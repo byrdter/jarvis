@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   AbsoluteFill,
-  Audio,
-  OffthreadVideo,
+  Img,
   Sequence,
   interpolate,
   staticFile,
@@ -278,8 +277,10 @@ const palette = {
   white: '#FFFFFF',
 };
 
-const ease = (frame: number, input: [number, number], output: [number, number]) =>
+const ease = (frame: number, input: number[], output: number[]) =>
   interpolate(frame, input, output, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+
+const stillSrc = (seg: number) => staticFile(`stills/${String(seg).padStart(3, '0')}.png`);
 
 const Bg: React.FC<{children: React.ReactNode}> = ({children}) => (
   <AbsoluteFill
@@ -545,40 +546,127 @@ const EvidenceShot: React.FC<{seg: Segment; frame: number}> = ({seg, frame}) => 
   </Bg>
 );
 
-const AvatarFull: React.FC<{seg: Segment; fromFrame: number}> = ({seg, fromFrame}) => (
-  <AbsoluteFill style={{background: '#000'}}>
-    <OffthreadVideo src={staticFile('heygen-source.mp4')} muted startFrom={fromFrame} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-    <div style={{position: 'absolute', left: 70, bottom: 62, background: 'rgba(0,0,0,0.62)', color: '#fff', padding: '22px 32px', borderRadius: 8, fontSize: 42, fontWeight: 900}}>
-      {seg.title}
+const LightSweep: React.FC<{frame: number; delay?: number}> = ({frame, delay = 0}) => {
+  const x = ease(frame - delay, [0, 90], [-780, 2350]);
+  const opacity = ease(frame - delay, [0, 18, 75, 98], [0, 0.72, 0.62, 0]);
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: -240,
+        left: x,
+        width: 320,
+        height: 1560,
+        transform: 'rotate(22deg)',
+        background: 'linear-gradient(90deg, transparent, rgba(82,235,255,0.28), rgba(255,180,78,0.22), transparent)',
+        filter: 'blur(16px)',
+        opacity,
+        mixBlendMode: 'screen',
+      }}
+    />
+  );
+};
+
+const PulseRing: React.FC<{frame: number; left: number; top: number; size: number; delay?: number}> = ({frame, left, top, size, delay = 0}) => {
+  const scale = ease((frame - delay) % 70, [0, 58], [0.88, 1.18]);
+  const opacity = ease((frame - delay) % 70, [0, 14, 58, 70], [0, 0.8, 0.28, 0]);
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left,
+        top,
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        border: '5px solid rgba(94,236,255,0.9)',
+        boxShadow: '0 0 36px rgba(94,236,255,0.78), inset 0 0 26px rgba(94,236,255,0.35)',
+        transform: `scale(${scale})`,
+        opacity,
+        mixBlendMode: 'screen',
+      }}
+    />
+  );
+};
+
+const ScanLines: React.FC = () => (
+  <div
+    style={{
+      position: 'absolute',
+      inset: 0,
+      opacity: 0.16,
+      backgroundImage: 'linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px)',
+      backgroundSize: '100% 5px',
+      mixBlendMode: 'overlay',
+    }}
+  />
+);
+
+const AnimatedStill: React.FC<{seg: Segment; frame: number; sideAvatar?: boolean}> = ({seg, frame, sideAvatar = false}) => {
+  const duration = Math.max(1, Math.round((seg.end - seg.start) * FPS));
+  const push = ease(frame, [0, duration], [1.035, 1.105]);
+  const driftX = ease(frame, [0, duration], [sideAvatar ? -14 : -24, sideAvatar ? 8 : 26]);
+  const driftY = ease(frame, [0, duration], [-10, 10]);
+  const titleOpacity = ease(frame, [8, 28], [0, 1]);
+  return (
+    <AbsoluteFill style={{background: '#05070B', overflow: 'hidden', fontFamily: 'Inter, Arial, sans-serif'}}>
+      <Img
+        src={stillSrc(seg.seg)}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: `scale(${push}) translate(${driftX}px, ${driftY}px)`,
+          filter: sideAvatar ? 'brightness(0.62) saturate(1.14)' : 'brightness(0.82) saturate(1.18) contrast(1.05)',
+        }}
+      />
+      <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 44%, transparent 42%, rgba(0,0,0,0.5) 100%)'}} />
+      <ScanLines />
+      <LightSweep frame={frame} />
+      <LightSweep frame={frame} delay={duration * 0.42} />
+      <PulseRing frame={frame} left={sideAvatar ? 170 : 1440} top={sideAvatar ? 690 : 140} size={sideAvatar ? 210 : 250} />
+      <PulseRing frame={frame} left={sideAvatar ? 760 : 160} top={sideAvatar ? 160 : 690} size={sideAvatar ? 170 : 190} delay={22} />
+      {!sideAvatar ? (
+        <div
+          style={{
+            position: 'absolute',
+            left: 54,
+            bottom: 42,
+            maxWidth: 960,
+            padding: '18px 24px',
+            background: 'rgba(5,9,14,0.68)',
+            borderLeft: '7px solid rgba(79,231,255,0.95)',
+            color: '#fff',
+            opacity: titleOpacity,
+            boxShadow: '0 0 32px rgba(0,0,0,0.38)',
+          }}
+        >
+          <div style={{fontSize: 30, letterSpacing: 1.6, fontWeight: 850, color: '#63EEFF'}}>SEGMENT {String(seg.seg).padStart(2, '0')}</div>
+          <div style={{fontSize: 52, lineHeight: 1.02, fontWeight: 950, marginTop: 3}}>{seg.title}</div>
+        </div>
+      ) : null}
+    </AbsoluteFill>
+  );
+};
+
+const AvatarSide: React.FC<{seg: Segment; frame: number}> = ({seg, frame}) => (
+  <AbsoluteFill style={{background: '#05070B'}}>
+    <AnimatedStill seg={seg} frame={frame} sideAvatar />
+    <div style={{position: 'absolute', left: 72, top: 70, width: 990, color: palette.white}}>
+      <div style={{fontSize: 74, fontWeight: 950, lineHeight: 1.02, textShadow: '0 0 26px rgba(0,0,0,0.75)'}}>{seg.title}</div>
+      <div style={{marginTop: 24}}>
+        <BulletList bullets={seg.bullets ?? []} frame={frame} color={palette.white} />
+      </div>
     </div>
   </AbsoluteFill>
 );
 
-const AvatarSide: React.FC<{seg: Segment; fromFrame: number; frame: number}> = ({seg, fromFrame, frame}) => (
-  <Bg>
-    <div style={{position: 'absolute', left: 90, top: 90, width: 1050}}>
-      <div style={{fontSize: 82, fontWeight: 950, color: palette.white, lineHeight: 1.02}}>{seg.title}</div>
-      <BulletList bullets={seg.bullets ?? []} frame={frame} color={palette.white} />
-    </div>
-    <div style={{position: 'absolute', right: 72, top: 110, width: 620, height: 860, border: `6px solid ${palette.white}`, borderRadius: 8, overflow: 'hidden', boxShadow: '18px 18px 0 rgba(0,0,0,0.25)'}}>
-      <OffthreadVideo src={staticFile('heygen-source.mp4')} muted startFrom={fromFrame} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-    </div>
-  </Bg>
-);
-
-const renderSegment = (seg: Segment, fromFrame: number) => {
+const renderSegment = (seg: Segment) => {
   const SegmentRenderer: React.FC = () => {
     const frame = useCurrentFrame();
-    if (seg.kind === 'avatar-full') return <AvatarFull seg={seg} fromFrame={fromFrame} />;
-    if (seg.kind === 'avatar-side') return <AvatarSide seg={seg} fromFrame={fromFrame} frame={frame} />;
-    if (seg.kind === 'source') return <Bg><BrowserPanel seg={seg} frame={frame} /></Bg>;
-    if (seg.kind === 'warning') return <WarningShot seg={seg} frame={frame} />;
-    if (seg.kind === 'metric') return <MetricShot seg={seg} frame={frame} />;
-    if (seg.kind === 'flow') return <FlowShot seg={seg} frame={frame} />;
-    if (seg.kind === 'code') return <CodeShot seg={seg} frame={frame} />;
-    if (seg.kind === 'table') return <TableShot seg={seg} frame={frame} />;
-    if (seg.kind === 'cta') return <CtaShot frame={frame} />;
-    return <EvidenceShot seg={seg} frame={frame} />;
+    if (seg.kind === 'avatar-side') return <AvatarSide seg={seg} frame={frame} />;
+    return <AnimatedStill seg={seg} frame={frame} />;
   };
   return <SegmentRenderer />;
 };
@@ -587,13 +675,12 @@ export const Main: React.FC = () => {
   const {fps} = useVideoConfig();
   return (
     <AbsoluteFill style={{background: '#000'}}>
-      <Audio src={staticFile('heygen-source.mp4')} />
       {segments.map((seg) => {
         const from = Math.round(seg.start * fps);
         const duration = Math.max(1, Math.round((seg.end - seg.start) * fps));
         return (
           <Sequence key={seg.seg} from={from} durationInFrames={duration} name={`Seg ${seg.seg}: ${seg.title}`}>
-            {renderSegment(seg, from)}
+            {renderSegment(seg)}
           </Sequence>
         );
       })}
