@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #06090f;
+        color: #f7fbff;
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(62, 231, 255, 0.18), transparent 30%),
+          radial-gradient(circle at 85% 70%, rgba(255, 184, 77, 0.12), transparent 32%),
+          #06090f;
+      }
+
+      video,
+      audio {
+        position: absolute;
+      }
+
+      .avatar-full {
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        object-fit: cover;
+        z-index: 20;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 58px 64px;
+        opacity: 0;
+        z-index: 5;
+        background:
+          linear-gradient(180deg, rgba(6, 9, 15, 0.2), rgba(6, 9, 15, 0.95)),
+          radial-gradient(circle at 70% 20%, rgba(62, 231, 255, 0.12), transparent 28%);
+      }
+
+      .intro-glass {
+        position: absolute;
+        left: 72px;
+        bottom: 74px;
+        width: 760px;
+        padding: 26px 32px;
+        border-left: 7px solid #3ee7ff;
+        background: rgba(6, 9, 15, 0.68);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+        z-index: 24;
+      }
+
+      .eyebrow {
+        color: #3ee7ff;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .headline {
+        font-size: 68px;
+        line-height: 0.98;
+        font-weight: 950;
+        margin-top: 10px;
+      }
+
+      .subcopy {
+        margin-top: 16px;
+        color: #c9d6e5;
+        font-size: 28px;
+        line-height: 1.24;
+      }
+
+      .vscode {
+        position: absolute;
+        left: 46px;
+        top: 46px;
+        width: 1828px;
+        height: 988px;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #0d1320;
+        border: 1px solid #263653;
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.55);
+      }
+
+      .activity {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 72px;
+        background: #0a0f1a;
+        border-right: 1px solid #1f2b42;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding-top: 28px;
+        color: #aab9cd;
+        font-size: 30px;
+      }
+
+      .sidebar {
+        position: absolute;
+        left: 72px;
+        top: 0;
+        bottom: 0;
+        width: 312px;
+        background: #0e1624;
+        border-right: 1px solid #1f2b42;
+        padding: 24px 18px;
+      }
+
+      .side-title {
+        color: #b7c7dc;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 900;
+        margin-bottom: 18px;
+      }
+
+      .file {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: #cbd7e8;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 18px;
+        border-radius: 6px;
+        padding: 0 10px;
+      }
+
+      .file.active {
+        background: rgba(62, 231, 255, 0.14);
+        color: #f7fbff;
+      }
+
+      .main-pane {
+        position: absolute;
+        left: 384px;
+        top: 0;
+        right: 0;
+        bottom: 300px;
+        background: #0b111d;
+      }
+
+      .tabs {
+        height: 48px;
+        display: flex;
+        align-items: end;
+        gap: 2px;
+        padding-left: 12px;
+        background: #090e18;
+        border-bottom: 1px solid #1f2b42;
+      }
+
+      .tab {
+        min-width: 190px;
+        height: 42px;
+        padding: 12px 18px 0;
+        color: #9db0c9;
+        background: #101827;
+        border: 1px solid #1f2b42;
+        border-bottom: none;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 18px;
+      }
+
+      .tab.active {
+        color: #f7fbff;
+        background: #111b2d;
+        box-shadow: inset 0 3px 0 #3ee7ff;
+      }
+
+      .editor {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 48px;
+        bottom: 0;
+        padding: 28px 34px;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 24px;
+        line-height: 1.55;
+        color: #e6edf7;
+      }
+
+      .line {
+        display: block;
+        white-space: pre;
+      }
+
+      .line.dim {
+        color: #9dafc7;
+      }
+
+      .line.bad {
+        color: #ff8fa3;
+      }
+
+      .line.good {
+        color: #55f2a0;
+      }
+
+      .line.focus {
+        background: rgba(62, 231, 255, 0.11);
+        outline: 2px solid rgba(62, 231, 255, 0.38);
+      }
+
+      .terminal {
+        position: absolute;
+        left: 384px;
+        right: 0;
+        bottom: 0;
+        height: 300px;
+        border-top: 1px solid #263653;
+        background: #080c14;
+        padding: 22px 28px;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 23px;
+        line-height: 1.42;
+        color: #d7e3f1;
+      }
+
+      .terminal-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 34px;
+        padding: 8px 16px;
+        background: #0d1320;
+        border-bottom: 1px solid #263653;
+        color: #b7c7dc;
+        font-size: 15px;
+        letter-spacing: 1px;
+      }
+
+      .terminal-body {
+        margin-top: 24px;
+      }
+
+      .prompt {
+        color: #46f39a;
+      }
+
+      .warn {
+        color: #ffb84d;
+      }
+
+      .danger {
+        color: #ff4d6d;
+      }
+
+      .cyan {
+        color: #3ee7ff;
+      }
+
+      .token-meter {
+        position: absolute;
+        top: 84px;
+        right: 72px;
+        width: 430px;
+        padding: 24px;
+        border-radius: 14px;
+        background: rgba(13, 19, 32, 0.9);
+        border: 1px solid #263653;
+        box-shadow: 0 0 44px rgba(0, 0, 0, 0.4);
+        z-index: 11;
+      }
+
+      .meter-label {
+        color: #b7c7dc;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+      }
+
+      .meter-number {
+        margin-top: 8px;
+        font-size: 68px;
+        line-height: 1;
+        font-weight: 950;
+      }
+
+      .meter-bar {
+        margin-top: 18px;
+        width: 100%;
+        height: 18px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #1a2436;
+      }
+
+      .meter-fill {
+        width: 8%;
+        height: 100%;
+        background: linear-gradient(90deg, #46f39a, #ffb84d, #ff4d6d);
+        transform-origin: left center;
+      }
+
+      .callout {
+        position: absolute;
+        min-width: 310px;
+        padding: 18px 20px;
+        background: rgba(6, 9, 15, 0.82);
+        border: 1px solid rgba(62, 231, 255, 0.5);
+        border-left: 7px solid #3ee7ff;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
+        color: #f7fbff;
+        font-size: 25px;
+        font-weight: 850;
+        z-index: 14;
+      }
+
+      .command-palette {
+        position: absolute;
+        left: 590px;
+        top: 146px;
+        width: 740px;
+        padding: 20px;
+        border-radius: 12px;
+        background: #101827;
+        border: 1px solid #3ee7ff;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55), 0 0 34px rgba(62, 231, 255, 0.28);
+        z-index: 15;
+        opacity: 0;
+      }
+
+      .search-input {
+        height: 52px;
+        border-radius: 8px;
+        background: #070b12;
+        border: 1px solid #263653;
+        padding: 12px 18px;
+        color: #f7fbff;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 24px;
+      }
+
+      .search-result {
+        margin-top: 12px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        background: rgba(62, 231, 255, 0.12);
+        border: 1px solid rgba(62, 231, 255, 0.32);
+        font-size: 22px;
+      }
+
+      .dashboard {
+        position: absolute;
+        left: 80px;
+        top: 88px;
+        width: 1760px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+
+      .stack-card {
+        min-height: 620px;
+        padding: 26px;
+        border-radius: 16px;
+        background: rgba(17, 27, 45, 0.86);
+        border: 1px solid #263653;
+        box-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
+      }
+
+      .stack-card h3 {
+        font-size: 42px;
+        line-height: 1;
+      }
+
+      .stack-card p {
+        margin-top: 20px;
+        color: #e0e9f5;
+        font-size: 25px;
+        line-height: 1.22;
+      }
+
+      .sandbox-strip {
+        position: absolute;
+        left: 80px;
+        right: 80px;
+        bottom: 78px;
+        height: 210px;
+        border-radius: 16px;
+        background: rgba(6, 9, 15, 0.86);
+        border: 1px solid rgba(62, 231, 255, 0.34);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 74px rgba(0, 0, 0, 0.36);
+        overflow: hidden;
+      }
+
+      .sandbox-line {
+        position: absolute;
+        left: 26px;
+        top: 26px;
+        right: 26px;
+        height: 46px;
+        color: #d7e3f1;
+        font-family: "JetBrains Mono", Menlo, monospace;
+        font-size: 23px;
+      }
+
+      .sandbox-pills {
+        position: absolute;
+        left: 26px;
+        right: 26px;
+        bottom: 26px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .sandbox-pill {
+        padding: 18px 20px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(62, 231, 255, 0.18), rgba(70, 243, 154, 0.08));
+        border: 1px solid rgba(62, 231, 255, 0.34);
+        color: #f7fbff;
+        font-size: 22px;
+        font-weight: 850;
+      }
+
+      .end-card {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        z-index: 12;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(62, 231, 255, 0.18), transparent 28%),
+          radial-gradient(circle at 72% 64%, rgba(70, 243, 154, 0.14), transparent 30%),
+          #06090f;
+      }
+
+      .end-card-inner {
+        width: 1180px;
+        padding: 54px 64px;
+        border-radius: 18px;
+        background: rgba(13, 19, 32, 0.9);
+        border: 1px solid rgba(62, 231, 255, 0.35);
+        box-shadow: 0 32px 90px rgba(0, 0, 0, 0.45);
+      }
+
+      .end-card h2 {
+        font-size: 76px;
+        line-height: 0.96;
+      }
+
+      .end-card p {
+        margin-top: 26px;
+        color: #d7e3f1;
+        font-size: 32px;
+        line-height: 1.25;
+      }
+
+      .badge {
+        display: inline-block;
+        margin-top: 28px;
+        padding: 10px 13px;
+        border-radius: 999px;
+        background: rgba(62, 231, 255, 0.12);
+        border: 1px solid rgba(62, 231, 255, 0.42);
+        color: #3ee7ff;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .cursor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 34px;
+        height: 48px;
+        z-index: 30;
+        filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.55));
+        opacity: 0;
+      }
+
+      .cursor svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .click-ring {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 84px;
+        height: 84px;
+        margin-left: -42px;
+        margin-top: -42px;
+        border-radius: 50%;
+        border: 4px solid #3ee7ff;
+        box-shadow: 0 0 30px rgba(62, 231, 255, 0.65);
+        opacity: 0;
+        z-index: 29;
+      }
+
+      .caption {
+        position: absolute;
+        left: 50%;
+        bottom: 54px;
+        transform: translateX(-50%);
+        min-width: 980px;
+        max-width: 1300px;
+        padding: 16px 26px;
+        text-align: center;
+        border-radius: 10px;
+        background: rgba(6, 9, 15, 0.74);
+        color: #f7fbff;
+        font-size: 38px;
+        line-height: 1.1;
+        font-weight: 900;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.38);
+        z-index: 26;
+        opacity: 0;
+      }
+
+      .tiny-label {
+        color: #b7c7dc;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="97.76"
+      data-width="1920"
+      data-height="1080"
+    >
+      <audio
+        id="voice-audio"
+        data-start="0"
+        data-duration="97.76"
+        data-track-index="20"
+        src="assets/TestVideo3_1080p-keyframed.mp4"
+        data-volume="1"
+      ></audio>
+
+      <video
+        id="avatar-intro"
+        class="avatar-full"
+        data-start="0"
+        data-duration="19"
+        data-track-index="0"
+        src="assets/TestVideo3_1080p-keyframed.mp4"
+        muted
+        playsinline
+      ></video>
+
+      <div id="intro-label" class="intro-glass">
+        <div class="eyebrow">HyperFrames Proof</div>
+        <div class="headline">Real Development Motion</div>
+        <div class="subcopy">Files opening. Commands running. Token cost changing on cue.</div>
+      </div>
+
+      <div id="scene-overload" class="scene">
+        <div class="vscode">
+          <div class="activity">⌘<span>⌕</span><span>⑂</span><span>⚙</span></div>
+          <div class="sidebar">
+            <div class="side-title">JARVIS / MCP STACK</div>
+            <div class="file active">▾ mcp-config.json</div>
+            <div class="file">▸ skills/</div>
+            <div class="file">▸ scripts/</div>
+            <div class="file">▸ reports/</div>
+            <div class="file">  token-audit.md</div>
+          </div>
+          <div class="main-pane">
+            <div class="tabs">
+              <div class="tab active">mcp-config.json</div>
+              <div class="tab">CLAUDE.md</div>
+              <div class="tab">token-audit.md</div>
+            </div>
+            <div class="editor">
+              <span class="line dim">01  {</span>
+              <span class="line focus">02    "mcpServers": {</span>
+              <span class="line bad">03      "github": { "tools": 74, "schema": "full" },</span>
+              <span class="line bad">04      "drive": { "tools": 61, "schema": "full" },</span>
+              <span class="line bad">05      "salesforce": { "tools": 89, "schema": "full" },</span>
+              <span class="line bad">06      "browser": { "tools": 42, "schema": "full" }</span>
+              <span class="line dim">07    }</span>
+              <span class="line dim">08  }</span>
+            </div>
+          </div>
+          <div class="terminal">
+            <div class="terminal-title">TERMINAL  /  zsh  /  token audit</div>
+            <div class="terminal-body">
+              <div id="old-line-1"><span class="prompt">$</span> claude /mcp --token-cost</div>
+              <div id="old-line-2"><span class="warn">loading schemas...</span> github, drive, salesforce, browser</div>
+              <div id="old-line-3"><span class="danger">context before task:</span> 77,430 tokens</div>
+              <div id="old-line-4"><span class="danger">problem:</span> definitions compete with reasoning</div>
+            </div>
+          </div>
+        </div>
+        <div class="token-meter" id="old-meter">
+          <div class="meter-label">Context Load</div>
+          <div class="meter-number danger" id="old-token-number">0K</div>
+          <div class="meter-bar"><div class="meter-fill" id="old-meter-fill"></div></div>
+        </div>
+        <div class="callout" id="overload-callout" style="left: 606px; top: 232px;">Old MCP loads too much too early</div>
+      </div>
+
+      <div id="scene-discovery" class="scene">
+        <div class="vscode">
+          <div class="activity">⌘<span>⌕</span><span>⑂</span><span>⚙</span></div>
+          <div class="sidebar">
+            <div class="side-title">DISCOVERY MODE</div>
+            <div class="file">▸ mcpServers</div>
+            <div class="file active">  tool-search.ts</div>
+            <div class="file">  github.schema.ts</div>
+            <div class="file">  drive.schema.ts</div>
+          </div>
+          <div class="main-pane">
+            <div class="tabs">
+              <div class="tab active">tool-search.ts</div>
+              <div class="tab">loaded-schema.json</div>
+            </div>
+            <div class="editor">
+              <span class="line dim">01  const task = "find relevant GitHub issue";</span>
+              <span class="line good">02  const candidates = await toolSearch("github issues");</span>
+              <span class="line good">03  const schema = await loadSchema(candidates[0]);</span>
+              <span class="line dim">04</span>
+              <span class="line focus">05  // The rest stays outside the context window.</span>
+            </div>
+          </div>
+          <div class="terminal">
+            <div class="terminal-title">TERMINAL  /  discovery run</div>
+            <div class="terminal-body">
+              <div id="disc-line-1"><span class="prompt">$</span> claude tool-search "github issues"</div>
+              <div id="disc-line-2"><span class="cyan">found:</span> github.search_issues</div>
+              <div id="disc-line-3"><span class="cyan">loaded:</span> one relevant schema</div>
+              <div id="disc-line-4"><span class="prompt">saved:</span> 68,700 startup tokens</div>
+            </div>
+          </div>
+        </div>
+        <div class="command-palette" id="palette">
+          <div class="tiny-label">Command Palette</div>
+          <div class="search-input">github issues</div>
+          <div class="search-result">↳ github.search_issues — load this schema only</div>
+        </div>
+        <div class="token-meter" id="disc-meter">
+          <div class="meter-label">Context Load</div>
+          <div class="meter-number cyan" id="disc-token-number">8.7K</div>
+          <div class="meter-bar"><div class="meter-fill" id="disc-meter-fill"></div></div>
+        </div>
+      </div>
+
+      <div id="scene-skill-cli" class="scene">
+        <div class="vscode">
+          <div class="activity">⌘<span>⌕</span><span>⑂</span><span>⚙</span></div>
+          <div class="sidebar">
+            <div class="side-title">JARVIS REFACTOR</div>
+            <div class="file active">▾ skills/mcp-token-stack/</div>
+            <div class="file">  SKILL.md</div>
+            <div class="file active">▾ scripts/</div>
+            <div class="file">  jarvis-mcp-cost.ts</div>
+            <div class="file">  report-writer.ts</div>
+          </div>
+          <div class="main-pane">
+            <div class="tabs">
+              <div class="tab active">SKILL.md</div>
+              <div class="tab">jarvis-mcp-cost.ts</div>
+            </div>
+            <div class="editor">
+              <span class="line good">01  # MCP Token Stack Skill</span>
+              <span class="line">02  Use MCP for permissioned external systems.</span>
+              <span class="line">03  Use skills for procedural knowledge.</span>
+              <span class="line focus">04  Use CLI scripts for deterministic local work.</span>
+              <span class="line">05  Return compact fields, not giant objects.</span>
+            </div>
+          </div>
+          <div class="terminal">
+            <div class="terminal-title">TERMINAL  /  filtered CLI output</div>
+            <div class="terminal-body">
+              <div id="cli-line-1"><span class="prompt">$</span> jarvis-mcp-cost --workflow qqq-macd --fields total,latency,status</div>
+              <div id="cli-line-2">{ "totalTokens": 2470, "latency": "4.8s", "status": "clean" }</div>
+              <div id="cli-line-3"><span class="cyan">model sees:</span> three fields, not a wall of JSON</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout" id="skill-callout" style="left: 510px; top: 254px;">Procedural knowledge belongs in skills</div>
+        <div class="callout" id="cli-callout" style="left: 672px; top: 768px; border-left-color: #46f39a;">Deterministic local work belongs in CLI scripts</div>
+      </div>
+
+      <div id="scene-stack" class="scene">
+        <div class="dashboard">
+          <div class="stack-card" id="stack-1">
+            <h3>MCP</h3>
+            <p>Use it for permissioned external systems, APIs, audit boundaries, and product integrations.</p>
+            <span class="badge">external authority</span>
+          </div>
+          <div class="stack-card" id="stack-2">
+            <h3>Skills</h3>
+            <p>Use them for reusable procedures, decision rules, and progressive disclosure.</p>
+            <span class="badge">procedure</span>
+          </div>
+          <div class="stack-card" id="stack-3">
+            <h3>CLI</h3>
+            <p>Use scripts for deterministic local work and filtered outputs the model can reason over.</p>
+            <span class="badge">local execution</span>
+          </div>
+          <div class="stack-card" id="stack-4">
+            <h3>Code Mode</h3>
+            <p>Use sandboxed execution when intermediate data should stay outside the model context.</p>
+            <span class="badge">heavy data movement</span>
+          </div>
+        </div>
+        <div class="sandbox-strip" id="sandbox-strip">
+          <div class="sandbox-line"><span class="prompt">$</span> run stack --mcp scoped --skills progressive --cli filtered --code-mode sandboxed</div>
+          <div class="sandbox-pills">
+            <div class="sandbox-pill">MCP gates external authority</div>
+            <div class="sandbox-pill">Skills load procedure on demand</div>
+            <div class="sandbox-pill">CLI returns compact fields</div>
+            <div class="sandbox-pill">Code Mode keeps data local</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="end-card" id="end-card">
+        <div class="end-card-inner">
+          <div class="eyebrow">Template verdict</div>
+          <h2>Full-screen software action beats static slides.</h2>
+          <p>The next pass should turn every voice-only segment into a scripted screen performance: cursor moves, files open, terminal output changes, and the visual state follows the words.</p>
+        </div>
+      </div>
+
+      <div class="cursor" id="cursor">
+        <svg viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3L30 28L17 31L11 45L3 3Z" fill="#f7fbff" stroke="#06090f" stroke-width="3" />
+        </svg>
+      </div>
+      <div class="click-ring" id="click-ring"></div>
+
+      <div class="caption" id="caption"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const caption = document.querySelector("#caption");
+      const setCaption = (text) => {
+        caption.textContent = text;
+      };
+
+      const oldTokens = { value: 0 };
+      const discTokens = { value: 77.4 };
+      const updateOld = () => {
+        document.querySelector("#old-token-number").textContent = `${Math.round(oldTokens.value)}K`;
+        document.querySelector("#old-meter-fill").style.width = `${Math.min(100, oldTokens.value * 1.2)}%`;
+      };
+      const updateDisc = () => {
+        document.querySelector("#disc-token-number").textContent = `${discTokens.value.toFixed(1)}K`;
+        document.querySelector("#disc-meter-fill").style.width = `${Math.max(12, discTokens.value * 1.1)}%`;
+      };
+
+      gsap.set(["#scene-overload", "#scene-discovery", "#scene-skill-cli", "#scene-stack"], { opacity: 0 });
+      gsap.set(["#old-line-1", "#old-line-2", "#old-line-3", "#old-line-4", "#disc-line-1", "#disc-line-2", "#disc-line-3", "#disc-line-4", "#cli-line-1", "#cli-line-2", "#cli-line-3"], { opacity: 0, y: 12 });
+      gsap.set(["#overload-callout", "#skill-callout", "#cli-callout", ".stack-card", "#sandbox-strip"], { opacity: 0, y: 24 });
+      gsap.set("#end-card", { opacity: 0, scale: 0.98 });
+      gsap.set("#old-meter-fill", { width: "8%" });
+      gsap.set("#disc-meter-fill", { width: "95%" });
+
+      tl.from("#intro-label", { opacity: 0, y: 28, duration: 0.55, ease: "power3.out" }, 0.4)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("A different kind of AI video.") }, 0.25)
+        .to("#caption", { opacity: 0, duration: 0.18 }, 5.75)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("Files opening. Commands running. Token cost changing.") }, 6.05)
+        .to("#intro-label", { opacity: 0, y: -22, duration: 0.45, ease: "power2.in" }, 17.8)
+        .to("#caption", { opacity: 0, duration: 0.2 }, 18.2);
+
+      tl.to("#scene-overload", { opacity: 1, duration: 0.35 }, 19)
+        .from("#scene-overload .vscode", { scale: 0.965, y: 24, duration: 0.55, ease: "power3.out" }, 19.05)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("Old MCP can load too much before work starts.") }, 19.2)
+        .to("#cursor", { opacity: 1, x: 1180, y: 248, duration: 0.45, ease: "power2.out" }, 20.4)
+        .to("#click-ring", { opacity: 0.9, x: 1196, y: 274, scale: 1.25, duration: 0.25, ease: "power1.out" }, 20.9)
+        .to("#click-ring", { opacity: 0, scale: 1.7, duration: 0.3 }, 21.15)
+        .to("#old-line-1", { opacity: 1, y: 0, duration: 0.22 }, 23.7)
+        .to("#cursor", { x: 612, y: 874, duration: 0.55, ease: "power2.inOut" }, 24.1)
+        .to("#old-line-2", { opacity: 1, y: 0, duration: 0.22 }, 25.0)
+        .to(oldTokens, { value: 77.4, duration: 1.4, ease: "power2.out", onUpdate: updateOld }, 25.1)
+        .to("#old-line-3", { opacity: 1, y: 0, duration: 0.22 }, 27.0)
+        .to("#overload-callout", { opacity: 1, y: 0, duration: 0.35 }, 29.8)
+        .to("#old-line-4", { opacity: 1, y: 0, duration: 0.22 }, 31.2)
+        .to("#caption", { opacity: 0, duration: 0.18 }, 35.6);
+
+      tl.to("#scene-overload", { opacity: 0, duration: 0.32 }, 37.8)
+        .to("#scene-discovery", { opacity: 1, duration: 0.35 }, 38.05)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("Discovery changes the workflow.") }, 38.2)
+        .to("#cursor", { x: 1038, y: 198, duration: 0.55, ease: "power2.inOut" }, 39.0)
+        .to("#palette", { opacity: 1, y: 8, duration: 0.35, ease: "power3.out" }, 39.6)
+        .to("#click-ring", { opacity: 0.9, x: 850, y: 198, scale: 1.2, duration: 0.2 }, 40.1)
+        .to("#click-ring", { opacity: 0, scale: 1.65, duration: 0.3 }, 40.32)
+        .to("#disc-line-1", { opacity: 1, y: 0, duration: 0.2 }, 42.8)
+        .to("#disc-line-2", { opacity: 1, y: 0, duration: 0.2 }, 44.0)
+        .to("#disc-line-3", { opacity: 1, y: 0, duration: 0.2 }, 45.0)
+        .to(discTokens, { value: 8.7, duration: 1.0, ease: "power2.out", onUpdate: updateDisc }, 45.0)
+        .to("#disc-line-4", { opacity: 1, y: 0, duration: 0.2 }, 47.7)
+        .to("#caption", { opacity: 0, duration: 0.18 }, 53.8);
+
+      tl.to("#scene-discovery", { opacity: 0, duration: 0.32 }, 54.8)
+        .to("#scene-skill-cli", { opacity: 1, duration: 0.35 }, 55.05)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("Tool search is only one layer.") }, 55.1)
+        .to("#cursor", { x: 532, y: 314, duration: 0.55, ease: "power2.inOut" }, 56.0)
+        .to("#skill-callout", { opacity: 1, y: 0, duration: 0.35 }, 58.4)
+        .to("#cli-line-1", { opacity: 1, y: 0, duration: 0.22 }, 62.0)
+        .to("#cursor", { x: 696, y: 858, duration: 0.55, ease: "power2.inOut" }, 63.0)
+        .to("#cli-line-2", { opacity: 1, y: 0, duration: 0.22 }, 65.2)
+        .to("#cli-line-3", { opacity: 1, y: 0, duration: 0.22 }, 67.0)
+        .to("#cli-callout", { opacity: 1, y: 0, duration: 0.35 }, 68.0)
+        .to("#caption", { opacity: 0, duration: 0.18 }, 71.2);
+
+      tl.to("#scene-skill-cli", { opacity: 0, duration: 0.32 }, 72.8)
+        .to("#scene-stack", { opacity: 1, duration: 0.38 }, 73.05)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("This is the stack we want to test.") }, 73.2)
+        .to(".stack-card", { opacity: 1, y: 0, duration: 0.45, stagger: 0.16, ease: "power3.out" }, 74.0)
+        .to("#sandbox-strip", { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 75.0)
+        .to("#cursor", { x: 292, y: 176, duration: 0.4 }, 75.0)
+        .to("#cursor", { x: 596, y: 176, duration: 0.4 }, 79.0)
+        .to("#cursor", { x: 906, y: 176, duration: 0.4 }, 83.0)
+        .to("#cursor", { x: 1202, y: 176, duration: 0.4 }, 86.4)
+        .to("#caption", { opacity: 0, duration: 0.18 }, 88.4)
+        .to("#scene-stack", { opacity: 0, duration: 0.35 }, 88.8)
+        .to("#cursor", { opacity: 0, duration: 0.2 }, 88.8)
+        .to("#end-card", { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 89.0)
+        .to("#caption", { opacity: 1, duration: 0.2, onStart: () => setCaption("If this works, it becomes the template.") }, 90.0)
+        .to("#caption", { opacity: 0, duration: 0.2 }, 96.8);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
