@@ -177,6 +177,7 @@
         stroke-linecap: round;
         filter: drop-shadow(0 0 10px rgba(63, 247, 255, 0.95));
         opacity: 0.72;
+        stroke-dasharray: 34 18;
       }
       .ray.alt { stroke: #aafcff; stroke-width: 2.4; opacity: 0.58; }
       .particle {
@@ -202,9 +203,19 @@
         letter-spacing: -1px;
         transform: skewX(-13deg) rotate(-2deg);
         border: 4px solid var(--edge);
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.38)), var(--fill);
+        background-color: var(--fill);
+        background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.42));
         box-shadow: 0 18px 0 rgba(11, 18, 32, 0.94), 0 28px 52px rgba(0, 0, 0, 0.46), 0 0 34px var(--glow);
         z-index: 10;
+      }
+      .tile-glow {
+        position: absolute;
+        inset: -14px;
+        border-radius: 32px;
+        background: radial-gradient(circle, currentColor, transparent 64%);
+        opacity: 0;
+        filter: blur(8px);
+        z-index: -1;
       }
       .tool::before {
         content: "";
@@ -260,6 +271,18 @@
         color: #ff3d55;
         text-shadow: 0 0 16px rgba(255, 61, 85, 0.9);
       }
+      .pulse-label {
+        position: absolute;
+        left: 748px;
+        top: 760px;
+        color: #caffff;
+        font-family: "JetBrains Mono", Consolas, monospace;
+        font-size: 30px;
+        letter-spacing: 1px;
+        text-shadow: 0 0 18px rgba(63, 247, 255, 0.9);
+        opacity: 0;
+        z-index: 20;
+      }
     </style>
   </head>
   <body>
@@ -309,14 +332,15 @@
       <div class="hub"></div>
       <div class="context-label">CONTEXT WINDOW</div>
 
-      <div class="tool github"><span><span class="icon">●</span>GitHub</span></div>
-      <div class="tool slack"><span><span class="icon">✣</span>Slack</span></div>
-      <div class="tool grafana"><span><span class="icon">◉</span>Grafana</span></div>
-      <div class="tool sentry"><span><span class="icon">◢</span>Sentry</span></div>
-      <div class="tool splunk"><span><span class="icon">⌁</span>Splunk</span></div>
-      <div class="tool jira"><span><span class="icon">▰</span>Jira</span></div>
+      <div class="tool github"><i class="tile-glow"></i><span><span class="icon">●</span>GitHub</span></div>
+      <div class="tool slack"><i class="tile-glow"></i><span><span class="icon">✣</span>Slack</span></div>
+      <div class="tool grafana"><i class="tile-glow"></i><span><span class="icon">◉</span>Grafana</span></div>
+      <div class="tool sentry"><i class="tile-glow"></i><span><span class="icon">◢</span>Sentry</span></div>
+      <div class="tool splunk"><i class="tile-glow"></i><span><span class="icon">⌁</span>Splunk</span></div>
+      <div class="tool jira"><i class="tile-glow"></i><span><span class="icon">▰</span>Jira</span></div>
 
       <div class="warning"><strong>Tool definitions</strong><br />loaded before useful work begins.</div>
+      <div class="pulse-label">schema stream active</div>
 
       <div class="particle p1"></div>
       <div class="particle p2"></div>
@@ -331,7 +355,6 @@
       gsap.defaults({ overwrite: "auto" });
       const tl = gsap.timeline({ paused: true });
 
-      const rays = [".ray", ".ray.alt"];
       const tools = [".github", ".slack", ".grafana", ".sentry", ".splunk", ".jira"];
       const particles = [
         [".p1", [[704, 837], [835, 650], [998, 412]], 2.0],
@@ -351,10 +374,11 @@
         .from(".warning", { opacity: 0, x: 30, duration: 0.45 }, 2.2);
 
       tl.to("#token-title", {
-        opacity: 0.44,
-        textShadow: "0 0 6px rgba(255,174,99,0.35), 0 0 20px rgba(255,61,85,0.22)",
+        color: "#ffd19d",
+        textShadow: "0 0 34px rgba(255,174,99,1), 0 0 90px rgba(255,61,85,0.78)",
+        scale: 1.045,
         duration: 0.16,
-        repeat: 26,
+        repeat: 92,
         yoyo: true,
         ease: "steps(1)"
       }, 2.7);
@@ -377,21 +401,43 @@
       }, 2.5);
 
       tl.to(".ray", {
-        opacity: 0.18,
-        strokeWidth: 1.8,
-        duration: 0.22,
-        repeat: 32,
-        yoyo: true,
-        stagger: 0.04,
-        ease: "steps(1)"
-      }, 2.8);
+        strokeDashoffset: -520,
+        duration: 1.4,
+        repeat: 12,
+        ease: "none"
+      }, 2.4)
+        .to(".ray", {
+          opacity: 0.12,
+          duration: 0.18,
+          repeat: 45,
+          yoyo: true,
+          stagger: 0.035,
+          ease: "steps(1)"
+        }, 2.8)
+        .to(".pulse-label", { opacity: 1, y: -12, duration: 0.35, repeat: 13, yoyo: true }, 3.0);
 
-      tl.to(".github", { "--edge": "#ffffff", "--glow": "rgba(255,255,255,0.92)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.0)
-        .to(".slack", { "--edge": "#ff4bd8", "--glow": "rgba(255,75,216,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.45)
-        .to(".grafana", { "--edge": "#ffd04d", "--glow": "rgba(255,208,77,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.9)
-        .to(".sentry", { "--edge": "#ff7c8f", "--glow": "rgba(255,124,143,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 4.35)
-        .to(".splunk", { "--edge": "#dbff6a", "--glow": "rgba(219,255,106,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 4.8)
-        .to(".jira", { "--edge": "#73dfff", "--glow": "rgba(115,223,255,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 5.25);
+      const activeStates = [
+        [".github", "#07111f", "#f4ffff", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 70px rgba(244,255,255,1)"],
+        [".slack", "#7b215f", "#ff54de", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 78px rgba(255,84,222,1)"],
+        [".grafana", "#7b3b05", "#ffd056", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 78px rgba(255,208,86,1)"],
+        [".sentry", "#7b1327", "#ff788d", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 78px rgba(255,120,141,1)"],
+        [".splunk", "#3a650e", "#dfff68", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 78px rgba(223,255,104,1)"],
+        [".jira", "#073f7c", "#6de1ff", "0 18px 0 rgba(11,18,32,0.94), 0 28px 52px rgba(0,0,0,0.46), 0 0 78px rgba(109,225,255,1)"]
+      ];
+      activeStates.forEach(([selector, fill, edge, shadow], i) => {
+        const at = 3.0 + i * 0.42;
+        tl.to(selector, { backgroundColor: fill, borderColor: edge, boxShadow: shadow, scale: 1.12, duration: 0.26 }, at)
+          .to(`${selector} .tile-glow`, { opacity: 0.45, duration: 0.26 }, at)
+          .to(selector, { scale: 1.0, duration: 0.24 }, at + 0.35);
+      });
+      activeStates.forEach(([selector, fill, edge, shadow], i) => {
+        const at = 7.0 + i * 0.62;
+        tl.to(selector, { backgroundColor: fill, borderColor: edge, boxShadow: shadow, scale: 1.13, duration: 0.3, repeat: 3, yoyo: true }, at);
+      });
+      activeStates.forEach(([selector, fill, edge, shadow], i) => {
+        const at = 14.0 + i * 0.25;
+        tl.to(selector, { backgroundColor: fill, borderColor: edge, boxShadow: shadow, scale: 1.14, duration: 0.22, repeat: 4, yoyo: true }, at);
+      });
 
       particles.forEach(([selector, pts, start]) => {
         tl.set(selector, { x: pts[0][0], y: pts[0][1], opacity: 0 }, start)
@@ -404,8 +450,7 @@
       tl.to(".code-lines", { opacity: 0.38, duration: 0.2, repeat: 20, yoyo: true, ease: "steps(1)" }, 4.0)
         .to(".warning", { borderColor: "rgba(255,61,85,0.95)", boxShadow: "0 0 60px rgba(255,61,85,0.45)", duration: 0.5, repeat: 10, yoyo: true }, 4.5)
         .to(".grid", { opacity: 0.78, duration: 1.8, repeat: 5, yoyo: true }, 5.0)
-        .to("#root", { filter: "brightness(1.16) saturate(1.18)", duration: 0.5, repeat: 9, yoyo: true }, 6.0)
-        .to([".warning", ".token-title", ".tool", ".meter-shell", ".context-label", ".ray", ".hub", ".particle"], { opacity: 0, duration: 0.65, ease: "power2.in" }, 19.2);
+        .to([".warning", ".pulse-label", ".token-title", ".tool", ".meter-shell", ".context-label", ".ray", ".hub", ".particle"], { opacity: 0, duration: 0.65, ease: "power2.in" }, 19.2);
 
       window.__timelines["main"] = tl;
     </script>
