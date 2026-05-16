@@ -1,0 +1,13 @@
+{
+  "name": "video-12-screenplay-rebuild",
+  "version": "1.0.0",
+  "compositions": [
+    {
+      "id": "main",
+      "file": "index.html",
+      "width": 1920,
+      "height": 1080,
+      "duration": 803.44
+    }
+  ]
+}
