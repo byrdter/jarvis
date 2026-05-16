@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #07111f;
+        color: #eefcff;
+        font-family: Orbitron, Arial Black, sans-serif;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 44%, rgba(156, 92, 255, 0.20), transparent 27%),
+          radial-gradient(circle at 52% 68%, rgba(63, 247, 255, 0.16), transparent 28%),
+          radial-gradient(circle at 22% 35%, rgba(255, 61, 85, 0.12), transparent 30%),
+          linear-gradient(135deg, #050b15, #081528 46%, #0b1022);
+      }
+      .grid {
+        position: absolute;
+        inset: -120px;
+        background-image:
+          linear-gradient(rgba(63, 247, 255, 0.13) 2px, transparent 2px),
+          linear-gradient(90deg, rgba(156, 92, 255, 0.13) 2px, transparent 2px);
+        background-size: 118px 118px;
+        transform: perspective(900px) rotateX(62deg) rotateZ(-32deg) translateY(420px) scale(1.5);
+        opacity: 0.58;
+        filter: drop-shadow(0 0 18px rgba(63, 247, 255, 0.25));
+      }
+      .code-panel {
+        position: absolute;
+        left: 72px;
+        top: 70px;
+        width: 860px;
+        height: 690px;
+        border-radius: 34px;
+        background: linear-gradient(135deg, rgba(28, 54, 81, 0.74), rgba(8, 18, 32, 0.85));
+        border: 4px solid rgba(130, 183, 231, 0.42);
+        box-shadow: inset 0 0 70px rgba(127, 192, 255, 0.12), 0 42px 90px rgba(0, 0, 0, 0.55);
+        transform: skewY(-8deg);
+        overflow: hidden;
+      }
+      .code-panel::before {
+        content: "";
+        position: absolute;
+        inset: 26px;
+        border-radius: 26px;
+        border: 3px solid rgba(118, 181, 235, 0.28);
+      }
+      .code-lines {
+        position: absolute;
+        left: 130px;
+        top: 116px;
+        font-family: "JetBrains Mono", Consolas, monospace;
+        font-size: 25px;
+        line-height: 1.45;
+        color: rgba(178, 226, 255, 0.62);
+        transform: skewY(8deg);
+        white-space: pre;
+      }
+      .token-title {
+        position: absolute;
+        left: 190px;
+        top: 128px;
+        width: 720px;
+        transform: skewY(-8deg);
+        z-index: 5;
+        color: #ffae63;
+        font-size: 66px;
+        line-height: 0.98;
+        letter-spacing: 4px;
+        text-shadow: 0 0 22px rgba(255, 174, 99, 0.9), 0 0 60px rgba(255, 110, 61, 0.42);
+      }
+      .comma {
+        display: inline-block;
+        font-family: Arial Black, Arial, sans-serif;
+        font-size: 0.74em;
+        transform: translateY(-0.07em);
+      }
+      .token-subtitle {
+        margin-top: 12px;
+        color: #ff3d55;
+        font-size: 43px;
+        line-height: 1;
+        text-shadow: 0 0 20px rgba(255, 61, 85, 0.9), 0 0 55px rgba(255, 61, 85, 0.4);
+      }
+      .context-label {
+        position: absolute;
+        left: 295px;
+        bottom: 52px;
+        font-size: 50px;
+        letter-spacing: 3px;
+        color: #3ff7ff;
+        text-shadow: 0 0 18px rgba(63, 247, 255, 0.95), 0 0 60px rgba(63, 247, 255, 0.36);
+      }
+      .meter-shell {
+        position: absolute;
+        left: 420px;
+        top: 360px;
+        width: 235px;
+        height: 455px;
+        border-radius: 42px;
+        background: linear-gradient(180deg, #172235, #0b1220);
+        border: 4px solid rgba(255, 61, 85, 0.75);
+        box-shadow: 0 0 35px rgba(255, 61, 85, 0.85), inset 0 0 30px rgba(0, 0, 0, 0.72);
+        z-index: 8;
+      }
+      .meter-inner {
+        position: absolute;
+        inset: 42px 54px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: rgba(58, 9, 18, 0.92);
+        border: 3px solid rgba(255, 122, 132, 0.65);
+      }
+      .meter-bars {
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            to bottom,
+            rgba(255, 95, 103, 0.95) 0px,
+            rgba(255, 95, 103, 0.95) 24px,
+            rgba(60, 8, 16, 0.8) 24px,
+            rgba(60, 8, 16, 0.8) 40px
+          );
+      }
+      .meter-scan {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 64px;
+        background: linear-gradient(180deg, transparent, rgba(255, 228, 226, 0.95), transparent);
+        filter: blur(2px);
+        mix-blend-mode: screen;
+      }
+      .meter-glow {
+        position: absolute;
+        inset: -32px;
+        border-radius: 52px;
+        background: radial-gradient(circle, rgba(255, 61, 85, 0.40), transparent 62%);
+        opacity: 0.75;
+        z-index: -1;
+      }
+      .hub {
+        position: absolute;
+        left: 650px;
+        top: 812px;
+        width: 116px;
+        height: 54px;
+        border-radius: 999px;
+        background: #3ff7ff;
+        box-shadow: 0 0 28px rgba(63, 247, 255, 1), 0 0 80px rgba(63, 247, 255, 0.55);
+        z-index: 12;
+      }
+      .ray-svg {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        overflow: visible;
+      }
+      .ray {
+        fill: none;
+        stroke: #3ff7ff;
+        stroke-width: 5;
+        stroke-linecap: round;
+        filter: drop-shadow(0 0 10px rgba(63, 247, 255, 0.95));
+        opacity: 0.72;
+      }
+      .ray.alt { stroke: #aafcff; stroke-width: 2.4; opacity: 0.58; }
+      .particle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #c7ffff;
+        box-shadow: 0 0 14px rgba(63, 247, 255, 1);
+        z-index: 14;
+      }
+      .tool {
+        position: absolute;
+        width: 260px;
+        height: 142px;
+        border-radius: 26px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        transform: skewX(-13deg) rotate(-2deg);
+        border: 4px solid var(--edge);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.38)), var(--fill);
+        box-shadow: 0 18px 0 rgba(11, 18, 32, 0.94), 0 28px 52px rgba(0, 0, 0, 0.46), 0 0 34px var(--glow);
+        z-index: 10;
+      }
+      .tool::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.34);
+      }
+      .tool span {
+        transform: skewX(13deg);
+        text-shadow: 0 0 18px rgba(0, 0, 0, 0.78);
+        z-index: 1;
+      }
+      .tool .icon {
+        display: block;
+        font-size: 44px;
+        margin-bottom: 4px;
+      }
+      .github { left: 990px; top: 280px; --edge: #bffcff; --fill: #233648; --glow: rgba(191, 252, 255, 0.6); }
+      .slack { left: 1290px; top: 345px; --edge: #b25cff; --fill: #40256f; --glow: rgba(178, 92, 255, 0.72); }
+      .grafana { left: 1045px; top: 525px; --edge: #ffae3f; --fill: #5c2f18; --glow: rgba(255, 174, 63, 0.75); }
+      .sentry { left: 1540px; top: 520px; --edge: #ff3d55; --fill: #4a1d33; --glow: rgba(255, 61, 85, 0.75); }
+      .splunk { left: 1315px; top: 700px; --edge: #b8ff45; --fill: #284929; --glow: rgba(184, 255, 69, 0.72); }
+      .jira { left: 1590px; top: 778px; --edge: #37c9ff; --fill: #173a70; --glow: rgba(55, 201, 255, 0.78); }
+      .column {
+        position: absolute;
+        width: 250px;
+        height: 520px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent);
+        opacity: 0.28;
+        z-index: 2;
+      }
+      .column.c1 { left: 995px; top: 145px; }
+      .column.c2 { left: 1295px; top: 215px; }
+      .column.c3 { left: 1545px; top: 360px; }
+      .warning {
+        position: absolute;
+        right: 95px;
+        top: 72px;
+        width: 430px;
+        padding: 22px 26px;
+        border-radius: 18px;
+        border: 2px solid rgba(255, 61, 85, 0.42);
+        background: rgba(9, 18, 34, 0.72);
+        box-shadow: 0 0 40px rgba(255, 61, 85, 0.18);
+        font-family: "JetBrains Mono", Consolas, monospace;
+        font-size: 29px;
+        line-height: 1.16;
+        color: #ffd7dc;
+        z-index: 18;
+      }
+      .warning strong {
+        color: #ff3d55;
+        text-shadow: 0 0 16px rgba(255, 61, 85, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1920" data-height="1080">
+      <div class="grid"></div>
+      <div class="column c1"></div>
+      <div class="column c2"></div>
+      <div class="column c3"></div>
+
+      <svg class="ray-svg" viewBox="0 0 1920 1080">
+        <path id="ray-github" class="ray" d="M704 837 C 820 780, 840 466, 998 412" />
+        <path id="ray-github2" class="ray alt" d="M724 848 C 880 790, 875 482, 1016 438" />
+        <path id="ray-slack" class="ray" d="M710 832 C 920 720, 1030 520, 1298 452" />
+        <path id="ray-slack2" class="ray alt" d="M690 860 C 970 780, 1070 570, 1308 495" />
+        <path id="ray-grafana" class="ray" d="M724 850 C 875 730, 930 642, 1050 604" />
+        <path id="ray-sentry" class="ray" d="M742 848 C 1020 820, 1290 654, 1548 594" />
+        <path id="ray-splunk" class="ray" d="M732 858 C 955 875, 1130 785, 1325 770" />
+        <path id="ray-jira" class="ray" d="M748 866 C 1020 940, 1350 900, 1605 850" />
+      </svg>
+
+      <div class="code-panel">
+        <div class="code-lines">{ message_type: text,
+  content: "...",
+  role: "user" }
+
+{ tool_schema: {
+  token_usage: {
+    prompt: 55000,
+    completion: 0,
+    total: 55000
+  }
+}</div>
+      </div>
+
+      <div class="token-title" id="token-title">
+        55<span class="comma">,</span>000 TOKENS
+        <div class="token-subtitle">BEFORE TASK STARTS</div>
+      </div>
+
+      <div class="meter-shell" id="meter-shell">
+        <div class="meter-glow"></div>
+        <div class="meter-inner">
+          <div class="meter-bars"></div>
+          <div class="meter-scan" id="meter-scan"></div>
+        </div>
+      </div>
+      <div class="hub"></div>
+      <div class="context-label">CONTEXT WINDOW</div>
+
+      <div class="tool github"><span><span class="icon">●</span>GitHub</span></div>
+      <div class="tool slack"><span><span class="icon">✣</span>Slack</span></div>
+      <div class="tool grafana"><span><span class="icon">◉</span>Grafana</span></div>
+      <div class="tool sentry"><span><span class="icon">◢</span>Sentry</span></div>
+      <div class="tool splunk"><span><span class="icon">⌁</span>Splunk</span></div>
+      <div class="tool jira"><span><span class="icon">▰</span>Jira</span></div>
+
+      <div class="warning"><strong>Tool definitions</strong><br />loaded before useful work begins.</div>
+
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+      <div class="particle p4"></div>
+      <div class="particle p5"></div>
+      <div class="particle p6"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      gsap.defaults({ overwrite: "auto" });
+      const tl = gsap.timeline({ paused: true });
+
+      const rays = [".ray", ".ray.alt"];
+      const tools = [".github", ".slack", ".grafana", ".sentry", ".splunk", ".jira"];
+      const particles = [
+        [".p1", [[704, 837], [835, 650], [998, 412]], 2.0],
+        [".p2", [[710, 832], [1030, 520], [1298, 452]], 2.4],
+        [".p3", [[724, 850], [930, 642], [1050, 604]], 1.8],
+        [".p4", [[742, 848], [1290, 654], [1548, 594]], 2.8],
+        [".p5", [[732, 858], [1130, 785], [1325, 770]], 2.2],
+        [".p6", [[748, 866], [1350, 900], [1605, 850]], 2.6]
+      ];
+
+      tl.from(".code-panel", { x: -70, y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, 0)
+        .from(".meter-shell", { y: 70, opacity: 0, scale: 0.86, duration: 0.75, ease: "back.out(1.6)" }, 0.35)
+        .from(".tool", { y: 70, opacity: 0, scale: 0.78, stagger: 0.12, duration: 0.65, ease: "back.out(1.7)" }, 0.75)
+        .from(".ray", { opacity: 0, duration: 0.5, stagger: 0.04 }, 1.3)
+        .from("#token-title", { opacity: 0, scale: 0.82, x: -30, duration: 0.55, ease: "power3.out" }, 1.55)
+        .from(".context-label", { opacity: 0, y: 26, duration: 0.4 }, 1.8)
+        .from(".warning", { opacity: 0, x: 30, duration: 0.45 }, 2.2);
+
+      tl.to("#token-title", {
+        opacity: 0.44,
+        textShadow: "0 0 6px rgba(255,174,99,0.35), 0 0 20px rgba(255,61,85,0.22)",
+        duration: 0.16,
+        repeat: 26,
+        yoyo: true,
+        ease: "steps(1)"
+      }, 2.7);
+
+      tl.to("#meter-scan", {
+        y: 268,
+        duration: 1.15,
+        repeat: 14,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 2.2);
+
+      tl.to("#meter-shell", {
+        boxShadow: "0 0 62px rgba(255,61,85,1), inset 0 0 36px rgba(0,0,0,0.72)",
+        scale: 1.035,
+        duration: 0.32,
+        repeat: 22,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 2.5);
+
+      tl.to(".ray", {
+        opacity: 0.18,
+        strokeWidth: 1.8,
+        duration: 0.22,
+        repeat: 32,
+        yoyo: true,
+        stagger: 0.04,
+        ease: "steps(1)"
+      }, 2.8);
+
+      tl.to(".github", { "--edge": "#ffffff", "--glow": "rgba(255,255,255,0.92)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.0)
+        .to(".slack", { "--edge": "#ff4bd8", "--glow": "rgba(255,75,216,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.45)
+        .to(".grafana", { "--edge": "#ffd04d", "--glow": "rgba(255,208,77,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 3.9)
+        .to(".sentry", { "--edge": "#ff7c8f", "--glow": "rgba(255,124,143,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 4.35)
+        .to(".splunk", { "--edge": "#dbff6a", "--glow": "rgba(219,255,106,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 4.8)
+        .to(".jira", { "--edge": "#73dfff", "--glow": "rgba(115,223,255,0.95)", scale: 1.07, duration: 0.35, repeat: 9, yoyo: true }, 5.25);
+
+      particles.forEach(([selector, pts, start]) => {
+        tl.set(selector, { x: pts[0][0], y: pts[0][1], opacity: 0 }, start)
+          .to(selector, { opacity: 1, duration: 0.08 }, start + 0.05)
+          .to(selector, { x: pts[1][0], y: pts[1][1], duration: 0.75, ease: "power1.inOut", repeat: 8, yoyo: true }, start + 0.12)
+          .to(selector, { x: pts[2][0], y: pts[2][1], duration: 0.75, ease: "power1.inOut", repeat: 8, yoyo: true }, start + 0.9)
+          .to(selector, { opacity: 0.2, duration: 0.12, repeat: 16, yoyo: true }, start + 0.12);
+      });
+
+      tl.to(".code-lines", { opacity: 0.38, duration: 0.2, repeat: 20, yoyo: true, ease: "steps(1)" }, 4.0)
+        .to(".warning", { borderColor: "rgba(255,61,85,0.95)", boxShadow: "0 0 60px rgba(255,61,85,0.45)", duration: 0.5, repeat: 10, yoyo: true }, 4.5)
+        .to(".grid", { opacity: 0.78, duration: 1.8, repeat: 5, yoyo: true }, 5.0)
+        .to("#root", { filter: "brightness(1.16) saturate(1.18)", duration: 0.5, repeat: 9, yoyo: true }, 6.0)
+        .to([".warning", ".token-title", ".tool", ".meter-shell", ".context-label", ".ray", ".hub", ".particle"], { opacity: 0, duration: 0.65, ease: "power2.in" }, 19.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
