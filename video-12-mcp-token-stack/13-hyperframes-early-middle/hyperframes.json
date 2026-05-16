@@ -1,0 +1,11 @@
+{
+  "version": "0.6.7",
+  "entry": "index.html",
+  "composition": {
+    "id": "video-12-early-middle-proof",
+    "width": 1920,
+    "height": 1080,
+    "duration": 158,
+    "fps": 30
+  }
+}
