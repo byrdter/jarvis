@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "check": "npx --yes hyperframes@0.6.7 lint && npx --yes hyperframes@0.6.7 validate",
+    "preview": "npx --yes hyperframes@0.6.7 preview --port 3024",
+    "render": "npx --yes hyperframes@0.6.7 render --output renders/video-12-two-scene-proof.mp4"
+  },
+  "dependencies": {
+    "hyperframes": "0.6.7"
+  },
+  "devDependencies": {}
+}

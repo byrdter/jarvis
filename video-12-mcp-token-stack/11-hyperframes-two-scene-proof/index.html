@@ -1,0 +1,566 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #020611; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      #video-12-two-scene-proof {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        color: #f7fbff;
+        background:
+          radial-gradient(circle at 20% 18%, rgba(44, 245, 255, 0.16), transparent 28%),
+          radial-gradient(circle at 82% 72%, rgba(255, 61, 104, 0.15), transparent 30%),
+          linear-gradient(135deg, #020611 0%, #071424 48%, #030712 100%);
+      }
+      .noise {
+        position: absolute;
+        inset: 0;
+        opacity: 0.16;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 54px 54px;
+        transform: perspective(800px) rotateX(58deg) translateY(280px) scale(1.25);
+        transform-origin: bottom center;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 76px 92px;
+      }
+      .label {
+        position: absolute;
+        top: 58px;
+        left: 92px;
+        color: #67f4ff;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .caption {
+        position: absolute;
+        left: 92px;
+        right: 92px;
+        bottom: 42px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(108, 244, 255, 0.18);
+        border-radius: 16px;
+        background: rgba(2, 6, 17, 0.72);
+        color: #f9fbff;
+        font-size: 24px;
+        font-weight: 900;
+        z-index: 30;
+      }
+
+      /* Scene 2: token overload */
+      .context-glass {
+        position: absolute;
+        left: 82px;
+        top: 122px;
+        width: 720px;
+        height: 790px;
+        border-radius: 42px;
+        border: 2px solid rgba(122, 200, 255, 0.28);
+        background: linear-gradient(135deg, rgba(18, 35, 58, 0.82), rgba(8, 14, 27, 0.74));
+        box-shadow: 0 0 80px rgba(55, 210, 255, 0.18), inset 0 0 70px rgba(110, 175, 255, 0.08);
+        transform: perspective(1000px) rotateY(-10deg) rotateX(3deg);
+        overflow: hidden;
+      }
+      .code-rain {
+        position: absolute;
+        inset: 44px 52px;
+        color: rgba(207, 239, 255, 0.58);
+        font: 24px/1.42 "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        white-space: pre;
+      }
+      .headline {
+        position: absolute;
+        left: 170px;
+        top: 154px;
+        z-index: 6;
+        font-size: 116px;
+        line-height: 0.9;
+        font-weight: 1000;
+        color: #ffb164;
+        text-shadow: 0 0 36px rgba(255, 129, 49, 0.9);
+      }
+      .headline span {
+        display: block;
+        margin-top: 22px;
+        color: #ff3c5e;
+        font-size: 54px;
+        text-shadow: 0 0 30px rgba(255, 31, 76, 0.8);
+      }
+      .token-meter {
+        position: absolute;
+        left: 425px;
+        top: 396px;
+        width: 190px;
+        height: 420px;
+        border-radius: 28px;
+        border: 5px solid rgba(255, 70, 100, 0.8);
+        background: rgba(9, 11, 21, 0.92);
+        box-shadow: 0 0 52px rgba(255, 48, 80, 0.68);
+        overflow: hidden;
+      }
+      .meter-fill {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 22px;
+        height: 338px;
+        border-radius: 16px;
+        background: repeating-linear-gradient(to top, #ff3558 0 28px, #ff8a97 28px 45px);
+        transform-origin: bottom center;
+      }
+      .scanner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: rgba(255, 240, 242, 0.78);
+        box-shadow: 0 0 36px rgba(255, 255, 255, 0.85);
+        top: 40px;
+      }
+      .task-line {
+        position: absolute;
+        left: 250px;
+        bottom: 120px;
+        font-size: 42px;
+        font-weight: 1000;
+        color: #2df5ff;
+        text-transform: uppercase;
+        text-shadow: 0 0 24px rgba(45, 245, 255, 0.7);
+      }
+      .tool-stage {
+        position: absolute;
+        right: 92px;
+        top: 106px;
+        width: 970px;
+        height: 820px;
+      }
+      .rays {
+        position: absolute;
+        inset: 0;
+        overflow: visible;
+      }
+      .ray {
+        fill: none;
+        stroke: #31f7ff;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-dasharray: 20 18;
+        filter: drop-shadow(0 0 12px rgba(49,247,255,0.9));
+      }
+      .hub {
+        position: absolute;
+        left: 20px;
+        bottom: 128px;
+        width: 96px;
+        height: 42px;
+        border-radius: 999px;
+        background: #27f7ff;
+        box-shadow: 0 0 45px rgba(39, 247, 255, 1);
+      }
+      .tool {
+        position: absolute;
+        width: 236px;
+        height: 122px;
+        border-radius: 24px;
+        display: grid;
+        place-items: center;
+        font-size: 31px;
+        font-weight: 1000;
+        color: white;
+        border: 3px solid currentColor;
+        background: rgba(8, 18, 31, 0.92);
+        box-shadow: 0 22px 0 rgba(255,255,255,0.08), 0 0 36px currentColor;
+        transform: perspective(900px) rotateX(55deg) rotateZ(-18deg);
+      }
+      .tool.github { left: 95px; top: 68px; color: #c8fbff; }
+      .tool.slack { left: 438px; top: 116px; color: #a86cff; }
+      .tool.sentry { right: 30px; top: 278px; color: #ff315d; }
+      .tool.grafana { left: 220px; top: 350px; color: #ff9b2d; }
+      .tool.splunk { left: 510px; top: 508px; color: #aaff3b; }
+      .tool.jira { right: 8px; bottom: 46px; color: #21a4ff; }
+      .pretask {
+        position: absolute;
+        right: 130px;
+        bottom: 98px;
+        font-size: 68px;
+        line-height: 0.95;
+        font-weight: 1000;
+        text-align: right;
+        color: #fff;
+        text-shadow: 0 0 30px rgba(255,255,255,0.4);
+      }
+      .pretask span { display: block; color: #ff3b65; }
+
+      /* Scene 17: software action */
+      .desktop {
+        position: absolute;
+        inset: 88px 86px 92px 86px;
+        border-radius: 28px;
+        border: 1px solid rgba(129, 232, 255, 0.18);
+        background: linear-gradient(140deg, rgba(6, 13, 25, 0.96), rgba(10, 26, 40, 0.92));
+        box-shadow: 0 0 70px rgba(34, 241, 255, 0.12);
+        overflow: hidden;
+      }
+      .topbar {
+        height: 54px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 22px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.04);
+        color: rgba(230, 248, 255, 0.8);
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .dot { width: 14px; height: 14px; border-radius: 50%; }
+      .dot.r { background: #ff5c67; } .dot.y { background: #ffcb4a; } .dot.g { background: #55f08f; }
+      .filetree {
+        position: absolute;
+        top: 54px;
+        bottom: 0;
+        left: 0;
+        width: 290px;
+        padding: 24px;
+        background: rgba(2, 7, 15, 0.78);
+        border-right: 1px solid rgba(255,255,255,0.08);
+      }
+      .file {
+        height: 42px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: #b8d7e5;
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .file.active { color: #ffffff; background: #0f6670; }
+      .editor {
+        position: absolute;
+        top: 78px;
+        left: 326px;
+        width: 565px;
+        height: 390px;
+        border-radius: 18px;
+        background: #07111f;
+        border: 1px solid rgba(109, 247, 255, 0.24);
+        padding: 24px 28px;
+        font: 24px/1.58 "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        color: #d9f7ff;
+        box-shadow: 0 18px 54px rgba(0,0,0,0.36);
+      }
+      .code-line { opacity: 0; }
+      .code-line .green { color: #67ff8a; } .code-line .red { color: #ff4b68; } .code-line .cyan { color: #6df7ff; }
+      .terminal {
+        position: absolute;
+        left: 326px;
+        bottom: 52px;
+        width: 685px;
+        height: 400px;
+        border-radius: 18px;
+        background: #030915;
+        border: 1px solid rgba(109, 247, 255, 0.2);
+        overflow: hidden;
+        box-shadow: 0 18px 54px rgba(0,0,0,0.36);
+      }
+      .term-head {
+        height: 44px;
+        padding: 10px 18px;
+        background: rgba(255,255,255,0.05);
+        color: #8bdbe7;
+        font-size: 16px;
+        font-weight: 1000;
+      }
+      .term-body {
+        padding: 22px 24px;
+        font: 25px/1.55 "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+      }
+      .term-line { opacity: 0; color: #cdefff; }
+      .term-line.good { color: #65ff86; }
+      .term-line.cost { color: #a5ffd0; font-size: 42px; font-weight: 1000; }
+      .run-button {
+        position: absolute;
+        top: 510px;
+        left: 760px;
+        width: 170px;
+        height: 58px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        background: #63ff85;
+        font-size: 22px;
+        font-weight: 1000;
+        box-shadow: 0 0 34px rgba(99,255,133,0.48);
+      }
+      .mcp-lab {
+        position: absolute;
+        top: 78px;
+        right: 54px;
+        width: 680px;
+        bottom: 52px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 83, 111, 0.32);
+        background: linear-gradient(180deg, rgba(35, 10, 23, 0.9), rgba(7, 10, 20, 0.94));
+        overflow: hidden;
+        box-shadow: 0 0 60px rgba(255, 46, 84, 0.18);
+      }
+      .mcp-title {
+        padding: 24px 30px;
+        font-size: 28px;
+        font-weight: 1000;
+        color: #ff5d79;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .schema-stream {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        top: 96px;
+        bottom: 240px;
+        overflow: hidden;
+      }
+      .schema {
+        height: 42px;
+        margin-bottom: 10px;
+        padding: 9px 14px;
+        border-radius: 10px;
+        color: rgba(255, 230, 235, 0.82);
+        background: rgba(255, 77, 111, 0.12);
+        border: 1px solid rgba(255, 77, 111, 0.24);
+        font: 17px "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        transform: translateY(560px);
+      }
+      .mcp-counter {
+        position: absolute;
+        left: 34px;
+        bottom: 118px;
+        font-size: 82px;
+        font-weight: 1000;
+        color: #ff3f66;
+        text-shadow: 0 0 28px rgba(255,63,102,0.7);
+      }
+      .failure {
+        position: absolute;
+        right: 36px;
+        bottom: 128px;
+        width: 220px;
+        height: 86px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: rgba(255, 44, 82, 0.18);
+        border: 2px solid #ff3f66;
+        font-size: 25px;
+        font-weight: 1000;
+        transform: rotate(-3deg) scale(0.8);
+        opacity: 0;
+      }
+      .verdict {
+        position: absolute;
+        right: 122px;
+        bottom: 48px;
+        font-size: 58px;
+        font-weight: 1000;
+        color: #fff;
+        opacity: 0;
+      }
+      .verdict span { color: #ffffff; background: rgba(44, 229, 104, 0.34); padding: 0 14px; border-radius: 12px; text-shadow: 0 0 20px rgba(99, 255, 133, 0.7); }
+      .cursor {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        z-index: 50;
+        transform: translate(1180px, 520px);
+      }
+      .cursor:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 0 solid transparent;
+        border-right: 26px solid transparent;
+        border-top: 34px solid #ffffff;
+        filter: drop-shadow(0 0 12px rgba(109,247,255,0.9));
+      }
+      .click-ring {
+        position: absolute;
+        width: 62px;
+        height: 62px;
+        margin-left: -14px;
+        margin-top: -14px;
+        border-radius: 50%;
+        border: 3px solid #6df7ff;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="video-12-two-scene-proof" data-composition-id="video-12-two-scene-proof" data-start="0" data-duration="53.6" data-width="1920" data-height="1080">
+      <div class="noise"></div>
+
+      <audio id="audio-seg-2" data-start="0" data-duration="26.16" data-media-start="35.04" data-track-index="20" src="assets/heygen-source-keyframed.mp4" data-volume="1"></audio>
+      <audio id="audio-seg-17" data-start="27.16" data-duration="25.44" data-media-start="417.064" data-track-index="20" src="assets/heygen-source-keyframed.mp4" data-volume="1"></audio>
+
+      <div id="scene-token" class="clip scene" data-start="0" data-duration="26.16" data-track-index="1">
+        <div class="label">Segment 002 / old failure mode</div>
+        <div class="context-glass">
+          <div class="code-rain">{ github.createIssue.schema }\n{ slack.chat.postMessage.schema }\n{ sentry.events.search.schema }\n{ grafana.dashboard.query.schema }\n{ splunk.search.jobs.schema }\n{ jira.issue.transition.schema }</div>
+          <div class="headline"><b id="token-count">0</b> TOKENS<span>BEFORE TASK STARTS</span></div>
+          <div class="token-meter"><div class="meter-fill"></div><div class="scanner"></div></div>
+        </div>
+        <div class="task-line">actual task: not started</div>
+        <div class="tool-stage">
+          <svg class="rays" viewBox="0 0 970 820">
+            <path class="ray r1" d="M60 675 C 125 520, 105 265, 210 150" />
+            <path class="ray r2" d="M60 675 C 300 610, 395 265, 545 197" />
+            <path class="ray r3" d="M60 675 C 420 560, 635 420, 840 350" />
+            <path class="ray r4" d="M60 675 C 220 615, 295 520, 330 435" />
+            <path class="ray r5" d="M60 675 C 445 705, 610 640, 625 590" />
+            <path class="ray r6" d="M60 675 C 530 820, 800 800, 845 742" />
+          </svg>
+          <div class="hub"></div>
+          <div class="tool github">GitHub</div>
+          <div class="tool slack">Slack</div>
+          <div class="tool sentry">Sentry</div>
+          <div class="tool grafana">Grafana</div>
+          <div class="tool splunk">Splunk</div>
+          <div class="tool jira">Jira</div>
+        </div>
+        <div class="pretask">OVERHEAD<span>IS NOT WORK</span></div>
+        <div class="caption">Latency, confusion, and less room for the actual problem.</div>
+      </div>
+
+      <div id="scene-cli" class="clip scene" data-start="27.16" data-duration="25.44" data-track-index="1">
+        <div class="label">Segment 017 / same task, two paths</div>
+        <div class="desktop">
+          <div class="topbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>JARVIS benchmark workspace</span></div>
+          <div class="filetree">
+            <div class="file active">repo-question.md</div>
+            <div class="file">scripts/detect-language.sh</div>
+            <div class="file">mcp/github-tools.json</div>
+            <div class="file">results/token-cost.md</div>
+          </div>
+          <div class="editor">
+            <div class="code-line">task: <span class="cyan">"what language is this repo?"</span></div>
+            <div class="code-line">path A: <span class="green">local CLI</span></div>
+            <div class="code-line">path B: <span class="red">GitHub MCP server</span></div>
+            <div class="code-line">measure: tokens + reliability</div>
+          </div>
+          <div class="run-button">RUN CLI</div>
+          <div class="terminal">
+            <div class="term-head">terminal</div>
+            <div class="term-body">
+              <div class="term-line">$ ./scripts/detect-language.sh</div>
+              <div class="term-line good">scan complete: TypeScript</div>
+              <div class="term-line good">license: MIT</div>
+              <div class="term-line cost">1,365 tokens</div>
+            </div>
+          </div>
+          <div class="mcp-lab">
+            <div class="mcp-title">MCP direct path</div>
+            <div class="schema-stream">
+              <div class="schema">github.repos.get.schema</div>
+              <div class="schema">github.contents.read.schema</div>
+              <div class="schema">github.search.code.schema</div>
+              <div class="schema">github.issues.list.schema</div>
+              <div class="schema">github.pullRequests.schema</div>
+              <div class="schema">github.actions.workflow.schema</div>
+              <div class="schema">github.branches.list.schema</div>
+              <div class="schema">github.commits.compare.schema</div>
+              <div class="schema">github.licenses.get.schema</div>
+              <div class="schema">github.users.get.schema</div>
+            </div>
+            <div class="mcp-counter"><span id="mcp-count">0</span></div>
+            <div class="failure">28% failure</div>
+          </div>
+          <div class="verdict">Local deterministic work: <span>use CLI</span></div>
+        </div>
+        <div class="cursor"><div class="click-ring"></div></div>
+        <div class="caption">Cheaper and more reliable when the task is deterministic and local.</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set(["#scene-token .label", "#scene-token .caption", ".context-glass", ".tool-stage", ".pretask", ".task-line"], { opacity: 0 });
+      gsap.set(".headline", { opacity: 0, scale: 0.88 });
+      gsap.set(".meter-fill", { scaleY: 0.08 });
+      gsap.set(".ray", { strokeDashoffset: 220, opacity: 0 });
+      gsap.set(".tool", { opacity: 0, y: 80, scale: 0.72 });
+      gsap.set(".scanner", { y: 330 });
+      gsap.set(["#scene-cli .label", "#scene-cli .caption", ".desktop", ".verdict"], { opacity: 0 });
+      gsap.set([".file", ".code-line", ".term-line"], { opacity: 0, y: 12 });
+      gsap.set(".run-button", { opacity: 0, scale: 0.85 });
+
+      const tokenObj = { value: 0 };
+      tl.to("#scene-token .label", { opacity: 1, duration: 0.35 }, 0.2)
+        .to(".context-glass", { opacity: 1, x: 20, duration: 0.8, ease: "power3.out" }, 0.5)
+        .to(".tool-stage", { opacity: 1, duration: 0.5 }, 1.0)
+        .to(".tool", { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.22, ease: "back.out(1.6)" }, 1.2)
+        .to(".ray", { opacity: 1, strokeDashoffset: 0, duration: 1.2, stagger: 0.13, ease: "power2.out" }, 2.0)
+        .to(".headline", { opacity: 1, scale: 1, duration: 0.65, ease: "back.out(1.25)" }, 3.1)
+        .to(tokenObj, { value: 55000, duration: 3.4, ease: "power4.out", onUpdate: () => {
+          document.getElementById("token-count").textContent = Math.round(tokenObj.value).toLocaleString("en-US");
+        }}, 3.3)
+        .to(".meter-fill", { scaleY: 1, duration: 3.3, ease: "power3.out" }, 3.35)
+        .to(".scanner", { y: -28, duration: 1.05, repeat: 8, yoyo: true, ease: "sine.inOut" }, 4.2)
+        .to(".tool.github", { color: "#ff4568", duration: 0.25, repeat: 7, yoyo: true }, 5.0)
+        .to(".tool.slack", { color: "#32f7ff", duration: 0.28, repeat: 6, yoyo: true }, 5.35)
+        .to(".tool.sentry", { color: "#ffb03b", duration: 0.24, repeat: 7, yoyo: true }, 5.7)
+        .to(".tool.grafana", { color: "#a86cff", duration: 0.28, repeat: 6, yoyo: true }, 6.0)
+        .to(".tool.splunk", { color: "#ff4568", duration: 0.28, repeat: 6, yoyo: true }, 6.3)
+        .to(".tool.jira", { color: "#63ff85", duration: 0.28, repeat: 6, yoyo: true }, 6.6)
+        .to(".task-line", { opacity: 1, y: -8, duration: 0.55 }, 8.4)
+        .to(".pretask", { opacity: 1, x: -24, duration: 0.55, ease: "power3.out" }, 10.2)
+        .to("#scene-token .caption", { opacity: 1, duration: 0.45 }, 13.0)
+        .to(".ray", { opacity: 0.25, duration: 0.16, repeat: 24, yoyo: true, stagger: 0.03 }, 13.4)
+        .to([".headline", ".token-meter"], { filter: "brightness(1.55)", duration: 0.2, repeat: 12, yoyo: true }, 16.2)
+        .to("#scene-token", { opacity: 0, duration: 0.5 }, 25.6);
+
+      const s2 = 27.16;
+      const mcpObj = { value: 0 };
+      tl.to("#scene-cli .label", { opacity: 1, duration: 0.35 }, s2 + 0.1)
+        .to(".desktop", { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, s2 + 0.25)
+        .to(".file", { opacity: 1, y: 0, duration: 0.25, stagger: 0.08 }, s2 + 0.75)
+        .to(".code-line", { opacity: 1, y: 0, duration: 0.28, stagger: 0.22 }, s2 + 1.4)
+        .to(".cursor", { x: 780, y: 500, duration: 0.65, ease: "power2.inOut" }, s2 + 3.1)
+        .to(".click-ring", { opacity: 1, scale: 1.7, duration: 0.28, yoyo: true, repeat: 1 }, s2 + 3.75)
+        .to(".run-button", { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, s2 + 3.85)
+        .to(".run-button", { backgroundColor: "#1fe66a", duration: 0.22, yoyo: true, repeat: 1 }, s2 + 4.32)
+        .to(".term-line", { opacity: 1, y: 0, duration: 0.22, stagger: 0.55 }, s2 + 4.8)
+        .to(".cursor", { x: 1260, y: 210, duration: 0.65, ease: "power2.inOut" }, s2 + 7.0)
+        .to(".schema", { y: -70, duration: 4.2, stagger: 0.12, ease: "power1.inOut" }, s2 + 7.5)
+        .to(mcpObj, { value: 44026, duration: 3.5, ease: "power3.out", onUpdate: () => {
+          document.getElementById("mcp-count").textContent = Math.round(mcpObj.value).toLocaleString("en-US");
+        }}, s2 + 7.6)
+        .to(".mcp-lab", { boxShadow: "0 0 84px rgba(255, 46, 84, 0.55)", duration: 0.28, repeat: 11, yoyo: true }, s2 + 8.1)
+        .to(".failure", { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, s2 + 12.0)
+        .to(".cursor", { x: 560, y: 800, duration: 0.75, ease: "power2.inOut" }, s2 + 13.1)
+        .to(".term-line.cost", { scale: 1.08, duration: 0.3, yoyo: true, repeat: 3 }, s2 + 14.0)
+        .to(".verdict", { opacity: 1, y: -12, duration: 0.55, ease: "power3.out" }, s2 + 16.2)
+        .to("#scene-cli .caption", { opacity: 1, duration: 0.45 }, s2 + 18.4)
+        .to([".mcp-lab", ".terminal"], { y: -8, duration: 0.35, repeat: 4, yoyo: true }, s2 + 19.2);
+
+      window.__timelines["video-12-two-scene-proof"] = tl;
+    </script>
+  </body>
+</html>
