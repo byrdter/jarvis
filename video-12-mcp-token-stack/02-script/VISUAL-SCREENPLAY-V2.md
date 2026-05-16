@@ -8,13 +8,16 @@ Transcript source: fresh Whisper alignment from the HeyGen source. Segment 3 was
 
 Avatar rule: use HeyGen full-frame source for the visible avatar sections, but crop/reposition it in HyperFrames/Remotion for side-avatar segments 6, 13, and 22. Do not cover the avatar face with large captions.
 
-Still-image rule: `09-stills/NNN.png` files are inspiration boards only. Do not use them as static plates unless a segment explicitly calls for it. Rebuild the idea as animated HyperFrames surfaces.
+Still-image rule: `09-stills/NNN.png` files are optional concept art, not production instructions. For each segment, inspect the still if one exists, then decide whether it helps. It may be used as inspiration, loosely emulated, ignored, or replaced with a completely new visual if the still does not serve the narration. Do not force the video to follow the stills.
+
+Layered-object rule: the final visual should be built as animated layers, not as a flat still with effects. Use separate text, counters, panels, rays, meters, highlights, cards, source windows, data objects, cursor/callout layers, and avatar layers, each with its own timing. The point is not to rebuild every still image. The point is to design the best layered scene for the idea being spoken in that segment.
 
 Global layout rules:
 
 - Use the whole 1920x1080 frame. Avoid small top-left panels floating in empty space.
 - Minimum primary text size: 56px. Minimum secondary text size: 34px. Avoid dense paragraphs.
 - Every segment gets one primary visual verb: build, collapse, compare, zoom, reveal, audit, measure, or decide.
+- Every segment gets a fresh visual decision. Do not over-apply one technique across the whole video just because it worked once.
 - Cursor appears only when it performs a real action: click, select, drag, open, underline, or confirm. No idle cursor.
 - Captions are not subtitles. Use one large visual thesis line only when it strengthens the scene.
 - Visual timing must follow the spoken timing below. If the voice moves to a new concept, the screen must move too.
