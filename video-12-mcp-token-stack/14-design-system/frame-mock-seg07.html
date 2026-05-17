@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Segment 07 · Cloudflare Source Proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E14;
+    --surface: #161A23;
+    --surface-2: #1F2530;
+    --text: #E8ECEF;
+    --text-dim: #9AA3AD;
+    --text-mute: #6B7280;
+    --amber: #F0B742;
+    --green: #5EBE89;
+    --red: #E5605C;
+    --blue: #5B9DF9;
+    --border: #2A3140;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .frame {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background:
+      radial-gradient(ellipse 1200px 800px at 80% 30%, rgba(240, 183, 66, 0.06), transparent 60%),
+      radial-gradient(ellipse 1000px 700px at 20% 80%, rgba(91, 157, 249, 0.04), transparent 60%),
+      var(--bg);
+  }
+
+  /* TOP BADGE */
+  .source-badge {
+    position: absolute;
+    top: 56px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: 999px;
+  }
+  .source-badge-dot {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #F38020, #FBAD41);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    font-family: 'Inter';
+  }
+  .source-badge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* BROWSER MOCK */
+  .browser {
+    position: absolute;
+    top: 130px;
+    left: 80px;
+    width: 1080px;
+    height: 700px;
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 2px 0 rgba(255,255,255,0.04) inset;
+  }
+  .browser-chrome {
+    height: 56px;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .traffic { display: flex; gap: 8px; margin-right: 24px; }
+  .traffic span {
+    width: 13px; height: 13px; border-radius: 50%;
+  }
+  .traffic .r { background: #FF5F57; }
+  .traffic .y { background: #FEBC2E; }
+  .traffic .g { background: #28C840; }
+  .url-bar {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .url-lock { color: var(--green); font-size: 12px; }
+  .browser-body {
+    padding: 56px 64px;
+    height: calc(100% - 56px);
+    overflow: hidden;
+  }
+  .post-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+  }
+  .post-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  .post-body {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .post-body code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--amber);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid var(--border);
+  }
+  .post-quote {
+    border-left: 3px solid var(--amber);
+    padding: 6px 0 6px 22px;
+    margin: 28px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  /* METRIC PANEL */
+  .metric {
+    position: absolute;
+    top: 200px;
+    right: 80px;
+    width: 600px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 48px 44px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .metric-label-top {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .metric-from {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 64px;
+    color: var(--red);
+    line-height: 1;
+    text-decoration: line-through;
+    text-decoration-color: rgba(229, 96, 92, 0.4);
+    text-decoration-thickness: 3px;
+  }
+  .metric-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-mute);
+    font-size: 28px;
+    margin: 16px 0;
+  }
+  .metric-to {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 132px;
+    color: var(--amber);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .metric-label-bottom {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--text);
+    margin-top: 16px;
+  }
+  .metric-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
+
+  /* THESIS BAR */
+  .thesis {
+    position: absolute;
+    left: 80px;
+    bottom: 64px;
+    width: 1080px;
+    padding: 32px 40px;
+    background: rgba(22, 26, 35, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--amber);
+    border-radius: 12px;
+  }
+  .thesis-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .thesis-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 40px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  /* CORNER SLATE */
+  .slate {
+    position: absolute;
+    bottom: 32px;
+    right: 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- top-left source badge -->
+  <div class="source-badge">
+    <div class="source-badge-dot">CF</div>
+    <div class="source-badge-label">CLOUDFLARE · CODE MODE</div>
+  </div>
+
+  <!-- browser mock -->
+  <div class="browser">
+    <div class="browser-chrome">
+      <div class="traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+      <div class="url-bar">
+        <span class="url-lock">●</span>
+        blog.cloudflare.com/code-mode
+      </div>
+    </div>
+    <div class="browser-body">
+      <div class="post-meta">CLOUDFLARE WORKERS · ENGINEERING</div>
+      <div class="post-title">Code Mode: give Claude code, not tools.</div>
+      <div class="post-body">
+        Instead of injecting every tool's schema into the model context, we expose
+        two primitives — <code>search()</code> and <code>execute()</code> — and let
+        the agent discover what it needs.
+      </div>
+      <div class="post-quote">
+        "Discover, inspect, execute, return." The agent reads its own code,
+        not 1.17 million tokens of someone else's documentation.
+      </div>
+    </div>
+  </div>
+
+  <!-- metric panel -->
+  <div class="metric">
+    <div class="metric-label-top">CONTEXT COST</div>
+    <div class="metric-from">1,170,000</div>
+    <div class="metric-arrow">↓</div>
+    <div class="metric-to">1,000</div>
+    <div class="metric-label-bottom">input tokens with Code Mode</div>
+    <div class="metric-sub">99.91% reduction · source: Cloudflare Workers</div>
+  </div>
+
+  <!-- thesis bar -->
+  <div class="thesis">
+    <div class="thesis-label">THE LAYER QUESTION</div>
+    <div class="thesis-text">Context should carry reasoning, not every instruction manual.</div>
+  </div>
+
+  <!-- corner slate -->
+  <div class="slate">SEG 07 · 172.50 → 199.10 · CLOUDFLARE SOURCE</div>
+
+</div>
+</body>
+</html>

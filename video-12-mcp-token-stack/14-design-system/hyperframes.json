@@ -1,0 +1,13 @@
+{
+  "name": "video-12-design-system",
+  "version": "1.0.0",
+  "compositions": [
+    {
+      "id": "segment-07-cloudflare-proof",
+      "file": "index.html",
+      "width": 1920,
+      "height": 1080,
+      "duration": 26.6
+    }
+  ]
+}
