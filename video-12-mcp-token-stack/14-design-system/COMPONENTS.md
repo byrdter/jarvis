@@ -19,9 +19,6 @@ This folder is the first pass at turning the `14-design-system` static mocks int
 - `eventCard()`
 - `thesisBar()`
 - `segmentShell()`
-
-## Next Components
-
 - `terminalMock()`
 - `vscodeMock()`
 - `comparisonSplit()`
@@ -30,11 +27,24 @@ This folder is the first pass at turning the `14-design-system` static mocks int
 - `dashboardPanel()`
 - `lowerThird()`
 - `ctaControls()`
+- `decisionTable()`
+- `architectureLayers()`
+- `evidenceMosaic()`
 
-## Rendering
+## Preview
+
+- `component-gallery.html` is a static browser preview of the reusable components. It is intentionally not a HyperFrames root composition so it does not interfere with Segment 7 rendering.
+
+## Rendering Segment 7
 
 ```bash
 cd video-12-mcp-token-stack/14-design-system
 npm run check
 npm run render:seg07
 ```
+
+## Asset Guidance
+
+Use HTML/CSS components for generic objects: terminals, phones, dashboards, cards, browser chrome, tables, charts, arrows, badges, and CTA controls.
+
+Use real image/video assets when the viewer needs evidence or recognition: source screenshots, product pages, logos, a real app UI, a real terminal/screen recording, avatar footage, or photographic backgrounds.
