@@ -111,6 +111,31 @@
         padding: 58px 70px;
         z-index: 2;
       }
+      .event-host {
+        position: absolute;
+        inset: 0;
+        z-index: 12;
+        pointer-events: none;
+      }
+      .event-beat {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+      .seg9-broll-video {
+        position: absolute;
+        left: 58px;
+        top: 96px;
+        width: 1210px;
+        height: 680px;
+        object-fit: cover;
+        border-radius: 18px;
+        border: 2px solid rgba(118, 176, 235, 0.38);
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.54);
+        z-index: 11;
+        opacity: 0;
+      }
       .scene-title {
         font-size: 72px;
         line-height: 0.98;
@@ -546,6 +571,234 @@
         text-align: center;
         text-wrap: balance;
       }
+      .beat-scene {
+        position: absolute;
+        inset: 0;
+        padding: 58px 70px;
+        overflow: hidden;
+      }
+      .beat-scene.tight { padding-right: 720px; }
+      .beat-kicker {
+        color: #3ff7ff;
+        font-size: 24px;
+        font-weight: 950;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .beat-title {
+        font-size: 78px;
+        line-height: 0.94;
+        font-weight: 950;
+        max-width: 1360px;
+        text-wrap: balance;
+      }
+      .beat-title.huge {
+        font-size: 118px;
+        line-height: 0.9;
+        max-width: 1560px;
+      }
+      .beat-sub {
+        margin-top: 20px;
+        font-size: 34px;
+        line-height: 1.14;
+        color: #d9edff;
+        max-width: 980px;
+      }
+      .beat-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 34px;
+        height: 710px;
+        margin-top: 38px;
+      }
+      .beat-panel {
+        position: relative;
+        min-height: 250px;
+        padding: 32px;
+        border-radius: 18px;
+        background: rgba(18, 35, 58, 0.84);
+        border: 1px solid rgba(118, 176, 235, 0.34);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.44);
+        overflow: hidden;
+      }
+      .beat-panel h3 {
+        margin: 0 0 18px;
+        font-size: 48px;
+        line-height: 1;
+      }
+      .beat-panel p {
+        margin: 0;
+        color: #d9edff;
+        font-size: 30px;
+        line-height: 1.18;
+      }
+      .beat-panel.warn { border-color: rgba(255, 190, 85, 0.52); }
+      .beat-panel.bad { border-color: rgba(255, 61, 85, 0.62); }
+      .beat-panel.good { border-color: rgba(114, 246, 162, 0.56); }
+      .token-number {
+        position: absolute;
+        left: 32px;
+        bottom: 28px;
+        font-family: Orbitron, Arial Black, sans-serif;
+        font-size: 118px;
+        line-height: 0.9;
+        font-weight: 950;
+        color: #ff3d55;
+        text-shadow: 0 0 30px rgba(255, 61, 85, 0.58);
+      }
+      .token-number.green { color: #72f6a2; text-shadow: 0 0 30px rgba(114, 246, 162, 0.52); }
+      .schema-stack {
+        display: grid;
+        gap: 13px;
+        margin-top: 24px;
+        max-width: 520px;
+      }
+      .schema-pill {
+        padding: 14px 18px;
+        border-radius: 10px;
+        background: rgba(5, 9, 18, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        font-size: 27px;
+        font-weight: 900;
+      }
+      .beat-search {
+        position: absolute;
+        left: 350px;
+        top: 386px;
+        width: 820px;
+        padding: 28px 36px;
+        border-radius: 999px;
+        background: rgba(5, 9, 18, 0.92);
+        border: 3px solid rgba(63, 247, 255, 0.74);
+        box-shadow: 0 0 60px rgba(63, 247, 255, 0.28);
+        color: #caffff;
+        font-size: 46px;
+        font-weight: 950;
+      }
+      .impact-stamp {
+        position: absolute;
+        right: 88px;
+        bottom: 84px;
+        padding: 18px 28px;
+        border-radius: 12px;
+        background: rgba(114, 246, 162, 0.16);
+        border: 2px solid rgba(114, 246, 162, 0.58);
+        color: #72f6a2;
+        font-size: 46px;
+        font-weight: 950;
+        transform: rotate(-3deg);
+        box-shadow: 0 0 52px rgba(114, 246, 162, 0.18);
+      }
+      .warning-card {
+        position: absolute;
+        width: 520px;
+        min-height: 250px;
+        padding: 30px;
+        border-radius: 18px;
+        background: rgba(17, 24, 39, 0.92);
+        border: 2px solid rgba(255, 190, 85, 0.48);
+        box-shadow: 0 34px 80px rgba(0, 0, 0, 0.48);
+      }
+      .warning-card h3 { margin: 0 0 12px; font-size: 46px; }
+      .warning-card p { margin: 0; font-size: 31px; line-height: 1.14; color: #f1e4ce; }
+      .warning-card.one { left: 116px; top: 378px; }
+      .warning-card.two { left: 700px; top: 242px; border-color: rgba(255, 61, 85, 0.58); }
+      .warning-card.three { right: 116px; top: 466px; border-color: rgba(255, 61, 85, 0.58); }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 48px;
+      }
+      .score-card {
+        min-height: 300px;
+        padding: 30px;
+        border-radius: 18px;
+        background: rgba(18, 35, 58, 0.86);
+        border: 1px solid rgba(118, 176, 235, 0.34);
+      }
+      .score-card h3 { margin: 0 0 22px; font-size: 46px; }
+      .score-card .score {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        font-family: Orbitron, Arial Black, sans-serif;
+        font-size: 84px;
+        font-weight: 950;
+      }
+      .score-card .old { color: #ff3d55; }
+      .score-card .new { color: #72f6a2; }
+      .layer-hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 46px;
+        max-width: 1020px;
+      }
+      .layer-row {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 22px;
+        align-items: center;
+        padding: 25px 28px;
+        border-radius: 18px;
+        background: rgba(18, 35, 58, 0.86);
+        border: 1px solid rgba(118, 176, 235, 0.34);
+        box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+      }
+      .layer-row strong { font-size: 44px; }
+      .layer-row span { color: #d9edff; font-size: 31px; line-height: 1.1; }
+      .broll-callout {
+        position: absolute;
+        right: 78px;
+        top: 140px;
+        width: 520px;
+        padding: 28px;
+        border-radius: 18px;
+        background: rgba(5, 9, 18, 0.90);
+        border: 1px solid rgba(63, 247, 255, 0.42);
+        z-index: 13;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.50);
+      }
+      .broll-callout h3 { margin: 0; font-size: 45px; line-height: 1.02; }
+      .broll-callout p { margin: 16px 0 0; color: #d9edff; font-size: 29px; line-height: 1.16; }
+      .pipeline {
+        position: absolute;
+        left: 86px;
+        right: 86px;
+        bottom: 76px;
+        height: 198px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 26px;
+        z-index: 14;
+      }
+      .pipe-node {
+        position: relative;
+        display: grid;
+        place-items: center;
+        border-radius: 18px;
+        background: rgba(18, 35, 58, 0.92);
+        border: 1px solid rgba(118, 176, 235, 0.38);
+        color: #f7fbff;
+        font-size: 42px;
+        font-weight: 950;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+      }
+      .pipe-node.context { border-color: rgba(255, 61, 85, 0.62); }
+      .pipe-arrow {
+        position: absolute;
+        top: 84px;
+        width: 72px;
+        height: 30px;
+        color: #ff3d55;
+        font-size: 58px;
+        font-weight: 950;
+        z-index: 15;
+      }
+      .pipe-arrow.a { left: 596px; }
+      .pipe-arrow.b { right: 596px; }
       .table {
         position: absolute;
         left: 70px;
@@ -641,6 +894,7 @@
       <video id="side-avatar-6" class="side-avatar-video right" data-start="139.22" data-duration="33.28" data-media-start="139.22" data-track-index="2" src="assets/heygen-source-keyframed.mp4" muted playsinline></video>
       <video id="side-avatar-13" class="side-avatar-video left" data-start="315.392" data-duration="29.84" data-media-start="315.392" data-track-index="3" src="assets/heygen-source-keyframed.mp4" muted playsinline></video>
       <video id="side-avatar-22" class="side-avatar-video right" data-start="550.324" data-duration="26.86" data-media-start="550.324" data-track-index="4" src="assets/heygen-source-keyframed.mp4" muted playsinline></video>
+      <video id="broll-seg9" class="seg9-broll-video" data-start="222.132" data-duration="20.24" data-track-index="8" src="assets/Segment009.mp4" muted playsinline></video>
 
       <div class="intro-card" id="intro-card">
         <div class="kicker">Video 12</div>
@@ -653,6 +907,7 @@
         <div class="floor-grid"></div>
         <div class="content" id="content"></div>
       </div>
+      <div class="event-host" id="event-host"></div>
 
       <div class="cursor" id="cursor">
         <svg viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -755,16 +1010,77 @@
         cta: (s) => `<div class="scene-title">${s.title}</div><div class="board-grid cols-4"><div class="board-card"><h3>Subscribe</h3><p>for the measurement run</p></div><div class="board-card"><h3>Like</h3><p>signal practical engineering</p></div><div class="board-card"><h3>Ring the bell</h3><p>new videos every week</p></div><div class="board-card"><h3>Next</h3><p>JARVIS token test</p></div></div>`
       };
 
+      const eventBeats = {
+        3: [
+          { t: 0, html: () => `<div class="beat-scene"><div class="beat-kicker">Segment 003 / baseline shift</div><div class="beat-title">Anthropic changed the baseline.</div><div class="beat-sub">The old problem was loading every tool definition before the work even started.</div><div class="beat-panel bad" style="position:absolute;left:100px;right:100px;bottom:96px;height:350px"><h3>Before</h3><p>Every connected service drags its schema into context up front.</p><div class="schema-stack"><div class="schema-pill">GitHub schema</div><div class="schema-pill">Slack schema</div><div class="schema-pill">Sentry schema</div></div><div class="token-number">77K</div></div></div>` },
+          { t: 6.2, html: () => `<div class="beat-scene"><div class="beat-kicker">Tool Search</div><div class="beat-title huge">Search first.</div><div class="beat-search">find the tools for this task...</div><div class="schema-stack" style="position:absolute;left:1220px;top:314px;width:430px"><div class="schema-pill">search tool</div><div class="schema-pill">candidate tools</div><div class="schema-pill">selected schema</div></div></div>` },
+          { t: 12.5, html: () => `<div class="beat-scene"><div class="beat-kicker">Only load what matters</div><div class="beat-split"><div class="beat-panel bad"><h3>Before</h3><p>Every schema comes along for the ride.</p><div class="token-number">77K</div></div><div class="beat-panel good"><h3>After</h3><p>Claude expands only the tools it needs.</p><div class="token-number green">8.7K</div></div></div></div>` },
+          { t: 19.2, html: () => `<div class="beat-scene"><div class="beat-title huge">That is a serious improvement.</div><div class="beat-sub">But it does not mean MCP is finished, solved, or free.</div><div class="impact-stamp">77K -> 8.7K</div></div>` }
+        ],
+        4: [
+          { t: 0, html: () => `<div class="beat-scene"><div class="beat-kicker">Segment 004 / the trap</div><div class="beat-title huge">“MCP is fixed now” is the dangerous take.</div></div>` },
+          { t: 5.4, html: () => `<div class="beat-scene"><div class="beat-title">Fixed?</div><div class="warning-card one"><h3>Schema load</h3><p>Reduced? Yes.</p></div><div class="impact-stamp" style="right:220px;bottom:260px">YES</div></div>` },
+          { t: 10.6, html: () => `<div class="beat-scene"><div class="beat-title">But the next costs remain.</div><div class="warning-card one"><h3>Tool result size</h3><p>A successful call can still return too much.</p></div><div class="warning-card two"><h3>Multi-step flows</h3><p>Data can still bounce through context.</p></div></div>` },
+          { t: 15.8, html: () => `<div class="beat-scene"><div class="beat-title huge" style="color:#ffbe55">Retrieval is now part of reliability.</div><div class="warning-card three"><h3>Not perfect</h3><p>The right tool still has to be found.</p></div></div>` }
+        ],
+        5: [
+          { t: 0, html: () => `<div class="beat-scene"><div class="beat-kicker">Segment 005 / accuracy evidence</div><div class="beat-title huge">Better, not magical.</div><div class="beat-sub">The numbers improved, but the reliability model changed.</div></div>` },
+          { t: 5.0, html: () => `<div class="beat-scene"><div class="beat-title">Opus 4 improved.</div><div class="scoreboard"><div class="score-card"><h3>Before</h3><div class="score old">49%</div></div><div class="score-card"><h3>After Tool Search</h3><div class="score new">74%</div></div></div></div>` },
+          { t: 11.8, html: () => `<div class="beat-scene"><div class="beat-title">Opus 4.5 still improved.</div><div class="scoreboard"><div class="score-card"><h3>Before</h3><div class="score old">79.5%</div></div><div class="score-card"><h3>After Tool Search</h3><div class="score new">88.1%</div></div></div></div>` },
+          { t: 18.8, html: () => `<div class="beat-scene"><div class="beat-title">Then Arcade stress-tested scale.</div><div class="score-card" style="position:absolute;left:270px;right:270px;bottom:120px;min-height:380px"><h3>4,000+ tools</h3><div class="score"><span class="new" style="color:#ffbe55">~60%</span></div><p>Retrieval accuracy becomes a production concern.</p></div></div>` },
+          { t: 25.6, html: () => `<div class="beat-scene"><div class="beat-title huge">Better context economics.</div><div class="beat-title huge" style="margin-top:18px;color:#ffbe55">New reliability surface.</div></div>` }
+        ],
+        6: [
+          { t: 0, html: () => `<div class="beat-scene tight"><div class="beat-kicker">Segment 006 / our position</div><div class="beat-title">Do not ask one layer to do every job.</div><div class="beat-sub">MCP, skills, CLI, and code execution are different tools for different work.</div></div>` },
+          { t: 6.8, html: () => `<div class="beat-scene tight"><div class="beat-title">MCP</div><div class="layer-hero"><div class="layer-row"><strong>MCP</strong><span>Permissioned access to external systems.</span></div></div></div>` },
+          { t: 11.8, html: () => `<div class="beat-scene tight"><div class="beat-title">Skills</div><div class="layer-hero"><div class="layer-row"><strong>Skills</strong><span>Procedures, patterns, commands, and local operating knowledge.</span></div></div></div>` },
+          { t: 16.8, html: () => `<div class="beat-scene tight"><div class="beat-title">CLI</div><div class="layer-hero"><div class="layer-row"><strong>CLI</strong><span>Deterministic local work with low token cost.</span></div></div></div>` },
+          { t: 21.8, html: () => `<div class="beat-scene tight"><div class="beat-title">Code execution</div><div class="layer-hero"><div class="layer-row"><strong>Code execution</strong><span>Move or transform large intermediate data without flooding context.</span></div></div></div>` },
+          { t: 27.8, html: () => `<div class="beat-scene tight"><div class="beat-title">Layer the stack.</div><div class="layer-hero"><div class="layer-row"><strong>MCP</strong><span>External access</span></div><div class="layer-row"><strong>Skills</strong><span>Procedure</span></div><div class="layer-row"><strong>CLI</strong><span>Local deterministic work</span></div><div class="layer-row"><strong>Code</strong><span>Intermediate data movement</span></div></div></div>` }
+        ],
+        9: [
+          { t: 0, html: () => `<div class="beat-scene"><div class="broll-callout"><div class="beat-kicker">Real source clip</div><h3>Anthropic’s example comes on screen.</h3><p>The webpage recording is the evidence layer, with graphics riding on top.</p></div></div>` },
+          { t: 4.0, html: () => `<div class="beat-scene"><div class="pipeline"><div class="pipe-node">Google Drive</div><div class="pipe-node context">Model context</div><div class="pipe-node">Salesforce</div></div><div class="pipe-arrow a">-></div><div class="pipe-arrow b">-></div><div class="broll-callout"><h3>Download a meeting transcript.</h3><p>That object is about to move through the model.</p></div></div>` },
+          { t: 9.0, html: () => `<div class="beat-scene"><div class="pipeline"><div class="pipe-node">Drive doc</div><div class="pipe-node context" style="box-shadow:0 0 60px rgba(255,61,85,.35)">Transcript enters context</div><div class="pipe-node">Salesforce</div></div><div class="pipe-arrow a">-></div><div class="broll-callout"><h3>First trip through context.</h3><p>The model reads the transcript even though it is mostly transport.</p></div></div>` },
+          { t: 14.0, html: () => `<div class="beat-scene"><div class="pipeline"><div class="pipe-node">Drive doc</div><div class="pipe-node context" style="box-shadow:0 0 70px rgba(255,61,85,.55)">Transcript enters again</div><div class="pipe-node">Salesforce lead</div></div><div class="pipe-arrow b">-></div><div class="broll-callout"><h3>Second trip through context.</h3><p>This is the waste Anthropic is pointing at.</p></div></div>` },
+          { t: 18.0, html: () => `<div class="beat-scene"><div class="beat-title huge" style="color:#ff3d55">Duplicate transport.</div><div class="beat-sub">The model is not reasoning about the transcript twice. It is carrying it twice.</div></div>` }
+        ]
+      };
+
       function render(s) {
         layer.className = `scene-layer ${s.avatar === "left" ? "avatar-left" : ""} ${s.avatar === "right" ? "avatar-right" : ""}`;
         content.innerHTML = html[s.kind](s);
       }
+      function renderBeat(s, beat) {
+        layer.className = `scene-layer ${s.avatar === "left" ? "avatar-left" : ""} ${s.avatar === "right" ? "avatar-right" : ""}`;
+        content.innerHTML = beat.html();
+      }
+      function buildEventBeatLayers() {
+        const host = document.querySelector("#event-host");
+        host.innerHTML = Object.entries(eventBeats).flatMap(([seg, beats]) =>
+          beats.map((beat, i) => `<div class="event-beat event-beat-${seg}-${i}">${beat.html()}</div>`)
+        ).join("");
+      }
       function enterScene(s, at) {
         const out = s.t + s.d - 0.65;
-        tl.call(() => render(s), [], at)
-          .set("#cursor", { opacity: 0 }, at)
-          .to("#scene-layer", { opacity: 1, duration: 0.28 }, at + 0.04)
-          .to("#scene-layer", { opacity: 0, duration: 0.32 }, out);
+        const beats = eventBeats[s.seg];
+        if (beats) {
+          tl.call(() => { content.innerHTML = ""; layer.className = `scene-layer ${s.avatar === "left" ? "avatar-left" : ""} ${s.avatar === "right" ? "avatar-right" : ""}`; }, [], at);
+          beats.forEach((beat, i) => {
+            tl.set(".event-beat", { opacity: 0 }, at + beat.t)
+              .set(`.event-beat-${s.seg}-${i}`, { opacity: 1 }, at + beat.t);
+          });
+          tl.set(".event-beat", { opacity: 0 }, out);
+        } else {
+          tl.call(() => render(s), [], at);
+        }
+        tl.set("#cursor", { opacity: 0 }, at)
+          .to("#scene-layer", { opacity: 1, duration: 0.16 }, at + 0.02)
+          .to("#scene-layer", { opacity: 0, duration: 0.22 }, out);
+        if (s.seg === 9) {
+          tl.to("#broll-seg9", { opacity: 1, duration: 0.16 }, at + 0.04)
+            .to("#broll-seg9", { opacity: 0, duration: 0.18 }, out);
+        }
         if (s.cursor) moveCursor(s.cursor, at + 1.1, Math.max(3.8, s.d / (s.cursor.length + 1)));
       }
       function moveCursor(points, start, gap) {
@@ -780,6 +1096,7 @@
 
       tl.from("#intro-card", { opacity: 0, y: 34, duration: 0.55, ease: "power3.out" }, 7.8)
         .to("#intro-card", { opacity: 0, y: -24, duration: 0.42 }, 33.9);
+      buildEventBeatLayers();
       segments.forEach((s) => enterScene(s, s.t));
       tl.to("#scene-layer", { opacity: 0, duration: 0.1 }, 762.95)
         .set("#cursor", { opacity: 0 }, 762.95);
