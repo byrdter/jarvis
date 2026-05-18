@@ -481,6 +481,60 @@
       }
       .board-card h3 { margin: 0; font-size: 42px; line-height: 1.02; }
       .board-card p { margin: 14px 0 0; font-size: 27px; line-height: 1.16; color: #dcecff; }
+      .evidence-mosaic {
+        position: relative;
+        height: 650px;
+        margin-top: 26px;
+      }
+      .evidence-tile {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 18px;
+        background: rgba(18, 35, 58, 0.82);
+        border: 2px solid rgba(255, 255, 255, 0.16);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+      }
+      .evidence-tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .evidence-tile::after {
+        content: attr(data-label);
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(5, 9, 18, 0.82);
+        border: 1px solid rgba(63, 247, 255, 0.34);
+        color: #f7fbff;
+        font-size: 19px;
+        font-weight: 950;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .evidence-tile.cloudflare { left: 0; top: 0; width: 560px; height: 315px; }
+      .evidence-tile.anthropic { left: 610px; top: 0; width: 560px; height: 315px; }
+      .evidence-tile.arcade { right: 0; top: 0; width: 560px; height: 315px; }
+      .evidence-tile.scalekit { left: 0; bottom: 0; width: 700px; height: 394px; }
+      .evidence-tile.jarvis { right: 0; bottom: 0; width: 1040px; height: 394px; border-color: rgba(63, 247, 255, 0.42); }
+      .evidence-stamp {
+        position: absolute;
+        left: 720px;
+        top: 334px;
+        padding: 14px 26px;
+        border-radius: 999px;
+        background: rgba(255, 190, 85, 0.14);
+        border: 2px solid rgba(255, 190, 85, 0.42);
+        color: #ffbe55;
+        font-size: 38px;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 0 44px rgba(255, 190, 85, 0.18);
+      }
       .big-question {
         position: absolute;
         left: 90px;
@@ -697,7 +751,7 @@
         refactor: (s) => `<div class="scene-title">${s.title}</div><div class="board-grid cols-3 card-grid"><div class="card"><h3>CLAUDE.md</h3><p>stop stuffing every rule here</p></div><div class="card"><h3>skills/</h3><p>procedural knowledge</p></div><div class="card"><h3>scripts/</h3><p>deterministic local work</p></div></div><div class="thesis">Full object -> three fields.</div>`,
         sandbox: (s) => `<div class="scene-title">${s.title}</div><div class="split"><div class="lane"><h3>MCP connector</h3><div class="node">cannot be called programmatically</div><div class="node">wrapper needed</div></div><div class="lane"><h3>Sandbox</h3><div class="node">large data stays inside</div><div class="node">only final result exits</div></div></div><div class="thesis">Sandboxing is not optional.</div>`,
         mistakes: (s) => `<div class="scene-title">${s.title}</div><div class="card-grid"><div class="card"><h3>MCP is dead</h3><p>Wrong. CLI wins local deterministic tasks.</p></div><div class="card"><h3>MCP is fixed</h3><p>Wrong. Tool Search helps, with caveats.</p></div><div class="card"><h3>TOON everywhere</h3><p>Wrong. Compact formats fit certain data.</p></div></div><div class="thesis">Right layer. Right scope. Measured output.</div>`,
-        evidence: (s) => `<div class="scene-title">${s.title}</div><div class="board-grid cols-4"><div class="board-card"><h3>Cloudflare</h3><p>1,000-token API</p></div><div class="board-card"><h3>Anthropic</h3><p>Tool Search and code execution</p></div><div class="board-card"><h3>Arcade</h3><p>4,000-tool stress test</p></div><div class="board-card"><h3>Scalekit</h3><p>CLI vs MCP cost</p></div></div><div class="thesis">JARVIS gives us a place to test it on real work.</div>`,
+        evidence: (s) => `<div class="scene-title">${s.title}</div><div class="evidence-mosaic"><div class="evidence-tile cloudflare" data-label="Cloudflare"><img src="assets/seg29-source-tiles/cloudflare.png" /></div><div class="evidence-tile anthropic" data-label="Anthropic"><img src="assets/seg29-source-tiles/anthropic.png" /></div><div class="evidence-tile arcade" data-label="Arcade"><img src="assets/seg29-source-tiles/arcade.png" /></div><div class="evidence-tile scalekit" data-label="Scalekit"><img src="assets/seg29-source-tiles/scalekit.png" /></div><div class="evidence-tile jarvis" data-label="JARVIS test bench"><img src="assets/seg29-source-tiles/jarvis-bench.png" /></div></div><div class="thesis">Cloudflare, Anthropic, Arcade, Scalekit, and JARVIS become the test bench.</div>`,
         cta: (s) => `<div class="scene-title">${s.title}</div><div class="board-grid cols-4"><div class="board-card"><h3>Subscribe</h3><p>for the measurement run</p></div><div class="board-card"><h3>Like</h3><p>signal practical engineering</p></div><div class="board-card"><h3>Ring the bell</h3><p>new videos every week</p></div><div class="board-card"><h3>Next</h3><p>JARVIS token test</p></div></div>`
       };
 
