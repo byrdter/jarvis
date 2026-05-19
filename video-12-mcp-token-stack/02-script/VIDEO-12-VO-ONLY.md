@@ -10,7 +10,7 @@ Here is the old failure mode. You connect GitHub, Slack, Sentry, Grafana, Splunk
 
 ## 003 — Hidden Voice
 
-Anthropic's Tool Search changed the baseline. Instead of loading every tool definition upfront, Claude starts with a small search tool and expands only the tools it needs. In Anthropic's own example, the setup moves from roughly seventy-seven thousand tokens of context consumption to about eight point seven thousand. That is a serious improvement.
+Anthropic's Tool Search changed the baseline. The workflow is simple, but important. Step one: Claude does not load every tool definition into context. It starts with a tiny search tool, while the full tool library stays outside the reasoning window. Step two: when the task arrives, that search tool looks across the library and selects the few tools that match the job: maybe Jira tasks, Sentry errors, or AWS metrics. Step three: only those relevant tool definitions are injected into the model context. The unrelated tools stay gray and outside the reasoning space. That is the shift: context is loaded on demand, not prepaid upfront. In Anthropic's own example, consumption moves from roughly seventy-seven thousand tokens to about eight point seven thousand. That is a serious improvement.
 
 ## 004 — Hidden Voice
 

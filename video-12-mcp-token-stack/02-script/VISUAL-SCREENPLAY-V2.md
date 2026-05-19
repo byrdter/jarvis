@@ -104,28 +104,32 @@ Cursor: none. This is a conceptual motion scene.
 
 Transition: context window compresses horizontally into a thin bar that becomes segment 3's before/after divider.
 
-### Segment 3 - 61.20-85.98 - Tool Search Changed Baseline
+### Segment 3 - revised - Tool Search Changed Baseline
 
-Narration purpose: show the improvement from upfront schemas to search-driven expansion.
+Narration purpose: make the three-step on-demand context injection workflow explicit before landing the 77K-to-8.7K payoff.
 
-Visual type: split-screen before/after.
+Visual type: animated workflow diagram inspired by `09-stills/TestFolder/003C.png`, built in HyperFrames rather than used as a flat still.
 
-Screen layout: left half labeled "Before: every schema loaded"; right half labeled "After: search, then load only what matters". The divider is large and animated.
+Screen layout: one full-screen technical explainer with three spatial zones. Left: faded searchable tool library outside the model context. Center: model context window containing the small Tool Search card. Right: optimized green context window that appears only during Step 3. Bottom/right payoff area becomes the 77K-to-8.7K comparison only after the workflow has been explained.
 
-On-screen text: "77K context consumption" on left, "8.7K with Tool Search" on right, "85 percent reduction" as final badge.
+On-screen text:
+- "Step 1: Minimal initial load"
+- "Tool Search only"
+- "Step 2: Select relevant tools"
+- "Jira Task / Sentry Error / AWS Metrics"
+- "Step 3: Inject only matched definitions"
+- "Unrelated tools stay outside context"
+- "77K -> 8.7K"
 
 Motion beats:
-- 61.20: split-screen opens from the compressed bar.
-- 64.62: left side fills with tool-definition cards.
-- 68.08: right side starts with one search box: "find the tool".
-- 73.56: right side reveals only three selected tool cards.
-- 76.78: left counter lands at "77K".
-- 80.96: right counter lands at "8.7K".
-- 84.00: green compression wipe crosses the screen.
+- Beat 1: The searchable library appears in faded gray outside the context boundary. Only one small "Tool Search" card snaps into the model context window. Label: "Minimal initial load."
+- Beat 2: A blue search beam leaves the Tool Search card and scans the gray library. Only three cards brighten: Jira Task, Sentry Error, and AWS Metrics. They remain outside context for this beat.
+- Beat 3: The three relevant cards travel into a glowing green context window. Unrelated tools stay gray and outside the reasoning space. Label: "Context injected on demand."
+- Beat 4: The workflow compresses into a before/after token comparison: old upfront schema load at 77K, Tool Search path at 8.7K, with a final "serious improvement" landing badge.
 
-Cursor: optional. If used, cursor clicks the right-side search box once at 68.08, then disappears.
+Cursor: optional. If used, cursor clicks the search card once during Beat 2, then disappears.
 
-Transition: green wipe snaps into red warning cards for segment 4.
+Transition: green success glow drains into the red warning cards for Segment 4, making clear that Tool Search helps but does not solve everything.
 
 ### Segment 4 - 85.98-107.54 - The Trap
 
