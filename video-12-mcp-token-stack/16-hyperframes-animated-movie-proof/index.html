@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #07101d;
+        color: #f4f8ff;
+        font-family: Inter, Arial, sans-serif;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 24% 18%, rgba(52, 232, 255, 0.16), transparent 28%),
+          radial-gradient(circle at 80% 74%, rgba(155, 108, 255, 0.18), transparent 30%),
+          linear-gradient(145deg, #050914, #07101d 48%, #0a1427);
+      }
+      audio { position: absolute; }
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 58px 72px;
+        opacity: 0;
+        overflow: hidden;
+        background:
+          linear-gradient(rgba(52, 232, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(90, 167, 255, 0.045) 1px, transparent 1px);
+        background-size: 58px 58px;
+      }
+      .scene::before {
+        content: "";
+        position: absolute;
+        inset: -120px;
+        background: radial-gradient(circle at var(--gx, 50%) var(--gy, 42%), rgba(52, 232, 255, 0.18), transparent 34%);
+        opacity: 0.8;
+      }
+      .scene > * { position: relative; z-index: 2; }
+      .kicker {
+        color: #34e8ff;
+        font-size: 23px;
+        font-weight: 950;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .title {
+        margin-top: 10px;
+        max-width: 1480px;
+        font-size: 72px;
+        line-height: 0.95;
+        font-weight: 950;
+        text-wrap: balance;
+      }
+      .title.huge { font-size: 105px; line-height: 0.9; }
+      .subtitle {
+        margin-top: 18px;
+        max-width: 940px;
+        color: #d8e9fb;
+        font-size: 31px;
+        line-height: 1.14;
+        font-weight: 750;
+      }
+      .glass {
+        background: rgba(15, 30, 52, 0.84);
+        border: 1px solid rgba(120, 190, 255, 0.34);
+        border-radius: 22px;
+        box-shadow: 0 34px 100px rgba(0, 0, 0, 0.45), inset 0 0 54px rgba(52, 232, 255, 0.05);
+      }
+      .context {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        color: #dffbff;
+        border: 3px solid rgba(52, 232, 255, 0.72);
+        box-shadow: 0 0 45px rgba(52, 232, 255, 0.30), inset 0 0 44px rgba(52, 232, 255, 0.08);
+      }
+      .context .label {
+        font-size: 36px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+      .prompt-box {
+        position: absolute;
+        left: 650px;
+        bottom: 74px;
+        width: 620px;
+        padding: 24px 30px;
+        border-radius: 18px;
+        background: rgba(5, 9, 18, 0.82);
+        border: 2px solid rgba(255, 191, 77, 0.54);
+        color: #ffdc8a;
+        font-size: 31px;
+        font-weight: 950;
+        text-align: center;
+      }
+      .app-tile {
+        position: absolute;
+        width: 210px;
+        height: 96px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 30px;
+        font-weight: 950;
+        background: rgba(15, 30, 52, 0.94);
+        border: 2px solid var(--accent);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.38), 0 0 28px color-mix(in srgb, var(--accent), transparent 55%);
+      }
+      .schema-card {
+        position: absolute;
+        width: 96px;
+        height: 42px;
+        border-radius: 9px;
+        background: rgba(185, 231, 255, 0.88);
+        border: 1px solid rgba(52, 232, 255, 0.55);
+        box-shadow: 0 10px 24px rgba(52, 232, 255, 0.18);
+      }
+      .meter-shell {
+        position: absolute;
+        left: 145px;
+        top: 220px;
+        width: 470px;
+        height: 690px;
+        padding: 30px;
+      }
+      .meter {
+        position: absolute;
+        left: 58px;
+        right: 58px;
+        bottom: 58px;
+        height: 520px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: rgba(4, 8, 15, 0.84);
+        border: 2px solid rgba(255, 191, 77, 0.46);
+      }
+      .meter-fill {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 10%;
+        background: linear-gradient(180deg, #ffbf4d, #ff4b64);
+      }
+      .metric {
+        font-family: Orbitron, Arial Black, sans-serif;
+        font-weight: 950;
+        letter-spacing: 0.02em;
+      }
+      .metric.red { color: #ff4b64; text-shadow: 0 0 28px rgba(255, 75, 100, 0.55); }
+      .metric.green { color: #68f59b; text-shadow: 0 0 28px rgba(104, 245, 155, 0.46); }
+      .spill {
+        position: absolute;
+        width: 250px;
+        height: 145px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 16px;
+        font-size: 31px;
+        font-weight: 950;
+        border-radius: 22px;
+        background: rgba(15, 30, 52, 0.92);
+        border: 2px solid rgba(255, 191, 77, 0.48);
+      }
+      .beam {
+        position: absolute;
+        height: 8px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, #34e8ff, transparent);
+        box-shadow: 0 0 28px rgba(52, 232, 255, 0.75);
+        transform-origin: left center;
+      }
+      .big-card {
+        position: absolute;
+        padding: 30px;
+        border-radius: 24px;
+        background: rgba(15, 30, 52, 0.9);
+        border: 2px solid rgba(120, 190, 255, 0.30);
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.46);
+      }
+      .big-card h3 {
+        margin: 0 0 14px;
+        font-size: 42px;
+        line-height: 1;
+      }
+      .big-card p {
+        margin: 0;
+        color: #d9eafd;
+        font-size: 27px;
+        line-height: 1.14;
+        font-weight: 750;
+      }
+      .payload {
+        position: absolute;
+        right: 80px;
+        top: 210px;
+        width: 870px;
+        height: 650px;
+        padding: 34px;
+        border-radius: 24px;
+        background: linear-gradient(140deg, rgba(54, 8, 20, 0.94), rgba(15, 30, 52, 0.96));
+        border: 3px solid rgba(255, 75, 100, 0.72);
+        box-shadow: 0 0 70px rgba(255, 75, 100, 0.25), 0 34px 110px rgba(0, 0, 0, 0.54);
+      }
+      .json-line {
+        height: 21px;
+        margin: 10px 0;
+        border-radius: 999px;
+        background: rgba(255, 170, 181, 0.45);
+      }
+      .json-line:nth-child(3n) { width: 78%; }
+      .json-line:nth-child(4n) { width: 92%; background: rgba(255, 75, 100, 0.62); }
+      .blob {
+        position: absolute;
+        width: 125px;
+        height: 125px;
+        border-radius: 32px;
+        background: linear-gradient(135deg, #ff9c3f, #ff4b64);
+        box-shadow: 0 0 44px rgba(255, 75, 100, 0.55);
+        display: grid;
+        place-items: center;
+        color: white;
+        font-size: 22px;
+        font-weight: 950;
+        text-align: center;
+      }
+      .boundary {
+        position: absolute;
+        top: 210px;
+        bottom: 170px;
+        width: 4px;
+        background: rgba(255, 75, 100, 0.74);
+        box-shadow: 0 0 32px rgba(255, 75, 100, 0.60);
+      }
+      .tool-card {
+        width: 142px;
+        height: 74px;
+        border-radius: 14px;
+        background: rgba(15, 30, 52, 0.84);
+        border: 1px solid rgba(120, 190, 255, 0.32);
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+        color: #9fbed9;
+        font-weight: 850;
+      }
+      .tool-card.good { border-color: rgba(104, 245, 155, 0.70); color: #68f59b; }
+      .tool-card.bad { border-color: rgba(255, 75, 100, 0.75); color: #ff8fa0; }
+      .tool-card.warn { border-color: rgba(255, 191, 77, 0.75); color: #ffcf78; }
+      .bar {
+        position: relative;
+        width: 760px;
+        height: 58px;
+        border-radius: 999px;
+        background: rgba(4, 8, 15, 0.78);
+        border: 1px solid rgba(120, 190, 255, 0.32);
+        overflow: hidden;
+      }
+      .bar-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 10%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #ffbf4d, #68f59b);
+        box-shadow: 0 0 24px rgba(104, 245, 155, 0.42);
+      }
+      .layer {
+        position: absolute;
+        left: 460px;
+        width: 980px;
+        height: 118px;
+        border-radius: 20px;
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        align-items: center;
+        gap: 24px;
+        padding: 0 32px;
+        background: rgba(15, 30, 52, 0.9);
+        border: 2px solid var(--accent);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36), 0 0 30px color-mix(in srgb, var(--accent), transparent 70%);
+      }
+      .layer strong { font-size: 43px; }
+      .layer span { color: #d9eafd; font-size: 29px; font-weight: 760; }
+      .matrix {
+        position: absolute;
+        left: 170px;
+        top: 250px;
+        width: 1580px;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 2px solid rgba(52, 232, 255, 0.36);
+      }
+      .matrix-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        padding: 24px 32px;
+        background: rgba(15, 30, 52, 0.88);
+        border-bottom: 1px solid rgba(120, 190, 255, 0.22);
+        font-size: 34px;
+        font-weight: 900;
+      }
+      .matrix-row.header {
+        color: #34e8ff;
+        background: rgba(5, 9, 18, 0.92);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 24px;
+      }
+      .sweep {
+        position: absolute;
+        left: 150px;
+        top: 250px;
+        width: 1620px;
+        height: 86px;
+        border-radius: 18px;
+        background: linear-gradient(90deg, transparent, rgba(52, 232, 255, 0.22), transparent);
+        border: 2px solid rgba(52, 232, 255, 0.26);
+      }
+      .exit-wipe {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(52, 232, 255, 0.22), transparent);
+        opacity: 0;
+        z-index: 20;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="137.46" data-width="1920" data-height="1080">
+      <audio id="voice" data-start="0" data-duration="137.46" data-media-start="35.04" data-track-index="10" src="assets/heygen-source-keyframed.mp4" data-volume="1"></audio>
+
+      <section id="s002a" class="scene" style="--gx:50%;--gy:42%">
+        <div class="kicker">002-A / connected before work</div>
+        <div class="title">Integrations are connected before the task begins.</div>
+        <div class="context glass" style="left:710px;top:330px;width:500px;height:260px"><div class="label">AI context<br>window</div></div>
+        <div class="app-tile" style="left:110px;top:210px;--accent:#ff9c3f">GitHub</div>
+        <div class="app-tile" style="left:116px;top:500px;--accent:#68f59b">Grafana</div>
+        <div class="app-tile" style="left:154px;top:740px;--accent:#5aa7ff">Splunk</div>
+        <div class="app-tile" style="right:120px;top:210px;--accent:#ff4b64">Sentry</div>
+        <div class="app-tile" style="right:110px;top:500px;--accent:#9b6cff">Slack</div>
+        <div class="app-tile" style="right:160px;top:740px;--accent:#ffbf4d">Jira</div>
+        <div class="schema-card stream l1" style="left:350px;top:255px"></div><div class="schema-card stream l2" style="left:430px;top:315px"></div><div class="schema-card stream l3" style="left:505px;top:385px"></div>
+        <div class="schema-card stream l4" style="left:360px;top:545px"></div><div class="schema-card stream l5" style="left:475px;top:570px"></div><div class="schema-card stream l6" style="left:565px;top:610px"></div>
+        <div class="schema-card stream r1" style="right:350px;top:255px"></div><div class="schema-card stream r2" style="right:430px;top:315px"></div><div class="schema-card stream r3" style="right:505px;top:385px"></div>
+        <div class="schema-card stream r4" style="right:370px;top:545px"></div><div class="schema-card stream r5" style="right:480px;top:590px"></div><div class="schema-card stream r6" style="right:575px;top:638px"></div>
+        <div class="prompt-box">User task has not started yet</div>
+      </section>
+
+      <section id="s002b" class="scene" style="--gx:32%;--gy:48%">
+        <div class="kicker">002-B / idle context cost</div>
+        <div class="title">Context memory before the task.</div>
+        <div class="meter-shell glass"><div style="font-size:28px;font-weight:950;color:#ffbf4d">Idle tool definitions</div><div class="meter"><div class="meter-fill"></div></div><div class="metric red" style="position:absolute;left:80px;top:180px;font-size:76px">55,000</div></div>
+        <div class="big-card" style="right:140px;top:260px;width:660px;height:470px;border-color:rgba(255,191,77,.55)"><h3>Actual problem</h3><p>not loaded yet</p><div style="position:absolute;left:36px;right:36px;bottom:42px;height:185px;border-radius:18px;border:2px dashed rgba(255,191,77,.46);display:grid;place-items:center;color:#ffdc8a;font-size:34px;font-weight:950">empty reasoning space</div></div>
+      </section>
+
+      <section id="s002c" class="scene" style="--gx:52%;--gy:44%">
+        <div class="kicker">002-C / overhead spills out</div>
+        <div class="title huge">That is not work. That is overhead.</div>
+        <div class="context glass" style="left:650px;top:330px;width:620px;height:330px;border-color:rgba(255,75,100,.72)"><div class="label">Overloaded<br>context</div></div>
+        <div class="spill" style="left:180px;top:280px">Cost</div>
+        <div class="spill" style="left:270px;bottom:150px">Latency</div>
+        <div class="spill" style="right:250px;top:270px">Confusion</div>
+        <div class="spill" style="right:150px;bottom:150px">Less room</div>
+      </section>
+
+      <section id="s002d" class="scene" style="--gx:60%;--gy:35%">
+        <div class="kicker">002-D / before reasoning</div>
+        <div class="title">Before the model thinks.</div>
+        <div class="big-card" style="left:110px;top:280px;width:720px;height:430px"><h3>User question</h3><p>How do I create an alert for memory spikes?</p></div>
+        <div class="big-card" style="right:110px;top:210px;width:820px;height:600px;border-color:rgba(255,75,100,.64)"><h3>Overloaded model context</h3><p>tool schemas compete with the real problem</p><div class="schema-card pile" style="left:70px;top:150px"></div><div class="schema-card pile" style="left:190px;top:210px"></div><div class="schema-card pile" style="left:330px;top:170px"></div><div class="schema-card pile" style="left:470px;top:265px"></div><div class="schema-card pile" style="left:575px;top:210px"></div><div class="schema-card pile" style="left:260px;top:340px"></div><div class="schema-card pile" style="left:420px;top:395px"></div></div>
+      </section>
+
+      <section id="s003a" class="scene" style="--gx:52%;--gy:42%">
+        <div class="kicker">003-A / search first</div>
+        <div class="title">One small search tool starts in context.</div>
+        <div class="context glass" style="left:690px;top:340px;width:540px;height:280px"><div class="label">Tool Search</div></div>
+        <div class="beam" style="left:1110px;top:480px;width:580px"></div>
+        <div style="position:absolute;right:100px;top:160px;width:530px;height:760px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;opacity:.72">
+          <div class="tool-card">GitHub</div><div class="tool-card">Slack</div><div class="tool-card">Sentry</div><div class="tool-card">Jira</div><div class="tool-card">Drive</div><div class="tool-card">Salesforce</div><div class="tool-card">Grafana</div><div class="tool-card">Splunk</div><div class="tool-card">AWS</div><div class="tool-card">Docs</div><div class="tool-card">Email</div><div class="tool-card">Search</div><div class="tool-card">SQL</div><div class="tool-card">Calendar</div><div class="tool-card">CRM</div><div class="tool-card">Files</div>
+        </div>
+      </section>
+
+      <section id="s003b" class="scene" style="--gx:50%;--gy:52%">
+        <div class="kicker">003-B / compression</div>
+        <div class="title">Load only what is needed.</div>
+        <div class="big-card old-meter" style="left:130px;top:280px;width:610px;height:500px;border-color:rgba(255,75,100,.68)"><h3>Old setup</h3><div class="metric red" style="font-size:112px;margin-top:100px">77K</div></div>
+        <div class="metric arrow" style="position:absolute;left:840px;top:470px;font-size:110px;color:#34e8ff">>>></div>
+        <div class="big-card new-meter" style="right:130px;top:280px;width:610px;height:500px;border-color:rgba(104,245,155,.68)"><h3>Tool Search</h3><div class="metric green" style="font-size:112px;margin-top:100px">8.7K</div></div>
+      </section>
+
+      <section id="s003c" class="scene" style="--gx:52%;--gy:48%">
+        <div class="kicker">003-C / search select load</div>
+        <div class="title">Search. Select. Load.</div>
+        <div class="big-card step" style="left:120px;top:330px;width:450px;height:340px"><h3>1 Search</h3><p>small search card</p></div>
+        <div class="big-card step" style="left:735px;top:300px;width:450px;height:400px"><h3>2 Select</h3><p>only relevant tools</p><div style="display:flex;gap:14px;margin-top:42px"><div class="tool-card good">Drive</div><div class="tool-card good">Salesforce</div><div class="tool-card good">Docs</div></div></div>
+        <div class="big-card step" style="right:120px;top:330px;width:450px;height:340px;border-color:rgba(104,245,155,.68)"><h3>3 Load</h3><p>minimal context</p></div>
+      </section>
+
+      <section id="s003d" class="scene" style="--gx:50%;--gy:38%">
+        <div class="kicker">003-D / baseline changed</div>
+        <div class="title huge">Baseline changed.</div>
+        <div class="big-card" style="left:260px;top:360px;width:650px;height:330px;border-color:rgba(104,245,155,.62)"><h3>77K -> 8.7K</h3><p>schema load reduced</p></div>
+        <div class="big-card warn-card" style="right:820px;bottom:90px;width:260px;height:120px;border-color:rgba(255,191,77,.54)"><h3>Results</h3></div>
+        <div class="big-card warn-card" style="right:500px;bottom:90px;width:260px;height:120px;border-color:rgba(255,191,77,.54)"><h3>Workflows</h3></div>
+        <div class="big-card warn-card" style="right:180px;bottom:90px;width:260px;height:120px;border-color:rgba(255,191,77,.54)"><h3>Retrieval</h3></div>
+      </section>
+
+      <section id="s004a" class="scene" style="--gx:44%;--gy:48%">
+        <div class="kicker">004-A / dangerous easy take</div>
+        <div class="title huge">MCP is fixed now?</div>
+        <div class="big-card" style="left:600px;top:440px;width:720px;height:160px;border-color:rgba(255,191,77,.78);display:grid;place-items:center"><h3 style="font-size:54px;color:#ffbf4d">Incomplete conclusion.</h3></div>
+      </section>
+
+      <section id="s004b" class="scene" style="--gx:65%;--gy:45%">
+        <div class="kicker">004-B / small schema, huge result</div>
+        <div class="title">Search reduces schema load. Results can still be huge.</div>
+        <div class="big-card small-schema" style="left:120px;top:430px;width:360px;height:190px"><h3>Small schema</h3><p>one compact tool card</p></div>
+        <div class="beam result-beam" style="left:490px;top:522px;width:350px"></div>
+        <div class="payload"><h3 style="margin:0 0 18px;font-size:50px">Large result</h3><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div><div class="json-line"></div></div>
+      </section>
+
+      <section id="s004c" class="scene" style="--gx:50%;--gy:50%">
+        <div class="kicker">004-C / workflow transport waste</div>
+        <div class="title">Multi-step workflows still copy data through context.</div>
+        <div class="boundary" style="left:640px"></div><div class="boundary" style="left:1280px"></div>
+        <div class="big-card" style="left:100px;top:470px;width:300px;height:150px"><h3>Tool A</h3></div>
+        <div class="context glass" style="left:720px;top:390px;width:480px;height:300px;border-color:rgba(255,75,100,.70)"><div class="label">Model<br>context</div></div>
+        <div class="big-card" style="right:100px;top:470px;width:300px;height:150px"><h3>Tool C</h3></div>
+        <div class="blob data-blob" style="left:200px;top:350px">DATA</div>
+        <div class="blob data-copy" style="left:860px;top:700px">COPY</div>
+      </section>
+
+      <section id="s004d" class="scene" style="--gx:55%;--gy:45%">
+        <div class="kicker">004-D / retrieval reliability</div>
+        <div class="title">Search quality is now part of reliability.</div>
+        <div style="position:absolute;left:130px;top:280px;width:1660px;display:grid;grid-template-columns:repeat(6,1fr);gap:18px">
+          <div class="tool-card good">Network API<br>92%</div><div class="tool-card good">Dynamic route<br>88%</div><div class="tool-card warn">SQL query<br>61%</div><div class="tool-card bad">Missing CRM<br>0%</div><div class="tool-card warn">Email archive<br>15%</div><div class="tool-card">Docs<br>41%</div>
+          <div class="tool-card">Calendar</div><div class="tool-card">Cloud logs</div><div class="tool-card">Billing</div><div class="tool-card">Webhook</div><div class="tool-card">Warehouse</div><div class="tool-card">Files</div>
+        </div>
+      </section>
+
+      <section id="s005a" class="scene" style="--gx:50%;--gy:45%">
+        <div class="kicker">005-A / eval improvements</div>
+        <div class="title">The accuracy numbers are better, but not magical.</div>
+        <div style="position:absolute;left:230px;top:360px">
+          <div style="display:grid;grid-template-columns:260px 780px 180px;gap:24px;align-items:center;margin-bottom:55px;font-size:34px;font-weight:950"><div>Opus 4</div><div class="bar"><div class="bar-fill b1"></div></div><div class="metric green">74%</div></div>
+          <div style="display:grid;grid-template-columns:260px 780px 180px;gap:24px;align-items:center;font-size:34px;font-weight:950"><div>Opus 4.5</div><div class="bar"><div class="bar-fill b2"></div></div><div class="metric green">88.1%</div></div>
+        </div>
+      </section>
+
+      <section id="s005b" class="scene" style="--gx:48%;--gy:52%">
+        <div class="kicker">005-B / stress test</div>
+        <div class="title">Arcade stress-tested more than 4,000 tools.</div>
+        <div style="position:absolute;right:120px;top:180px;width:950px;height:720px;display:grid;grid-template-columns:repeat(8,1fr);gap:10px;perspective:700px">
+          <div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div>
+          <div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card good">right</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div>
+          <div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card warn">maybe</div><div class="tool-card">tool</div><div class="tool-card">tool</div><div class="tool-card">tool</div>
+        </div>
+        <div class="metric" style="position:absolute;left:160px;top:420px;font-size:104px;color:#ffbf4d">~60%</div>
+      </section>
+
+      <section id="s005c" class="scene" style="--gx:50%;--gy:46%">
+        <div class="kicker">005-C / tradeoff</div>
+        <div class="title">Better context economics. New reliability risk.</div>
+        <div class="big-card" style="left:220px;top:380px;width:560px;height:300px;border-color:rgba(104,245,155,.64)"><h3>Token savings</h3><div class="metric green" style="font-size:76px;margin-top:50px">better</div></div>
+        <div class="big-card" style="right:220px;top:380px;width:560px;height:300px;border-color:rgba(255,191,77,.64)"><h3>Search quality</h3><div class="metric" style="font-size:76px;margin-top:50px;color:#ffbf4d">risk</div></div>
+      </section>
+
+      <section id="s005d" class="scene" style="--gx:54%;--gy:44%">
+        <div class="kicker">005-D / reliability model</div>
+        <div class="title">Retrieval quality joins the reliability checklist.</div>
+        <div class="big-card" style="left:210px;top:300px;width:650px;height:520px"><h3>Reliability checklist</h3><p class="check">Permissions</p><p class="check">Latency</p><p class="check">Tool output size</p><p class="check highlight" style="color:#ffbf4d">Retrieval quality</p></div>
+        <div class="context glass" style="right:260px;top:385px;width:430px;height:330px"><div class="label">System<br>score</div><div class="metric" style="position:absolute;bottom:44px;font-size:76px;color:#ffbf4d">87</div></div>
+      </section>
+
+      <section id="s006a" class="scene" style="--gx:48%;--gy:50%">
+        <div class="kicker">006-A / four layers</div>
+        <div class="title">Four layers. Four jobs.</div>
+        <div class="layer" style="top:290px;--accent:#34e8ff"><strong>MCP</strong><span>external systems</span></div>
+        <div class="layer" style="top:430px;--accent:#68f59b"><strong>Skills</strong><span>procedures</span></div>
+        <div class="layer" style="top:570px;--accent:#ffbf4d"><strong>CLI</strong><span>local deterministic work</span></div>
+        <div class="layer" style="top:710px;--accent:#9b6cff"><strong>Code execution</strong><span>multi-step compression</span></div>
+      </section>
+
+      <section id="s006b" class="scene" style="--gx:50%;--gy:44%">
+        <div class="kicker">006-B / myth versus reality</div>
+        <div class="title">These are layers.</div>
+        <div class="big-card myth" style="left:150px;top:330px;width:600px;height:350px;border-color:rgba(255,75,100,.62)"><h3 style="color:#ff8fa0">Overclaims</h3><p>MCP is dead</p><p>Skills replace MCP</p><p>CLI solves everything</p></div>
+        <div class="big-card reality" style="right:150px;top:330px;width:720px;height:350px;border-color:rgba(104,245,155,.62)"><h3 style="color:#68f59b">Reality</h3><p style="font-size:42px">Use the right layer for the job.</p></div>
+      </section>
+
+      <section id="s006c" class="scene" style="--gx:48%;--gy:46%">
+        <div class="kicker">006-C / one layer cannot carry everything</div>
+        <div class="title">Forcing one layer to do every job bends the system.</div>
+        <div class="layer overloaded" style="left:170px;top:470px;width:620px;--accent:#ff4b64;transform:rotate(-5deg)"><strong>One layer</strong><span>access + procedure + terminal + data movement</span></div>
+        <div class="layer dist d1" style="left:1060px;top:300px;width:620px;--accent:#34e8ff"><strong>MCP</strong><span>access</span></div>
+        <div class="layer dist d2" style="left:1060px;top:430px;width:620px;--accent:#68f59b"><strong>Skills</strong><span>procedure</span></div>
+        <div class="layer dist d3" style="left:1060px;top:560px;width:620px;--accent:#ffbf4d"><strong>CLI</strong><span>local work</span></div>
+        <div class="layer dist d4" style="left:1060px;top:690px;width:620px;--accent:#9b6cff"><strong>Code</strong><span>data movement</span></div>
+      </section>
+
+      <section id="s006d" class="scene" style="--gx:50%;--gy:44%">
+        <div class="kicker">006-D / decision surface</div>
+        <div class="title">The mistake is forcing one layer to do all four jobs.</div>
+        <div class="matrix">
+          <div class="matrix-row header"><div>Need</div><div>Best layer</div></div>
+          <div class="matrix-row"><div>Permissioned external access</div><div>MCP</div></div>
+          <div class="matrix-row"><div>Know how we do it</div><div>Skill</div></div>
+          <div class="matrix-row"><div>Repeatable local operation</div><div>CLI</div></div>
+          <div class="matrix-row"><div>Large intermediate data</div><div>Code execution</div></div>
+        </div>
+        <div class="sweep"></div>
+      </section>
+
+      <div class="exit-wipe"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      gsap.defaults({ ease: "power3.out", overwrite: "auto" });
+      const tl = gsap.timeline({ paused: true });
+      const scenes = [
+        ["s002a", 0, 6.6], ["s002b", 6.6, 6.5], ["s002c", 13.1, 6.4], ["s002d", 19.5, 6.66],
+        ["s003a", 26.16, 6.2], ["s003b", 32.36, 6.8], ["s003c", 39.16, 6.1], ["s003d", 45.26, 5.68],
+        ["s004a", 50.94, 5.5], ["s004b", 56.44, 6.0], ["s004c", 62.44, 6.4], ["s004d", 68.84, 3.66],
+        ["s005a", 72.5, 10.6], ["s005b", 83.1, 8.4], ["s005c", 91.5, 6.8], ["s005d", 98.3, 5.9],
+        ["s006a", 104.2, 7.8], ["s006b", 112.0, 6.2], ["s006c", 118.2, 9.4], ["s006d", 127.6, 9.86]
+      ];
+      function show(id, at, dur, fromX = 90) {
+        const end = at + dur;
+        tl.set(`#${id}`, { opacity: 1, x: 0, y: 0, scale: 1 }, at)
+          .from(`#${id} .kicker, #${id} .title, #${id} .subtitle`, { y: 34, opacity: 0, stagger: 0.08, duration: 0.42 }, at + 0.12)
+          .to(`#${id}`, { x: -fromX, opacity: 0, duration: 0.38, ease: "power2.in" }, end - 0.38);
+      }
+      scenes.forEach((s, i) => show(s[0], s[1], s[2], i % 2 === 0 ? 110 : -110));
+
+      tl.from("#s002a .app-tile", { scale: 0.82, opacity: 0, stagger: 0.06, duration: 0.5 }, 0.35)
+        .from("#s002a .context", { scale: 0.86, opacity: 0, duration: 0.5 }, 0.65)
+        .to("#s002a .stream", { x: (i) => i < 6 ? 290 : -290, y: (i) => i % 3 * 24 - 24, scale: 0.72, duration: 4.6, stagger: 0.08, ease: "sine.inOut" }, 1.0)
+        .from("#s002a .prompt-box", { y: 80, opacity: 0, duration: 0.48 }, 4.6);
+
+      tl.from("#s002b .meter-shell", { x: -260, opacity: 0, rotation: -2, duration: 0.6 }, 6.85)
+        .to("#s002b .meter-fill", { height: "92%", duration: 3.3, ease: "power2.inOut" }, 7.25)
+        .from("#s002b .metric", { scale: 0.6, opacity: 0, duration: 0.45, ease: "back.out(1.8)" }, 8.0)
+        .from("#s002b .big-card", { x: 260, opacity: 0, duration: 0.6 }, 9.0);
+
+      tl.from("#s002c .context", { scale: 0.78, opacity: 0, duration: 0.55 }, 13.5)
+        .from("#s002c .spill", { x: 0, y: 0, scale: 0.2, opacity: 0, stagger: 0.28, duration: 0.52, ease: "back.out(2.2)" }, 14.2)
+        .to("#s002c .context", { rotation: -2, scale: 1.04, duration: 0.5, yoyo: true, repeat: 3 }, 15.3);
+
+      tl.from("#s002d .big-card", { y: 80, opacity: 0, stagger: 0.18, duration: 0.58 }, 19.9)
+        .from("#s002d .pile", { x: -420, y: -160, rotation: -18, opacity: 0, stagger: 0.08, duration: 0.62 }, 21.0);
+
+      tl.from("#s003a .context", { scale: 0.5, opacity: 0, duration: 0.55, ease: "back.out(1.7)" }, 26.55)
+        .from("#s003a .tool-card", { scale: 0.7, opacity: 0, stagger: 0.025, duration: 0.35 }, 27.1)
+        .from("#s003a .beam", { scaleX: 0, opacity: 0, duration: 0.55 }, 28.0)
+        .to("#s003a .beam", { x: 30, duration: 1.1, yoyo: true, repeat: 3, ease: "sine.inOut" }, 28.6);
+
+      tl.from("#s003b .old-meter", { x: -420, opacity: 0, duration: 0.58 }, 32.7)
+        .from("#s003b .new-meter", { x: 420, opacity: 0, duration: 0.58 }, 33.55)
+        .from("#s003b .arrow", { scaleX: 0, opacity: 0, duration: 0.48 }, 34.25)
+        .to("#s003b .old-meter", { scale: 0.92, opacity: 0.76, duration: 0.5 }, 35.0)
+        .to("#s003b .new-meter", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1 }, 35.1);
+
+      tl.from("#s003c .step", { y: 140, opacity: 0, stagger: 0.45, duration: 0.55, ease: "back.out(1.4)" }, 39.55);
+      tl.from("#s003d .big-card", { y: 130, opacity: 0, stagger: 0.16, duration: 0.46 }, 45.7);
+
+      tl.from("#s004a .big-card", { scale: 0.4, rotation: -5, opacity: 0, duration: 0.58, ease: "back.out(2)" }, 51.55)
+        .to("#s004a .big-card", { scale: 1.04, duration: 0.35, yoyo: true, repeat: 1 }, 53.0);
+
+      tl.from("#s004b .small-schema", { x: -300, opacity: 0, duration: 0.52 }, 56.85)
+        .from("#s004b .result-beam", { scaleX: 0, opacity: 0, duration: 0.28 }, 58.0)
+        .from("#s004b .payload", { x: 980, rotation: 4, opacity: 0, duration: 0.58, ease: "back.out(1.4)" }, 58.25)
+        .from("#s004b .json-line", { scaleX: 0, stagger: 0.035, duration: 0.22, transformOrigin: "left center" }, 58.75);
+
+      tl.from("#s004c .boundary", { scaleY: 0, opacity: 0, duration: 0.42, transformOrigin: "center center" }, 62.8)
+        .to("#s004c .data-blob", { x: 700, y: 145, duration: 1.3, ease: "power2.inOut" }, 63.25)
+        .from("#s004c .data-copy", { scale: 0.2, opacity: 0, duration: 0.35 }, 64.1)
+        .to("#s004c .data-copy", { x: 520, y: -210, duration: 1.15, ease: "power2.inOut" }, 64.5)
+        .to("#s004c .data-blob", { x: 1320, y: 160, duration: 1.15, ease: "power2.inOut" }, 65.35);
+
+      tl.from("#s004d .tool-card", { scale: 0.65, opacity: 0, stagger: 0.04, duration: 0.3 }, 69.2);
+
+      tl.from("#s005a .bar", { x: -220, opacity: 0, stagger: 0.25, duration: 0.48 }, 73.0)
+        .to("#s005a .b1", { width: "74%", duration: 1.6, ease: "power2.inOut" }, 73.7)
+        .to("#s005a .b2", { width: "88%", duration: 1.6, ease: "power2.inOut" }, 76.6)
+        .from("#s005a .metric", { scale: 0.5, opacity: 0, stagger: 1.1, duration: 0.42, ease: "back.out(1.9)" }, 74.8);
+
+      tl.from("#s005b .tool-card", { z: -120, y: 80, opacity: 0, stagger: 0.025, duration: 0.34 }, 83.6)
+        .from("#s005b .metric", { scale: 0.25, opacity: 0, duration: 0.62, ease: "back.out(2)" }, 85.2);
+
+      tl.from("#s005c .big-card", { y: 140, opacity: 0, stagger: 0.25, duration: 0.55 }, 92.0)
+        .to("#s005c .big-card", { y: (i) => i === 0 ? -16 : 16, duration: 0.7, yoyo: true, repeat: 2, ease: "sine.inOut" }, 94.0);
+
+      tl.from("#s005d .big-card", { x: -280, opacity: 0, duration: 0.55 }, 98.8)
+        .from("#s005d .context", { x: 280, opacity: 0, duration: 0.55 }, 99.35)
+        .from("#s005d .check", { x: -80, opacity: 0, stagger: 0.18, duration: 0.34 }, 99.8);
+
+      tl.from("#s006a .layer", { x: -520, opacity: 0, stagger: 0.22, duration: 0.55, ease: "back.out(1.3)" }, 104.8);
+      tl.from("#s006b .myth", { x: -360, opacity: 0, duration: 0.52 }, 112.45)
+        .from("#s006b .reality", { x: 360, opacity: 0, duration: 0.52 }, 113.35);
+      tl.from("#s006c .overloaded", { x: -420, opacity: 0, duration: 0.5 }, 118.75)
+        .to("#s006c .overloaded", { rotation: -10, y: 22, duration: 0.34, yoyo: true, repeat: 3 }, 120.2)
+        .from("#s006c .dist", { x: 380, opacity: 0, stagger: 0.18, duration: 0.5 }, 121.2);
+      tl.from("#s006d .matrix", { y: 140, opacity: 0, duration: 0.55 }, 128.15)
+        .from("#s006d .matrix-row:not(.header)", { x: -180, opacity: 0, stagger: 0.2, duration: 0.38 }, 128.75)
+        .to("#s006d .sweep", { y: 360, duration: 5.2, ease: "power1.inOut" }, 130.0);
+
+      scenes.forEach(([id, at, dur]) => {
+        tl.to(".exit-wipe", { opacity: 0.9, x: 2200, duration: 0.34, ease: "power2.in" }, at + dur - 0.34)
+          .set(".exit-wipe", { opacity: 0, x: -2200 }, at + dur);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
