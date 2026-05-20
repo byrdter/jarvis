@@ -1,0 +1,683 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #020611; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      #video-12-testvisual1-visual-first {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        color: #f7fbff;
+        background: #020611;
+      }
+      #sourceVideo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+      .overlayRoot {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+      }
+      .shot {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 16%, rgba(52, 245, 255, 0.16), transparent 27%),
+          radial-gradient(circle at 82% 78%, rgba(255, 65, 100, 0.12), transparent 29%),
+          linear-gradient(135deg, #020611 0%, #071424 48%, #030712 100%);
+      }
+      .shot::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.18;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+        background-size: 58px 58px;
+        mask-image: radial-gradient(circle at center, black 0%, black 55%, transparent 95%);
+      }
+      .shot::after {
+        content: "";
+        position: absolute;
+        inset: -160px;
+        opacity: 0.34;
+        background:
+          linear-gradient(110deg, transparent 10%, rgba(52,245,255,0.08) 22%, transparent 34%),
+          linear-gradient(250deg, transparent 45%, rgba(255,178,63,0.07) 52%, transparent 62%);
+        transform: rotate(-4deg);
+      }
+      .hud-title {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 44px;
+        text-align: center;
+        z-index: 20;
+        font-size: 58px;
+        line-height: 1;
+        font-weight: 1000;
+        text-transform: uppercase;
+        color: #f7fbff;
+        text-shadow: 0 0 26px rgba(52,245,255,0.38);
+      }
+      .hud-sub {
+        position: absolute;
+        left: 140px;
+        right: 140px;
+        bottom: 40px;
+        z-index: 20;
+        text-align: center;
+        color: #a9c4d8;
+        font-size: 28px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .window {
+        position: absolute;
+        border: 2px solid rgba(77, 234, 255, 0.55);
+        border-radius: 26px;
+        background: linear-gradient(145deg, rgba(14, 35, 57, 0.92), rgba(7, 13, 27, 0.88));
+        box-shadow: 0 0 55px rgba(52,245,255,0.22), inset 0 0 55px rgba(52,245,255,0.08);
+        overflow: hidden;
+      }
+      .window .bar {
+        height: 42px;
+        border-bottom: 1px solid rgba(126,240,255,0.22);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-left: 22px;
+        color: #67f4ff;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .dot { width: 16px; height: 16px; border-radius: 50%; background: #34f5ff; box-shadow: 0 0 18px rgba(52,245,255,0.8); }
+      .tool-panel {
+        position: absolute;
+        width: 278px;
+        height: 166px;
+        border-radius: 18px;
+        border: 2px solid currentColor;
+        background: linear-gradient(160deg, rgba(13, 29, 45, 0.96), rgba(18, 25, 42, 0.9));
+        box-shadow: 0 0 32px color-mix(in srgb, currentColor 38%, transparent);
+        color: #34f5ff;
+        overflow: hidden;
+        z-index: 8;
+      }
+      .tool-panel .name {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        padding: 0 18px;
+        font-size: 28px;
+        font-weight: 1000;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, color-mix(in srgb, currentColor 50%, transparent), transparent);
+      }
+      .tool-panel .mini {
+        position: absolute;
+        width: 48px;
+        height: 62px;
+        border-radius: 6px;
+        border: 1px solid rgba(255,255,255,0.45);
+        background: rgba(4, 11, 22, 0.82);
+      }
+      .schema-card {
+        position: absolute;
+        width: 72px;
+        height: 92px;
+        border-radius: 7px;
+        border: 1px solid rgba(189, 238, 255, 0.75);
+        background: linear-gradient(160deg, rgba(228, 249, 255, 0.9), rgba(119, 176, 217, 0.72));
+        box-shadow: 0 0 20px rgba(52,245,255,0.55);
+        z-index: 14;
+      }
+      .schema-card.dark { background: linear-gradient(160deg, rgba(10, 21, 39, 0.98), rgba(25, 35, 58, 0.96)); }
+      .schema-card::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        top: 16px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.82);
+        box-shadow: 0 16px 0 rgba(255,255,255,0.55), 0 32px 0 rgba(255,255,255,0.38), 0 48px 0 rgba(255,255,255,0.24);
+      }
+      .flow-svg {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        overflow: visible;
+      }
+      .flow-path {
+        fill: none;
+        stroke: #34f5ff;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 14 20;
+        filter: drop-shadow(0 0 12px rgba(52,245,255,0.9));
+      }
+      .prompt-box {
+        position: absolute;
+        left: 640px;
+        bottom: 120px;
+        width: 640px;
+        height: 88px;
+        border-radius: 16px;
+        border: 2px solid rgba(103,244,255,0.62);
+        display: grid;
+        place-items: center;
+        color: #f7fbff;
+        font-size: 38px;
+        font-weight: 1000;
+        text-transform: uppercase;
+        background: rgba(6, 17, 31, 0.78);
+        z-index: 16;
+      }
+      .status-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 26px;
+        text-align: center;
+        font-size: 46px;
+        font-weight: 1000;
+        text-transform: uppercase;
+        color: #9decff;
+        z-index: 20;
+      }
+      .band {
+        position: absolute;
+        left: 520px;
+        width: 900px;
+        height: 88px;
+        border-radius: 12px;
+        border: 3px solid currentColor;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 34px;
+        font-size: 40px;
+        font-weight: 1000;
+        background: linear-gradient(90deg, color-mix(in srgb, currentColor 34%, #06111f 66%), rgba(8, 16, 30, 0.9));
+        box-shadow: 0 0 34px color-mix(in srgb, currentColor 40%, transparent);
+        z-index: 12;
+      }
+      .side-panel {
+        position: absolute;
+        width: 300px;
+        min-height: 112px;
+        border-radius: 12px;
+        border: 1px solid rgba(179, 211, 229, 0.25);
+        background: rgba(8, 16, 28, 0.82);
+        padding: 22px;
+        font-size: 28px;
+        font-weight: 900;
+        color: #dcecff;
+        z-index: 12;
+      }
+      .side-panel strong { display: block; margin-top: 8px; font-size: 38px; color: #59ffad; }
+      .side-panel.warn strong { color: #ff6f6f; }
+      .big-number {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 145px;
+        text-align: center;
+        z-index: 15;
+        font-size: 64px;
+        font-weight: 1000;
+        text-transform: uppercase;
+      }
+      .big-number span { color: #ffb23f; font-size: 82px; text-shadow: 0 0 30px rgba(255,178,63,0.8); }
+      .library {
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(6, 118px);
+        gap: 18px;
+        z-index: 12;
+      }
+      .lib-card {
+        height: 82px;
+        border-radius: 12px;
+        border: 1px solid rgba(168, 198, 218, 0.24);
+        background: rgba(9, 18, 31, 0.84);
+        display: grid;
+        place-items: center;
+        color: #7f96aa;
+        font-size: 18px;
+        font-weight: 900;
+        text-align: center;
+      }
+      .lib-card.match {
+        border-color: #59ffad;
+        color: #f7fbff;
+        box-shadow: 0 0 25px rgba(89,255,173,0.6);
+      }
+      .search-card {
+        position: absolute;
+        width: 240px;
+        height: 118px;
+        border-radius: 18px;
+        border: 3px solid #34f5ff;
+        background: rgba(8, 23, 39, 0.95);
+        display: grid;
+        place-items: center;
+        color: #f7fbff;
+        font-size: 32px;
+        font-weight: 1000;
+        text-transform: uppercase;
+        box-shadow: 0 0 40px rgba(52,245,255,0.48);
+        z-index: 16;
+      }
+      .boundary {
+        position: absolute;
+        top: 140px;
+        bottom: 140px;
+        left: 930px;
+        width: 3px;
+        background: linear-gradient(transparent, #34f5ff, transparent);
+        box-shadow: 0 0 26px rgba(52,245,255,0.8);
+        z-index: 10;
+      }
+      .beam {
+        position: absolute;
+        height: 380px;
+        width: 840px;
+        background: linear-gradient(90deg, rgba(52,245,255,0.55), rgba(89,255,173,0.18), transparent);
+        clip-path: polygon(0 46%, 100% 0, 100% 100%, 0 54%);
+        filter: blur(0.5px) drop-shadow(0 0 28px rgba(52,245,255,0.8));
+        z-index: 11;
+        opacity: 0;
+      }
+      .meter-pair {
+        position: absolute;
+        left: 390px;
+        right: 390px;
+        bottom: 120px;
+        height: 160px;
+        z-index: 16;
+      }
+      .meter-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 54px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+      .meter-line .fill {
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+        transform-origin: left center;
+      }
+      .meter-label {
+        position: absolute;
+        top: -54px;
+        font-size: 44px;
+        font-weight: 1000;
+      }
+      .payload {
+        position: absolute;
+        width: 420px;
+        border-radius: 18px;
+        border: 2px solid currentColor;
+        background: rgba(11, 20, 35, 0.92);
+        padding: 20px;
+        font-size: 26px;
+        font-weight: 900;
+        color: #ff4164;
+        box-shadow: 0 0 36px currentColor;
+        z-index: 14;
+      }
+      .payload .rows {
+        margin-top: 18px;
+        height: 210px;
+        background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.75) 0 5px, transparent 5px 16px);
+        opacity: 0.55;
+      }
+      .benchmark {
+        position: absolute;
+        width: 520px;
+        height: 250px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.24);
+        background: rgba(7, 15, 28, 0.86);
+        padding: 28px;
+        z-index: 14;
+      }
+      .barrow { position: relative; height: 58px; margin-top: 28px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+      .barrow .fill { height: 100%; border-radius: inherit; transform-origin: left center; background: linear-gradient(90deg, #ff4164, #ffb23f, #59ffad); }
+      .layer {
+        position: absolute;
+        left: 255px;
+        width: 610px;
+        height: 96px;
+        border-radius: 14px;
+        border: 2px solid currentColor;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 30px;
+        font-size: 35px;
+        font-weight: 1000;
+        background: rgba(7, 15, 28, 0.92);
+        box-shadow: 0 0 28px color-mix(in srgb, currentColor 42%, transparent);
+        z-index: 14;
+      }
+      .mono {
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="video-12-testvisual1-visual-first" data-composition-id="video-12-testvisual1-visual-first" data-start="0" data-width="1920" data-height="1080">
+      <video id="sourceVideo" src="media/TestVisual1.mp4" data-start="0" data-duration="212.96" data-track-index="0" muted playsinline></video>
+      <audio id="sourceAudio" src="media/TestVisual1.mp4" data-start="0" data-duration="212.96" data-track-index="1" data-volume="1"></audio>
+      <div class="overlayRoot">
+        <section class="shot s002a">
+          <div class="hud-title">Integrations Are Connected Before Work Begins</div>
+          <svg class="flow-svg" viewBox="0 0 1920 1080"></svg>
+          <div class="window context" style="left:650px; top:300px; width:620px; height:460px;">
+            <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>Central AI Context Window</div>
+          </div>
+          <div class="prompt-box">Empty User Prompt</div>
+          <div class="status-line">User task has not started yet</div>
+        </section>
+        <section class="shot s002b">
+          <div class="hud-title">Context Memory Before The Task</div>
+          <div class="big-number">Current Total: <span class="counter55">55,000</span> Tokens</div>
+          <div class="side-panel" style="left:70px; top:150px;">Integration Status:<strong>All Active</strong></div>
+          <div class="side-panel" style="left:70px; top:300px;">Pre-Task Data:<strong>Populated</strong></div>
+          <div class="side-panel warn" style="right:70px; top:150px;">Problem Space:<strong>Uninitialized</strong></div>
+          <div class="side-panel warn actual-problem" style="right:70px; top:350px; height:310px; display:grid; place-items:center; text-align:center;">Actual problem:<strong>not loaded yet</strong></div>
+          <div class="hud-sub">Latency, confusion, cost, and less room for the actual task</div>
+        </section>
+        <section class="shot s003a">
+          <div class="hud-title">Minimal Initial Load</div>
+          <div class="boundary"></div>
+          <div class="window modelA" style="left:150px; top:240px; width:690px; height:470px;"><div class="bar">Model Context</div></div>
+          <div class="search-card searchA" style="left:370px; top:420px;">Tool Search</div>
+          <div class="library libA" style="left:1080px; top:210px;"></div>
+          <div class="hud-sub">The full library stays outside the reasoning window</div>
+        </section>
+        <section class="shot s003b">
+          <div class="hud-title">Search Selects The Few Definitions That Match</div>
+          <div class="window" style="left:120px; top:260px; width:470px; height:420px;"><div class="bar">Reasoning Window</div></div>
+          <div class="search-card searchB" style="left:235px; top:410px;">Tool Search</div>
+          <div class="beam"></div>
+          <div class="library libB" style="left:835px; top:165px; grid-template-columns: repeat(5, 130px); gap:20px;"></div>
+          <div class="hud-sub">Selected, not loaded yet</div>
+        </section>
+        <section class="shot s003c">
+          <div class="hud-title">Only Relevant Definitions Are Injected</div>
+          <svg class="flow-svg inject-svg" viewBox="0 0 1920 1080"></svg>
+          <div class="library libC" style="left:80px; top:185px; grid-template-columns: repeat(4, 112px); gap:18px;"></div>
+          <div class="window greenContext" style="right:130px; top:220px; width:760px; height:430px; border-color:#59ffad; box-shadow:0 0 60px rgba(89,255,173,0.35);"><div class="bar" style="color:#59ffad;">Loaded On Demand</div></div>
+          <div class="meter-pair">
+            <div class="meter-label" style="left:0; color:#ff4164;">77,000 upfront</div>
+            <div class="meter-line" style="top:0;"><div class="fill redFill" style="background:#ff4164;"></div></div>
+            <div class="meter-label" style="right:0; top:64px; color:#59ffad;">8,700 on demand</div>
+            <div class="meter-line" style="top:96px;"><div class="fill greenFill" style="background:#59ffad;"></div></div>
+          </div>
+        </section>
+        <section class="shot s004a">
+          <div class="hud-title">The Easy Take Gets Dangerous</div>
+          <div class="payload smallSchema" style="left:210px; top:315px; color:#59ffad; width:330px;"><strong>Small schema load</strong><div class="rows" style="height:130px;"></div></div>
+          <div class="payload largeResult" style="right:210px; top:210px; color:#ff4164; width:560px;"><strong>Large tool result</strong><div class="rows" style="height:420px;"></div></div>
+          <div class="hud-sub">Search reduces schema load. It does not make every result small.</div>
+        </section>
+        <section class="shot s004b">
+          <div class="hud-title">Workflow And Retrieval Risk Remain</div>
+          <svg class="flow-svg loop-svg" viewBox="0 0 1920 1080"></svg>
+          <div class="window" style="left:110px; top:250px; width:500px; height:470px;"><div class="bar">Tool Result</div></div>
+          <div class="window" style="left:710px; top:250px; width:500px; height:470px;"><div class="bar">Context Copy</div></div>
+          <div class="window" style="right:110px; top:250px; width:500px; height:470px;"><div class="bar">Next Step</div></div>
+          <div class="payload retrieve" style="left:720px; bottom:90px; width:480px; color:#ffb23f;"><strong>Retrieval has to be right</strong><div class="rows" style="height:100px;"></div></div>
+        </section>
+        <section class="shot s005a">
+          <div class="hud-title">Better Numbers, Still Not Magical</div>
+          <div class="benchmark b1" style="left:250px; top:300px;"><h2>Opus 4 MCP eval</h2><div class="barrow"><div class="fill f49"></div></div><div class="barrow"><div class="fill f74"></div></div></div>
+          <div class="benchmark b2" style="right:250px; top:300px;"><h2>Opus 4.5 MCP eval</h2><div class="barrow"><div class="fill f795"></div></div><div class="barrow"><div class="fill f881"></div></div></div>
+          <div class="hud-sub">Improvement is real. The reliability problem still matters.</div>
+        </section>
+        <section class="shot s005b">
+          <div class="hud-title">Search Quality Becomes Part Of Reliability</div>
+          <div class="library libMass" style="left:155px; top:185px; grid-template-columns: repeat(12, 96px); gap:14px; transform:perspective(1000px) rotateX(46deg) rotateZ(-7deg);"></div>
+          <div class="window" style="right:170px; top:285px; width:420px; height:420px; border-color:#ffb23f;"><div class="bar" style="color:#ffb23f;">Retrieval</div><div style="position:absolute; inset:90px 40px; display:grid; place-items:center; font-size:116px; font-weight:1000; color:#ffb23f; text-shadow:0 0 32px rgba(255,178,63,0.75);">60%</div></div>
+          <div class="hud-sub">More than 4,000 tools means search quality is now part of the reliability model</div>
+        </section>
+        <section class="shot s006a">
+          <div class="hud-title">Four Layers, Four Different Jobs</div>
+          <div class="layer l1" style="top:250px; color:#34f5ff;">MCP <span>external systems</span></div>
+          <div class="layer l2" style="top:370px; color:#ffb23f;">Skills <span>procedures</span></div>
+          <div class="layer l3" style="top:490px; color:#59ffad;">CLI scripts <span>deterministic work</span></div>
+          <div class="layer l4" style="top:610px; color:#3da5ff;">Code execution <span>workflow compression</span></div>
+          <div class="window" style="right:230px; top:315px; width:470px; height:330px;"><div class="bar">Layered Stack</div></div>
+          <div class="hud-sub">MCP is not dead. Skills are not a replacement. CLI is not universal.</div>
+        </section>
+        <section class="shot s006b">
+          <div class="hud-title">Do Not Force One Layer To Carry Everything</div>
+          <div class="window monolith" style="left:180px; top:230px; width:520px; height:520px; border-color:#ff4164;"><div class="bar" style="color:#ff4164;">One overloaded layer</div></div>
+          <div class="layer r1" style="left:auto; right:230px; top:220px; color:#34f5ff;">MCP <span>connect</span></div>
+          <div class="layer r2" style="left:auto; right:230px; top:340px; color:#ffb23f;">Skills <span>teach</span></div>
+          <div class="layer r3" style="left:auto; right:230px; top:460px; color:#59ffad;">CLI <span>execute</span></div>
+          <div class="layer r4" style="left:auto; right:230px; top:580px; color:#3da5ff;">Code <span>compress</span></div>
+          <div class="hud-sub">Each layer gets the job it is actually good at</div>
+        </section>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+        const tools = [
+          ["GitHub", "#ffb23f"], ["Slack", "#b45cff"], ["Sentry", "#ff4164"],
+          ["Grafana", "#ff8c2c"], ["Splunk", "#d9ff54"], ["Jira", "#3da5ff"]
+        ];
+        const make = (tag, cls, parent, text) => {
+          const el = document.createElement(tag);
+          if (cls) el.className = cls;
+          if (text) el.textContent = text;
+          parent.appendChild(el);
+          return el;
+        };
+        function addToolPanels() {
+          const root = document.querySelector(".s002a");
+          const positions = [[70,210],[70,440],[70,670],[1570,210],[1570,440],[1570,670]];
+          tools.forEach(([name, color], i) => {
+            const p = make("div", "tool-panel toolp", root);
+            p.style.left = positions[i][0] + "px";
+            p.style.top = positions[i][1] + "px";
+            p.style.color = color;
+            make("div", "name", p, name);
+            for (let j = 0; j < 5; j++) {
+              const m = make("div", "mini", p);
+              m.style.left = 22 + j * 44 + "px";
+              m.style.top = 78 + (j % 2) * 16 + "px";
+            }
+          });
+          const svg = root.querySelector(".flow-svg");
+          const starts = [[350,290],[350,520],[350,750],[1570,290],[1570,520],[1570,750]];
+          starts.forEach(([x,y], i) => {
+            const side = x < 960 ? 1 : -1;
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("class", "flow-path");
+            path.setAttribute("d", `M ${x} ${y} C ${x + side*230} ${y-70}, ${960 - side*260} ${460+i*18}, ${960 - side*40} ${520+i*8}`);
+            svg.appendChild(path);
+          });
+          for (let i = 0; i < 44; i++) {
+            const c = make("div", "schema-card flycard" + (i % 3 === 0 ? " dark" : ""), root);
+            c.style.left = (i < 22 ? 240 + ((i * 37) % 180) : 1510 + ((i * 29) % 110)) + "px";
+            c.style.top = (230 + (i % 11) * 58) + "px";
+          }
+        }
+        function addBands() {
+          const root = document.querySelector(".s002b");
+          const y = [315,415,515,615,715,815];
+          tools.forEach(([name, color], i) => {
+            const b = make("div", "band tokenBand", root);
+            b.style.top = y[i] + "px";
+            b.style.color = color;
+            b.innerHTML = `<span>${name} tool definitions</span><span>${[5200,12200,9400,3700,1000,700][i].toLocaleString()} tokens</span>`;
+          });
+        }
+        function addLibrary(rootSel, cls, names) {
+          const lib = document.querySelector(rootSel);
+          names.forEach((name) => {
+            const card = make("div", cls, lib, name);
+            if (/Jira|Sentry|AWS/.test(name)) card.classList.add("match");
+          });
+        }
+        function addFlowCards() {
+          const root = document.querySelector(".s003c");
+          ["Jira Task","Sentry Error","AWS Metrics"].forEach((name, i) => {
+            const c = make("div", "schema-card injectCard dark", root);
+            c.style.left = 570 + i * 115 + "px";
+            c.style.top = 255 + i * 65 + "px";
+            c.dataset.label = name;
+            const label = make("div", "", c, name);
+            label.style.cssText = "position:absolute;left:6px;right:6px;bottom:8px;font-size:10px;text-align:center;color:#fff;font-weight:900;";
+          });
+        }
+        addToolPanels();
+        addBands();
+        const libNames = ["GitHub","Slack","Sentry","Grafana","Splunk","Jira","AWS","Docs","Calendar","Email","CRM","DB","Logs","Billing","Deploy","Search","Files","Tests"];
+        addLibrary(".libA", "lib-card", libNames);
+        addLibrary(".libB", "lib-card", libNames.concat(["Queues","Secrets","Analytics","Cache","Auth","Images","Maps"]));
+        addLibrary(".libC", "lib-card", libNames.slice(0, 12));
+        addLibrary(".libMass", "lib-card", Array.from({length: 72}, (_, i) => ["GitHub","Slack","Sentry","Jira","AWS","Logs","CRM","Docs","DB","Deploy","Search","Cache"][i % 12]));
+        addFlowCards();
+
+        const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+        const show = (sel, t, d) => {
+          tl.set(sel, { opacity: 1 }, t);
+          tl.set(sel, { opacity: 0 }, t + d);
+        };
+        show(".s002a", 6.52, 21.6);
+        tl.from(".s002a .context", { scale: 0.82, opacity: 0, duration: 0.7 }, 6.52);
+        tl.from(".s002a .toolp", { x: (i) => i < 3 ? -330 : 330, opacity: 0, stagger: 0.08, duration: 0.8 }, 6.75);
+        tl.from(".s002a .hud-title", { y: -55, opacity: 0, duration: 0.6 }, 7.0);
+        tl.from(".s002a .flow-path", { strokeDashoffset: 260, opacity: 0, stagger: 0.12, duration: 1.2 }, 10.6);
+        tl.to(".s002a .flycard", { x: (i) => i < 22 ? 610 - (i % 8)*28 : -610 + (i % 8)*28, y: (i) => -20 + (i % 9)*14, scale: 0.78, rotation: (i) => (i % 5 - 2) * 4, stagger: 0.035, duration: 2.9 }, 12.0);
+        tl.from(".s002a .prompt-box", { y: 45, opacity: 0, duration: 0.55 }, 20.2);
+        tl.from(".s002a .status-line", { y: 40, opacity: 0, duration: 0.55 }, 23.8);
+        tl.to(".s002a", { scale: 1.04, duration: 2.3, ease: "none" }, 25.5);
+
+        show(".s002b", 29.36, 16.04);
+        tl.from(".s002b .hud-title", { y: -70, opacity: 0, duration: 0.6 }, 29.36);
+        tl.from(".side-panel", { x: (i, el) => el.style.left ? -280 : 280, opacity: 0, stagger: 0.12, duration: 0.65 }, 29.75);
+        tl.from(".tokenBand", { x: (i) => i % 2 ? 460 : -460, opacity: 0, stagger: 0.18, duration: 0.72 }, 31.2);
+        tl.from(".big-number span", { scale: 0.78, opacity: 0, duration: 0.55 }, 32.2);
+        tl.to(".big-number span", { textShadow: "0 0 48px rgba(255,178,63,1)", duration: 0.35, repeat: 3, yoyo: true }, 33.0);
+        tl.to(".actual-problem", { scaleX: 0.78, x: 34, borderColor: "#ff4164", duration: 1.0 }, 37.4);
+        tl.from(".s002b .hud-sub", { y: 42, opacity: 0, duration: 0.6 }, 40.2);
+        tl.to(".s002b", { boxShadow: "inset 0 0 0 12px rgba(255,178,63,0.75)", duration: 0.25, repeat: 3, yoyo: true }, 43.6);
+
+        show(".s003a", 45.4, 15.4);
+        tl.from(".s003a .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 45.4);
+        tl.from(".libA .lib-card", { x: 520, opacity: 0, stagger: 0.025, duration: 0.55 }, 46.0);
+        tl.from(".boundary", { scaleY: 0, opacity: 0, duration: 0.55 }, 47.0);
+        tl.from(".modelA", { scale: 0.86, opacity: 0, duration: 0.65 }, 47.2);
+        tl.from(".searchA", { x: 820, scale: 0.6, opacity: 0, duration: 0.85 }, 49.6);
+        tl.to(".libA .lib-card", { opacity: 0.36, duration: 0.7 }, 53.8);
+        tl.from(".s003a .hud-sub", { y: 36, opacity: 0, duration: 0.55 }, 56.9);
+
+        show(".s003b", 60.8, 16.72);
+        tl.from(".s003b .hud-title", { y: -60, opacity: 0, duration: 0.5 }, 60.8);
+        tl.from(".searchB", { scale: 0.76, opacity: 0, duration: 0.55 }, 61.1);
+        tl.from(".libB .lib-card", { y: 130, opacity: 0, stagger: 0.018, duration: 0.45 }, 61.7);
+        tl.set(".beam", { left: 430, top: 320, opacity: 0 }, 62.0);
+        tl.to(".beam", { opacity: 0.72, duration: 0.25 }, 62.2);
+        tl.to(".beam", { x: 670, duration: 4.0, ease: "power1.inOut" }, 62.4);
+        tl.to(".libB .match", { y: -28, scale: 1.08, color: "#f7fbff", stagger: 0.22, duration: 0.55 }, 66.9);
+        tl.to(".libB .lib-card:not(.match)", { opacity: 0.25, duration: 0.55 }, 68.6);
+        tl.from(".s003b .hud-sub", { y: 38, opacity: 0, duration: 0.55 }, 71.8);
+
+        show(".s003c", 77.52, 24.84);
+        tl.from(".s003c .hud-title", { y: -60, opacity: 0, duration: 0.5 }, 77.52);
+        tl.from(".greenContext", { x: 180, opacity: 0, duration: 0.7 }, 78.0);
+        tl.from(".libC .lib-card", { x: -210, opacity: 0, stagger: 0.025, duration: 0.45 }, 78.2);
+        tl.to(".libC .lib-card:not(.match)", { opacity: 0.18, scale: 0.9, duration: 0.7 }, 82.6);
+        tl.to(".injectCard", { x: 760, y: (i) => 70 + i * 15, scale: 1.18, stagger: 0.45, duration: 1.0 }, 83.2);
+        tl.from(".meter-pair", { y: 110, opacity: 0, duration: 0.6 }, 91.8);
+        tl.from(".redFill", { scaleX: 0, duration: 1.2 }, 92.4);
+        tl.to(".redFill", { scaleX: 0.112, duration: 1.15, ease: "power3.inOut" }, 97.5);
+        tl.from(".greenFill", { scaleX: 0, duration: 1.15 }, 98.1);
+        tl.to(".greenContext", { boxShadow: "0 0 90px rgba(89,255,173,0.65)", duration: 0.35, repeat: 2, yoyo: true }, 100.2);
+
+        show(".s004a", 102.36, 14.36);
+        tl.from(".s004a .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 102.36);
+        tl.from(".smallSchema", { x: -420, rotation: -8, opacity: 0, duration: 0.8 }, 104.0);
+        tl.from(".largeResult", { x: 520, scale: 0.65, opacity: 0, duration: 0.9 }, 107.0);
+        tl.to(".largeResult", { scale: 1.08, duration: 1.2, ease: "power2.inOut" }, 111.0);
+        tl.from(".s004a .hud-sub", { y: 38, opacity: 0, duration: 0.5 }, 112.9);
+
+        show(".s004b", 118.24, 18.24);
+        tl.from(".s004b .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 118.24);
+        tl.from(".s004b .window", { y: 120, opacity: 0, stagger: 0.18, duration: 0.7 }, 119.0);
+        for (let i = 0; i < 12; i++) {
+          const c = make("div", "schema-card dark loopCard", document.querySelector(".s004b"));
+          c.style.left = "260px"; c.style.top = 420 + (i % 3) * 24 + "px";
+        }
+        tl.to(".loopCard", { x: (i) => 620 + (i % 4)*25, y: (i) => (i % 3)*8, stagger: 0.05, duration: 1.2 }, 122.0);
+        tl.to(".loopCard", { x: (i) => 1220 + (i % 4)*25, y: (i) => (i % 3)*8, stagger: 0.05, duration: 1.2 }, 124.2);
+        tl.from(".retrieve", { y: 130, opacity: 0, duration: 0.7 }, 126.7);
+        tl.to(".retrieve", { borderColor: "#ff4164", color: "#ff4164", duration: 0.5, repeat: 2, yoyo: true }, 130.1);
+
+        show(".s005a", 136.48, 19.0);
+        tl.from(".s005a .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 136.48);
+        tl.from(".benchmark", { y: 130, opacity: 0, stagger: 0.18, duration: 0.7 }, 137.0);
+        tl.from(".f49", { scaleX: 0, duration: 1.0 }, 142.0).to(".f49", { scaleX: 0.49, duration: 0.01 }, 142.0);
+        tl.from(".f74", { scaleX: 0, duration: 1.2 }, 143.4).to(".f74", { scaleX: 0.74, duration: 0.01 }, 143.4);
+        tl.from(".f795", { scaleX: 0, duration: 1.0 }, 148.0).to(".f795", { scaleX: 0.795, duration: 0.01 }, 148.0);
+        tl.from(".f881", { scaleX: 0, duration: 1.2 }, 150.0).to(".f881", { scaleX: 0.881, duration: 0.01 }, 150.0);
+        tl.from(".s005a .hud-sub", { y: 40, opacity: 0, duration: 0.55 }, 152.8);
+
+        show(".s005b", 155.48, 15.64);
+        tl.from(".s005b .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 155.48);
+        tl.from(".libMass .lib-card", { y: 160, opacity: 0, stagger: 0.006, duration: 0.5 }, 156.1);
+        tl.to(".libMass .match", { y: -22, scale: 1.15, stagger: 0.035, duration: 0.45 }, 159.0);
+        tl.from(".s005b .window", { x: 320, opacity: 0, duration: 0.7 }, 162.6);
+        tl.from(".s005b .hud-sub", { y: 42, opacity: 0, duration: 0.55 }, 166.8);
+
+        show(".s006a", 172.44, 15.52);
+        tl.from(".s006a .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 172.44);
+        tl.from(".s006a .layer", { x: -560, opacity: 0, stagger: 0.35, duration: 0.7 }, 174.5);
+        tl.from(".s006a .window", { x: 460, opacity: 0, duration: 0.8 }, 181.0);
+        tl.from(".s006a .hud-sub", { y: 42, opacity: 0, duration: 0.55 }, 183.8);
+
+        show(".s006b", 187.96, 19.12);
+        tl.from(".s006b .hud-title", { y: -55, opacity: 0, duration: 0.5 }, 187.96);
+        for (let i = 0; i < 16; i++) {
+          const c = make("div", "schema-card dark weight", document.querySelector(".monolith"));
+          c.style.left = 55 + (i % 4)*86 + "px"; c.style.top = 90 + Math.floor(i/4)*82 + "px";
+        }
+        tl.from(".monolith", { x: -420, opacity: 0, duration: 0.75 }, 188.6);
+        tl.from(".weight", { scale: 0, opacity: 0, stagger: 0.035, duration: 0.45 }, 190.0);
+        tl.to(".monolith", { borderColor: "#ff4164", boxShadow: "0 0 80px rgba(255,65,100,0.8)", duration: 0.25, repeat: 5, yoyo: true }, 199.5);
+        tl.from(".s006b .layer", { x: 520, opacity: 0, stagger: 0.18, duration: 0.6 }, 201.6);
+        tl.to(".weight", { x: (i) => 820 + (i % 4)*8, y: (i) => -180 + Math.floor(i/4)*90, scale: 0.55, opacity: 0.65, stagger: 0.018, duration: 1.1 }, 202.6);
+        tl.from(".s006b .hud-sub", { y: 42, opacity: 0, duration: 0.55 }, 204.2);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["video-12-testvisual1-visual-first"] = tl;
+      </script>
+    </div>
+  </body>
+</html>
