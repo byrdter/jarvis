@@ -1,859 +1,501 @@
 # Video 12 Visual Treatment Board - First 10 Segments
 
-Purpose: define concrete visual direction options for every subsegment from `002A` through `010E` before production. This board deliberately does not assume HyperFrames is the answer. Each beat can use Veo, source capture, simulated UI, still-image generation, talking head overlays, HyperFrames/Remotion compositing, or a hybrid.
+Purpose: define the production-level visual direction for Segments `002-010` using the newer structure: most segments get **2 visual subsegments**, with **3 only when the teaching idea naturally requires it**.
 
-Source basis:
+This replaces the earlier 4-subsegment image-prompt structure. The older A/B/C/D stills remain useful as concept references, but they are no longer the production unit.
 
-- `video-12-mcp-token-stack/02-script/VIDEO-12-FIRST-10-VO-SUBSEGMENTS.md`
-- `video-12-mcp-token-stack/02-script/VIDEO-12-FIRST-10-SUBSEGMENT-IMAGE-PROMPTS.md`
-- User direction: concept -> visual options -> recommendation -> VO/production.
+## Production Rule
 
-Recommendation shorthand:
+- Default: `2` visual beats per narrative segment.
+- Exception: `3` visual beats when the concept has a natural sequence, such as Step 1 / Step 2 / Step 3.
+- Each beat should generally run `10-18 seconds`, depending on final VO.
+- Visuals should be selected before final VO.
+- HyperFrames/Remotion are assembly and precision tools, not the only visual language.
+- Consider Veo, still+motion, source capture, simulated UI/IDE, talking head overlays, and HyperFrames/Remotion for every beat.
 
-- `Veo`: use a short cinematic generated video shot as the main visual.
-- `Still + Motion`: generate a rich still or use a strong existing still, then animate camera, masks, slices, highlights, or overlays.
-- `Simulated UI`: build a fake but believable IDE, workbench, dashboard, source page, or terminal.
-- `Source Capture`: use real website/document/screen capture when credibility matters.
-- `Talking Head + Overlays`: keep avatar/human visible and bring active graphics around the presenter.
-- `HyperFrames/Remotion`: use for compositing, overlays, precise timing, charts, callouts, split screens, and transitions.
+## High-Level Direction
 
-## Overall Recommendation For Segments 002-010
+Segments `002-003` should carry the most important visual correction. They should not be abstract boxes. Segment `002` should feel like a real AI workbench or workstation where tools are connected before the task starts. Segment `003` should become more precise and instructional, because it teaches the Tool Search mechanism.
 
-Do not make this section one continuous abstract diagram. Use a mixed visual language:
+Segments `004-006` should move into interpretation: what Tool Search does not solve, why retrieval becomes reliability, and why MCP/Skills/CLI/Code Execution are layers rather than replacements.
 
-- Segments `002-003`: cinematic workstation UI plus selected simulated UI overlays. This makes the old failure mode and Tool Search feel like a real work environment.
-- Segments `004-006`: stronger editorial/teaching visuals with a mix of warning metaphors, source-proof boards, and a talking-head reset around the layer thesis.
-- Segments `007-008`: source capture or simulated Cloudflare/code-mode environment plus kinetic metric treatment.
-- Segments `009-010`: enterprise workflow story using Google Drive, Salesforce, transcript object, sandbox runtime, and side-by-side data paths.
-
-The repeated mistake to avoid: turning every idea into a dark dashboard full of boxes. A box is allowed only when it represents a real artifact: an editor, monitor, source page, context meter, runtime, tool card, or record.
+Segments `007-010` should use more source-proof and workflow-specific visuals: Cloudflare Code Mode, discover/inspect/execute/return, and the Google Drive to Salesforce transcript example.
 
 ---
 
 ## Segment 002 - Old Failure Mode: Tool Definitions Before Work
 
-### 002A - Connected Tools Before the Task
+Recommended subsegments: `2`
 
-VO: "Here is the old failure mode. You connect GitHub, Slack, Sentry, Grafana, Splunk, maybe Jira."
+### 002A - Connected Tools Before The Task
 
-**Option A - Cinematic Workstation UI**
+VO coverage: "Here is the old failure mode. You connect GitHub, Slack, Sentry, Grafana, Splunk, maybe Jira. Before the user types a task..."
 
-A realistic desk and monitor fill the frame, similar to the user reference image. The monitor shows a dark AI workbench with a left rail of connected services: GitHub, Slack, Sentry, Grafana, Splunk, and Jira. Each service lights up one by one with a small "available / search-ready" status. The center of the screen is a large task input area that is still empty or just beginning to receive a cursor. The viewer understands that the tools are connected before work starts because the services are visibly awake while the task area is quiet. This should feel like a real operator workstation, not a diagram.
+**Option 1 - Cinematic Workstation UI**
 
-**Option B - Physical Tool Console**
+A realistic desk and monitor fill the frame. On the monitor, a dark AI workbench is open. The left rail shows connected services: GitHub, Slack, Sentry, Grafana, Splunk, and Jira. Each service lights up one by one as available/search-ready while the central task input is still empty or only has a blinking cursor. The right side shows a context/search panel waiting to activate. The viewer understands that the system is prepared before the user has actually started the job. This treatment should feel like a real operator workstation, not an abstract context diagram.
 
-The camera moves across a dark operations desk where six small glass tiles or device screens are arranged around a central AI console. The tiles wake up in sequence, each showing one service name and icon-like mark. The central console remains idle with a blinking cursor. The action is physical and cinematic: indicator lights, reflections on the desk, shallow depth of field, and the feeling of a system powering on before the user has made a request.
+**Option 2 - Simulated IDE / Tool Sidebar**
 
-**Option C - Talking Head + Service Cards**
+A VS Code-like interface shows a sidebar called "Connected MCP Tools." GitHub, Slack, Sentry, Grafana, Splunk, and Jira each switch to green status. The editor area remains blank except for an empty task prompt. A small context inspector shows tool definitions beginning to register. The action is precise and controllable, but less cinematic than the workstation shot.
 
-The presenter is on screen, probably left or center. As he says the tool names, service cards fly in around him one by one, but they do not become a static ring. Each card briefly opens a tiny drawer showing "available" or "indexed" and then docks into a side rail. A small empty prompt box appears near the presenter. The contrast is that the speaker is describing readiness while the visual system shows everything connecting before the actual task appears.
+**Option 3 - Talking Head With Tool Cards**
 
-**Recommendation**
-
-Use `Veo` or image-generation for Option A as the main direction, then use HyperFrames/Remotion only for clean labels, service-status highlights, and possible cursor/text overlays. This is a strong first beat because it escapes the abstract box diagram immediately.
-
-### 002B - 55,000 Tokens of Idle Context
-
-VO: "Before the user types a task, the model is already carrying tool definitions."
-
-**Option A - Workstation Context Usage Panel**
-
-Continue from the workstation UI. The right side of the monitor opens a "Context Window Usage" panel. A small baseline bar begins to fill even though the task input is still empty. Service badges from the left rail send compact definition packets into the usage panel. The number climbs toward `55,000 tokens`. The important action is not a giant dashboard. It is a usage meter rising in an otherwise real-looking workbench before the user has typed anything useful.
-
-**Option B - Backpack / Load Metaphor**
-
-A cinematic AI assistant avatar or abstract model silhouette stands beside an empty task card. Before the task card is handed over, service manuals are loaded onto the model like heavy packs: GitHub manual, Slack manual, Sentry manual, and so on. The model visibly leans under the weight. This is less literal but instantly communicates "carrying definitions." It would work as a short Veo shot or a still with parallax and animated labels.
-
-**Option C - Simulated IDE Memory Inspector**
-
-A VS Code-like window shows an empty prompt file on the left and a memory/context inspector on the right. The inspector lists tool definition modules being loaded automatically: `github.schema`, `slack.schema`, `sentry.schema`. The cursor has not typed the user's task yet. The viewer sees a developer artifact rather than a generic token bar.
+The presenter remains on screen while service cards enter from different screen edges. Each card opens a small drawer showing "available" or "indexed," then docks into an organized side rail. A blank prompt box appears beside the presenter. The speaker anchors the explanation while the graphics show that tool readiness is happening before the task.
 
 **Recommendation**
 
-Use Option A if we stay with the cinematic workstation from `002A`. It creates continuity: same monitor, new panel, rising token usage. Avoid a full standalone dashboard unless we need a quick cutaway.
+Use **Option 1: Cinematic Workstation UI**. This is the strongest correction away from the old box-heavy style. Use HyperFrames/Remotion only for overlays, service highlights, cursor text, and labels.
 
-### 002C - Overhead Is Not Just Money
+### 002B - Idle Context Becomes Overhead
 
-VO: "That is not work. That is overhead. And overhead is not just money."
+VO coverage: "...the model is already carrying tool definitions. That is not work. That is overhead. And overhead is not just money. It is latency, confusion, and less room for the actual problem."
 
-**Option A - Four Overhead Effects Around The Same Workstation**
+**Option 1 - Same Workstation, Context Usage Rises**
 
-The workstation monitor dims slightly and four distinct effects appear around the interface: a latency stopwatch pulses red, a confusion route map tangles near the context panel, a cost counter ticks upward, and the central task input area physically shrinks. These effects should orbit or slide around the same real interface, not become four separate text cards. The viewer sees that overhead has multiple consequences.
+Continue from `002A`. The right-side context usage panel begins filling before the task is meaningful. Service badges send compact definition packets into the context panel. The number climbs toward `55,000 tokens`. The central task area visibly loses space as the context panel grows. Around the monitor, four small effects appear: a latency stopwatch, a cost counter, tangled confusion arrows, and a shrinking "actual problem" workspace. This keeps the whole segment as one coherent mini-story.
 
-**Option B - Split-Screen Human Delay**
+**Option 2 - Task Space Gets Crowded Out**
 
-The screen shows a user waiting at the keyboard while the system is busy loading definitions. The visual language is cinematic: fingers paused above keys, the monitor showing "preloading tool definitions," and small overlays showing time, cost, confusion, and reduced reasoning room. This makes overhead feel like a practical delay instead of an abstract metric.
+The user's task input is shown cleanly at first. Then a wall of schema cards slides forward and starts covering or squeezing the task area. The viewer sees the practical effect: less room for the actual problem before the model has reasoned about anything.
 
-**Option C - Animated Still: Context Spill**
+**Option 3 - Physical Load Metaphor**
 
-Use a rich generated still of an overfilled context window spilling token fragments outward. Animate the spill with masks: money/cost tags move down, latency icons sweep across, tangled arrows twist, and the reasoning space compresses. This can be visually dramatic, but it must be brief so it does not feel like another static infographic.
-
-**Recommendation**
-
-Use Option A as the direct continuation. Keep the four overhead items visual and iconographic, with minimal text. This beat should last only long enough to make the warning clear.
-
-### 002D - Context Window Crowded Before Reasoning
-
-VO: "It is latency, confusion, and less room for the actual problem."
-
-**Option A - Task Input Gets Crowded Out**
-
-The same workbench interface shows the task input area in the center. As tool-definition packets accumulate, they push inward from the right context panel until the prompt area becomes visibly cramped. The cursor tries to type, but the usable writing space narrows. The viewer understands "less room for the actual problem" without needing a separate explanatory diagram.
-
-**Option B - Before Reasoning Split**
-
-The screen divides into two layers: the front layer is the user's actual question, clean and simple; the back layer is a wall of schemas. The schema wall slides forward until it partially covers the question. A camera push reveals the question trapped behind idle context. This can be Veo or still-plus-motion.
-
-**Option C - Talking Head Reset**
-
-Cut back to the presenter for a few seconds. Around him, the service cards from `002A` compress into a crowded context meter on one side, while the words "actual problem" appear as a small squeezed card. This keeps the human presence alive while still showing the visual claim.
+An abstract AI model or assistant carries heavy manuals labeled GitHub, Slack, Sentry, Grafana, Splunk, and Jira before receiving the actual task. The model leans under the weight. This is simple and memorable, but less specific than the workstation sequence.
 
 **Recommendation**
 
-Use Option A if Segment 002 is one continuous workstation sequence. It gives Segment 002 a coherent mini-story: tools wake up, context usage rises, overhead appears, actual task space is squeezed.
+Use **Option 1**. The best version of Segment 002 is a continuous workstation story: connected services wake up, context usage rises, overhead effects appear, and the task area gets squeezed.
 
 ---
 
-## Segment 003 - Tool Search Changes the Baseline
+## Segment 003 - Tool Search Changes The Baseline
+
+Recommended subsegments: `3`
+
+This is the main exception to the 2-beat rule because the concept is naturally a three-step process.
 
 ### 003A - Step 1: Minimal Initial Load
 
-VO: "Anthropic's Tool Search changed the baseline. The workflow is simple, but important. Step one: Claude does not load every tool definition into context. It starts with a tiny search tool, while the full tool library stays outside the reasoning window."
+VO coverage: "Anthropic's Tool Search changed the baseline. The workflow is simple, but important. Step one: Claude does not load every tool definition into context. It starts with a tiny search tool, while the full tool library stays outside the reasoning window."
 
-**Option A - Same Workstation, Optimized Mode**
+**Option 1 - Optimized Workbench**
 
-The monitor resets into a cleaner version of the same AI workbench. The left service rail stays connected, but the right context panel now contains only one compact "Tool Search" capability. Behind the main interface, the full tool library appears as a blurred/off-context shelf or translucent background layer. The key motion is that the library tries to move toward the context window but is stopped by a boundary, while the small Tool Search capability passes through.
+The same AI workbench resets into optimized mode. The service rail remains available, but the active context panel contains only one compact Tool Search capability. The full tool library appears as a blurred/off-context shelf behind or beside the interface. The library tries to move toward context but stops at a boundary; only the small Tool Search capability passes through.
 
-**Option B - Library Shelf Metaphor**
+**Option 2 - Digital Library Shelf**
 
-Show a cinematic digital library where thousands of tool manuals sit on shelves outside a glass reasoning room. Only a small search lens enters the room. The lens is bright, lightweight, and purposeful. The rest of the library remains visible but outside. This is a strong Veo option because it can be visually rich without many labels.
+Thousands of tool manuals sit outside a glass reasoning room. Only a small search lens enters the room. The full library remains visible but outside. This is visually rich and good for Veo, but less literal than a real workbench.
 
-**Option C - Simulated IDE Plugin Manager**
+**Option 3 - IDE Plugin Manager**
 
-A VS Code-like "MCP Tools" sidebar shows many installed tools, but the active context inspector contains only `tool_search()`. The full schemas remain collapsed with disclosure triangles. A small boundary label says "available, not loaded." This is precise and teachable, especially if we want the viewer to understand implementation mechanics.
+A simulated IDE shows many installed tools in a sidebar, but the active context inspector contains only `tool_search()`. Tool schemas remain collapsed and off-context. This is the most precise teaching treatment.
 
 **Recommendation**
 
-Use Option A or C. Option A preserves cinematic continuity from Segment 002; Option C is clearer for teaching. If the goal is to finish the video soon, choose Option A with composited overlays.
+Use a **hybrid of Option 1 and Option 3**: a polished workbench/IDE where the Tool Search card is the only object entering active context.
 
 ### 003B - Step 2: Search Selects Relevant Tools
 
-VO: "Step two: when the task arrives, that search tool looks across the library and selects the few tools that match the job: maybe Jira tasks, Sentry errors, or AWS metrics."
+VO coverage: "Step two: when the task arrives, that search tool looks across the library and selects the few tools that match the job: maybe Jira tasks, Sentry errors, or AWS metrics."
 
-**Option A - Search Beam Across Workbench Library**
+**Option 1 - Ranked Search Results**
 
-The user task appears in the central prompt: investigate a Sentry error and create a Jira issue. The Tool Search panel emits a narrow light sweep across the off-context library shelf. Most services remain dim, but Sentry, Jira, and AWS light up and detach slightly from the background. The selected tools hover near the context boundary but do not enter yet. This is a clean action beat: task arrives, search scans, matches appear.
+The task appears: investigate a Sentry error and create a Jira issue, possibly with AWS metrics. A search panel opens and ranks candidate tools. Sentry, Jira, and AWS rise to the top and glow. Unrelated tools stay gray. This creates a reusable visual language for later retrieval reliability discussion.
 
-**Option B - Detective Lens / Spotlight**
+**Option 2 - Search Beam Across Library**
 
-A magnifying-glass beam moves across rows of tool cards in a dark space. The beam passes over irrelevant tools without effect, then locks onto Sentry, Jira, and AWS. Each selected card stamps itself with "match." This could be Veo or HyperFrames. It is less tied to a real interface but visually readable.
+The Tool Search capability emits a blue beam across the off-context tool library. It passes over irrelevant tools without effect, then locks onto Sentry, Jira, and AWS. The selected cards lift but do not enter context yet.
 
-**Option C - IDE Search Results**
+**Option 3 - Detective Lens**
 
-The right sidebar becomes a search-results panel. The query is derived from the prompt, and ranked results appear: Sentry Error Events, Jira Issue Create, AWS Metrics Read. Other tools have lower scores and remain gray. A cursor or highlight moves down the ranked list. This is best if we want to explain search quality later because the retrieval list becomes a reusable visual object.
-
-**Recommendation**
-
-Use Option A if Segment 003 is cinematic. Use Option C if we want continuity with retrieval reliability in Segments 004-005. My recommendation is Option C because ranked results naturally set up the later "search quality is reliability" argument.
-
-### 003C - Step 3: Inject Only What Matched
-
-VO: "Step three: only those relevant tool definitions are injected into the model context. The unrelated tools stay gray and outside the reasoning space. That is the shift: context is loaded on demand, not prepaid upfront."
-
-**Option A - Selected Cards Enter Context**
-
-The selected Sentry, Jira, and AWS cards slide from the ranked search result list into the active context panel. Each card becomes a compact schema chip once it enters. The rest of the library recedes and desaturates. The context panel glows green, but it remains mostly open, showing that only a few definitions entered. This is the clearest teaching shot.
-
-**Option B - Doorway / Access Control**
-
-Imagine the context window as a glass room with a guarded door. The three selected tools pass through the door; all unrelated tools wait outside behind the glass. The door closes after the selected tools enter. The metaphor says "permission to enter context" without relying on text.
-
-**Option C - Talking Head With Context Panel**
-
-The presenter returns in a side frame while the active context panel beside him receives only three chips. As he says "unrelated tools stay outside," gray cards drift behind the panel but never enter. This gives a human reset inside the three-step explanation.
+A magnifying lens moves across a field of tool cards. Correct matches stamp themselves as "match." This is visually intuitive but less tied to the actual software mechanism.
 
 **Recommendation**
 
-Use Option A. It is direct, concrete, and production-friendly. The motion must be visible: selected cards actually travel into the context panel.
+Use **Option 1: Ranked Search Results**. It sets up Segment `004D` and `005D`, where search quality becomes reliability.
 
-### 003D - 77K Down to 8.7K
+### 003C - Step 3: Inject Matches And Show Reduction
 
-VO: "In Anthropic's own example, consumption moves from roughly seventy-seven thousand tokens to about eight point seven thousand. That is a serious improvement."
+VO coverage: "Step three: only those relevant tool definitions are injected into the model context... context is loaded on demand, not prepaid upfront. In Anthropic's own example, consumption moves from roughly seventy-seven thousand tokens to about eight point seven thousand. That is a serious improvement."
 
-**Option A - Metric Compression On Same Interface**
+**Option 1 - Selected Cards Enter Context, Then Metric Compresses**
 
-The optimized workbench holds on screen. A red ghost version of the old path appears briefly on the left with `77,000 tokens`, then compresses into the green optimized path on the right showing `8,700 tokens`. The numbers should be large, but the interface remains visible behind them so the viewer knows what caused the reduction.
+The selected Sentry, Jira, and AWS cards slide from the ranked results into the active context panel. Each becomes a compact schema chip. Unrelated tools recede and desaturate. Then a red ghost path labeled `77,000 tokens` compresses into a green `8,700 tokens` packet. The viewer sees both the mechanism and the payoff.
 
-**Option B - Physical Scale Collapse**
+**Option 2 - Physical Compression Gate**
 
-A massive red stack of schema cards labeled `77K` collapses through a compression gate into a small green packet labeled `8.7K`. The selected tools remain visible as the reason for the smaller packet. This is a strong animated metaphor and could be a short Veo shot or HyperFrames/Remotion scene.
+A massive red stack of upfront schemas labeled `77K` collapses through a compression gate into a small green packet labeled `8.7K`. The selected tool cards remain visible as the reason for the smaller packet.
 
-**Option C - Source-Proof Metric Card**
+**Option 3 - Source-Proof Metric Card**
 
-Show a browser/source-card style frame with the metric highlighted, then animate the two numbers as callouts over the source. This is less visually cinematic but more credible if the audience needs evidence.
+Show a source-style metric card with the `77K -> 8.7K` claim, then animate the two numbers into the workbench. This is more credible but less dramatic.
 
 **Recommendation**
 
-Use Option A or B. For pacing, I recommend Option B as a distinct visual payoff. It gives the audience a satisfying "compression" moment before Segment 004 warns that the story is not over.
+Use **Option 1**. It combines the Step 3 action and the metric payoff without creating a fourth subsegment.
 
 ---
 
 ## Segment 004 - Search Helps, But It Does Not Fix Everything
 
+Recommended subsegments: `2`
+
 ### 004A - The Dangerous Easy Take
 
-VO: "But this is where the easy take gets dangerous. If you say, 'MCP is fixed now,' you miss the next problem."
+VO coverage: "But this is where the easy take gets dangerous. If you say, 'MCP is fixed now,' you miss the next problem."
 
-**Option A - False Victory Freeze**
+**Option 1 - Presenter Challenge**
 
-The green `8.7K` success frame freezes like a victory screen. Then a yellow caution frame slams around it and the phrase "MCP is fixed now?" appears as a temporary overclaim. The camera pulls back to reveal that the success card is only one tile in a larger problem board. This preserves continuity from Segment 003 while shifting tone from improvement to caution.
+Return to the presenter for a direct interpretive reset. The green `8.7K` improvement number floats beside him, then an amber "not solved" marker slices through it. Three unresolved icons appear behind or beside the improvement: large result payloads, multi-step workflow waste, and retrieval mistakes.
 
-**Option B - Presenter Challenge**
+**Option 2 - False Victory Freeze**
 
-Return to the presenter for a direct challenge. A large green improvement number floats beside him, then an amber "not solved" marker slices through it. Behind him, three unresolved areas appear as icons: large results, multi-step workflow waste, retrieval mistakes. This is a strong human teaching reset.
+The `8.7K` success frame freezes like a victory screen. A caution frame slams around it, and the claim "MCP is fixed now?" appears as an overreach. The camera pulls back to reveal the success card is only one tile in a larger problem board.
 
-**Option C - Courtroom / Evidence Board**
+**Option 3 - Evidence Board**
 
-The claim "MCP is fixed now" appears as a headline on an evidence board. A red marker circles "fixed" and three evidence folders slide in underneath. This turns Segment 004 into an investigation rather than another dashboard.
-
-**Recommendation**
-
-Use Option B if we want to restore human authority after the technical sequence. It also prevents the first five minutes from feeling like only UI animation.
-
-### 004B - Tool Results Can Still Be Huge
-
-VO: "Search reduces schema load. It does not make every tool result small."
-
-**Option A - Small Request, Huge Result In Real UI**
-
-Inside a believable IDE/workbench, a tiny tool schema or API request is selected. When executed, a large JSON/document result erupts from the response panel and expands beyond the visible context boundary. The visual contrast is the whole point: small schema, huge returned payload. The result should look like real structured data, not generic lines.
-
-**Option B - Package Delivery Metaphor**
-
-A small request envelope goes out to a tool and returns as a huge cargo container of data. The container is too large for the model context doorway and jams at the entrance. This is cinematic and memorable, especially as a 5-8 second Veo shot.
-
-**Option C - Source-Capture Plus Highlight**
-
-Use a real or simulated tool-result screen with a large returned payload. Zoom into the result size and add a red bracket showing "this still enters context." This is more evidence-like and less metaphorical.
+The claim "MCP is fixed now" appears on an evidence board. A red marker circles "fixed," and three evidence folders slide in underneath for the problems that remain.
 
 **Recommendation**
 
-Use Option A or B. I recommend Option A for teaching clarity; Option B would be a good quick intercut if the surrounding visuals are too interface-heavy.
+Use **Option 1**. A talking-head reset helps the viewer understand that the video is not just celebrating Tool Search.
 
-### 004C - Multi-Step Workflows Still Copy Data
+### 004B - What Still Breaks: Results, Workflows, Retrieval
 
-VO: "It does not make every multi-step workflow efficient."
+VO coverage: "Search reduces schema load. It does not make every tool result small. It does not make every multi-step workflow efficient. And it does not make tool retrieval perfectly reliable."
 
-**Option A - Conveyor Belt Through Context**
+**Option 1 - Three-Part Problem Board**
 
-A large data object travels from Tool A into the model context, then out to Tool B, then back into the model context before Tool C. Each time it crosses the context boundary, it leaves a duplicate ghost copy behind. The camera follows the object, so the viewer experiences the waste as repeated transport. This is much stronger than a static workflow diagram.
+Build one fast editorial board with three animated areas. First, a small schema request triggers a huge JSON/document payload. Second, a large data object crosses the model context boundary repeatedly and leaves ghost copies. Third, a ranked retrieval panel shows two correct tools, one missed needed tool, and one irrelevant amber result. Each problem appears as the VO names it, then the three problems lock together as the unresolved risk set.
 
-**Option B - Office Copier Metaphor**
+**Option 2 - Conveyor Belt Through Context**
 
-A meeting transcript or data packet is copied repeatedly by a machine labeled "context." Each copy stacks up on the desk while the actual work waits. This is a visual metaphor for data duplication and can be cinematic without many labels.
+Focus mainly on workflow waste. A data object travels from Tool A into context, out to Tool B, back into context, then out to Tool C, leaving duplicate copies. Retrieval risk appears as a secondary warning overlay.
 
-**Option C - Simulated Runtime Trace**
+**Option 3 - Wrong Tool Doors**
 
-A trace viewer shows each tool call as a row. The same payload hash appears in multiple rows, and a red duplicate badge lights up each time. This is very clear for technical viewers and sets up Segments 009-010.
-
-**Recommendation**
-
-Use Option A now, then reuse its logic later in Segments 009-010 with Google Drive/Salesforce specifics. It creates conceptual continuity.
-
-### 004D - Search Quality Becomes Reliability
-
-VO: "And it does not make tool retrieval perfectly reliable."
-
-**Option A - Ranked Retrieval Board**
-
-The search result list from `003B` returns, but now it behaves imperfectly. Two correct tools light green, one needed tool is missed and outlined red, and one irrelevant tool appears amber. Confidence scores flicker. The viewer sees that search itself is now part of reliability.
-
-**Option B - Wrong Tool Door**
-
-The system is in a hallway of tool doors. The search beam opens two correct doors, pauses at the needed third door without opening it, and accidentally opens one wrong door. This is cinematic and intuitive.
-
-**Option C - Presenter With Reliability Gauge**
-
-The presenter explains while a reliability gauge beside him shifts from "schema load" to "retrieval quality." Tool cards move under the gauge, and one wrong selection causes the needle to wobble.
+A hallway of tool doors shows the search system opening two correct doors, missing one needed door, and opening a wrong door. A large payload then jams at the context doorway. This is more cinematic but less source-like.
 
 **Recommendation**
 
-Use Option A because it builds directly on the search-result visual from `003B`. This is why `003B` should probably use a ranked result panel.
+Use **Option 1**. Segment 004 needs to consolidate the three caveats into one clear beat, not split them into three separate subsegments.
 
 ---
 
 ## Segment 005 - Accuracy Improves, But Retrieval Is Not Magic
 
-### 005A - Anthropic Eval Improvement Board
+Recommended subsegments: `2`
 
-VO: "The accuracy numbers are better, but not magical. Anthropic reported MCP eval improvements from forty-nine percent to seventy-four percent on Opus 4, and from seventy-nine point five to eighty-eight point one percent on Opus 4.5."
+### 005A - Benchmark Improvements
 
-**Option A - Source-Proof Benchmark Board**
+VO coverage: "The accuracy numbers are better, but not magical. Anthropic reported MCP eval improvements from forty-nine percent to seventy-four percent on Opus 4, and from seventy-nine point five to eighty-eight point one percent on Opus 4.5."
 
-Show a clean source-card board with two benchmark rows. The first row grows from `49%` to `74%`; the second grows from `79.5%` to `88.1%`. The board should feel like a clipped research/source artifact with a citation badge, not a generic chart. The key action is restrained: the bars grow, then a small "better" stamp appears, followed by "not magical" in amber.
+**Option 1 - Source-Proof Benchmark Board**
 
-**Option B - Presenter With Two Metric Cards**
+A clipped source-style board shows two benchmark rows. `Opus 4: 49% -> 74%` grows from amber to green. `Opus 4.5: 79.5% -> 88.1%` grows next. The board looks like evidence, not generic hype. After both rows settle, a small amber label appears: "better, not magical."
 
-The presenter appears on one side. Two large metric cards slide in beside him, one at a time, timed to the spoken numbers. The cards animate with controlled confidence, not hype. Then both cards move down into a larger reliability board, setting up the Arcade stress test.
+**Option 2 - Presenter With Metric Cards**
 
-**Option C - Number Transformation In Space**
+The presenter remains visible while two metric cards slide in beside him, one per model. The cards animate in time with the spoken numbers, then shrink into a larger reliability board.
 
-The numbers float as physical objects. `49` rotates and becomes `74`; `79.5` stretches to `88.1`. But the transformed numbers stop short of `100`, and a visible gap remains. This is more cinematic but may be less evidence-like.
+**Option 3 - Number Transformation**
 
-**Recommendation**
-
-Use Option A. This beat is about credibility and exact numbers; source-proof styling matters.
-
-### 005B - Arcade 4,000+ Tool Stress Test
-
-VO: "Then Arcade stress-tested more than four thousand tools and saw retrieval around sixty percent."
-
-**Option A - Tool Library Depth Field**
-
-The camera flies over a deep field of thousands of tiny tool cards. A search beam tries to locate the right tool, but the field is enormous. In the foreground, a large amber `60%` retrieval ring appears. The action should make `4,000+ tools` feel physically large. This is a strong Veo or still-plus-motion shot.
-
-**Option B - Source Capture / Article Evidence**
-
-Show the Arcade source page or a simulated source card. Cursor highlights `4,000+ tools` and `60% retrieval`. Then the source shrinks into a visual stress-test field behind the metrics. This is better if we want evidence before interpretation.
-
-**Option C - Retrieval Game Board**
-
-Cards rush past like a high-speed sorting game. The system catches some correct cards, misses others, and catches a wrong one. The score settles at `60%`. This is visually active and makes retrieval quality intuitive.
+The numbers themselves animate as physical objects: `49` transforms into `74`, and `79.5` transforms into `88.1`, but both stop short of `100`. This is more visual but less credible.
 
 **Recommendation**
 
-Use Option A with a source badge or small source inset. It gives the section energy after the more restrained benchmark board.
+Use **Option 1**. Exact numbers need source-proof treatment.
 
-### 005C - Better Economics, New Reliability Risk
+### 005B - Arcade Stress Test And Reliability Tradeoff
 
-VO: "That is the trade: better context economics,"
+VO coverage: "Then Arcade stress-tested more than four thousand tools and saw retrieval around sixty percent. That is the trade: better context economics, but now search quality is part of your reliability model."
 
-**Option A - Tradeoff Scale**
+**Option 1 - Deep Tool Library With Reliability Overlay**
 
-A clean scale appears. On the left, green token savings become lighter and cleaner; on the right, amber search reliability risk becomes heavier. The scale does not collapse; it balances. Behind the scale, the context window looks cleaner, but the retrieval board remains uncertain. This visually says "tradeoff" without too many words.
+The camera flies over a deep field of thousands of tool cards. A search beam tries to retrieve the correct card, and an amber `60%` retrieval ring appears. The field then compresses into a reliability test harness where retrieval quality becomes a scored system metric alongside permissions, latency, and output size.
 
-**Option B - Two-Lane Dashboard**
+**Option 2 - Source Badge Plus Stress Field**
 
-The left lane shows context tokens dropping; the right lane shows search uncertainty rising. The two lines cross in the middle. This is more analytical and could fit a technical audience.
+Show a source/evidence card for Arcade first, then expand it into a dense tool-library stress field. The `4,000+ tools` and `60%` metrics remain attached as source-style callouts.
 
-**Option C - Presenter Interpretation**
+**Option 3 - Presenter Tradeoff Interpretation**
 
-Return to the presenter, with a green "context economics" object in one hand/side and an amber "retrieval risk" object on the other. The overlays balance around him. This gives the audience a human interpretation point.
-
-**Recommendation**
-
-Use Option C or A. My recommendation is Option C if Segment 005 has been chart-heavy; let the presenter interpret the tradeoff.
-
-### 005D - Reliability Model Includes Retrieval
-
-VO: "but now search quality is part of your reliability model."
-
-**Option A - Reliability Checklist Adds A New Item**
-
-A reliability model board shows familiar rows: permissions, latency, output size. Then "retrieval quality" slides in as a new highlighted row and the board recalculates. The search icon becomes part of the system reliability score. This is simple but clear.
-
-**Option B - System Architecture Adds Sensor**
-
-An architecture diagram gains a new sensor module labeled retrieval quality. It connects to monitoring, evaluation, and fallback paths. The visual point is that search is no longer just a convenience; it must be monitored.
-
-**Option C - Red-Team Evaluation Screen**
-
-Show a test harness running retrieval cases. Correct, missed, and irrelevant results are scored. The final score feeds into a larger reliability panel. This directly prepares the viewer for an engineering mindset.
+Return to the presenter. A green "context economics" object and an amber "retrieval risk" object balance on screen. The presenter explains that the optimization shifts risk into search quality.
 
 **Recommendation**
 
-Use Option C if we want to keep it concrete and technical. It is more interesting than another checklist and gives us a reusable pattern for later test-bench scenes.
+Use **Option 2** if a source card is available. Otherwise use **Option 1**. This beat should connect the `60%` number directly to reliability.
 
 ---
 
 ## Segment 006 - Layered Architecture, Not One Universal Tool
 
-### 006A - Four Layers, Four Jobs
+Recommended subsegments: `2`
 
-VO: "So here is our position. MCP is not dead. Skills are not a replacement for MCP. And CLI scripts are not the universal answer."
+### 006A - Thesis Reset: Not One Universal Answer
 
-**Option A - Talking Head Thesis Reset**
+VO coverage: "So here is our position. MCP is not dead. Skills are not a replacement for MCP. And CLI scripts are not the universal answer. These are layers."
 
-Return to the presenter full or side-screen. As each overclaim is spoken, a phrase appears and is crossed out: "MCP is dead," "Skills replace MCP," "CLI solves everything." The crossed-out claims slide away and reveal the thesis: "Different layers, different jobs." This is a human-led reset before the architecture explanation.
+**Option 1 - Talking Head Thesis Reset**
 
-**Option B - Tool Debate Table**
+Return to the presenter full or side-screen. Three overclaims appear and are crossed out: "MCP is dead," "Skills replace MCP," and "CLI solves everything." The crossed-out claims slide away and reveal the principle: "Different layers, different jobs."
 
-MCP, Skills, CLI, and Code Execution appear as distinct objects around a table or control room. The camera moves from one to another, showing that none is the whole answer. This could be a Veo shot with stylized system icons.
+**Option 2 - Tool Debate Table**
 
-**Option C - Architecture Stack Appears**
+MCP, Skills, CLI, and Code Execution appear as distinct artifacts around a control table. The camera moves from one to another, making clear that none is the whole answer.
 
-A clean four-layer stack builds on screen immediately, but it is introduced as a correction to overclaims rather than a generic diagram. Each layer is physically distinct in material/color, not just a colored rectangle.
+**Option 3 - Layer Stack Begins**
 
-**Recommendation**
-
-Use Option A. This is a natural place for Dr. Byrd/avatar presence because it states the position of the video.
-
-### 006B - MCP Is Not Dead
-
-VO: "These are layers."
-
-**Option A - Layers Assemble Around Presenter**
-
-The presenter remains visible while four horizontal layers slide in beside him. They do not just appear as boxes; each layer has a different artifact: MCP as connected external systems, Skills as a procedure card, CLI as a terminal strip, Code Execution as a sandbox/runtime. The screen action is assembly into a stack.
-
-**Option B - Building Cross-Section**
-
-Show a cross-section of a technical building or machine. The layers are floors: external systems, procedure knowledge, deterministic operations, and execution runtime. A camera moves upward through them. This is cinematic but may be less direct.
-
-**Option C - Desk Objects**
-
-On a real desk, four labeled objects slide into place: connector hub, procedure notebook, terminal keyboard, sandbox container. The physical metaphor helps escape the UI-box habit.
+A four-layer stack starts assembling immediately, but each layer is a concrete artifact, not just a rectangle: connector hub, procedure notebook, terminal strip, sandbox runtime.
 
 **Recommendation**
 
-Use Option A. It combines human explanation with concrete layer artifacts.
+Use **Option 1**, then transition into the layer artifacts. This is a natural place for a human/direct-address reset.
 
-### 006C - Forcing One Layer to Do Everything
+### 006B - Four Layers, Four Jobs
 
-VO: "MCP connects agents to external systems. Skills teach the agent procedures. CLI scripts do deterministic local work. Code execution compresses multi-step workflows."
+VO coverage: "MCP connects agents to external systems. Skills teach the agent procedures. CLI scripts do deterministic local work. Code execution compresses multi-step workflows. The mistake is forcing one layer to do all four jobs."
 
-**Option A - Function Assignments Light Up**
+**Option 1 - Jobs Route To Matching Layers**
 
-The four layers from `006B` remain on screen. As each function is spoken, a specific animated job travels to the matching layer: external app cable to MCP, procedure document to Skills, command line task to CLI, large data workflow to Code Execution. Each match locks in with a different color. This is active, precise, and teachable.
+Four layers remain on screen. As each job is spoken, a specific animated object travels to the matching layer: external app cable to MCP, procedure document to Skills, terminal command to CLI, and large intermediate-data workflow to Code Execution. Then all four are briefly pulled into one overloaded layer, which shakes and fails, before returning to the proper layered structure.
 
-**Option B - Overloaded Layer Splits Apart**
+**Option 2 - Overloaded Layer Splits Apart**
 
-A single overloaded layer tries to carry all four tasks and visibly strains. Then it splits into four specialized layers, and each task moves to its proper place. This is more dramatic and may be better if we want a stronger visual story.
+A single overloaded layer tries to carry all four tasks and visibly strains. It then splits into four specialized layers, and each task moves to the correct place. This is more dramatic and compact.
 
-**Option C - Control Panel Routing**
+**Option 3 - Decision Matrix Hold Frame**
 
-A routing console shows four job requests. A selector routes each request to the proper layer. Wrong routes briefly flash red, then correct routes light green. This is useful if the later video will make layer-choice decisions.
-
-**Recommendation**
-
-Use Option A if continuing from `006B`; use Option B if we need more drama. My recommendation is Option A for clarity.
-
-### 006D - Layer Selection Decision Surface
-
-VO: "The mistake is forcing one layer to do all four jobs."
-
-**Option A - Wrong One-Layer Attempt**
-
-The four correctly assigned jobs are pulled back into one single layer. The layer overloads, shakes, and starts dropping tasks. Then the system returns to the four-layer stack. The viewer sees the mistake and the correction in one visual beat.
-
-**Option B - Decision Matrix**
-
-A practical decision table appears: need external access -> MCP; need procedure -> Skill; need local deterministic work -> CLI; need intermediate data compression -> Code Execution. A cursor/highlight moves down the rows. This is less cinematic but very useful as a teaching artifact.
-
-**Option C - Presenter Final Rule**
-
-The presenter states the rule while the four-layer stack locks into place beside him. The final phrase "right layer for the job" appears as a clean lower-third. This gives the segment a calm landing.
+A practical matrix appears after the animation: external access -> MCP; procedure -> Skill; deterministic local operation -> CLI; large intermediate data -> Code Execution. This is less cinematic but valuable as a final rule.
 
 **Recommendation**
 
-Use Option A followed by a brief Option B-style matrix as the hold frame. The mistake needs motion; the decision rule needs readability.
+Use **Option 1**, ending with a brief **Option 3** hold frame. The mistake needs motion; the rule needs readability.
 
 ---
 
-## Segment 007 - Cloudflare Code Mode: Search and Execute
+## Segment 007 - Cloudflare Code Mode: Search And Execute
+
+Recommended subsegments: `2`
 
 ### 007A - Entire API Through Two Tools
 
-VO: "Cloudflare showed the sharpest version of this idea. They took the entire Cloudflare API and exposed it through two tools: search and execute."
+VO coverage: "Cloudflare showed the sharpest version of this idea. They took the entire Cloudflare API and exposed it through two tools: search and execute."
 
-**Option A - Source Capture With Overlay**
+**Option 1 - Source Capture With Callouts**
 
-Use the Cloudflare source page if available. Start on the real article or documentation page, then overlay two large callouts: `search` and `execute`. The full API catalog appears as a blurred or compressed background layer behind those two tools. This gives credibility first, then interpretation.
+Use the Cloudflare source page or a credible source-style browser frame. Overlay two large callouts: `search` and `execute`. Behind those two tools, the full API catalog appears as a compressed or blurred layer. The viewer sees credibility first, then the abstraction.
 
-**Option B - API Catalog Compression**
+**Option 2 - API Catalog Compression**
 
-A massive grid of endpoint cards fills the screen. The grid physically compresses into two glowing tool cards labeled `search` and `execute`. The endpoint grid remains behind them, visibly available but not loaded into context. This is a strong generated or HyperFrames shot.
+A massive grid of endpoint cards fills the screen and compresses into two exposed tool cards labeled `search` and `execute`. The endpoint grid remains outside context, still available but not loaded.
 
-**Option C - Developer Workbench**
+**Option 3 - Developer Workbench**
 
-Show a developer-style interface where a Cloudflare API tree has thousands of endpoints in a left panel, but the active agent tool list contains only two exposed tools. The cursor hovers over `search()` and `execute()`. This is precise and production-controllable.
-
-**Recommendation**
-
-Use Option A if we have the source recording. Otherwise use Option C with a source badge. Since this is a named public example, credibility matters.
-
-### 007B - Agent Writes Code Against Typed API
-
-VO: "Instead of loading thousands of endpoint schemas, the agent writes code against a typed API."
-
-**Option A - Code Editor Autocomplete**
-
-Show a TypeScript-like editor where the agent writes a short plan against a typed API. Autocomplete opens with Cloudflare methods. The thousands of endpoint schemas are represented as off-context documentation, while the code editor only receives typed method access. The visual action is code appearing, autocomplete selecting a method, and a typed result shape appearing.
-
-**Option B - Code Forms From Intent**
-
-The user's intent appears as a natural-language task card, then transforms into a compact code block. Endpoint manuals remain outside the reasoning window. This is more cinematic and less tied to a real editor.
-
-**Option C - Presenter Explains Over Editor**
-
-The presenter is a small side frame while the code editor dominates. As he says "typed API," the editor highlights type signatures and the schema pile stays grayed out in the background.
+A developer interface shows thousands of endpoints in an API tree, while the active agent tool list contains only `search()` and `execute()`. The cursor hovers over the two exposed tools.
 
 **Recommendation**
 
-Use Option A. It is the clearest way to show "writes code against typed API" without abstracting too much.
+Use **Option 1** if we have the source recording. Otherwise use **Option 3** with a source badge.
 
-### 007C - Sandbox Execution Boundary
+### 007B - Typed API, Sandbox, Extreme Token Reduction
 
-VO: "And runs that code in a sandbox."
+VO coverage: "Instead of loading thousands of endpoint schemas, the agent writes code against a typed API and runs that code in a sandbox. Their claim is extreme: about one thousand input tokens instead of one point one seven million."
 
-**Option A - Isolated Runtime Box**
+**Option 1 - Code Editor To Sandbox To Metric**
 
-The code block moves from the editor into a glowing sandbox/runtime box. The model context remains outside with only a small request and final result path. The sandbox boundary is visually strong: secure frame, contained logs, no transcript/schema spill into context. The code runs inside the boundary with small terminal output.
+A TypeScript-like editor writes code against a typed Cloudflare API. Autocomplete opens with method signatures. The code block moves into a glowing sandbox/runtime boundary and runs. Then the source metric appears: `1,170,000 input tokens` collapses into `1,000 input tokens`.
 
-**Option B - Lab Containment Metaphor**
+**Option 2 - Source Metric First, Then Code Mode**
 
-Generated code appears as a small machine or process inside a transparent containment chamber. Outside the chamber, the model watches but does not ingest every intermediate step. This is more cinematic and helps explain sandboxing to non-developers.
+Highlight the Cloudflare metric on the source page first, then pull the numbers into a dramatic comparison. Behind the numbers, a code editor and sandbox show why the reduction happens.
 
-**Option C - Terminal Execution**
+**Option 3 - Data Flood Diverted**
 
-A terminal panel runs a short command or script. The output stays inside the terminal. A small status card returns to the model. This is simple and production-friendly.
-
-**Recommendation**
-
-Use Option A. It connects code mode to the later code-execution pattern in Segment 010.
-
-### 007D - 1.17 Million to 1,000 Tokens
-
-VO: "Their claim is extreme: about one thousand input tokens instead of one point one seven million."
-
-**Option A - Extreme Scale Comparison**
-
-The screen shows a huge red `1,170,000` token tower that extends beyond the top of the frame. It compresses or collapses to a tiny green `1,000` token block. The two Cloudflare tool cards remain visible as the mechanism that enabled the compression. The scale difference should feel almost absurd.
-
-**Option B - Source Metric Highlight**
-
-Return briefly to the source page and highlight the metric claim. Then pull the highlighted number out into a motion graphic comparison. This preserves credibility while still giving visual impact.
-
-**Option C - Data Flood Avoided**
-
-A flood of endpoint schemas rushes toward context but is diverted into search/execute. Only a tiny packet reaches the model. The token numbers appear as labels on the flood versus packet.
+A flood of endpoint schemas rushes toward context but is diverted by `search` and `execute`. Only a tiny code-mode packet reaches the model. The numbers appear as labels on the flood versus packet.
 
 **Recommendation**
 
-Use Option B into Option A. Source first, then dramatic metric. This avoids the number feeling unsupported.
+Use **Option 1**, with a source-style metric badge. This keeps the mechanism and payoff in one production beat.
 
 ---
 
-## Segment 008 - The New Mental Model: Discover, Inspect, Execute, Return
+## Segment 008 - The New Mental Model
 
-### 008A - Do Not Pour the Whole API Into Context
+Recommended subsegments: `2`
 
-VO: "That number matters because it changes the mental model. The agent does not need every API endpoint poured into its context window."
+### 008A - Do Not Pour The Whole API Into Context
 
-**Option A - API Manual Pour Redirected**
+VO coverage: "That number matters because it changes the mental model. The agent does not need every API endpoint poured into its context window."
 
-A massive API manual made of endpoint pages pours toward the model context, but a clean redirect barrier sends most of it into an external searchable library. The context remains mostly empty except for reasoning notes. This is a visual metaphor, but it directly matches the wording.
+**Option 1 - API Manual Pour Redirected**
 
-**Option B - Workbench Before/After**
+A massive API manual made of endpoint pages pours toward the model context. A clean redirect barrier sends most of it into an external searchable library. The context remains mostly empty except for reasoning notes. This directly visualizes the rejected mental model.
 
-Show the old mental model on the left: endpoint schemas dumped into context. Show the new model on the right: API docs stay external, context holds only reasoning and small tool handles. A camera pans from the cluttered old side to the clean new side.
+**Option 2 - Before/After Workbench**
 
-**Option C - Presenter With Two Models**
+Left side: old model, endpoint schemas dumped into context. Right side: new model, API docs stay external and context holds only reasoning plus small tool handles. A camera move shifts from cluttered to clean.
 
-The presenter stands between two floating models: "pour everything in" and "keep capability outside." He gestures or the camera focus shifts to the better model as the VO explains the shift.
+**Option 3 - Presenter Between Two Models**
+
+The presenter stands between two floating models: "pour everything in" and "keep capability outside." The better model becomes highlighted as the VO explains the shift.
 
 **Recommendation**
 
-Use Option A for visual energy. It is memorable and tees up the four-step workflow.
+Use **Option 1**. It is memorable and transitions naturally to the four-step workflow.
 
 ### 008B - Discover, Inspect, Execute, Return
 
-VO: "It needs a way to discover what exists, inspect what matters, execute the operation, and return the result."
+VO coverage: "It needs a way to discover what exists, inspect what matters, execute the operation, and return the result. The context window should carry reasoning, not every possible instruction manual."
 
-**Option A - Four-Step Action Chain**
+**Option 1 - Four-Step Action Chain**
 
-Create a horizontal chain where each verb is a different action, not just a label: Discover uses a search lens over the external library; Inspect opens a small relevant doc snippet; Execute moves code into a sandbox; Return sends a compact result card back to context. Each step lights up in sequence. The context window remains small and clean throughout.
+Create a horizontal chain where each verb is an actual action: Discover uses a search lens over the external library; Inspect opens a relevant documentation snippet; Execute sends code into a sandbox; Return sends a compact result card back to context. The context window remains small and clean throughout.
 
-**Option B - Circular Workflow**
+**Option 2 - Clean Reasoning Context With Rich External Capability**
 
-The four verbs form a loop around a clean context window. A bright particle travels from Discover to Inspect to Execute to Return, leaving the model context mostly untouched. This is elegant but could become too abstract if not anchored by real artifacts.
+A small bright model context contains only goal, constraints, selected tools, and decision notes. Around it sit larger external zones: docs, tool registry, execution sandbox, result store. The camera pulls back to show that the system is powerful because everything does not live inside context.
 
-**Option C - IDE Walkthrough**
+**Option 3 - IDE Walkthrough**
 
-In a simulated IDE, the cursor runs through the four steps: search registry, open docs, run sandbox, receive result. This is concrete and teachable but less cinematic.
-
-**Recommendation**
-
-Use Option A. It gives the viewer a clear mental model and can become a reusable sequence for future videos.
-
-### 008C - Reasoning Belongs in Context
-
-VO: "The context window should carry reasoning,"
-
-**Option A - Clean Reasoning Desk**
-
-The context window is shown as a clean workspace containing only a few reasoning notes: goal, constraints, selected tools, decision. Large manuals and tool catalogs sit outside on shelves. The camera pushes into the spacious reasoning area, making "reasoning belongs here" feel calm and obvious.
-
-**Option B - Brain / Workbench Metaphor**
-
-A stylized thinking workspace has only the relevant cards on the table. All manuals are in cabinets behind it. The visual says the mind works better with a clear desk.
-
-**Option C - Presenter With Reasoning Notes**
-
-The presenter appears beside a clean context board. As he says "reasoning," only reasoning notes appear, not schemas. This is useful if the video needs a human pause after many systems visuals.
+A simulated IDE runs through search registry, open docs, execute sandbox, receive result. This is concrete and controllable.
 
 **Recommendation**
 
-Use Option A. Keep it quiet and spacious as contrast against the API flood.
-
-### 008D - Minimal Context, Rich External Capability
-
-VO: "not every possible instruction manual."
-
-**Option A - Small Center, Rich Surroundings**
-
-A small bright model context sits in the center, connected to large external capability zones: docs, tool registry, execution sandbox, result store. The surrounding capability is rich, but the context itself stays compact. The camera slowly pulls back to reveal that the system is powerful precisely because everything does not live inside the model.
-
-**Option B - City Infrastructure Metaphor**
-
-The model context is a control room in the middle of a city. Around it are libraries, factories, data stores, and service hubs. The control room does not contain the whole city; it coordinates access. This could be a strong Veo shot if done cleanly.
-
-**Option C - Architecture Diagram**
-
-Use a restrained system architecture diagram with external layers and a small context core. This is production-friendly but risks returning to generic box language unless visually excellent.
-
-**Recommendation**
-
-Use Option A. It has enough structure for teaching but avoids making the context window look like a dumping ground.
+Use **Option 1**, ending on the small-context/rich-capability frame from Option 2.
 
 ---
 
 ## Segment 009 - Naive Tool Calls Duplicate The Transcript
 
-### 009A - Google Drive To Salesforce Task
+Recommended subsegments: `2`
 
-VO: "Anthropic published the same pattern from another angle. Their example is simple: download a meeting transcript from Google Drive and attach it to a Salesforce lead."
+### 009A - Google Drive To Salesforce Example
 
-**Option A - Source Capture First**
+VO coverage: "Anthropic published the same pattern from another angle. Their example is simple: download a meeting transcript from Google Drive and attach it to a Salesforce lead."
 
-Use the Anthropic source page or article capture showing the Google Drive to Salesforce example. The cursor or highlight marks the sentence. Then the source page becomes a small evidence card while the visual workflow expands around it. This establishes that the example is not invented.
+**Option 1 - Source Capture First**
 
-**Option B - Enterprise Workflow Desk**
+Use the Anthropic source page or source-style article frame showing the Google Drive to Salesforce example. The cursor or highlight marks the sentence. The source page then shrinks into an evidence card while the Drive -> model -> Salesforce workflow expands around it.
 
-Show a realistic business workflow interface on a monitor: Google Drive document on the left, Salesforce lead record on the right, AI assistant/workbench in the middle. The transcript file is visibly named "Meeting transcript." This is clear and grounded.
+**Option 2 - Enterprise Workflow Workbench**
 
-**Option C - Talking Head With Workflow Tiles**
+A realistic business workflow interface shows a Google Drive document tile labeled "Meeting transcript" on the left, a Salesforce lead record on the right, and an AI assistant context window in the middle. The task label appears at the top: attach transcript to Salesforce lead.
 
-The presenter explains while Google Drive and Salesforce tiles appear beside him. A transcript document card moves from Drive toward Salesforce, pausing at the model context in the middle.
+**Option 3 - Talking Head With Workflow Tiles**
 
-**Recommendation**
-
-Use Option A if we have the source recording. Otherwise use Option B. Segment 009 benefits from source credibility because it references Anthropic directly.
-
-### 009B - Transcript Enters Context When Read
-
-VO: "In the naive tool-call path, the transcript enters the model context when it is read,"
-
-**Option A - Document Flow Into Context**
-
-The Google Drive transcript opens and flows into the model context as many stacked pages. A token meter rises sharply as the pages enter. The Salesforce record is visible but not active yet. The visual should show the first context crossing as a real boundary event.
-
-**Option B - Text Flood In Chat Window**
-
-A chat/context window receives the transcript as a huge block of text. The scroll bar shrinks, the context meter rises, and the actual instruction is pushed upward. This is very understandable to viewers who have seen long pasted text in AI tools.
-
-**Option C - Physical Paper Stack**
-
-A thick transcript document is carried through a glowing doorway labeled context. Each page crossing adds to a growing stack. This is more cinematic and may pair well with Veo.
+The presenter explains while Google Drive and Salesforce tiles appear beside him. A transcript card moves from Drive toward Salesforce and pauses at the model context.
 
 **Recommendation**
 
-Use Option A. It keeps the Google Drive -> model path explicit and prepares the second crossing.
+Use **Option 1** if the source recording is available. Otherwise use **Option 2**. This named example benefits from credibility.
 
-### 009C - Transcript Enters Context Again When Passed
+### 009B - Transcript Crosses Context Twice
 
-VO: "then enters again when the model passes it to Salesforce."
+VO coverage: "In the naive tool-call path, the transcript enters the model context when it is read, then enters again when the model passes it to Salesforce. The same transcript crosses the model context boundary twice..."
 
-**Option A - Same Transcript Duplicates**
+**Option 1 - Two Context Crossings Map**
 
-The same transcript pages already inside context are duplicated before being sent to Salesforce. The duplicate stack is visually identical and marked "same data, second pass." The token meter jumps again. The viewer should feel the waste immediately because the object is the same object crossing again.
+Show Google Drive on the left, model context in the center, Salesforce on the right. The transcript flows from Drive into context and gets stamped `context hit #1`. Then the same transcript duplicates and flows from context to Salesforce with `context hit #2`. A token meter jumps both times. This is the clearest explanation.
 
-**Option B - Copy Machine Metaphor**
+**Option 2 - Transcript Flood In Chat Window**
 
-The transcript is copied by a model-context machine before being delivered to Salesforce. Two identical stacks appear, and the second stack is stamped with another token cost. This is memorable and less UI-heavy.
+The transcript enters a chat/context window as a huge block of text, then is copied again when sent to Salesforce. The scroll bar shrinks and the context meter rises twice.
 
-**Option C - Trace Viewer**
+**Option 3 - Toll Booth Metaphor**
 
-A workflow trace shows `drive.download()` returning transcript into context, then `salesforce.attach()` receiving the same transcript from context. The same payload hash is highlighted twice. This is for a more technical audience.
-
-**Recommendation**
-
-Use Option A. It is concrete and easy to compare with `009B`.
-
-### 009D - Naive Path Has Two Context Crossings
-
-VO: "The same transcript crosses the model context boundary twice: once from Google Drive into the model, and once from the model into Salesforce."
-
-**Option A - Boundary Crossing Map**
-
-Show the entire naive path as a two-crossing map. Google Drive is left, model context is center, Salesforce is right. The transcript crosses into context with a red stamp `context hit #1`, then crosses out with `context hit #2`. The path animates twice so the viewer sees both crossings.
-
-**Option B - Toll Booth Metaphor**
-
-The transcript travels down a road through a context toll booth twice. Each crossing charges tokens. This is easy to understand but less technical.
-
-**Option C - Side-by-Side Freeze**
-
-Freeze the two moments from `009B` and `009C` side by side. Red circles mark the repeated boundary crossing. This is fast and good for a summary beat.
+The transcript travels through a glowing context toll booth twice, paying token cost each time. This is simple and memorable but less technical.
 
 **Recommendation**
 
-Use Option A. It becomes the "before" lane for the optimized comparison in Segment 010.
+Use **Option 1**. It becomes the "before" lane for Segment `010`.
 
 ---
 
 ## Segment 010 - Code Execution Keeps Intermediate Data Out
 
-### 010A - Thinking vs Transporting
+Recommended subsegments: `2`, with an optional third only if the timing needs a separate final comparison.
 
-VO: "That is the waste. The model is not thinking about the transcript twice."
+### 010A - Thinking Versus Transporting
 
-**Option A - Thinking Panel vs Transport Path**
+VO coverage: "That is the waste. The model is not thinking about the transcript twice. It is transporting the transcript twice. Anthropic estimates a two-hour sales meeting could add fifty thousand intermediate-result tokens."
 
-Split the screen. Left side shows a small reasoning panel with a few notes about what needs to happen. Right side shows the transcript physically traveling through context twice. The left side is calm and compact; the right side is busy and wasteful. The message is that thinking is small, transporting is large.
+**Option 1 - Thinking Panel Versus Transport Path**
 
-**Option B - Presenter Interpretation**
+Split the screen. Left side shows a compact reasoning panel with a few notes: goal, source, destination, rule. Right side shows the transcript traveling through context twice, producing duplicate token stacks. A counter climbs to `+50,000 intermediate-result tokens`. The message is that the reasoning is small; the transport is large.
 
-Return to the presenter with two visual objects beside him: a small "thinking" note and a massive transcript cargo path. As he says "not thinking twice," the thinking note stays small while the transport path flashes red.
+**Option 2 - Transcript Timeline Cost Counter**
 
-**Option C - Runtime Trace**
+A two-hour meeting transcript appears as a long timeline. The transcript crosses context twice, and an amber counter climbs to `+50,000`. This is more focused on the numeric claim.
 
-A trace viewer highlights which steps require reasoning and which steps just move data. The transport rows are much larger than the reasoning rows. This is analytical but clear.
+**Option 3 - Presenter Interpretation**
 
-**Recommendation**
-
-Use Option A. It is a strong transition from the naive path into the code-execution fix.
-
-### 010B - 50,000 Intermediate-Result Tokens
-
-VO: "It is transporting the transcript twice. Anthropic estimates a two-hour sales meeting could add fifty thousand intermediate-result tokens."
-
-**Option A - Cost Counter From Transcript Timeline**
-
-A two-hour meeting transcript appears as a long timeline. The transcript travels through context twice, and an amber counter climbs to `+50,000 intermediate-result tokens`. The number should be large and central, but the transcript timeline explains what caused it.
-
-**Option B - Invoice / Cost Report**
-
-Show an engineering cost report or benchmark sheet. Line item: "intermediate-result tokens: +50,000." Behind it, ghosted transcript pages repeat. This is credible and sober.
-
-**Option C - Physical Token Stack**
-
-The transcript duplication produces a growing stack of token blocks until it reaches `50,000`. This is more visual but could feel generic if not tied to the meeting transcript.
+The presenter returns with a small "thinking" note and a massive transcript cargo path beside him. The thinking note stays small while the transport path flashes red.
 
 **Recommendation**
 
-Use Option A. It connects the number to the story object: a two-hour transcript.
+Use **Option 1**. It combines the conceptual distinction and the `+50K` metric in one beat.
 
-### 010C - Transcript Stays As A Variable
+### 010B - Runtime Keeps Transcript, Only Status Returns
 
-VO: "With code execution, the transcript stays inside the execution environment as a variable,"
+VO coverage: "With code execution, the transcript stays inside the execution environment as a variable, and only the final status comes back to the model."
 
-**Option A - Sandbox Code Execution Scene**
+**Option 1 - Sandbox Runtime Variable**
 
-Show a sandbox runtime containing code such as `transcript = drive.download(fileId)` and `salesforce.attach(leadId, transcript)`. The transcript appears as a contained variable object inside the sandbox. The model context sits outside with only the plan and a small handle. The transcript never crosses into the model context.
+A sandbox runtime contains code such as `transcript = drive.download(fileId)` and `salesforce.attach(leadId, transcript)`. The transcript appears as a contained variable object inside the sandbox. The model context sits outside with only the plan and a small handle. When the sandbox finishes, it sends one green result card back: "Done: transcript attached."
 
-**Option B - Containment Chamber**
+**Option 2 - Containment Chamber**
 
-The transcript file enters a secure execution chamber and stays there while the operation runs. The model watches from outside and receives only status signals. This is cinematic and explains the concept without code.
+The transcript enters a secure execution chamber and stays there while the operation runs. The model watches from outside and receives only a tiny receipt. This explains the concept without code.
 
-**Option C - IDE Debugger**
+**Option 3 - Terminal Success Output**
 
-A debugger view shows the variable `transcript` in local runtime memory. The model context panel remains clean. This is precise for technical viewers.
-
-**Recommendation**
-
-Use Option A. It is the clearest bridge between "code execution" and "keeps intermediate data out."
-
-### 010D - Only Final Status Comes Back
-
-VO: "and only the final status comes back to the model."
-
-**Option A - Green Status Card Return**
-
-The sandbox finishes the Drive-to-Salesforce operation. Instead of sending the transcript back, it sends one small green result card to the model: "Done: transcript attached." The context meter remains low. This is the payoff shot.
-
-**Option B - Minimal Receipt**
-
-The full transcript stays sealed in the sandbox, and the model receives only a tiny receipt. The receipt is physically small compared with the transcript stack. This is a good visual metaphor.
-
-**Option C - Terminal Success Output**
-
-A terminal returns `success: transcript attached` and the model context receives only that line. This is simple and production-friendly.
+A terminal runs the workflow and returns only `success: transcript attached`. The context receives that line and nothing else.
 
 **Recommendation**
 
-Use Option A. It gives a clean, satisfying optimized outcome.
+Use **Option 1**. It is the clearest bridge between code execution and keeping intermediate data out of context.
 
-### 010E - Naive vs Code Execution Side By Side
+### 010C - Optional Final Comparison: Naive Versus Code Execution
 
-VO: "Naive tool calls transport the transcript through context twice. Code execution keeps the transcript inside the runtime and sends only the final status back."
+Use only if timing supports a third beat.
 
-**Option A - Two-Lane Final Comparison**
+VO coverage: "Naive tool calls transport the transcript through context twice. Code execution keeps the transcript inside the runtime and sends only the final status back."
 
-Show the naive path on the left and the code execution path on the right using identical Drive and Salesforce endpoints. On the left, the transcript crosses context twice and the meter turns red. On the right, the transcript stays in the sandbox and only a green final status returns. The viewer can compare the data paths directly.
+**Option 1 - Two-Lane Final Comparison**
 
-**Option B - Before/After Swipe**
+Show identical Drive and Salesforce endpoints on both sides. Left lane: naive path, transcript crosses context twice and the meter turns red. Right lane: code execution path, transcript stays inside the sandbox and only a green final status returns. The two lanes make the difference impossible to miss.
 
-Start with the naive path full screen. A vertical wipe moves across the frame and replaces it with the code execution path. The transcript route shortens and the context meter drops. This is visually cleaner if there is not enough time for two lanes.
+**Option 2 - Before/After Swipe**
 
-**Option C - Presenter Closing Rule**
-
-The presenter appears with the side-by-side comparison behind him. He states the takeaway while the optimized path glows. This is useful if Segment 010 is the end of this first section.
+Start with the naive path full screen. A vertical wipe replaces it with the optimized code-execution path. The transcript route shortens and the context meter drops.
 
 **Recommendation**
 
-Use Option A as the main visual, with a brief Option C-style presenter return only if the edit needs a human transition into Segment 011.
+Use **Option 1** only if Segment 010 needs a strong section-ending summary. Otherwise fold this comparison into the ending of `010B`.
 
 ---
 
-## Production Recommendation Summary
+## Revised Production Summary
 
-| Subsegment | Recommended Treatment | Primary Tool |
-| --- | --- | --- |
-| 002A | Cinematic workstation UI with connected services lighting up | Veo + overlays |
-| 002B | Same workstation, context usage panel rises before task | Veo/still + HyperFrames overlays |
-| 002C | Four overhead effects around the same interface | HyperFrames/Remotion overlays |
-| 002D | Task input gets crowded out by idle context | Veo/still + motion |
-| 003A | Optimized workbench with only Tool Search loaded | Simulated UI / Veo hybrid |
-| 003B | Ranked search-result panel selects Sentry/Jira/AWS | Simulated UI |
-| 003C | Selected cards enter context; others stay outside | HyperFrames/Remotion |
-| 003D | 77K stack compresses to 8.7K packet | Veo or HyperFrames |
-| 004A | Presenter challenge with overclaim crossed out | Talking Head + overlays |
-| 004B | Small schema triggers huge result payload | Simulated UI |
-| 004C | Data object crosses context repeatedly with ghost copies | HyperFrames/Remotion |
-| 004D | Ranked retrieval board shows correct/missed/wrong results | Simulated UI |
-| 005A | Source-proof benchmark board | Still + Motion / HyperFrames |
-| 005B | Deep tool-library stress field with 60% metric | Veo/still + overlays |
-| 005C | Presenter interprets tradeoff | Talking Head + overlays |
-| 005D | Retrieval test harness feeds reliability score | Simulated UI |
-| 006A | Talking-head thesis reset | HeyGen/Talking Head + overlays |
-| 006B | Layers assemble as concrete artifacts | HyperFrames/Remotion |
-| 006C | Jobs route to matching layers | HyperFrames/Remotion |
-| 006D | One-layer overload, then decision matrix | HyperFrames/Remotion |
-| 007A | Cloudflare source capture with search/execute callouts | Source Capture + overlays |
-| 007B | Typed API code editor/autocomplete | Simulated IDE |
-| 007C | Code moves into sandbox boundary | Simulated UI / HyperFrames |
-| 007D | Source metric into extreme scale comparison | Source Capture + motion |
-| 008A | API manual pour redirected out of context | Veo/still + motion |
-| 008B | Discover/Inspect/Execute/Return action chain | HyperFrames/Remotion |
-| 008C | Clean reasoning context with manuals outside | Still + Motion |
-| 008D | Small context connected to rich external capabilities | Still + Motion / HyperFrames |
-| 009A | Anthropic source first, then workflow expansion | Source Capture + overlays |
-| 009B | Transcript flows from Drive into context | HyperFrames/Remotion |
-| 009C | Same transcript duplicates for Salesforce pass | HyperFrames/Remotion |
-| 009D | Two context-boundary crossings map | HyperFrames/Remotion |
-| 010A | Thinking panel vs transport path | HyperFrames/Remotion |
-| 010B | Two-hour transcript counter reaches +50K | Still + Motion / HyperFrames |
-| 010C | Transcript stays as sandbox variable | Simulated IDE |
-| 010D | Only final green status returns | HyperFrames/Remotion |
-| 010E | Naive vs code execution two-lane comparison | HyperFrames/Remotion |
+| Segment | Beats | Recommended Production Shape |
+| --- | ---: | --- |
+| 002 | 2 | Cinematic workstation: tools wake up, then idle context becomes overhead |
+| 003 | 3 | Tool Search steps: minimal load, ranked search, inject + token reduction |
+| 004 | 2 | Presenter warning, then three remaining failure modes in one board |
+| 005 | 2 | Source-proof benchmark board, then Arcade/reliability tradeoff |
+| 006 | 2 | Talking-head thesis reset, then four layers/four jobs |
+| 007 | 2 | Cloudflare source/search-execute, then typed API/sandbox/token collapse |
+| 008 | 2 | API manual not poured into context, then discover/inspect/execute/return |
+| 009 | 2 | Anthropic Drive/Salesforce source, then transcript crosses context twice |
+| 010 | 2-3 | Thinking vs transport/+50K, sandbox variable/final status, optional side-by-side |
 
-## Immediate Next Step
+## Recommended First Decision
 
-Choose one treatment chain for Segments `002-003` before producing anything:
+Start with the **hybrid chain**:
 
-1. **Cinematic workstation chain**: best for audience engagement and the strongest break from the old box-heavy style.
-2. **Simulated IDE/workbench chain**: best for teaching precision and easier controlled production.
-3. **Hybrid chain**: use cinematic workstation for `002A-002D`, then simulated UI for `003A-003D`.
+- Segment `002`: cinematic workstation UI.
+- Segment `003`: simulated UI/workbench for precise Tool Search mechanics.
 
-Recommendation: use the **hybrid chain**. Segment 002 should feel cinematic and concrete. Segment 003 should become more precise because it teaches the actual Tool Search mechanism.
+This gives the video a strong visual opening without sacrificing teaching clarity.
