@@ -30,20 +30,56 @@ developments early enough to turn them into useful videos.
 
 ## Next Implementation Phases
 
-1. Create a canonical event store for all monitors:
-   `event_id`, `source_type`, `source_name`, `url`, `title`, `published_at`,
-   `summary`, `raw_payload_path`, `first_seen_at`, and `dedupe_hash`.
-2. Add daily YouTube competitor ingestion:
-   detect new videos, fetch transcripts, summarize angles, and emit candidate
-   events instead of only markdown reports.
-3. Add impact scoring:
-   novelty, relevance, market importance, proof availability, visual potential,
-   search demand, tension, saturation penalty, and uncertainty penalty.
-4. Generate research packs for the top candidates:
-   confirmed facts, claims, source links, transcript excerpts, visual captures,
-   risk notes, and recommended video format.
-5. Generate script-with-visual-cues, resolve assets through `asset-library`, and
+1. Canonical event store: implemented in `scripts/newsroom.py`.
+2. RSS event ingestion: implemented in `scripts/newsroom.py ingest-rss`.
+3. YouTube report ingestion: implemented in `scripts/newsroom.py
+   ingest-youtube-report`.
+4. Impact scoring: implemented in `scripts/newsroom.py score` with weights in
+   `config/scoring.yaml`.
+5. Research-pack generation: implemented in `scripts/newsroom.py
+   research-packs`.
+6. Add daily YouTube competitor transcript ingestion:
+   detect new videos, fetch transcripts, summarize angles, and emit richer
+   candidate events instead of only markdown report entries.
+   The first bridge is implemented: `youtube-transcript-queue` exports a daily
+   queue of high-priority channels with verified channel IDs, and
+   `export-youtube-monitor-config` exports an API-ready monitor config.
+7. Generate script-with-visual-cues, resolve assets through `asset-library`, and
    render a faceless HyperFrames/Remotion draft.
+
+## CLI
+
+Initialize the local SQLite event store:
+
+```bash
+python3 keyadvances-newsroom/scripts/newsroom.py init
+```
+
+Run the current daily pipeline:
+
+```bash
+python3 keyadvances-newsroom/scripts/newsroom.py run-daily
+```
+
+Run individual stages:
+
+```bash
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-rss --max-days 14
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-youtube-report
+python3 keyadvances-newsroom/scripts/newsroom.py score
+python3 keyadvances-newsroom/scripts/newsroom.py research-packs --limit 5
+python3 keyadvances-newsroom/scripts/newsroom.py youtube-transcript-queue
+python3 keyadvances-newsroom/scripts/newsroom.py export-youtube-monitor-config
+```
+
+Default outputs:
+
+- Event DB: `keyadvances-newsroom/data/newsroom.db`
+- Candidate JSON: `keyadvances-newsroom/outputs/candidates.json`
+- Research packs: `keyadvances-newsroom/outputs/research-packs/`
+- Transcript queue: `keyadvances-newsroom/outputs/youtube-transcript-queue.json`
+- Exported YouTube monitor config:
+  `keyadvances-newsroom/outputs/keyadvances-youtube-monitor.yaml`
 
 ## Operational Notes
 

@@ -82,7 +82,7 @@ sources:
       priority: 2
     - name: "The Verge AI"
       type: "rss"
-      url: "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml"
+      url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
       priority: 2
     - name: "IEEE Spectrum AI"
       type: "rss"

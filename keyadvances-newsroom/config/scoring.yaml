@@ -1,0 +1,75 @@
+# Impact scoring model for @Keyadvances video candidates.
+#
+# Scores are deterministic heuristics for triage. Later phases can replace or
+# augment these with an LLM judge, search-volume data, and channel saturation
+# checks while keeping the same output fields.
+
+weights:
+  novelty: 20
+  audience_relevance: 20
+  market_importance: 15
+  proof_available: 15
+  visual_potential: 10
+  search_demand: 10
+  tension: 10
+  saturation_penalty: -15
+  uncertainty_penalty: -10
+
+high_value_terms:
+  - agent
+  - agentic
+  - automation
+  - assistant
+  - autonomous
+  - browser
+  - claude
+  - claude code
+  - computer use
+  - cursor
+  - deep research
+  - gemini
+  - github
+  - gpt
+  - grok
+  - langchain
+  - llamaindex
+  - mcp
+  - model
+  - multi-agent
+  - n8n
+  - open source
+  - openai
+  - operator
+  - release
+  - tool use
+  - workflow
+
+visual_terms:
+  - demo
+  - github
+  - launch
+  - product
+  - release
+  - repo
+  - screenshot
+  - update
+  - website
+
+tension_terms:
+  - beta
+  - broken
+  - changed
+  - controversy
+  - dead
+  - insane
+  - leaked
+  - replaced
+  - risk
+  - warning
+
+saturation_terms:
+  - reaction
+  - recap
+  - roundup
+  - podcast
+  - interview
