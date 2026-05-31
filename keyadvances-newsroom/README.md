@@ -75,6 +75,7 @@ python3 keyadvances-newsroom/scripts/newsroom.py ingest-rss --max-days 14
 python3 keyadvances-newsroom/scripts/newsroom.py ingest-youtube-report
 python3 keyadvances-newsroom/scripts/newsroom.py score
 python3 keyadvances-newsroom/scripts/newsroom.py research-packs --limit 5
+python3 keyadvances-newsroom/scripts/newsroom.py script-drafts --limit 3
 python3 keyadvances-newsroom/scripts/newsroom.py youtube-transcript-queue
 python3 keyadvances-newsroom/scripts/newsroom.py export-youtube-monitor-config
 python3 keyadvances-newsroom/scripts/newsroom.py ingest-youtube-competitors --fetch-transcripts
@@ -87,6 +88,8 @@ Default outputs:
 - Event DB: `keyadvances-newsroom/data/newsroom.db`
 - Candidate JSON: `keyadvances-newsroom/outputs/candidates.json`
 - Research packs: `keyadvances-newsroom/outputs/research-packs/`
+- Draft scripts: `keyadvances-newsroom/outputs/scripts/`
+- Asset manifests: `keyadvances-newsroom/outputs/asset-manifests/`
 - Transcript queue: `keyadvances-newsroom/outputs/youtube-transcript-queue.json`
 - Exported YouTube monitor config:
   `keyadvances-newsroom/outputs/keyadvances-youtube-monitor.yaml`

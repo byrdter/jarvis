@@ -35,6 +35,8 @@ except ImportError as exc:  # pragma: no cover - environment guard
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "newsroom.db"
 DEFAULT_OUTPUTS = ROOT / "outputs"
+DEFAULT_SCRIPT_DIR = DEFAULT_OUTPUTS / "scripts"
+DEFAULT_ASSET_MANIFEST_DIR = DEFAULT_OUTPUTS / "asset-manifests"
 DEFAULT_RSS_CONFIG = ROOT.parent / "skills" / "news-aggregator" / "config" / "rss-feeds.json"
 DEFAULT_YOUTUBE_REPORT_DIR = ROOT.parent / "skills" / "youtube-monitor" / "reports" / "daily"
 DEFAULT_SCORING_CONFIG = ROOT / "config" / "scoring.yaml"
@@ -91,6 +93,18 @@ CREATE TABLE IF NOT EXISTS youtube_transcripts (
   status TEXT NOT NULL,
   fetched_at TEXT NOT NULL,
   error TEXT DEFAULT '',
+  FOREIGN KEY(event_id) REFERENCES events(event_id)
+);
+
+CREATE TABLE IF NOT EXISTS video_drafts (
+  draft_id TEXT PRIMARY KEY,
+  event_id TEXT NOT NULL,
+  title TEXT NOT NULL,
+  script_path TEXT NOT NULL,
+  script_json_path TEXT NOT NULL,
+  asset_manifest_path TEXT NOT NULL,
+  target_duration_seconds INTEGER NOT NULL,
+  created_at TEXT NOT NULL,
   FOREIGN KEY(event_id) REFERENCES events(event_id)
 );
 """
@@ -554,6 +568,270 @@ def generate_research_packs(db: sqlite3.Connection, output_dir: Path, limit: int
     for row in top_candidates(db, limit):
         paths.append(write_research_pack(row, output_dir))
     return paths
+
+
+def split_sentences(text: str, limit: int = 8) -> list[str]:
+    clean = clean_text(text)
+    if not clean:
+        return []
+    parts = re.split(r"(?<=[.!?])\s+", clean)
+    return [p.strip() for p in parts if len(p.strip()) > 20][:limit]
+
+
+def script_clean_text(text: str) -> str:
+    text = clean_text(text)
+    text = re.sub(r"https?://\S+", "", text)
+    text = re.sub(r"\b\d{1,2}:\d{2}\b", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    blocked = [
+        "join here",
+        "get a free",
+        "strategy session",
+        "masterclass",
+        "skool.com",
+        "prompts",
+        "opt-in",
+        "subscribe",
+    ]
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    useful = []
+    for sentence in sentences:
+        lower = sentence.lower()
+        if any(term in lower for term in blocked):
+            continue
+        if len(sentence) < 20:
+            continue
+        useful.append(sentence.strip())
+    return " ".join(useful) if useful else text
+
+
+def candidate_summary(row: sqlite3.Row, max_sentences: int = 4) -> list[str]:
+    summary = script_clean_text(row["summary"] or "")
+    sentences = split_sentences(summary, max_sentences)
+    if sentences:
+        return sentences
+    return [
+        f"{row['title']} is a new candidate item from {row['source_name']}.",
+        "The next step is to verify the primary source and decide whether it deserves a full Keyadvances video.",
+    ]
+
+
+def extract_transcript_excerpt(row: sqlite3.Row) -> str:
+    summary = row["summary"] or ""
+    marker = "Transcript excerpt:"
+    if marker not in summary:
+        return ""
+    return script_clean_text(summary.split(marker, 1)[1])[:650]
+
+
+def draft_video_sections(row: sqlite3.Row) -> list[dict[str, Any]]:
+    title = row["title"]
+    source = row["source_name"]
+    summary = candidate_summary(row, 5)
+    angle = suggest_angle(row)
+    transcript_excerpt = extract_transcript_excerpt(row)
+    cues = visual_cues_for(row)
+
+    hook_title = title.rstrip(".!?")
+    hook = (
+        f"{hook_title}. That is the signal today. The question is not just whether it is interesting. "
+        "The question is whether it changes a real workflow."
+    )
+    proof = (
+        f"The source is {source}. Start by showing the original page or video, then separate what is confirmed "
+        "from what still needs verification."
+    )
+    breakdown = " ".join(summary[:3])
+    if transcript_excerpt:
+        breakdown += f" Competitor transcript signal: {transcript_excerpt}"
+    why = (
+        f"{angle} For Keyadvances, the useful part is the practical consequence: who can use this, "
+        "what gets faster, and what becomes easier to automate."
+    )
+    skeptic = (
+        "The caution is simple: do not repeat the headline as fact until the primary source, docs, release notes, "
+        "or product page confirms it. If the claim is only from a creator video, treat it as a lead."
+    )
+    verdict = (
+        "The draft verdict: this is worth tracking if the proof is strong and the visuals can show the change clearly. "
+        "Next, capture the source page, any product or GitHub evidence, and build the final script around those receipts."
+    )
+
+    return [
+        {
+            "id": "cold-open",
+            "target_seconds": 18,
+            "voiceover": hook,
+            "visual_cues": [cues[0], "{{ASSET: keyadvances.title-card WRAP: screenshotFrame}}"],
+        },
+        {
+            "id": "source-proof",
+            "target_seconds": 28,
+            "voiceover": proof,
+            "visual_cues": cues[:2],
+        },
+        {
+            "id": "breakdown",
+            "target_seconds": 55,
+            "voiceover": breakdown,
+            "visual_cues": cues,
+        },
+        {
+            "id": "why-it-matters",
+            "target_seconds": 40,
+            "voiceover": why,
+            "visual_cues": ["{{ASSET: keyadvances.impact-map WRAP: screenshotFrame}}", cues[-1]],
+        },
+        {
+            "id": "skeptic-check",
+            "target_seconds": 30,
+            "voiceover": skeptic,
+            "visual_cues": ["{{ASSET: keyadvances.claim-check WRAP: screenshotFrame}}", cues[0]],
+        },
+        {
+            "id": "verdict",
+            "target_seconds": 25,
+            "voiceover": verdict,
+            "visual_cues": ["{{ASSET: keyadvances.verdict-card WRAP: screenshotFrame}}"],
+        },
+    ]
+
+
+ASSET_CUE_RE = re.compile(
+    r"\{\{ASSET:\s*(?P<asset>[^\s}]+)(?:\s+URL:\s*(?P<url>\S+))?(?:\s+WRAP:\s*(?P<wrap>\w+))?\s*\}\}"
+)
+
+
+def asset_capture_manifest(row: sqlite3.Row, sections: list[dict[str, Any]]) -> dict[str, Any]:
+    assets: dict[str, dict[str, Any]] = {}
+    for section in sections:
+        for cue in section["visual_cues"]:
+            match = ASSET_CUE_RE.search(cue)
+            if not match:
+                continue
+            asset_id = match.group("asset")
+            url = match.group("url") or row["url"]
+            wrap = match.group("wrap") or "screenshotFrame"
+            if asset_id in assets:
+                continue
+            capture_type = "synthetic"
+            if asset_id.startswith("source.") or asset_id.startswith("youtube.") or asset_id.startswith("github."):
+                capture_type = "screenshot"
+            if "scroll" in asset_id:
+                capture_type = "scroll-video"
+            assets[asset_id] = {
+                "asset_id": asset_id,
+                "capture_type": capture_type,
+                "source_url": url,
+                "wrap": wrap,
+                "status": "pending",
+            }
+    return {
+        "event_id": row["event_id"],
+        "title": row["title"],
+        "source": {"type": row["source_type"], "name": row["source_name"], "url": row["url"]},
+        "assets": list(assets.values()),
+    }
+
+
+def write_script_draft(
+    db: sqlite3.Connection,
+    row: sqlite3.Row,
+    script_dir: Path,
+    manifest_dir: Path,
+) -> dict[str, Path]:
+    script_dir.mkdir(parents=True, exist_ok=True)
+    manifest_dir.mkdir(parents=True, exist_ok=True)
+    slug = slugify(row["title"])
+    draft_id = f"draft-{row['event_id']}"
+    sections = draft_video_sections(row)
+    target_duration = sum(s["target_seconds"] for s in sections)
+    manifest = asset_capture_manifest(row, sections)
+
+    script_path = script_dir / f"{slug}.md"
+    json_path = script_dir / f"{slug}.json"
+    manifest_path = manifest_dir / f"{slug}.asset-manifest.json"
+
+    md_lines = [
+        f"# Keyadvances Draft Script: {row['title']}",
+        "",
+        f"Generated: {utc_now()}",
+        f"Source: {row['source_name']} ({row['source_type']})",
+        f"URL: {row['url']}",
+        f"Target duration: {target_duration} seconds",
+        "",
+        "## Editorial Angle",
+        "",
+        suggest_angle(row),
+        "",
+        "## Script",
+        "",
+    ]
+    for section in sections:
+        md_lines.extend(
+            [
+                f"### {section['id']} ({section['target_seconds']}s)",
+                "",
+                section["voiceover"],
+                "",
+                "Visual cues:",
+            ]
+        )
+        md_lines.extend(f"- `{cue}`" for cue in section["visual_cues"])
+        md_lines.append("")
+    script_path.write_text("\n".join(md_lines).strip() + "\n")
+
+    json_payload = {
+        "draft_id": draft_id,
+        "event_id": row["event_id"],
+        "title": row["title"],
+        "source_url": row["url"],
+        "target_duration_seconds": target_duration,
+        "sections": sections,
+        "asset_manifest": str(manifest_path),
+    }
+    json_path.write_text(json.dumps(json_payload, indent=2) + "\n")
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+
+    db.execute(
+        """
+        INSERT INTO video_drafts (
+          draft_id, event_id, title, script_path, script_json_path,
+          asset_manifest_path, target_duration_seconds, created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(draft_id) DO UPDATE SET
+          script_path = excluded.script_path,
+          script_json_path = excluded.script_json_path,
+          asset_manifest_path = excluded.asset_manifest_path,
+          target_duration_seconds = excluded.target_duration_seconds,
+          created_at = excluded.created_at
+        """,
+        (
+            draft_id,
+            row["event_id"],
+            row["title"],
+            str(script_path),
+            str(json_path),
+            str(manifest_path),
+            target_duration,
+            utc_now(),
+        ),
+    )
+    db.commit()
+    return {"script": script_path, "json": json_path, "manifest": manifest_path}
+
+
+def generate_script_drafts(
+    db: sqlite3.Connection,
+    script_dir: Path,
+    manifest_dir: Path,
+    limit: int,
+) -> list[dict[str, Path]]:
+    outputs = []
+    for row in top_candidates(db, limit):
+        outputs.append(write_script_draft(db, row, script_dir, manifest_dir))
+    return outputs
 
 
 def export_candidates(db: sqlite3.Connection, output_path: Path, limit: int) -> None:
@@ -1106,6 +1384,11 @@ def build_parser() -> argparse.ArgumentParser:
     packs.add_argument("--limit", type=int, default=5)
     packs.add_argument("--candidates-json", type=Path, default=DEFAULT_OUTPUTS / "candidates.json")
 
+    drafts = sub.add_parser("script-drafts", help="Generate draft scripts and asset manifests for top candidates")
+    drafts.add_argument("--script-dir", type=Path, default=DEFAULT_SCRIPT_DIR)
+    drafts.add_argument("--manifest-dir", type=Path, default=DEFAULT_ASSET_MANIFEST_DIR)
+    drafts.add_argument("--limit", type=int, default=3)
+
     yt_queue = sub.add_parser("youtube-transcript-queue", help="Export daily/weekly transcript queue from channel registry")
     yt_queue.add_argument("--registry", type=Path, default=DEFAULT_YOUTUBE_CHANNELS)
     yt_queue.add_argument("--cadence", choices=["daily", "weekly"], default="daily")
@@ -1140,6 +1423,7 @@ def build_parser() -> argparse.ArgumentParser:
     daily.add_argument("--youtube-transcripts", action="store_true")
     daily.add_argument("--process-audio-fallbacks", action="store_true")
     daily.add_argument("--max-youtube-channels", type=int)
+    daily.add_argument("--script-drafts", action="store_true")
 
     return parser
 
@@ -1168,6 +1452,12 @@ def main() -> None:
         print(f"research packs generated: {len(paths)}")
         for path in paths:
             print(path)
+    elif args.command == "script-drafts":
+        outputs = generate_script_drafts(db, args.script_dir, args.manifest_dir, args.limit)
+        print(f"script drafts generated: {len(outputs)}")
+        for item in outputs:
+            print(item["script"])
+            print(item["manifest"])
     elif args.command == "youtube-transcript-queue":
         queue = build_youtube_transcript_queue(args.registry, args.output, args.cadence)
         print(f"youtube transcript queue exported: {len(queue)} channels -> {args.output}")
@@ -1237,11 +1527,20 @@ def main() -> None:
             scored = score_events(db, DEFAULT_SCORING_CONFIG)
         packs = generate_research_packs(db, DEFAULT_OUTPUTS / "research-packs", args.pack_limit)
         export_candidates(db, DEFAULT_OUTPUTS / "candidates.json", args.pack_limit)
+        drafts = []
+        if args.script_drafts:
+            drafts = generate_script_drafts(
+                db,
+                DEFAULT_SCRIPT_DIR,
+                DEFAULT_ASSET_MANIFEST_DIR,
+                min(args.pack_limit, 3),
+            )
         print(
             f"daily run complete: rss={rss_count}, youtube_report={yt_count}, "
             f"youtube_competitor_videos={competitor_stats['videos']}, "
             f"caption_transcripts={competitor_stats['transcripts']}, "
-            f"audio_transcripts={audio_stats['transcribed']}, scored={scored}, packs={len(packs)}"
+            f"audio_transcripts={audio_stats['transcribed']}, scored={scored}, "
+            f"packs={len(packs)}, script_drafts={len(drafts)}"
         )
 
 
