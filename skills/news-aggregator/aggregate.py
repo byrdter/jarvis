@@ -40,33 +40,29 @@ TOPICS = {
     'Regulation': ['regulation', 'policy', 'law', 'ethics', 'safety'],
 }
 
-# RSS Feed URLs
-RSS_FEEDS = {
-    # News outlets
-    'VentureBeat': 'https://venturebeat.com/category/ai/feed/',
-    'TechCrunch': 'https://techcrunch.com/category/artificial-intelligence/feed/',
-    'Ars Technica': 'https://arstechnica.com/tag/artificial-intelligence/feed/',
-    'Federal News Network': 'https://federalnewsnetwork.com/category/technology-main/artificial-intelligence/feed/',
-
-    # AI Labs & Research
-    'OpenAI': 'https://openai.com/news/rss.xml',
-    'DeepMind': 'https://deepmind.google/blog/rss.xml',
-    'Microsoft Research': 'https://www.microsoft.com/en-us/research/feed/',
-    'IEEE Spectrum': 'https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss',
-
-    # Big Tech AI
-    'Microsoft AI': 'https://blogs.microsoft.com/ai/search/feed/rss2/',
-    'AWS ML': 'https://aws.amazon.com/blogs/machine-learning/feed/',
-    'NVIDIA': 'https://blogs.nvidia.com/feed/',
-
-    # Developer/Open Source
-    'Hugging Face': 'https://huggingface.co/blog/feed.xml',
-    'LangChain': 'https://www.blog.langchain.com/rss/',
-
-    # International
-    'SCMP AI': 'https://www.scmp.com/rss/320663/feed',
-    'ChinAI': 'https://chinai.substack.com/feed',
+DEFAULT_RSS_FEEDS = {
+    'VentureBeat AI': 'https://venturebeat.com/category/ai/feed/',
+    'TechCrunch AI': 'https://techcrunch.com/category/artificial-intelligence/feed/',
+    'OpenAI News': 'https://openai.com/news/rss.xml',
+    'Google DeepMind': 'https://deepmind.google/blog/rss.xml',
+    'Hugging Face Blog': 'https://huggingface.co/blog/feed.xml',
+    'LangChain Blog': 'https://blog.langchain.com/rss/',
 }
+
+
+def load_rss_feeds() -> Dict[str, str]:
+    """Load RSS feeds from config, falling back to a small built-in set."""
+    config_path = Path(__file__).parent / 'config' / 'rss-feeds.json'
+    if not config_path.exists():
+        return DEFAULT_RSS_FEEDS
+
+    try:
+        with config_path.open() as f:
+            feeds = json.load(f)
+        return {name: url for name, url in feeds.items() if name and url}
+    except Exception as e:
+        print(f"  Warning: Could not load RSS feed config: {e}")
+        return DEFAULT_RSS_FEEDS
 
 
 def run_agent_browser(command: str, timeout: int = 30) -> str:
@@ -428,7 +424,10 @@ def main():
     all_articles.extend(hn_articles)
 
     # Fetch all RSS feeds
-    for source_name, feed_url in RSS_FEEDS.items():
+    rss_feeds = load_rss_feeds()
+    print(f"Fetching RSS feeds: {len(rss_feeds)} configured sources")
+
+    for source_name, feed_url in rss_feeds.items():
         rss_articles = fetch_rss_feed(source_name, feed_url)
         all_articles.extend(rss_articles)
 

@@ -1,0 +1,158 @@
+# Keyadvances non-YouTube source registry
+#
+# These are the source classes the newsroom monitor should ingest before
+# scoring and research-pack generation. Prefer API/RSS sources first; add
+# authenticated/browser sources later.
+
+sources:
+  official_ai_labs:
+    - name: "OpenAI News"
+      type: "rss"
+      url: "https://openai.com/news/rss.xml"
+      priority: 1
+    - name: "Anthropic News"
+      type: "rss"
+      url: "https://www.anthropic.com/news/rss.xml"
+      priority: 1
+    - name: "Google DeepMind Blog"
+      type: "rss"
+      url: "https://deepmind.google/blog/rss.xml"
+      priority: 1
+    - name: "Google Research Blog"
+      type: "rss"
+      url: "https://research.google/blog/rss/"
+      priority: 1
+    - name: "Microsoft AI Blog"
+      type: "rss"
+      url: "https://blogs.microsoft.com/ai/feed/"
+      priority: 1
+    - name: "Meta AI Blog"
+      type: "html"
+      url: "https://ai.meta.com/blog/"
+      priority: 2
+    - name: "NVIDIA Blog"
+      type: "rss"
+      url: "https://blogs.nvidia.com/feed/"
+      priority: 1
+
+  developer_and_agent_ecosystem:
+    - name: "Hugging Face Blog"
+      type: "rss"
+      url: "https://huggingface.co/blog/feed.xml"
+      priority: 1
+    - name: "LangChain Blog"
+      type: "rss"
+      url: "https://blog.langchain.com/rss/"
+      priority: 1
+    - name: "LlamaIndex Blog"
+      type: "rss"
+      url: "https://www.llamaindex.ai/blog/rss.xml"
+      priority: 1
+    - name: "Replicate Blog"
+      type: "rss"
+      url: "https://replicate.com/blog/rss"
+      priority: 2
+    - name: "GitHub Releases"
+      type: "api"
+      url: "https://api.github.com/repos/{owner}/{repo}/releases"
+      priority: 1
+      note: "Parameterized source for tracked repos like browser-use, crewAI, langgraph, openai-agents-python, and claude-code adjacent tools."
+    - name: "GitHub Trending"
+      type: "html"
+      url: "https://github.com/trending?since=daily"
+      priority: 2
+
+  news_and_aggregators:
+    - name: "Hacker News"
+      type: "api"
+      url: "https://hacker-news.firebaseio.com/v0/topstories.json"
+      priority: 1
+    - name: "Product Hunt"
+      type: "api"
+      url: "https://api.producthunt.com/v2/api/graphql"
+      priority: 1
+      note: "Requires Product Hunt developer token."
+    - name: "TechCrunch AI"
+      type: "rss"
+      url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+      priority: 2
+    - name: "VentureBeat AI"
+      type: "rss"
+      url: "https://venturebeat.com/category/ai/feed/"
+      priority: 2
+    - name: "The Verge AI"
+      type: "rss"
+      url: "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml"
+      priority: 2
+    - name: "IEEE Spectrum AI"
+      type: "rss"
+      url: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
+      priority: 2
+
+  research:
+    - name: "arXiv AI/ML"
+      type: "api"
+      url: "http://export.arxiv.org/api/query"
+      priority: 1
+      query_groups: ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "stat.ML"]
+    - name: "Papers with Code"
+      type: "api"
+      url: "https://paperswithcode.com/api/v1/"
+      priority: 2
+    - name: "MIT News AI"
+      type: "rss"
+      url: "https://news.mit.edu/rss/topic/artificial-intelligence2"
+      priority: 2
+    - name: "BAIR Blog"
+      type: "rss"
+      url: "https://bair.berkeley.edu/blog/feed.xml"
+      priority: 2
+    - name: "Stanford AI Lab"
+      type: "rss"
+      url: "https://ai.stanford.edu/blog/feed.xml"
+      priority: 2
+
+  communities:
+    - name: "Reddit LocalLLaMA"
+      type: "api"
+      url: "https://www.reddit.com/r/LocalLLaMA/new.json"
+      priority: 1
+    - name: "Reddit ClaudeAI"
+      type: "api"
+      url: "https://www.reddit.com/r/ClaudeAI/new.json"
+      priority: 1
+    - name: "Reddit OpenAI"
+      type: "api"
+      url: "https://www.reddit.com/r/OpenAI/new.json"
+      priority: 2
+    - name: "Reddit n8n"
+      type: "api"
+      url: "https://www.reddit.com/r/n8n/new.json"
+      priority: 2
+    - name: "Reddit ArtificialInteligence"
+      type: "api"
+      url: "https://www.reddit.com/r/ArtificialInteligence/new.json"
+      priority: 2
+
+  future_browser_sources:
+    - name: "X/Twitter AI launch lists"
+      type: "browser_or_api"
+      url: "manual-list-required"
+      priority: 1
+      note: "Add after deciding between official API, Browserbase, or manual curated account list."
+    - name: "Discord/Slack AI communities"
+      type: "manual_or_connector"
+      url: "manual-list-required"
+      priority: 3
+      note: "Use only where terms and authentication are acceptable."
+
+scoring_inputs:
+  - novelty
+  - audience_relevance
+  - market_importance
+  - proof_available
+  - visual_potential
+  - search_demand
+  - controversy_or_tension
+  - saturation_penalty
+  - uncertainty_penalty

@@ -1,0 +1,171 @@
+# Keyadvances YouTube source candidates
+#
+# Purpose: daily competitor/source monitoring for AI automation, agentic AI,
+# AI assistants, AI product launches, and practical builder workflows.
+# `channel_url` is authoritative for discovery. Add `channel_id` once verified
+# before wiring into API-based daily checks.
+
+channels:
+  - name: "Julian Goldie SEO"
+    channel_url: "https://www.youtube.com/@JulianGoldieSEO"
+    category: "ai_automation"
+    priority: 1
+    rationale: "High-frequency AI automation/current-product channel; useful for format and topic velocity monitoring."
+
+  - name: "Cole Medin"
+    channel_url: "https://www.youtube.com/@ColeMedin"
+    category: "agentic_ai"
+    priority: 1
+    rationale: "Practical local AI, agents, MCP, n8n, and open-source automation builds."
+
+  - name: "Nate Herk"
+    channel_url: "https://www.youtube.com/@nateherk"
+    category: "ai_automation"
+    priority: 1
+    rationale: "Claude Code, automation, and agent workflow tutorials."
+
+  - name: "Greg Isenberg"
+    channel_url: "https://www.youtube.com/@GregIsenberg"
+    category: "ai_business"
+    priority: 1
+    rationale: "AI agents, startups, automation products, and business-model angles."
+
+  - name: "Matthew Berman"
+    channel_url: "https://www.youtube.com/@matthew_berman"
+    category: "ai_news_tools"
+    priority: 1
+    rationale: "High-volume AI news, tools, product demos, and model updates."
+
+  - name: "Wes Roth"
+    channel_url: "https://www.youtube.com/@WesRoth"
+    category: "ai_news"
+    priority: 1
+    rationale: "Fast AI news cycle coverage and trend framing."
+
+  - name: "AI Explained"
+    channel_url: "https://www.youtube.com/@aiexplained-official"
+    category: "ai_analysis"
+    priority: 1
+    rationale: "Deeper analysis of frontier AI, benchmarks, and industry implications."
+
+  - name: "The AI Advantage"
+    channel_url: "https://www.youtube.com/@aiadvantage"
+    category: "ai_assistants"
+    priority: 1
+    rationale: "Practical AI assistant/productivity workflows and tool adoption."
+
+  - name: "All About AI"
+    channel_url: "https://www.youtube.com/@AllAboutAI"
+    category: "agentic_ai"
+    priority: 1
+    rationale: "Hands-on AI engineering, agents, LLM apps, and product walkthroughs."
+
+  - name: "WorldofAI"
+    channel_url: "https://www.youtube.com/@worldofai"
+    category: "ai_tools"
+    priority: 1
+    rationale: "Frequent coverage of AI tools, agents, workflows, and automation products."
+
+  - name: "1littlecoder"
+    channel_url: "https://www.youtube.com/@1littlecoder"
+    category: "ai_engineering"
+    priority: 1
+    rationale: "Builder-focused LLM apps, local models, and agent workflows."
+
+  - name: "AI Jason"
+    channel_url: "https://www.youtube.com/@AIJasonZ"
+    category: "ai_automation"
+    priority: 1
+    rationale: "AI automation, agent workflows, and business automation content."
+
+  - name: "Dave Ebbelaar"
+    channel_url: "https://www.youtube.com/@daveebbelaar"
+    category: "ai_automation"
+    priority: 1
+    rationale: "Practical AI automation, agents, and applied business workflows."
+
+  - name: "Mervin Praison"
+    channel_url: "https://www.youtube.com/@MervinPraison"
+    category: "agentic_ai"
+    priority: 1
+    rationale: "AI agents, automation frameworks, and fast technical updates."
+
+  - name: "IndyDevDan"
+    channel_url: "https://www.youtube.com/@indydevdan"
+    category: "ai_coding"
+    priority: 2
+    rationale: "AI coding agent workflows and developer productivity."
+
+  - name: "Nick Dobos"
+    channel_url: "https://www.youtube.com/@NickADobos"
+    category: "ai_coding"
+    priority: 2
+    rationale: "Claude Code and AI-assisted software building patterns."
+
+  - name: "LangChain"
+    channel_url: "https://www.youtube.com/@LangChain"
+    category: "agentic_ai"
+    priority: 1
+    rationale: "Official agent framework updates, tutorials, and ecosystem demos."
+
+  - name: "LlamaIndex"
+    channel_url: "https://www.youtube.com/@LlamaIndex"
+    category: "agentic_ai"
+    priority: 2
+    rationale: "Agentic RAG, data agents, and LLM application architecture."
+
+  - name: "Anthropic"
+    channel_url: "https://www.youtube.com/@anthropic-ai"
+    channel_id: "UCrDwWp7EBBv4NwvScIpBDOA"
+    category: "official_ai_lab"
+    priority: 1
+    rationale: "Official Claude, Claude Code, and Anthropic product/research updates."
+
+  - name: "OpenAI"
+    channel_url: "https://www.youtube.com/@OpenAI"
+    channel_id: "UCXZCJLdBC09xxGZ6gcdrc6A"
+    category: "official_ai_lab"
+    priority: 1
+    rationale: "Official OpenAI launches, demos, research, and product announcements."
+
+  - name: "Google DeepMind"
+    channel_url: "https://www.youtube.com/@googledeepmind"
+    category: "official_ai_lab"
+    priority: 1
+    rationale: "Official Gemini, DeepMind research, and Google AI updates."
+
+  - name: "AI Engineer"
+    channel_url: "https://www.youtube.com/@aiDotEngineer"
+    category: "ai_engineering"
+    priority: 2
+    rationale: "AI engineering talks, architecture, and production agent lessons."
+
+  - name: "IBM Technology"
+    channel_url: "https://www.youtube.com/@IBMTechnology"
+    category: "enterprise_ai"
+    priority: 2
+    rationale: "Enterprise AI assistants, automation, agents, and explainers."
+
+  - name: "Weights & Biases"
+    channel_url: "https://www.youtube.com/@WeightsBiases"
+    category: "ai_engineering"
+    priority: 2
+    rationale: "MLOps, evals, LLM engineering, and production AI practices."
+
+  - name: "AssemblyAI"
+    channel_url: "https://www.youtube.com/@AssemblyAI"
+    category: "ai_engineering"
+    priority: 2
+    rationale: "Applied AI engineering, speech AI, tutorials, and model explainers."
+
+monitoring_policy:
+  daily:
+    priority: [1]
+    lookback_hours: 30
+    transcript_strategy: "captions_first_audio_fallback"
+    max_new_videos_per_channel: 3
+  weekly:
+    priority: [2]
+    lookback_hours: 192
+    transcript_strategy: "captions_first_audio_fallback"
+    max_new_videos_per_channel: 5

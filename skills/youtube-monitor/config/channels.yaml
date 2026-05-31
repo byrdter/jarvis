@@ -1,0 +1,185 @@
+# AI YouTube Channels to Monitor
+# Curated list of high-quality AI content creators
+
+categories:
+  # Daily must-watch channels (breaking news, important updates)
+  tier1_daily:
+    - name: "Matthew Berman"
+      channel_id: "UCscRl1FHHWgalCRD4XhjgaA"
+      focus: "AI news, tool reviews, hands-on demos"
+
+    - name: "AI Explained"
+      channel_id: "UCkLfEpE3hE0gPnfZxwPvfzw"
+      focus: "Deep analysis, paper breakdowns, industry trends"
+
+    - name: "Wes Roth"
+      channel_id: "UCDq7SjbgRKty5TgBfUVUPBg"
+      focus: "Emerging trends, predictions, AGI discussion"
+
+    - name: "Two Minute Papers"
+      channel_id: "UCbfYPyITQ-7l4upoX8nvctg"
+      focus: "Research papers, visual explanations"
+
+    - name: "The AI Advantage (Igor)"
+      channel_id: "UCKs5-A7NyU4XrVL5bgAMBxw"
+      focus: "Practical AI tools, workflows, productivity"
+
+  # Technical deep dives (check 2-3x per week)
+  tier2_technical:
+    - name: "Yannic Kilcher"
+      channel_id: "UCZHmQk67mSJgfCCTn7xBfew"
+      focus: "Paper reviews, technical deep dives"
+
+    - name: "David Shapiro"
+      channel_id: "UCMSBk9a3TfNU-b8T3vPpxdA"
+      focus: "Agentic AI, cognitive architecture, ACE framework"
+
+    - name: "Sam Witteveen"
+      channel_id: "UCfzlCWGWYyIQ0aLC5w48gBQ"
+      focus: "LangChain, agents, practical tutorials"
+
+    - name: "Prompt Engineering"
+      channel_id: "UCBagGP6FLvqY8fN-uzUkLqA"
+      focus: "Advanced prompting, Claude/GPT techniques"
+
+    - name: "All About AI"
+      channel_id: "UC5vz8vi6YmQvFzYFLhX2u3A"
+      focus: "AI engineering, LLM applications"
+
+  # AI Engineering & Development
+  tier3_engineering:
+    - name: "AI Engineering (Swyx/Alessio)"
+      channel_id: "UC6-g6xulq6oT_5gNUGgqWPw"
+      focus: "AI engineering practices, latent space podcast"
+
+    - name: "3Blue1Brown"
+      channel_id: "UCYO_jab_esuFRV4b17AJtAw"
+      focus: "Math foundations, neural networks visualization"
+
+    - name: "Sentdex"
+      channel_id: "UCQALLeQPoZdZC4JNUboVEUg"
+      focus: "Python, ML tutorials, practical AI coding"
+
+  # Official AI Labs & Research
+  tier4_official:
+    - name: "Anthropic"
+      channel_id: "UCrDwWp7EBBv4NwvScIpBDOA"
+      focus: "Claude updates, research announcements"
+
+    - name: "Google DeepMind"
+      channel_id: "UCBcRF18a7Qf58cCRy5xuWwQ"
+      focus: "Research breakthroughs, Gemini updates"
+
+    - name: "OpenAI"
+      channel_id: "UCXZCJLdBC09xxGZ6gcdrc6A"
+      focus: "GPT updates, research announcements"
+
+    - name: "Stanford HAI"
+      channel_id: "UCxze5b5JZOaHnSHPsLTaKCA"
+      focus: "Academic research, AI policy, ethics"
+
+  # Business & Strategy
+  tier5_business:
+    - name: "Ethan Mollick"
+      channel_id: "UC0qaLP16FLbd8Y6dNZ_3BXg"
+      focus: "AI in business, education, practical adoption"
+
+    - name: "NVIDIA"
+      channel_id: "UCHRp19HU7Y2LwfI0Ai6WAGQ"
+      focus: "GPU tech, AI infrastructure, GTC talks"
+
+  # Additional AI News & Commentary
+  tier6_news_extended:
+    - name: "TheAIGRID"
+      channel_id: "UCZavUOChr7_4PzWXdRqprBQ"
+      focus: "AI news, model comparisons, breakdowns"
+
+    - name: "MattVidPro AI"
+      channel_id: "UCJ0yBou72Lz9fqeMXh9mkog"
+      focus: "AI news, tutorials, creative AI applications"
+
+    - name: "AI Search"
+      channel_id: "UCwF3hdPgFN8S0HYd_7EDxTw"
+      focus: "AI news aggregation, daily updates"
+
+    - name: "Fireship"
+      channel_id: "UCsBjURrPoezykLs9EqgamOA"
+      focus: "Tech news including AI, fast-paced updates"
+
+  # LLM Application Development
+  tier7_llm_dev:
+    - name: "LangChain"
+      channel_id: "UCC-lyFqJ1FXaRx8M56BPj5w"
+      focus: "Official LangChain tutorials, updates"
+
+    - name: "1littlecoder"
+      channel_id: "UC9oZWDRBZkqJI5qCUdWKbww"
+      focus: "LLM applications, agents, tutorials"
+
+    - name: "Cole Medin"
+      channel_id: "UCxOiIKcXLLLZ6lLEZPZc8jA"
+      focus: "Local AI, open source models, practical builds"
+
+    - name: "WorldofAI"
+      channel_id: "UCKKDKkmJNKaL7tJg3CUL8yw"
+      focus: "AI tools, workflows, productivity"
+
+  # AI Research & Papers
+  tier8_research:
+    - name: "Arxiv Insights"
+      channel_id: "UCNIkB2IeJ-6AmZv7bQ1oBYg"
+      focus: "Deep paper explanations, ML theory"
+
+    - name: "AI Coffee Break with Letitia"
+      channel_id: "UCobqgqE4i5Kf7wrxRxhToQA"
+      focus: "AI safety, ethics, research papers"
+
+  # Open Source & Local AI
+  tier9_open_source:
+    - name: "Siraj Raval"
+      channel_id: "UCWN3xxRkmTPmbKwht9FuE5A"
+      focus: "AI education, code walkthroughs"
+
+    - name: "Nicholas Renotte"
+      channel_id: "UCHXa4OpASJEwrHrLeIzw7Yg"
+      focus: "Computer vision, ML tutorials"
+
+    - name: "Weights & Biases"
+      channel_id: "UCBp3w4DCEC64FZr4k9ROxig"
+      focus: "MLOps, experiment tracking, best practices"
+
+  # AI Safety & Ethics
+  tier10_safety:
+    - name: "Robert Miles"
+      channel_id: "UCLB7AzTwc6VFZrBsO2ucBMg"
+      focus: "AI alignment, safety research"
+
+    - name: "Machine Learning Street Talk"
+      channel_id: "UCMLtBahI5DMrt0NPvDSoIRQ"
+      focus: "Deep AI discussions, safety, AGI"
+
+# Filtering preferences
+filters:
+  min_duration_seconds: 120  # Skip shorts under 2 minutes
+  max_duration_seconds: 7200  # Skip videos over 2 hours (likely streams)
+  exclude_keywords:
+    - "LIVE"
+    - "livestream"
+    - "podcast" # Optional: remove if you want podcasts
+  priority_keywords:
+    - "Claude"
+    - "GPT-4"
+    - "Gemini"
+    - "agents"
+    - "agentic"
+    - "breaking"
+    - "new model"
+    - "announced"
+
+# Report preferences
+report:
+  max_videos_per_channel: 3
+  max_total_videos: 20
+  sort_by: "engagement"  # Options: engagement, views, recency
+  include_stats: true
+  include_description: true
