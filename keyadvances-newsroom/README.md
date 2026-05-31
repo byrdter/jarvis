@@ -49,6 +49,13 @@ developments early enough to turn them into useful videos.
 
 ## CLI
 
+Recommended local runtime:
+
+```bash
+python3 -m venv ~/.local/share/jarvis/keyadvances-newsroom/venv
+~/.local/share/jarvis/keyadvances-newsroom/venv/bin/pip install -r keyadvances-newsroom/requirements.txt
+```
+
 Initialize the local SQLite event store:
 
 ```bash
@@ -70,6 +77,9 @@ python3 keyadvances-newsroom/scripts/newsroom.py score
 python3 keyadvances-newsroom/scripts/newsroom.py research-packs --limit 5
 python3 keyadvances-newsroom/scripts/newsroom.py youtube-transcript-queue
 python3 keyadvances-newsroom/scripts/newsroom.py export-youtube-monitor-config
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-youtube-competitors --fetch-transcripts
+python3 keyadvances-newsroom/scripts/newsroom.py audio-fallback-queue
+python3 keyadvances-newsroom/scripts/newsroom.py process-audio-fallbacks --limit 1
 ```
 
 Default outputs:
@@ -80,6 +90,9 @@ Default outputs:
 - Transcript queue: `keyadvances-newsroom/outputs/youtube-transcript-queue.json`
 - Exported YouTube monitor config:
   `keyadvances-newsroom/outputs/keyadvances-youtube-monitor.yaml`
+- YouTube transcripts: `keyadvances-newsroom/data/youtube-transcripts/`
+- YouTube audio cache: `keyadvances-newsroom/data/youtube-audio/`
+- Audio fallback queue: `keyadvances-newsroom/outputs/audio-fallback-queue.json`
 
 ## Operational Notes
 

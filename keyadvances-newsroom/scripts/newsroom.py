@@ -14,8 +14,10 @@ import html
 import json
 import re
 import sqlite3
+import subprocess
 import textwrap
 import time
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -37,6 +39,9 @@ DEFAULT_RSS_CONFIG = ROOT.parent / "skills" / "news-aggregator" / "config" / "rs
 DEFAULT_YOUTUBE_REPORT_DIR = ROOT.parent / "skills" / "youtube-monitor" / "reports" / "daily"
 DEFAULT_SCORING_CONFIG = ROOT / "config" / "scoring.yaml"
 DEFAULT_YOUTUBE_CHANNELS = ROOT / "sources" / "youtube-channels.yaml"
+DEFAULT_TRANSCRIPT_DIR = ROOT / "data" / "youtube-transcripts"
+DEFAULT_AUDIO_DIR = ROOT / "data" / "youtube-audio"
+DEFAULT_WHISPER_MODEL = Path.home() / ".whisper-models" / "ggml-base.en.bin"
 
 
 SCHEMA = """
@@ -74,6 +79,20 @@ CREATE TABLE IF NOT EXISTS event_scores (
 CREATE INDEX IF NOT EXISTS idx_events_published ON events(published_at);
 CREATE INDEX IF NOT EXISTS idx_events_source ON events(source_type, source_name);
 CREATE INDEX IF NOT EXISTS idx_scores_impact ON event_scores(impact_score DESC);
+
+CREATE TABLE IF NOT EXISTS youtube_transcripts (
+  video_id TEXT PRIMARY KEY,
+  event_id TEXT NOT NULL,
+  channel_name TEXT NOT NULL,
+  title TEXT NOT NULL,
+  url TEXT NOT NULL,
+  transcript_path TEXT,
+  transcript_chars INTEGER NOT NULL DEFAULT 0,
+  status TEXT NOT NULL,
+  fetched_at TEXT NOT NULL,
+  error TEXT DEFAULT '',
+  FOREIGN KEY(event_id) REFERENCES events(event_id)
+);
 """
 
 
@@ -186,6 +205,19 @@ def fetch_url(url: str, timeout: int = 20) -> bytes:
     )
     with urllib.request.urlopen(req, timeout=timeout) as res:
         return res.read()
+
+
+def load_env(path: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
+    if not path.exists():
+        return values
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
 
 
 def parse_feed_entries(xml_bytes: bytes, source_name: str) -> list[Event]:
@@ -614,6 +646,442 @@ def export_youtube_monitor_config(registry_path: Path, output_path: Path) -> Non
     output_path.write_text(yaml.safe_dump(payload, sort_keys=False))
 
 
+def export_audio_fallback_queue(db: sqlite3.Connection, output_path: Path, limit: int = 25) -> list[dict[str, Any]]:
+    rows = db.execute(
+        """
+        SELECT yt.*, e.raw_payload_json, e.published_at
+        FROM youtube_transcripts yt
+        JOIN events e ON e.event_id = yt.event_id
+        WHERE yt.status NOT IN ('cached', 'fetched_api', 'fetched_ytdlp')
+        ORDER BY e.published_at DESC, yt.fetched_at DESC
+        LIMIT ?
+        """,
+        (limit,),
+    ).fetchall()
+    queue: list[dict[str, Any]] = []
+    for row in rows:
+        raw = json.loads(row["raw_payload_json"] or "{}")
+        queue.append(
+            {
+                "video_id": row["video_id"],
+                "title": row["title"],
+                "channel_name": row["channel_name"],
+                "url": row["url"],
+                "published_at": row["published_at"],
+                "duration_seconds": raw.get("duration_seconds"),
+                "target_transcript_path": str(
+                    DEFAULT_TRANSCRIPT_DIR
+                    / f"{row['video_id']}-{slugify(row['title'], 52)}.txt"
+                ),
+                "preferred_fallback": "audio_download_then_whisper_or_assemblyai",
+                "caption_failure": row["error"],
+            }
+        )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(queue, indent=2) + "\n")
+    return queue
+
+
+def download_youtube_audio(video_id: str, title: str, audio_dir: Path) -> Path:
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    existing = sorted(audio_dir.glob(f"{video_id}.*"))
+    for path in existing:
+        if path.suffix.lower() in {".wav", ".m4a", ".mp3"} and path.stat().st_size > 0:
+            return path
+    output_template = str(audio_dir / f"{video_id}.%(ext)s")
+    cmd = [
+        "yt-dlp",
+        "-x",
+        "--audio-format",
+        "wav",
+        "--audio-quality",
+        "5",
+        "--output",
+        output_template,
+        f"https://www.youtube.com/watch?v={video_id}",
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
+    if result.returncode != 0:
+        raise RuntimeError(clean_text(result.stderr or result.stdout)[:700])
+    wav = audio_dir / f"{video_id}.wav"
+    if wav.exists() and wav.stat().st_size > 0:
+        return wav
+    candidates = sorted(audio_dir.glob(f"{video_id}.*"), key=lambda p: p.stat().st_size, reverse=True)
+    if not candidates:
+        raise RuntimeError("yt-dlp completed but no audio file was produced")
+    return candidates[0]
+
+
+def whisper_transcribe(audio_path: Path, output_stem: Path, model_path: Path) -> str:
+    if not model_path.exists():
+        raise RuntimeError(f"Whisper model not found: {model_path}")
+    output_stem.parent.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        "whisper-cli",
+        "-m",
+        str(model_path),
+        "-f",
+        str(audio_path),
+        "--output-txt",
+        "--output-file",
+        str(output_stem),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=900)
+    if result.returncode != 0:
+        raise RuntimeError(clean_text(result.stderr or result.stdout)[:700])
+    txt_path = output_stem.with_suffix(".txt")
+    if not txt_path.exists():
+        raise RuntimeError("whisper-cli completed but no transcript txt was produced")
+    return clean_text(txt_path.read_text(errors="ignore"))
+
+
+def process_audio_fallbacks(
+    db: sqlite3.Connection,
+    limit: int,
+    audio_dir: Path,
+    transcript_dir: Path,
+    model_path: Path,
+) -> dict[str, int]:
+    rows = db.execute(
+        """
+        SELECT yt.*, e.raw_payload_json
+        FROM youtube_transcripts yt
+        JOIN events e ON e.event_id = yt.event_id
+        WHERE yt.status NOT IN ('cached', 'fetched_api', 'fetched_ytdlp', 'audio_whisper')
+        ORDER BY yt.fetched_at DESC
+        LIMIT ?
+        """,
+        (limit,),
+    ).fetchall()
+    stats = {"queued": len(rows), "transcribed": 0, "failed": 0}
+    for row in rows:
+        target = transcript_dir / f"{row['video_id']}-{slugify(row['title'], 52)}.txt"
+        try:
+            audio_path = download_youtube_audio(row["video_id"], row["title"], audio_dir)
+            text = whisper_transcribe(
+                audio_path,
+                transcript_dir / ".whisper" / f"{row['video_id']}-{slugify(row['title'], 52)}",
+                model_path,
+            )
+            if not text:
+                raise RuntimeError("whisper transcript was empty")
+            transcript_dir.mkdir(parents=True, exist_ok=True)
+            target.write_text(text + "\n")
+            db.execute(
+                """
+                UPDATE youtube_transcripts
+                SET transcript_path = ?, transcript_chars = ?, status = ?,
+                    fetched_at = ?, error = ''
+                WHERE video_id = ?
+                """,
+                (str(target), len(text), "audio_whisper", utc_now(), row["video_id"]),
+            )
+            excerpt = text[:900]
+            db.execute(
+                """
+                UPDATE events
+                SET summary = CASE
+                  WHEN summary LIKE '%Transcript excerpt:%' THEN summary
+                  ELSE summary || char(10) || char(10) || 'Transcript excerpt: ' || ?
+                END
+                WHERE event_id = ?
+                """,
+                (excerpt, row["event_id"]),
+            )
+            stats["transcribed"] += 1
+        except Exception as exc:
+            db.execute(
+                """
+                UPDATE youtube_transcripts
+                SET status = ?, fetched_at = ?, error = ?
+                WHERE video_id = ?
+                """,
+                ("audio_failed", utc_now(), str(exc)[:700], row["video_id"]),
+            )
+            stats["failed"] += 1
+    db.commit()
+    return stats
+
+
+def youtube_api_key(explicit_key: str | None = None) -> str:
+    if explicit_key:
+        return explicit_key
+    env = load_env(ROOT.parent / "agent-sdk" / ".env")
+    env.update(load_env(ROOT.parent / ".env"))
+    key = env.get("YOUTUBE_API_KEY")
+    if not key:
+        raise SystemExit("YOUTUBE_API_KEY not found in agent-sdk/.env or repo .env")
+    return key
+
+
+def youtube_api_get(api_key: str, endpoint: str, params: dict[str, Any]) -> dict[str, Any]:
+    query = urllib.parse.urlencode({**params, "key": api_key})
+    url = f"https://www.googleapis.com/youtube/v3/{endpoint}?{query}"
+    return json.loads(fetch_url(url, timeout=30).decode("utf-8"))
+
+
+def parse_iso8601_duration(value: str) -> int:
+    match = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", value or "")
+    if not match:
+        return 0
+    hours = int(match.group(1) or 0)
+    minutes = int(match.group(2) or 0)
+    seconds = int(match.group(3) or 0)
+    return hours * 3600 + minutes * 60 + seconds
+
+
+def discover_channel_videos(
+    api_key: str,
+    channel: dict[str, Any],
+    lookback_hours: int,
+    max_results: int,
+) -> list[dict[str, Any]]:
+    published_after = (
+        datetime.now(timezone.utc) - timedelta(hours=lookback_hours)
+    ).isoformat(timespec="seconds").replace("+00:00", "Z")
+    search = youtube_api_get(
+        api_key,
+        "search",
+        {
+            "part": "snippet",
+            "channelId": channel["channel_id"],
+            "publishedAfter": published_after,
+            "type": "video",
+            "order": "date",
+            "maxResults": max_results,
+        },
+    )
+    ids = [item["id"]["videoId"] for item in search.get("items", []) if item.get("id", {}).get("videoId")]
+    if not ids:
+        return []
+    details = youtube_api_get(
+        api_key,
+        "videos",
+        {
+            "part": "snippet,contentDetails,statistics",
+            "id": ",".join(ids),
+            "maxResults": len(ids),
+        },
+    )
+    videos = []
+    for item in details.get("items", []):
+        snippet = item.get("snippet", {})
+        stats = item.get("statistics", {})
+        duration_seconds = parse_iso8601_duration(item.get("contentDetails", {}).get("duration", ""))
+        videos.append(
+            {
+                "video_id": item["id"],
+                "title": snippet.get("title", ""),
+                "description": snippet.get("description", ""),
+                "published_at": parse_date(snippet.get("publishedAt")),
+                "channel_title": snippet.get("channelTitle") or channel["name"],
+                "channel_id": channel["channel_id"],
+                "url": f"https://www.youtube.com/watch?v={item['id']}",
+                "thumbnail": (snippet.get("thumbnails", {}).get("high") or {}).get("url", ""),
+                "duration_seconds": duration_seconds,
+                "views": int(stats.get("viewCount", 0)),
+                "likes": int(stats.get("likeCount", 0)),
+                "comments": int(stats.get("commentCount", 0)),
+            }
+        )
+    return videos
+
+
+def vtt_to_text(path: Path) -> str:
+    lines: list[str] = []
+    seen: set[str] = set()
+    for raw in path.read_text(errors="ignore").splitlines():
+        line = raw.strip()
+        if not line or line == "WEBVTT" or line.startswith(("NOTE", "Kind:", "Language:")):
+            continue
+        if "-->" in line or re.fullmatch(r"\d+", line):
+            continue
+        line = re.sub(r"<[^>]+>", "", line)
+        line = clean_text(line)
+        if not line or line in seen:
+            continue
+        seen.add(line)
+        lines.append(line)
+    return "\n".join(lines).strip()
+
+
+def fetch_transcript_api_text(video_id: str) -> tuple[str, str]:
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+    except ImportError:
+        return "", "youtube-transcript-api is not installed"
+
+    try:
+        transcript = YouTubeTranscriptApi().fetch(video_id, languages=["en"])
+        snippets = []
+        for item in transcript:
+            text = getattr(item, "text", None)
+            if text is None and isinstance(item, dict):
+                text = item.get("text")
+            if text:
+                snippets.append(clean_text(text))
+        return "\n".join(snippets).strip(), ""
+    except Exception as exc:
+        return "", f"{type(exc).__name__}: {str(exc)[:500]}"
+
+
+def fetch_youtube_transcript(video_id: str, title: str, output_dir: Path) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    slug = slugify(title, 52)
+    txt_path = output_dir / f"{video_id}-{slug}.txt"
+    if txt_path.exists() and txt_path.stat().st_size > 0:
+        return {"status": "cached", "path": str(txt_path), "chars": txt_path.stat().st_size, "error": ""}
+
+    api_text, api_error = fetch_transcript_api_text(video_id)
+    if api_text:
+        txt_path.write_text(api_text + "\n")
+        return {"status": "fetched_api", "path": str(txt_path), "chars": len(api_text), "error": ""}
+
+    tmp_dir = output_dir / ".tmp" / video_id
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    cmd = [
+        "yt-dlp",
+        "--skip-download",
+        "--write-subs",
+        "--write-auto-subs",
+        "--sub-langs",
+        "en,en-US,en.*",
+        "--sub-format",
+        "vtt",
+        "--output",
+        str(tmp_dir / "%(id)s.%(ext)s"),
+        url,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+    if result.returncode != 0:
+        return {
+            "status": "failed",
+            "path": "",
+            "chars": 0,
+            "error": clean_text(api_error + " | " + (result.stderr or result.stdout))[:500],
+        }
+
+    vtts = sorted(tmp_dir.glob("*.vtt"), key=lambda p: p.stat().st_size, reverse=True)
+    if not vtts:
+        return {"status": "missing", "path": "", "chars": 0, "error": api_error or "No VTT subtitles produced"}
+
+    text = vtt_to_text(vtts[0])
+    if not text:
+        return {"status": "empty", "path": "", "chars": 0, "error": api_error or "Subtitle file produced no text"}
+    txt_path.write_text(text + "\n")
+    return {"status": "fetched_ytdlp", "path": str(txt_path), "chars": len(text), "error": ""}
+
+
+def store_youtube_transcript(
+    db: sqlite3.Connection,
+    event_id: str,
+    video: dict[str, Any],
+    transcript: dict[str, Any],
+) -> None:
+    db.execute(
+        """
+        INSERT INTO youtube_transcripts (
+          video_id, event_id, channel_name, title, url, transcript_path,
+          transcript_chars, status, fetched_at, error
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(video_id) DO UPDATE SET
+          event_id = excluded.event_id,
+          transcript_path = excluded.transcript_path,
+          transcript_chars = excluded.transcript_chars,
+          status = excluded.status,
+          fetched_at = excluded.fetched_at,
+          error = excluded.error
+        """,
+        (
+            video["video_id"],
+            event_id,
+            video["channel_title"],
+            video["title"],
+            video["url"],
+            transcript.get("path", ""),
+            transcript.get("chars", 0),
+            transcript.get("status", "unknown"),
+            utc_now(),
+            transcript.get("error", ""),
+        ),
+    )
+
+
+def ingest_youtube_competitors(
+    db: sqlite3.Connection,
+    registry_path: Path,
+    cadence: str,
+    fetch_transcripts: bool,
+    transcript_dir: Path,
+    api_key_value: str | None = None,
+    max_channels: int | None = None,
+) -> dict[str, int]:
+    api_key = youtube_api_key(api_key_value)
+    queue = build_youtube_transcript_queue(
+        registry_path,
+        DEFAULT_OUTPUTS / "youtube-transcript-queue.json",
+        cadence,
+    )
+    if max_channels:
+        queue = queue[:max_channels]
+
+    stats = {"channels": len(queue), "videos": 0, "events": 0, "transcripts": 0, "transcript_failures": 0}
+    for channel in queue:
+        videos = discover_channel_videos(
+            api_key,
+            channel,
+            channel["lookback_hours"],
+            channel["max_new_videos"],
+        )
+        for video in videos:
+            if not (120 <= video["duration_seconds"] <= 7200):
+                continue
+            summary = video["description"][:1200]
+            raw = {
+                "video_id": video["video_id"],
+                "channel_id": video["channel_id"],
+                "thumbnail": video["thumbnail"],
+                "duration_seconds": video["duration_seconds"],
+                "views": video["views"],
+                "likes": video["likes"],
+                "comments": video["comments"],
+                "registry_category": channel["category"],
+            }
+            transcript = {"status": "not_requested", "path": "", "chars": 0, "error": ""}
+            if fetch_transcripts:
+                transcript = fetch_youtube_transcript(video["video_id"], video["title"], transcript_dir)
+                raw["transcript"] = transcript
+                ok_statuses = {"cached", "fetched_api", "fetched_ytdlp"}
+                stats["transcripts"] += int(transcript["status"] in ok_statuses)
+                stats["transcript_failures"] += int(transcript["status"] not in ok_statuses)
+                if transcript.get("path"):
+                    try:
+                        transcript_excerpt = Path(transcript["path"]).read_text(errors="ignore")[:900]
+                        summary = f"{summary}\n\nTranscript excerpt: {transcript_excerpt}"
+                    except OSError:
+                        pass
+
+            event = Event(
+                "youtube",
+                video["channel_title"],
+                video["title"],
+                video["url"],
+                summary,
+                video["published_at"],
+                raw,
+            )
+            inserted = upsert_event(db, event)
+            event_id = event_id_for(event)
+            if fetch_transcripts:
+                store_youtube_transcript(db, event_id, video, transcript)
+            stats["videos"] += 1
+            stats["events"] += int(inserted)
+    db.commit()
+    return stats
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Keyadvances newsroom pipeline")
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -647,10 +1115,31 @@ def build_parser() -> argparse.ArgumentParser:
     yt_config.add_argument("--registry", type=Path, default=DEFAULT_YOUTUBE_CHANNELS)
     yt_config.add_argument("--output", type=Path, default=DEFAULT_OUTPUTS / "keyadvances-youtube-monitor.yaml")
 
+    audio_queue = sub.add_parser("audio-fallback-queue", help="Export videos whose caption transcript fetch failed")
+    audio_queue.add_argument("--output", type=Path, default=DEFAULT_OUTPUTS / "audio-fallback-queue.json")
+    audio_queue.add_argument("--limit", type=int, default=25)
+
+    audio_fallback = sub.add_parser("process-audio-fallbacks", help="Download audio and transcribe failed caption fetches with whisper-cpp")
+    audio_fallback.add_argument("--limit", type=int, default=3)
+    audio_fallback.add_argument("--audio-dir", type=Path, default=DEFAULT_AUDIO_DIR)
+    audio_fallback.add_argument("--transcript-dir", type=Path, default=DEFAULT_TRANSCRIPT_DIR)
+    audio_fallback.add_argument("--model", type=Path, default=DEFAULT_WHISPER_MODEL)
+
+    yt_competitors = sub.add_parser("ingest-youtube-competitors", help="Discover recent videos and fetch transcripts")
+    yt_competitors.add_argument("--registry", type=Path, default=DEFAULT_YOUTUBE_CHANNELS)
+    yt_competitors.add_argument("--cadence", choices=["daily", "weekly"], default="daily")
+    yt_competitors.add_argument("--fetch-transcripts", action="store_true")
+    yt_competitors.add_argument("--transcript-dir", type=Path, default=DEFAULT_TRANSCRIPT_DIR)
+    yt_competitors.add_argument("--api-key")
+    yt_competitors.add_argument("--max-channels", type=int)
+
     daily = sub.add_parser("run-daily", help="Run RSS, latest YouTube report ingestion, scoring, and packs")
     daily.add_argument("--limit-rss-sources", type=int)
     daily.add_argument("--max-days", type=int, default=14)
     daily.add_argument("--pack-limit", type=int, default=5)
+    daily.add_argument("--youtube-transcripts", action="store_true")
+    daily.add_argument("--process-audio-fallbacks", action="store_true")
+    daily.add_argument("--max-youtube-channels", type=int)
 
     return parser
 
@@ -685,21 +1174,74 @@ def main() -> None:
     elif args.command == "export-youtube-monitor-config":
         export_youtube_monitor_config(args.registry, args.output)
         print(f"youtube monitor config exported -> {args.output}")
+    elif args.command == "audio-fallback-queue":
+        queue = export_audio_fallback_queue(db, args.output, args.limit)
+        print(f"audio fallback queue exported: {len(queue)} videos -> {args.output}")
+    elif args.command == "process-audio-fallbacks":
+        stats = process_audio_fallbacks(
+            db,
+            args.limit,
+            args.audio_dir,
+            args.transcript_dir,
+            args.model,
+        )
+        print(
+            "audio fallback processing complete: "
+            f"queued={stats['queued']}, transcribed={stats['transcribed']}, failed={stats['failed']}"
+        )
+    elif args.command == "ingest-youtube-competitors":
+        stats = ingest_youtube_competitors(
+            db,
+            args.registry,
+            args.cadence,
+            args.fetch_transcripts,
+            args.transcript_dir,
+            args.api_key,
+            args.max_channels,
+        )
+        print(
+            "youtube competitor ingest complete: "
+            f"channels={stats['channels']}, videos={stats['videos']}, "
+            f"events={stats['events']}, transcripts={stats['transcripts']}, "
+            f"transcript_failures={stats['transcript_failures']}"
+        )
     elif args.command == "run-daily":
         rss_count = ingest_rss(db, DEFAULT_RSS_CONFIG, args.limit_rss_sources, args.max_days)
         report = latest_youtube_report(DEFAULT_YOUTUBE_REPORT_DIR)
         yt_count = ingest_youtube_report(db, report) if report else 0
+        competitor_stats = ingest_youtube_competitors(
+            db,
+            DEFAULT_YOUTUBE_CHANNELS,
+            "daily",
+            args.youtube_transcripts,
+            DEFAULT_TRANSCRIPT_DIR,
+            None,
+            args.max_youtube_channels,
+        )
         scored = score_events(db, DEFAULT_SCORING_CONFIG)
         build_youtube_transcript_queue(
             DEFAULT_YOUTUBE_CHANNELS,
             DEFAULT_OUTPUTS / "youtube-transcript-queue.json",
             "daily",
         )
+        export_audio_fallback_queue(db, DEFAULT_OUTPUTS / "audio-fallback-queue.json")
+        audio_stats = {"queued": 0, "transcribed": 0, "failed": 0}
+        if args.process_audio_fallbacks:
+            audio_stats = process_audio_fallbacks(
+                db,
+                3,
+                DEFAULT_AUDIO_DIR,
+                DEFAULT_TRANSCRIPT_DIR,
+                DEFAULT_WHISPER_MODEL,
+            )
+            scored = score_events(db, DEFAULT_SCORING_CONFIG)
         packs = generate_research_packs(db, DEFAULT_OUTPUTS / "research-packs", args.pack_limit)
         export_candidates(db, DEFAULT_OUTPUTS / "candidates.json", args.pack_limit)
         print(
-            f"daily run complete: rss={rss_count}, youtube={yt_count}, "
-            f"scored={scored}, packs={len(packs)}"
+            f"daily run complete: rss={rss_count}, youtube_report={yt_count}, "
+            f"youtube_competitor_videos={competitor_stats['videos']}, "
+            f"caption_transcripts={competitor_stats['transcripts']}, "
+            f"audio_transcripts={audio_stats['transcribed']}, scored={scored}, packs={len(packs)}"
         )
 
 
