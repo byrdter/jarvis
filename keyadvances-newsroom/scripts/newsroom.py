@@ -862,6 +862,7 @@ def build_youtube_transcript_queue(
             continue
         if not channel.get("channel_id"):
             continue
+        cap_key = "max_new_videos_per_day" if cadence == "daily" else "max_new_videos_per_week"
         queue.append(
             {
                 "name": channel["name"],
@@ -870,7 +871,7 @@ def build_youtube_transcript_queue(
                 "category": channel.get("category", "unknown"),
                 "priority": channel.get("priority", 2),
                 "lookback_hours": policy.get("lookback_hours", 30),
-                "max_new_videos": policy.get("max_new_videos_per_channel", 3),
+                "max_new_videos": channel.get(cap_key, policy.get("max_new_videos_per_channel", 5)),
                 "transcript_strategy": policy.get("transcript_strategy", "captions_first_audio_fallback"),
             }
         )
@@ -882,14 +883,23 @@ def build_youtube_transcript_queue(
 def export_youtube_monitor_config(registry_path: Path, output_path: Path) -> None:
     registry = load_youtube_registry(registry_path)
     categories: dict[str, list[dict[str, str]]] = {"keyadvances_daily": [], "keyadvances_weekly": []}
+    max_channel_cap = 5
     for channel in registry.get("channels", []):
         if not channel.get("channel_id"):
             continue
         target = "keyadvances_daily" if channel.get("priority") == 1 else "keyadvances_weekly"
+        cap = channel.get(
+            "max_new_videos_per_day" if target == "keyadvances_daily" else "max_new_videos_per_week",
+            registry.get("monitoring_policy", {})
+            .get("daily" if target == "keyadvances_daily" else "weekly", {})
+            .get("max_new_videos_per_channel", 5),
+        )
+        max_channel_cap = max(max_channel_cap, cap)
         categories[target].append(
             {
                 "name": channel["name"],
                 "channel_id": channel["channel_id"],
+                "max_new_videos": cap,
                 "focus": channel.get("rationale", channel.get("category", "")),
             }
         )
@@ -913,8 +923,8 @@ def export_youtube_monitor_config(registry_path: Path, output_path: Path) -> Non
             ],
         },
         "report": {
-            "max_videos_per_channel": 3,
-            "max_total_videos": 40,
+            "max_videos_per_channel": max_channel_cap,
+            "max_total_videos": 200,
             "sort_by": "engagement",
             "include_stats": True,
             "include_description": True,
