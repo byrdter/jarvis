@@ -114,11 +114,14 @@ channels:
   category: ai_coding
   priority: 2
   rationale: AI coding agent workflows and developer productivity.
-- name: Nick Dobos
-  channel_url: https://www.youtube.com/@NickADobos
-  category: ai_coding
+- name: Every
+  channel_url: https://www.youtube.com/@EveryInc
+  channel_id: UCjIMtrzxYc0lblGhmOgC_CA
+  category: ai_analysis
   priority: 2
-  rationale: Claude Code and AI-assisted software building patterns.
+  max_new_videos_per_day: 2
+  max_new_videos_per_week: 5
+  rationale: Low-volume AI ideas, product analysis, and edge-of-AI essays from Every.to; useful for higher-signal angles rather than volume.
 - name: LangChain
   channel_url: https://www.youtube.com/@LangChain
   channel_id: UCC-lyoTfSrcJzA1ab3APAgw

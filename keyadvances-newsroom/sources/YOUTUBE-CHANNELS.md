@@ -19,7 +19,7 @@ Source registry for AI automation, agentic AI, AI assistants, AI product develop
 | 13 | Dave Ebbelaar | Yes | 1 | 8 | 20 | `ai_automation` | [@daveebbelaar](https://www.youtube.com/@daveebbelaar) | `UCn8ujwUInbJkBhffxqAPBVQ` | Practical AI automation, agents, and applied business workflows. |
 | 14 | Mervin Praison | Yes | 1 | 5 |  | `agentic_ai` | [@MervinPraison](https://www.youtube.com/@MervinPraison) | `UCWTyktbw5JYoSBduu8LsBgQ` | AI agents, automation frameworks, and fast technical updates. |
 | 15 | IndyDevDan | Yes | 2 | 5 | 10 | `ai_coding` | [@indydevdan](https://www.youtube.com/@indydevdan) | `UC_x36zCEGilGpB1m-V4gmjg` | AI coding agent workflows and developer productivity. |
-| 16 | Nick Dobos | No - needs channel ID | 2 | 5 | 10 | `ai_coding` | [@NickADobos](https://www.youtube.com/@NickADobos) | `Needs verification` | Claude Code and AI-assisted software building patterns. |
+| 16 | Every | Yes | 2 | 2 | 5 | `ai_analysis` | [@EveryInc](https://www.youtube.com/@EveryInc) | `UCjIMtrzxYc0lblGhmOgC_CA` | Low-volume AI ideas, product analysis, and edge-of-AI essays from Every.to; useful for higher-signal angles rather than volume. |
 | 17 | LangChain | Yes | 1 | 5 |  | `agentic_ai` | [@LangChain](https://www.youtube.com/@LangChain) | `UCC-lyoTfSrcJzA1ab3APAgw` | Official agent framework updates, tutorials, and ecosystem demos. |
 | 18 | LlamaIndex | Yes | 2 | 5 | 10 | `agentic_ai` | [@LlamaIndex](https://www.youtube.com/@LlamaIndex) | `UCeRjipR4_SsCddq9VZ2AeKg` | Agentic RAG, data agents, and LLM application architecture. |
 | 19 | Anthropic | Yes | 1 | 5 |  | `official_ai_lab` | [@anthropic-ai](https://www.youtube.com/@anthropic-ai) | `UCrDwWp7EBBv4NwvScIpBDOA` | Official Claude, Claude Code, and Anthropic product/research updates. |
