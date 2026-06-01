@@ -883,26 +883,33 @@ def build_youtube_transcript_queue(
 def export_youtube_monitor_config(registry_path: Path, output_path: Path) -> None:
     registry = load_youtube_registry(registry_path)
     categories: dict[str, list[dict[str, str]]] = {"keyadvances_daily": [], "keyadvances_weekly": []}
+    daily_priorities = set(registry.get("monitoring_policy", {}).get("daily", {}).get("priority", [1]))
+    weekly_priorities = set(registry.get("monitoring_policy", {}).get("weekly", {}).get("priority", []))
     max_channel_cap = 5
     for channel in registry.get("channels", []):
         if not channel.get("channel_id"):
             continue
-        target = "keyadvances_daily" if channel.get("priority") == 1 else "keyadvances_weekly"
-        cap = channel.get(
-            "max_new_videos_per_day" if target == "keyadvances_daily" else "max_new_videos_per_week",
-            registry.get("monitoring_policy", {})
-            .get("daily" if target == "keyadvances_daily" else "weekly", {})
-            .get("max_new_videos_per_channel", 5),
-        )
-        max_channel_cap = max(max_channel_cap, cap)
-        categories[target].append(
-            {
-                "name": channel["name"],
-                "channel_id": channel["channel_id"],
-                "max_new_videos": cap,
-                "focus": channel.get("rationale", channel.get("category", "")),
-            }
-        )
+        targets = []
+        if channel.get("priority") in daily_priorities:
+            targets.append("keyadvances_daily")
+        if channel.get("priority") in weekly_priorities:
+            targets.append("keyadvances_weekly")
+        for target in targets:
+            cap = channel.get(
+                "max_new_videos_per_day" if target == "keyadvances_daily" else "max_new_videos_per_week",
+                registry.get("monitoring_policy", {})
+                .get("daily" if target == "keyadvances_daily" else "weekly", {})
+                .get("max_new_videos_per_channel", 5),
+            )
+            max_channel_cap = max(max_channel_cap, cap)
+            categories[target].append(
+                {
+                    "name": channel["name"],
+                    "channel_id": channel["channel_id"],
+                    "max_new_videos": cap,
+                    "focus": channel.get("rationale", channel.get("category", "")),
+                }
+            )
 
     payload = {
         "categories": categories,
