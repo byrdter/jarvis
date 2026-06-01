@@ -19,6 +19,7 @@ import subprocess
 import textwrap
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -551,11 +552,37 @@ def ingest_github_trending(
     return inserted
 
 
-def product_hunt_token(explicit_token: str | None = None) -> str:
+def product_hunt_token(explicit_token: str | None = None, force_client_credentials: bool = False) -> str:
     if explicit_token:
         return explicit_token
     env = load_env(ROOT.parent / ".env")
-    return os.getenv("PRODUCT_HUNT_TOKEN") or env.get("PRODUCT_HUNT_TOKEN", "")
+    token = os.getenv("PRODUCT_HUNT_TOKEN") or env.get("PRODUCT_HUNT_TOKEN", "")
+    if token and not force_client_credentials:
+        return token
+
+    client_id = os.getenv("PRODUCT_HUNT_CLIENT_ID") or env.get("PRODUCT_HUNT_CLIENT_ID", "")
+    client_secret = os.getenv("PRODUCT_HUNT_CLIENT_SECRET") or env.get("PRODUCT_HUNT_CLIENT_SECRET", "")
+    if not client_id or not client_secret:
+        return ""
+
+    try:
+        payload = post_json(
+            "https://api.producthunt.com/v2/oauth/token",
+            {
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "grant_type": "client_credentials",
+            },
+            {},
+        )
+    except urllib.error.HTTPError as exc:
+        if exc.code == 401:
+            raise SystemExit(
+                "Product Hunt rejected PRODUCT_HUNT_CLIENT_ID/PRODUCT_HUNT_CLIENT_SECRET. "
+                "Check that these are real API dashboard credentials, not the example values from the docs."
+            ) from exc
+        raise
+    return payload.get("access_token", "")
 
 
 def ingest_product_hunt(
@@ -576,7 +603,10 @@ def ingest_product_hunt(
         return 0
     bearer = product_hunt_token(token)
     if not bearer:
-        raise SystemExit("PRODUCT_HUNT_TOKEN is required for Product Hunt ingestion.")
+        raise SystemExit(
+            "Product Hunt ingestion requires PRODUCT_HUNT_TOKEN or "
+            "PRODUCT_HUNT_CLIENT_ID plus PRODUCT_HUNT_CLIENT_SECRET."
+        )
 
     query = """
     query KeyadvancesProductHunt($first: Int!) {
@@ -596,11 +626,16 @@ def ingest_product_hunt(
       }
     }
     """
-    payload = post_json(
-        source["url"],
-        {"query": query, "variables": {"first": limit}},
-        {"Authorization": f"Bearer {bearer}"},
-    )
+    request_payload = {"query": query, "variables": {"first": limit}}
+    try:
+        payload = post_json(source["url"], request_payload, {"Authorization": f"Bearer {bearer}"})
+    except urllib.error.HTTPError as exc:
+        if exc.code != 401 or token:
+            raise
+        refreshed = product_hunt_token(None, force_client_credentials=True)
+        if not refreshed or refreshed == bearer:
+            raise
+        payload = post_json(source["url"], request_payload, {"Authorization": f"Bearer {refreshed}"})
     if payload.get("errors"):
         raise SystemExit(f"Product Hunt API error: {payload['errors']}")
     inserted = 0
