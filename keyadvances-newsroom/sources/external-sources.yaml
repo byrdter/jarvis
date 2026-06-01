@@ -12,8 +12,9 @@ sources:
       priority: 1
     - name: "Anthropic News"
       type: "rss"
-      url: "https://www.anthropic.com/news/rss.xml"
+      url: "https://raw.githubusercontent.com/0xSMW/rss-feeds/main/feeds/feed_anthropic_news.xml"
       priority: 1
+      note: "Anthropic does not currently expose a stable first-party RSS feed; use the generated feed until a first-party feed is available."
     - name: "Google DeepMind Blog"
       type: "rss"
       url: "https://deepmind.google/blog/rss.xml"
@@ -26,6 +27,7 @@ sources:
       type: "rss"
       url: "https://blogs.microsoft.com/ai/feed/"
       priority: 1
+      note: "This feed is currently stale; Microsoft Research and official product channels are stronger signals."
     - name: "Meta AI Blog"
       type: "html"
       url: "https://ai.meta.com/blog/"
@@ -42,12 +44,14 @@ sources:
       priority: 1
     - name: "LangChain Blog"
       type: "rss"
-      url: "https://blog.langchain.com/rss/"
+      url: "https://changelog.langchain.com/feed.xml"
       priority: 1
+      note: "The old blog RSS endpoint now returns HTML; use the official changelog RSS for product/release signals."
     - name: "LlamaIndex Blog"
-      type: "rss"
-      url: "https://www.llamaindex.ai/blog/rss.xml"
+      type: "html"
+      url: "https://www.llamaindex.ai/blog"
       priority: 1
+      note: "No active RSS feed found; monitor via YouTube/X/GitHub until an HTML or API scraper is added."
     - name: "Replicate Blog"
       type: "rss"
       url: "https://replicate.com/blog/rss"
@@ -108,9 +112,10 @@ sources:
       url: "https://bair.berkeley.edu/blog/feed.xml"
       priority: 2
     - name: "Stanford AI Lab"
-      type: "rss"
-      url: "https://ai.stanford.edu/blog/feed.xml"
+      type: "html"
+      url: "https://ai.stanford.edu/blog/"
       priority: 2
+      note: "Old RSS feed is stale; keep as future HTML/source candidate only."
 
   communities:
     - name: "Reddit LocalLLaMA"
@@ -133,13 +138,21 @@ sources:
       type: "api"
       url: "https://www.reddit.com/r/ArtificialInteligence/new.json"
       priority: 2
+    - name: "Reddit AgenticAI"
+      type: "api"
+      url: "https://www.reddit.com/r/AgenticAI/new.json"
+      priority: 2
+    - name: "Reddit AI Agents"
+      type: "api"
+      url: "https://www.reddit.com/r/AI_Agents/new.json"
+      priority: 2
 
   future_browser_sources:
     - name: "X/Twitter AI launch lists"
       type: "browser_or_api"
-      url: "manual-list-required"
+      url: "sources/x-twitter-sources.yaml"
       priority: 1
-      note: "Add after deciding between official API, Browserbase, or manual curated account list."
+      note: "Curated source list exists; ingestion needs official API, Browserbase/session, or third-party provider decision."
     - name: "Discord/Slack AI communities"
       type: "manual_or_connector"
       url: "manual-list-required"

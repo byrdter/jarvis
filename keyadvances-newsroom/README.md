@@ -14,6 +14,8 @@ developments early enough to turn them into useful videos.
   discovery, transcripts, competing angles, and title/thumbnail intelligence.
 - `sources/external-sources.yaml` - RSS, API, community, research, GitHub, and
   future browser/authenticated sources.
+- `sources/x-twitter-sources.yaml` - curated X/Twitter launch-signal accounts
+  for a future API/browser-backed social monitor.
 
 ## Current Local Reuse Points
 
@@ -44,7 +46,13 @@ developments early enough to turn them into useful videos.
    The first bridge is implemented: `youtube-transcript-queue` exports a daily
    queue of high-priority channels with verified channel IDs, and
    `export-youtube-monitor-config` exports an API-ready monitor config.
-7. Generate script-with-visual-cues, resolve assets through `asset-library`, and
+7. Add non-YouTube source ingestion:
+   RSS ingestion is implemented; Reddit community JSON ingestion and GitHub
+   Trending ingestion are implemented and included in `run-daily`; Product Hunt
+   ingestion is implemented but requires `PRODUCT_HUNT_TOKEN`; X/Twitter source
+   lists are configured but not yet ingested until the API/browser strategy is
+   selected.
+8. Generate script-with-visual-cues, resolve assets through `asset-library`, and
    render a faceless HyperFrames/Remotion draft.
 
 ## CLI
@@ -72,6 +80,10 @@ Run individual stages:
 
 ```bash
 python3 keyadvances-newsroom/scripts/newsroom.py ingest-rss --max-days 14
+python3 keyadvances-newsroom/scripts/newsroom.py audit-rss --output keyadvances-newsroom/outputs/rss-health.json
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-reddit
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-github-trending
+python3 keyadvances-newsroom/scripts/newsroom.py ingest-product-hunt
 python3 keyadvances-newsroom/scripts/newsroom.py ingest-youtube-report
 python3 keyadvances-newsroom/scripts/newsroom.py score
 python3 keyadvances-newsroom/scripts/newsroom.py research-packs --limit 5
@@ -87,6 +99,7 @@ Default outputs:
 
 - Event DB: `keyadvances-newsroom/data/newsroom.db`
 - Candidate JSON: `keyadvances-newsroom/outputs/candidates.json`
+- RSS health audit: `keyadvances-newsroom/outputs/rss-health.json`
 - Research packs: `keyadvances-newsroom/outputs/research-packs/`
 - Draft scripts: `keyadvances-newsroom/outputs/scripts/`
 - Asset manifests: `keyadvances-newsroom/outputs/asset-manifests/`

@@ -1,0 +1,93 @@
+# Keyadvances X/Twitter source candidates
+#
+# Purpose: curated launch-signal accounts for a future X/Twitter ingestion step.
+# This file is intentionally config-only for now. X ingestion needs an explicit
+# choice between official API access, a browser/session workflow, or a third-party
+# social listening provider.
+
+accounts:
+  official_ai_labs:
+  - handle: OpenAI
+    url: https://x.com/OpenAI
+    priority: 1
+    rationale: Official OpenAI product, model, API, and research announcements.
+  - handle: AnthropicAI
+    url: https://x.com/AnthropicAI
+    priority: 1
+    rationale: Official Claude, Claude Code, API, and research announcements.
+  - handle: GoogleDeepMind
+    url: https://x.com/GoogleDeepMind
+    priority: 1
+    rationale: Official Gemini, DeepMind research, and Google AI announcements.
+  - handle: AIatMeta
+    url: https://x.com/AIatMeta
+    priority: 1
+    rationale: Official Meta AI and Llama ecosystem announcements.
+  - handle: MistralAI
+    url: https://x.com/MistralAI
+    priority: 1
+    rationale: Official Mistral model and product announcements.
+  - handle: xai
+    url: https://x.com/xai
+    priority: 1
+    rationale: Official xAI and Grok announcements.
+
+  agent_and_builder_ecosystem:
+  - handle: LangChainAI
+    url: https://x.com/LangChainAI
+    priority: 1
+    rationale: Agent framework, LangGraph, and ecosystem release signals.
+  - handle: llama_index
+    url: https://x.com/llama_index
+    priority: 1
+    rationale: Agentic RAG, data agents, and LLM app architecture updates.
+  - handle: huggingface
+    url: https://x.com/huggingface
+    priority: 1
+    rationale: Model, dataset, Spaces, and open-source AI launch signals.
+  - handle: togethercompute
+    url: https://x.com/togethercompute
+    priority: 2
+    rationale: Open model serving, inference, and developer platform updates.
+  - handle: replicate
+    url: https://x.com/replicate
+    priority: 2
+    rationale: Model deployment and generative AI product updates.
+  - handle: browserbasehq
+    url: https://x.com/browserbasehq
+    priority: 2
+    rationale: Browser automation infrastructure and agent browsing signals.
+  - handle: n8n_io
+    url: https://x.com/n8n_io
+    priority: 2
+    rationale: Automation workflow product updates relevant to agent operations.
+
+  developer_tools_and_repos:
+  - handle: GitHub
+    url: https://x.com/github
+    priority: 1
+    rationale: GitHub product announcements and developer workflow updates.
+  - handle: Docker
+    url: https://x.com/Docker
+    priority: 2
+    rationale: Developer infrastructure updates that can affect agent deployment.
+  - handle: vercel
+    url: https://x.com/vercel
+    priority: 2
+    rationale: AI app hosting, frontend agents, and developer platform launches.
+  - handle: Replit
+    url: https://x.com/Replit
+    priority: 2
+    rationale: AI coding, agents, and cloud development environment updates.
+
+monitoring_policy:
+  daily:
+    priority:
+    - 1
+    - 2
+    lookback_hours: 30
+    max_posts_per_account: 10
+  notes:
+  - Official API access is preferred for reliable automation.
+  - Browser/session capture should be used only when it complies with account terms and rate limits.
+  - Treat X as an early-signal source; verify claims against official docs, blogs, GitHub releases, or product pages before scripting.

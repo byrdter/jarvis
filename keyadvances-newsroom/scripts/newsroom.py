@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import sqlite3
 import subprocess
@@ -38,6 +39,7 @@ DEFAULT_OUTPUTS = ROOT / "outputs"
 DEFAULT_SCRIPT_DIR = DEFAULT_OUTPUTS / "scripts"
 DEFAULT_ASSET_MANIFEST_DIR = DEFAULT_OUTPUTS / "asset-manifests"
 DEFAULT_RSS_CONFIG = ROOT.parent / "skills" / "news-aggregator" / "config" / "rss-feeds.json"
+DEFAULT_EXTERNAL_SOURCES = ROOT / "sources" / "external-sources.yaml"
 DEFAULT_YOUTUBE_REPORT_DIR = ROOT.parent / "skills" / "youtube-monitor" / "reports" / "daily"
 DEFAULT_SCORING_CONFIG = ROOT / "config" / "scoring.yaml"
 DEFAULT_YOUTUBE_CHANNELS = ROOT / "sources" / "youtube-channels.yaml"
@@ -221,6 +223,26 @@ def fetch_url(url: str, timeout: int = 20) -> bytes:
         return res.read()
 
 
+def fetch_json(url: str, timeout: int = 20) -> Any:
+    return json.loads(fetch_url(url, timeout).decode("utf-8"))
+
+
+def post_json(url: str, payload: dict[str, Any], headers: dict[str, str], timeout: int = 30) -> Any:
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": "KeyadvancesNewsroom/0.1 (+https://youtube.com/@keyadvances)",
+            **headers,
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as res:
+        return json.loads(res.read().decode("utf-8"))
+
+
 def load_env(path: Path) -> dict[str, str]:
     values: dict[str, str] = {}
     if not path.exists():
@@ -283,6 +305,44 @@ def load_rss_config(path: Path) -> dict[str, str]:
         return json.load(f)
 
 
+def audit_rss_feeds(config_path: Path, max_days: int = 14) -> list[dict[str, Any]]:
+    feeds = list(load_rss_config(config_path).items())
+    cutoff = datetime.now(timezone.utc) - timedelta(days=max_days)
+    report = []
+    for source_name, feed_url in feeds:
+        item: dict[str, Any] = {
+            "source": source_name,
+            "url": feed_url,
+            "ok": False,
+            "entries": 0,
+            "recent_entries": 0,
+            "latest_published_at": None,
+            "error": "",
+        }
+        try:
+            entries = parse_feed_entries(fetch_url(feed_url), source_name)
+            item["ok"] = True
+            item["entries"] = len(entries)
+            recent_entries = []
+            latest: datetime | None = None
+            for entry in entries:
+                if not entry.published_at:
+                    continue
+                try:
+                    published = datetime.fromisoformat(entry.published_at)
+                except ValueError:
+                    continue
+                latest = max(latest, published) if latest else published
+                if published >= cutoff:
+                    recent_entries.append(entry)
+            item["recent_entries"] = len(recent_entries)
+            item["latest_published_at"] = latest.isoformat(timespec="seconds") if latest else None
+        except Exception as exc:
+            item["error"] = str(exc)
+        report.append(item)
+    return report
+
+
 def ingest_rss(
     db: sqlite3.Connection,
     config_path: Path,
@@ -310,6 +370,263 @@ def ingest_rss(
                 except ValueError:
                     pass
             inserted += int(upsert_event(db, event))
+    db.commit()
+    return inserted
+
+
+def load_external_sources(path: Path) -> dict[str, Any]:
+    with path.open() as f:
+        return yaml.safe_load(f)
+
+
+def iter_external_sources(
+    registry_path: Path,
+    source_type: str | None = None,
+    categories: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    registry = load_external_sources(registry_path)
+    rows = []
+    for category, sources in registry.get("sources", {}).items():
+        if categories and category not in categories:
+            continue
+        for source in sources:
+            if source_type and source.get("type") != source_type:
+                continue
+            row = dict(source)
+            row["category"] = category
+            rows.append(row)
+    return rows
+
+
+def ingest_reddit(
+    db: sqlite3.Connection,
+    registry_path: Path,
+    max_days: int = 3,
+    limit_sources: int | None = None,
+    limit_posts: int = 25,
+) -> int:
+    sources = [
+        s
+        for s in iter_external_sources(registry_path, "api", {"communities"})
+        if "reddit.com" in s.get("url", "")
+    ]
+    if limit_sources:
+        sources = sources[:limit_sources]
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=max_days)
+    inserted = 0
+    for source in sources:
+        url = source["url"]
+        separator = "&" if "?" in url else "?"
+        feed_url = f"{url}{separator}limit={limit_posts}"
+        try:
+            payload = fetch_json(feed_url)
+        except Exception as exc:
+            subreddit_match = re.search(r"reddit\.com/r/([^/]+)", url)
+            if not subreddit_match:
+                print(f"! Reddit fetch failed for {source['name']}: {exc}")
+                continue
+            rss_url = f"https://www.reddit.com/r/{subreddit_match.group(1)}/new/.rss"
+            try:
+                entries = parse_feed_entries(fetch_url(rss_url), source["name"])[:limit_posts]
+            except Exception as rss_exc:
+                print(f"! Reddit fetch failed for {source['name']}: json={exc}; rss={rss_exc}")
+                continue
+            for entry in entries:
+                if entry.published_at:
+                    try:
+                        published = datetime.fromisoformat(entry.published_at)
+                        if published < cutoff:
+                            continue
+                    except ValueError:
+                        pass
+                event = Event(
+                    "reddit",
+                    source["name"],
+                    entry.title,
+                    entry.url,
+                    entry.summary,
+                    entry.published_at,
+                    {"source_category": source.get("category"), "fallback": "rss"},
+                )
+                inserted += int(upsert_event(db, event))
+            continue
+
+        children = payload.get("data", {}).get("children", [])
+        for child in children:
+            data = child.get("data", {})
+            title = clean_text(data.get("title", ""))
+            if not title:
+                continue
+            created = datetime.fromtimestamp(data.get("created_utc", 0), timezone.utc)
+            if created < cutoff:
+                continue
+            permalink = data.get("permalink", "")
+            comments_url = urllib.parse.urljoin("https://www.reddit.com", permalink)
+            outbound_url = data.get("url_overridden_by_dest") or data.get("url") or comments_url
+            summary = clean_text(data.get("selftext", ""))
+            if not summary:
+                summary = f"Reddit discussion with score {data.get('score', 0)} and {data.get('num_comments', 0)} comments."
+            event = Event(
+                "reddit",
+                source["name"],
+                title,
+                comments_url,
+                summary,
+                created.isoformat(timespec="seconds"),
+                {
+                    "subreddit": data.get("subreddit"),
+                    "score": data.get("score", 0),
+                    "num_comments": data.get("num_comments", 0),
+                    "outbound_url": outbound_url,
+                    "source_category": source.get("category"),
+                },
+            )
+            inserted += int(upsert_event(db, event))
+    db.commit()
+    return inserted
+
+
+def ingest_github_trending(
+    db: sqlite3.Connection,
+    registry_path: Path,
+    since: str = "daily",
+    language: str = "",
+) -> int:
+    sources = [
+        s
+        for s in iter_external_sources(registry_path, "html", {"developer_and_agent_ecosystem"})
+        if "github.com/trending" in s.get("url", "")
+    ]
+    if not sources:
+        return 0
+    query = {"since": since}
+    base_url = sources[0]["url"].split("?", 1)[0]
+    path = f"/{urllib.parse.quote(language.strip())}" if language.strip() else ""
+    url = f"{base_url}{path}?{urllib.parse.urlencode(query)}"
+    try:
+        html_text = fetch_url(url).decode("utf-8", errors="replace")
+    except Exception as exc:
+        print(f"! GitHub Trending fetch failed: {exc}")
+        return 0
+
+    articles = re.findall(r"<article\b.*?</article>", html_text, flags=re.DOTALL | re.IGNORECASE)
+    inserted = 0
+    for article in articles:
+        link_match = re.search(r'<h2[^>]*>.*?<a[^>]+href="(?P<href>/[^"]+)"', article, flags=re.DOTALL)
+        if not link_match:
+            continue
+        repo_path = clean_text(link_match.group("href").strip("/"))
+        if "/" not in repo_path:
+            continue
+        desc_match = re.search(r'<p[^>]*class="[^"]*col-9[^"]*"[^>]*>(?P<desc>.*?)</p>', article, flags=re.DOTALL)
+        language_match = re.search(r'<span[^>]*itemprop="programmingLanguage"[^>]*>(?P<lang>.*?)</span>', article, flags=re.DOTALL)
+        stars_match = re.search(r"(?P<stars>[\d,]+)\s+stars\s+today", clean_text(article), flags=re.IGNORECASE)
+        description = clean_text(desc_match.group("desc")) if desc_match else ""
+        repo_language = clean_text(language_match.group("lang")) if language_match else ""
+        title = f"GitHub Trending: {repo_path}"
+        summary_parts = []
+        if description:
+            summary_parts.append(description)
+        if repo_language:
+            summary_parts.append(f"Language: {repo_language}.")
+        if stars_match:
+            summary_parts.append(f"Stars today: {stars_match.group('stars')}.")
+        event = Event(
+            "github",
+            "GitHub Trending",
+            title,
+            f"https://github.com/{repo_path}",
+            " ".join(summary_parts),
+            utc_now(),
+            {
+                "repo": repo_path,
+                "language": repo_language,
+                "stars_today": stars_match.group("stars") if stars_match else "",
+                "since": since,
+            },
+        )
+        inserted += int(upsert_event(db, event))
+    db.commit()
+    return inserted
+
+
+def product_hunt_token(explicit_token: str | None = None) -> str:
+    if explicit_token:
+        return explicit_token
+    env = load_env(ROOT.parent / ".env")
+    return os.getenv("PRODUCT_HUNT_TOKEN") or env.get("PRODUCT_HUNT_TOKEN", "")
+
+
+def ingest_product_hunt(
+    db: sqlite3.Connection,
+    registry_path: Path,
+    token: str | None = None,
+    limit: int = 20,
+) -> int:
+    source = next(
+        (
+            s
+            for s in iter_external_sources(registry_path, "api", {"news_and_aggregators"})
+            if "producthunt.com" in s.get("url", "")
+        ),
+        None,
+    )
+    if not source:
+        return 0
+    bearer = product_hunt_token(token)
+    if not bearer:
+        raise SystemExit("PRODUCT_HUNT_TOKEN is required for Product Hunt ingestion.")
+
+    query = """
+    query KeyadvancesProductHunt($first: Int!) {
+      posts(first: $first) {
+        edges {
+          node {
+            id
+            name
+            tagline
+            description
+            url
+            votesCount
+            commentsCount
+            createdAt
+          }
+        }
+      }
+    }
+    """
+    payload = post_json(
+        source["url"],
+        {"query": query, "variables": {"first": limit}},
+        {"Authorization": f"Bearer {bearer}"},
+    )
+    if payload.get("errors"):
+        raise SystemExit(f"Product Hunt API error: {payload['errors']}")
+    inserted = 0
+    edges = payload.get("data", {}).get("posts", {}).get("edges", [])
+    for edge in edges:
+        node = edge.get("node", {})
+        name = clean_text(node.get("name", ""))
+        if not name:
+            continue
+        tagline = clean_text(node.get("tagline", ""))
+        description = clean_text(node.get("description", ""))
+        summary = " ".join(part for part in [tagline, description] if part)
+        event = Event(
+            "product_hunt",
+            source["name"],
+            name,
+            node.get("url", ""),
+            summary,
+            parse_date(node.get("createdAt")),
+            {
+                "product_hunt_id": node.get("id"),
+                "votes": node.get("votesCount", 0),
+                "comments": node.get("commentsCount", 0),
+            },
+        )
+        inserted += int(upsert_event(db, event))
     db.commit()
     return inserted
 
@@ -381,7 +698,7 @@ def score_event(row: sqlite3.Row, config: dict[str, Any]) -> dict[str, Any]:
     novelty = 1.0 if any(w in text for w in ["new", "launch", "released", "update", "beta", "leak"]) else 0.55
     audience_relevance = min(1.0, 0.2 + high_hits * 0.16)
     market_importance = 0.85 if contains_any(text, ["openai", "anthropic", "google", "meta", "microsoft", "nvidia", "github"]) else 0.45
-    proof_available = 0.85 if source_type in {"rss", "youtube", "github", "api"} else 0.55
+    proof_available = 0.85 if source_type in {"rss", "youtube", "github", "reddit", "product_hunt", "api"} else 0.55
     visual_potential = min(1.0, 0.35 + visual_hits * 0.18 + (0.15 if source_type == "youtube" else 0))
     search_demand = min(1.0, 0.25 + high_hits * 0.12 + (0.2 if source_type == "youtube" else 0))
     tension = min(1.0, 0.1 + tension_hits * 0.2)
@@ -1389,6 +1706,27 @@ def build_parser() -> argparse.ArgumentParser:
     rss.add_argument("--limit-sources", type=int)
     rss.add_argument("--max-days", type=int, default=14)
 
+    rss_audit = sub.add_parser("audit-rss", help="Check RSS feed health and recency")
+    rss_audit.add_argument("--config", type=Path, default=DEFAULT_RSS_CONFIG)
+    rss_audit.add_argument("--max-days", type=int, default=14)
+    rss_audit.add_argument("--output", type=Path)
+
+    reddit = sub.add_parser("ingest-reddit", help="Fetch Reddit community sources into the event store")
+    reddit.add_argument("--registry", type=Path, default=DEFAULT_EXTERNAL_SOURCES)
+    reddit.add_argument("--max-days", type=int, default=3)
+    reddit.add_argument("--limit-sources", type=int)
+    reddit.add_argument("--limit-posts", type=int, default=25)
+
+    github_trending = sub.add_parser("ingest-github-trending", help="Fetch GitHub Trending into the event store")
+    github_trending.add_argument("--registry", type=Path, default=DEFAULT_EXTERNAL_SOURCES)
+    github_trending.add_argument("--since", choices=["daily", "weekly", "monthly"], default="daily")
+    github_trending.add_argument("--language", default="")
+
+    product_hunt = sub.add_parser("ingest-product-hunt", help="Fetch Product Hunt launches into the event store")
+    product_hunt.add_argument("--registry", type=Path, default=DEFAULT_EXTERNAL_SOURCES)
+    product_hunt.add_argument("--token")
+    product_hunt.add_argument("--limit", type=int, default=20)
+
     yt = sub.add_parser("ingest-youtube-report", help="Ingest a YouTube markdown report")
     yt.add_argument("--report", type=Path)
     yt.add_argument("--report-dir", type=Path, default=DEFAULT_YOUTUBE_REPORT_DIR)
@@ -1441,6 +1779,9 @@ def build_parser() -> argparse.ArgumentParser:
     daily.add_argument("--process-audio-fallbacks", action="store_true")
     daily.add_argument("--max-youtube-channels", type=int)
     daily.add_argument("--script-drafts", action="store_true")
+    daily.add_argument("--skip-reddit", action="store_true")
+    daily.add_argument("--skip-github-trending", action="store_true")
+    daily.add_argument("--product-hunt", action="store_true")
 
     return parser
 
@@ -1454,6 +1795,27 @@ def main() -> None:
     elif args.command == "ingest-rss":
         count = ingest_rss(db, args.config, args.limit_sources, args.max_days)
         print(f"rss events upserted: {count}")
+    elif args.command == "audit-rss":
+        report = audit_rss_feeds(args.config, args.max_days)
+        failed = [item for item in report if not item["ok"]]
+        stale = [item for item in report if item["ok"] and item["recent_entries"] == 0]
+        text = json.dumps(report, indent=2) + "\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(text)
+            print(f"rss audit written: {args.output}")
+        else:
+            print(text, end="")
+        print(f"rss audit complete: feeds={len(report)}, failed={len(failed)}, stale={len(stale)}")
+    elif args.command == "ingest-reddit":
+        count = ingest_reddit(db, args.registry, args.max_days, args.limit_sources, args.limit_posts)
+        print(f"reddit events upserted: {count}")
+    elif args.command == "ingest-github-trending":
+        count = ingest_github_trending(db, args.registry, args.since, args.language)
+        print(f"github trending events upserted: {count}")
+    elif args.command == "ingest-product-hunt":
+        count = ingest_product_hunt(db, args.registry, args.token, args.limit)
+        print(f"product hunt events upserted: {count}")
     elif args.command == "ingest-youtube-report":
         report = args.report or latest_youtube_report(args.report_dir)
         if not report:
@@ -1514,6 +1876,11 @@ def main() -> None:
         )
     elif args.command == "run-daily":
         rss_count = ingest_rss(db, DEFAULT_RSS_CONFIG, args.limit_rss_sources, args.max_days)
+        reddit_count = 0 if args.skip_reddit else ingest_reddit(db, DEFAULT_EXTERNAL_SOURCES)
+        github_count = 0 if args.skip_github_trending else ingest_github_trending(db, DEFAULT_EXTERNAL_SOURCES)
+        product_hunt_count = 0
+        if args.product_hunt:
+            product_hunt_count = ingest_product_hunt(db, DEFAULT_EXTERNAL_SOURCES)
         report = latest_youtube_report(DEFAULT_YOUTUBE_REPORT_DIR)
         yt_count = ingest_youtube_report(db, report) if report else 0
         competitor_stats = ingest_youtube_competitors(
@@ -1553,7 +1920,9 @@ def main() -> None:
                 min(args.pack_limit, 3),
             )
         print(
-            f"daily run complete: rss={rss_count}, youtube_report={yt_count}, "
+            f"daily run complete: rss={rss_count}, reddit={reddit_count}, "
+            f"github_trending={github_count}, product_hunt={product_hunt_count}, "
+            f"youtube_report={yt_count}, "
             f"youtube_competitor_videos={competitor_stats['videos']}, "
             f"caption_transcripts={competitor_stats['transcripts']}, "
             f"audio_transcripts={audio_stats['transcribed']}, scored={scored}, "
