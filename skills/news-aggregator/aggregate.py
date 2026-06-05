@@ -167,10 +167,8 @@ def fetch_rss_feed(source_name: str, feed_url: str, max_days: float = 5.0) -> Li
                 if not title or not url:
                     continue
 
-                # Only include AI-relevant articles
-                if not is_ai_relevant(title + ' ' + summary):
-                    continue
-
+                # NOTE: Relevance filtering moved to main() so that AI-dedicated
+                # sources (Substacks, Reddit AI subs) can bypass keyword matching.
                 articles.append({
                     'title': title,
                     'url': url,
@@ -712,7 +710,7 @@ def main():
     all_articles.extend(hn_articles)
     per_source_raw['Hacker News'] = len(hn_articles)
 
-    # Fetch all RSS feeds
+    # Fetch all RSS feeds (includes Reddit subs and Substacks)
     rss_feeds = load_rss_feeds()
     print(f"Fetching RSS feeds: {len(rss_feeds)} configured sources")
 
@@ -725,8 +723,34 @@ def main():
     print(f"Total articles collected: {len(all_articles)}")
 
     # ── Filter for relevance ──────────────────────────────────────────────
+    # Sources whose entire feed is AI-by-definition bypass the keyword filter.
     print("Filtering for AI relevance...")
-    relevant_articles = [a for a in all_articles if is_ai_relevant(a.get('title', ''))]
+    AI_DEDICATED_SOURCES = {
+        'Hacker News',  # already pre-filtered upstream
+        'Import AI (Jack Clark)',
+        'Latent Space (swyx)',
+        'AI Snake Oil (Narayanan)',
+        'One Useful Thing (Mollick)',
+        'The Algorithmic Bridge',
+        'Last Week in AI',
+        'OpenAI News',
+        'Anthropic News',
+        'Anthropic Research',
+        'Google DeepMind',
+        'Google AI Blog',
+        'Hugging Face Blog',
+        'LangChain Changelog',
+        'BAIR Blog',
+        'ChinAI Newsletter',
+    }
+    def _passes_relevance(a):
+        src = a.get('source', '')
+        if src.startswith('Reddit:'):
+            return True
+        if src in AI_DEDICATED_SOURCES:
+            return True
+        return is_ai_relevant(a.get('title', ''))
+    relevant_articles = [a for a in all_articles if _passes_relevance(a)]
     print(f"  Relevant articles: {len(relevant_articles)}")
 
     # ── Within-batch dedupe (same article, multiple feeds) ────────────────
@@ -747,7 +771,12 @@ def main():
     persisted = 0
     extracted = 0
     for i, a in enumerate(fresh_articles, 1):
-        full_text = extract_full_text(a.get('url', ''))
+        # Reddit self-posts: use selftext directly (no need to refetch).
+        # Reddit link posts: fall through to trafilatura against external URL.
+        if a.get('_is_self') and a.get('_selftext'):
+            full_text = a['_selftext']
+        else:
+            full_text = extract_full_text(a.get('url', ''))
         if full_text:
             extracted += 1
         archive_path = write_archive(a, full_text)

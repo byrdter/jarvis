@@ -18,5 +18,18 @@
   "LangChain Changelog": "https://changelog.langchain.com/feed.xml",
   "Replicate Blog": "https://replicate.com/blog/rss",
   "ChinAI Newsletter": "https://chinai.substack.com/feed",
-  "BAIR Blog": "https://bair.berkeley.edu/blog/feed.xml"
+  "BAIR Blog": "https://bair.berkeley.edu/blog/feed.xml",
+
+  "Import AI (Jack Clark)": "https://jack-clark.net/feed/",
+  "Latent Space (swyx)": "https://www.latent.space/feed",
+  "AI Snake Oil (Narayanan)": "https://www.aisnakeoil.com/feed",
+  "The Pragmatic Engineer": "https://newsletter.pragmaticengineer.com/feed",
+  "Stratechery (free posts)": "https://stratechery.com/feed/",
+  "One Useful Thing (Mollick)": "https://www.oneusefulthing.org/feed",
+  "The Algorithmic Bridge": "https://www.thealgorithmicbridge.com/feed",
+  "Astral Codex Ten (Alexander)": "https://www.astralcodexten.com/feed",
+  "Last Week in AI": "https://lastweekin.ai/feed",
+
+  "Reddit: r/LocalLLaMA": "https://www.reddit.com/r/LocalLLaMA/.rss",
+  "Reddit: r/MachineLearning": "https://www.reddit.com/r/MachineLearning/.rss"
 }
