@@ -77,7 +77,9 @@ skills/social-poster/
 skills/slack-notifier/
 skills/gmail-insights/
 skills/calendar-scheduler/
-skills/youtube-monitor/
+skills/youtube-monitor/reports/
+skills/youtube-monitor/config/handle-cache.json
+skills/youtube-monitor/__pycache__/
 skills/youtube-content-aggregator/
 skills/video-standards-checker/
 skills/script-optimizer/
