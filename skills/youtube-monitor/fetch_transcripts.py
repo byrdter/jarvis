@@ -25,7 +25,7 @@ except ImportError:
         return False
 
 # ---- Knowledge-graph integration ------------------------------------------
-KNOWLEDGE_DB = Path(__file__).resolve().parents[2] / "agent-sdk" / "data" / "claude-code-knowledge.db"
+KNOWLEDGE_DB = Path(__file__).resolve().parents[2] / "agent-sdk" / "data" / "ai-knowledge.db"
 VAULT_ROOT = Path(os.path.expanduser("~/Obsidian/JARVIS/YouTube"))
 
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
@@ -181,7 +181,7 @@ def write_vault_markdown(v, text, source, lang):
 
 
 def mirror_to_knowledge_db(v, text, source, lang, transcript_path):
-    """Insert into claude-code-knowledge.db so JARVIS sees this in its
+    """Insert into ai-knowledge.db so JARVIS sees this in its
     unified knowledge graph (content_sources + segments)."""
     if not KNOWLEDGE_DB.exists():
         return False
