@@ -109,6 +109,15 @@ categories:
       channel_id: "UCtatfZMf-8EkIwASXM4ts0A"
       focus: "Applied AI engineering, speech AI, tutorials, model explainers"
 
+    # Migrated from the (now retired) Sunday Claude Code scraper
+    - name: "Chase H A I"
+      channel_id: "UCoy6cTJ7Tg0dqS-DI-_REsA"
+      focus: "Claude Code tutorials, agentic AI walkthroughs"
+
+    - name: "simonscrapes"
+      channel_id: "UCdCR4-uYOg5ju-IUuDnfnQA"
+      focus: "Web scraping, automation, applied AI builds"
+
   # ──────────────────────────────────────────────────────────────────────
   # TIER 2 — supplementary technical / research / business channels
   # From prior 40-channel config; deduped against Tier 1
