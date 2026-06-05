@@ -34,15 +34,17 @@ def read_digest(file_path: str) -> tuple[str, str, int]:
     with open(file_path, 'r') as f:
         content = f.read()
 
-    # Extract article count from "Articles: N" line
+    # Extract article count from "New articles today: N" (v2) or "Articles: N" (v1)
+    import re
     article_count = 0
-    for line in content.split('\n'):
-        if line.startswith('Articles:'):
-            try:
-                article_count = int(line.split(':')[1].strip())
-            except (IndexError, ValueError):
-                pass
-            break
+    m = re.search(r'New articles today:\*?\*?\s*(\d+)', content)
+    if not m:
+        m = re.search(r'^Articles:\s*(\d+)', content, re.MULTILINE)
+    if m:
+        try:
+            article_count = int(m.group(1))
+        except (IndexError, ValueError):
+            pass
 
     # Extract title (first line starting with #)
     title = "AI News Digest"
