@@ -15,6 +15,10 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 from pathlib import Path
 import argparse
+import hashlib
+import json
+import re
+import sqlite3
 import sys
 import smtplib
 from email.mime.text import MIMEText
@@ -22,8 +26,48 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 
-# arXiv API endpoint
-ARXIV_API = "http://export.arxiv.org/api/query"
+# ---- Persistence layer (mirrors news-aggregator + youtube-monitor) --------
+ORICO_MOUNT = Path("/Volumes/ORICO")
+ORICO_ROOT = ORICO_MOUNT / "jarvis" / "papers"
+LOCAL_INCOMING = Path.home() / ".local/share/jarvis/papers/incoming"
+KNOWLEDGE_DB = Path(__file__).resolve().parents[2] / "agent-sdk" / "data" / "ai-knowledge.db"
+VAULT_ROOT = Path(os.path.expanduser("~/Obsidian/JARVIS/Papers"))
+
+_SLUG_RE = re.compile(r"[^a-z0-9]+")
+_ARXIV_VERSION_RE = re.compile(r"v\d+$")
+
+
+def _slug(s, maxlen=60):
+    s = _SLUG_RE.sub("-", (s or "").lower()).strip("-")
+    return s[:maxlen] or "untitled"
+
+
+def _archive_root():
+    if ORICO_MOUNT.exists():
+        ORICO_ROOT.mkdir(parents=True, exist_ok=True)
+        return ORICO_ROOT, True
+    LOCAL_INCOMING.mkdir(parents=True, exist_ok=True)
+    return LOCAL_INCOMING, False
+
+
+def _arxiv_id(url: str) -> str:
+    """Extract canonical arxiv id (e.g. '2401.12345') with version stripped.
+    URLs look like http://arxiv.org/abs/2401.12345v1 — version updates of the
+    same paper should dedupe to one row.
+    """
+    if not url:
+        return ""
+    last = url.rstrip("/").split("/")[-1]
+    return _ARXIV_VERSION_RE.sub("", last)
+
+
+def _normalize_url(url: str) -> str:
+    """Stable URL form for dedupe — strip /vN suffix."""
+    aid = _arxiv_id(url)
+    return f"http://arxiv.org/abs/{aid}" if aid else url
+
+# arXiv API endpoint (HTTPS — HTTP redirects but Python urllib chokes on the SSL handshake)
+ARXIV_API = "https://export.arxiv.org/api/query"
 
 # Search categories (AI/ML focused)
 SEARCH_CATEGORIES = [
@@ -82,9 +126,46 @@ def search_arxiv(query, max_results=50, days_back=7):
     print(f"Searching arXiv: {full_query[:100]}...")
     print(f"Date filter: Papers from last {days_back} days")
 
+    # arXiv asks API clients to send a descriptive UA and rate-limit to
+    # ≤1 query per 3 seconds. Default urllib UA gets aggressively 429'd.
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "JarvisResearchAggregator/1.0 (terry@byrddynasty.com; personal research archive)",
+        },
+    )
+
+    import time
+    xml_data = None
+    backoff = 3.0
+    last_err = None
+    for attempt in range(5):
+        try:
+            time.sleep(backoff)
+            with urllib.request.urlopen(req, timeout=60) as response:
+                xml_data = response.read()
+            break
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code == 429:
+                retry_after = int(e.headers.get('Retry-After', '60'))
+                wait = max(retry_after, 60) * (attempt + 1)
+                print(f"  arXiv 429 — backing off {wait}s (attempt {attempt+1}/5)")
+                time.sleep(wait)
+                continue
+            print(f"  arXiv HTTP {e.code}: {e}")
+            return []
+        except Exception as e:
+            last_err = e
+            print(f"  arXiv error (attempt {attempt+1}/5): {e}")
+            backoff = min(backoff * 2, 60)
+            continue
+
+    if xml_data is None:
+        print(f"  Giving up after 5 attempts. Last error: {last_err}")
+        return []
+
     try:
-        with urllib.request.urlopen(url) as response:
-            xml_data = response.read()
 
         # Parse XML response
         root = ET.fromstring(xml_data)
@@ -260,6 +341,177 @@ def send_email_digest(digest_path, paper_count):
         print(f"❌ Error sending email: {e}")
         return False
 
+# ===========================================================================
+# Persistence: ai-knowledge.db + Obsidian vault + ORICO archive
+# ===========================================================================
+
+def open_knowledge_db():
+    if not KNOWLEDGE_DB.exists():
+        return None
+    return sqlite3.connect(str(KNOWLEDGE_DB))
+
+
+def filter_already_seen(papers):
+    """Persistent dedupe: drop papers whose arxiv id is already in ai-knowledge.db."""
+    conn = open_knowledge_db()
+    if conn is None:
+        return papers
+    try:
+        seen = {row[0] for row in conn.execute(
+            "SELECT url FROM content_sources WHERE type='article' AND url LIKE 'http://arxiv.org/abs/%'"
+        )}
+    finally:
+        conn.close()
+
+    fresh = []
+    dropped = 0
+    for p in papers:
+        if _normalize_url(p.get('link', '')) in seen:
+            dropped += 1
+            continue
+        fresh.append(p)
+    if dropped:
+        print(f"  Persistent dedupe: dropped {dropped} previously-seen papers")
+    return fresh
+
+
+def write_paper_vault(paper):
+    """Write paper markdown to ~/Obsidian/JARVIS/Papers/YYYY-MM-DD/ for vector indexing."""
+    try:
+        pub_date_str = paper['published'][:10]
+        date_dir = VAULT_ROOT / pub_date_str
+        date_dir.mkdir(parents=True, exist_ok=True)
+        aid = _arxiv_id(paper['link'])
+        path = date_dir / f"{aid}--{_slug(paper['title'])}.md"
+
+        authors = ', '.join(paper['authors'][:5])
+        if len(paper['authors']) > 5:
+            authors += f" et al. ({len(paper['authors'])} total)"
+        title_clean = paper['title'].replace('"', "'")
+        cats = ', '.join(paper.get('categories', []))
+
+        fm = (
+            "---\n"
+            f"arxiv_id: {aid}\n"
+            f"title: \"{title_clean}\"\n"
+            f"authors: \"{authors}\"\n"
+            f"published: {paper['published']}\n"
+            f"updated: {paper.get('updated', '')}\n"
+            f"url: {paper['link']}\n"
+            f"pdf_url: {paper.get('pdf_link', '')}\n"
+            f"categories: \"{cats}\"\n"
+            "tags: [arxiv, paper, ai, research]\n"
+            "---\n\n"
+        )
+        body = (
+            f"# {paper['title']}\n\n"
+            f"**Authors:** {authors}  \n"
+            f"**Published:** {paper['published'][:10]}  \n"
+            f"**Categories:** {cats}  \n"
+            f"**arXiv:** {paper['link']}  \n"
+        )
+        if paper.get('pdf_link'):
+            body += f"**PDF:** {paper['pdf_link']}\n"
+        body += f"\n## Abstract\n\n{paper['summary']}\n"
+        path.write_text(fm + body)
+        return path
+    except Exception as e:
+        print(f"    vault write failed for {paper.get('link')}: {e}")
+        return None
+
+
+def write_paper_archive(paper):
+    """Write a plain-text abstract file to ORICO so the corpus is grep-able offline."""
+    try:
+        root, on_orico = _archive_root()
+        pub_date_str = paper['published'][:10]
+        date_dir = root / pub_date_str
+        date_dir.mkdir(parents=True, exist_ok=True)
+        aid = _arxiv_id(paper['link'])
+        path = date_dir / f"{aid}--{_slug(paper['title'])}.txt"
+        authors = ', '.join(paper['authors'])
+        body = (
+            f"{paper['title']}\n"
+            f"Authors: {authors}\n"
+            f"Published: {paper['published'][:10]}\n"
+            f"URL: {paper['link']}\n"
+            f"PDF: {paper.get('pdf_link', '')}\n"
+            f"Categories: {', '.join(paper.get('categories', []))}\n\n"
+            f"{paper['summary']}\n"
+        )
+        path.write_text(body)
+        return path
+    except Exception as e:
+        print(f"    archive write failed: {e}")
+        return None
+
+
+def mirror_to_knowledge_db(paper, vault_path):
+    """Insert into ai-knowledge.db as type='article' with metadata.subtype='paper'."""
+    conn = open_knowledge_db()
+    if conn is None:
+        return False
+    try:
+        canonical = _normalize_url(paper['link'])
+        # Check for existing
+        existing = conn.execute(
+            "SELECT id FROM content_sources WHERE url = ?", (canonical,)
+        ).fetchone()
+        if existing:
+            return False
+
+        authors_str = ', '.join(paper['authors'][:3])
+        if len(paper['authors']) > 3:
+            authors_str += f" et al."
+        conn.execute(
+            """INSERT INTO content_sources
+               (type, title, url, author, published_date, transcript_path,
+                indexed_at, last_updated, metadata)
+               VALUES('article', ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?)""",
+            (
+                paper['title'],
+                canonical,
+                authors_str,
+                paper['published'][:10],
+                str(vault_path) if vault_path else None,
+                json.dumps({
+                    'subtype': 'paper',
+                    'source': 'arxiv',
+                    'arxiv_id': _arxiv_id(paper['link']),
+                    'pdf_link': paper.get('pdf_link', ''),
+                    'categories': paper.get('categories', []),
+                    'authors_full': paper['authors'],
+                    'updated': paper.get('updated', ''),
+                    'abstract_chars': len(paper.get('summary', '')),
+                }),
+            ),
+        )
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    except Exception as e:
+        print(f"    knowledge-db write failed: {e}")
+        return False
+    finally:
+        conn.close()
+
+
+def persist_papers(papers):
+    """Write fresh papers to all three surfaces. Returns count actually stored."""
+    if not papers:
+        return 0
+    print(f"Persisting {len(papers)} fresh papers to vault + ORICO + ai-knowledge.db...")
+    stored = 0
+    for p in papers:
+        vault_path = write_paper_vault(p)
+        write_paper_archive(p)
+        if mirror_to_knowledge_db(p, vault_path):
+            stored += 1
+    print(f"  ✓ {stored} rows written to ai-knowledge.db (type='article', subtype='paper')")
+    return stored
+
+
 def main():
     parser = argparse.ArgumentParser(description="Aggregate AI/ML research from arXiv")
     parser.add_argument('--days', type=int, default=7,
@@ -282,6 +534,21 @@ def main():
     if not papers:
         print("No papers found matching criteria")
         sys.exit(1)
+
+    # Persistent dedupe vs ai-knowledge.db (drops papers already ingested)
+    print()
+    print("Persistent dedupe vs ai-knowledge.db...")
+    fresh_papers = filter_already_seen(papers)
+    print(f"  Fresh papers this week: {len(fresh_papers)}")
+
+    # Persist fresh papers to vault + ORICO + ai-knowledge.db
+    persist_papers(fresh_papers)
+
+    # Digest uses only fresh papers (matches what's in the email)
+    papers = fresh_papers
+    if not papers:
+        print("\nNo NEW papers this week — corpus is up to date.")
+        sys.exit(0)
 
     # Determine output path
     if args.output:
