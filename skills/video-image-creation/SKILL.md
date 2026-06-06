@@ -1,5 +1,7 @@
 # Video Image Creation Skill
 
+> **LEGACY / SUPPORTING ASSET SKILL:** This is no longer the main video-production workflow. Current Jarvis videos use a mixed faceless production stack: HyperFrames, real screenshots, web artifacts, B-roll, code/terminal simulations, diagrams, generated clips, and occasional stills. Use `.agents/skills/jarvis-video-production/SKILL.md` for full videos. Use this skill only for thumbnails, concept frames, or one-off generated still assets.
+
 **Purpose:** Create high-quality, story-driven images for Byrddynasty educational videos that are simple, colorful, and visually engaging.
 
 **Core Philosophy:** Images should tell the story through visuals, not text. Large headings, vibrant colors, and clear visual metaphors trump detailed explanations.

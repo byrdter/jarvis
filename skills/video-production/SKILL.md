@@ -1,5 +1,7 @@
 # Video Production Skill — Byrddynasty Long-Form Video Pipeline
 
+> **LEGACY / SPECIAL CASE:** This is the older HeyGen + Remotion + talking-avatar pipeline. For current Jarvis/Byrddynasty faceless videos, use `.agents/skills/jarvis-video-production/SKILL.md` instead. Keep this skill for intentional avatar/talking-head or legacy Remotion maintenance work only.
+
 **Purpose:** Take a HeyGen MP4 (with 1-second silences between scenes and any Nano Banana images baked in) and produce a finished Byrddynasty long-form video using a single Remotion project that respects per-segment avatar position.
 
 **Status:** **PROVEN.** First successful production run was Video 8 (Phase 8: The Second Brain Gets Sharper), shipped 2026-04-30. Reference example lives at `Byrddynasty-Videos/video-8-phase-8/` (or wherever Video 8's project sits).

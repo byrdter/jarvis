@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jarvis Video Production"
+  short_description: "Produce faceless Jarvis videos from research through master render."
+  default_prompt: "Use the canonical Jarvis video production workflow to plan, build, QA, and package this episode."
