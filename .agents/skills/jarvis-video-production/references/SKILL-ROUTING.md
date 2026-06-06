@@ -28,8 +28,13 @@ Use it for:
 
 - `skills/video-production/SKILL.md`: legacy HeyGen + Remotion + avatar pipeline. Use only for intentional talking-head/avatar work.
 - `skills/video-image-creation/SKILL.md`: legacy still-image prompt workflow. Use only for thumbnails, concept frames, or one-off generated still assets.
-- `~/.claude/skills/byrddynasty-video-v14`: first proven faceless implementation. Reference it for examples, but this repo skill is the canonical entry point.
-- `~/.claude/skills/byrddynasty-video-production`: larger vocabulary library. Reference useful patterns until the library is mirrored into `.agents/skills`.
+- `~/.claude/skills/byrddynasty-video-v14`: first proven faceless implementation. It should delegate to this repo skill; do not use it as source of truth.
+- `~/.claude/skills/byrddynasty-video-production`: older Claude-local vocabulary library. Its reusable content is mirrored under `references/channel-library/`.
+
+## Mirrored Reference Libraries
+
+- `references/v14/`: Video 14-proven shot vocabulary, palette, tooling, Runway prompts, and anti-patterns.
+- `references/channel-library/`: reusable channel identity, shape catalog, recipes, anti-patterns, asset standards, tone matrix, and interaction vocabulary.
 
 ## Rule
 

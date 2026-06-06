@@ -25,6 +25,8 @@ Read only what the task needs:
 - Final render or scene review: [references/QC-PASS.md](references/QC-PASS.md)
 - Asset paths, naming, or clip conventions: [references/ASSET-CONTRACT.md](references/ASSET-CONTRACT.md)
 - Episode command-center / Site planning: [references/COMMAND-CENTER.md](references/COMMAND-CENTER.md)
+- V14-proven palette, tooling, Runway prompts, shot vocabulary, or anti-patterns: [references/v14/INDEX.md](references/v14/INDEX.md)
+- Reusable channel shapes, recipes, and interaction vocabulary: [references/channel-library/INDEX.md](references/channel-library/INDEX.md)
 
 ## Required Workflow
 
@@ -48,8 +50,9 @@ Read only what the task needs:
 
 - `.agents/skills/hyperframes-video-director/` carries HyperFrames visual direction.
 - `.agents/skills/remotion-video-qa/` is for legacy/special Remotion or talking-head QA.
-- `~/.claude/skills/byrddynasty-video-production/` carries a larger channel-level vocabulary library. Treat it as reference until it is mirrored into the repo.
-- `~/.claude/skills/byrddynasty-video-v14/` is the first proven implementation of this faceless workflow. This skill supersedes it as the canonical repo-visible entry point.
+- `references/channel-library/` carries the mirrored channel-level shape catalog, recipes, identity, and interaction vocabulary.
+- `references/v14/` carries the mirrored Video 14-proven palette, shot vocabulary, tooling, Runway prompts, and anti-patterns.
+- `~/.claude/skills/byrddynasty-video-v14/` should delegate to this repo skill. Do not treat it as the source of truth.
 
 ## Maintenance Rule
 
