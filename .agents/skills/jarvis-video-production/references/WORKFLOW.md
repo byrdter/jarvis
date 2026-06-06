@@ -23,6 +23,12 @@ Create or update the episode folder with:
 - production risks
 - beads issue IDs
 
+Initialize the command-center files with:
+
+```bash
+.agents/skills/jarvis-video-production/scripts/scaffold-command-center.sh video-XX-name
+```
+
 ## 3. Visual-First Script
 
 Plan the visual arc before locking VO. For each scene:

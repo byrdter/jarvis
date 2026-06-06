@@ -31,7 +31,12 @@ Read only what the task needs:
 ## Required Workflow
 
 1. Create or claim a beads issue before implementation work.
-2. Build or update the episode command center: script, visual board, assets, scene status, approvals, blockers.
+2. Build or update the episode command center: script, visual board, assets, scene status, approvals, blockers. For a new episode, run:
+
+```bash
+.agents/skills/jarvis-video-production/scripts/scaffold-command-center.sh video-XX-name
+```
+
 3. Produce a visual treatment board before final VO or scene builds.
 4. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
 5. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.

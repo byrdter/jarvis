@@ -32,6 +32,16 @@ video-XX-name/
   YOUTUBE-PACKAGE.md
 ```
 
+## Scaffold
+
+For a new episode, initialize the command center with:
+
+```bash
+.agents/skills/jarvis-video-production/scripts/scaffold-command-center.sh video-XX-name
+```
+
+The script copies templates from `templates/episode-command-center/`, creates `scenes/`, and skips existing files rather than overwriting them.
+
 ## Site Direction
 
 When building this as a Site, prioritize a dense production workspace:
