@@ -32,6 +32,8 @@ One-sentence thesis:
 - Default format: faceless mixed-register video
 - Talking-head/guest appearance planned: no
 - Primary visual system: HyperFrames
+- Codex Sites planned: no
+- Site role: production tool / on-screen visual source / companion asset / none
 - External clip tools:
 - TTS/VO tool:
 

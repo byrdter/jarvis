@@ -84,6 +84,8 @@ video-XX-name/
 
 Use HyperFrames unless another tool is clearly better. Real source proof beats simulated proof. Simulated UI/code beats generic cards when the topic is technical work.
 
+Codex Sites can be used as supporting production surfaces for dashboards, simulators, evidence explorers, command centers, review boards, and companion resources. Capture Site interactions or screenshots, then bring them into HyperFrames for final VO-synced composition. See [SITES.md](SITES.md).
+
 ## 7. Scene QC
 
 Run lint, render, and rendered-video QC before locking any take. Text/layout problems are production blockers, not polish notes.

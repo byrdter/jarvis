@@ -20,6 +20,12 @@ Use semantic keys from `asset-library/MANIFEST.json` whenever possible.
 |---|---|---|---|---|---|
 | | Runway / Higgsfield / other | | | silent / has audio | |
 
+## Site Prototypes / Captures
+
+| Site | Role | URL / Location | Scene(s) | Capture Plan | Access / Privacy | Status |
+|---|---|---|---|---|---|---|
+| | production tool / on-screen visual source / companion asset | | | screenshot / screen recording / live review | | planned |
+
 ## Asset Risks
 
 -

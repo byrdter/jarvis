@@ -30,15 +30,30 @@ Use the project clip library, Runway, Higgsfield, or future generators. Prefer s
 
 Counters, gauges, bar races, sparklines, progress stages, confidence meters, token/context/decision visualizations.
 
-## H. Talking-Head Substitutes
+## H. Generated Sites / Interactive Presentation Surfaces
+
+Codex Sites, local mini apps, dashboards, simulators, evidence explorers, command centers, review boards, comparison tools, and interactive data stories. Use them as working UI surfaces that can be clicked, scrolled, filtered, screen-recorded, or captured, then polished inside HyperFrames.
+
+Examples:
+
+- AI router simulator
+- model decision dashboard
+- agent stack map
+- transcript intelligence board
+- research evidence explorer
+- episode command center
+
+HyperFrames remains the final composition layer.
+
+## I. Talking-Head Substitutes
 
 Cursor-driven chat, document annotation, phone-screen framing, pinned messages, hands/device views. Provides human presence without breaking faceless default.
 
-## I. Audio Variety
+## J. Audio Variety
 
 Light music beds, UI clicks, type sounds, section stings, impact hits, intentional silence, reverb tails. Plan audio as part of the scene.
 
-## J. Pacing Variety
+## K. Pacing Variety
 
 Quick-cut montage, held cinematic shot, freeze-zoom, time-lapse, match cut, L-cut/J-cut. Every long video needs both fast proof and slower breath.
 

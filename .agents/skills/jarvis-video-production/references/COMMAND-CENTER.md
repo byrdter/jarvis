@@ -1,6 +1,6 @@
 # Episode Command Center
 
-The command center is the live workspace for an episode. It can start as Markdown files and later become a local Site.
+The command center is the live workspace for an episode. It can start as Markdown files and later become a Codex Site or local Site.
 
 ## Required Surfaces
 
@@ -54,3 +54,5 @@ When building this as a Site, prioritize a dense production workspace:
 - annotation-style review notes
 
 The Site should be a working surface, not a marketing page.
+
+If the command center becomes an on-screen visual source, capture only approved information and bring the recording or screenshots into HyperFrames for final timing, zooms, callouts, and transitions.

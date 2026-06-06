@@ -9,7 +9,7 @@ Use this before final VO or scene production. The viewer should understand the s
 - Include at least one quick-cut montage.
 - Include at least one held 4-6 second breath.
 
-Registers: real-tool screenshot, code/terminal action, web/source proof, self-drawing diagram, documentary B-roll, generated/pixel B-roll, data-viz beat, talking-head substitute, audio variety, pacing variety.
+Registers: real-tool screenshot, code/terminal action, web/source proof, self-drawing diagram, documentary B-roll, generated/pixel B-roll, data-viz beat, generated Site/interactive surface, talking-head substitute, audio variety, pacing variety.
 
 ## Board
 
@@ -28,6 +28,7 @@ Registers: real-tool screenshot, code/terminal action, web/source proof, self-dr
 | Documentary B-roll | |
 | Generated / pixel B-roll | |
 | Data visualization | |
+| Generated Sites / interactive surfaces | |
 | Talking-head substitutes | |
 | Audio variety | |
 | Pacing variety | |

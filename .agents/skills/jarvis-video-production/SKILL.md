@@ -10,6 +10,7 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 ## Default Position
 
 - **Faceless video is the default.** Use HyperFrames, real screenshots, web artifacts, B-roll, code/terminal simulations, diagrams, data visualization, and cinematic clips.
+- **Sites are supporting surfaces.** Use Codex Sites for dashboards, simulators, review boards, command centers, or companion resources; capture them into HyperFrames for final video composition.
 - **Talking heads are special appearances.** Use avatars, HeyGen, or Remotion talking-head pipelines only when the user intentionally asks for a guest/talking-head moment.
 - **Visual-first beats script-first.** Decide what the viewer sees before locking final VO.
 - **Minimum runtime is 8 minutes.** Preferred runtime is 10-15 minutes unless the user explicitly requests a short.
@@ -25,6 +26,7 @@ Read only what the task needs:
 - Final render or scene review: [references/QC-PASS.md](references/QC-PASS.md)
 - Asset paths, naming, or clip conventions: [references/ASSET-CONTRACT.md](references/ASSET-CONTRACT.md)
 - Episode command-center / Site planning: [references/COMMAND-CENTER.md](references/COMMAND-CENTER.md)
+- Codex Sites as production tools, on-screen visual sources, or companion assets: [references/SITES.md](references/SITES.md)
 - V14-proven palette, tooling, Runway prompts, shot vocabulary, or anti-patterns: [references/v14/INDEX.md](references/v14/INDEX.md)
 - Reusable channel shapes, recipes, and interaction vocabulary: [references/channel-library/INDEX.md](references/channel-library/INDEX.md)
 
