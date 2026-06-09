@@ -369,7 +369,7 @@ Each layer makes the next layer easier.
 
 ---
 
-## Chunk 9 — scene 10 (185 words)
+## Chunk 9 — scene 10 (229 words)
 
 ```
 The big shift is this.
@@ -402,14 +402,26 @@ Turn one repeated task into a system.
 
 That is how the roadmap becomes real.
 
-If this helped you see where AI building is headed, subscribe to the channel so you do not miss the next episode. Hit the like button if this was useful. And ring the notification bell so you know when the next practical AI builder breakdown goes live.
+If this helped you see where AI building is headed, subscribe to the channel.
+
+That tells YouTube you want more practical AI builder breakdowns, not just hype clips.
+
+Hit the like button if this was useful, because that helps the video reach other builders who are trying to make sense of the same shift.
+
+And ring the notification bell so you know when the next episode goes live.
+
+We are going to keep building this stack piece by piece: agents, tools, memory, workflows, evals, deployment, and the judgment to use all of it well.
+
+The goal is not to chase every trend.
+
+The goal is to become the kind of builder who can turn new AI capability into real systems.
 
 Thanks for watching.
 ```
 
 ---
 
-**Total spoken script:** 1,714 words across 9 chunks and 10 visual scenes.  
+**Total spoken script:** 1,787 words across 9 chunks and 10 visual scenes.  
 **Estimated final runtime:** roughly 11-13 minutes depending on HeyGen delivery speed, visual holds, and CTA pacing.
 
 ## After Terry Ships The File
