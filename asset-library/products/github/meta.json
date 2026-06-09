@@ -1,0 +1,16 @@
+{
+  "id": "github",
+  "name": "GitHub",
+  "vendor": "GitHub",
+  "homepage": "https://github.com/",
+  "brand": {
+    "primary": "#24292f",
+    "secondary": "#0969da"
+  },
+  "surfaces": [
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Public repo, issue, pull request, and Actions captures for developer proof."
+}

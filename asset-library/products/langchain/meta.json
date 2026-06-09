@@ -1,0 +1,16 @@
+{
+  "id": "langchain",
+  "name": "LangChain",
+  "vendor": "LangChain",
+  "homepage": "https://www.langchain.com/",
+  "brand": {
+    "primary": "#1c3b2f",
+    "secondary": "#16a34a"
+  },
+  "surfaces": [
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Public LangChain, LangGraph, LangSmith, and docs captures for agent workflow visuals."
+}

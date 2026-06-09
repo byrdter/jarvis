@@ -1,5 +1,7 @@
 # Presentation Variety
 
+The default visual language for Jarvis/Byrddynasty videos is **cinematic WebGL / layered depth**: screens, docs, code, Sites, B-roll, cards, and diagrams should feel arranged in depth with camera pushes, parallax, glow, masked reveals, and scroll-chapter motion. This is the base language, not a single register. The registers below are the ingredients that keep that base from becoming repetitive.
+
 Every 8+ minute episode must use at least 6 of these registers, and no more than 3 consecutive scenes should share the same dominant register.
 
 ## A. Real Tool Screenshots

@@ -1,0 +1,18 @@
+{
+  "id": "claude-code",
+  "name": "Claude Code",
+  "vendor": "Anthropic",
+  "homepage": "https://claude.com/claude-code",
+  "brand": {
+    "primary": "#C96442",
+    "secondary": "#1F1F1F"
+  },
+  "surfaces": [
+    "desktop",
+    "cli",
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Desktop captures are manual (native app, not browser). CLI uses asciinema. Web captures via playbook."
+}

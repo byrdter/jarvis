@@ -1,0 +1,16 @@
+{
+  "id": "openai",
+  "name": "OpenAI",
+  "vendor": "OpenAI",
+  "homepage": "https://openai.com/",
+  "brand": {
+    "primary": "#10A37F",
+    "secondary": "#000000"
+  },
+  "surfaces": [
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Corporate/platform surfaces. Distinct from chatgpt product UI."
+}

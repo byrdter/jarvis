@@ -1,0 +1,16 @@
+{
+  "id": "huggingface",
+  "name": "Hugging Face",
+  "vendor": "Hugging Face",
+  "homepage": "https://huggingface.co/",
+  "brand": {
+    "primary": "#ffcc4d",
+    "secondary": "#111827"
+  },
+  "surfaces": [
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Public model, dataset, Space, and blog captures for open AI ecosystem proof."
+}

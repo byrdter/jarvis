@@ -1,0 +1,16 @@
+{
+  "id": "anthropic",
+  "name": "Anthropic",
+  "vendor": "Anthropic",
+  "homepage": "https://www.anthropic.com/",
+  "brand": {
+    "primary": "#C96442",
+    "secondary": "#1F1F1F"
+  },
+  "surfaces": [
+    "web"
+  ],
+  "last_captured": "2026-06-09",
+  "version_at_capture": null,
+  "notes": "Public Anthropic homepage, docs, news, research, and Claude Code documentation captures."
+}
