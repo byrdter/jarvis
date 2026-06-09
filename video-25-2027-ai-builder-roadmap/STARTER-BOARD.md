@@ -9,11 +9,16 @@ This should be framed as **preparation**, not prediction. The video is not "what
 ## Target Shape
 
 - Channel: Byrddynasty
+- Episode status: regular episode, not a pillar video
+- Audience: non-coders, builders, and business owners who want to understand the 2027 direction without needing to already be software engineers
 - Format: faceless, HeyGen clean VO only
 - Runtime: 10-12 minutes
 - Visual system: HyperFrames final composition, with real web-rolls, product screenshots, Codex Site surfaces, pixel B-roll, and kinetic roadmap graphics
 - Tone: practical, builder-focused, not hype-heavy
 - Voice: first-person plural where personal channel voice is needed: we, our, us
+- 2027 framing: preparation, not prediction
+- JARVIS/local screens: start mock-first, then replace with real local captures where the real screen clearly improves credibility and does not expose private information
+- Style target: cinematic WebGL / layered depth as the starting point, with real screenshots and web-rolls placed inside that depth system
 
 ## Existing Product Assets Found
 
@@ -124,7 +129,8 @@ This is where the video can become uniquely Byrddynasty. Show that a serious bui
 
 Needs:
 
-- Codex Site for JARVIS knowledge search.
+- Mock-first Codex Site for JARVIS knowledge search.
+- Optional real local capture after review.
 - Optional Obsidian graph.
 - Existing `agent-sdk/data/ai-knowledge.db` can drive a local surface.
 
@@ -215,7 +221,7 @@ Needs:
 
 ### Local Or Private Captures Terry Should Decide
 
-- Whether to show real JARVIS knowledge database screens.
+- Whether to replace mock JARVIS knowledge database screens with real local captures after seeing the mock.
 - Whether to show real Obsidian graph/screens.
 - Whether to show real JARVIS code or use sanitized mock code.
 - Whether to show actual Codex/Claude Code project screens beyond the current saved desktop screenshots.
@@ -231,17 +237,30 @@ Needs:
 
 ## Tomorrow Decisions For Terry
 
-1. Should Video 25 be a **pillar video** for the channel, or a regular episode?
-2. Audience level: non-coders, builders, business owners, or technical founders?
-3. JARVIS screens: real, sanitized, or mock-only?
-4. 2027 framing: roadmap, preparation, or prediction?
-5. Which style target from the PDF feels right for this one:
-   - cinematic WebGL / layered depth
-   - editorial evidence gallery
-   - dark technical product reveal
-   - kinetic type/specimen
-   - infinite canvas roadmap
+Resolved:
+
+1. Video 25 is a regular episode, not a pillar video.
+2. Audience is non-coders, builders, and business owners.
+3. JARVIS screens should be mock-first. After reviewing the mock, decide which real local captures are worth adding.
+4. 2027 should be framed as preparation.
+5. Initial style target is cinematic WebGL / layered depth, with room to borrow from the other styles where useful.
+
+Still useful to decide:
+
+1. Which real local captures are safe enough to show after the mock pass.
+2. Which public URLs must be captured for credibility.
+3. Whether the visual style should lean more cinematic, more evidence-board, or more roadmap/toolkit once the first mock is visible.
+
+## Style Options In Plain English
+
+- Cinematic WebGL / layered depth: feels like a modern interactive product story. Screens, cards, code, and diagrams sit in 3D depth with camera pushes, parallax, glow, and scroll-chapter reveals. Best default for this episode.
+- Editorial evidence gallery: feels like a polished investigative article. Source screenshots, claim cards, quotes, and timelines appear in a curated wall. Best for proof-heavy sections.
+- Dark technical product reveal: feels like a serious infrastructure product launch. Strong for deployment, observability, and systems architecture.
+- Kinetic type/specimen: uses typography as the main motion object. Good for definitions, mistakes, "learn this next" moments, and punch lines.
+- Infinite canvas roadmap: a wide map the camera travels across. Strong for the final learning path and 2027 roadmap sequence.
+
+For Video 25, the practical blend is cinematic layered depth for the main language, evidence gallery for proof, and infinite canvas for the roadmap.
 
 ## Recommended Next Step
 
-Build the public capture pack first, then design the roadmap Site. That gives us enough real artifacts to make the video feel grounded before writing final VO.
+Build the mock roadmap Site first, then decide which real local captures should replace or supplement the mock. In parallel, build the public capture pack so the video has grounded proof before final VO.
