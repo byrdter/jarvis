@@ -88,7 +88,18 @@ Codex Sites can be used as supporting production surfaces for dashboards, simula
 
 ## 7. Scene QC
 
-Run lint, render, and rendered-video QC before locking any take. Text/layout problems are production blockers, not polish notes.
+Run lint, validator, render, and rendered-video QC before locking any take. Text/layout problems are production blockers, not polish notes.
+
+For HyperFrames projects, run:
+
+```bash
+python3 tools/scene-validator.py video-XX-name
+python3 tools/scene-validator.py video-XX-name --frames
+```
+
+Use the first command before or during scene iteration. Use `--frames` after rendered MP4s exist. The validator must report 0 issues before Terry reviews the scene set unless a specific exception is documented in the QC report.
+
+The validator should catch timing and rendering defects Terry should not have to find manually: VO/composition mismatches, dead-air tails, stale `data-duration` values, animation events scheduled past scene end, `tl.call(...)` timeline killers, and near-empty rendered frames.
 
 ## 8. Master Build
 

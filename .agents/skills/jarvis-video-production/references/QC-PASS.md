@@ -2,6 +2,38 @@
 
 Run this on rendered MP4s before locking scene takes or the master.
 
+## Required Validator Gate
+
+Run the scene validator before Terry reviews any HyperFrames scene set:
+
+```bash
+python3 tools/scene-validator.py <project-dir>
+python3 tools/scene-validator.py <project-dir> --frames
+```
+
+Use `--frames` after renders exist to sample frame variance and catch near-empty/background-only stretches. Use `--fix` only for the validator's narrow auto-fix target: shifting overrun `BT.*` helper animations that extend past composition end. Review any `--fix` edit before rendering.
+
+The validator is expected to catch:
+
+- audio-vs-composition duration mismatches
+- VO overruns and excessive dead air
+- animation events past composition end
+- stale `data-duration` attributes
+- `tl.call(...)` in scene HTML or transition libraries
+- end-of-scene visual gaps
+- text overflow risk from large nowrap text
+- optional post-render low-variance frame stretches
+
+Validator output must be clean before a scene is considered ready for human review. If a video uses a non-HyperFrames workflow, apply the same classes of checks manually or with the closest available tool.
+
+## Audio
+
+- VO is the main audio by default.
+- Music beds, UI clicks, type sounds, section stings, impact hits, and ambient texture are optional supporting elements.
+- Supporting audio should be subtle enough that the narration remains clean and intelligible.
+- B-roll audio must not double with VO unless intentionally mixed for a brief effect.
+- Do not use audio effects to compensate for weak visuals or dead screen time.
+
 ## Runtime
 
 - Minimum 8 minutes unless user explicitly requested shorter.
@@ -38,6 +70,8 @@ Run this on rendered MP4s before locking scene takes or the master.
 - No long static sections unless deliberately held for breath.
 - Scene rhythm changes every 3-8 seconds for normal explanatory sections.
 - B-roll audio does not double with VO unless intentionally mixed.
+- No animation reveal should be scheduled after the composition ends.
+- No scene should hold a completed visual for multiple seconds unless the hold is an intentional breath and still visually alive.
 
 ## Variety
 
@@ -46,6 +80,7 @@ Run this on rendered MP4s before locking scene takes or the master.
 
 ## Master
 
+- Run `tools/scene-validator.py` cleanly before final master assembly when applicable.
 - Validate scene durations and selected takes.
 - Confirm `master.mp4` duration, resolution, codec, and audio stream.
 - Watch intro, middle, final third, and all recently changed scenes.

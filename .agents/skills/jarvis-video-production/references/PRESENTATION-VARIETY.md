@@ -53,7 +53,7 @@ Cursor-driven chat, document annotation, phone-screen framing, pinned messages, 
 
 ## J. Audio Variety
 
-Light music beds, UI clicks, type sounds, section stings, impact hits, intentional silence, reverb tails. Plan audio as part of the scene.
+VO is the main audio by default. Use light music beds, UI clicks, type sounds, section stings, impact hits, intentional silence, and reverb tails only as supporting accents. Plan audio as part of the scene, but keep narration clean and dominant.
 
 ## K. Pacing Variety
 

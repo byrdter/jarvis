@@ -43,7 +43,7 @@ Read only what the task needs:
 3. Produce a visual treatment board before final VO or scene builds.
 4. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
 5. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.
-6. Run scene QC on rendered MP4s, not only previews.
+6. Run scene QC on rendered MP4s, not only previews. For HyperFrames scene sets, run `python3 tools/scene-validator.py <project-dir>` and the post-render `--frames` pass before Terry reviews the video.
 7. Validate and stitch scenes with the bundled scripts:
 
 ```bash
