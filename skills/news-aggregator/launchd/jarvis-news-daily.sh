@@ -14,7 +14,7 @@ unset VIRTUAL_ENV PYTHONPATH PYTHONHOME
 export PATH="/Users/terrybyrd/.local/share/jarvis/news-aggregator/venv/bin:/Users/terrybyrd/.bun/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 
 DATE=$(date +%Y-%m-%d)
-LOG_DIR="/Users/terrybyrd/Library/CloudStorage/Dropbox/jarvis/logs"
+LOG_DIR="/Users/terrybyrd/.local/share/jarvis/news-aggregator/logs"
 STDOUT_LOG="$LOG_DIR/news-aggregator-stdout.log"
 STDERR_LOG="$LOG_DIR/news-aggregator-stderr.log"
 OUTPUT="/Users/terrybyrd/Library/CloudStorage/Dropbox/jarvis/reports/news-digests/ai-news-digest-$DATE.md"

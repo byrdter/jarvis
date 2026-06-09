@@ -19,10 +19,10 @@
     </dict>
 
     <key>StandardOutPath</key>
-    <string>/Users/terrybyrd/Library/CloudStorage/Dropbox/jarvis/logs/news-aggregator-stdout.log</string>
+    <string>/Users/terrybyrd/.local/share/jarvis/news-aggregator/logs/news-aggregator-stdout.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/terrybyrd/Library/CloudStorage/Dropbox/jarvis/logs/news-aggregator-stderr.log</string>
+    <string>/Users/terrybyrd/.local/share/jarvis/news-aggregator/logs/news-aggregator-stderr.log</string>
 
     <key>RunAtLoad</key>
     <false/>
