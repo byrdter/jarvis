@@ -267,6 +267,9 @@ data/personal/
 # Final assembly + per-segment intermediate outputs
 **/10-output/
 
+# Video 25 generated first-master boards, scene MP4s, and QC frames
+video-25-2027-ai-builder-roadmap/renders/
+
 # ============================================================================
 # DOCUMENTATION STAGING
 # ============================================================================
