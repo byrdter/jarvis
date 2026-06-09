@@ -49,6 +49,8 @@ Terry can provide these if he wants more credibility or personal channel texture
 4. A local JARVIS dashboard with private data masked
 5. A cleaned screen recording of the knowledge database search UI
 
+Detailed capture prompts, privacy checks, and suggested filenames are in `REAL-CAPTURE-PROMPTS.md`.
+
 ## Do Not Capture
 
 - `.env` files
