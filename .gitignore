@@ -269,6 +269,10 @@ data/personal/
 
 # Video 25 generated first-master boards, scene MP4s, and QC frames
 video-25-2027-ai-builder-roadmap/renders/
+video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/assets/
+video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/renders/
+video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/qc-frames/
+video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/qc-contact-sheet.jpg
 
 # ============================================================================
 # DOCUMENTATION STAGING

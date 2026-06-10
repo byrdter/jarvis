@@ -1,0 +1,14 @@
+{
+  "name": "video-25-v2-proof",
+  "version": "0.1.0",
+  "compositions": [
+    {
+      "id": "video-25-v2-proof",
+      "file": "index.html",
+      "width": 1920,
+      "height": 1080,
+      "duration": 74.85
+    }
+  ]
+}
+
