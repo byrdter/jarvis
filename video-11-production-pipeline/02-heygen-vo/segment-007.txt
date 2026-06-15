@@ -1,1 +1,0 @@
-Path A. Full API automation. HeyGen exposes a REST API. You send it a script, a voice ID, and an avatar ID. It returns a finished avatar video. Claude Code writes the script, splits it into segments, calls the API per segment, polls for completion, downloads the clips. <break time="1s"/>

@@ -1,1 +1,0 @@
-That is the pattern we want in JARVIS. The wiki is memory. Skills are operating procedures. Local scripts are reliable actions. MCP is for permissioned external services. Scheduled jobs create the heartbeat. The agent orchestrates the layers, but it does not need every layer fully loaded in context all the time.

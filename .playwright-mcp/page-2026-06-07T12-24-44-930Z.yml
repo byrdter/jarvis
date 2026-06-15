@@ -1,0 +1,461 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "PostgreSQL Elephant Logo" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "PostgreSQL Elephant Logo" [ref=e7]
+      - generic [ref=e8]:
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - link "Home" [ref=e11] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e12]:
+            - link "About" [ref=e13] [cursor=pointer]:
+              - /url: /about/
+          - listitem [ref=e14]:
+            - link "Download" [ref=e15] [cursor=pointer]:
+              - /url: /download/
+          - listitem [ref=e16]:
+            - link "Documentation" [ref=e17] [cursor=pointer]:
+              - /url: /docs/
+          - listitem [ref=e18]:
+            - link "Community" [ref=e19] [cursor=pointer]:
+              - /url: /community/
+          - listitem [ref=e20]:
+            - link "Developers" [ref=e21] [cursor=pointer]:
+              - /url: /developer/
+          - listitem [ref=e22]:
+            - link "Support" [ref=e23] [cursor=pointer]:
+              - /url: /support/
+          - listitem [ref=e24]:
+            - link "Donate" [ref=e25] [cursor=pointer]:
+              - /url: /about/donate/
+          - listitem [ref=e26]:
+            - link "Your account" [ref=e27] [cursor=pointer]:
+              - /url: /account/
+        - search [ref=e28]:
+          - generic [ref=e29]:
+            - textbox "Search for..." [ref=e30]
+            - button "" [ref=e32] [cursor=pointer]:
+              - generic [ref=e33]: 
+        - button "" [ref=e35] [cursor=pointer]:
+          - generic [ref=e36]: 
+    - generic [ref=e38]:
+      - text: "June 4, 2026:"
+      - link "PostgreSQL 19 Beta 1 Released!" [ref=e39] [cursor=pointer]:
+        - /url: /about/news/postgresql-19-beta-1-released-3313/
+  - generic [ref=e41]:
+    - 'heading "PostgreSQL: The World''s Most Advanced Open Source Relational Database" [level=1] [ref=e42]'
+    - generic [ref=e44]:
+      - button "Download" [ref=e45] [cursor=pointer]:
+        - text: Download
+        - generic [ref=e46]: 
+      - button "New to PostgreSQL?" [ref=e47] [cursor=pointer]
+  - generic [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - img "PostgreSQL Elephant Logo" [ref=e51]
+        - heading "New to PostgreSQL?" [level=2] [ref=e52]
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+          - paragraph [ref=e55]:
+            - text: There is a wealth of information to be found describing how to
+            - link "install" [ref=e56] [cursor=pointer]:
+              - /url: /download/
+            - text: and
+            - link "use" [ref=e57] [cursor=pointer]:
+              - /url: /docs/
+            - text: PostgreSQL through the
+            - link "official documentation" [ref=e58] [cursor=pointer]:
+              - /url: /docs/
+            - text: . The
+            - link "open source community" [ref=e59] [cursor=pointer]:
+              - /url: /community/
+            - text: provides many helpful places to become familiar with PostgreSQL, discover how it works, and find career opportunities. Learn more on how to
+            - link "engage with the community" [ref=e60] [cursor=pointer]:
+              - /url: /community/
+            - text: .
+        - link "Learn More" [ref=e61] [cursor=pointer]:
+          - /url: /about/
+          - button "Learn More" [ref=e62]
+        - link "Feature Matrix" [ref=e63] [cursor=pointer]:
+          - /url: /about/featurematrix/
+          - button "Feature Matrix" [ref=e64]
+        - link "Governance" [ref=e65] [cursor=pointer]:
+          - /url: /about/governance/
+          - button "Governance" [ref=e66]
+      - generic [ref=e67]:
+        - generic [ref=e68]: 
+        - heading "Latest Releases" [level=2] [ref=e69]
+        - generic [ref=e70]:
+          - paragraph [ref=e71]:
+            - strong [ref=e72]:
+              - text: 2026-06-04 -
+              - link "PostgreSQL 19 Beta 1 Released!" [ref=e73] [cursor=pointer]:
+                - /url: /about/news/postgresql-19-beta-1-released-3313/
+          - paragraph [ref=e74]:
+            - text: The PostgreSQL Global Development Group announces that the first beta release of PostgreSQL 19 is now
+            - link "available for download" [ref=e75] [cursor=pointer]:
+              - /url: /download/
+            - text: . This release contains PostgreSQL 19 feature previews ahead of general availability, though some details of the release can change during the beta period.
+          - paragraph [ref=e76]:
+            - text: You can find information about all of the PostgreSQL 19 features and changes in the
+            - link "release notes" [ref=e77] [cursor=pointer]:
+              - /url: /docs/19/release-19.html
+            - text: .
+          - paragraph [ref=e78]: In the spirit of the open source PostgreSQL community, we strongly encourage you to test the new features of PostgreSQL 19 on your systems to help us eliminate bugs and other issues. While we do not advise you to run beta versions in production environments, we encourage you to find ways to run your typical application workloads against this beta release.
+          - paragraph [ref=e79]:
+            - text: Your testing and feedback help the community ensure that PostgreSQL 19 upholds our standards of delivering a stable, reliable release of the world's most advanced open source relational database. Please read more about our
+            - link "beta testing process" [ref=e80] [cursor=pointer]:
+              - /url: /developer/beta/
+            - text: and how you can contribute.
+          - paragraph [ref=e81]:
+            - text: PostgreSQL 14 will stop receiving fixes on November 12, 2026. If you are running PostgreSQL 14 in a production environment, we suggest that you make plans to upgrade to a newer, supported version of PostgreSQL. Please see our
+            - link "versioning policy" [ref=e82] [cursor=pointer]:
+              - /url: /support/versioning/
+            - text: for more information.
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - strong [ref=e85]: "18.4"
+              - text: · 2026-05-14 ·
+              - link "Notes" [ref=e86] [cursor=pointer]:
+                - /url: /docs/18/release-18-4.html
+            - listitem [ref=e87]:
+              - strong [ref=e88]: "17.10"
+              - text: · 2026-05-14 ·
+              - link "Notes" [ref=e89] [cursor=pointer]:
+                - /url: /docs/17/release-17-10.html
+            - listitem [ref=e90]:
+              - strong [ref=e91]: "16.14"
+              - text: · 2026-05-14 ·
+              - link "Notes" [ref=e92] [cursor=pointer]:
+                - /url: /docs/16/release-16-14.html
+            - listitem [ref=e93]:
+              - strong [ref=e94]: "15.18"
+              - text: · 2026-05-14 ·
+              - link "Notes" [ref=e95] [cursor=pointer]:
+                - /url: /docs/15/release-15-18.html
+            - listitem [ref=e96]:
+              - strong [ref=e97]: "14.23"
+              - text: · 2026-05-14 ·
+              - link "Notes" [ref=e98] [cursor=pointer]:
+                - /url: /docs/14/release-14-23.html
+        - link "Download" [ref=e99] [cursor=pointer]:
+          - /url: /download/
+          - button "Download" [ref=e100]
+        - link "Why Upgrade?" [ref=e101] [cursor=pointer]:
+          - /url: /support/versioning/
+          - button "Why Upgrade?" [ref=e102]
+        - link "Security" [ref=e103] [cursor=pointer]:
+          - /url: /support/security/
+          - button "Security" [ref=e104]
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]: 
+        - heading "Upcoming Events" [level=2] [ref=e108]
+        - generic [ref=e109]:
+          - list [ref=e110]:
+            - listitem [ref=e111]:
+              - img "PostgreSQL Community Event" [ref=e112]
+              - text: 2026-06-09 ·
+              - link "PgDay Boston 2026" [ref=e113] [cursor=pointer]:
+                - /url: /about/event/pgday-boston-2026-2578/
+            - listitem [ref=e114]:
+              - text: 2026-06-16 – 2026-06-18 ·
+              - 'link "POSETTE: An Event for Postgres 2026" [ref=e115] [cursor=pointer]':
+                - /url: /about/event/posette-an-event-for-postgres-2026-2569/
+            - listitem [ref=e116]:
+              - img "PostgreSQL Community Event" [ref=e117]
+              - text: 2026-06-25 – 2026-06-26 ·
+              - link "Swiss PGDay 2026" [ref=e118] [cursor=pointer]:
+                - /url: /about/event/swiss-pgday-2026-2570/
+            - listitem [ref=e119]:
+              - img "PostgreSQL Community Event" [ref=e120]
+              - text: 2026-09-08 ·
+              - link "PGDay UK 2026" [ref=e121] [cursor=pointer]:
+                - /url: /about/event/pgday-uk-2026-2584/
+            - listitem [ref=e122]:
+              - img "PostgreSQL Community Event" [ref=e123]
+              - text: 2026-10-20 – 2026-10-23 ·
+              - link "PGConf.EU 2026" [ref=e124] [cursor=pointer]:
+                - /url: /about/event/pgconfeu-2026-2587/
+            - listitem [ref=e125]:
+              - img "PostgreSQL Community Event" [ref=e126]
+              - text: 2026-10-25 ·
+              - link "PGDay Israel 2026" [ref=e127] [cursor=pointer]:
+                - /url: /about/event/pgday-israel-2026-2588/
+            - listitem [ref=e128]:
+              - img "PostgreSQL Community Event" [ref=e129]
+              - text: 2026-10-30 ·
+              - link "PG Down Under 2026" [ref=e130] [cursor=pointer]:
+                - /url: /about/event/pg-down-under-2026-2585/
+          - paragraph [ref=e131]:
+            - img "PostgreSQL Community Event" [ref=e132]
+            - text: indicates that an event is recognised under the
+            - link "community event guidelines" [ref=e133] [cursor=pointer]:
+              - /url: /about/policies/conferences/
+            - text: and is directly helping the PostgreSQL community.
+        - link "Check Schedule" [ref=e134] [cursor=pointer]:
+          - /url: /about/events/
+          - button "Check Schedule" [ref=e135]
+        - link "Add Your Event" [ref=e136] [cursor=pointer]:
+          - /url: /account/events/new/
+          - button "Add Your Event" [ref=e137]
+      - generic [ref=e138]:
+        - generic [ref=e139]: 
+        - heading "Mailing Lists" [level=2] [ref=e140]
+        - generic [ref=e141]:
+          - paragraph [ref=e142]:
+            - text: The PostgreSQL
+            - link "mailing lists" [ref=e143] [cursor=pointer]:
+              - /url: https://lists.postgresql.org
+            - text: enable you to interact with active community participants on subjects related to the development of PostgreSQL, discovering how to use PostgreSQL, or learning about upcoming events and product releases.
+          - paragraph [ref=e144]:
+            - text: In order to manage your mailing list subscription, you need a
+            - link "PostgreSQL community account" [ref=e145] [cursor=pointer]:
+              - /url: /account/
+            - text: .
+            - link "Signing up" [ref=e146] [cursor=pointer]:
+              - /url: /account/
+            - text: is easy and gives you direct access to the
+            - link "global PostgreSQL community" [ref=e147] [cursor=pointer]:
+              - /url: /community/
+            - text: .
+        - link "Subscribe" [ref=e148] [cursor=pointer]:
+          - /url: https://lists.postgresql.org
+          - button "Subscribe" [ref=e149]
+        - link "View Archives" [ref=e150] [cursor=pointer]:
+          - /url: https://www.postgresql.org/list/
+          - button "View Archives" [ref=e151]
+  - generic [ref=e155]:
+    - heading "Learning Opportunities Ahead" [level=2] [ref=e156]
+    - paragraph [ref=e157]: Want to learn more about PostgreSQL and help build the community? Come to one of the many events, local user groups, & training sessions where you can meet experienced PostgreSQL users and enhance your database skills.
+    - link "Browse Events" [ref=e158] [cursor=pointer]:
+      - /url: /about/events/
+      - button "Browse Events" [ref=e159]
+    - link "Browse User Groups" [ref=e160] [cursor=pointer]:
+      - /url: /community/user-groups/
+      - button "Browse User Groups" [ref=e161]
+  - generic [ref=e163]:
+    - generic [ref=e164]:
+      - heading "Latest News" [level=2] [ref=e165]
+      - banner [ref=e166]:
+        - heading "PostgreSQL 19 Beta 1 Released!" [level=3] [ref=e167]:
+          - link "PostgreSQL 19 Beta 1 Released!" [ref=e168] [cursor=pointer]:
+            - /url: /about/news/postgresql-19-beta-1-released-3313/
+        - list [ref=e169]:
+          - listitem [ref=e170]:
+            - generic [ref=e171]: 
+            - text: 2026-06-04
+      - paragraph [ref=e172]:
+        - text: The PostgreSQL Global Development Group announces that the first beta release of PostgreSQL 19 is now
+        - link "available for download" [ref=e173] [cursor=pointer]:
+          - /url: /download/
+        - text: . This release contains PostgreSQL 19 feature previews ahead of general availability, though some details of the release can change during the beta period.
+      - paragraph [ref=e174]:
+        - text: You can find information about all of the PostgreSQL 19 features and changes in the
+        - link "release notes" [ref=e175] [cursor=pointer]:
+          - /url: /docs/19/release-19.html
+        - text: .
+      - paragraph [ref=e176]: In the spirit of the open source PostgreSQL community, we strongly encourage you to test the new features of PostgreSQL 19 on your systems to help us eliminate bugs and other issues. While we do not advise you to run beta versions in production environments, we encourage you to find ways to run your typical application workloads against this beta release.
+      - paragraph [ref=e177]:
+        - text: Your testing and feedback help the community ensure that PostgreSQL 19 upholds our standards of delivering a stable, reliable release of the world's most advanced open source relational database. Please read more about our
+        - link "beta testing process" [ref=e178] [cursor=pointer]:
+          - /url: /developer/beta/
+        - text: and how you can contribute.
+      - paragraph [ref=e179]:
+        - text: PostgreSQL 14 will stop receiving fixes on November 12, 2026. If you are running PostgreSQL 14 in a production environment, we suggest that you make plans to upgrade to a newer, supported version of PostgreSQL. Please see our
+        - link "versioning policy" [ref=e180] [cursor=pointer]:
+          - /url: /support/versioning/
+        - text: for more information.
+      - list [ref=e181]:
+        - listitem [ref=e182]:
+          - link "Release Announcement" [ref=e183] [cursor=pointer]:
+            - /url: /about/news/postgresql-19-beta-1-released-3313/
+        - listitem [ref=e184]:
+          - link "Release Notes" [ref=e185] [cursor=pointer]:
+            - /url: /docs/release/
+        - listitem [ref=e186]:
+          - link "PostgreSQL 19 Open Items" [ref=e187] [cursor=pointer]:
+            - /url: https://wiki.postgresql.org/wiki/PostgreSQL_19_Open_Items
+        - listitem [ref=e188]:
+          - link "Versioning Policy" [ref=e189] [cursor=pointer]:
+            - /url: /support/versioning/
+        - listitem [ref=e190]:
+          - link "Download" [ref=e191] [cursor=pointer]:
+            - /url: /download/
+      - link "Browse Archives" [ref=e192] [cursor=pointer]:
+        - /url: /about/newsarchive/
+        - button "Browse Archives" [ref=e193]
+      - link "Submit News" [ref=e194] [cursor=pointer]:
+        - /url: /account/news/new/
+        - button "Submit News" [ref=e195]
+    - list [ref=e198]:
+      - listitem [ref=e199]:
+        - heading "PGConf.PL 2026 Call for Papers Open" [level=3] [ref=e200]:
+          - link "PGConf.PL 2026 Call for Papers Open" [ref=e201] [cursor=pointer]:
+            - /url: /about/news/pgconfpl-2026-call-for-papers-open-3312/
+        - list [ref=e202]:
+          - listitem [ref=e203]:
+            - generic [ref=e204]: 
+            - text: 2026-06-04 by PGConf.PL
+      - listitem [ref=e205]:
+        - heading "PostgreSQL 19 Beta 1 Released!" [level=3] [ref=e206]:
+          - link "PostgreSQL 19 Beta 1 Released!" [ref=e207] [cursor=pointer]:
+            - /url: /about/news/postgresql-19-beta-1-released-3313/
+        - list [ref=e208]:
+          - listitem [ref=e209]:
+            - generic [ref=e210]: 
+            - text: 2026-06-04 by PostgreSQL Global Development Group
+      - listitem [ref=e211]:
+        - heading "pg_tre 1.1.1 released -- an approximate-REGEX index AM for PostgreSQL 18+" [level=3] [ref=e212]:
+          - link "pg_tre 1.1.1 released -- an approximate-REGEX index AM for PostgreSQL 18+" [ref=e213] [cursor=pointer]:
+            - /url: /about/news/pg_tre-111-released-an-approximate-regex-index-am-for-postgresql-18-3305/
+        - list [ref=e214]:
+          - listitem [ref=e215]:
+            - generic [ref=e216]: 
+            - text: 2026-05-22 by Greg Burd
+      - listitem [ref=e217]:
+        - heading "pg_infer 1.0.0 released -- transformer model knowledge as SQL relations" [level=3] [ref=e218]:
+          - link "pg_infer 1.0.0 released -- transformer model knowledge as SQL relations" [ref=e219] [cursor=pointer]:
+            - /url: /about/news/pg_infer-100-released-transformer-model-knowledge-as-sql-relations-3307/
+        - list [ref=e220]:
+          - listitem [ref=e221]:
+            - generic [ref=e222]: 
+            - text: 2026-05-22 by Greg Burd
+      - listitem [ref=e223]:
+        - heading "pg_mentat 1.3.0 released -- Datomic-compatible Datalog inside PostgreSQL" [level=3] [ref=e224]:
+          - link "pg_mentat 1.3.0 released -- Datomic-compatible Datalog inside PostgreSQL" [ref=e225] [cursor=pointer]:
+            - /url: /about/news/pg_mentat-130-released-datomic-compatible-datalog-inside-postgresql-3306/
+        - list [ref=e226]:
+          - listitem [ref=e227]:
+            - generic [ref=e228]: 
+            - text: 2026-05-22 by Greg Burd
+  - generic [ref=e229]:
+    - generic [ref=e231]:
+      - heading "PLANET POSTGRESQL" [level=2] [ref=e232]:
+        - generic [ref=e233]: PLANET POSTGRESQL
+      - generic [ref=e235]: 
+    - generic [ref=e236]:
+      - generic [ref=e238]:
+        - 'heading "All Your GUCs in a Row: data_directory_mode" [level=3] [ref=e239]':
+          - 'link "All Your GUCs in a Row: data_directory_mode" [ref=e240] [cursor=pointer]':
+            - /url: https://postgr.es/p/9ls
+        - list [ref=e241]:
+          - listitem [ref=e242]:
+            - generic [ref=e243]: 
+            - text: Christophe Pettus
+          - listitem [ref=e244]:
+            - generic [ref=e245]: 
+            - text: 2026-06-07
+      - generic [ref=e247]:
+        - 'heading "All Your GUCs in a Row: data_directory" [level=3] [ref=e248]':
+          - 'link "All Your GUCs in a Row: data_directory" [ref=e249] [cursor=pointer]':
+            - /url: https://postgr.es/p/9lq
+        - list [ref=e250]:
+          - listitem [ref=e251]:
+            - generic [ref=e252]: 
+            - text: Christophe Pettus
+          - listitem [ref=e253]:
+            - generic [ref=e254]: 
+            - text: 2026-06-06
+      - generic [ref=e256]:
+        - heading "Beta Testing PostgreSQL With Docker" [level=3] [ref=e257]:
+          - link "Beta Testing PostgreSQL With Docker" [ref=e258] [cursor=pointer]:
+            - /url: https://postgr.es/p/9lr
+        - list [ref=e259]:
+          - listitem [ref=e260]:
+            - generic [ref=e261]: 
+            - text: Andrew Atkinson
+          - listitem [ref=e262]:
+            - generic [ref=e263]: 
+            - text: 2026-06-05
+      - generic [ref=e265]:
+        - 'heading "Acknowledged Individuals in the PostgreSQL Release Notes: 2026 Edition" [level=3] [ref=e266]':
+          - 'link "Acknowledged Individuals in the PostgreSQL Release Notes: 2026 Edition" [ref=e267] [cursor=pointer]':
+            - /url: https://postgr.es/p/9lp
+        - list [ref=e268]:
+          - listitem [ref=e269]:
+            - generic [ref=e270]: 
+            - text: Mark Wong
+          - listitem [ref=e271]:
+            - generic [ref=e272]: 
+            - text: 2026-06-05
+      - generic [ref=e274]:
+        - 'heading "Looking Forward to Postgres 19: Query Hints" [level=3] [ref=e275]':
+          - 'link "Looking Forward to Postgres 19: Query Hints" [ref=e276] [cursor=pointer]':
+            - /url: https://postgr.es/p/9ln
+        - list [ref=e277]:
+          - listitem [ref=e278]:
+            - generic [ref=e279]: 
+            - text: Shaun Thomas
+          - listitem [ref=e280]:
+            - generic [ref=e281]: 
+            - text: 2026-06-05
+      - generic [ref=e283]:
+        - 'heading "All Your GUCs in a Row: data_checksums" [level=3] [ref=e284]':
+          - 'link "All Your GUCs in a Row: data_checksums" [ref=e285] [cursor=pointer]':
+            - /url: https://postgr.es/p/9lc
+        - list [ref=e286]:
+          - listitem [ref=e287]:
+            - generic [ref=e288]: 
+            - text: Christophe Pettus
+          - listitem [ref=e289]:
+            - generic [ref=e290]: 
+            - text: 2026-06-05
+      - generic [ref=e292]:
+        - heading "A Reviewer Was Born" [level=3] [ref=e293]:
+          - link "A Reviewer Was Born" [ref=e294] [cursor=pointer]:
+            - /url: https://postgr.es/p/9lo
+        - list [ref=e295]:
+          - listitem [ref=e296]:
+            - generic [ref=e297]: 
+            - text: Lætitia AVROT
+          - listitem [ref=e298]:
+            - generic [ref=e299]: 
+            - text: 2026-06-05
+      - generic [ref=e301]:
+        - heading "How to test PostgreSQL 19 beta in your Kubernetes cluster" [level=3] [ref=e302]:
+          - link "How to test PostgreSQL 19 beta in your Kubernetes cluster" [ref=e303] [cursor=pointer]:
+            - /url: https://postgr.es/p/9li
+        - list [ref=e304]:
+          - listitem [ref=e305]:
+            - generic [ref=e306]: 
+            - text: Floor Drees
+          - listitem [ref=e307]:
+            - generic [ref=e308]: 
+            - text: 2026-06-05
+      - generic [ref=e310]:
+        - 'heading "File Descriptors: The OS Limit That Takes Down PostgreSQL" [level=3] [ref=e311]':
+          - 'link "File Descriptors: The OS Limit That Takes Down PostgreSQL" [ref=e312] [cursor=pointer]':
+            - /url: https://postgr.es/p/9lb
+        - list [ref=e313]:
+          - listitem [ref=e314]:
+            - generic [ref=e315]: 
+            - text: warda bibi
+          - listitem [ref=e316]:
+            - generic [ref=e317]: 
+            - text: 2026-06-04
+    - link "Browse Archives" [ref=e320] [cursor=pointer]:
+      - /url: https://planet.postgresql.org
+      - button "Browse Archives" [ref=e321]
+  - generic [ref=e324]:
+    - heading "Seeing unexpected behavior?" [level=2] [ref=e325]
+    - paragraph [ref=e326]: The PostgreSQL community takes pride in releasing software that reliably stores your data. If you believe you've discovered a bug, please click the button below and follow the instructions on how to submit a bug.
+    - link "Submit a Bug" [ref=e327] [cursor=pointer]:
+      - /url: /account/submitbug/
+      - button "Submit a Bug" [ref=e328]
+  - contentinfo [ref=e330]:
+    - generic [ref=e331]:
+      - link "Policies" [ref=e332] [cursor=pointer]:
+        - /url: /about/policies/
+      - text: "|"
+      - link "Code of Conduct" [ref=e333] [cursor=pointer]:
+        - /url: /about/policies/coc/
+      - text: "|"
+      - link "About PostgreSQL" [ref=e334] [cursor=pointer]:
+        - /url: /about/
+      - text: "|"
+      - link "Contact" [ref=e335] [cursor=pointer]:
+        - /url: /about/contact/
+      - paragraph [ref=e336]: Copyright © 1996-2026 The PostgreSQL Global Development Group

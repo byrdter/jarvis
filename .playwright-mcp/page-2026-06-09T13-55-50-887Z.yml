@@ -1,0 +1,1393 @@
+- generic [active] [ref=e1]:
+  - blockquote [ref=e2]:
+    - heading [level=2] [ref=e3]: Documentation Index
+    - paragraph [ref=e4]:
+      - text: "Fetch the complete documentation index at:"
+      - link [ref=e5] [cursor=pointer]:
+        - /url: /docs/llms.txt
+        - text: /docs/llms.txt
+    - paragraph [ref=e6]: Use this file to discover all available pages before exploring further.
+  - generic [ref=e7]:
+    - link "Skip to main content" [ref=e8] [cursor=pointer]:
+      - /url: "#content-area"
+    - generic [ref=e10]:
+      - banner [ref=e11]:
+        - generic [ref=e14]:
+          - generic [ref=e17]:
+            - generic [ref=e18]:
+              - link "Claude Code Docs home page light logo" [ref=e19] [cursor=pointer]:
+                - /url: /docs/en/overview
+                - generic [ref=e20]: Claude Code Docs home page
+                - img "light logo" [ref=e21]
+              - button "English" [ref=e23] [cursor=pointer]:
+                - generic [ref=e24]: English
+                - img [ref=e25]
+            - generic [ref=e27]:
+              - button "Open search" [ref=e28] [cursor=pointer]:
+                - generic [ref=e29]:
+                  - img [ref=e30]
+                  - generic [ref=e33]: Search...
+                - generic [ref=e34]: ⌘K
+              - button "Toggle assistant panel" [ref=e35] [cursor=pointer]:
+                - img [ref=e36]
+                - generic [ref=e39]: Ask Assistant
+            - generic [ref=e40]:
+              - navigation "Main" [ref=e41]:
+                - list [ref=e42]:
+                  - listitem [ref=e43]:
+                    - link "Claude Developer Platform" [ref=e44] [cursor=pointer]:
+                      - /url: https://platform.claude.com/
+                  - listitem [ref=e45]:
+                    - link "Claude Code on the Web" [ref=e46] [cursor=pointer]:
+                      - /url: https://claude.ai/code
+                      - generic [ref=e48]:
+                        - generic [ref=e49]: Claude Code on the Web
+                        - img [ref=e50]
+              - button "Toggle dark mode" [ref=e53] [cursor=pointer]:
+                - img [ref=e54]
+          - generic [ref=e62]:
+            - link "Getting started" [ref=e63] [cursor=pointer]:
+              - /url: /docs/en/overview
+              - text: Getting started
+            - link "Build with Claude Code" [ref=e65] [cursor=pointer]:
+              - /url: /docs/en/agents
+              - text: Build with Claude Code
+            - link "Administration" [ref=e67] [cursor=pointer]:
+              - /url: /docs/en/admin-setup
+              - text: Administration
+            - link "Configuration" [ref=e69] [cursor=pointer]:
+              - /url: /docs/en/settings
+              - text: Configuration
+            - link "Reference" [ref=e71] [cursor=pointer]:
+              - /url: /docs/en/cli-reference
+              - text: Reference
+            - link "Agent SDK" [ref=e73] [cursor=pointer]:
+              - /url: /docs/en/agent-sdk/overview
+              - text: Agent SDK
+            - link "What's New" [ref=e75] [cursor=pointer]:
+              - /url: /docs/en/whats-new
+              - text: What's New
+            - link "Resources" [ref=e77] [cursor=pointer]:
+              - /url: /docs/en/legal-and-compliance
+              - text: Resources
+      - generic [ref=e79]:
+        - navigation "Pages" [ref=e80]:
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - heading "Reference" [level=3] [ref=e86]
+              - list [ref=e87]:
+                - listitem [ref=e88]:
+                  - link "CLI reference" [ref=e89] [cursor=pointer]:
+                    - /url: /docs/en/cli-reference
+                    - generic [ref=e92]: CLI reference
+                - listitem [ref=e93]:
+                  - link "Commands" [ref=e94] [cursor=pointer]:
+                    - /url: /docs/en/commands
+                    - generic [ref=e97]: Commands
+                - listitem [ref=e98]:
+                  - link "Environment variables" [ref=e99] [cursor=pointer]:
+                    - /url: /docs/en/env-vars
+                    - generic [ref=e102]: Environment variables
+                - listitem [ref=e103]:
+                  - link "Tools reference" [ref=e104] [cursor=pointer]:
+                    - /url: /docs/en/tools-reference
+                    - generic [ref=e107]: Tools reference
+                - listitem [ref=e108]:
+                  - link "Interactive mode" [ref=e109] [cursor=pointer]:
+                    - /url: /docs/en/interactive-mode
+                    - generic [ref=e112]: Interactive mode
+                - listitem [ref=e113]:
+                  - link "Checkpointing" [ref=e114] [cursor=pointer]:
+                    - /url: /docs/en/checkpointing
+                    - generic [ref=e117]: Checkpointing
+                - listitem [ref=e118]:
+                  - link "Hooks reference" [ref=e119] [cursor=pointer]:
+                    - /url: /docs/en/hooks
+                    - generic [ref=e122]: Hooks reference
+                - listitem [ref=e123]:
+                  - link "Plugins reference" [ref=e124] [cursor=pointer]:
+                    - /url: /docs/en/plugins-reference
+                    - generic [ref=e127]: Plugins reference
+                - listitem [ref=e128]:
+                  - link "Channels reference" [ref=e129] [cursor=pointer]:
+                    - /url: /docs/en/channels-reference
+                    - generic [ref=e132]: Channels reference
+            - generic [ref=e133]:
+              - heading "Glossary" [level=3] [ref=e135]
+              - list [ref=e136]:
+                - listitem [ref=e137]:
+                  - link "Glossary" [ref=e138] [cursor=pointer]:
+                    - /url: /docs/en/glossary
+                    - generic [ref=e141]: Glossary
+        - main [ref=e142]:
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - generic [ref=e146]:
+                - generic [ref=e147]: Reference
+                - generic [ref=e148]:
+                  - heading "CLI reference" [level=1] [ref=e149]
+                  - generic [ref=e150]:
+                    - button "Copy page" [ref=e151] [cursor=pointer]:
+                      - generic [ref=e152]:
+                        - img [ref=e153]
+                        - generic [ref=e156]: Copy page
+                    - button "More actions" [ref=e157] [cursor=pointer]:
+                      - img [ref=e158]
+              - paragraph [ref=e161]: Complete reference for Claude Code command-line interface, including commands and flags.
+            - generic [ref=e162]:
+              - heading "Navigate to header CLI commands" [level=2] [ref=e163]:
+                - link "Navigate to header" [ref=e164] [cursor=pointer]:
+                  - /url: "#cli-commands"
+                  - img [ref=e166]
+                - generic [ref=e168] [cursor=pointer]: CLI commands
+              - generic [ref=e169]: "You can start sessions, pipe content, resume conversations, and manage updates with these commands:"
+              - table [ref=e172]:
+                - rowgroup [ref=e173]:
+                  - row "Command Description Example" [ref=e174]:
+                    - columnheader "Command" [ref=e175]
+                    - columnheader "Description" [ref=e176]
+                    - columnheader "Example" [ref=e177]
+                - rowgroup [ref=e178]:
+                  - row "claude Start interactive session claude" [ref=e179]:
+                    - cell "claude" [ref=e180]:
+                      - code [ref=e181]: claude
+                    - cell "Start interactive session" [ref=e182]
+                    - cell "claude" [ref=e183]:
+                      - code [ref=e184]: claude
+                  - row "claude \"query\" Start interactive session with initial prompt claude \"explain this project\"" [ref=e185]:
+                    - cell "claude \"query\"" [ref=e186]:
+                      - code [ref=e187]: claude "query"
+                    - cell "Start interactive session with initial prompt" [ref=e188]
+                    - cell "claude \"explain this project\"" [ref=e189]:
+                      - code [ref=e190]: claude "explain this project"
+                  - row "claude -p \"query\" Query via SDK, then exit claude -p \"explain this function\"" [ref=e191]:
+                    - cell "claude -p \"query\"" [ref=e192]:
+                      - code [ref=e193]: claude -p "query"
+                    - cell "Query via SDK, then exit" [ref=e194]
+                    - cell "claude -p \"explain this function\"" [ref=e195]:
+                      - code [ref=e196]: claude -p "explain this function"
+                  - row "cat file | claude -p \"query\" Process piped content cat logs.txt | claude -p \"explain\"" [ref=e197]:
+                    - cell "cat file | claude -p \"query\"" [ref=e198]:
+                      - code [ref=e199]: cat file | claude -p "query"
+                    - cell "Process piped content" [ref=e200]
+                    - cell "cat logs.txt | claude -p \"explain\"" [ref=e201]:
+                      - code [ref=e202]: cat logs.txt | claude -p "explain"
+                  - row "claude -c Continue most recent conversation in current directory claude -c" [ref=e203]:
+                    - cell "claude -c" [ref=e204]:
+                      - code [ref=e205]: claude -c
+                    - cell "Continue most recent conversation in current directory" [ref=e206]
+                    - cell "claude -c" [ref=e207]:
+                      - code [ref=e208]: claude -c
+                  - row "claude -c -p \"query\" Continue via SDK claude -c -p \"Check for type errors\"" [ref=e209]:
+                    - cell "claude -c -p \"query\"" [ref=e210]:
+                      - code [ref=e211]: claude -c -p "query"
+                    - cell "Continue via SDK" [ref=e212]
+                    - cell "claude -c -p \"Check for type errors\"" [ref=e213]:
+                      - code [ref=e214]: claude -c -p "Check for type errors"
+                  - row "claude -r \"<session>\" \"query\" Resume session by ID or name claude -r \"auth-refactor\" \"Finish this PR\"" [ref=e215]:
+                    - cell "claude -r \"<session>\" \"query\"" [ref=e216]:
+                      - code [ref=e217]: claude -r "<session>" "query"
+                    - cell "Resume session by ID or name" [ref=e218]
+                    - cell "claude -r \"auth-refactor\" \"Finish this PR\"" [ref=e219]:
+                      - code [ref=e220]: claude -r "auth-refactor" "Finish this PR"
+                  - row "claude update Update to latest version claude update" [ref=e221]:
+                    - cell "claude update" [ref=e222]:
+                      - code [ref=e223]: claude update
+                    - cell "Update to latest version" [ref=e224]
+                    - cell "claude update" [ref=e225]:
+                      - code [ref=e226]: claude update
+                  - row "claude install [version] Install or reinstall the native binary. Accepts a version like 2.1.118, or stable or latest. See Install a specific version claude install stable" [ref=e227]:
+                    - cell "claude install [version]" [ref=e228]:
+                      - code [ref=e229]: claude install [version]
+                    - cell "Install or reinstall the native binary. Accepts a version like 2.1.118, or stable or latest. See Install a specific version" [ref=e230]:
+                      - text: Install or reinstall the native binary. Accepts a version like
+                      - code [ref=e231]: 2.1.118
+                      - text: ", or"
+                      - code [ref=e232]: stable
+                      - text: or
+                      - code [ref=e233]: latest
+                      - text: . See
+                      - link "Install a specific version" [ref=e234] [cursor=pointer]:
+                        - /url: /docs/en/setup#install-a-specific-version
+                    - cell "claude install stable" [ref=e235]:
+                      - code [ref=e236]: claude install stable
+                  - row "claude auth login Sign in to your Anthropic account. Use --email to pre-fill your email address, --sso to force SSO authentication, and --console to sign in with Anthropic Console for API usage billing instead of a Claude subscription claude auth login --console" [ref=e237]:
+                    - cell "claude auth login" [ref=e238]:
+                      - code [ref=e239]: claude auth login
+                    - cell "Sign in to your Anthropic account. Use --email to pre-fill your email address, --sso to force SSO authentication, and --console to sign in with Anthropic Console for API usage billing instead of a Claude subscription" [ref=e240]:
+                      - text: Sign in to your Anthropic account. Use
+                      - code [ref=e241]: "--email"
+                      - text: to pre-fill your email address,
+                      - code [ref=e242]: "--sso"
+                      - text: to force SSO authentication, and
+                      - code [ref=e243]: "--console"
+                      - text: to sign in with Anthropic Console for API usage billing instead of a Claude subscription
+                    - cell "claude auth login --console" [ref=e244]:
+                      - code [ref=e245]: claude auth login --console
+                  - row "claude auth logout Log out from your Anthropic account claude auth logout" [ref=e246]:
+                    - cell "claude auth logout" [ref=e247]:
+                      - code [ref=e248]: claude auth logout
+                    - cell "Log out from your Anthropic account" [ref=e249]
+                    - cell "claude auth logout" [ref=e250]:
+                      - code [ref=e251]: claude auth logout
+                  - row "claude auth status Show authentication status as JSON. Use --text for human-readable output. Exits with code 0 if logged in, 1 if not claude auth status" [ref=e252]:
+                    - cell "claude auth status" [ref=e253]:
+                      - code [ref=e254]: claude auth status
+                    - cell "Show authentication status as JSON. Use --text for human-readable output. Exits with code 0 if logged in, 1 if not" [ref=e255]:
+                      - text: Show authentication status as JSON. Use
+                      - code [ref=e256]: "--text"
+                      - text: for human-readable output. Exits with code 0 if logged in, 1 if not
+                    - cell "claude auth status" [ref=e257]:
+                      - code [ref=e258]: claude auth status
+                  - row "claude agents Open agent view to monitor and dispatch parallel background sessions. Use --cwd <path> to show only sessions started under that directory, or --json to print live sessions as a JSON array for scripting. Pass --permission-mode, --model, --effort, or --agent to set defaults for dispatched sessions. Accepts --settings, --add-dir, --plugin-dir, and --mcp-config like the top-level claude command. Opening agent view requires an interactive terminal claude agents --json" [ref=e259]:
+                    - cell "claude agents" [ref=e260]:
+                      - code [ref=e261]: claude agents
+                    - cell "Open agent view to monitor and dispatch parallel background sessions. Use --cwd <path> to show only sessions started under that directory, or --json to print live sessions as a JSON array for scripting. Pass --permission-mode, --model, --effort, or --agent to set defaults for dispatched sessions. Accepts --settings, --add-dir, --plugin-dir, and --mcp-config like the top-level claude command. Opening agent view requires an interactive terminal" [ref=e262]:
+                      - text: Open
+                      - link "agent view" [ref=e263] [cursor=pointer]:
+                        - /url: /docs/en/agent-view
+                      - text: to monitor and dispatch parallel background sessions. Use
+                      - code [ref=e264]: "--cwd <path>"
+                      - text: to show only sessions started under that directory, or
+                      - code [ref=e265]: "--json"
+                      - text: to print live sessions as a JSON array for scripting. Pass
+                      - code [ref=e266]: "--permission-mode"
+                      - text: ","
+                      - code [ref=e267]: "--model"
+                      - text: ","
+                      - code [ref=e268]: "--effort"
+                      - text: ", or"
+                      - code [ref=e269]: "--agent"
+                      - text: to set
+                      - link "defaults for dispatched sessions" [ref=e270] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#permission-mode-model-and-effort
+                      - text: . Accepts
+                      - code [ref=e271]: "--settings"
+                      - text: ","
+                      - code [ref=e272]: "--add-dir"
+                      - text: ","
+                      - code [ref=e273]: "--plugin-dir"
+                      - text: ", and"
+                      - code [ref=e274]: "--mcp-config"
+                      - text: like the top-level
+                      - code [ref=e275]: claude
+                      - text: command. Opening agent view requires an interactive terminal
+                    - cell "claude agents --json" [ref=e276]:
+                      - code [ref=e277]: claude agents --json
+                  - row "claude attach <id> Attach to a background session in this terminal claude attach 7c5dcf5d" [ref=e278]:
+                    - cell "claude attach <id>" [ref=e279]:
+                      - code [ref=e280]: claude attach <id>
+                    - cell "Attach to a background session in this terminal" [ref=e281]:
+                      - text: Attach to a
+                      - link "background session" [ref=e282] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#manage-sessions-from-the-shell
+                      - text: in this terminal
+                    - cell "claude attach 7c5dcf5d" [ref=e283]:
+                      - code [ref=e284]: claude attach 7c5dcf5d
+                  - row "claude auto-mode defaults Print the built-in auto mode classifier rules as JSON. Use claude auto-mode config to see your effective config with settings applied claude auto-mode defaults > rules.json" [ref=e285]:
+                    - cell "claude auto-mode defaults" [ref=e286]:
+                      - code [ref=e287]: claude auto-mode defaults
+                    - cell "Print the built-in auto mode classifier rules as JSON. Use claude auto-mode config to see your effective config with settings applied" [ref=e288]:
+                      - text: Print the built-in
+                      - link "auto mode" [ref=e289] [cursor=pointer]:
+                        - /url: /docs/en/permission-modes#eliminate-prompts-with-auto-mode
+                      - text: classifier rules as JSON. Use
+                      - code [ref=e290]: claude auto-mode config
+                      - text: to see your effective config with settings applied
+                    - cell "claude auto-mode defaults > rules.json" [ref=e291]:
+                      - code [ref=e292]: claude auto-mode defaults > rules.json
+                  - row "claude daemon status Print the background-session supervisor’s state, version, socket directory, and worker count for diagnostics. Exits 1 if the supervisor isn’t running claude daemon status" [ref=e293]:
+                    - cell "claude daemon status" [ref=e294]:
+                      - code [ref=e295]: claude daemon status
+                    - cell "Print the background-session supervisor’s state, version, socket directory, and worker count for diagnostics. Exits 1 if the supervisor isn’t running" [ref=e296]:
+                      - text: Print the background-session
+                      - link "supervisor’s" [ref=e297] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#the-supervisor-process
+                      - text: state, version, socket directory, and worker count for diagnostics. Exits 1 if the supervisor isn’t running
+                    - cell "claude daemon status" [ref=e298]:
+                      - code [ref=e299]: claude daemon status
+                  - row "claude daemon stop --any Stop the background-session supervisor and the sessions it hosts. Pass --keep-workers to leave background sessions running so the next supervisor reconnects to them. --any confirms stopping an on-demand supervisor, which is the default. Use this to recover from an unresponsive supervisor claude daemon stop --any --keep-workers" [ref=e300]:
+                    - cell "claude daemon stop --any" [ref=e301]:
+                      - code [ref=e302]: claude daemon stop --any
+                    - cell "Stop the background-session supervisor and the sessions it hosts. Pass --keep-workers to leave background sessions running so the next supervisor reconnects to them. --any confirms stopping an on-demand supervisor, which is the default. Use this to recover from an unresponsive supervisor" [ref=e303]:
+                      - text: Stop the background-session
+                      - link "supervisor" [ref=e304] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#the-supervisor-process
+                      - text: and the sessions it hosts. Pass
+                      - code [ref=e305]: "--keep-workers"
+                      - text: to leave background sessions running so the next supervisor reconnects to them.
+                      - code [ref=e306]: "--any"
+                      - text: confirms stopping an on-demand supervisor, which is the default. Use this to recover from an
+                      - link "unresponsive supervisor" [ref=e307] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#agent-view-says-the-background-service-did-not-respond
+                    - cell "claude daemon stop --any --keep-workers" [ref=e308]:
+                      - code [ref=e309]: claude daemon stop --any --keep-workers
+                  - row "claude logs <id> Print recent output from a background session claude logs 7c5dcf5d" [ref=e310]:
+                    - cell "claude logs <id>" [ref=e311]:
+                      - code [ref=e312]: claude logs <id>
+                    - cell "Print recent output from a background session" [ref=e313]:
+                      - text: Print recent output from a
+                      - link "background session" [ref=e314] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#manage-sessions-from-the-shell
+                    - cell "claude logs 7c5dcf5d" [ref=e315]:
+                      - code [ref=e316]: claude logs 7c5dcf5d
+                  - row "claude mcp Configure Model Context Protocol (MCP) servers See the Claude Code MCP documentation." [ref=e317]:
+                    - cell "claude mcp" [ref=e318]:
+                      - code [ref=e319]: claude mcp
+                    - cell "Configure Model Context Protocol (MCP) servers" [ref=e320]
+                    - cell "See the Claude Code MCP documentation." [ref=e321]:
+                      - text: See the
+                      - link "Claude Code MCP documentation" [ref=e322] [cursor=pointer]:
+                        - /url: /docs/en/mcp
+                      - text: .
+                  - 'row "claude plugin Manage Claude Code plugins. Alias: claude plugins. See plugin reference for subcommands claude plugin install code-review@claude-plugins-official" [ref=e323]':
+                    - cell "claude plugin" [ref=e324]:
+                      - code [ref=e325]: claude plugin
+                    - 'cell "Manage Claude Code plugins. Alias: claude plugins. See plugin reference for subcommands" [ref=e326]':
+                      - text: Manage Claude Code
+                      - link "plugins" [ref=e327] [cursor=pointer]:
+                        - /url: /docs/en/plugins
+                      - text: ". Alias:"
+                      - code [ref=e328]: claude plugins
+                      - text: . See
+                      - link "plugin reference" [ref=e329] [cursor=pointer]:
+                        - /url: /docs/en/plugins-reference#cli-commands-reference
+                      - text: for subcommands
+                    - cell "claude plugin install code-review@claude-plugins-official" [ref=e330]:
+                      - code [ref=e331]: claude plugin install code-review@claude-plugins-official
+                  - 'row "claude project purge [path] Delete all local Claude Code state for a project: transcripts, task lists, debug logs, file-edit history, prompt history lines, and the project’s entry in ~/.claude.json. Omit [path] to pick from an interactive list. Flags: --dry-run to preview, -y/--yes to skip confirmation, -i/--interactive to confirm each item, --all for every project. See Clear local data claude project purge ~/work/repo --dry-run" [ref=e332]':
+                    - cell "claude project purge [path]" [ref=e333]:
+                      - code [ref=e334]: claude project purge [path]
+                    - 'cell "Delete all local Claude Code state for a project: transcripts, task lists, debug logs, file-edit history, prompt history lines, and the project’s entry in ~/.claude.json. Omit [path] to pick from an interactive list. Flags: --dry-run to preview, -y/--yes to skip confirmation, -i/--interactive to confirm each item, --all for every project. See Clear local data" [ref=e335]':
+                      - text: "Delete all local Claude Code state for a project: transcripts, task lists, debug logs, file-edit history, prompt history lines, and the project’s entry in"
+                      - code [ref=e336]: ~/.claude.json
+                      - text: . Omit
+                      - code [ref=e337]: "[path]"
+                      - text: "to pick from an interactive list. Flags:"
+                      - code [ref=e338]: "--dry-run"
+                      - text: to preview,
+                      - code [ref=e339]: "-y"
+                      - text: /
+                      - code [ref=e340]: "--yes"
+                      - text: to skip confirmation,
+                      - code [ref=e341]: "-i"
+                      - text: /
+                      - code [ref=e342]: "--interactive"
+                      - text: to confirm each item,
+                      - code [ref=e343]: "--all"
+                      - text: for every project. See
+                      - link "Clear local data" [ref=e344] [cursor=pointer]:
+                        - /url: /docs/en/claude-directory#clear-local-data
+                    - cell "claude project purge ~/work/repo --dry-run" [ref=e345]:
+                      - code [ref=e346]: claude project purge ~/work/repo --dry-run
+                  - row "claude remote-control Start a Remote Control server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See Server mode flags claude remote-control --name \"My Project\"" [ref=e347]:
+                    - cell "claude remote-control" [ref=e348]:
+                      - code [ref=e349]: claude remote-control
+                    - cell "Start a Remote Control server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See Server mode flags" [ref=e350]:
+                      - text: Start a
+                      - link "Remote Control" [ref=e351] [cursor=pointer]:
+                        - /url: /docs/en/remote-control
+                      - text: server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See
+                      - link "Server mode flags" [ref=e352] [cursor=pointer]:
+                        - /url: /docs/en/remote-control#start-a-remote-control-session
+                    - cell "claude remote-control --name \"My Project\"" [ref=e353]:
+                      - code [ref=e354]: claude remote-control --name "My Project"
+                  - row "claude respawn <id> Restart a background session, running or stopped, with its conversation intact. Use --all to restart every running session, e.g. to pick up an updated Claude Code binary claude respawn 7c5dcf5d" [ref=e355]:
+                    - cell "claude respawn <id>" [ref=e356]:
+                      - code [ref=e357]: claude respawn <id>
+                    - cell "Restart a background session, running or stopped, with its conversation intact. Use --all to restart every running session, e.g. to pick up an updated Claude Code binary" [ref=e358]:
+                      - text: Restart a
+                      - link "background session" [ref=e359] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#manage-sessions-from-the-shell
+                      - text: ", running or stopped, with its conversation intact. Use"
+                      - code [ref=e360]: "--all"
+                      - text: to restart every running session, e.g. to pick up an updated Claude Code binary
+                    - cell "claude respawn 7c5dcf5d" [ref=e361]:
+                      - code [ref=e362]: claude respawn 7c5dcf5d
+                  - row "claude rm <id> Remove a background session from the list. The conversation transcript stays on your local machine, available through claude --resume claude rm 7c5dcf5d" [ref=e363]:
+                    - cell "claude rm <id>" [ref=e364]:
+                      - code [ref=e365]: claude rm <id>
+                    - cell "Remove a background session from the list. The conversation transcript stays on your local machine, available through claude --resume" [ref=e366]:
+                      - text: Remove a
+                      - link "background session" [ref=e367] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#manage-sessions-from-the-shell
+                      - text: from the list. The conversation transcript stays on your local machine, available through
+                      - code [ref=e368]: claude --resume
+                    - cell "claude rm 7c5dcf5d" [ref=e369]:
+                      - code [ref=e370]: claude rm 7c5dcf5d
+                  - row "claude setup-token Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See Generate a long-lived token claude setup-token" [ref=e371]:
+                    - cell "claude setup-token" [ref=e372]:
+                      - code [ref=e373]: claude setup-token
+                    - cell "Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See Generate a long-lived token" [ref=e374]:
+                      - text: Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See
+                      - link "Generate a long-lived token" [ref=e375] [cursor=pointer]:
+                        - /url: /docs/en/authentication#generate-a-long-lived-token
+                    - cell "claude setup-token" [ref=e376]:
+                      - code [ref=e377]: claude setup-token
+                  - row "claude stop <id> Stop a background session. Also accepts claude kill claude stop 7c5dcf5d" [ref=e378]:
+                    - cell "claude stop <id>" [ref=e379]:
+                      - code [ref=e380]: claude stop <id>
+                    - cell "Stop a background session. Also accepts claude kill" [ref=e381]:
+                      - text: Stop a
+                      - link "background session" [ref=e382] [cursor=pointer]:
+                        - /url: /docs/en/agent-view#manage-sessions-from-the-shell
+                      - text: . Also accepts
+                      - code [ref=e383]: claude kill
+                    - cell "claude stop 7c5dcf5d" [ref=e384]:
+                      - code [ref=e385]: claude stop 7c5dcf5d
+                  - row "claude ultrareview [target] Run ultrareview non-interactively. Prints findings to stdout and exits 0 on success or 1 on failure. Use --json for the raw payload and --timeout <minutes> to override the 30-minute default claude ultrareview 1234 --json" [ref=e386]:
+                    - cell "claude ultrareview [target]" [ref=e387]:
+                      - code [ref=e388]: claude ultrareview [target]
+                    - cell "Run ultrareview non-interactively. Prints findings to stdout and exits 0 on success or 1 on failure. Use --json for the raw payload and --timeout <minutes> to override the 30-minute default" [ref=e389]:
+                      - text: Run
+                      - link "ultrareview" [ref=e390] [cursor=pointer]:
+                        - /url: /docs/en/ultrareview#run-ultrareview-non-interactively
+                      - text: non-interactively. Prints findings to stdout and exits 0 on success or 1 on failure. Use
+                      - code [ref=e391]: "--json"
+                      - text: for the raw payload and
+                      - code [ref=e392]: "--timeout <minutes>"
+                      - text: to override the 30-minute default
+                    - cell "claude ultrareview 1234 --json" [ref=e393]:
+                      - code [ref=e394]: claude ultrareview 1234 --json
+              - generic [ref=e395]:
+                - text: If you mistype a subcommand, Claude Code suggests the closest match and exits without starting a session. For example,
+                - code [ref=e396]: claude udpate
+                - text: prints
+                - code [ref=e397]: Did you mean claude update?
+                - text: .
+              - heading "Navigate to header CLI flags" [level=2] [ref=e398]:
+                - link "Navigate to header" [ref=e399] [cursor=pointer]:
+                  - /url: "#cli-flags"
+                  - img [ref=e401]
+                - generic [ref=e403] [cursor=pointer]: CLI flags
+              - generic [ref=e404]:
+                - text: Customize Claude Code’s behavior with these command-line flags.
+                - code [ref=e405]: claude --help
+                - text: does not list every flag, so a flag’s absence from
+                - code [ref=e406]: "--help"
+                - text: does not mean it is unavailable.
+              - table [ref=e409]:
+                - rowgroup [ref=e410]:
+                  - row "Flag Description Example" [ref=e411]:
+                    - columnheader "Flag" [ref=e412]
+                    - columnheader "Description" [ref=e413]
+                    - columnheader "Example" [ref=e414]
+                - rowgroup [ref=e415]:
+                  - row "--add-dir Add additional working directories for Claude to read and edit files. Grants file access; most .claude/ configuration is not discovered from these directories. Validates each path exists as a directory. To persist these directories across sessions, set permissions.additionalDirectories in settings claude --add-dir ../apps ../lib" [ref=e416]:
+                    - cell "--add-dir" [ref=e417]:
+                      - code [ref=e418]: "--add-dir"
+                    - cell "Add additional working directories for Claude to read and edit files. Grants file access; most .claude/ configuration is not discovered from these directories. Validates each path exists as a directory. To persist these directories across sessions, set permissions.additionalDirectories in settings" [ref=e419]:
+                      - text: Add additional working directories for Claude to read and edit files. Grants file access; most
+                      - code [ref=e420]: .claude/
+                      - text: configuration is
+                      - link "not discovered" [ref=e421] [cursor=pointer]:
+                        - /url: /docs/en/permissions#additional-directories-grant-file-access-not-configuration
+                      - text: from these directories. Validates each path exists as a directory. To persist these directories across sessions, set
+                      - link "permissions.additionalDirectories" [ref=e422] [cursor=pointer]:
+                        - /url: /docs/en/settings#permission-settings
+                        - code [ref=e423]: permissions.additionalDirectories
+                      - text: in settings
+                    - cell "claude --add-dir ../apps ../lib" [ref=e424]:
+                      - code [ref=e425]: claude --add-dir ../apps ../lib
+                  - row "--agent Specify an agent for the current session (overrides the agent setting) claude --agent my-custom-agent" [ref=e426]:
+                    - cell "--agent" [ref=e427]:
+                      - code [ref=e428]: "--agent"
+                    - cell "Specify an agent for the current session (overrides the agent setting)" [ref=e429]:
+                      - text: Specify an agent for the current session (overrides the
+                      - code [ref=e430]: agent
+                      - text: setting)
+                    - cell "claude --agent my-custom-agent" [ref=e431]:
+                      - code [ref=e432]: claude --agent my-custom-agent
+                  - 'row "--agents Define custom subagents dynamically via JSON. Uses the same field names as subagent frontmatter, plus a prompt field for the agent’s instructions claude --agents ''{\"reviewer\":{\"description\":\"Reviews code\",\"prompt\":\"You are a code reviewer\"}}''" [ref=e433]':
+                    - cell "--agents" [ref=e434]:
+                      - code [ref=e435]: "--agents"
+                    - cell "Define custom subagents dynamically via JSON. Uses the same field names as subagent frontmatter, plus a prompt field for the agent’s instructions" [ref=e436]:
+                      - text: Define custom subagents dynamically via JSON. Uses the same field names as subagent
+                      - link "frontmatter" [ref=e437] [cursor=pointer]:
+                        - /url: /docs/en/sub-agents#supported-frontmatter-fields
+                      - text: ", plus a"
+                      - code [ref=e438]: prompt
+                      - text: field for the agent’s instructions
+                    - 'cell "claude --agents ''{\"reviewer\":{\"description\":\"Reviews code\",\"prompt\":\"You are a code reviewer\"}}''" [ref=e439]':
+                      - code [ref=e440]: "claude --agents '{\"reviewer\":{\"description\":\"Reviews code\",\"prompt\":\"You are a code reviewer\"}}'"
+                  - row "--allow-dangerously-skip-permissions Add bypassPermissions to the Shift+Tab mode cycle without starting in it. Lets you begin in a different mode like plan and switch to bypassPermissions later. See permission modes claude --permission-mode plan --allow-dangerously-skip-permissions" [ref=e441]:
+                    - cell "--allow-dangerously-skip-permissions" [ref=e442]:
+                      - code [ref=e443]: "--allow-dangerously-skip-permissions"
+                    - cell "Add bypassPermissions to the Shift+Tab mode cycle without starting in it. Lets you begin in a different mode like plan and switch to bypassPermissions later. See permission modes" [ref=e444]:
+                      - text: Add
+                      - code [ref=e445]: bypassPermissions
+                      - text: to the
+                      - code [ref=e446]: Shift+Tab
+                      - text: mode cycle without starting in it. Lets you begin in a different mode like
+                      - code [ref=e447]: plan
+                      - text: and switch to
+                      - code [ref=e448]: bypassPermissions
+                      - text: later. See
+                      - link "permission modes" [ref=e449] [cursor=pointer]:
+                        - /url: /docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode
+                    - cell "claude --permission-mode plan --allow-dangerously-skip-permissions" [ref=e450]:
+                      - code [ref=e451]: claude --permission-mode plan --allow-dangerously-skip-permissions
+                  - row "--allowedTools Tools that execute without prompting for permission. See permission rule syntax for pattern matching. To restrict which tools are available, use --tools instead \"Bash(git log *)\" \"Bash(git diff *)\" \"Read\"" [ref=e452]:
+                    - cell "--allowedTools" [ref=e453]:
+                      - code [ref=e454]: "--allowedTools"
+                    - cell "Tools that execute without prompting for permission. See permission rule syntax for pattern matching. To restrict which tools are available, use --tools instead" [ref=e455]:
+                      - text: Tools that execute without prompting for permission. See
+                      - link "permission rule syntax" [ref=e456] [cursor=pointer]:
+                        - /url: /docs/en/settings#permission-rule-syntax
+                      - text: for pattern matching. To restrict which tools are available, use
+                      - code [ref=e457]: "--tools"
+                      - text: instead
+                    - cell "\"Bash(git log *)\" \"Bash(git diff *)\" \"Read\"" [ref=e458]:
+                      - code [ref=e459]: "\"Bash(git log *)\" \"Bash(git diff *)\" \"Read\""
+                  - row "--append-system-prompt Append custom text to the end of the default system prompt claude --append-system-prompt \"Always use TypeScript\"" [ref=e460]:
+                    - cell "--append-system-prompt" [ref=e461]:
+                      - code [ref=e462]: "--append-system-prompt"
+                    - cell "Append custom text to the end of the default system prompt" [ref=e463]
+                    - cell "claude --append-system-prompt \"Always use TypeScript\"" [ref=e464]:
+                      - code [ref=e465]: claude --append-system-prompt "Always use TypeScript"
+                  - row "--append-system-prompt-file Load additional system prompt text from a file and append to the default prompt claude --append-system-prompt-file ./extra-rules.txt" [ref=e466]:
+                    - cell "--append-system-prompt-file" [ref=e467]:
+                      - code [ref=e468]: "--append-system-prompt-file"
+                    - cell "Load additional system prompt text from a file and append to the default prompt" [ref=e469]
+                    - cell "claude --append-system-prompt-file ./extra-rules.txt" [ref=e470]:
+                      - code [ref=e471]: claude --append-system-prompt-file ./extra-rules.txt
+                  - 'row "--bare Minimal mode: skip auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md so scripted calls start faster. Claude has access to Bash, file read, and file edit tools. Sets CLAUDE_CODE_SIMPLE. See bare mode claude --bare -p \"query\"" [ref=e472]':
+                    - cell "--bare" [ref=e473]:
+                      - code [ref=e474]: "--bare"
+                    - 'cell "Minimal mode: skip auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md so scripted calls start faster. Claude has access to Bash, file read, and file edit tools. Sets CLAUDE_CODE_SIMPLE. See bare mode" [ref=e475]':
+                      - text: "Minimal mode: skip auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md so scripted calls start faster. Claude has access to Bash, file read, and file edit tools. Sets"
+                      - link "CLAUDE_CODE_SIMPLE" [ref=e476] [cursor=pointer]:
+                        - /url: /docs/en/env-vars
+                        - code [ref=e477]: CLAUDE_CODE_SIMPLE
+                      - text: . See
+                      - link "bare mode" [ref=e478] [cursor=pointer]:
+                        - /url: /docs/en/headless#start-faster-with-bare-mode
+                    - cell "claude --bare -p \"query\"" [ref=e479]:
+                      - code [ref=e480]: claude --bare -p "query"
+                  - row "--betas Beta headers to include in API requests (API key users only) claude --betas interleaved-thinking" [ref=e481]:
+                    - cell "--betas" [ref=e482]:
+                      - code [ref=e483]: "--betas"
+                    - cell "Beta headers to include in API requests (API key users only)" [ref=e484]
+                    - cell "claude --betas interleaved-thinking" [ref=e485]:
+                      - code [ref=e486]: claude --betas interleaved-thinking
+                  - row "--bg Start the session as a background agent and return immediately. Prints the session ID and management commands. Combine with --exec to run a shell command as a background job instead of a Claude session, or with --agent to run a specific subagent claude --bg \"investigate the flaky test\"" [ref=e487]:
+                    - cell "--bg" [ref=e488]:
+                      - code [ref=e489]: "--bg"
+                    - cell "Start the session as a background agent and return immediately. Prints the session ID and management commands. Combine with --exec to run a shell command as a background job instead of a Claude session, or with --agent to run a specific subagent" [ref=e490]:
+                      - text: Start the session as a
+                      - link "background agent" [ref=e491] [cursor=pointer]:
+                        - /url: /docs/en/agent-view
+                      - text: and return immediately. Prints the session ID and management commands. Combine with
+                      - code [ref=e492]: "--exec"
+                      - text: to run a shell command as a background job instead of a Claude session, or with
+                      - code [ref=e493]: "--agent"
+                      - text: to run a specific subagent
+                    - cell "claude --bg \"investigate the flaky test\"" [ref=e494]:
+                      - code [ref=e495]: claude --bg "investigate the flaky test"
+                  - row "--channels (Research preview) MCP servers whose channel notifications Claude should listen for in this session. Space-separated list of plugin:<name>@<marketplace> entries. Requires Claude.ai authentication claude --channels plugin:my-notifier@my-marketplace" [ref=e496]:
+                    - cell "--channels" [ref=e497]:
+                      - code [ref=e498]: "--channels"
+                    - cell "(Research preview) MCP servers whose channel notifications Claude should listen for in this session. Space-separated list of plugin:<name>@<marketplace> entries. Requires Claude.ai authentication" [ref=e499]:
+                      - text: (Research preview) MCP servers whose
+                      - link "channel" [ref=e500] [cursor=pointer]:
+                        - /url: /docs/en/channels
+                      - text: notifications Claude should listen for in this session. Space-separated list of
+                      - code [ref=e501]: plugin:<name>@<marketplace>
+                      - text: entries. Requires Claude.ai authentication
+                    - cell "claude --channels plugin:my-notifier@my-marketplace" [ref=e502]:
+                      - code [ref=e503]: claude --channels plugin:my-notifier@my-marketplace
+                  - row "--chrome Enable Chrome browser integration for web automation and testing claude --chrome" [ref=e504]:
+                    - cell "--chrome" [ref=e505]:
+                      - code [ref=e506]: "--chrome"
+                    - cell "Enable Chrome browser integration for web automation and testing" [ref=e507]:
+                      - text: Enable
+                      - link "Chrome browser integration" [ref=e508] [cursor=pointer]:
+                        - /url: /docs/en/chrome
+                      - text: for web automation and testing
+                    - cell "claude --chrome" [ref=e509]:
+                      - code [ref=e510]: claude --chrome
+                  - row "--continue, -c Load the most recent conversation in the current directory. Includes sessions that added this directory with /add-dir claude --continue" [ref=e511]:
+                    - cell "--continue, -c" [ref=e512]:
+                      - code [ref=e513]: "--continue"
+                      - text: ","
+                      - code [ref=e514]: "-c"
+                    - cell "Load the most recent conversation in the current directory. Includes sessions that added this directory with /add-dir" [ref=e515]:
+                      - text: Load the most recent conversation in the current directory. Includes sessions that added this directory with
+                      - code [ref=e516]: /add-dir
+                    - cell "claude --continue" [ref=e517]:
+                      - code [ref=e518]: claude --continue
+                  - row "--dangerously-load-development-channels Enable channels that are not on the approved allowlist, for local development. Accepts plugin:<name>@<marketplace> and server:<name> entries. Prompts for confirmation claude --dangerously-load-development-channels server:webhook" [ref=e519]:
+                    - cell "--dangerously-load-development-channels" [ref=e520]:
+                      - code [ref=e521]: "--dangerously-load-development-channels"
+                    - cell "Enable channels that are not on the approved allowlist, for local development. Accepts plugin:<name>@<marketplace> and server:<name> entries. Prompts for confirmation" [ref=e522]:
+                      - text: Enable
+                      - link "channels" [ref=e523] [cursor=pointer]:
+                        - /url: /docs/en/channels-reference#test-during-the-research-preview
+                      - text: that are not on the approved allowlist, for local development. Accepts
+                      - code [ref=e524]: plugin:<name>@<marketplace>
+                      - text: and
+                      - code [ref=e525]: server:<name>
+                      - text: entries. Prompts for confirmation
+                    - cell "claude --dangerously-load-development-channels server:webhook" [ref=e526]:
+                      - code [ref=e527]: claude --dangerously-load-development-channels server:webhook
+                  - row "--dangerously-skip-permissions Skip permission prompts. Equivalent to --permission-mode bypassPermissions. See permission modes for what this does and does not skip claude --dangerously-skip-permissions" [ref=e528]:
+                    - cell "--dangerously-skip-permissions" [ref=e529]:
+                      - code [ref=e530]: "--dangerously-skip-permissions"
+                    - cell "Skip permission prompts. Equivalent to --permission-mode bypassPermissions. See permission modes for what this does and does not skip" [ref=e531]:
+                      - text: Skip permission prompts. Equivalent to
+                      - code [ref=e532]: "--permission-mode bypassPermissions"
+                      - text: . See
+                      - link "permission modes" [ref=e533] [cursor=pointer]:
+                        - /url: /docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode
+                      - text: for what this does and does not skip
+                    - cell "claude --dangerously-skip-permissions" [ref=e534]:
+                      - code [ref=e535]: claude --dangerously-skip-permissions
+                  - row "--debug Enable debug mode with optional category filtering (for example, \"api,hooks\" or \"!statsig,!file\") claude --debug \"api,mcp\"" [ref=e536]:
+                    - cell "--debug" [ref=e537]:
+                      - code [ref=e538]: "--debug"
+                    - cell "Enable debug mode with optional category filtering (for example, \"api,hooks\" or \"!statsig,!file\")" [ref=e539]:
+                      - text: Enable debug mode with optional category filtering (for example,
+                      - code [ref=e540]: "\"api,hooks\""
+                      - text: or
+                      - code [ref=e541]: "\"!statsig,!file\""
+                      - text: )
+                    - cell "claude --debug \"api,mcp\"" [ref=e542]:
+                      - code [ref=e543]: claude --debug "api,mcp"
+                  - row "--debug-file <path> Write debug logs to a specific file path. Implicitly enables debug mode. Takes precedence over CLAUDE_CODE_DEBUG_LOGS_DIR claude --debug-file /tmp/claude-debug.log" [ref=e544]:
+                    - cell "--debug-file <path>" [ref=e545]:
+                      - code [ref=e546]: "--debug-file <path>"
+                    - cell "Write debug logs to a specific file path. Implicitly enables debug mode. Takes precedence over CLAUDE_CODE_DEBUG_LOGS_DIR" [ref=e547]:
+                      - text: Write debug logs to a specific file path. Implicitly enables debug mode. Takes precedence over
+                      - code [ref=e548]: CLAUDE_CODE_DEBUG_LOGS_DIR
+                    - cell "claude --debug-file /tmp/claude-debug.log" [ref=e549]:
+                      - code [ref=e550]: claude --debug-file /tmp/claude-debug.log
+                  - row "--disable-slash-commands Disable all skills and commands for this session claude --disable-slash-commands" [ref=e551]:
+                    - cell "--disable-slash-commands" [ref=e552]:
+                      - code [ref=e553]: "--disable-slash-commands"
+                    - cell "Disable all skills and commands for this session" [ref=e554]
+                    - cell "claude --disable-slash-commands" [ref=e555]:
+                      - code [ref=e556]: claude --disable-slash-commands
+                  - row "--disallowedTools Deny rules. A bare tool name removes that tool from the model’s context. A scoped rule such as Bash(rm *) leaves the tool available and denies only matching calls \"Bash(git log *)\" \"Bash(git diff *)\" \"Edit\"" [ref=e557]:
+                    - cell "--disallowedTools" [ref=e558]:
+                      - code [ref=e559]: "--disallowedTools"
+                    - cell "Deny rules. A bare tool name removes that tool from the model’s context. A scoped rule such as Bash(rm *) leaves the tool available and denies only matching calls" [ref=e560]:
+                      - text: Deny rules. A bare tool name removes that tool from the model’s context. A scoped rule such as
+                      - code [ref=e561]: Bash(rm *)
+                      - text: leaves the tool available and denies only matching calls
+                    - cell "\"Bash(git log *)\" \"Bash(git diff *)\" \"Edit\"" [ref=e562]:
+                      - code [ref=e563]: "\"Bash(git log *)\" \"Bash(git diff *)\" \"Edit\""
+                  - 'row "--effort Set the effort level for the current session. Options: low, medium, high, xhigh, max; available levels depend on the model. Overrides the effortLevel setting for this session and does not persist claude --effort high" [ref=e564]':
+                    - cell "--effort" [ref=e565]:
+                      - code [ref=e566]: "--effort"
+                    - 'cell "Set the effort level for the current session. Options: low, medium, high, xhigh, max; available levels depend on the model. Overrides the effortLevel setting for this session and does not persist" [ref=e567]':
+                      - text: Set the
+                      - link "effort level" [ref=e568] [cursor=pointer]:
+                        - /url: /docs/en/model-config#adjust-effort-level
+                      - text: "for the current session. Options:"
+                      - code [ref=e569]: low
+                      - text: ","
+                      - code [ref=e570]: medium
+                      - text: ","
+                      - code [ref=e571]: high
+                      - text: ","
+                      - code [ref=e572]: xhigh
+                      - text: ","
+                      - code [ref=e573]: max
+                      - text: ; available levels depend on the model. Overrides the
+                      - link "effortLevel" [ref=e574] [cursor=pointer]:
+                        - /url: /docs/en/settings#available-settings
+                        - code [ref=e575]: effortLevel
+                      - text: setting for this session and does not persist
+                    - cell "claude --effort high" [ref=e576]:
+                      - code [ref=e577]: claude --effort high
+                  - row "--enable-auto-mode Removed in v2.1.111. Auto mode is now in the Shift+Tab cycle by default; use --permission-mode auto to start in it claude --permission-mode auto" [ref=e578]:
+                    - cell "--enable-auto-mode" [ref=e579]:
+                      - code [ref=e580]: "--enable-auto-mode"
+                    - cell "Removed in v2.1.111. Auto mode is now in the Shift+Tab cycle by default; use --permission-mode auto to start in it" [ref=e581]:
+                      - text: Removed in v2.1.111. Auto mode is now in the
+                      - code [ref=e582]: Shift+Tab
+                      - text: cycle by default; use
+                      - code [ref=e583]: "--permission-mode auto"
+                      - text: to start in it
+                    - cell "claude --permission-mode auto" [ref=e584]:
+                      - code [ref=e585]: claude --permission-mode auto
+                  - row "--exclude-dynamic-system-prompt-sections Move per-machine sections from the system prompt (working directory, environment info, memory paths, git-repo flag) into the first user message. Improves prompt-cache reuse across different users and machines running the same task. Only applies with the default system prompt; ignored when --system-prompt or --system-prompt-file is set. Use with -p for scripted, multi-user workloads claude -p --exclude-dynamic-system-prompt-sections \"query\"" [ref=e586]:
+                    - cell "--exclude-dynamic-system-prompt-sections" [ref=e587]:
+                      - code [ref=e588]: "--exclude-dynamic-system-prompt-sections"
+                    - cell "Move per-machine sections from the system prompt (working directory, environment info, memory paths, git-repo flag) into the first user message. Improves prompt-cache reuse across different users and machines running the same task. Only applies with the default system prompt; ignored when --system-prompt or --system-prompt-file is set. Use with -p for scripted, multi-user workloads" [ref=e589]:
+                      - text: Move per-machine sections from the system prompt (working directory, environment info, memory paths, git-repo flag) into the first user message. Improves prompt-cache reuse across different users and machines running the same task. Only applies with the default system prompt; ignored when
+                      - code [ref=e590]: "--system-prompt"
+                      - text: or
+                      - code [ref=e591]: "--system-prompt-file"
+                      - text: is set. Use with
+                      - code [ref=e592]: "-p"
+                      - text: for scripted, multi-user workloads
+                    - cell "claude -p --exclude-dynamic-system-prompt-sections \"query\"" [ref=e593]:
+                      - code [ref=e594]: claude -p --exclude-dynamic-system-prompt-sections "query"
+                  - row "--exec Run a shell command as a PTY-backed background job instead of starting a Claude session. Use with --bg to launch from the shell claude --bg --exec 'pytest -x'" [ref=e595]:
+                    - cell "--exec" [ref=e596]:
+                      - code [ref=e597]: "--exec"
+                    - cell "Run a shell command as a PTY-backed background job instead of starting a Claude session. Use with --bg to launch from the shell" [ref=e598]:
+                      - text: Run a shell command as a PTY-backed background job instead of starting a Claude session. Use with
+                      - code [ref=e599]: "--bg"
+                      - text: to launch from the shell
+                    - cell "claude --bg --exec 'pytest -x'" [ref=e600]:
+                      - code [ref=e601]: claude --bg --exec 'pytest -x'
+                  - row "--fallback-model Enable automatic fallback to a specified model when the default model is overloaded or not available, for example a retired model. Takes effect in print mode (-p) and in background sessions, which run non-interactively; ignored in an interactive session claude -p --fallback-model sonnet \"query\"" [ref=e602]:
+                    - cell "--fallback-model" [ref=e603]:
+                      - code [ref=e604]: "--fallback-model"
+                    - cell "Enable automatic fallback to a specified model when the default model is overloaded or not available, for example a retired model. Takes effect in print mode (-p) and in background sessions, which run non-interactively; ignored in an interactive session" [ref=e605]:
+                      - text: Enable automatic fallback to a specified model when the default model is overloaded or not available, for example a retired model. Takes effect in print mode (
+                      - code [ref=e606]: "-p"
+                      - text: ) and in
+                      - link "background sessions" [ref=e607] [cursor=pointer]:
+                        - /url: /docs/en/agent-view
+                      - text: ", which run non-interactively; ignored in an interactive session"
+                    - cell "claude -p --fallback-model sonnet \"query\"" [ref=e608]:
+                      - code [ref=e609]: claude -p --fallback-model sonnet "query"
+                  - row "--fork-session When resuming, create a new session ID instead of reusing the original (use with --resume or --continue) claude --resume abc123 --fork-session" [ref=e610]:
+                    - cell "--fork-session" [ref=e611]:
+                      - code [ref=e612]: "--fork-session"
+                    - cell "When resuming, create a new session ID instead of reusing the original (use with --resume or --continue)" [ref=e613]:
+                      - text: When resuming, create a new session ID instead of reusing the original (use with
+                      - code [ref=e614]: "--resume"
+                      - text: or
+                      - code [ref=e615]: "--continue"
+                      - text: )
+                    - cell "claude --resume abc123 --fork-session" [ref=e616]:
+                      - code [ref=e617]: claude --resume abc123 --fork-session
+                  - row "--from-pr Resume sessions linked to a specific pull request. Accepts a PR number, a GitHub or GitHub Enterprise PR URL, a GitLab merge request URL, or a Bitbucket pull request URL. Sessions are linked automatically when Claude creates the pull request claude --from-pr 123" [ref=e618]:
+                    - cell "--from-pr" [ref=e619]:
+                      - code [ref=e620]: "--from-pr"
+                    - cell "Resume sessions linked to a specific pull request. Accepts a PR number, a GitHub or GitHub Enterprise PR URL, a GitLab merge request URL, or a Bitbucket pull request URL. Sessions are linked automatically when Claude creates the pull request" [ref=e621]
+                    - cell "claude --from-pr 123" [ref=e622]:
+                      - code [ref=e623]: claude --from-pr 123
+                  - row "--ide Automatically connect to IDE on startup if exactly one valid IDE is available claude --ide" [ref=e624]:
+                    - cell "--ide" [ref=e625]:
+                      - code [ref=e626]: "--ide"
+                    - cell "Automatically connect to IDE on startup if exactly one valid IDE is available" [ref=e627]
+                    - cell "claude --ide" [ref=e628]:
+                      - code [ref=e629]: claude --ide
+                  - row "--init Run Setup hooks with the init matcher before the session (print mode only) claude -p --init \"query\"" [ref=e630]:
+                    - cell "--init" [ref=e631]:
+                      - code [ref=e632]: "--init"
+                    - cell "Run Setup hooks with the init matcher before the session (print mode only)" [ref=e633]:
+                      - text: Run
+                      - link "Setup hooks" [ref=e634] [cursor=pointer]:
+                        - /url: /docs/en/hooks#setup
+                      - text: with the
+                      - code [ref=e635]: init
+                      - text: matcher before the session (print mode only)
+                    - cell "claude -p --init \"query\"" [ref=e636]:
+                      - code [ref=e637]: claude -p --init "query"
+                  - row "--init-only Run Setup and SessionStart hooks, then exit without starting a conversation claude --init-only" [ref=e638]:
+                    - cell "--init-only" [ref=e639]:
+                      - code [ref=e640]: "--init-only"
+                    - cell "Run Setup and SessionStart hooks, then exit without starting a conversation" [ref=e641]:
+                      - text: Run
+                      - link "Setup" [ref=e642] [cursor=pointer]:
+                        - /url: /docs/en/hooks#setup
+                      - text: and
+                      - code [ref=e643]: SessionStart
+                      - text: hooks, then exit without starting a conversation
+                    - cell "claude --init-only" [ref=e644]:
+                      - code [ref=e645]: claude --init-only
+                  - row "--include-hook-events Include all hook lifecycle events in the output stream. Requires --output-format stream-json claude -p --output-format stream-json --verbose --include-hook-events \"query\"" [ref=e646]:
+                    - cell "--include-hook-events" [ref=e647]:
+                      - code [ref=e648]: "--include-hook-events"
+                    - cell "Include all hook lifecycle events in the output stream. Requires --output-format stream-json" [ref=e649]:
+                      - text: Include all hook lifecycle events in the output stream. Requires
+                      - code [ref=e650]: "--output-format stream-json"
+                    - cell "claude -p --output-format stream-json --verbose --include-hook-events \"query\"" [ref=e651]:
+                      - code [ref=e652]: claude -p --output-format stream-json --verbose --include-hook-events "query"
+                  - row "--include-partial-messages Include partial streaming events in output. Requires --print and --output-format stream-json claude -p --output-format stream-json --verbose --include-partial-messages \"query\"" [ref=e653]:
+                    - cell "--include-partial-messages" [ref=e654]:
+                      - code [ref=e655]: "--include-partial-messages"
+                    - cell "Include partial streaming events in output. Requires --print and --output-format stream-json" [ref=e656]:
+                      - text: Include partial streaming events in output. Requires
+                      - code [ref=e657]: "--print"
+                      - text: and
+                      - code [ref=e658]: "--output-format stream-json"
+                    - cell "claude -p --output-format stream-json --verbose --include-partial-messages \"query\"" [ref=e659]:
+                      - code [ref=e660]: claude -p --output-format stream-json --verbose --include-partial-messages "query"
+                  - 'row "--input-format Specify input format for print mode (options: text, stream-json) claude -p --output-format json --input-format stream-json" [ref=e661]':
+                    - cell "--input-format" [ref=e662]:
+                      - code [ref=e663]: "--input-format"
+                    - 'cell "Specify input format for print mode (options: text, stream-json)" [ref=e664]':
+                      - text: "Specify input format for print mode (options:"
+                      - code [ref=e665]: text
+                      - text: ","
+                      - code [ref=e666]: stream-json
+                      - text: )
+                    - cell "claude -p --output-format json --input-format stream-json" [ref=e667]:
+                      - code [ref=e668]: claude -p --output-format json --input-format stream-json
+                  - 'row "--json-schema Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see structured outputs) claude -p --json-schema ''{\"type\":\"object\",\"properties\":{...}}'' \"query\"" [ref=e669]':
+                    - cell "--json-schema" [ref=e670]:
+                      - code [ref=e671]: "--json-schema"
+                    - cell "Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see structured outputs)" [ref=e672]:
+                      - text: Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see
+                      - link "structured outputs" [ref=e673] [cursor=pointer]:
+                        - /url: /docs/en/agent-sdk/structured-outputs
+                      - text: )
+                    - 'cell "claude -p --json-schema ''{\"type\":\"object\",\"properties\":{...}}'' \"query\"" [ref=e674]':
+                      - code [ref=e675]: "claude -p --json-schema '{\"type\":\"object\",\"properties\":{...}}' \"query\""
+                  - row "--maintenance Run Setup hooks with the maintenance matcher before the session (print mode only) claude -p --maintenance \"query\"" [ref=e676]:
+                    - cell "--maintenance" [ref=e677]:
+                      - code [ref=e678]: "--maintenance"
+                    - cell "Run Setup hooks with the maintenance matcher before the session (print mode only)" [ref=e679]:
+                      - text: Run
+                      - link "Setup hooks" [ref=e680] [cursor=pointer]:
+                        - /url: /docs/en/hooks#setup
+                      - text: with the
+                      - code [ref=e681]: maintenance
+                      - text: matcher before the session (print mode only)
+                    - cell "claude -p --maintenance \"query\"" [ref=e682]:
+                      - code [ref=e683]: claude -p --maintenance "query"
+                  - row "--max-budget-usd Maximum dollar amount to spend on API calls before stopping (print mode only) claude -p --max-budget-usd 5.00 \"query\"" [ref=e684]:
+                    - cell "--max-budget-usd" [ref=e685]:
+                      - code [ref=e686]: "--max-budget-usd"
+                    - cell "Maximum dollar amount to spend on API calls before stopping (print mode only)" [ref=e687]
+                    - cell "claude -p --max-budget-usd 5.00 \"query\"" [ref=e688]:
+                      - code [ref=e689]: claude -p --max-budget-usd 5.00 "query"
+                  - row "--max-turns Limit the number of agentic turns (print mode only). Exits with an error when the limit is reached. No limit by default claude -p --max-turns 3 \"query\"" [ref=e690]:
+                    - cell "--max-turns" [ref=e691]:
+                      - code [ref=e692]: "--max-turns"
+                    - cell "Limit the number of agentic turns (print mode only). Exits with an error when the limit is reached. No limit by default" [ref=e693]
+                    - cell "claude -p --max-turns 3 \"query\"" [ref=e694]:
+                      - code [ref=e695]: claude -p --max-turns 3 "query"
+                  - row "--mcp-config Load MCP servers from JSON files or strings (space-separated) claude --mcp-config ./mcp.json" [ref=e696]:
+                    - cell "--mcp-config" [ref=e697]:
+                      - code [ref=e698]: "--mcp-config"
+                    - cell "Load MCP servers from JSON files or strings (space-separated)" [ref=e699]
+                    - cell "claude --mcp-config ./mcp.json" [ref=e700]:
+                      - code [ref=e701]: claude --mcp-config ./mcp.json
+                  - row "--model Sets the model for the current session with an alias for the latest model (sonnet or opus) or a model’s full name. Overrides the model setting and ANTHROPIC_MODEL claude --model claude-sonnet-4-6" [ref=e702]:
+                    - cell "--model" [ref=e703]:
+                      - code [ref=e704]: "--model"
+                    - cell "Sets the model for the current session with an alias for the latest model (sonnet or opus) or a model’s full name. Overrides the model setting and ANTHROPIC_MODEL" [ref=e705]:
+                      - text: Sets the model for the current session with an alias for the latest model (
+                      - code [ref=e706]: sonnet
+                      - text: or
+                      - code [ref=e707]: opus
+                      - text: ) or a model’s full name. Overrides the
+                      - link "model" [ref=e708] [cursor=pointer]:
+                        - /url: /docs/en/settings#available-settings
+                        - code [ref=e709]: model
+                      - text: setting and
+                      - link "ANTHROPIC_MODEL" [ref=e710] [cursor=pointer]:
+                        - /url: /docs/en/model-config#environment-variables
+                        - code [ref=e711]: ANTHROPIC_MODEL
+                    - cell "claude --model claude-sonnet-4-6" [ref=e712]:
+                      - code [ref=e713]: claude --model claude-sonnet-4-6
+                  - row "--name, -n Set a display name for the session, shown in /resume and the terminal title. You can resume a named session with claude --resume <name>. /rename changes the name mid-session and also shows it on the prompt bar claude -n \"my-feature-work\"" [ref=e714]:
+                    - cell "--name, -n" [ref=e715]:
+                      - code [ref=e716]: "--name"
+                      - text: ","
+                      - code [ref=e717]: "-n"
+                    - cell "Set a display name for the session, shown in /resume and the terminal title. You can resume a named session with claude --resume <name>. /rename changes the name mid-session and also shows it on the prompt bar" [ref=e718]:
+                      - text: Set a display name for the session, shown in
+                      - code [ref=e719]: /resume
+                      - text: and the terminal title. You can resume a named session with
+                      - code [ref=e720]: claude --resume <name>
+                      - text: .
+                      - link "/rename" [ref=e721] [cursor=pointer]:
+                        - /url: /docs/en/commands
+                        - code [ref=e722]: /rename
+                      - text: changes the name mid-session and also shows it on the prompt bar
+                    - cell "claude -n \"my-feature-work\"" [ref=e723]:
+                      - code [ref=e724]: claude -n "my-feature-work"
+                  - row "--no-chrome Disable Chrome browser integration for this session claude --no-chrome" [ref=e725]:
+                    - cell "--no-chrome" [ref=e726]:
+                      - code [ref=e727]: "--no-chrome"
+                    - cell "Disable Chrome browser integration for this session" [ref=e728]:
+                      - text: Disable
+                      - link "Chrome browser integration" [ref=e729] [cursor=pointer]:
+                        - /url: /docs/en/chrome
+                      - text: for this session
+                    - cell "claude --no-chrome" [ref=e730]:
+                      - code [ref=e731]: claude --no-chrome
+                  - row "--no-session-persistence Disable session persistence so sessions are not saved to disk and cannot be resumed. Print mode only. The CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable does the same in any mode claude -p --no-session-persistence \"query\"" [ref=e732]:
+                    - cell "--no-session-persistence" [ref=e733]:
+                      - code [ref=e734]: "--no-session-persistence"
+                    - cell "Disable session persistence so sessions are not saved to disk and cannot be resumed. Print mode only. The CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable does the same in any mode" [ref=e735]:
+                      - text: Disable session persistence so sessions are not saved to disk and cannot be resumed. Print mode only. The
+                      - link "CLAUDE_CODE_SKIP_PROMPT_HISTORY" [ref=e736] [cursor=pointer]:
+                        - /url: /docs/en/env-vars
+                        - code [ref=e737]: CLAUDE_CODE_SKIP_PROMPT_HISTORY
+                      - text: environment variable does the same in any mode
+                    - cell "claude -p --no-session-persistence \"query\"" [ref=e738]:
+                      - code [ref=e739]: claude -p --no-session-persistence "query"
+                  - 'row "--output-format Specify output format for print mode (options: text, json, stream-json) claude -p \"query\" --output-format json" [ref=e740]':
+                    - cell "--output-format" [ref=e741]:
+                      - code [ref=e742]: "--output-format"
+                    - 'cell "Specify output format for print mode (options: text, json, stream-json)" [ref=e743]':
+                      - text: "Specify output format for print mode (options:"
+                      - code [ref=e744]: text
+                      - text: ","
+                      - code [ref=e745]: json
+                      - text: ","
+                      - code [ref=e746]: stream-json
+                      - text: )
+                    - cell "claude -p \"query\" --output-format json" [ref=e747]:
+                      - code [ref=e748]: claude -p "query" --output-format json
+                  - row "--permission-mode Begin in a specified permission mode. Accepts default, acceptEdits, plan, auto, dontAsk, or bypassPermissions. Overrides defaultMode from settings files claude --permission-mode plan" [ref=e749]:
+                    - cell "--permission-mode" [ref=e750]:
+                      - code [ref=e751]: "--permission-mode"
+                    - cell "Begin in a specified permission mode. Accepts default, acceptEdits, plan, auto, dontAsk, or bypassPermissions. Overrides defaultMode from settings files" [ref=e752]:
+                      - text: Begin in a specified
+                      - link "permission mode" [ref=e753] [cursor=pointer]:
+                        - /url: /docs/en/permission-modes
+                      - text: . Accepts
+                      - code [ref=e754]: default
+                      - text: ","
+                      - code [ref=e755]: acceptEdits
+                      - text: ","
+                      - code [ref=e756]: plan
+                      - text: ","
+                      - code [ref=e757]: auto
+                      - text: ","
+                      - code [ref=e758]: dontAsk
+                      - text: ", or"
+                      - code [ref=e759]: bypassPermissions
+                      - text: . Overrides
+                      - code [ref=e760]: defaultMode
+                      - text: from settings files
+                    - cell "claude --permission-mode plan" [ref=e761]:
+                      - code [ref=e762]: claude --permission-mode plan
+                  - row "--permission-prompt-tool Specify an MCP tool to handle permission prompts in non-interactive mode claude -p --permission-prompt-tool mcp_auth_tool \"query\"" [ref=e763]:
+                    - cell "--permission-prompt-tool" [ref=e764]:
+                      - code [ref=e765]: "--permission-prompt-tool"
+                    - cell "Specify an MCP tool to handle permission prompts in non-interactive mode" [ref=e766]
+                    - cell "claude -p --permission-prompt-tool mcp_auth_tool \"query\"" [ref=e767]:
+                      - code [ref=e768]: claude -p --permission-prompt-tool mcp_auth_tool "query"
+                  - 'row "--plugin-dir Load a plugin from a directory or .zip archive for this session only. Each flag takes one path. Repeat the flag for multiple plugins: --plugin-dir A --plugin-dir B.zip claude --plugin-dir ./my-plugin" [ref=e769]':
+                    - cell "--plugin-dir" [ref=e770]:
+                      - code [ref=e771]: "--plugin-dir"
+                    - 'cell "Load a plugin from a directory or .zip archive for this session only. Each flag takes one path. Repeat the flag for multiple plugins: --plugin-dir A --plugin-dir B.zip" [ref=e772]':
+                      - text: Load a plugin from a directory or
+                      - code [ref=e773]: .zip
+                      - text: "archive for this session only. Each flag takes one path. Repeat the flag for multiple plugins:"
+                      - code [ref=e774]: "--plugin-dir A --plugin-dir B.zip"
+                    - cell "claude --plugin-dir ./my-plugin" [ref=e775]:
+                      - code [ref=e776]: claude --plugin-dir ./my-plugin
+                  - row "--plugin-url Fetch a plugin .zip archive from a URL for this session only. Repeat the flag for multiple plugins, or pass space-separated URLs in a single quoted value claude --plugin-url https://example.com/plugin.zip" [ref=e777]:
+                    - cell "--plugin-url" [ref=e778]:
+                      - code [ref=e779]: "--plugin-url"
+                    - cell "Fetch a plugin .zip archive from a URL for this session only. Repeat the flag for multiple plugins, or pass space-separated URLs in a single quoted value" [ref=e780]:
+                      - text: Fetch a plugin
+                      - code [ref=e781]: .zip
+                      - text: archive from a URL for this session only. Repeat the flag for multiple plugins, or pass space-separated URLs in a single quoted value
+                    - cell "claude --plugin-url https://example.com/plugin.zip" [ref=e782]:
+                      - code [ref=e783]: claude --plugin-url https://example.com/plugin.zip
+                  - row "--print, -p Print response without interactive mode (see Agent SDK documentation for programmatic usage details) claude -p \"query\"" [ref=e784]:
+                    - cell "--print, -p" [ref=e785]:
+                      - code [ref=e786]: "--print"
+                      - text: ","
+                      - code [ref=e787]: "-p"
+                    - cell "Print response without interactive mode (see Agent SDK documentation for programmatic usage details)" [ref=e788]:
+                      - text: Print response without interactive mode (see
+                      - link "Agent SDK documentation" [ref=e789] [cursor=pointer]:
+                        - /url: /docs/en/agent-sdk/overview
+                      - text: for programmatic usage details)
+                    - cell "claude -p \"query\"" [ref=e790]:
+                      - code [ref=e791]: claude -p "query"
+                  - row "--prompt-suggestions Emit a prompt_suggestion message after each turn with a predicted next user prompt. Requires --print, --output-format stream-json, and --verbose. See Prompt suggestions claude -p --prompt-suggestions --output-format stream-json --verbose \"query\"" [ref=e792]:
+                    - cell "--prompt-suggestions" [ref=e793]:
+                      - code [ref=e794]: "--prompt-suggestions"
+                    - cell "Emit a prompt_suggestion message after each turn with a predicted next user prompt. Requires --print, --output-format stream-json, and --verbose. See Prompt suggestions" [ref=e795]:
+                      - text: Emit a
+                      - code [ref=e796]: prompt_suggestion
+                      - text: message after each turn with a predicted next user prompt. Requires
+                      - code [ref=e797]: "--print"
+                      - text: ","
+                      - code [ref=e798]: "--output-format stream-json"
+                      - text: ", and"
+                      - code [ref=e799]: "--verbose"
+                      - text: . See
+                      - link "Prompt suggestions" [ref=e800] [cursor=pointer]:
+                        - /url: /docs/en/interactive-mode#prompt-suggestions
+                    - cell "claude -p --prompt-suggestions --output-format stream-json --verbose \"query\"" [ref=e801]:
+                      - code [ref=e802]: claude -p --prompt-suggestions --output-format stream-json --verbose "query"
+                  - row "--remote Create a new web session on claude.ai with the provided task description claude --remote \"Fix the login bug\"" [ref=e803]:
+                    - cell "--remote" [ref=e804]:
+                      - code [ref=e805]: "--remote"
+                    - cell "Create a new web session on claude.ai with the provided task description" [ref=e806]:
+                      - text: Create a new
+                      - link "web session" [ref=e807] [cursor=pointer]:
+                        - /url: /docs/en/claude-code-on-the-web
+                      - text: on claude.ai with the provided task description
+                    - cell "claude --remote \"Fix the login bug\"" [ref=e808]:
+                      - code [ref=e809]: claude --remote "Fix the login bug"
+                  - row "--remote-control, --rc Start an interactive session with Remote Control enabled so you can also control it from claude.ai or the Claude app. Optionally pass a name for the session claude --remote-control \"My Project\"" [ref=e810]:
+                    - cell "--remote-control, --rc" [ref=e811]:
+                      - code [ref=e812]: "--remote-control"
+                      - text: ","
+                      - code [ref=e813]: "--rc"
+                    - cell "Start an interactive session with Remote Control enabled so you can also control it from claude.ai or the Claude app. Optionally pass a name for the session" [ref=e814]:
+                      - text: Start an interactive session with
+                      - link "Remote Control" [ref=e815] [cursor=pointer]:
+                        - /url: /docs/en/remote-control#start-a-remote-control-session
+                      - text: enabled so you can also control it from claude.ai or the Claude app. Optionally pass a name for the session
+                    - cell "claude --remote-control \"My Project\"" [ref=e816]:
+                      - code [ref=e817]: claude --remote-control "My Project"
+                  - row "--remote-control-session-name-prefix <prefix> Prefix for auto-generated Remote Control session names when no explicit name is set. Defaults to your machine’s hostname, producing names like myhost-graceful-unicorn. Set CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX for the same effect claude remote-control --remote-control-session-name-prefix dev-box" [ref=e818]:
+                    - cell "--remote-control-session-name-prefix <prefix>" [ref=e819]:
+                      - code [ref=e820]: "--remote-control-session-name-prefix <prefix>"
+                    - cell "Prefix for auto-generated Remote Control session names when no explicit name is set. Defaults to your machine’s hostname, producing names like myhost-graceful-unicorn. Set CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX for the same effect" [ref=e821]:
+                      - text: Prefix for auto-generated
+                      - link "Remote Control" [ref=e822] [cursor=pointer]:
+                        - /url: /docs/en/remote-control
+                      - text: session names when no explicit name is set. Defaults to your machine’s hostname, producing names like
+                      - code [ref=e823]: myhost-graceful-unicorn
+                      - text: . Set
+                      - code [ref=e824]: CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX
+                      - text: for the same effect
+                    - cell "claude remote-control --remote-control-session-name-prefix dev-box" [ref=e825]:
+                      - code [ref=e826]: claude remote-control --remote-control-session-name-prefix dev-box
+                  - row "--replay-user-messages Re-emit user messages from stdin back on stdout for acknowledgment. Requires --input-format stream-json and --output-format stream-json claude -p --input-format stream-json --output-format stream-json --verbose --replay-user-messages" [ref=e827]:
+                    - cell "--replay-user-messages" [ref=e828]:
+                      - code [ref=e829]: "--replay-user-messages"
+                    - cell "Re-emit user messages from stdin back on stdout for acknowledgment. Requires --input-format stream-json and --output-format stream-json" [ref=e830]:
+                      - text: Re-emit user messages from stdin back on stdout for acknowledgment. Requires
+                      - code [ref=e831]: "--input-format stream-json"
+                      - text: and
+                      - code [ref=e832]: "--output-format stream-json"
+                    - cell "claude -p --input-format stream-json --output-format stream-json --verbose --replay-user-messages" [ref=e833]:
+                      - code [ref=e834]: claude -p --input-format stream-json --output-format stream-json --verbose --replay-user-messages
+                  - row "--resume, -r Resume a specific session by ID or name, or show an interactive picker to choose a session. Includes sessions that added this directory with /add-dir. As of v2.1.144, background sessions appear in the picker marked with bg claude --resume auth-refactor" [ref=e835]:
+                    - cell "--resume, -r" [ref=e836]:
+                      - code [ref=e837]: "--resume"
+                      - text: ","
+                      - code [ref=e838]: "-r"
+                    - cell "Resume a specific session by ID or name, or show an interactive picker to choose a session. Includes sessions that added this directory with /add-dir. As of v2.1.144, background sessions appear in the picker marked with bg" [ref=e839]:
+                      - text: Resume a specific session by ID or name, or show an interactive picker to choose a session. Includes sessions that added this directory with
+                      - code [ref=e840]: /add-dir
+                      - text: . As of v2.1.144,
+                      - link "background sessions" [ref=e841] [cursor=pointer]:
+                        - /url: /docs/en/agent-view
+                      - text: appear in the picker marked with
+                      - code [ref=e842]: bg
+                    - cell "claude --resume auth-refactor" [ref=e843]:
+                      - code [ref=e844]: claude --resume auth-refactor
+                  - row "--session-id Use a specific session ID for the conversation (must be a valid UUID) claude --session-id \"550e8400-e29b-41d4-a716-446655440000\"" [ref=e845]:
+                    - cell "--session-id" [ref=e846]:
+                      - code [ref=e847]: "--session-id"
+                    - cell "Use a specific session ID for the conversation (must be a valid UUID)" [ref=e848]
+                    - cell "claude --session-id \"550e8400-e29b-41d4-a716-446655440000\"" [ref=e849]:
+                      - code [ref=e850]: claude --session-id "550e8400-e29b-41d4-a716-446655440000"
+                  - row "--setting-sources Comma-separated list of setting sources to load (user, project, local) claude --setting-sources user,project" [ref=e851]:
+                    - cell "--setting-sources" [ref=e852]:
+                      - code [ref=e853]: "--setting-sources"
+                    - cell "Comma-separated list of setting sources to load (user, project, local)" [ref=e854]:
+                      - text: Comma-separated list of setting sources to load (
+                      - code [ref=e855]: user
+                      - text: ","
+                      - code [ref=e856]: project
+                      - text: ","
+                      - code [ref=e857]: local
+                      - text: )
+                    - cell "claude --setting-sources user,project" [ref=e858]:
+                      - code [ref=e859]: claude --setting-sources user,project
+                  - row "--settings Path to a settings JSON file or an inline JSON string. Values you set here override the same keys in your settings.json files for this session. Keys you omit keep their file-based values. See settings precedence claude --settings ./settings.json" [ref=e860]:
+                    - cell "--settings" [ref=e861]:
+                      - code [ref=e862]: "--settings"
+                    - cell "Path to a settings JSON file or an inline JSON string. Values you set here override the same keys in your settings.json files for this session. Keys you omit keep their file-based values. See settings precedence" [ref=e863]:
+                      - text: Path to a settings JSON file or an inline JSON string. Values you set here override the same keys in your
+                      - code [ref=e864]: settings.json
+                      - text: files for this session. Keys you omit keep their file-based values. See
+                      - link "settings precedence" [ref=e865] [cursor=pointer]:
+                        - /url: /docs/en/settings#settings-precedence
+                    - cell "claude --settings ./settings.json" [ref=e866]:
+                      - code [ref=e867]: claude --settings ./settings.json
+                  - row "--strict-mcp-config Only use MCP servers from --mcp-config, ignoring all other MCP configurations claude --strict-mcp-config --mcp-config ./mcp.json" [ref=e868]:
+                    - cell "--strict-mcp-config" [ref=e869]:
+                      - code [ref=e870]: "--strict-mcp-config"
+                    - cell "Only use MCP servers from --mcp-config, ignoring all other MCP configurations" [ref=e871]:
+                      - text: Only use MCP servers from
+                      - code [ref=e872]: "--mcp-config"
+                      - text: ", ignoring all other MCP configurations"
+                    - cell "claude --strict-mcp-config --mcp-config ./mcp.json" [ref=e873]:
+                      - code [ref=e874]: claude --strict-mcp-config --mcp-config ./mcp.json
+                  - row "--system-prompt Replace the entire system prompt with custom text claude --system-prompt \"You are a Python expert\"" [ref=e875]:
+                    - cell "--system-prompt" [ref=e876]:
+                      - code [ref=e877]: "--system-prompt"
+                    - cell "Replace the entire system prompt with custom text" [ref=e878]
+                    - cell "claude --system-prompt \"You are a Python expert\"" [ref=e879]:
+                      - code [ref=e880]: claude --system-prompt "You are a Python expert"
+                  - row "--system-prompt-file Load system prompt from a file, replacing the default prompt claude --system-prompt-file ./custom-prompt.txt" [ref=e881]:
+                    - cell "--system-prompt-file" [ref=e882]:
+                      - code [ref=e883]: "--system-prompt-file"
+                    - cell "Load system prompt from a file, replacing the default prompt" [ref=e884]
+                    - cell "claude --system-prompt-file ./custom-prompt.txt" [ref=e885]:
+                      - code [ref=e886]: claude --system-prompt-file ./custom-prompt.txt
+                  - row "--teleport Resume a web session in your local terminal claude --teleport" [ref=e887]:
+                    - cell "--teleport" [ref=e888]:
+                      - code [ref=e889]: "--teleport"
+                    - cell "Resume a web session in your local terminal" [ref=e890]:
+                      - text: Resume a
+                      - link "web session" [ref=e891] [cursor=pointer]:
+                        - /url: /docs/en/claude-code-on-the-web
+                      - text: in your local terminal
+                    - cell "claude --teleport" [ref=e892]:
+                      - code [ref=e893]: claude --teleport
+                  - 'row "--teammate-mode Set how agent team teammates display: auto (default), in-process, or tmux. Overrides the teammateMode setting for this session. See Choose a display mode claude --teammate-mode in-process" [ref=e894]':
+                    - cell "--teammate-mode" [ref=e895]:
+                      - code [ref=e896]: "--teammate-mode"
+                    - 'cell "Set how agent team teammates display: auto (default), in-process, or tmux. Overrides the teammateMode setting for this session. See Choose a display mode" [ref=e897]':
+                      - text: Set how
+                      - link "agent team" [ref=e898] [cursor=pointer]:
+                        - /url: /docs/en/agent-teams
+                      - text: "teammates display:"
+                      - code [ref=e899]: auto
+                      - text: (default),
+                      - code [ref=e900]: in-process
+                      - text: ", or"
+                      - code [ref=e901]: tmux
+                      - text: . Overrides the
+                      - link "teammateMode" [ref=e902] [cursor=pointer]:
+                        - /url: /docs/en/settings#available-settings
+                        - code [ref=e903]: teammateMode
+                      - text: setting for this session. See
+                      - link "Choose a display mode" [ref=e904] [cursor=pointer]:
+                        - /url: /docs/en/agent-teams#choose-a-display-mode
+                    - cell "claude --teammate-mode in-process" [ref=e905]:
+                      - code [ref=e906]: claude --teammate-mode in-process
+                  - row "--tmux Create a tmux session for the worktree. Requires --worktree. Uses iTerm2 native panes when available; pass --tmux=classic for traditional tmux claude -w feature-auth --tmux" [ref=e907]:
+                    - cell "--tmux" [ref=e908]:
+                      - code [ref=e909]: "--tmux"
+                    - cell "Create a tmux session for the worktree. Requires --worktree. Uses iTerm2 native panes when available; pass --tmux=classic for traditional tmux" [ref=e910]:
+                      - text: Create a tmux session for the worktree. Requires
+                      - code [ref=e911]: "--worktree"
+                      - text: . Uses iTerm2 native panes when available; pass
+                      - code [ref=e912]: "--tmux=classic"
+                      - text: for traditional tmux
+                    - cell "claude -w feature-auth --tmux" [ref=e913]:
+                      - code [ref=e914]: claude -w feature-auth --tmux
+                  - row "--tools Restrict which built-in tools Claude can use. Use \"\" to disable all, \"default\" for all, or tool names like \"Bash,Edit,Read\" claude --tools \"Bash,Edit,Read\"" [ref=e915]:
+                    - cell "--tools" [ref=e916]:
+                      - code [ref=e917]: "--tools"
+                    - cell "Restrict which built-in tools Claude can use. Use \"\" to disable all, \"default\" for all, or tool names like \"Bash,Edit,Read\"" [ref=e918]:
+                      - text: Restrict which built-in tools Claude can use. Use
+                      - code [ref=e919]: "\"\""
+                      - text: to disable all,
+                      - code [ref=e920]: "\"default\""
+                      - text: for all, or tool names like
+                      - code [ref=e921]: "\"Bash,Edit,Read\""
+                    - cell "claude --tools \"Bash,Edit,Read\"" [ref=e922]:
+                      - code [ref=e923]: claude --tools "Bash,Edit,Read"
+                  - row "--verbose Enable verbose logging, shows full turn-by-turn output. Overrides the viewMode setting for this session claude --verbose" [ref=e924]:
+                    - cell "--verbose" [ref=e925]:
+                      - code [ref=e926]: "--verbose"
+                    - cell "Enable verbose logging, shows full turn-by-turn output. Overrides the viewMode setting for this session" [ref=e927]:
+                      - text: Enable verbose logging, shows full turn-by-turn output. Overrides the
+                      - link "viewMode" [ref=e928] [cursor=pointer]:
+                        - /url: /docs/en/settings#available-settings
+                        - code [ref=e929]: viewMode
+                      - text: setting for this session
+                    - cell "claude --verbose" [ref=e930]:
+                      - code [ref=e931]: claude --verbose
+                  - row "--version, -v Output the version number claude -v" [ref=e932]:
+                    - cell "--version, -v" [ref=e933]:
+                      - code [ref=e934]: "--version"
+                      - text: ","
+                      - code [ref=e935]: "-v"
+                    - cell "Output the version number" [ref=e936]
+                    - cell "claude -v" [ref=e937]:
+                      - code [ref=e938]: claude -v
+                  - 'row "--worktree, -w Start Claude in an isolated git worktree at <repo>/.claude/worktrees/<name>. If no name is given, one is auto-generated. Pass #<number> or a GitHub pull request URL to fetch that PR from origin and branch the worktree from it claude -w feature-auth" [ref=e939]':
+                    - cell "--worktree, -w" [ref=e940]:
+                      - code [ref=e941]: "--worktree"
+                      - text: ","
+                      - code [ref=e942]: "-w"
+                    - 'cell "Start Claude in an isolated git worktree at <repo>/.claude/worktrees/<name>. If no name is given, one is auto-generated. Pass #<number> or a GitHub pull request URL to fetch that PR from origin and branch the worktree from it" [ref=e943]':
+                      - text: Start Claude in an isolated
+                      - link "git worktree" [ref=e944] [cursor=pointer]:
+                        - /url: /docs/en/worktrees
+                      - text: at
+                      - code [ref=e945]: <repo>/.claude/worktrees/<name>
+                      - text: . If no name is given, one is auto-generated. Pass
+                      - code [ref=e946]: "#<number>"
+                      - text: or a GitHub pull request URL to fetch that PR from
+                      - code [ref=e947]: origin
+                      - text: and branch the worktree from it
+                    - cell "claude -w feature-auth" [ref=e948]:
+                      - code [ref=e949]: claude -w feature-auth
+              - heading "Navigate to header System prompt flags" [level=3] [ref=e950]:
+                - link "Navigate to header" [ref=e951] [cursor=pointer]:
+                  - /url: "#system-prompt-flags"
+                  - img [ref=e953]
+                - generic [ref=e955] [cursor=pointer]: System prompt flags
+              - generic [ref=e956]: Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes.
+              - table [ref=e959]:
+                - rowgroup [ref=e960]:
+                  - row "Flag Behavior Example" [ref=e961]:
+                    - columnheader "Flag" [ref=e962]
+                    - columnheader "Behavior" [ref=e963]
+                    - columnheader "Example" [ref=e964]
+                - rowgroup [ref=e965]:
+                  - row "--system-prompt Replaces the entire default prompt claude --system-prompt \"You are a Python expert\"" [ref=e966]:
+                    - cell "--system-prompt" [ref=e967]:
+                      - code [ref=e968]: "--system-prompt"
+                    - cell "Replaces the entire default prompt" [ref=e969]
+                    - cell "claude --system-prompt \"You are a Python expert\"" [ref=e970]:
+                      - code [ref=e971]: claude --system-prompt "You are a Python expert"
+                  - row "--system-prompt-file Replaces with file contents claude --system-prompt-file ./prompts/review.txt" [ref=e972]:
+                    - cell "--system-prompt-file" [ref=e973]:
+                      - code [ref=e974]: "--system-prompt-file"
+                    - cell "Replaces with file contents" [ref=e975]
+                    - cell "claude --system-prompt-file ./prompts/review.txt" [ref=e976]:
+                      - code [ref=e977]: claude --system-prompt-file ./prompts/review.txt
+                  - row "--append-system-prompt Appends to the default prompt claude --append-system-prompt \"Always use TypeScript\"" [ref=e978]:
+                    - cell "--append-system-prompt" [ref=e979]:
+                      - code [ref=e980]: "--append-system-prompt"
+                    - cell "Appends to the default prompt" [ref=e981]
+                    - cell "claude --append-system-prompt \"Always use TypeScript\"" [ref=e982]:
+                      - code [ref=e983]: claude --append-system-prompt "Always use TypeScript"
+                  - row "--append-system-prompt-file Appends file contents to the default prompt claude --append-system-prompt-file ./style-rules.txt" [ref=e984]:
+                    - cell "--append-system-prompt-file" [ref=e985]:
+                      - code [ref=e986]: "--append-system-prompt-file"
+                    - cell "Appends file contents to the default prompt" [ref=e987]
+                    - cell "claude --append-system-prompt-file ./style-rules.txt" [ref=e988]:
+                      - code [ref=e989]: claude --append-system-prompt-file ./style-rules.txt
+              - generic [ref=e990]:
+                - code [ref=e991]: "--system-prompt"
+                - text: and
+                - code [ref=e992]: "--system-prompt-file"
+                - text: are mutually exclusive. The append flags can be combined with either replacement flag.
+              - generic [ref=e993]:
+                - text: "Choose based on whether Claude Code’s default identity still fits your task. Use an append flag when Claude should remain a coding assistant that also follows your extra rules: per-invocation instructions, output formatting, or domain context for a"
+                - code [ref=e994]: "-p"
+                - text: script. Appending preserves the default tool guidance, safety instructions, and coding conventions, so you only supply what differs. Use a replacement flag when the surface, identity, or permission model differs from Claude Code’s, like a non-coding agent in a pipeline that no human watches. Replacing drops all of the default prompt, including tool guidance and safety instructions, so you take responsibility for whatever your task still needs.
+              - generic [ref=e995]:
+                - text: These flags apply only to the current invocation. For persistent personas you can switch between and share across a project, use
+                - link "output styles" [ref=e996] [cursor=pointer]:
+                  - /url: /docs/en/output-styles
+                - text: . For project conventions Claude should always follow, use
+                - link "CLAUDE.md" [ref=e997] [cursor=pointer]:
+                  - /url: /docs/en/memory
+                - text: . The
+                - link "Agent SDK guide on system prompts" [ref=e998] [cursor=pointer]:
+                  - /url: /docs/en/agent-sdk/modifying-system-prompts#decide-on-a-starting-point
+                - text: covers the same decision in more depth.
+              - heading "Navigate to header See also" [level=2] [ref=e999]:
+                - link "Navigate to header" [ref=e1000] [cursor=pointer]:
+                  - /url: "#see-also"
+                  - img [ref=e1002]
+                - generic [ref=e1004] [cursor=pointer]: See also
+              - list [ref=e1005]:
+                - listitem [ref=e1006]:
+                  - link "Chrome extension" [ref=e1007] [cursor=pointer]:
+                    - /url: /docs/en/chrome
+                  - text: "- Browser automation and web testing"
+                - listitem [ref=e1008]:
+                  - link "Interactive mode" [ref=e1009] [cursor=pointer]:
+                    - /url: /docs/en/interactive-mode
+                  - text: "- Shortcuts, input modes, and interactive features"
+                - listitem [ref=e1010]:
+                  - link "Quickstart guide" [ref=e1011] [cursor=pointer]:
+                    - /url: /docs/en/quickstart
+                  - text: "- Getting started with Claude Code"
+                - listitem [ref=e1012]:
+                  - link "Common workflows" [ref=e1013] [cursor=pointer]:
+                    - /url: /docs/en/common-workflows
+                  - text: "- Advanced workflows and patterns"
+                - listitem [ref=e1014]:
+                  - link "Settings" [ref=e1015] [cursor=pointer]:
+                    - /url: /docs/en/settings
+                  - text: "- Configuration options"
+                - listitem [ref=e1016]:
+                  - link "Agent SDK documentation" [ref=e1017] [cursor=pointer]:
+                    - /url: /docs/en/agent-sdk/overview
+                  - text: "- Programmatic usage and integrations"
+            - generic [ref=e1019]:
+              - paragraph [ref=e1020]: Was this page helpful?
+              - generic [ref=e1022]:
+                - button "Yes" [ref=e1023] [cursor=pointer]:
+                  - img [ref=e1024]
+                  - generic [ref=e1026]: "Yes"
+                - button "No" [ref=e1027] [cursor=pointer]:
+                  - img [ref=e1028]
+                  - generic [ref=e1030]: "No"
+            - link "Commands" [ref=e1032] [cursor=pointer]:
+              - /url: /docs/en/commands
+              - generic [ref=e1033]: Commands
+              - img [ref=e1034]
+            - generic [ref=e1037]:
+              - textbox "Ask a question..." [ref=e1038]
+              - generic: ⌘I
+              - button "Send message" [disabled] [ref=e1039]:
+                - img [ref=e1040]
+      - contentinfo [ref=e1042]:
+        - generic [ref=e1044]:
+          - generic [ref=e1045]:
+            - link "Claude Code Docs home page light logo" [ref=e1046] [cursor=pointer]:
+              - /url: /docs/en/overview
+              - generic [ref=e1047]: Claude Code Docs home page
+              - img "light logo" [ref=e1048]
+            - generic [ref=e1049]:
+              - link "x" [ref=e1050] [cursor=pointer]:
+                - /url: https://x.com/AnthropicAI
+                - generic [ref=e1051]: x
+                - img [ref=e1052]
+              - link "linkedin" [ref=e1053] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/anthropicresearch
+                - generic [ref=e1054]: linkedin
+                - img [ref=e1055]
+          - generic [ref=e1056]:
+            - generic [ref=e1058]:
+              - paragraph [ref=e1059]: Company
+              - link "Anthropic" [ref=e1060] [cursor=pointer]:
+                - /url: https://www.anthropic.com/company
+              - link "Careers" [ref=e1061] [cursor=pointer]:
+                - /url: https://www.anthropic.com/careers
+              - link "Economic Futures" [ref=e1062] [cursor=pointer]:
+                - /url: https://www.anthropic.com/economic-futures
+              - link "Research" [ref=e1063] [cursor=pointer]:
+                - /url: https://www.anthropic.com/research
+              - link "News" [ref=e1064] [cursor=pointer]:
+                - /url: https://www.anthropic.com/news
+              - link "Trust center" [ref=e1065] [cursor=pointer]:
+                - /url: https://trust.anthropic.com/
+              - link "Transparency" [ref=e1066] [cursor=pointer]:
+                - /url: https://www.anthropic.com/transparency
+            - generic [ref=e1068]:
+              - paragraph [ref=e1069]: Help and security
+              - link "Availability" [ref=e1070] [cursor=pointer]:
+                - /url: https://www.anthropic.com/supported-countries
+              - link "Status" [ref=e1071] [cursor=pointer]:
+                - /url: https://status.anthropic.com/
+              - link "Support center" [ref=e1072] [cursor=pointer]:
+                - /url: https://support.claude.com/
+            - generic [ref=e1074]:
+              - paragraph [ref=e1075]: Learn
+              - link "Courses" [ref=e1076] [cursor=pointer]:
+                - /url: https://www.anthropic.com/learn
+              - link "MCP connectors" [ref=e1077] [cursor=pointer]:
+                - /url: https://claude.com/partners/mcp
+              - link "Customer stories" [ref=e1078] [cursor=pointer]:
+                - /url: https://www.claude.com/customers
+              - link "Engineering blog" [ref=e1079] [cursor=pointer]:
+                - /url: https://www.anthropic.com/engineering
+              - link "Events" [ref=e1080] [cursor=pointer]:
+                - /url: https://www.anthropic.com/events
+              - link "Powered by Claude" [ref=e1081] [cursor=pointer]:
+                - /url: https://claude.com/partners/powered-by-claude
+              - link "Service partners" [ref=e1082] [cursor=pointer]:
+                - /url: https://claude.com/partners/services
+              - link "Startups program" [ref=e1083] [cursor=pointer]:
+                - /url: https://claude.com/programs/startups
+            - generic [ref=e1085]:
+              - paragraph [ref=e1086]: Terms and policies
+              - link "Privacy choices" [ref=e1087] [cursor=pointer]:
+                - /url: https://www.anthropic.com/legal/privacy
+              - link "Privacy policy" [ref=e1088] [cursor=pointer]:
+                - /url: https://www.anthropic.com/legal/privacy
+              - link "Disclosure policy" [ref=e1089] [cursor=pointer]:
+                - /url: https://www.anthropic.com/responsible-disclosure-policy
+              - link "Usage policy" [ref=e1090] [cursor=pointer]:
+                - /url: https://www.anthropic.com/legal/aup
+              - link "Commercial terms" [ref=e1091] [cursor=pointer]:
+                - /url: https://www.anthropic.com/legal/commercial-terms
+              - link "Consumer terms" [ref=e1092] [cursor=pointer]:
+                - /url: https://www.anthropic.com/legal/consumer-terms
+  - alert [ref=e1093]

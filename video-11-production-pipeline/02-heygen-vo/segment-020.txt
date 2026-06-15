@@ -1,1 +1,0 @@
-Transitions are code, not clicks. Crossfades, wipes, shader effects — all defined in TypeScript, all reusable across videos. Captions come from the same word-level transcript. Synced to the millisecond. Style them however you want. <break time="1s"/>

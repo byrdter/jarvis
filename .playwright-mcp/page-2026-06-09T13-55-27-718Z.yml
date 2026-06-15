@@ -1,0 +1,572 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fanthropics%2Fskills
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=anthropics%2Fskills
+            - button "Appearance settings" [disabled] [ref=e58]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "anthropics" [ref=e70] [cursor=pointer]:
+            - /url: /anthropics
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "skills" [ref=e73] [cursor=pointer]:
+              - /url: /anthropics/skills
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2Fanthropics%2Fskills
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 17.5k" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2Fanthropics%2Fskills
+                - img [ref=e82]
+                - text: Fork
+                - generic "17,511" [ref=e84]: 17.5k
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fanthropics%2Fskills
+                - img [ref=e88]
+                - text: Star
+                - generic "148422 users starred this repository" [ref=e90]: 148k
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /anthropics/skills
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues 260" [ref=e99] [cursor=pointer]:
+              - /url: /anthropics/skills/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+              - generic "260" [ref=e104]
+          - listitem [ref=e105]:
+            - link "Pull requests 686" [ref=e106] [cursor=pointer]:
+              - /url: /anthropics/skills/pulls
+              - img [ref=e107]
+              - generic [ref=e109]: Pull requests
+              - generic "686" [ref=e110]
+          - listitem [ref=e111]:
+            - link "Discussions" [ref=e112] [cursor=pointer]:
+              - /url: /anthropics/skills/discussions
+              - img [ref=e113]
+              - generic [ref=e115]: Discussions
+          - listitem [ref=e116]:
+            - link "Actions" [ref=e117] [cursor=pointer]:
+              - /url: /anthropics/skills/actions
+              - img [ref=e118]
+              - generic [ref=e120]: Actions
+          - listitem [ref=e121]:
+            - link "Security and quality" [ref=e122] [cursor=pointer]:
+              - /url: /anthropics/skills/security
+              - img [ref=e123]
+              - generic [ref=e125]: Security and quality
+          - listitem [ref=e126]:
+            - link "Insights" [ref=e127] [cursor=pointer]:
+              - /url: /anthropics/skills/pulse
+              - img [ref=e128]
+              - generic [ref=e130]: Insights
+    - generic [ref=e143]:
+      - heading "anthropics/skills" [level=1] [ref=e145]
+      - generic [ref=e146]:
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - button "main branch" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - generic [ref=e156]:
+                    - img [ref=e158]
+                    - generic [ref=e161]: main
+                  - generic:
+                    - img
+              - generic [ref=e162]:
+                - link "Branches" [ref=e163] [cursor=pointer]:
+                  - /url: /anthropics/skills/branches
+                  - generic [ref=e164]:
+                    - generic:
+                      - img
+                    - generic [ref=e165]: Branches
+                - link "Tags" [ref=e166] [cursor=pointer]:
+                  - /url: /anthropics/skills/tags
+                  - generic [ref=e167]:
+                    - generic:
+                      - img
+                    - generic [ref=e168]: Tags
+            - generic [ref=e169]:
+              - generic [ref=e173]:
+                - img [ref=e175]
+                - combobox "Go to file" [ref=e177]
+              - button "Code" [ref=e178] [cursor=pointer]:
+                - generic [ref=e179]:
+                  - generic:
+                    - img
+                  - generic [ref=e180]: Code
+                  - generic:
+                    - img
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - heading "Folders and files" [level=2] [ref=e183]
+              - table "Folders and files" [ref=e184]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e185]:
+                  - row "Latest commit History 38 Commits" [ref=e186]:
+                    - cell "Latest commit History 38 Commits" [ref=e187]:
+                      - generic [ref=e188]:
+                        - heading "Latest commit" [level=2] [ref=e189]
+                        - generic [ref=e192]:
+                          - heading "History" [level=2] [ref=e193]
+                          - link "38 Commits" [ref=e194] [cursor=pointer]:
+                            - /url: /anthropics/skills/commits/main/
+                            - generic [ref=e195]:
+                              - generic:
+                                - img
+                              - generic [ref=e196]: 38 Commits
+                  - row ".claude-plugin, (Directory)" [ref=e197]:
+                    - cell ".claude-plugin, (Directory)" [ref=e198]:
+                      - generic [ref=e199]:
+                        - img [ref=e200]
+                        - link ".claude-plugin, (Directory)" [ref=e205] [cursor=pointer]:
+                          - /url: /anthropics/skills/tree/main/.claude-plugin
+                          - text: .claude-plugin
+                    - cell [ref=e206]
+                    - cell [ref=e208]
+                  - row "skills, (Directory)" [ref=e211]:
+                    - cell "skills, (Directory)" [ref=e212]:
+                      - generic [ref=e213]:
+                        - img [ref=e214]
+                        - link "skills, (Directory)" [ref=e219] [cursor=pointer]:
+                          - /url: /anthropics/skills/tree/main/skills
+                          - text: skills
+                    - cell [ref=e220]
+                    - cell [ref=e222]
+                  - row "spec, (Directory)" [ref=e225]:
+                    - cell "spec, (Directory)" [ref=e226]:
+                      - generic [ref=e227]:
+                        - img [ref=e228]
+                        - link "spec, (Directory)" [ref=e233] [cursor=pointer]:
+                          - /url: /anthropics/skills/tree/main/spec
+                          - text: spec
+                    - cell [ref=e234]
+                    - cell [ref=e236]
+                  - row "template, (Directory)" [ref=e239]:
+                    - cell "template, (Directory)" [ref=e240]:
+                      - generic [ref=e241]:
+                        - img [ref=e242]
+                        - link "template, (Directory)" [ref=e247] [cursor=pointer]:
+                          - /url: /anthropics/skills/tree/main/template
+                          - text: template
+                    - cell [ref=e248]
+                    - cell [ref=e250]
+                  - row ".gitignore, (File)" [ref=e253]:
+                    - cell ".gitignore, (File)" [ref=e254]:
+                      - generic [ref=e255]:
+                        - img [ref=e256]
+                        - link ".gitignore, (File)" [ref=e261] [cursor=pointer]:
+                          - /url: /anthropics/skills/blob/main/.gitignore
+                          - text: .gitignore
+                    - cell [ref=e262]
+                    - cell [ref=e264]
+                  - row "README.md, (File)" [ref=e267]:
+                    - cell "README.md, (File)" [ref=e268]:
+                      - generic [ref=e269]:
+                        - img [ref=e270]
+                        - link "README.md, (File)" [ref=e275] [cursor=pointer]:
+                          - /url: /anthropics/skills/blob/main/README.md
+                          - text: README.md
+                    - cell [ref=e276]
+                    - cell [ref=e278]
+                  - row "THIRD_PARTY_NOTICES.md, (File)" [ref=e281]:
+                    - cell "THIRD_PARTY_NOTICES.md, (File)" [ref=e282]:
+                      - generic [ref=e283]:
+                        - img [ref=e284]
+                        - link "THIRD_PARTY_NOTICES.md, (File)" [ref=e289] [cursor=pointer]:
+                          - /url: /anthropics/skills/blob/main/THIRD_PARTY_NOTICES.md
+                          - text: THIRD_PARTY_NOTICES.md
+                    - cell [ref=e290]
+                    - cell [ref=e292]
+            - generic [ref=e296]:
+              - generic [ref=e297]:
+                - heading "Repository files navigation" [level=2] [ref=e298]
+                - navigation "Repository files" [ref=e299]:
+                  - list [ref=e300]:
+                    - listitem [ref=e301]:
+                      - link "README" [ref=e302] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e304]
+                        - generic [ref=e306]: README
+                - button "Outline" [ref=e307] [cursor=pointer]:
+                  - img [ref=e308]
+              - article [ref=e311]:
+                - blockquote [ref=e312]:
+                  - paragraph [ref=e313]:
+                    - strong [ref=e314]: "Note:"
+                    - text: This repository contains Anthropic's implementation of skills for Claude. For information about the Agent Skills standard, see
+                    - link "agentskills.io" [ref=e315] [cursor=pointer]:
+                      - /url: http://agentskills.io
+                    - text: .
+                - paragraph [ref=e316]:
+                  - link "skills.sh" [ref=e317] [cursor=pointer]:
+                    - /url: https://skills.sh/anthropics/skills
+                    - img "skills.sh" [ref=e318]
+                - generic [ref=e319]:
+                  - heading "Skills" [level=1] [ref=e320]
+                  - 'link "Permalink: Skills" [ref=e321] [cursor=pointer]':
+                    - /url: "#skills"
+                    - img [ref=e322]
+                - paragraph [ref=e324]: Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. Skills teach Claude how to complete specific tasks in a repeatable way, whether that's creating documents with your company's brand guidelines, analyzing data using your organization's specific workflows, or automating personal tasks.
+                - paragraph [ref=e325]: "For more information, check out:"
+                - list [ref=e326]:
+                  - listitem [ref=e327]:
+                    - link "What are skills?" [ref=e328] [cursor=pointer]:
+                      - /url: https://support.claude.com/en/articles/12512176-what-are-skills
+                  - listitem [ref=e329]:
+                    - link "Using skills in Claude" [ref=e330] [cursor=pointer]:
+                      - /url: https://support.claude.com/en/articles/12512180-using-skills-in-claude
+                  - listitem [ref=e331]:
+                    - link "How to create custom skills" [ref=e332] [cursor=pointer]:
+                      - /url: https://support.claude.com/en/articles/12512198-creating-custom-skills
+                  - listitem [ref=e333]:
+                    - link "Equipping agents for the real world with Agent Skills" [ref=e334] [cursor=pointer]:
+                      - /url: https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+                - generic [ref=e335]:
+                  - heading "About This Repository" [level=1] [ref=e336]
+                  - 'link "Permalink: About This Repository" [ref=e337] [cursor=pointer]':
+                    - /url: "#about-this-repository"
+                    - img [ref=e338]
+                - paragraph [ref=e340]: This repository contains skills that demonstrate what's possible with Claude's skills system. These skills range from creative applications (art, music, design) to technical tasks (testing web apps, MCP server generation) to enterprise workflows (communications, branding, etc.).
+                - paragraph [ref=e341]:
+                  - text: Each skill is self-contained in its own folder with a
+                  - code [ref=e342]: SKILL.md
+                  - text: file containing the instructions and metadata that Claude uses. Browse through these skills to get inspiration for your own skills or to understand different patterns and approaches.
+                - paragraph [ref=e343]:
+                  - text: Many skills in this repo are open source (Apache 2.0). We've also included the document creation & editing skills that power
+                  - link "Claude's document capabilities" [ref=e344] [cursor=pointer]:
+                    - /url: https://www.anthropic.com/news/create-files
+                  - text: under the hood in the
+                  - link "skills/docx" [ref=e345] [cursor=pointer]:
+                    - /url: /anthropics/skills/blob/main/skills/docx
+                    - code [ref=e346]: skills/docx
+                  - text: ","
+                  - link "skills/pdf" [ref=e347] [cursor=pointer]:
+                    - /url: /anthropics/skills/blob/main/skills/pdf
+                    - code [ref=e348]: skills/pdf
+                  - text: ","
+                  - link "skills/pptx" [ref=e349] [cursor=pointer]:
+                    - /url: /anthropics/skills/blob/main/skills/pptx
+                    - code [ref=e350]: skills/pptx
+                  - text: ", and"
+                  - link "skills/xlsx" [ref=e351] [cursor=pointer]:
+                    - /url: /anthropics/skills/blob/main/skills/xlsx
+                    - code [ref=e352]: skills/xlsx
+                  - text: subfolders. These are source-available, not open source, but we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application.
+                - generic [ref=e353]:
+                  - heading "Disclaimer" [level=2] [ref=e354]
+                  - 'link "Permalink: Disclaimer" [ref=e355] [cursor=pointer]':
+                    - /url: "#disclaimer"
+                    - img [ref=e356]
+                - paragraph [ref=e358]:
+                  - strong [ref=e359]: These skills are provided for demonstration and educational purposes only.
+                  - text: While some of these capabilities may be available in Claude, the implementations and behaviors you receive from Claude may differ from what is shown in these skills. These skills are meant to illustrate patterns and possibilities. Always test skills thoroughly in your own environment before relying on them for critical tasks.
+                - generic [ref=e360]:
+                  - heading "Skill Sets" [level=1] [ref=e361]
+                  - 'link "Permalink: Skill Sets" [ref=e362] [cursor=pointer]':
+                    - /url: "#skill-sets"
+                    - img [ref=e363]
+                - list [ref=e365]:
+                  - listitem [ref=e366]:
+                    - link "./skills" [ref=e367] [cursor=pointer]:
+                      - /url: /anthropics/skills/blob/main/skills
+                    - text: ": Skill examples for Creative & Design, Development & Technical, Enterprise & Communication, and Document Skills"
+                  - listitem [ref=e368]:
+                    - link "./spec" [ref=e369] [cursor=pointer]:
+                      - /url: /anthropics/skills/blob/main/spec
+                    - text: ": The Agent Skills specification"
+                  - listitem [ref=e370]:
+                    - link "./template" [ref=e371] [cursor=pointer]:
+                      - /url: /anthropics/skills/blob/main/template
+                    - text: ": Skill template"
+                - generic [ref=e372]:
+                  - heading "Try in Claude Code, Claude.ai, and the API" [level=1] [ref=e373]
+                  - 'link "Permalink: Try in Claude Code, Claude.ai, and the API" [ref=e374] [cursor=pointer]':
+                    - /url: "#try-in-claude-code-claudeai-and-the-api"
+                    - img [ref=e375]
+                - generic [ref=e377]:
+                  - heading "Claude Code" [level=2] [ref=e378]
+                  - 'link "Permalink: Claude Code" [ref=e379] [cursor=pointer]':
+                    - /url: "#claude-code"
+                    - img [ref=e380]
+                - paragraph [ref=e382]: "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:"
+                - generic [ref=e383]:
+                  - code [ref=e385]: /plugin marketplace add anthropics/skills
+                  - button "Copy code to clipboard" [ref=e387] [cursor=pointer]:
+                    - img [ref=e388]
+                - paragraph [ref=e391]: "Then, to install a specific set of skills:"
+                - list [ref=e392]:
+                  - listitem [ref=e393]:
+                    - text: Select
+                    - code [ref=e394]: Browse and install plugins
+                  - listitem [ref=e395]:
+                    - text: Select
+                    - code [ref=e396]: anthropic-agent-skills
+                  - listitem [ref=e397]:
+                    - text: Select
+                    - code [ref=e398]: document-skills
+                    - text: or
+                    - code [ref=e399]: example-skills
+                  - listitem [ref=e400]:
+                    - text: Select
+                    - code [ref=e401]: Install now
+                - paragraph [ref=e402]: "Alternatively, directly install either Plugin via:"
+                - generic [ref=e403]:
+                  - code [ref=e405]: /plugin install document-skills@anthropic-agent-skills /plugin install example-skills@anthropic-agent-skills
+                  - button "Copy code to clipboard" [ref=e407] [cursor=pointer]:
+                    - img [ref=e408]
+                - paragraph [ref=e411]:
+                  - text: After installing the plugin, you can use the skill by just mentioning it. For instance, if you install the
+                  - code [ref=e412]: document-skills
+                  - text: "plugin from the marketplace, you can ask Claude Code to do something like: \"Use the PDF skill to extract the form fields from"
+                  - code [ref=e413]: path/to/some-file.pdf
+                  - text: "\""
+                - generic [ref=e414]:
+                  - heading "Claude.ai" [level=2] [ref=e415]
+                  - 'link "Permalink: Claude.ai" [ref=e416] [cursor=pointer]':
+                    - /url: "#claudeai"
+                    - img [ref=e417]
+                - paragraph [ref=e419]: These example skills are all already available to paid plans in Claude.ai.
+                - paragraph [ref=e420]:
+                  - text: To use any skill from this repository or upload custom skills, follow the instructions in
+                  - link "Using skills in Claude" [ref=e421] [cursor=pointer]:
+                    - /url: https://support.claude.com/en/articles/12512180-using-skills-in-claude#h_a4222fa77b
+                  - text: .
+                - generic [ref=e422]:
+                  - heading "Claude API" [level=2] [ref=e423]
+                  - 'link "Permalink: Claude API" [ref=e424] [cursor=pointer]':
+                    - /url: "#claude-api"
+                    - img [ref=e425]
+                - paragraph [ref=e427]:
+                  - text: You can use Anthropic's pre-built skills, and upload custom skills, via the Claude API. See the
+                  - link "Skills API Quickstart" [ref=e428] [cursor=pointer]:
+                    - /url: https://docs.claude.com/en/api/skills-guide#creating-a-skill
+                  - text: for more.
+                - generic [ref=e429]:
+                  - heading "Creating a Basic Skill" [level=1] [ref=e430]
+                  - 'link "Permalink: Creating a Basic Skill" [ref=e431] [cursor=pointer]':
+                    - /url: "#creating-a-basic-skill"
+                    - img [ref=e432]
+                - paragraph [ref=e434]:
+                  - text: Skills are simple to create - just a folder with a
+                  - code [ref=e435]: SKILL.md
+                  - text: file containing YAML frontmatter and instructions. You can use the
+                  - strong [ref=e436]: template-skill
+                  - text: "in this repository as a starting point:"
+                - generic [ref=e437]:
+                  - generic [ref=e438]:
+                    - text: "--- name: my-skill-name description: A clear description of what this skill does and when to use it ---"
+                    - generic [ref=e439]: "# My Skill Name"
+                    - text: "[Add your instructions here that Claude will follow when this skill is active]"
+                    - generic [ref=e440]: "## Examples"
+                    - text: "- Example usage 1 - Example usage 2"
+                    - generic [ref=e441]: "## Guidelines"
+                    - text: "- Guideline 1 - Guideline 2"
+                  - button "Copy code to clipboard" [ref=e443] [cursor=pointer]:
+                    - img [ref=e444]
+                - paragraph [ref=e447]: "The frontmatter requires only two fields:"
+                - list [ref=e448]:
+                  - listitem [ref=e449]:
+                    - code [ref=e450]: name
+                    - text: "- A unique identifier for your skill (lowercase, hyphens for spaces)"
+                  - listitem [ref=e451]:
+                    - code [ref=e452]: description
+                    - text: "- A complete description of what the skill does and when to use it"
+                - paragraph [ref=e453]:
+                  - text: The markdown content below contains the instructions, examples, and guidelines that Claude will follow. For more details, see
+                  - link "How to create custom skills" [ref=e454] [cursor=pointer]:
+                    - /url: https://support.claude.com/en/articles/12512198-creating-custom-skills
+                  - text: .
+                - generic [ref=e455]:
+                  - heading "Partner Skills" [level=1] [ref=e456]
+                  - 'link "Permalink: Partner Skills" [ref=e457] [cursor=pointer]':
+                    - /url: "#partner-skills"
+                    - img [ref=e458]
+                - paragraph [ref=e460]: "Skills are a great way to teach Claude how to get better at using specific pieces of software. As we see awesome example skills from partners, we may highlight some of them here:"
+                - list [ref=e461]:
+                  - listitem [ref=e462]:
+                    - strong [ref=e463]: Notion
+                    - text: "-"
+                    - link "Notion Skills for Claude" [ref=e464] [cursor=pointer]:
+                      - /url: https://www.notion.so/notiondevs/Notion-Skills-for-Claude-28da4445d27180c7af1df7d8615723d0
+        - generic [ref=e468]:
+          - generic [ref=e471]:
+            - heading "About" [level=2] [ref=e472]
+            - paragraph [ref=e473]: Public repository for Agent Skills
+            - heading "Topics" [level=3] [ref=e474]
+            - link "agent-skills" [ref=e477] [cursor=pointer]:
+              - /url: /topics/agent-skills
+            - heading "Resources" [level=3] [ref=e478]
+            - link "Readme" [ref=e480] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e481]
+              - text: Readme
+            - link "Activity" [ref=e484] [cursor=pointer]:
+              - /url: /anthropics/skills/activity
+              - img [ref=e485]
+              - text: Activity
+            - link "Custom properties" [ref=e488] [cursor=pointer]:
+              - /url: /anthropics/skills/custom-properties
+              - img [ref=e489]
+              - text: Custom properties
+            - heading "Stars" [level=3] [ref=e491]
+            - link "148k stars" [ref=e493] [cursor=pointer]:
+              - /url: /anthropics/skills/stargazers
+              - img [ref=e494]
+              - strong [ref=e496]: 148k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e497]
+            - link "958 watching" [ref=e499] [cursor=pointer]:
+              - /url: /anthropics/skills/watchers
+              - img [ref=e500]
+              - strong [ref=e502]: "958"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e503]
+            - link "17.5k forks" [ref=e505] [cursor=pointer]:
+              - /url: /anthropics/skills/forks
+              - img [ref=e506]
+              - strong [ref=e508]: 17.5k
+              - text: forks
+            - link "Report repository" [ref=e510] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fanthropics%2Fskills&report=anthropics+%28user%29
+          - generic [ref=e512]:
+            - heading "Releases" [level=2] [ref=e513]:
+              - link "Releases" [ref=e514] [cursor=pointer]:
+                - /url: /anthropics/skills/releases
+            - generic [ref=e515]: No releases published
+          - generic "Loading latest packages" [ref=e518]:
+            - heading "Packages" [level=2] [ref=e519]:
+              - link "Packages" [ref=e520] [cursor=pointer]:
+                - /url: /orgs/anthropics/packages?repo_name=skills
+          - generic "Loading contributors" [ref=e532]:
+            - generic:
+              - heading "Contributors" [level=2] [ref=e533]:
+                - link "Contributors" [ref=e534] [cursor=pointer]:
+                  - /url: /anthropics/skills/graphs/contributors
+              - list [ref=e535]:
+                - listitem [ref=e536]
+                - listitem [ref=e538]
+                - listitem [ref=e540]
+          - generic [ref=e543]:
+            - heading "Languages" [level=2] [ref=e544]
+            - list [ref=e551]:
+              - listitem [ref=e552]:
+                - link "Python 84.4%" [ref=e553] [cursor=pointer]:
+                  - /url: /anthropics/skills/search?l=python
+                  - img [ref=e554]
+                  - generic [ref=e556]: Python
+                  - generic [ref=e557]: 84.4%
+              - listitem [ref=e558]:
+                - link "HTML 12.4%" [ref=e559] [cursor=pointer]:
+                  - /url: /anthropics/skills/search?l=html
+                  - img [ref=e560]
+                  - generic [ref=e562]: HTML
+                  - generic [ref=e563]: 12.4%
+              - listitem [ref=e564]:
+                - link "Shell 1.9%" [ref=e565] [cursor=pointer]:
+                  - /url: /anthropics/skills/search?l=shell
+                  - img [ref=e566]
+                  - generic [ref=e568]: Shell
+                  - generic [ref=e569]: 1.9%
+              - listitem [ref=e570]:
+                - link "JavaScript 1.3%" [ref=e571] [cursor=pointer]:
+                  - /url: /anthropics/skills/search?l=javascript
+                  - img [ref=e572]
+                  - generic [ref=e574]: JavaScript
+                  - generic [ref=e575]: 1.3%
+  - contentinfo [ref=e577]:
+    - heading "Footer" [level=2] [ref=e578]
+    - generic [ref=e579]:
+      - generic [ref=e580]:
+        - link "GitHub Homepage" [ref=e581] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e582]
+        - generic [ref=e584]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e585]:
+        - heading "Footer navigation" [level=3] [ref=e586]
+        - list "Footer navigation" [ref=e587]:
+          - listitem [ref=e588]:
+            - link "Terms" [ref=e589] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e590]:
+            - link "Privacy" [ref=e591] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e592]:
+            - link "Security" [ref=e593] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e594]:
+            - link "Status" [ref=e595] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e596]:
+            - link "Community" [ref=e597] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e598]:
+            - link "Docs" [ref=e599] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e600]:
+            - link "Contact" [ref=e601] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e602]:
+            - button "Manage cookies" [ref=e604] [cursor=pointer]
+          - listitem [ref=e605]:
+            - button "Do not share my personal information" [ref=e607] [cursor=pointer]

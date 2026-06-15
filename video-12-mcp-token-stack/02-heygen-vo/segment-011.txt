@@ -1,1 +1,0 @@
-The result is the headline number: one hundred fifty thousand tokens down to two thousand. That is a ninety-eight point seven percent reduction. But the important part is not the percentage. The important part is where the data lives. If intermediate data never needs the model's judgment, it should not enter the model's context.

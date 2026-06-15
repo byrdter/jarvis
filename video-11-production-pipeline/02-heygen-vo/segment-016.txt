@@ -1,1 +1,0 @@
-Stage one. Transcribe. AssemblyAI extracts word-level timestamps from the avatar audio. Every word. Every pause. Every gap. The pipeline scans for gaps longer than one second. Each gap becomes a hard scene boundary. <break time="1s"/>

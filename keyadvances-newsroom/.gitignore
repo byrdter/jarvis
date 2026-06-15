@@ -1,5 +1,0 @@
-data/
-outputs/
-*.db
-*.db-shm
-*.db-wal

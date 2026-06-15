@@ -1,1 +1,0 @@
-This is why JARVIS uses skills heavily. A video-production skill can say, "Here is how we structure HeyGen blocks. Here is where stills live. Here is how Remotion should treat avatar segments." The model only needs that instruction when it is doing video work. It should not carry it during a market scan or a wiki cleanup.

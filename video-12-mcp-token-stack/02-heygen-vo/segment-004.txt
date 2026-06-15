@@ -1,1 +1,0 @@
-But this is where the easy take gets dangerous. If you say, "MCP is fixed now," you miss the next problem. Search reduces schema load. It does not make every tool result small. It does not make every multi-step workflow efficient. And it does not make tool retrieval perfectly reliable.

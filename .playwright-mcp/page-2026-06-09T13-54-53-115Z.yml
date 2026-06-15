@@ -1,0 +1,1612 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Cookie settings" [level=3] [ref=e3]
+    - paragraph [ref=e4]:
+      - text: We use cookies to deliver and improve our services, analyze site usage, and if you agree, to customize or personalize your experience and market our services to you. You can read our Cookie Policy
+      - link "here" [ref=e5] [cursor=pointer]:
+        - /url: https://www.anthropic.com/legal/cookies
+      - text: .
+    - generic [ref=e6]:
+      - button "Customize Cookie Settings" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: Customize Cookie Settings
+      - button "Reject All Cookies" [ref=e9] [cursor=pointer]:
+        - generic [ref=e10]: Reject All Cookies
+      - button "Accept All Cookies" [ref=e11] [cursor=pointer]:
+        - generic [ref=e12]: Accept All Cookies
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - link "Claude API Docs Home" [ref=e17] [cursor=pointer]:
+        - /url: /docs/en/home
+        - img "Claude API Docs" [ref=e18]
+      - navigation [ref=e21]:
+        - list [ref=e22]:
+          - listitem [ref=e23]:
+            - link "Messages" [ref=e24] [cursor=pointer]:
+              - /url: /docs/en/intro
+          - listitem [ref=e25]:
+            - link "Managed Agents" [ref=e26] [cursor=pointer]:
+              - /url: /docs/en/managed-agents/overview
+          - listitem [ref=e27]:
+            - link "Admin" [ref=e28] [cursor=pointer]:
+              - /url: /docs/en/manage-claude/admin-api
+          - listitem [ref=e29]:
+            - button "Resources" [ref=e30] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e32]
+      - generic [ref=e35]:
+        - link "API reference" [ref=e36] [cursor=pointer]:
+          - /url: /docs/en/api/overview
+          - button "API reference" [ref=e37]:
+            - img [ref=e39]
+            - text: API reference
+        - button [ref=e42] [cursor=pointer]:
+          - img [ref=e44]
+        - button "English" [ref=e46] [cursor=pointer]:
+          - text: English
+          - img [ref=e48]
+        - link "Console" [ref=e50] [cursor=pointer]:
+          - /url: /
+          - button "Console" [ref=e51]:
+            - img [ref=e53]
+            - text: Console
+        - link "Log in" [ref=e56] [cursor=pointer]:
+          - /url: /login?returnTo=%2Fdocs%2Fen%2Fagents-and-tools%2Ftool-use%2Fprogrammatic-tool-calling
+          - button "Log in" [ref=e57]
+    - generic [ref=e59]:
+      - complementary [ref=e60]:
+        - button "Search documentation" [ref=e62] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img
+          - generic [ref=e63]: Search...
+          - generic:
+            - generic: ⌘K
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: First steps
+            - generic [ref=e69]:
+              - link "Intro to Claude" [ref=e70] [cursor=pointer]:
+                - /url: /docs/en/intro
+                - generic [ref=e72]: Intro to Claude
+              - link "Quickstart" [ref=e73] [cursor=pointer]:
+                - /url: /docs/en/get-started
+                - generic [ref=e75]: Quickstart
+          - generic [ref=e76]:
+            - generic [ref=e77]: Building with Claude
+            - generic [ref=e78]:
+              - link "Features overview" [ref=e79] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/overview
+                - generic [ref=e81]: Features overview
+              - link "Using the Messages API" [ref=e82] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/working-with-messages
+                - generic [ref=e84]: Using the Messages API
+              - link "Handling stop reasons" [ref=e85] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/handling-stop-reasons
+                - generic [ref=e87]: Handling stop reasons
+          - generic [ref=e88]:
+            - generic [ref=e89]: Model capabilities
+            - generic [ref=e90]:
+              - link "Extended thinking" [ref=e91] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/extended-thinking
+                - generic [ref=e93]: Extended thinking
+              - link "Adaptive thinking" [ref=e94] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/adaptive-thinking
+                - generic [ref=e96]: Adaptive thinking
+              - link "Effort" [ref=e97] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/effort
+                - generic [ref=e99]: Effort
+              - link "Task budgets (beta)" [ref=e100] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/task-budgets
+                - generic [ref=e102]: Task budgets (beta)
+              - link "Fast mode (research preview)" [ref=e103] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/fast-mode
+                - generic [ref=e105]: Fast mode (research preview)
+              - link "Structured outputs" [ref=e106] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/structured-outputs
+                - generic [ref=e108]: Structured outputs
+              - link "Citations" [ref=e109] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/citations
+                - generic [ref=e111]: Citations
+              - link "Streaming Messages" [ref=e112] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/streaming
+                - generic [ref=e114]: Streaming Messages
+              - link "Batch processing" [ref=e115] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/batch-processing
+                - generic [ref=e117]: Batch processing
+              - link "Search results" [ref=e118] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/search-results
+                - generic [ref=e120]: Search results
+              - link "Streaming refusals" [ref=e121] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
+                - generic [ref=e123]: Streaming refusals
+              - link "Multilingual support" [ref=e124] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/multilingual-support
+                - generic [ref=e126]: Multilingual support
+              - link "Embeddings" [ref=e127] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/embeddings
+                - generic [ref=e129]: Embeddings
+          - generic [ref=e130]:
+            - generic [ref=e131]: Tools
+            - generic [ref=e132]:
+              - link "Overview" [ref=e133] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/overview
+                - generic [ref=e135]: Overview
+              - link "How tool use works" [ref=e136] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/how-tool-use-works
+                - generic [ref=e138]: How tool use works
+              - 'link "Tutorial: Build a tool-using agent" [ref=e139] [cursor=pointer]':
+                - /url: /docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
+                - generic [ref=e141]: "Tutorial: Build a tool-using agent"
+              - link "Define tools" [ref=e142] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/define-tools
+                - generic [ref=e144]: Define tools
+              - link "Handle tool calls" [ref=e145] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/handle-tool-calls
+                - generic [ref=e147]: Handle tool calls
+              - link "Parallel tool use" [ref=e148] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/parallel-tool-use
+                - generic [ref=e150]: Parallel tool use
+              - link "Tool Runner (SDK)" [ref=e151] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-runner
+                - generic [ref=e153]: Tool Runner (SDK)
+              - link "Strict tool use" [ref=e154] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/strict-tool-use
+                - generic [ref=e156]: Strict tool use
+              - link "Tool use with prompt caching" [ref=e157] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching
+                - generic [ref=e159]: Tool use with prompt caching
+              - link "Server tools" [ref=e160] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/server-tools
+                - generic [ref=e162]: Server tools
+              - link "Troubleshooting" [ref=e163] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/troubleshooting-tool-use
+                - generic [ref=e165]: Troubleshooting
+              - link "Web search tool" [ref=e166] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-search-tool
+                - generic [ref=e168]: Web search tool
+              - link "Web fetch tool" [ref=e169] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-fetch-tool
+                - generic [ref=e171]: Web fetch tool
+              - link "Code execution tool" [ref=e172] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool
+                - generic [ref=e174]: Code execution tool
+              - link "Advisor tool" [ref=e175] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/advisor-tool
+                - generic [ref=e177]: Advisor tool
+              - link "Memory tool" [ref=e178] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/memory-tool
+                - generic [ref=e180]: Memory tool
+              - link "Bash tool" [ref=e181] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/bash-tool
+                - generic [ref=e183]: Bash tool
+              - link "Computer use tool" [ref=e184] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/computer-use-tool
+                - generic [ref=e186]: Computer use tool
+              - link "Text editor tool" [ref=e187] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/text-editor-tool
+                - generic [ref=e189]: Text editor tool
+          - generic [ref=e190]:
+            - generic [ref=e191]: Tool infrastructure
+            - generic [ref=e192]:
+              - link "Tool reference" [ref=e193] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-reference
+                - generic [ref=e195]: Tool reference
+              - link "Manage tool context" [ref=e196] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/manage-tool-context
+                - generic [ref=e198]: Manage tool context
+              - link "Tool combinations" [ref=e199] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-combinations
+                - generic [ref=e201]: Tool combinations
+              - link "Tool search" [ref=e202] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-search-tool
+                - generic [ref=e204]: Tool search
+              - link "Programmatic tool calling" [ref=e205] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+                - generic [ref=e207]: Programmatic tool calling
+              - link "Fine-grained tool streaming" [ref=e208] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+                - generic [ref=e210]: Fine-grained tool streaming
+          - generic [ref=e211]:
+            - generic [ref=e212]: Context management
+            - generic [ref=e213]:
+              - link "Context windows" [ref=e214] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-windows
+                - generic [ref=e216]: Context windows
+              - link "Compaction" [ref=e217] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/compaction
+                - generic [ref=e219]: Compaction
+              - link "Context editing" [ref=e220] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-editing
+                - generic [ref=e222]: Context editing
+              - link "Prompt caching" [ref=e223] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-caching
+                - generic [ref=e225]: Prompt caching
+              - link "Mid-conversation system messages" [ref=e226] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/mid-conversation-system-messages
+                - generic [ref=e228]: Mid-conversation system messages
+              - link "Build an orchestration mode" [ref=e229] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/mid-conversation-effort-example
+                - generic [ref=e231]: Build an orchestration mode
+              - link "Cache diagnostics (beta)" [ref=e232] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/cache-diagnostics
+                - generic [ref=e234]: Cache diagnostics (beta)
+              - link "Token counting" [ref=e235] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/token-counting
+                - generic [ref=e237]: Token counting
+          - generic [ref=e238]:
+            - generic [ref=e239]: Working with files
+            - generic [ref=e240]:
+              - link "Files API" [ref=e241] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/files
+                - generic [ref=e243]: Files API
+              - link "PDF support" [ref=e244] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/pdf-support
+                - generic [ref=e246]: PDF support
+              - link "Images and vision" [ref=e247] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/vision
+                - generic [ref=e249]: Images and vision
+          - generic [ref=e250]:
+            - generic [ref=e251]: Skills
+            - generic [ref=e252]:
+              - link "Overview" [ref=e253] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/overview
+                - generic [ref=e255]: Overview
+              - link "Quickstart" [ref=e256] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/quickstart
+                - generic [ref=e258]: Quickstart
+              - link "Best practices" [ref=e259] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/best-practices
+                - generic [ref=e261]: Best practices
+              - link "Skills for enterprise" [ref=e262] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/enterprise
+                - generic [ref=e264]: Skills for enterprise
+              - link "Skills in the API" [ref=e265] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/skills-guide
+                - generic [ref=e267]: Skills in the API
+          - generic [ref=e268]:
+            - generic [ref=e269]: MCP
+            - generic [ref=e270]:
+              - link "Remote MCP servers" [ref=e271] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/remote-mcp-servers
+                - generic [ref=e273]: Remote MCP servers
+              - link "MCP connector" [ref=e274] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/mcp-connector
+                - generic [ref=e276]: MCP connector
+              - button "MCP tunnels" [ref=e278] [cursor=pointer]:
+                - generic [ref=e279]: MCP tunnels
+                - img [ref=e282]
+          - generic [ref=e284]:
+            - generic [ref=e285]: Claude on cloud platforms
+            - generic [ref=e286]:
+              - link "Amazon Bedrock" [ref=e287] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-amazon-bedrock
+                - generic [ref=e289]: Amazon Bedrock
+              - link "Amazon Bedrock (legacy)" [ref=e290] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
+                - generic [ref=e292]: Amazon Bedrock (legacy)
+              - link "Claude Platform on AWS" [ref=e293] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-platform-on-aws
+                - generic [ref=e295]: Claude Platform on AWS
+              - link "Microsoft Foundry" [ref=e296] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-microsoft-foundry
+                - generic [ref=e298]: Microsoft Foundry
+              - link "Vertex AI" [ref=e299] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-on-vertex-ai
+                - generic [ref=e301]: Vertex AI
+      - main [ref=e305]:
+        - generic [ref=e306]:
+          - article [ref=e308]:
+            - generic [ref=e309]:
+              - generic [ref=e311]:
+                - generic [ref=e312]: Messages
+                - generic [ref=e313]: /
+                - generic [ref=e314]: Tool infrastructure
+              - generic [ref=e315]:
+                - heading "Programmatic tool calling" [level=1] [ref=e316]
+                - generic [ref=e318]:
+                  - button "Copy page" [ref=e319] [cursor=pointer]:
+                    - generic [ref=e320]:
+                      - generic [ref=e321]:
+                        - img
+                        - img [ref=e322]
+                        - img
+                        - img
+                      - generic [ref=e324]: Copy page
+                  - button [ref=e325] [cursor=pointer]:
+                    - img [ref=e327]
+            - paragraph [ref=e329]:
+              - text: Programmatic tool calling allows Claude to write code that calls your tools programmatically within a
+              - link "code execution" [ref=e330] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool
+              - text: container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window. On agentic search benchmarks like
+              - link "BrowseComp" [ref=e331] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/2504.12516
+              - text: and
+              - link "DeepSearchQA" [ref=e332] [cursor=pointer]:
+                - /url: https://github.com/google-deepmind/deepsearchqa
+              - text: ", which test multi-step web research and complex information retrieval, adding programmatic tool calling on top of basic search tools improved performance by an average of 11% while using 24% fewer input tokens (see"
+              - link "Improved web search with dynamic filtering" [ref=e333] [cursor=pointer]:
+                - /url: https://claude.com/blog/improved-web-search-with-dynamic-filtering
+              - text: ).
+            - paragraph [ref=e334]: "The difference compounds fast in real workflows. Consider checking budget compliance across 20 employees: the traditional approach requires 20 separate model round-trips, pulling thousands of expense line items into the context along the way. With programmatic tool calling, a single script runs all 20 lookups, filters the results, and returns only the employees who exceeded their limits, shrinking what Claude needs to reason over from hundreds of kilobytes down to a handful of lines."
+            - generic [ref=e335]:
+              - img [ref=e338]
+              - paragraph [ref=e341]:
+                - text: For a deeper look at the inference and context costs that programmatic tool calling addresses, see
+                - link "Advanced tool use" [ref=e342] [cursor=pointer]:
+                  - /url: https://www.anthropic.com/engineering/advanced-tool-use
+                - text: .
+            - generic [ref=e343]:
+              - img [ref=e346]
+              - paragraph [ref=e349]: This feature requires the code execution tool to be enabled.
+            - generic [ref=e350]:
+              - img [ref=e353]
+              - paragraph [ref=e356]:
+                - text: This feature is
+                - strong [ref=e357]: not
+                - text: eligible for
+                - link "Zero Data Retention (ZDR)" [ref=e358] [cursor=pointer]:
+                  - /url: /docs/en/build-with-claude/api-and-data-retention
+                - text: . Data is retained according to the feature's standard retention policy.
+            - heading "Copy link to clipboard Model compatibility" [level=2] [ref=e359]:
+              - generic [ref=e360]:
+                - button "Copy link to clipboard" [ref=e362] [cursor=pointer]:
+                  - img [ref=e364]
+                - generic [ref=e366]: Model compatibility
+            - paragraph [ref=e367]:
+              - text: Programmatic tool calling requires
+              - code [ref=e368]: code_execution_20260120
+              - text: ", which is supported on the following models:"
+            - table [ref=e370]:
+              - rowgroup [ref=e371]:
+                - row "Model" [ref=e372]:
+                  - columnheader "Model" [ref=e373]
+              - rowgroup [ref=e374]:
+                - row "Claude Opus 4.8 ( claude-opus-4-8 )" [ref=e375]:
+                  - cell "Claude Opus 4.8 ( claude-opus-4-8 )" [ref=e376]:
+                    - text: Claude Opus 4.8 (
+                    - generic [ref=e377] [cursor=pointer]: claude-opus-4-8
+                    - text: )
+                - row "Claude Opus 4.7 ( claude-opus-4-7 )" [ref=e378]:
+                  - cell "Claude Opus 4.7 ( claude-opus-4-7 )" [ref=e379]:
+                    - text: Claude Opus 4.7 (
+                    - generic [ref=e380] [cursor=pointer]: claude-opus-4-7
+                    - text: )
+                - row "Claude Opus 4.6 ( claude-opus-4-6 )" [ref=e381]:
+                  - cell "Claude Opus 4.6 ( claude-opus-4-6 )" [ref=e382]:
+                    - text: Claude Opus 4.6 (
+                    - generic [ref=e383] [cursor=pointer]: claude-opus-4-6
+                    - text: )
+                - row "Claude Sonnet 4.6 ( claude-sonnet-4-6 )" [ref=e384]:
+                  - cell "Claude Sonnet 4.6 ( claude-sonnet-4-6 )" [ref=e385]:
+                    - text: Claude Sonnet 4.6 (
+                    - generic [ref=e386] [cursor=pointer]: claude-sonnet-4-6
+                    - text: )
+                - row "Claude Opus 4.5 ( claude-opus-4-5-20251101 )" [ref=e387]:
+                  - cell "Claude Opus 4.5 ( claude-opus-4-5-20251101 )" [ref=e388]:
+                    - text: Claude Opus 4.5 (
+                    - generic [ref=e389] [cursor=pointer]: claude-opus-4-5-20251101
+                    - text: )
+                - row "Claude Sonnet 4.5 ( claude-sonnet-4-5-20250929 )" [ref=e390]:
+                  - cell "Claude Sonnet 4.5 ( claude-sonnet-4-5-20250929 )" [ref=e391]:
+                    - text: Claude Sonnet 4.5 (
+                    - generic [ref=e392] [cursor=pointer]: claude-sonnet-4-5-20250929
+                    - text: )
+            - paragraph [ref=e393]:
+              - text: For the full code execution tool version matrix, see the
+              - link "code execution tool model compatibility table" [ref=e394] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility
+              - text: . Programmatic tool calling is available on the Claude API,
+              - link "Claude Platform on AWS" [ref=e395] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-platform-on-aws
+              - text: ", and"
+              - link "Microsoft Foundry" [ref=e396] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-microsoft-foundry
+              - text: . It is not currently available on Amazon Bedrock or Vertex AI.
+            - heading "Copy link to clipboard Quick start" [level=2] [ref=e397]:
+              - generic [ref=e398]:
+                - button "Copy link to clipboard" [ref=e400] [cursor=pointer]:
+                  - img [ref=e402]
+                - generic [ref=e404]: Quick start
+            - paragraph [ref=e405]: "Here's an example where Claude programmatically queries a database multiple times and aggregates results:"
+            - generic [ref=e406]:
+              - generic [ref=e407]:
+                - generic [ref=e408]:
+                  - button "cURL" [ref=e409] [cursor=pointer]
+                  - button "CLI" [ref=e410] [cursor=pointer]
+                  - button "Python" [ref=e411] [cursor=pointer]
+                  - button "TypeScript" [ref=e412] [cursor=pointer]
+                  - button "C#" [ref=e413] [cursor=pointer]
+                  - button "Go" [ref=e414] [cursor=pointer]
+                  - button "Java" [ref=e415] [cursor=pointer]
+                  - button "PHP" [ref=e416] [cursor=pointer]
+                  - button "Ruby" [ref=e417] [cursor=pointer]
+                - button "Copy code" [ref=e419] [cursor=pointer]:
+                  - generic [ref=e422]: 
+              - code [ref=e426]:
+                - generic [ref=e427]: client = anthropic.Anthropic()
+                - generic [ref=e428]: response = client.messages.create(
+                - generic [ref=e429]: model="claude-opus-4-8",
+                - generic [ref=e430]: max_tokens=4096,
+                - generic [ref=e431]: messages=[
+                - generic [ref=e432]: "{"
+                - generic [ref=e433]: "\"role\": \"user\","
+                - generic [ref=e434]: "\"content\": \"Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue\","
+                - generic [ref=e435]: "}"
+                - generic [ref=e436]: "],"
+                - generic [ref=e437]: tools=[
+                - generic [ref=e438]: "{\"type\": \"code_execution_20260120\", \"name\": \"code_execution\"},"
+                - generic [ref=e439]: "{"
+                - generic [ref=e440]: "\"name\": \"query_database\","
+                - generic [ref=e441]: "\"description\": \"Execute a SQL query against the sales database. Returns a list of rows as JSON objects.\","
+                - generic [ref=e442]: "\"input_schema\": {"
+                - generic [ref=e443]: "\"type\": \"object\","
+                - generic [ref=e444]: "\"properties\": {"
+                - generic [ref=e445]: "\"sql\": {\"type\": \"string\", \"description\": \"SQL query to execute\"}"
+                - generic [ref=e446]: "},"
+                - generic [ref=e447]: "\"required\": [\"sql\"],"
+                - generic [ref=e448]: "},"
+                - generic [ref=e449]: "\"allowed_callers\": [\"code_execution_20260120\"],"
+                - generic [ref=e450]: "},"
+                - generic [ref=e451]: "],"
+                - generic [ref=e452]: )
+                - generic [ref=e453]: print(response)
+            - heading "Copy link to clipboard How programmatic tool calling works" [level=2] [ref=e454]:
+              - generic [ref=e455]:
+                - button "Copy link to clipboard" [ref=e457] [cursor=pointer]:
+                  - img [ref=e459]
+                - generic [ref=e461]: How programmatic tool calling works
+            - paragraph [ref=e462]: "When you configure a tool to be callable from code execution and Claude decides to use that tool:"
+            - list [ref=e463]:
+              - listitem [ref=e464]: Claude writes Python code that invokes the tool as a function, potentially including multiple tool calls and pre/post-processing logic
+              - listitem [ref=e465]: Claude runs this code in a sandboxed container through code execution
+              - listitem [ref=e466]:
+                - text: When a tool function is called, code execution pauses and the API returns a
+                - code [ref=e467]: tool_use
+                - text: block
+              - listitem [ref=e468]: You provide the tool result, and code execution continues (intermediate results are not loaded into Claude's context window)
+              - listitem [ref=e469]: Once all code execution completes, Claude receives the final output and continues working on the task
+            - paragraph [ref=e470]: "This approach is particularly useful for:"
+            - list [ref=e471]:
+              - listitem [ref=e472]:
+                - text: •
+                - strong [ref=e473]: "Large data processing:"
+                - text: Filter or aggregate tool results before they reach Claude's context
+              - listitem [ref=e474]:
+                - text: •
+                - strong [ref=e475]: "Multi-step workflows:"
+                - text: Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
+              - listitem [ref=e476]:
+                - text: •
+                - strong [ref=e477]: "Conditional logic:"
+                - text: Make decisions based on intermediate tool results
+            - generic [ref=e478]:
+              - img [ref=e481]
+              - generic [ref=e483]:
+                - paragraph [ref=e484]:
+                  - text: Custom tools are converted to async Python functions to support parallel tool calling. When Claude writes code that calls your tools, it uses
+                  - code [ref=e485]: await
+                  - text: (for example,
+                  - code [ref=e486]: result = await query_database("<sql>")
+                  - text: ) and automatically includes the appropriate async wrapper function.
+                - paragraph [ref=e487]: The async wrapper is omitted from code examples in this documentation for clarity.
+            - heading "Copy link to clipboard Core concepts" [level=2] [ref=e488]:
+              - generic [ref=e489]:
+                - button "Copy link to clipboard" [ref=e491] [cursor=pointer]:
+                  - img [ref=e493]
+                - generic [ref=e495]: Core concepts
+            - heading "Copy link to clipboard The allowed_callers field" [level=3] [ref=e496]:
+              - generic [ref=e497]:
+                - button "Copy link to clipboard" [ref=e499] [cursor=pointer]:
+                  - img [ref=e501]
+                - generic [ref=e503]:
+                  - text: The
+                  - code [ref=e504]: allowed_callers
+                  - text: field
+            - paragraph [ref=e505]:
+              - text: The
+              - code [ref=e506]: allowed_callers
+              - text: "field specifies which contexts can invoke a tool:"
+            - generic [ref=e507]:
+              - code [ref=e511]:
+                - generic [ref=e512]: "{"
+                - generic [ref=e513]: "\"name\": \"query_database\","
+                - generic [ref=e514]: "\"description\": \"Execute a SQL query against the database\","
+                - generic [ref=e515]: "\"input_schema\": {"
+                - generic [ref=e516]: // ...
+                - generic [ref=e517]: "},"
+                - generic [ref=e518]: "\"allowed_callers\": [\"code_execution_20260120\"]"
+                - generic [ref=e519]: "}"
+              - button "Copy code" [ref=e521] [cursor=pointer]:
+                - generic [ref=e524]: 
+            - paragraph [ref=e525]:
+              - strong [ref=e526]: "Possible values:"
+            - list [ref=e527]:
+              - listitem [ref=e528]:
+                - text: •
+                - code [ref=e529]: "[\"direct\"]"
+                - text: "- Claude is guided to call this tool directly (default if omitted)"
+              - listitem [ref=e530]:
+                - text: •
+                - code [ref=e531]: "[\"code_execution_20260120\"]"
+                - text: "- Claude is guided to call this tool only from within code execution"
+              - listitem [ref=e532]:
+                - text: •
+                - code [ref=e533]: "[\"direct\", \"code_execution_20260120\"]"
+                - text: "- Claude may call this tool directly or from within code execution"
+            - generic [ref=e534]:
+              - img [ref=e537]
+              - paragraph [ref=e540]:
+                - text: Choose either
+                - code [ref=e541]: "[\"direct\"]"
+                - text: or
+                - code [ref=e542]: "[\"code_execution_20260120\"]"
+                - text: for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
+            - generic [ref=e543]:
+              - img [ref=e546]
+              - paragraph [ref=e549]:
+                - code [ref=e550]: allowed_callers
+                - text: controls how the tool is presented to Claude and is validated against
+                - code [ref=e551]: tool_choice
+                - text: ", but it is not a hard API-level block on direct invocation. Claude is strongly guided to respect it, but your client should still be prepared to handle a direct"
+                - code [ref=e552]: tool_use
+                - text: for any tool it defines. Do not rely on
+                - code [ref=e553]: allowed_callers
+                - text: as a security boundary.
+            - heading "Copy link to clipboard The caller field in responses" [level=3] [ref=e554]:
+              - generic [ref=e555]:
+                - button "Copy link to clipboard" [ref=e557] [cursor=pointer]:
+                  - img [ref=e559]
+                - generic [ref=e561]:
+                  - text: The
+                  - code [ref=e562]: caller
+                  - text: field in responses
+            - paragraph [ref=e563]:
+              - text: Every tool use block includes a
+              - code [ref=e564]: caller
+              - text: "field indicating how it was invoked:"
+            - paragraph [ref=e565]:
+              - strong [ref=e566]: "Direct invocation (traditional tool use):"
+            - generic [ref=e567]:
+              - code [ref=e571]:
+                - generic [ref=e572]: "{"
+                - generic [ref=e573]: "\"type\": \"tool_use\","
+                - generic [ref=e574]: "\"id\": \"toolu_abc123\","
+                - generic [ref=e575]: "\"name\": \"query_database\","
+                - generic [ref=e576]: "\"input\": { \"sql\": \"<sql>\" },"
+                - generic [ref=e577]: "\"caller\": { \"type\": \"direct\" }"
+                - generic [ref=e578]: "}"
+              - button "Copy code" [ref=e580] [cursor=pointer]:
+                - generic [ref=e583]: 
+            - paragraph [ref=e584]:
+              - strong [ref=e585]: "Programmatic invocation:"
+            - generic [ref=e586]:
+              - code [ref=e590]:
+                - generic [ref=e591]: "{"
+                - generic [ref=e592]: "\"type\": \"tool_use\","
+                - generic [ref=e593]: "\"id\": \"toolu_xyz789\","
+                - generic [ref=e594]: "\"name\": \"query_database\","
+                - generic [ref=e595]: "\"input\": { \"sql\": \"<sql>\" },"
+                - generic [ref=e596]: "\"caller\": {"
+                - generic [ref=e597]: "\"type\": \"code_execution_20260120\","
+                - generic [ref=e598]: "\"tool_id\": \"srvtoolu_abc123\""
+                - generic [ref=e599]: "}"
+                - generic [ref=e600]: "}"
+              - button "Copy code" [ref=e602] [cursor=pointer]:
+                - generic [ref=e605]: 
+            - paragraph [ref=e606]:
+              - text: The
+              - code [ref=e607]: tool_id
+              - text: references the code execution tool that made the programmatic call.
+            - heading "Copy link to clipboard Container lifecycle" [level=3] [ref=e608]:
+              - generic [ref=e609]:
+                - button "Copy link to clipboard" [ref=e611] [cursor=pointer]:
+                  - img [ref=e613]
+                - generic [ref=e615]: Container lifecycle
+            - paragraph [ref=e616]: "Programmatic tool calling uses the same containers as code execution:"
+            - list [ref=e617]:
+              - listitem [ref=e618]:
+                - text: •
+                - strong [ref=e619]: "Container creation:"
+                - text: A new container is created for each request unless you reuse an existing one
+              - listitem [ref=e620]:
+                - text: •
+                - strong [ref=e621]: "Expiration:"
+                - text: Containers have a 30-day maximum lifetime and are cleaned up after 4.5 minutes of idle time
+              - listitem [ref=e622]:
+                - text: •
+                - strong [ref=e623]: "Container ID:"
+                - text: Returned in responses in the
+                - code [ref=e624]: container
+                - text: field
+              - listitem [ref=e625]:
+                - text: •
+                - strong [ref=e626]: "Reuse:"
+                - text: Pass the container ID to maintain state across requests
+            - generic [ref=e627]:
+              - img [ref=e630]
+              - paragraph [ref=e633]:
+                - text: When a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the
+                - code [ref=e634]: expires_at
+                - text: field. If the container expires, Claude may treat the tool call as timed out and retry it.
+            - heading "Copy link to clipboard Example workflow" [level=2] [ref=e635]:
+              - generic [ref=e636]:
+                - button "Copy link to clipboard" [ref=e638] [cursor=pointer]:
+                  - img [ref=e640]
+                - generic [ref=e642]: Example workflow
+            - paragraph [ref=e643]: "Here's how a complete programmatic tool calling flow works:"
+            - 'heading "Copy link to clipboard Step 1: Initial request" [level=3] [ref=e644]':
+              - generic [ref=e645]:
+                - button "Copy link to clipboard" [ref=e647] [cursor=pointer]:
+                  - img [ref=e649]
+                - generic [ref=e651]: "Step 1: Initial request"
+            - paragraph [ref=e652]:
+              - text: Send a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the
+              - code [ref=e653]: allowed_callers
+              - text: field to your tool definition.
+            - generic [ref=e654]:
+              - img [ref=e657]
+              - paragraph [ref=e660]: Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
+            - paragraph [ref=e661]:
+              - text: The request shape is identical to the
+              - link "Quick start" [ref=e662] [cursor=pointer]:
+                - /url: "#quick-start"
+              - text: "example: include"
+              - code [ref=e663]: code_execution
+              - text: in your tools list, add
+              - code [ref=e664]: "allowed_callers: [\"code_execution_20260120\"]"
+              - text: to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message
+              - code [ref=e665]: "\"Query customer purchase history from the last quarter and identify our top 5 customers by revenue\""
+              - text: .
+            - 'heading "Copy link to clipboard Step 2: API response with tool call" [level=3] [ref=e666]':
+              - generic [ref=e667]:
+                - button "Copy link to clipboard" [ref=e669] [cursor=pointer]:
+                  - img [ref=e671]
+                - generic [ref=e673]: "Step 2: API response with tool call"
+            - paragraph [ref=e674]: "Claude writes code that calls your tool. The API pauses and returns:"
+            - generic [ref=e675]:
+              - generic [ref=e676]:
+                - generic [ref=e677]: Output
+                - button "Copy code" [ref=e679] [cursor=pointer]:
+                  - generic [ref=e682]: 
+              - code [ref=e686]:
+                - generic [ref=e687]: "{"
+                - generic [ref=e688]: "\"role\": \"assistant\","
+                - generic [ref=e689]: "\"content\": ["
+                - generic [ref=e690]: "{"
+                - generic [ref=e691]: "\"type\": \"text\","
+                - generic [ref=e692]: "\"text\": \"I'll query the purchase history and analyze the results.\""
+                - generic [ref=e693]: "},"
+                - generic [ref=e694]: "{"
+                - generic [ref=e695]: "\"type\": \"server_tool_use\","
+                - generic [ref=e696]: "\"id\": \"srvtoolu_abc123\","
+                - generic [ref=e697]: "\"name\": \"code_execution\","
+                - generic [ref=e698]: "\"input\": {"
+                - generic [ref=e699]: "\"code\": \"results = await query_database('<sql>')\\ntop_customers = sorted(results, key=lambda x: x['revenue'], reverse=True)[:5]\\nprint(f'Top 5 customers: {top_customers}')\""
+                - generic [ref=e700]: "}"
+                - generic [ref=e701]: "},"
+                - generic [ref=e702]: "{"
+                - generic [ref=e703]: "\"type\": \"tool_use\","
+                - generic [ref=e704]: "\"id\": \"toolu_def456\","
+                - generic [ref=e705]: "\"name\": \"query_database\","
+                - generic [ref=e706]: "\"input\": { \"sql\": \"<sql>\" },"
+                - generic [ref=e707]: "\"caller\": {"
+                - generic [ref=e708]: "\"type\": \"code_execution_20260120\","
+                - generic [ref=e709]: "\"tool_id\": \"srvtoolu_abc123\""
+                - generic [ref=e710]: "}"
+                - generic [ref=e711]: "}"
+                - generic [ref=e712]: "],"
+                - generic [ref=e713]: "\"container\": {"
+                - generic [ref=e714]: "\"id\": \"container_xyz789\","
+                - generic [ref=e715]: "\"expires_at\": \"2026-01-20T14:30:00Z\""
+                - generic [ref=e716]: "},"
+                - generic [ref=e717]: "\"stop_reason\": \"tool_use\""
+                - generic [ref=e718]: "}"
+            - 'heading "Copy link to clipboard Step 3: Provide tool result" [level=3] [ref=e719]':
+              - generic [ref=e720]:
+                - button "Copy link to clipboard" [ref=e722] [cursor=pointer]:
+                  - img [ref=e724]
+                - generic [ref=e726]: "Step 3: Provide tool result"
+            - paragraph [ref=e727]: "Include the full conversation history plus your tool result:"
+            - generic [ref=e728]:
+              - generic [ref=e729]:
+                - generic [ref=e730]:
+                  - button "CLI" [ref=e731] [cursor=pointer]
+                  - button "Python" [ref=e732] [cursor=pointer]
+                  - button "TypeScript" [ref=e733] [cursor=pointer]
+                  - button "C#" [ref=e734] [cursor=pointer]
+                  - button "Go" [ref=e735] [cursor=pointer]
+                  - button "Java" [ref=e736] [cursor=pointer]
+                  - button "PHP" [ref=e737] [cursor=pointer]
+                  - button "Ruby" [ref=e738] [cursor=pointer]
+                - button "Copy code" [ref=e740] [cursor=pointer]:
+                  - generic [ref=e743]: 
+              - code [ref=e747]:
+                - generic [ref=e748]: response = client.messages.create(
+                - generic [ref=e749]: model="claude-opus-4-8",
+                - generic [ref=e750]: max_tokens=4096,
+                - generic [ref=e751]: "container=\"container_xyz789\", # Reuse the container"
+                - generic [ref=e752]: messages=[
+                - generic [ref=e753]: "{"
+                - generic [ref=e754]: "\"role\": \"user\","
+                - generic [ref=e755]: "\"content\": \"Query customer purchase history from the last quarter and identify our top 5 customers by revenue\","
+                - generic [ref=e756]: "},"
+                - generic [ref=e757]: "{"
+                - generic [ref=e758]: "\"role\": \"assistant\","
+                - generic [ref=e759]: "\"content\": ["
+                - generic [ref=e760]: "{"
+                - generic [ref=e761]: "\"type\": \"text\","
+                - generic [ref=e762]: "\"text\": \"I'll query the purchase history and analyze the results.\","
+                - generic [ref=e763]: "},"
+                - generic [ref=e764]: "{"
+                - generic [ref=e765]: "\"type\": \"server_tool_use\","
+                - generic [ref=e766]: "\"id\": \"srvtoolu_abc123\","
+                - generic [ref=e767]: "\"name\": \"code_execution\","
+                - generic [ref=e768]: "\"input\": {\"code\": \"...\"},"
+                - generic [ref=e769]: "},"
+                - generic [ref=e770]: "{"
+                - generic [ref=e771]: "\"type\": \"tool_use\","
+                - generic [ref=e772]: "\"id\": \"toolu_def456\","
+                - generic [ref=e773]: "\"name\": \"query_database\","
+                - generic [ref=e774]: "\"input\": {\"sql\": \"<sql>\"},"
+                - generic [ref=e775]: "\"caller\": {"
+                - generic [ref=e776]: "\"type\": \"code_execution_20260120\","
+                - generic [ref=e777]: "\"tool_id\": \"srvtoolu_abc123\","
+                - generic [ref=e778]: "},"
+                - generic [ref=e779]: "},"
+                - generic [ref=e780]: "],"
+                - generic [ref=e781]: "},"
+                - generic [ref=e782]: "{"
+                - generic [ref=e783]: "\"role\": \"user\","
+                - generic [ref=e784]: "\"content\": ["
+                - generic [ref=e785]: "{"
+                - generic [ref=e786]: "\"type\": \"tool_result\","
+                - generic [ref=e787]: "\"tool_use_id\": \"toolu_def456\","
+                - generic [ref=e788]: "\"content\": '[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]',"
+                - generic [ref=e789]: "}"
+                - generic [ref=e790]: "],"
+                - generic [ref=e791]: "},"
+                - generic [ref=e792]: "],"
+                - generic [ref=e793]: tools=[...],
+                - generic [ref=e794]: )
+                - generic [ref=e795]: print(response)
+            - 'heading "Copy link to clipboard Step 4: Next tool call or completion" [level=3] [ref=e796]':
+              - generic [ref=e797]:
+                - button "Copy link to clipboard" [ref=e799] [cursor=pointer]:
+                  - img [ref=e801]
+                - generic [ref=e803]: "Step 4: Next tool call or completion"
+            - paragraph [ref=e804]: The code execution continues and processes the results. If additional tool calls are needed, repeat Step 3 until all tool calls are satisfied.
+            - 'heading "Copy link to clipboard Step 5: Final response" [level=3] [ref=e805]':
+              - generic [ref=e806]:
+                - button "Copy link to clipboard" [ref=e808] [cursor=pointer]:
+                  - img [ref=e810]
+                - generic [ref=e812]: "Step 5: Final response"
+            - paragraph [ref=e813]: "Once the code execution completes, Claude provides the final response:"
+            - generic [ref=e814]:
+              - generic [ref=e815]:
+                - generic [ref=e816]: Output
+                - button "Copy code" [ref=e818] [cursor=pointer]:
+                  - generic [ref=e821]: 
+              - code [ref=e825]:
+                - generic [ref=e826]: "{"
+                - generic [ref=e827]: "\"content\": ["
+                - generic [ref=e828]: "{"
+                - generic [ref=e829]: "\"type\": \"code_execution_tool_result\","
+                - generic [ref=e830]: "\"tool_use_id\": \"srvtoolu_abc123\","
+                - generic [ref=e831]: "\"content\": {"
+                - generic [ref=e832]: "\"type\": \"code_execution_result\","
+                - generic [ref=e833]: "\"stdout\": \"Top 5 customers: [{'customer_id': 'C1', 'revenue': 45000}, {'customer_id': 'C2', 'revenue': 38000}, {'customer_id': 'C5', 'revenue': 32000}, {'customer_id': 'C8', 'revenue': 28500}, {'customer_id': 'C3', 'revenue': 24000}]\","
+                - generic [ref=e834]: "\"stderr\": \"\","
+                - generic [ref=e835]: "\"return_code\": 0,"
+                - generic [ref=e836]: "\"content\": []"
+                - generic [ref=e837]: "}"
+                - generic [ref=e838]: "},"
+                - generic [ref=e839]: "{"
+                - generic [ref=e840]: "\"type\": \"text\","
+                - generic [ref=e841]: "\"text\": \"I've analyzed the purchase history from last quarter. Your top 5 customers generated $167,500 in total revenue, with Customer C1 leading at $45,000.\""
+                - generic [ref=e842]: "}"
+                - generic [ref=e843]: "],"
+                - generic [ref=e844]: "\"stop_reason\": \"end_turn\""
+                - generic [ref=e845]: "}"
+            - heading "Copy link to clipboard Advanced patterns" [level=2] [ref=e846]:
+              - generic [ref=e847]:
+                - button "Copy link to clipboard" [ref=e849] [cursor=pointer]:
+                  - img [ref=e851]
+                - generic [ref=e853]: Advanced patterns
+            - heading "Copy link to clipboard Batch processing with loops" [level=3] [ref=e854]:
+              - generic [ref=e855]:
+                - button "Copy link to clipboard" [ref=e857] [cursor=pointer]:
+                  - img [ref=e859]
+                - generic [ref=e861]: Batch processing with loops
+            - paragraph [ref=e862]: "Claude can write code that processes multiple items efficiently:"
+            - generic [ref=e863]:
+              - code [ref=e867]:
+                - generic [ref=e868]: "async def _claude_code():"
+                - generic [ref=e869]: regions = ["West", "East", "Central", "North", "South"]
+                - generic [ref=e870]: "results = {}"
+                - generic [ref=e871]: "for region in regions:"
+                - generic [ref=e872]: "data = await query_database(f\"<sql for {region}>\")"
+                - generic [ref=e873]: results[region] = sum(row["revenue"] for row in data)
+                - generic [ref=e874]: "# Process results programmatically"
+                - generic [ref=e875]: "top_region = max(results.items(), key=lambda x: x[1])"
+                - generic [ref=e876]: "print(f\"Top region: {top_region[0]} with ${top_region[1]:,} in revenue\")"
+              - button "Copy code" [ref=e878] [cursor=pointer]:
+                - generic [ref=e881]: 
+            - paragraph [ref=e882]: "This pattern:"
+            - list [ref=e883]:
+              - listitem [ref=e884]: • Reduces model round-trips from N (one per region) to 1
+              - listitem [ref=e885]: • Processes large result sets programmatically before returning to Claude
+              - listitem [ref=e886]: • Saves tokens by only returning aggregated conclusions instead of raw data
+            - heading "Copy link to clipboard Early termination" [level=3] [ref=e887]:
+              - generic [ref=e888]:
+                - button "Copy link to clipboard" [ref=e890] [cursor=pointer]:
+                  - img [ref=e892]
+                - generic [ref=e894]: Early termination
+            - paragraph [ref=e895]: "Claude can stop processing as soon as success criteria are met:"
+            - generic [ref=e896]:
+              - code [ref=e900]:
+                - generic [ref=e901]: "async def _claude_code():"
+                - generic [ref=e902]: endpoints = ["us-east", "eu-west", "apac"]
+                - generic [ref=e903]: "for endpoint in endpoints:"
+                - generic [ref=e904]: status = await check_health(endpoint)
+                - generic [ref=e905]: "if status == \"healthy\":"
+                - generic [ref=e906]: "print(f\"Found healthy endpoint: {endpoint}\")"
+                - generic [ref=e907]: "break # Stop early, don't check remaining"
+              - button "Copy code" [ref=e909] [cursor=pointer]:
+                - generic [ref=e912]: 
+            - heading "Copy link to clipboard Conditional tool selection" [level=3] [ref=e913]:
+              - generic [ref=e914]:
+                - button "Copy link to clipboard" [ref=e916] [cursor=pointer]:
+                  - img [ref=e918]
+                - generic [ref=e920]: Conditional tool selection
+            - generic [ref=e921]:
+              - code [ref=e925]:
+                - generic [ref=e926]: "async def _claude_code():"
+                - generic [ref=e927]: file_info = await get_file_info(path)
+                - generic [ref=e928]: "if file_info[\"size\"] < 10000:"
+                - generic [ref=e929]: content = await read_full_file(path)
+                - generic [ref=e930]: "else:"
+                - generic [ref=e931]: content = await read_file_summary(path)
+                - generic [ref=e932]: print(content)
+              - button "Copy code" [ref=e934] [cursor=pointer]:
+                - generic [ref=e937]: 
+            - heading "Copy link to clipboard Data filtering" [level=3] [ref=e938]:
+              - generic [ref=e939]:
+                - button "Copy link to clipboard" [ref=e941] [cursor=pointer]:
+                  - img [ref=e943]
+                - generic [ref=e945]: Data filtering
+            - generic [ref=e946]:
+              - code [ref=e950]:
+                - generic [ref=e951]: "async def _claude_code():"
+                - generic [ref=e952]: logs = await fetch_logs(server_id)
+                - generic [ref=e953]: errors = [log for log in logs if "ERROR" in log]
+                - generic [ref=e954]: "print(f\"Found {len(errors)} errors\")"
+                - generic [ref=e955]: "for error in errors[-10:]: # Only return last 10 errors"
+                - generic [ref=e956]: print(error)
+              - button "Copy code" [ref=e958] [cursor=pointer]:
+                - generic [ref=e961]: 
+            - heading "Copy link to clipboard Response format" [level=2] [ref=e962]:
+              - generic [ref=e963]:
+                - button "Copy link to clipboard" [ref=e965] [cursor=pointer]:
+                  - img [ref=e967]
+                - generic [ref=e969]: Response format
+            - heading "Copy link to clipboard Programmatic tool call" [level=3] [ref=e970]:
+              - generic [ref=e971]:
+                - button "Copy link to clipboard" [ref=e973] [cursor=pointer]:
+                  - img [ref=e975]
+                - generic [ref=e977]: Programmatic tool call
+            - paragraph [ref=e978]: "When code execution calls a tool:"
+            - generic [ref=e979]:
+              - code [ref=e983]:
+                - generic [ref=e984]: "{"
+                - generic [ref=e985]: "\"type\": \"tool_use\","
+                - generic [ref=e986]: "\"id\": \"toolu_abc123\","
+                - generic [ref=e987]: "\"name\": \"query_database\","
+                - generic [ref=e988]: "\"input\": { \"sql\": \"<sql>\" },"
+                - generic [ref=e989]: "\"caller\": {"
+                - generic [ref=e990]: "\"type\": \"code_execution_20260120\","
+                - generic [ref=e991]: "\"tool_id\": \"srvtoolu_xyz789\""
+                - generic [ref=e992]: "}"
+                - generic [ref=e993]: "}"
+              - button "Copy code" [ref=e995] [cursor=pointer]:
+                - generic [ref=e998]: 
+            - heading "Copy link to clipboard Tool result handling" [level=3] [ref=e999]:
+              - generic [ref=e1000]:
+                - button "Copy link to clipboard" [ref=e1002] [cursor=pointer]:
+                  - img [ref=e1004]
+                - generic [ref=e1006]: Tool result handling
+            - paragraph [ref=e1007]: "Your tool result is passed back to the running code:"
+            - generic [ref=e1008]:
+              - code [ref=e1012]:
+                - generic [ref=e1013]: "{"
+                - generic [ref=e1014]: "\"role\": \"user\","
+                - generic [ref=e1015]: "\"content\": ["
+                - generic [ref=e1016]: "{"
+                - generic [ref=e1017]: "\"type\": \"tool_result\","
+                - generic [ref=e1018]: "\"tool_use_id\": \"toolu_abc123\","
+                - generic [ref=e1019]: "\"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000, \\\"orders\\\": 23}, {\\\"customer_id\\\": \\\"C2\\\", \\\"revenue\\\": 38000, \\\"orders\\\": 18}, ...]\""
+                - generic [ref=e1020]: "}"
+                - generic [ref=e1021]: "]"
+                - generic [ref=e1022]: "}"
+              - button "Copy code" [ref=e1024] [cursor=pointer]:
+                - generic [ref=e1027]: 
+            - heading "Copy link to clipboard Code execution completion" [level=3] [ref=e1028]:
+              - generic [ref=e1029]:
+                - button "Copy link to clipboard" [ref=e1031] [cursor=pointer]:
+                  - img [ref=e1033]
+                - generic [ref=e1035]: Code execution completion
+            - paragraph [ref=e1036]: "When all tool calls are satisfied and code completes:"
+            - generic [ref=e1037]:
+              - code [ref=e1041]:
+                - generic [ref=e1042]: "{"
+                - generic [ref=e1043]: "\"type\": \"code_execution_tool_result\","
+                - generic [ref=e1044]: "\"tool_use_id\": \"srvtoolu_xyz789\","
+                - generic [ref=e1045]: "\"content\": {"
+                - generic [ref=e1046]: "\"type\": \"code_execution_result\","
+                - generic [ref=e1047]: "\"stdout\": \"Analysis complete. Top 5 customers identified from 847 total records.\","
+                - generic [ref=e1048]: "\"stderr\": \"\","
+                - generic [ref=e1049]: "\"return_code\": 0,"
+                - generic [ref=e1050]: "\"content\": []"
+                - generic [ref=e1051]: "}"
+                - generic [ref=e1052]: "}"
+              - button "Copy code" [ref=e1054] [cursor=pointer]:
+                - generic [ref=e1057]: 
+            - heading "Copy link to clipboard Error handling" [level=2] [ref=e1058]:
+              - generic [ref=e1059]:
+                - button "Copy link to clipboard" [ref=e1061] [cursor=pointer]:
+                  - img [ref=e1063]
+                - generic [ref=e1065]: Error handling
+            - heading "Copy link to clipboard Common errors" [level=3] [ref=e1066]:
+              - generic [ref=e1067]:
+                - button "Copy link to clipboard" [ref=e1069] [cursor=pointer]:
+                  - img [ref=e1071]
+                - generic [ref=e1073]: Common errors
+            - table [ref=e1075]:
+              - rowgroup [ref=e1076]:
+                - row "Error Description Solution" [ref=e1077]:
+                  - columnheader "Error" [ref=e1078]
+                  - columnheader "Description" [ref=e1079]
+                  - columnheader "Solution" [ref=e1080]
+              - rowgroup [ref=e1081]:
+                - row "invalid_tool_input Tool input doesn't match schema Validate your tool's input_schema" [ref=e1082]:
+                  - cell "invalid_tool_input" [ref=e1083]:
+                    - code [ref=e1084]: invalid_tool_input
+                  - cell "Tool input doesn't match schema" [ref=e1085]
+                  - cell "Validate your tool's input_schema" [ref=e1086]
+                - row "invalid_request_error (on tool_choice) tool_choice names a tool whose allowed_callers does not include \"direct\" Either add \"direct\" to that tool's allowed_callers, or remove the tool from tool_choice and let Claude invoke it from code" [ref=e1087]:
+                  - cell "invalid_request_error (on tool_choice)" [ref=e1088]:
+                    - code [ref=e1089]: invalid_request_error
+                    - text: (on
+                    - code [ref=e1090]: tool_choice
+                    - text: )
+                  - cell "tool_choice names a tool whose allowed_callers does not include \"direct\"" [ref=e1091]:
+                    - code [ref=e1092]: tool_choice
+                    - text: names a tool whose
+                    - code [ref=e1093]: allowed_callers
+                    - text: does not include
+                    - code [ref=e1094]: "\"direct\""
+                  - cell "Either add \"direct\" to that tool's allowed_callers, or remove the tool from tool_choice and let Claude invoke it from code" [ref=e1095]:
+                    - text: Either add
+                    - code [ref=e1096]: "\"direct\""
+                    - text: to that tool's
+                    - code [ref=e1097]: allowed_callers
+                    - text: ", or remove the tool from"
+                    - code [ref=e1098]: tool_choice
+                    - text: and let Claude invoke it from code
+            - heading "Copy link to clipboard Container expiration during tool call" [level=3] [ref=e1099]:
+              - generic [ref=e1100]:
+                - button "Copy link to clipboard" [ref=e1102] [cursor=pointer]:
+                  - img [ref=e1104]
+                - generic [ref=e1106]: Container expiration during tool call
+            - paragraph [ref=e1107]:
+              - text: If your tool takes too long to respond, the code execution receives a
+              - code [ref=e1108]: TimeoutError
+              - text: ". Claude sees this in stderr and typically retries:"
+            - generic [ref=e1109]:
+              - code [ref=e1113]:
+                - generic [ref=e1114]: "{"
+                - generic [ref=e1115]: "\"type\": \"code_execution_tool_result\","
+                - generic [ref=e1116]: "\"tool_use_id\": \"srvtoolu_abc123\","
+                - generic [ref=e1117]: "\"content\": {"
+                - generic [ref=e1118]: "\"type\": \"code_execution_result\","
+                - generic [ref=e1119]: "\"stdout\": \"\","
+                - generic [ref=e1120]: "\"stderr\": \"TimeoutError: Calling tool ['query_database'] timed out.\","
+                - generic [ref=e1121]: "\"return_code\": 0,"
+                - generic [ref=e1122]: "\"content\": []"
+                - generic [ref=e1123]: "}"
+                - generic [ref=e1124]: "}"
+              - button "Copy code" [ref=e1126] [cursor=pointer]:
+                - generic [ref=e1129]: 
+            - paragraph [ref=e1130]: "To prevent timeouts:"
+            - list [ref=e1131]:
+              - listitem [ref=e1132]:
+                - text: • Monitor the
+                - code [ref=e1133]: expires_at
+                - text: field in responses
+              - listitem [ref=e1134]: • Implement timeouts for your tool execution
+              - listitem [ref=e1135]: • Consider breaking long operations into smaller chunks
+            - heading "Copy link to clipboard Tool execution errors" [level=3] [ref=e1136]:
+              - generic [ref=e1137]:
+                - button "Copy link to clipboard" [ref=e1139] [cursor=pointer]:
+                  - img [ref=e1141]
+                - generic [ref=e1143]: Tool execution errors
+            - paragraph [ref=e1144]: "If your tool returns an error:"
+            - generic [ref=e1145]:
+              - code [ref=e1149]:
+                - generic [ref=e1150]: "{"
+                - generic [ref=e1151]: "\"type\": \"tool_result\","
+                - generic [ref=e1152]: "\"tool_use_id\": \"toolu_abc123\","
+                - generic [ref=e1153]: "\"content\": \"Error: Query timeout - table lock exceeded 30 seconds\""
+                - generic [ref=e1154]: "}"
+              - button "Copy code" [ref=e1156] [cursor=pointer]:
+                - generic [ref=e1159]: 
+            - paragraph [ref=e1160]: Claude's code receives this error and can handle it appropriately.
+            - heading "Copy link to clipboard Constraints and limitations" [level=2] [ref=e1161]:
+              - generic [ref=e1162]:
+                - button "Copy link to clipboard" [ref=e1164] [cursor=pointer]:
+                  - img [ref=e1166]
+                - generic [ref=e1168]: Constraints and limitations
+            - heading "Copy link to clipboard Feature incompatibilities" [level=3] [ref=e1169]:
+              - generic [ref=e1170]:
+                - button "Copy link to clipboard" [ref=e1172] [cursor=pointer]:
+                  - img [ref=e1174]
+                - generic [ref=e1176]: Feature incompatibilities
+            - list [ref=e1177]:
+              - listitem [ref=e1178]:
+                - text: •
+                - strong [ref=e1179]: "Structured outputs:"
+                - text: Tools with
+                - code [ref=e1180]: "strict: true"
+                - text: are not supported with programmatic calling
+              - listitem [ref=e1181]:
+                - text: •
+                - strong [ref=e1182]: "Tool choice:"
+                - text: You cannot force programmatic calling of a specific tool through
+                - code [ref=e1183]: tool_choice
+              - listitem [ref=e1184]:
+                - text: •
+                - strong [ref=e1185]: "Parallel tool use:"
+                - code [ref=e1186]: "disable_parallel_tool_use: true"
+                - text: is not supported with programmatic calling
+            - heading "Copy link to clipboard Tool restrictions" [level=3] [ref=e1187]:
+              - generic [ref=e1188]:
+                - button "Copy link to clipboard" [ref=e1190] [cursor=pointer]:
+                  - img [ref=e1192]
+                - generic [ref=e1194]: Tool restrictions
+            - paragraph [ref=e1195]: "The following tools cannot be called programmatically:"
+            - list [ref=e1196]:
+              - listitem [ref=e1197]:
+                - text: • Tools provided by an
+                - link "MCP connector" [ref=e1198] [cursor=pointer]:
+                  - /url: /docs/en/agents-and-tools/mcp-connector
+            - heading "Copy link to clipboard Message formatting restrictions" [level=3] [ref=e1199]:
+              - generic [ref=e1200]:
+                - button "Copy link to clipboard" [ref=e1202] [cursor=pointer]:
+                  - img [ref=e1204]
+                - generic [ref=e1206]: Message formatting restrictions
+            - paragraph [ref=e1207]: "When responding to programmatic tool calls, there are strict formatting requirements:"
+            - paragraph [ref=e1208]:
+              - strong [ref=e1209]: "Tool result only responses:"
+              - text: If there are pending programmatic tool calls waiting for results, your response message must contain
+              - strong [ref=e1210]: only
+              - code [ref=e1211]: tool_result
+              - text: blocks. You cannot include any text content, even after the tool results.
+            - paragraph [ref=e1212]: "Invalid - Cannot include text when responding to programmatic tool calls:"
+            - generic [ref=e1213]:
+              - code [ref=e1217]:
+                - generic [ref=e1218]: "{"
+                - generic [ref=e1219]: "\"role\": \"user\","
+                - generic [ref=e1220]: "\"content\": ["
+                - generic [ref=e1221]: "{"
+                - generic [ref=e1222]: "\"type\": \"tool_result\","
+                - generic [ref=e1223]: "\"tool_use_id\": \"toolu_01\","
+                - generic [ref=e1224]: "\"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000}]\""
+                - generic [ref=e1225]: "},"
+                - generic [ref=e1226]: "{ \"type\": \"text\", \"text\": \"What should I do next?\" }"
+                - generic [ref=e1227]: "]"
+                - generic [ref=e1228]: "}"
+              - button "Copy code" [ref=e1230] [cursor=pointer]:
+                - generic [ref=e1233]: 
+            - paragraph [ref=e1234]: "Valid - Only tool results when responding to programmatic tool calls:"
+            - generic [ref=e1235]:
+              - code [ref=e1239]:
+                - generic [ref=e1240]: "{"
+                - generic [ref=e1241]: "\"role\": \"user\","
+                - generic [ref=e1242]: "\"content\": ["
+                - generic [ref=e1243]: "{"
+                - generic [ref=e1244]: "\"type\": \"tool_result\","
+                - generic [ref=e1245]: "\"tool_use_id\": \"toolu_01\","
+                - generic [ref=e1246]: "\"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000}]\""
+                - generic [ref=e1247]: "}"
+                - generic [ref=e1248]: "]"
+                - generic [ref=e1249]: "}"
+              - button "Copy code" [ref=e1251] [cursor=pointer]:
+                - generic [ref=e1254]: 
+            - paragraph [ref=e1255]: This restriction only applies when responding to programmatic (code execution) tool calls. For regular client-side tool calls, you can include text content after tool results.
+            - heading "Copy link to clipboard Rate limits" [level=3] [ref=e1256]:
+              - generic [ref=e1257]:
+                - button "Copy link to clipboard" [ref=e1259] [cursor=pointer]:
+                  - img [ref=e1261]
+                - generic [ref=e1263]: Rate limits
+            - paragraph [ref=e1264]: Programmatic tool calls are subject to the same rate limits as regular tool calls. Each tool call from code execution counts as a separate invocation.
+            - heading "Copy link to clipboard Validate tool results before use" [level=3] [ref=e1265]:
+              - generic [ref=e1266]:
+                - button "Copy link to clipboard" [ref=e1268] [cursor=pointer]:
+                  - img [ref=e1270]
+                - generic [ref=e1272]: Validate tool results before use
+            - paragraph [ref=e1273]: "When implementing user-defined tools that will be called programmatically:"
+            - list [ref=e1274]:
+              - listitem [ref=e1275]:
+                - text: •
+                - strong [ref=e1276]: "Tool results are returned as strings:"
+                - text: They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
+              - listitem [ref=e1277]:
+                - text: •
+                - strong [ref=e1278]: "Validate external tool results:"
+                - text: If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
+            - heading "Copy link to clipboard Token efficiency" [level=2] [ref=e1279]:
+              - generic [ref=e1280]:
+                - button "Copy link to clipboard" [ref=e1282] [cursor=pointer]:
+                  - img [ref=e1284]
+                - generic [ref=e1286]: Token efficiency
+            - paragraph [ref=e1287]: "Programmatic tool calling can significantly reduce token consumption:"
+            - list [ref=e1288]:
+              - listitem [ref=e1289]:
+                - text: •
+                - strong [ref=e1290]: Tool results from programmatic calls are not added to Claude's context
+                - text: "- only the final code output is"
+              - listitem [ref=e1291]:
+                - text: •
+                - strong [ref=e1292]: Intermediate processing happens in code
+                - text: "- filtering, aggregation, and other transformations don't consume model tokens"
+              - listitem [ref=e1293]:
+                - text: •
+                - strong [ref=e1294]: Multiple tool calls in one code execution
+                - text: "- reduces overhead compared to separate model turns"
+            - paragraph [ref=e1295]: For example, calling 10 tools directly uses ~10x the tokens of calling them programmatically and returning a summary.
+            - paragraph [ref=e1296]: "In Anthropic's internal evaluations on a production Claude model:"
+            - list [ref=e1297]:
+              - listitem [ref=e1298]: • On a 75-tool project-management agent benchmark, enabling programmatic tool calling reduced billed input tokens by roughly 38% with no change in task accuracy.
+              - listitem [ref=e1299]:
+                - text: • On
+                - link "τ²-bench" [ref=e1300] [cursor=pointer]:
+                  - /url: https://arxiv.org/abs/2506.07982
+                - text: (airline, retail, and telecom domains), where each turn makes one or two sequential tool calls, programmatic tool calling left scores unchanged and cost roughly 8% more. Sequential single-call workflows do not benefit.
+              - listitem [ref=e1301]:
+                - text: • Across production API traffic, requests whose
+                - code [ref=e1302]: tools
+                - text: array contains 10 to 49 tool definitions see typical token savings of 20% to 40% with programmatic tool calling enabled.
+            - paragraph [ref=e1303]:
+              - text: Actual savings vary with workload shape; see
+              - link "When to use programmatic calling" [ref=e1304] [cursor=pointer]:
+                - /url: "#when-to-use-programmatic-calling"
+              - text: .
+            - heading "Copy link to clipboard Usage and pricing" [level=2] [ref=e1305]:
+              - generic [ref=e1306]:
+                - button "Copy link to clipboard" [ref=e1308] [cursor=pointer]:
+                  - img [ref=e1310]
+                - generic [ref=e1312]: Usage and pricing
+            - paragraph [ref=e1313]:
+              - text: Programmatic tool calling uses the same pricing as code execution. See the
+              - link "code execution pricing" [ref=e1314] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing
+              - text: for details.
+            - generic [ref=e1315]:
+              - img [ref=e1318]
+              - paragraph [ref=e1321]: "Token counting for programmatic tool calls: Tool results from programmatic invocations do not count toward your input/output token usage. Only the final code execution result and Claude's response count."
+            - heading "Copy link to clipboard Best practices" [level=2] [ref=e1322]:
+              - generic [ref=e1323]:
+                - button "Copy link to clipboard" [ref=e1325] [cursor=pointer]:
+                  - img [ref=e1327]
+                - generic [ref=e1329]: Best practices
+            - heading "Copy link to clipboard Tool design" [level=3] [ref=e1330]:
+              - generic [ref=e1331]:
+                - button "Copy link to clipboard" [ref=e1333] [cursor=pointer]:
+                  - img [ref=e1335]
+                - generic [ref=e1337]: Tool design
+            - list [ref=e1338]:
+              - listitem [ref=e1339]:
+                - text: •
+                - strong [ref=e1340]: "Provide detailed output descriptions:"
+                - text: Because Claude deserializes tool results in code, clearly document the format (JSON structure and field types)
+              - listitem [ref=e1341]:
+                - text: •
+                - strong [ref=e1342]: "Return structured data:"
+                - text: JSON or other easily parseable formats work best for programmatic processing
+              - listitem [ref=e1343]:
+                - text: •
+                - strong [ref=e1344]: "Keep responses concise:"
+                - text: Return only necessary data to minimize processing overhead
+            - heading "Copy link to clipboard When to use programmatic calling" [level=3] [ref=e1345]:
+              - generic [ref=e1346]:
+                - button "Copy link to clipboard" [ref=e1348] [cursor=pointer]:
+                  - img [ref=e1350]
+                - generic [ref=e1352]: When to use programmatic calling
+            - paragraph [ref=e1353]: Programmatic tool calling trades a small fixed overhead (container startup, script generation) for large savings on tool-result tokens and model round-trips. Whether that trade pays off depends on workload shape.
+            - paragraph [ref=e1354]:
+              - strong [ref=e1355]: "Strong fit:"
+            - list [ref=e1356]:
+              - listitem [ref=e1357]: • Fan-out or parallel operations across many items (for example, checking 50 endpoints or looking up 20 records)
+              - listitem [ref=e1358]: • Large tool results that can be filtered, aggregated, or summarized before reaching Claude's context
+              - listitem [ref=e1359]: • Agentic search and retrieval, where iterative querying and result filtering dominate the workflow
+            - paragraph [ref=e1360]:
+              - strong [ref=e1361]: "Weak fit:"
+            - list [ref=e1362]:
+              - listitem [ref=e1363]: • Strictly sequential workflows where each call depends on Claude reasoning over the previous result, because the script cannot skip the model round-trip in that case
+              - listitem [ref=e1364]: • A small number of tool calls with small responses, especially on the first turn of a conversation, where container and script overhead can exceed the savings
+              - listitem [ref=e1365]: • Tools that require immediate user feedback between calls
+            - paragraph [ref=e1366]:
+              - text: If you are unsure, measure billed input tokens with and without
+              - code [ref=e1367]: allowed_callers
+              - text: on a representative sample of your traffic before enabling it broadly.
+            - heading "Copy link to clipboard Performance optimization" [level=3] [ref=e1368]:
+              - generic [ref=e1369]:
+                - button "Copy link to clipboard" [ref=e1371] [cursor=pointer]:
+                  - img [ref=e1373]
+                - generic [ref=e1375]: Performance optimization
+            - list [ref=e1376]:
+              - listitem [ref=e1377]:
+                - text: •
+                - strong [ref=e1378]: Reuse containers
+                - text: when making multiple related requests to maintain state
+              - listitem [ref=e1379]:
+                - text: •
+                - strong [ref=e1380]: Batch similar operations
+                - text: in a single code execution when possible
+            - heading "Copy link to clipboard Troubleshooting" [level=2] [ref=e1381]:
+              - generic [ref=e1382]:
+                - button "Copy link to clipboard" [ref=e1384] [cursor=pointer]:
+                  - img [ref=e1386]
+                - generic [ref=e1388]: Troubleshooting
+            - heading "Copy link to clipboard Common issues" [level=3] [ref=e1389]:
+              - generic [ref=e1390]:
+                - button "Copy link to clipboard" [ref=e1392] [cursor=pointer]:
+                  - img [ref=e1394]
+                - generic [ref=e1396]: Common issues
+            - paragraph [ref=e1397]:
+              - strong [ref=e1398]:
+                - code [ref=e1399]: invalid_request_error
+                - text: when setting
+                - code [ref=e1400]: tool_choice
+            - list [ref=e1401]:
+              - listitem [ref=e1402]:
+                - text: •
+                - code [ref=e1403]: tool_choice
+                - text: cannot name a tool whose
+                - code [ref=e1404]: allowed_callers
+                - text: omits
+                - code [ref=e1405]: "\"direct\""
+                - text: . Either add
+                - code [ref=e1406]: "\"direct\""
+                - text: to that tool's
+                - code [ref=e1407]: allowed_callers
+                - text: ", or remove the tool from"
+                - code [ref=e1408]: tool_choice
+                - text: and let Claude invoke it from code.
+            - paragraph [ref=e1409]:
+              - strong [ref=e1410]: Container expiration
+            - list [ref=e1411]:
+              - listitem [ref=e1412]: • Ensure you respond to tool calls before the container idles out (4.5 minutes of inactivity; 30-day hard maximum)
+              - listitem [ref=e1413]:
+                - text: • Monitor the
+                - code [ref=e1414]: expires_at
+                - text: field in responses
+              - listitem [ref=e1415]: • Consider implementing faster tool execution
+            - paragraph [ref=e1416]:
+              - strong [ref=e1417]: Tool result not parsed correctly
+            - list [ref=e1418]:
+              - listitem [ref=e1419]: • Ensure your tool returns string data that Claude can deserialize
+              - listitem [ref=e1420]: • Provide clear output format documentation in your tool description
+            - heading "Copy link to clipboard Debugging tips" [level=3] [ref=e1421]:
+              - generic [ref=e1422]:
+                - button "Copy link to clipboard" [ref=e1424] [cursor=pointer]:
+                  - img [ref=e1426]
+                - generic [ref=e1428]: Debugging tips
+            - list [ref=e1429]:
+              - listitem [ref=e1430]:
+                - strong [ref=e1431]: Log all tool calls and results
+                - text: to track the flow
+              - listitem [ref=e1432]:
+                - strong [ref=e1433]:
+                  - text: Check the
+                  - code [ref=e1434]: caller
+                  - text: field
+                - text: to confirm programmatic invocation
+              - listitem [ref=e1435]:
+                - strong [ref=e1436]: Monitor container IDs
+                - text: to ensure proper reuse
+              - listitem [ref=e1437]:
+                - strong [ref=e1438]: Test tools independently
+                - text: before enabling programmatic calling
+            - heading "Copy link to clipboard Why programmatic tool calling works" [level=2] [ref=e1439]:
+              - generic [ref=e1440]:
+                - button "Copy link to clipboard" [ref=e1442] [cursor=pointer]:
+                  - img [ref=e1444]
+                - generic [ref=e1446]: Why programmatic tool calling works
+            - paragraph [ref=e1447]: "Claude's training includes extensive exposure to code, making it effective at reasoning through and chaining function calls. When tools are presented as callable functions within a code execution environment, Claude can leverage this strength to:"
+            - list [ref=e1448]:
+              - listitem [ref=e1449]:
+                - text: •
+                - strong [ref=e1450]: "Reason naturally about tool composition:"
+                - text: Chain operations and handle dependencies as naturally as writing any Python code
+              - listitem [ref=e1451]:
+                - text: •
+                - strong [ref=e1452]: "Process large results efficiently:"
+                - text: Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
+              - listitem [ref=e1453]:
+                - text: •
+                - strong [ref=e1454]: "Reduce latency significantly:"
+                - text: Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
+            - paragraph [ref=e1455]: This approach enables workflows that would be impractical with traditional tool use (such as processing files over 1M tokens) by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
+            - heading "Copy link to clipboard Alternative implementations" [level=2] [ref=e1456]:
+              - generic [ref=e1457]:
+                - button "Copy link to clipboard" [ref=e1459] [cursor=pointer]:
+                  - img [ref=e1461]
+                - generic [ref=e1463]: Alternative implementations
+            - paragraph [ref=e1464]: "Programmatic tool calling is a generalizable pattern that can also be implemented on your own infrastructure. Here's how the approaches compare:"
+            - heading "Copy link to clipboard Client-side direct execution" [level=3] [ref=e1465]:
+              - generic [ref=e1466]:
+                - button "Copy link to clipboard" [ref=e1468] [cursor=pointer]:
+                  - img [ref=e1470]
+                - generic [ref=e1472]: Client-side direct execution
+            - paragraph [ref=e1473]: Provide Claude with a code execution tool and describe what functions are available in that environment. When Claude invokes the tool with code, your application executes it locally where those functions are defined.
+            - paragraph [ref=e1474]:
+              - strong [ref=e1475]: "Advantages:"
+            - list [ref=e1476]:
+              - listitem [ref=e1477]: • Simple to implement with minimal re-architecting
+              - listitem [ref=e1478]: • Full control over the environment and instructions
+            - paragraph [ref=e1479]:
+              - strong [ref=e1480]: "Disadvantages:"
+            - list [ref=e1481]:
+              - listitem [ref=e1482]: • Executes untrusted code outside of a sandbox
+              - listitem [ref=e1483]: • Tool invocations can be vectors for code injection
+            - paragraph [ref=e1484]:
+              - strong [ref=e1485]: "Use when:"
+              - text: Your application can safely execute arbitrary code, you want a simple solution, and Anthropic's managed offering doesn't fit your needs.
+            - heading "Copy link to clipboard Self-managed sandboxed execution" [level=3] [ref=e1486]:
+              - generic [ref=e1487]:
+                - button "Copy link to clipboard" [ref=e1489] [cursor=pointer]:
+                  - img [ref=e1491]
+                - generic [ref=e1493]: Self-managed sandboxed execution
+            - paragraph [ref=e1494]: Same approach from Claude's perspective, but code runs in a sandboxed container with security restrictions (for example, no network egress). If your tools require external resources, you'll need a protocol for executing tool calls outside the sandbox.
+            - paragraph [ref=e1495]:
+              - strong [ref=e1496]: "Advantages:"
+            - list [ref=e1497]:
+              - listitem [ref=e1498]: • Safe programmatic tool calling on your own infrastructure
+              - listitem [ref=e1499]: • Full control over the execution environment
+            - paragraph [ref=e1500]:
+              - strong [ref=e1501]: "Disadvantages:"
+            - list [ref=e1502]:
+              - listitem [ref=e1503]: • Complex to build and maintain
+              - listitem [ref=e1504]: • Requires managing both infrastructure and inter-process communication
+            - paragraph [ref=e1505]:
+              - strong [ref=e1506]: "Use when:"
+              - text: Security is critical and Anthropic's managed solution doesn't fit your requirements.
+            - heading "Copy link to clipboard Anthropic-managed execution" [level=3] [ref=e1507]:
+              - generic [ref=e1508]:
+                - button "Copy link to clipboard" [ref=e1510] [cursor=pointer]:
+                  - img [ref=e1512]
+                - generic [ref=e1514]: Anthropic-managed execution
+            - paragraph [ref=e1515]: Anthropic's programmatic tool calling is a managed version of sandboxed execution with an opinionated Python environment tuned for Claude. Anthropic handles container management, code execution, and secure tool invocation communication.
+            - paragraph [ref=e1516]:
+              - strong [ref=e1517]: "Advantages:"
+            - list [ref=e1518]:
+              - listitem [ref=e1519]: • Safe and secure by default
+              - listitem [ref=e1520]: • Easy to enable with minimal configuration
+              - listitem [ref=e1521]: • Environment and instructions optimized for Claude
+            - paragraph [ref=e1522]:
+              - text: Consider using Anthropic's managed solution if you're using the Claude API,
+              - link "Claude Platform on AWS" [ref=e1523] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-platform-on-aws
+              - text: ", or"
+              - link "Microsoft Foundry" [ref=e1524] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-microsoft-foundry
+              - text: .
+            - heading "Copy link to clipboard Data retention" [level=2] [ref=e1525]:
+              - generic [ref=e1526]:
+                - button "Copy link to clipboard" [ref=e1528] [cursor=pointer]:
+                  - img [ref=e1530]
+                - generic [ref=e1532]: Data retention
+            - paragraph [ref=e1533]: Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
+            - paragraph [ref=e1534]:
+              - text: For ZDR eligibility across all features, see
+              - link "API and data retention" [ref=e1535] [cursor=pointer]:
+                - /url: /docs/en/manage-claude/api-and-data-retention
+              - text: .
+            - heading "Copy link to clipboard Related features" [level=2] [ref=e1536]:
+              - generic [ref=e1537]:
+                - button "Copy link to clipboard" [ref=e1539] [cursor=pointer]:
+                  - img [ref=e1541]
+                - generic [ref=e1543]: Related features
+            - generic [ref=e1544]:
+              - link "Code execution tool Learn about the underlying code execution capability that powers programmatic tool calling." [ref=e1545] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool
+                - generic [ref=e1546]:
+                  - img [ref=e1549]
+                  - generic [ref=e1551]:
+                    - generic [ref=e1553]: Code execution tool
+                    - paragraph [ref=e1555]: Learn about the underlying code execution capability that powers programmatic tool calling.
+              - link "Tool use with Claude Understand the fundamentals of tool use with Claude." [ref=e1556] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/overview
+                - generic [ref=e1557]:
+                  - img [ref=e1560]
+                  - generic [ref=e1562]:
+                    - generic [ref=e1564]: Tool use with Claude
+                    - paragraph [ref=e1566]: Understand the fundamentals of tool use with Claude.
+              - link "Define tools Step-by-step guide for defining tools." [ref=e1567] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/define-tools
+                - generic [ref=e1568]:
+                  - img [ref=e1570]
+                  - generic [ref=e1572]:
+                    - generic [ref=e1574]: Define tools
+                    - paragraph [ref=e1576]: Step-by-step guide for defining tools.
+            - generic [ref=e1577]:
+              - paragraph [ref=e1578]: Was this page helpful?
+              - generic [ref=e1579]:
+                - button "Thumbs up" [ref=e1580] [cursor=pointer]:
+                  - img [ref=e1582]
+                - button "Thumbs down" [ref=e1584] [cursor=pointer]:
+                  - img [ref=e1586]
+          - button "Toggle table of contents" [ref=e1588] [cursor=pointer]:
+            - img [ref=e1589]
+        - generic [ref=e1592]:
+          - generic [ref=e1593]:
+            - link "Claude API Docs home page" [ref=e1595] [cursor=pointer]:
+              - /url: /docs
+              - img "Claude API Docs" [ref=e1596]
+            - generic [ref=e1599]:
+              - link "X (Twitter)" [ref=e1600] [cursor=pointer]:
+                - /url: https://x.com/claudeai
+                - img [ref=e1601]
+              - link "Threads" [ref=e1603] [cursor=pointer]:
+                - /url: https://www.threads.com/@claudeai
+                - img [ref=e1604]
+              - link "LinkedIn" [ref=e1606] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/claude
+                - img [ref=e1607]
+              - link "YouTube" [ref=e1609] [cursor=pointer]:
+                - /url: https://www.youtube.com/@anthropic-ai
+                - img [ref=e1610]
+              - link "Instagram" [ref=e1612] [cursor=pointer]:
+                - /url: https://instagram.com/claudeai
+                - img [ref=e1613]
+          - generic [ref=e1616]:
+            - generic [ref=e1617]:
+              - generic [ref=e1618]:
+                - heading "Solutions" [level=3] [ref=e1619]
+                - list [ref=e1620]:
+                  - listitem [ref=e1621]:
+                    - link "AI agents" [ref=e1622] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/agents
+                  - listitem [ref=e1623]:
+                    - link "Code modernization" [ref=e1624] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/code-modernization
+                  - listitem [ref=e1625]:
+                    - link "Coding" [ref=e1626] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/coding
+                  - listitem [ref=e1627]:
+                    - link "Customer support" [ref=e1628] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/customer-support
+                  - listitem [ref=e1629]:
+                    - link "Education" [ref=e1630] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/education
+                  - listitem [ref=e1631]:
+                    - link "Financial services" [ref=e1632] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/financial-services
+                  - listitem [ref=e1633]:
+                    - link "Government" [ref=e1634] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/government
+                  - listitem [ref=e1635]:
+                    - link "Life sciences" [ref=e1636] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/life-sciences
+              - generic [ref=e1637]:
+                - heading "Partners" [level=3] [ref=e1638]
+                - list [ref=e1639]:
+                  - listitem [ref=e1640]:
+                    - link "Amazon Bedrock" [ref=e1641] [cursor=pointer]:
+                      - /url: https://claude.com/partners/amazon-bedrock
+                  - listitem [ref=e1642]:
+                    - link "Google Cloud's Vertex AI" [ref=e1643] [cursor=pointer]:
+                      - /url: https://claude.com/partners/google-cloud-vertex-ai
+            - generic [ref=e1644]:
+              - generic [ref=e1645]:
+                - heading "Learn" [level=3] [ref=e1646]
+                - list [ref=e1647]:
+                  - listitem [ref=e1648]:
+                    - link "Blog" [ref=e1649] [cursor=pointer]:
+                      - /url: https://claude.com/blog
+                  - listitem [ref=e1650]:
+                    - link "Courses" [ref=e1651] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/learn
+                  - listitem [ref=e1652]:
+                    - link "Use cases" [ref=e1653] [cursor=pointer]:
+                      - /url: https://claude.com/resources/use-cases
+                  - listitem [ref=e1654]:
+                    - link "Connectors" [ref=e1655] [cursor=pointer]:
+                      - /url: https://claude.com/partners/mcp
+                  - listitem [ref=e1656]:
+                    - link "Customer stories" [ref=e1657] [cursor=pointer]:
+                      - /url: https://claude.com/customers
+                  - listitem [ref=e1658]:
+                    - link "Engineering at Anthropic" [ref=e1659] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/engineering
+                  - listitem [ref=e1660]:
+                    - link "Events" [ref=e1661] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/events
+                  - listitem [ref=e1662]:
+                    - link "Powered by Claude" [ref=e1663] [cursor=pointer]:
+                      - /url: https://claude.com/partners/powered-by-claude
+                  - listitem [ref=e1664]:
+                    - link "Service partners" [ref=e1665] [cursor=pointer]:
+                      - /url: https://claude.com/partners/services
+                  - listitem [ref=e1666]:
+                    - link "Startups program" [ref=e1667] [cursor=pointer]:
+                      - /url: https://claude.com/programs/startups
+              - generic [ref=e1668]:
+                - heading "Company" [level=3] [ref=e1669]
+                - list [ref=e1670]:
+                  - listitem [ref=e1671]:
+                    - link "Anthropic" [ref=e1672] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/company
+                  - listitem [ref=e1673]:
+                    - link "Careers" [ref=e1674] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/careers
+                  - listitem [ref=e1675]:
+                    - link "Economic Futures" [ref=e1676] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/economic-futures
+                  - listitem [ref=e1677]:
+                    - link "Research" [ref=e1678] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/research
+                  - listitem [ref=e1679]:
+                    - link "News" [ref=e1680] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news
+                  - listitem [ref=e1681]:
+                    - link "Responsible Scaling Policy" [ref=e1682] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy
+                  - listitem [ref=e1683]:
+                    - link "Security and compliance" [ref=e1684] [cursor=pointer]:
+                      - /url: https://trust.anthropic.com
+                  - listitem [ref=e1685]:
+                    - link "Transparency" [ref=e1686] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/transparency
+            - generic [ref=e1687]:
+              - generic [ref=e1688]:
+                - heading "Help and security" [level=3] [ref=e1689]
+                - list [ref=e1690]:
+                  - listitem [ref=e1691]:
+                    - link "Availability" [ref=e1692] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/supported-countries
+                  - listitem [ref=e1693]:
+                    - link "Status" [ref=e1694] [cursor=pointer]:
+                      - /url: https://status.claude.com/
+                  - listitem [ref=e1695]:
+                    - link "Support" [ref=e1696] [cursor=pointer]:
+                      - /url: https://support.claude.com/
+                  - listitem [ref=e1697]:
+                    - link "Discord" [ref=e1698] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/discord
+              - generic [ref=e1699]:
+                - heading "Terms and policies" [level=3] [ref=e1700]
+                - list [ref=e1701]:
+                  - listitem [ref=e1702]:
+                    - link "Privacy policy" [ref=e1703] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/privacy
+                  - listitem [ref=e1704]:
+                    - link "Responsible disclosure policy" [ref=e1705] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/responsible-disclosure-policy
+                  - listitem [ref=e1706]:
+                    - 'link "Terms of service: Commercial" [ref=e1707] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/commercial-terms
+                  - listitem [ref=e1708]:
+                    - 'link "Terms of service: Consumer" [ref=e1709] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/consumer-terms
+                  - listitem [ref=e1710]:
+                    - link "Usage policy" [ref=e1711] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/aup
+  - button "Ask Docs Chat avatar" [ref=e1715] [cursor=pointer]:
+    - generic [ref=e1716]: Ask Docs
+    - img "Chat avatar" [ref=e1718]
+  - generic:
+    - generic:
+      - region "Notifications"
+  - alert [ref=e1719]

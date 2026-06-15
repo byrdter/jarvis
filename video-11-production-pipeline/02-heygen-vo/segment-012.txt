@@ -1,1 +1,0 @@
-Why twenty manual minutes? Because you catch problems before the pipeline blindly composes around them. And if you used the pause protocol in your script — one-second pauses between scenes — HeyGen renders those gaps to the millisecond. That precision is what makes the downstream automation possible. <break time="1s"/>

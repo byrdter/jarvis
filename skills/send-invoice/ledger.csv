@@ -1,0 +1,2 @@
+id,date,client,amount,description,due_date,status
+INV-0001,2026-06-09,Acme Corp,4200.00,Website redesign — May sprint,2026-06-23,draft

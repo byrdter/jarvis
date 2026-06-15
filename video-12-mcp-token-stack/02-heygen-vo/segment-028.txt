@@ -1,1 +1,0 @@
-There are three mistakes we would avoid. First, saying MCP is dead because CLI is cheaper on local tasks. Second, saying MCP is fixed because Tool Search exists. Third, treating compact formats like TOON as a universal compression spell. The winning stack is boring: right layer, right scope, measured output.

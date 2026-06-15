@@ -1,0 +1,348 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic [ref=e2]: "Please note: This website includes an accessibility system. Press Control-F11 to adjust the website to people with visual disabilities who are using a screen reader; Press Control-F10 to open an accessibility menu."
+        - generic:
+          - list:
+            - listitem:
+              - button "Press enter for Accessibility for blind people who use screen readers" [ref=e3] [cursor=pointer]:
+                - generic [ref=e4]:
+                  - text: Press enter for Accessibility for blind people
+                  - generic [ref=e5]: who use screen readers
+            - listitem:
+              - button "Press enter for Keyboard Navigation" [ref=e6] [cursor=pointer]
+            - listitem:
+              - button "Press enter for Accessibility menu" [ref=e7] [cursor=pointer]
+  - region "Announcement" [ref=e8]:
+    - generic [ref=e10]:
+      - paragraph [ref=e11]:
+        - link "Join Tavily at one of our events" [ref=e12] [cursor=pointer]:
+          - /url: https://www.tavily.com/events
+        - text: . Meet the team, connect with the community, and see what we're building.
+      - paragraph
+  - banner [ref=e13]:
+    - navigation [ref=e14]:
+      - generic [ref=e15]:
+        - link "Tavily" [ref=e16] [cursor=pointer]:
+          - /url: /
+          - img "Tavily" [ref=e17]
+        - generic [ref=e18]:
+          - link "Product" [ref=e19] [cursor=pointer]:
+            - /url: /product
+            - img [ref=e21]
+            - generic [ref=e24]: Product
+          - link "Pricing" [ref=e25] [cursor=pointer]:
+            - /url: /pricing
+            - img [ref=e27]
+            - generic [ref=e30]: Pricing
+          - button "Resources" [ref=e32] [cursor=pointer]:
+            - img [ref=e34]
+            - generic [ref=e37]: Resources
+            - img [ref=e38]
+          - link "Docs" [ref=e40] [cursor=pointer]:
+            - /url: https://docs.tavily.com
+            - img [ref=e42]
+            - generic [ref=e45]: Docs
+            - img [ref=e47]
+          - link "About" [ref=e49] [cursor=pointer]:
+            - /url: /about
+            - img [ref=e51]
+            - generic [ref=e54]: About
+          - link "Careers" [ref=e55] [cursor=pointer]:
+            - /url: /careers
+            - img [ref=e57]
+            - generic [ref=e60]: Careers
+      - generic [ref=e62]:
+        - button "Login" [ref=e63] [cursor=pointer]:
+          - generic [ref=e64]: Login
+          - img [ref=e65]
+        - button "Sign Up" [ref=e67] [cursor=pointer]:
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Sign Up
+            - img [ref=e72]
+    - generic:
+      - generic:
+        - link "Events":
+          - /url: /events
+          - generic:
+            - img
+          - generic: Events
+        - link "Blog":
+          - /url: /blog
+          - generic:
+            - img
+          - generic: Blog
+        - link "Certification":
+          - /url: /certification
+          - generic:
+            - img
+          - generic: Certification
+        - link "Use Cases":
+          - /url: /use-cases
+          - generic:
+            - img
+          - generic: Use Cases
+  - main [ref=e75]:
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - heading "Connect your AI agents to the web" [level=1] [ref=e82]:
+          - text: Connect your AI agents
+          - generic [ref=e83]: to the web
+        - paragraph [ref=e84]: Real-time search, extraction, research, and web crawling through a single, secure API.
+        - generic [ref=e85]:
+          - link "Talk to an expert" [ref=e86] [cursor=pointer]:
+            - /url: /enterprise
+            - button "Talk to an expert" [ref=e87]:
+              - generic [ref=e88]:
+                - paragraph [ref=e89]: Talk to an expert
+                - img [ref=e92]
+          - link "Try it out" [ref=e95] [cursor=pointer]:
+            - /url: https://app.tavily.com/home
+            - button "Try it out" [ref=e96]:
+              - generic [ref=e97]: Try it out
+              - img [ref=e99]
+      - generic [ref=e102]:
+        - textbox "What are the latest updates with Nvidia?" [ref=e103]
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - button "search" [ref=e106] [cursor=pointer]
+            - button "extract" [ref=e107] [cursor=pointer]
+            - button "crawl" [ref=e108] [cursor=pointer]
+            - button "research" [ref=e109] [cursor=pointer]
+          - button "Submit" [ref=e110] [cursor=pointer]:
+            - img [ref=e111]
+    - generic [ref=e114]:
+      - paragraph [ref=e115]: Trusted by 2M+ developers around the world
+      - generic [ref=e116]:
+        - img "WRITER" [ref=e118]
+        - img "MongoDB" [ref=e120]
+        - img "GROQ" [ref=e122]
+        - img "LangChain" [ref=e124]
+        - img "Monday" [ref=e126]
+        - img "JetBrains" [ref=e128]
+        - img "AWS" [ref=e130]
+        - img "Ironclad" [ref=e132]
+        - img "IBM" [ref=e134]
+        - img "BCG" [ref=e136]
+        - img "Troutman Pepper Locke" [ref=e138]
+        - img "Extend" [ref=e140]
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - paragraph [ref=e144]: /the web access layer for agents
+        - heading "Loved by developers, built for enterprises" [level=2] [ref=e145]
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - img "Ground models with fresh web context" [ref=e149]
+          - generic [ref=e150]:
+            - heading "Ground models with fresh web context" [level=3] [ref=e151]
+            - paragraph [ref=e152]: Retrieve live web data, extract relevant content, and return it structured and chunked for models, so agents reason over facts without hallucinating.
+        - generic [ref=e153]:
+          - img "Handle thousands of web queries in seconds" [ref=e155]
+          - generic [ref=e156]:
+            - heading "Handle thousands of web queries in seconds" [level=3] [ref=e157]
+            - paragraph [ref=e158]: A production-grade retrieval stack with real-time search, intelligent caching, and indexing keeps latency predictable as traffic grows.
+        - generic [ref=e159]:
+          - img "Ship to production with built-in safeguards" [ref=e161]
+          - generic [ref=e162]:
+            - heading "Ship to production with built-in safeguards" [level=3] [ref=e163]
+            - paragraph [ref=e164]: Requests pass through security, privacy, and content validation layers that block PII leakage, prompt injection, and malicious sources.
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - paragraph [ref=e168]: /benchmarks
+          - heading "Web Search Driven by Research" [level=3] [ref=e169]
+        - generic [ref=e171]:
+          - tablist "Benchmark tabs" [ref=e172]:
+            - generic [ref=e173]:
+              - tab "SimpleQA" [selected] [ref=e174] [cursor=pointer]:
+                - generic [ref=e175]: SimpleQA
+              - tab "Document Relevance" [ref=e176] [cursor=pointer]:
+                - generic [ref=e177]: Document Relevance
+              - tab "DeepResearch Bench" [ref=e178] [cursor=pointer]:
+                - generic [ref=e179]: DeepResearch Bench
+              - tab "GAIA" [ref=e180] [cursor=pointer]:
+                - generic [ref=e181]: GAIA
+              - tab "Leetcode 75" [ref=e182] [cursor=pointer]:
+                - generic [ref=e183]: Leetcode 75
+              - tab "Latency" [ref=e184] [cursor=pointer]:
+                - generic [ref=e185]: Latency
+          - tabpanel [ref=e187]:
+            - generic [ref=e190]: SimpleQA
+            - application [ref=e194]:
+              - generic [ref=e217]:
+                - generic [ref=e218]:
+                  - generic [ref=e220]: Tavily
+                  - generic [ref=e222]: Perplexity Search
+                  - generic [ref=e224]: Google (SERP)
+                  - generic [ref=e226]: Brave
+                  - generic [ref=e228]: Exa
+                - generic [ref=e229]:
+                  - generic [ref=e231]: "67"
+                  - generic [ref=e233]: "74.3"
+                  - generic [ref=e235]: "81.5"
+                  - generic [ref=e237]: "88.8"
+                  - generic [ref=e239]: "96"
+                - generic [ref=e240]: Accuracy (%)
+          - generic [ref=e241]:
+            - generic [ref=e242]:
+              - heading "About this benchmark Learn more about this benchmark" [level=4] [ref=e243]:
+                - text: About this benchmark
+                - link "Learn more about this benchmark" [ref=e244] [cursor=pointer]:
+                  - /url: https://arxiv.org/abs/2411.04368
+                  - text: ↗
+              - paragraph [ref=e245]: This benchmark evaluates factual question answering using OpenAI's SimpleQA, which measures how accurately models answer short, fact-seeking queries. It focuses on precise retrieval and synthesis of factual information.
+            - generic [ref=e246]:
+              - heading "MethodologyLearn more about the methodology" [level=4] [ref=e247]:
+                - text: Methodology
+                - link "Learn more about the methodology" [ref=e248] [cursor=pointer]:
+                  - /url: https://github.com/tavily-ai/tavily-search-evals
+                  - text: ↗
+              - generic [ref=e249]:
+                - paragraph [ref=e250]: "• Dataset: Full set of OpenAI's SimpleQA question set"
+                - paragraph [ref=e251]: "• Model: GPT-4.1, grounded by retrieved documents from provider"
+                - paragraph [ref=e252]: "• Scoring: Accuracy (correct answers ÷ total questions), graded by SimpleQA's classifier"
+                - paragraph [ref=e253]: "• Normalization: Comparable document length across providers"
+                - paragraph [ref=e254]: "• Retrieval: max 10 documents per query"
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - paragraph [ref=e257]: /proof is in the numbers
+          - heading "Trusted in production. Proven at scale." [level=2] [ref=e258]
+        - generic [ref=e259]:
+          - generic [ref=e260]:
+            - paragraph [ref=e261]: 300M+
+            - paragraph [ref=e262]: monthly requests handled
+          - generic [ref=e263]:
+            - paragraph [ref=e264]: 99.99% uptime
+            - paragraph [ref=e265]: SLA powering mission-critical systems
+          - generic [ref=e266]:
+            - paragraph [ref=e267]: 180 ms
+            - paragraph [ref=e268]: p50 on Tavily /search making us fastest on the market
+          - generic [ref=e269]:
+            - paragraph [ref=e270]: 2M+
+            - paragraph [ref=e271]: developers using Tavily
+          - generic [ref=e272]:
+            - paragraph [ref=e273]: Billions
+            - paragraph [ref=e274]: of pages crawled and extracted without downtime
+          - generic [ref=e275]:
+            - paragraph [ref=e276]: Drop-in integration
+            - paragraph [ref=e277]: with leading LLM providers (OpenAI, Anthropic, Groq)
+    - generic [ref=e279]:
+      - generic [ref=e280]:
+        - paragraph [ref=e281]: /press room
+        - heading "Tavily in action" [level=2] [ref=e282]
+      - generic [ref=e283]:
+        - button "Scroll left" [disabled] [ref=e284]:
+          - img [ref=e285]
+        - button "Scroll right" [ref=e287] [cursor=pointer]:
+          - img [ref=e288]
+      - generic [ref=e291]:
+        - link "Databricks Partners with Tavily on MCP Marketplace" [ref=e292] [cursor=pointer]:
+          - /url: https://www.databricks.com/blog/accelerate-ai-development-databricks-discover-govern-and-build-mcp-and-agent-bricks
+          - img "Databricks Partners with Tavily on MCP Marketplace" [ref=e294]
+        - link "IBM Partners with Tavily on WatsonX Platform" [ref=e295] [cursor=pointer]:
+          - /url: https://www.ibm.com/new/announcements/driving-smarter-data-enrichment-ibm-and-tavily-partner-for-agentic-ai-solutions
+          - img "IBM Partners with Tavily on WatsonX Platform" [ref=e297]
+        - link "JetBrains Integrates Tavily for Real-Time AI Search" [ref=e298] [cursor=pointer]:
+          - /url: https://www.tavily.com/blog/jetbrains-tavily
+          - img "JetBrains Integrates Tavily for Real-Time AI Search" [ref=e300]
+        - link "Tavily releases /research endpoint, achieves state-of-the-art" [ref=e301] [cursor=pointer]:
+          - /url: https://chat-research.tavily.com
+          - img "Tavily releases /research endpoint, achieves state-of-the-art" [ref=e303]
+        - link "Tavily raises $25M Series A Funding" [ref=e304] [cursor=pointer]:
+          - /url: https://techcrunch.com/2025/08/06/tavily-raises-25m-to-connect-ai-agents-to-the-web/
+          - img "Tavily raises $25M Series A Funding" [ref=e306]
+      - generic [ref=e307]:
+        - heading "Databricks Partners with Tavily on MCP Marketplace" [level=3] [ref=e309]
+        - heading "IBM Partners with Tavily on WatsonX Platform" [level=3] [ref=e311]
+        - heading "JetBrains Integrates Tavily for Real-Time AI Search" [level=3] [ref=e313]
+        - heading "Tavily releases /research endpoint, achieves state-of-the-art" [level=3] [ref=e315]
+        - heading "Tavily raises $25M Series A Funding" [level=3] [ref=e317]
+  - contentinfo [ref=e318]:
+    - generic [ref=e319]:
+      - generic [ref=e322]:
+        - heading "Power your AI with real-time web search." [level=2] [ref=e323]
+        - generic [ref=e324]:
+          - link "Explore API Docs" [ref=e325] [cursor=pointer]:
+            - /url: https://docs.tavily.com
+            - button "Explore API Docs" [ref=e326]:
+              - generic [ref=e327]: Explore API Docs
+              - img [ref=e329]
+          - link "Try it out" [ref=e331] [cursor=pointer]:
+            - /url: https://app.tavily.com/home
+            - button "Try it out" [ref=e332]:
+              - generic [ref=e333]:
+                - paragraph [ref=e334]: Try it out
+                - img [ref=e337]
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - paragraph [ref=e342]: Stay connected with us
+          - generic [ref=e343]:
+            - generic [ref=e344]:
+              - link "X" [ref=e345] [cursor=pointer]:
+                - /url: https://x.com/tavilyai
+                - img [ref=e346]
+              - link "LinkedIn" [ref=e348] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/tavily
+                - img [ref=e349]
+              - link "GitHub" [ref=e351] [cursor=pointer]:
+                - /url: https://github.com/tavily-ai
+                - img [ref=e352]
+              - link "YouTube" [ref=e354] [cursor=pointer]:
+                - /url: https://www.youtube.com/@TavilyAI
+                - img [ref=e355]
+              - link "Discord" [ref=e357] [cursor=pointer]:
+                - /url: https://community.tavily.com
+                - img [ref=e358]
+            - generic [ref=e360]:
+              - generic [ref=e361]: Email
+              - textbox "Enter your email"
+              - button "Submit email" [ref=e362] [cursor=pointer]:
+                - img [ref=e363]
+                - img [ref=e365]
+                - img [ref=e367]
+          - paragraph [ref=e369]:
+            - text: By submitting my email address, I agree to receive marketing communications. For more information, please see the
+            - link "Privacy Policy" [ref=e370] [cursor=pointer]:
+              - /url: https://www.tavily.com/privacy
+            - text: .
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - link "Docs" [ref=e373] [cursor=pointer]:
+              - /url: https://docs.tavily.com
+            - link "Blog" [ref=e374] [cursor=pointer]:
+              - /url: /blog
+            - link "Events" [ref=e375] [cursor=pointer]:
+              - /url: /events
+            - link "Use Cases" [ref=e376] [cursor=pointer]:
+              - /url: /use-cases
+            - link "Community" [ref=e377] [cursor=pointer]:
+              - /url: https://community.tavily.com
+            - link "Pricing" [ref=e378] [cursor=pointer]:
+              - /url: /pricing
+            - link "Careers" [ref=e379] [cursor=pointer]:
+              - /url: /careers
+          - generic [ref=e380]:
+            - link "Website Terms of Use" [ref=e381] [cursor=pointer]:
+              - /url: /website-terms
+            - link "Platform Terms of Use" [ref=e382] [cursor=pointer]:
+              - /url: /terms
+            - link "Privacy Policy" [ref=e383] [cursor=pointer]:
+              - /url: /privacy
+            - link "Cookie Notice" [ref=e384] [cursor=pointer]:
+              - /url: /cookie-policy
+            - link "Acceptable Use Policy" [ref=e385] [cursor=pointer]:
+              - /url: /acceptable-use-policy
+            - link "Trust Center" [ref=e386] [cursor=pointer]:
+              - /url: https://trust.tavily.com
+            - link "Cookie Settings" [ref=e387] [cursor=pointer]:
+              - /url: "#"
+            - link "Accessibility Menu" [ref=e388] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e389]:
+        - paragraph [ref=e390]: Built by researchers. Trusted by 2M+ AI builders.
+        - generic [ref=e391]:
+          - generic [ref=e392]: ©2026
+          - generic [ref=e393]: Tavily Inc. All rights reserved.
+  - alert [ref=e394]
+  - generic [ref=e395]: "67"

@@ -1,1 +1,0 @@
-Stage three. Generate the visuals. Static images from Nano Banana Pro, DALL-E, or Midjourney — whatever you've wired up. Animated graphics from HyperFrames — title sequences, charts, captions, audio-reactive overlays. Cinematic B-roll from Higgsfield via MCP. <break time="1s"/>

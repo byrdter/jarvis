@@ -1,0 +1,853 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main_focusable"
+  - banner:
+    - navigation "Primary Navigation" [ref=e4]:
+      - generic [ref=e5]:
+        - link "Slack" [ref=e7] [cursor=pointer]:
+          - /url: https://slack.com/
+          - img "Slack" [ref=e8]
+        - navigation [ref=e9]:
+          - list [ref=e10]:
+            - listitem [ref=e11]:
+              - button "Features" [ref=e12] [cursor=pointer]
+            - listitem [ref=e13]:
+              - button "Solutions" [ref=e14] [cursor=pointer]
+            - listitem [ref=e15]:
+              - link "Enterprise" [ref=e16] [cursor=pointer]:
+                - /url: https://slack.com/enterprise
+                - generic [ref=e18]: Enterprise
+            - listitem [ref=e19]:
+              - button "Resources" [ref=e20] [cursor=pointer]
+            - listitem [ref=e21]:
+              - link "Pricing" [ref=e22] [cursor=pointer]:
+                - /url: https://slack.com/pricing
+                - generic [ref=e24]: Pricing
+          - button "Search" [ref=e25] [cursor=pointer]:
+            - img [ref=e26]
+          - generic [ref=e28]:
+            - link "Sign in" [ref=e29] [cursor=pointer]:
+              - /url: https://slack.com/signin
+            - link "Request a demo" [ref=e30] [cursor=pointer]:
+              - /url: https://slack.com/contact-sales
+            - link "Get started" [ref=e31] [cursor=pointer]:
+              - /url: https://slack.com/pricing
+  - main [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - heading "All your people and AI agents working together." [level=1] [ref=e35]
+        - paragraph [ref=e36]: Slack connects your team. Slackbot multiplies what they can do.
+        - link "Get started" [ref=e38] [cursor=pointer]:
+          - /url: https://slack.com/pricing
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: Trusted by top teams
+          - list [ref=e43]:
+            - listitem [ref=e44]:
+              - img "GM Logo" [ref=e45]
+            - listitem [ref=e46]:
+              - img "OpenAI Logo" [ref=e47]
+            - listitem [ref=e48]:
+              - img "Target Logo" [ref=e49]
+            - listitem [ref=e50]:
+              - img "Paramount Logo" [ref=e51]
+            - listitem [ref=e52]:
+              - img "Stripe Logo" [ref=e53]
+            - listitem [ref=e54]:
+              - img "IBM Logo" [ref=e55]
+        - generic [ref=e56]:
+          - generic "A Slack conversation between a user and Slackbot incorporating Docusign to send a contract." [ref=e57]
+          - generic "A channel window in Slack shows people discussing a project launch."
+          - generic "A Slack channel shows project milestones and their statuses."
+          - generic "A Slack channel shows a conversation between an internal team and their external clients."
+          - generic "A Slack Workflow Builder form allows creation of automated messages."
+      - generic [ref=e59]:
+        - generic [ref=e61] [cursor=pointer]:
+          - text: Ask Slackbot
+          - img [ref=e62]
+        - generic [ref=e64] [cursor=pointer]:
+          - text: Plan launches
+          - img [ref=e65]
+        - generic [ref=e67] [cursor=pointer]:
+          - text: Run projects
+          - img [ref=e68]
+        - generic [ref=e70] [cursor=pointer]:
+          - text: Chat with clients
+          - img [ref=e71]
+        - generic [ref=e73] [cursor=pointer]:
+          - text: Automate tasks
+          - img [ref=e74]
+    - generic [ref=e76]:
+      - heading "Reimagine what’s possible with AI and agents." [level=2] [ref=e77]
+      - generic [ref=e78]: AI in Slack doesn’t make you think, it helps you do. It summarizes and searches based on actual conversations, and with it, makes every app and agent more helpful and contextually aware than ever.
+      - generic [ref=e82]:
+        - generic "A user dictates to Slackbot via voice command to update a deal." [ref=e85]
+        - navigation [ref=e86]:
+          - button "Update deals just by asking Slackbot NEW" [ref=e87]:
+            - generic [ref=e88]:
+              - paragraph [ref=e89]:
+                - strong [ref=e90]: Update deals just by asking Slackbot
+              - generic [ref=e91]: NEW
+          - button "Summarize a conversation you missed" [ref=e92] [cursor=pointer]:
+            - paragraph [ref=e94]:
+              - strong [ref=e95]: Summarize a conversation you missed
+          - button "Get fast answers with Claude NEW" [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]:
+              - paragraph [ref=e98]:
+                - strong [ref=e99]: Get fast answers with Claude
+              - generic [ref=e100]: NEW
+          - button "Turn on AI note-taking in huddles" [ref=e101] [cursor=pointer]:
+            - paragraph [ref=e103]:
+              - strong [ref=e104]: Turn on AI note-taking in huddles
+          - button "Review code with Github Copilot" [ref=e105] [cursor=pointer]:
+            - paragraph [ref=e107]:
+              - strong [ref=e108]: Review code with Github Copilot
+          - button "Lookup customer data in Agentforce" [ref=e109] [cursor=pointer]:
+            - paragraph [ref=e111]:
+              - strong [ref=e112]: Lookup customer data in Agentforce
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - heading "What’s new in Slack" [level=2] [ref=e120]
+          - link "See all updates" [ref=e121] [cursor=pointer]:
+            - /url: https://slack.com/whats-new
+            - generic [ref=e122]: See all updates
+            - img [ref=e124]
+        - generic [ref=e126]:
+          - button "Previous slide" [disabled]:
+            - img
+          - button "Next slide" [ref=e127] [cursor=pointer]:
+            - img [ref=e128]
+      - generic [ref=e131]:
+        - group "1 / 10" [ref=e132]:
+          - link "New Feature, Today View Your day used to start with a wall of messages and no clear place to begin.," [ref=e133] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_today_view
+            - generic [ref=e134]: Link may open in new tab
+            - region "New Feature, Today View Your day used to start with a wall of messages and no clear place to begin.," [ref=e135]:
+              - figure [ref=e136]
+              - generic [ref=e137]:
+                - generic [ref=e138]: New Feature
+                - heading "Today View" [level=3] [ref=e139]
+                - paragraph [ref=e140]: Your day used to start with a wall of messages and no clear place to begin.
+        - group "2 / 10" [ref=e141]:
+          - link "New Feature, Slackbot Native Charts Slackbot can now create visual charts based on your underlying Slack, Salesforce and connected data - just ask.," [ref=e142] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_slackbot_native
+            - generic [ref=e143]: Link may open in new tab
+            - region "New Feature, Slackbot Native Charts Slackbot can now create visual charts based on your underlying Slack, Salesforce and connected data - just ask.," [ref=e144]:
+              - figure [ref=e145]
+              - generic [ref=e146]:
+                - generic [ref=e147]: New Feature
+                - heading "Slackbot Native Charts" [level=3] [ref=e148]
+                - paragraph [ref=e149]: Slackbot can now create visual charts based on your underlying Slack, Salesforce and connected data - just ask.
+        - group "3 / 10" [ref=e150]:
+          - link "New Feature, Web Search Slackbot now searches the web, and reads external links, to enrich your business context with real-time public information from the web.," [ref=e151] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_web_search
+            - generic [ref=e152]: Link may open in new tab
+            - region "New Feature, Web Search Slackbot now searches the web, and reads external links, to enrich your business context with real-time public information from the web.," [ref=e153]:
+              - figure [ref=e154]
+              - generic [ref=e155]:
+                - generic [ref=e156]: New Feature
+                - heading "Web Search" [level=3] [ref=e157]
+                - paragraph [ref=e158]: Slackbot now searches the web, and reads external links, to enrich your business context with real-time public information from the web.
+        - group "4 / 10" [ref=e159]:
+          - link "Feature Enhancement, Focus Mode Sometimes the best thing you can do to get work done is quiet the distractions.," [ref=e160] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_focus_mode
+            - generic [ref=e161]: Link may open in new tab
+            - region "Feature Enhancement, Focus Mode Sometimes the best thing you can do to get work done is quiet the distractions.," [ref=e162]:
+              - figure [ref=e163]
+              - generic [ref=e164]:
+                - generic [ref=e165]: Feature Enhancement
+                - heading "Focus Mode" [level=3] [ref=e166]
+                - paragraph [ref=e167]: Sometimes the best thing you can do to get work done is quiet the distractions.
+        - group "5 / 10" [ref=e168]:
+          - link "Feature Enhancement, Block Kit Builder Updates Building in Slack just got smoother.," [ref=e169] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_block_kit
+            - generic [ref=e170]: Link may open in new tab
+            - region "Feature Enhancement, Block Kit Builder Updates Building in Slack just got smoother.," [ref=e171]:
+              - figure [ref=e172]
+              - generic [ref=e173]:
+                - generic [ref=e174]: Feature Enhancement
+                - heading "Block Kit Builder Updates" [level=3] [ref=e175]
+                - paragraph [ref=e176]: Building in Slack just got smoother.
+        - group "6 / 10" [ref=e177]:
+          - link "New Feature, Miles Davis in Slack Experience New Miles Davis–inspired backgrounds, visual effects, and emoji reactions give every call a little more soul during your Huddles.," [ref=e178] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_miles_davis
+            - generic [ref=e179]: Link may open in new tab
+            - region "New Feature, Miles Davis in Slack Experience New Miles Davis–inspired backgrounds, visual effects, and emoji reactions give every call a little more soul during your Huddles.," [ref=e180]:
+              - figure [ref=e181]
+              - generic [ref=e182]:
+                - generic [ref=e183]: New Feature
+                - heading "Miles Davis in Slack Experience" [level=3] [ref=e184]
+                - paragraph [ref=e185]: New Miles Davis–inspired backgrounds, visual effects, and emoji reactions give every call a little more soul during your Huddles.
+        - group "7 / 10" [ref=e186]:
+          - link "New Feature, Slack comes included with every new Salesforce org Every new Enterprise Edition and Unlimited Edition Salesforce org now comes with a Slack Free workspace — already connected, already configured, ready to go.," [ref=e187] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_slack_comes
+            - generic [ref=e188]: Link may open in new tab
+            - region "New Feature, Slack comes included with every new Salesforce org Every new Enterprise Edition and Unlimited Edition Salesforce org now comes with a Slack Free workspace — already connected, already configured, ready to go.," [ref=e189]:
+              - figure [ref=e190]
+              - generic [ref=e191]:
+                - generic [ref=e192]: New Feature
+                - heading "Slack comes included with every new Salesforce org" [level=3] [ref=e193]
+                - paragraph [ref=e194]: Every new Enterprise Edition and Unlimited Edition Salesforce org now comes with a Slack Free workspace — already connected, already configured, ready to go.
+        - group "8 / 10" [ref=e195]:
+          - link "New Feature, Salesforce Actions in Slackbot Your CRM just got a whole lot more conversational.," [ref=e196] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_salesforce_actions
+            - generic [ref=e197]: Link may open in new tab
+            - region "New Feature, Salesforce Actions in Slackbot Your CRM just got a whole lot more conversational.," [ref=e198]:
+              - figure [ref=e199]
+              - generic [ref=e200]:
+                - generic [ref=e201]: New Feature
+                - heading "Salesforce Actions in Slackbot" [level=3] [ref=e202]
+                - paragraph [ref=e203]: Your CRM just got a whole lot more conversational.
+        - group "9 / 10" [ref=e204]:
+          - link "New Feature, New Welcome Mat Slackbot Home Updates introduces a personalized welcome mat with upcoming meetings, recommended Skills, and examples of how teammates are using Slackbot.," [ref=e205] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_new_welcome
+            - generic [ref=e206]: Link may open in new tab
+            - region "New Feature, New Welcome Mat Slackbot Home Updates introduces a personalized welcome mat with upcoming meetings, recommended Skills, and examples of how teammates are using Slackbot.," [ref=e207]:
+              - figure [ref=e208]
+              - generic [ref=e209]:
+                - generic [ref=e210]: New Feature
+                - heading "New Welcome Mat" [level=3] [ref=e211]
+                - paragraph [ref=e212]: Slackbot Home Updates introduces a personalized welcome mat with upcoming meetings, recommended Skills, and examples of how teammates are using Slackbot.
+        - group "10 / 10" [ref=e213]:
+          - link "New, Embedded AI Slackbot Across Slack embeds AI assistance directly into the flow of work.," [ref=e214] [cursor=pointer]:
+            - /url: https://slack.com/whats-new#052926_embedded_ai
+            - generic [ref=e215]: Link may open in new tab
+            - region "New, Embedded AI Slackbot Across Slack embeds AI assistance directly into the flow of work.," [ref=e216]:
+              - figure [ref=e217]
+              - generic [ref=e218]:
+                - generic [ref=e219]: New
+                - heading "Embedded AI" [level=3] [ref=e220]
+                - paragraph [ref=e221]: Slackbot Across Slack embeds AI assistance directly into the flow of work.
+    - generic [ref=e222]:
+      - button "Knowledge" [ref=e223] [cursor=pointer]
+      - button "People" [ref=e224] [cursor=pointer]
+      - button "Process" [ref=e225] [cursor=pointer]
+      - button "Platform" [ref=e226] [cursor=pointer]
+    - generic [ref=e227]:
+      - generic [ref=e229]:
+        - generic [ref=e230]: Give everyone instant context.
+        - generic [ref=e231]: Get access to every file, decision, and conversation, so you can build on past work instead of recreating it.
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - generic [ref=e234]:
+              - generic [ref=e237] [cursor=pointer]:
+                - generic [ref=e238]: "Meet Slackbot: Your personal agent for work."
+                - generic [ref=e239]: Slackbot isn't just any AI. It's AI that knows you and your team. It coordinates work across your apps and agents so one conversation gets work done.
+                - link "Learn more about Slackbot" [ref=e240]:
+                  - /url: https://slack.com/features/slackbot
+              - generic [ref=e243] [cursor=pointer]:
+                - generic [ref=e244]: One search to rule them all.
+                - generic: AI-powered search puts your company’s entire memory at your fingertips.
+              - generic [ref=e247] [cursor=pointer]:
+                - generic [ref=e248]: Bring CRM data to the conversation.
+                - generic: Customer insights now live alongside conversations, so deals keep moving forward.
+            - generic [ref=e250]:
+              - generic [ref=e251]: 97 min
+              - generic [ref=e252]:
+                - text: average time users can save weekly with AI in Slack
+                - superscript [ref=e253]: "1"
+          - generic [ref=e254]:
+            - generic [ref=e255]:
+              - img "Slack UI displays an AI answer to a search query."
+            - generic:
+              - img "Slack UI displays an AI answer to a search query."
+            - generic:
+              - img "A Salesforce channel in Slack shows a dashboard with data related to an opportunity."
+      - generic [ref=e258]:
+        - generic [ref=e259]: Let your people connect like people.
+        - generic [ref=e260]: Slack’s conversational UI makes collaborating more approachable, whether you're working with a colleague or an agent.
+        - generic [ref=e261]:
+          - generic [ref=e262]:
+            - generic [ref=e263]:
+              - generic [ref=e266] [cursor=pointer]:
+                - generic [ref=e267]: It all starts with a channel.
+                - generic [ref=e268]: Channels are flexible, transparent spaces for working with your team, AI assistants, and agents.
+                - link "Learn about channels" [ref=e269]:
+                  - /url: https://slack.com/features/channels
+              - generic [ref=e272] [cursor=pointer]:
+                - generic [ref=e273]: When talking is easier than typing…
+                - generic: …hop on a huddle, our built-in video tool. With AI in Slack, your meeting notes take themselves.
+              - generic [ref=e276] [cursor=pointer]:
+                - generic [ref=e277]: Bring conversations out of the inbox.
+                - generic: Slack Connect lets you chat with clients and vendors in real-time, right from Slack. Email could never.
+            - generic [ref=e279]:
+              - text: “Slack has been essential to our growth, our speed, and our ability to stay aligned as we scale”
+              - generic [ref=e280]:
+                - strong [ref=e281]: Kate Jenson,
+                - text: Head of Americas, Anthropic
+          - generic [ref=e282]:
+            - generic [ref=e283]:
+              - img "Slack UI shows the a conversation thread between a team and an Agentforce agent."
+            - generic:
+              - img "A huddle in Slack shows a presentation for product launch strategy."
+            - generic:
+              - img "A Slack Connect channel shows a conversation between an internal team and external clients."
+      - generic [ref=e286]:
+        - generic [ref=e287]: Manage all your work from one place.
+        - generic [ref=e288]: Automate daily stand-ups, project updates, and approvals so your team can focus on growth instead of guesswork.
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e291]:
+              - generic [ref=e294] [cursor=pointer]:
+                - generic [ref=e295]: Anyone can automate in Slack.
+                - generic [ref=e296]: By click or by code, Slack makes it easy for anyone to build time-saving automations of their own.
+                - link "Learn about workflows" [ref=e297]:
+                  - /url: https://slack.com/features/workflow-automation
+              - generic [ref=e300] [cursor=pointer]:
+                - generic [ref=e301]: Manage projects and tasks.
+                - generic: Track. Approve. Mark as complete. All without leaving the conversation.
+              - generic [ref=e304] [cursor=pointer]:
+                - generic [ref=e305]: A simpler way to get started.
+                - generic: Project manager's block? Beginning a brief? There’s a template for that.
+            - generic [ref=e307]:
+              - generic [ref=e308]: 35%
+              - generic [ref=e309]:
+                - text: increase in time saved due to automations for Slack users
+                - superscript [ref=e310]: "2"
+          - generic [ref=e311]:
+            - generic [ref=e312]:
+              - img "A workflow builder outlines steps to send a message to a channel and add steps."
+            - generic:
+              - img "A project management board in Slack displays customer incidents."
+            - generic:
+              - img "Slack UI shows various workflow templates."
+      - generic [ref=e315]:
+        - generic [ref=e316]: Secure. Scaleable. Silo-free.
+        - generic [ref=e317]: Our flexible, open platform is purpose-built for bringing the best agents and AI to every business, and can be tailored to fit however your teams work best.
+        - generic [ref=e318]:
+          - generic [ref=e319]:
+            - generic [ref=e320]:
+              - generic [ref=e323] [cursor=pointer]:
+                - generic [ref=e324]: From Atlassian to Zoom.
+                - generic [ref=e325]: Google Drive. ChatGPT. Vercel. Box. Asana. Workday. You name it, it works in Slack.
+                - link "See all integrations" [ref=e326]:
+                  - /url: https://slack.com/marketplace
+              - generic [ref=e329] [cursor=pointer]:
+                - generic [ref=e330]: Customize Slack to fit your needs.
+                - generic: Our platform is flexible so you can build solutions specific to your business.
+              - generic [ref=e333] [cursor=pointer]:
+                - generic [ref=e334]: Work without worry.
+                - generic: If it’s shared in Slack, it’s safe. Our security program protects your data at every layer.
+            - generic [ref=e336]:
+              - text: “Work starts in conversation. That’s why we see Slack as the natural place to build our agents.”
+              - generic [ref=e337]:
+                - strong [ref=e338]: Guillermo Rauch,
+                - text: CEO, Vercel
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - img "filler alt"
+            - generic:
+              - img "filler alt"
+            - generic:
+              - img "filler alt"
+    - generic [ref=e343]:
+      - heading "The most innovative companies run their business in Slack." [level=2] [ref=e344]
+      - generic [ref=e345]:
+        - 'link "Watch video: Slackbot helps MrBeast create viral videos." [ref=e347] [cursor=pointer]':
+          - /url: https://www.youtube.com/embed/nl66SzwkGKU
+          - generic [ref=e349]:
+            - generic [ref=e351]:
+              - generic:
+                - img "Company logo"
+              - heading "Slackbot helps MrBeast create viral videos." [level=3] [ref=e352]
+            - generic [ref=e353]:
+              - img "Play video"
+        - 'link "Watch video: Slack helps Box bring agents to every employee" [ref=e355] [cursor=pointer]':
+          - /url: https://www.youtube.com/embed/o2c2_EGP8w4
+          - generic [ref=e357]:
+            - generic:
+              - generic:
+                - img "Company logo"
+        - 'link "Watch video: Caraway Brings All The Right Ingredients Together In Slack" [ref=e359] [cursor=pointer]':
+          - /url: https://www.youtube.com/embed/EOTqujB8_R4
+          - generic [ref=e361]:
+            - generic:
+              - generic:
+                - img "Company logo"
+        - 'link "Watch video: Slack helps Rivian do business in the fast lane" [ref=e363] [cursor=pointer]':
+          - /url: https://www.youtube.com/embed/8NjVIWfje1o
+          - generic [ref=e365]:
+            - generic:
+              - generic:
+                - img "Company logo"
+    - generic [ref=e366]:
+      - link "Get Started" [ref=e367] [cursor=pointer]:
+        - /url: https://slack.com/pricing
+      - link "Request a demo" [ref=e368] [cursor=pointer]:
+        - /url: https://slack.com/contact-sales
+    - generic [ref=e373]:
+      - heading "We’re in the business of growing businesses." [level=2] [ref=e374]
+      - generic [ref=e375]:
+        - generic [ref=e376]:
+          - generic [ref=e377]:
+            - generic [ref=e378]: "90"
+            - generic [ref=e379]: "%"
+          - generic [ref=e380]:
+            - text: of users say Slack helps them stay more connected
+            - superscript [ref=e381]: "4"
+        - generic [ref=e382]:
+          - generic [ref=e384]: "43"
+          - generic [ref=e385]:
+            - text: The average number of apps used by teams in Slack
+            - superscript [ref=e386]: "3"
+        - generic [ref=e387]:
+          - generic [ref=e388]:
+            - generic [ref=e389]: "87"
+            - generic [ref=e390]: "%"
+          - generic [ref=e391]:
+            - text: of users say Slack helps them collaborate more efficiently
+            - superscript [ref=e392]: "4"
+    - generic [ref=e394]:
+      - heading "Millions of people love to work in Slack." [level=2] [ref=e396]
+      - generic [ref=e397]:
+        - generic [ref=e398]:
+          - generic [ref=e399]:
+            - generic [ref=e400]: 700M
+            - generic [ref=e401]:
+              - text: Messages sent daily
+              - superscript [ref=e402]: "3"
+          - generic [ref=e403]:
+            - generic [ref=e404]: 4M
+            - generic [ref=e405]:
+              - text: Slack Connect users working directly with external teams each week
+              - superscript [ref=e406]: "3"
+          - generic [ref=e407]:
+            - generic [ref=e408]: 3M
+            - generic [ref=e409]:
+              - text: Daily Workflows
+              - superscript [ref=e410]: "3"
+          - generic [ref=e411]:
+            - generic [ref=e412]: 1.7M
+            - generic [ref=e413]:
+              - text: Apps actively used each week
+              - superscript [ref=e414]: "3"
+        - generic [ref=e415]:
+          - generic [ref=e416]: Don’t just take our word for it.
+          - generic [ref=e417]:
+            - text: Slack is a leader in over 303 G2 market reports.
+            - superscript [ref=e418]: "5"
+          - generic [ref=e419]:
+            - img "Awarded Best Result - Spring 2026 by G2 market reports"
+            - img "Awarded Easiest Setup - Spring 2026 by G2 market reports"
+            - img "Awarded Highest User Adoption - Spring 2026 by G2 market reports"
+            - img "Awarded Grid Leader in Small Business - Spring 2026 by G2 market reports"
+            - img "Awarded Grid Leader in mid-market - Spring 2026 by G2 market reports"
+            - img "Awarded Grid Leader in Enterprise - Spring 2026 by G2 market reports"
+    - generic [ref=e420]:
+      - heading "Your Slack deep dive starts here." [level=2] [ref=e423]
+      - generic [ref=e425]:
+        - link "Report, AI Agents are the Catalyst for a Limitless Workforce , Get the report" [ref=e426] [cursor=pointer]:
+          - /url: https://slack.com/resources/why-use-slack/state-of-ai-agents
+          - generic [ref=e427]: Link may open in new tab
+          - region "Report, AI Agents are the Catalyst for a Limitless Workforce , Get the report" [ref=e428]:
+            - figure [ref=e429]:
+              - img "Slack user interface with a floating agentforce mascot." [ref=e430]
+            - generic [ref=e431]:
+              - generic [ref=e432]: Report
+              - heading "AI Agents are the Catalyst for a Limitless Workforce" [level=3] [ref=e433]
+          - generic [ref=e436]: Get the report
+        - link "Webinar, Unlock Agentic Productivity for Every Employee , Watch Now" [ref=e437] [cursor=pointer]:
+          - /url: https://slack.com/events/introducing-agentforce-in-slack
+          - generic [ref=e438]: Link may open in new tab
+          - region "Webinar, Unlock Agentic Productivity for Every Employee , Watch Now" [ref=e439]:
+            - figure [ref=e440]:
+              - img "Slack Agentforce mascot along with various others." [ref=e441]
+            - generic [ref=e442]:
+              - generic [ref=e443]: Webinar
+              - heading "Unlock Agentic Productivity for Every Employee" [level=3] [ref=e444]
+          - generic [ref=e447]: Watch Now
+        - link "Future of work, The Cost of Business as Usual in the AI Era. , Learn more" [ref=e448] [cursor=pointer]:
+          - /url: https://slack.com/resources/why-use-slack/rethinking-email-ai-conversations-work
+          - generic [ref=e449]: Link may open in new tab
+          - region "Future of work, The Cost of Business as Usual in the AI Era. , Learn more" [ref=e450]:
+            - figure [ref=e451]:
+              - img "A picture of two women clapping at a conference next to a Dreamforce logo." [ref=e452]
+            - generic [ref=e453]:
+              - generic [ref=e454]: Future of work
+              - heading "The Cost of Business as Usual in the AI Era." [level=3] [ref=e455]
+          - generic [ref=e458]: Learn more
+        - link "Guide, 10 Ways to Replace Ineffective Meetings with Slack , Read more" [ref=e459] [cursor=pointer]:
+          - /url: https://slack.com/resources/why-use-slack/10-ways-to-replace-ineffective-meetings-with-slack
+          - generic [ref=e460]: Link may open in new tab
+          - region "Guide, 10 Ways to Replace Ineffective Meetings with Slack , Read more" [ref=e461]:
+            - figure [ref=e462]:
+              - img "An image of a Slack workspace with a number of users chatting." [ref=e463]
+            - generic [ref=e464]:
+              - generic [ref=e465]: Guide
+              - heading "10 Ways to Replace Ineffective Meetings with Slack" [level=3] [ref=e466]
+          - generic [ref=e469]: Read more
+      - generic [ref=e470]:
+        - generic [ref=e471]:
+          - superscript [ref=e472]: "1"
+          - text: Based on an internal analysis during the pilot of AI in Slack features (channel recaps, thread summaries, and AI search answers).
+        - generic [ref=e473]:
+          - superscript [ref=e474]: "2"
+          - text: "FY24 Customer Success Metrics. Base: Total n = 247-1,696, Slack internal data."
+        - generic [ref=e475]:
+          - superscript [ref=e476]: "3"
+          - text: FY25 Slack internal data, product usage analysis.
+        - generic [ref=e477]:
+          - superscript [ref=e478]: "4"
+          - text: FY25 Slack Customer Tracking Survey. Internal survey of weekly active Slack users in the US, UK, CA, and AU. Total n = 2,410.
+        - generic [ref=e479]:
+          - superscript [ref=e480]: "5"
+          - text: G2 Spring 2026 market reports for work management, workflow management, project collaboration software, enterprise search, knowledge base, employee Q&A, audio conferencing, business instant messaging, unified workspaces and more.
+    - generic [ref=e482]:
+      - heading "See all you can accomplish in Slack." [level=3] [ref=e483]
+      - link "Get started" [ref=e484] [cursor=pointer]:
+        - /url: https://slack.com/pricing
+      - link "Request a demo" [ref=e485] [cursor=pointer]:
+        - /url: https://slack.com/contact-sales
+  - contentinfo [ref=e486]:
+    - generic [ref=e487]:
+      - button "Change Region" [ref=e488] [cursor=pointer]:
+        - generic [ref=e490]: Change Region
+      - list [ref=e491]:
+        - listitem [ref=e492]:
+          - link "LinkedIn" [ref=e493] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/tiny-spec-inc/
+        - listitem [ref=e495]:
+          - link "Instagram" [ref=e496] [cursor=pointer]:
+            - /url: https://www.instagram.com/slackhq/
+        - listitem [ref=e498]:
+          - link "Facebook" [ref=e499] [cursor=pointer]:
+            - /url: https://facebook.com/slackhq
+        - listitem [ref=e501]:
+          - link "X" [ref=e502] [cursor=pointer]:
+            - /url: https://twitter.com/slackhq
+        - listitem [ref=e504]:
+          - link "YouTube" [ref=e505] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UCY3YECgeBcLCzIrFLP4gblw
+        - listitem [ref=e508]:
+          - link "TikTok" [ref=e509] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@slackhq
+    - generic [ref=e511]:
+      - link "Slack" [ref=e512] [cursor=pointer]:
+        - /url: https://slack.com/
+        - img "Close Navigation" [ref=e513]
+      - navigation "Footer Navigation" [ref=e514]:
+        - list [ref=e515]:
+          - listitem [ref=e516]:
+            - generic [ref=e517]: Product
+            - list [ref=e518]:
+              - listitem [ref=e519]:
+                - link "Watch Demo" [ref=e520] [cursor=pointer]:
+                  - /url: https://slack.com/demo
+                  - generic [ref=e522]: Watch Demo
+              - listitem [ref=e523]:
+                - link "Pricing" [ref=e524] [cursor=pointer]:
+                  - /url: https://slack.com/pricing
+                  - generic [ref=e526]: Pricing
+              - listitem [ref=e527]:
+                - link "Paid vs. Free" [ref=e528] [cursor=pointer]:
+                  - /url: https://slack.com/pricing/paid-vs-free
+                  - generic [ref=e530]: Paid vs. Free
+              - listitem [ref=e531]:
+                - link "Accessibility" [ref=e532] [cursor=pointer]:
+                  - /url: https://slack.com/accessibility
+                  - generic [ref=e534]: Accessibility
+              - listitem [ref=e535]:
+                - link "Featured Releases" [ref=e536] [cursor=pointer]:
+                  - /url: https://slack.com/innovations
+                  - generic [ref=e538]: Featured Releases
+              - listitem [ref=e539]:
+                - link "Changelog" [ref=e540] [cursor=pointer]:
+                  - /url: https://slack.com/changelog
+                  - generic [ref=e542]: Changelog
+              - listitem [ref=e543]:
+                - link "Status" [ref=e544] [cursor=pointer]:
+                  - /url: https://slack-status.com/?_gl=1*6cfpp0*_gcl_au*MTg5ODY1ODY3LjE3MDE3MTQ3MTc.
+                  - generic [ref=e546]: Status
+          - listitem [ref=e547]:
+            - generic [ref=e548]: Why Slack?
+            - list [ref=e549]:
+              - listitem [ref=e550]:
+                - link "Slack vs. Email" [ref=e551] [cursor=pointer]:
+                  - /url: https://slack.com/why/slack-vs-email
+                  - generic [ref=e553]: Slack vs. Email
+              - listitem [ref=e554]:
+                - link "Slack vs. Teams" [ref=e555] [cursor=pointer]:
+                  - /url: https://slack.com/compare/slack-vs-teams
+                  - generic [ref=e557]: Slack vs. Teams
+              - listitem [ref=e558]:
+                - link "Enterprise" [ref=e559] [cursor=pointer]:
+                  - /url: https://slack.com/enterprise
+                  - generic [ref=e561]: Enterprise
+              - listitem [ref=e562]:
+                - link "Small Business" [ref=e563] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/small-business
+                  - generic [ref=e565]: Small Business
+              - listitem [ref=e566]:
+                - link "Productivity" [ref=e567] [cursor=pointer]:
+                  - /url: https://slack.com/engage-users
+                  - generic [ref=e569]: Productivity
+              - listitem [ref=e570]:
+                - link "Task Management" [ref=e571] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/task-management
+                  - generic [ref=e573]: Task Management
+              - listitem [ref=e574]:
+                - link "Scale" [ref=e575] [cursor=pointer]:
+                  - /url: https://slack.com/scale
+                  - generic [ref=e577]: Scale
+              - listitem [ref=e578]:
+                - link "Trust" [ref=e579] [cursor=pointer]:
+                  - /url: https://slack.com/trust
+                  - generic [ref=e581]: Trust
+          - listitem [ref=e582]:
+            - generic [ref=e583]: Features
+            - list [ref=e584]:
+              - listitem [ref=e585]:
+                - link "Channels" [ref=e586] [cursor=pointer]:
+                  - /url: https://slack.com/features/channels
+                  - generic [ref=e588]: Channels
+              - listitem [ref=e589]:
+                - link "Slack Connect" [ref=e590] [cursor=pointer]:
+                  - /url: https://slack.com/connect
+                  - generic [ref=e592]: Slack Connect
+              - listitem [ref=e593]:
+                - link "Workflow Builder" [ref=e594] [cursor=pointer]:
+                  - /url: https://slack.com/features/workflow-automation
+                  - generic [ref=e596]: Workflow Builder
+              - listitem [ref=e597]:
+                - link "Messaging" [ref=e598] [cursor=pointer]:
+                  - /url: https://slack.com/team-chat
+                  - generic [ref=e600]: Messaging
+              - listitem [ref=e601]:
+                - link "Huddles" [ref=e602] [cursor=pointer]:
+                  - /url: https://slack.com/features/huddles
+                  - generic [ref=e604]: Huddles
+              - listitem [ref=e605]:
+                - link "Canvas" [ref=e606] [cursor=pointer]:
+                  - /url: https://slack.com/features/canvas
+                  - generic [ref=e608]: Canvas
+              - listitem [ref=e609]:
+                - link "Lists" [ref=e610] [cursor=pointer]:
+                  - /url: https://slack.com/features/task-list
+                  - generic [ref=e612]: Lists
+              - listitem [ref=e613]:
+                - link "Clips" [ref=e614] [cursor=pointer]:
+                  - /url: https://slack.com/features/clips
+                  - generic [ref=e616]: Clips
+              - listitem [ref=e617]:
+                - link "Apps & Integrations" [ref=e618] [cursor=pointer]:
+                  - /url: https://slack.com/integrations
+                  - generic [ref=e620]: Apps & Integrations
+              - listitem [ref=e621]:
+                - link "File Sharing" [ref=e622] [cursor=pointer]:
+                  - /url: https://slack.com/document-sharing
+                  - generic [ref=e624]: File Sharing
+              - listitem [ref=e625]:
+                - link "Slack AI" [ref=e626] [cursor=pointer]:
+                  - /url: https://slack.com/features/ai
+                  - generic [ref=e628]: Slack AI
+              - listitem [ref=e629]:
+                - link "Agentforce" [ref=e630] [cursor=pointer]:
+                  - /url: https://slack.com/ai-agents
+                  - generic [ref=e632]: Agentforce
+              - listitem [ref=e633]:
+                - link "Enterprise Search" [ref=e634] [cursor=pointer]:
+                  - /url: https://slack.com/features/enterprise-search
+                  - generic [ref=e636]: Enterprise Search
+              - listitem [ref=e637]:
+                - link "Security" [ref=e638] [cursor=pointer]:
+                  - /url: https://slack.com/trust/security
+                  - generic [ref=e640]: Security
+              - listitem [ref=e641]:
+                - link "Enterprise Key Management" [ref=e642] [cursor=pointer]:
+                  - /url: https://slack.com/enterprise-key-management
+                  - generic [ref=e644]: Enterprise Key Management
+              - listitem [ref=e645]:
+                - link "Slack Atlas" [ref=e646] [cursor=pointer]:
+                  - /url: https://slack.com/atlas
+                  - generic [ref=e648]: Slack Atlas
+              - listitem [ref=e649]:
+                - link "See all features" [ref=e650] [cursor=pointer]:
+                  - /url: https://slack.com/features
+                  - generic [ref=e652]: See all features
+          - listitem [ref=e653]:
+            - generic [ref=e654]: Solutions
+            - list [ref=e655]:
+              - listitem [ref=e656]:
+                - link "Engineering" [ref=e657] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/engineering
+                  - generic [ref=e659]: Engineering
+              - listitem [ref=e660]:
+                - link "IT" [ref=e661] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/information-technology
+                  - generic [ref=e663]: IT
+              - listitem [ref=e664]:
+                - link "Customer Service" [ref=e665] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/customer-service
+                  - generic [ref=e667]: Customer Service
+              - listitem [ref=e668]:
+                - link "Sales" [ref=e669] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/sales
+                  - generic [ref=e671]: Sales
+              - listitem [ref=e672]:
+                - link "Project Management" [ref=e673] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/project-management
+                  - generic [ref=e675]: Project Management
+              - listitem [ref=e676]:
+                - link "Marketing" [ref=e677] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/marketing
+                  - generic [ref=e679]: Marketing
+              - listitem [ref=e680]:
+                - link "Security" [ref=e681] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/security
+                  - generic [ref=e683]: Security
+              - listitem [ref=e684]:
+                - link "Manufacturing, Auto & Energy" [ref=e685] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/manufacturing
+                  - generic [ref=e687]: Manufacturing, Auto & Energy
+              - listitem [ref=e688]:
+                - link "Technology" [ref=e689] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/technology
+                  - generic [ref=e691]: Technology
+              - listitem [ref=e692]:
+                - link "Media" [ref=e693] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/media
+                  - generic [ref=e695]: Media
+              - listitem [ref=e696]:
+                - link "Financial Services" [ref=e697] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/financial-services
+                  - generic [ref=e699]: Financial Services
+              - listitem [ref=e700]:
+                - link "Retail" [ref=e701] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/retail
+                  - generic [ref=e703]: Retail
+              - listitem [ref=e704]:
+                - link "Public Sector" [ref=e705] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/public-sector
+                  - generic [ref=e707]: Public Sector
+              - listitem [ref=e708]:
+                - link "Education" [ref=e709] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/distance-learning
+                  - generic [ref=e711]: Education
+              - listitem [ref=e712]:
+                - link "Health & Life Sciences" [ref=e713] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/healthcare
+                  - generic [ref=e715]: Health & Life Sciences
+              - listitem [ref=e716]:
+                - link "See all solutions" [ref=e717] [cursor=pointer]:
+                  - /url: https://slack.com/solutions
+                  - generic [ref=e719]: See all solutions
+          - listitem [ref=e720]:
+            - generic [ref=e721]: Resources
+            - list [ref=e722]:
+              - listitem [ref=e723]:
+                - link "Help Center" [ref=e724] [cursor=pointer]:
+                  - /url: https://slack.com/help
+                  - generic [ref=e726]: Help Center
+              - listitem [ref=e727]:
+                - link "What’s New" [ref=e728] [cursor=pointer]:
+                  - /url: https://slack.com/innovations
+                  - generic [ref=e730]: What’s New
+              - listitem [ref=e731]:
+                - link "Resources Library" [ref=e732] [cursor=pointer]:
+                  - /url: https://slack.com/resources
+                  - generic [ref=e734]: Resources Library
+              - listitem [ref=e735]:
+                - link "Slack Blog" [ref=e736] [cursor=pointer]:
+                  - /url: https://slack.com/blog
+                  - generic [ref=e738]: Slack Blog
+              - listitem [ref=e739]:
+                - link "Community" [ref=e740] [cursor=pointer]:
+                  - /url: https://slack.com/community
+                  - generic [ref=e742]: Community
+              - listitem [ref=e743]:
+                - link "Customer Stories" [ref=e744] [cursor=pointer]:
+                  - /url: https://slack.com/customer-stories
+                  - generic [ref=e746]: Customer Stories
+              - listitem [ref=e747]:
+                - link "Events" [ref=e748] [cursor=pointer]:
+                  - /url: https://slack.com/events
+                  - generic [ref=e750]: Events
+              - listitem [ref=e751]:
+                - link "Developers" [ref=e752] [cursor=pointer]:
+                  - /url: https://api.slack.com/?_gl=1*618lju*_gcl_au*MTg5ODY1ODY3LjE3MDE3MTQ3MTc.
+                  - generic [ref=e754]: Developers
+              - listitem [ref=e755]:
+                - link "Partner Program" [ref=e756] [cursor=pointer]:
+                  - /url: https://slack.com/partners
+                  - generic [ref=e758]: Partner Program
+              - listitem [ref=e759]:
+                - link "Partner Offers" [ref=e760] [cursor=pointer]:
+                  - /url: https://slack.com/partner-offers
+                  - generic [ref=e762]: Partner Offers
+              - listitem [ref=e763]:
+                - link "Slack Marketplace" [ref=e764] [cursor=pointer]:
+                  - /url: https://slack.com/marketplace
+                  - generic [ref=e766]: Slack Marketplace
+              - listitem [ref=e767]:
+                - link "Slack Certified" [ref=e768] [cursor=pointer]:
+                  - /url: https://slackcertified.com/
+                  - generic [ref=e770]: Slack Certified
+              - listitem [ref=e771]:
+                - link "Run Effective Meetings" [ref=e772] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/use-cases/run-effective-meetings
+                  - generic [ref=e774]: Run Effective Meetings
+              - listitem [ref=e775]:
+                - link "Collaborate Externally" [ref=e776] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/use-cases/collaborate-externally
+                  - generic [ref=e778]: Collaborate Externally
+              - listitem [ref=e779]:
+                - link "Manage Projects Efficiently" [ref=e780] [cursor=pointer]:
+                  - /url: https://slack.com/solutions/use-cases/manage-projects-efficiently
+                  - generic [ref=e782]: Manage Projects Efficiently
+          - listitem [ref=e783]:
+            - generic [ref=e784]: Company
+            - list [ref=e785]:
+              - listitem [ref=e786]:
+                - link "About Us" [ref=e787] [cursor=pointer]:
+                  - /url: https://slack.com/about
+                  - generic [ref=e789]: About Us
+              - listitem [ref=e790]:
+                - link "News" [ref=e791] [cursor=pointer]:
+                  - /url: https://slack.com/blog/news
+                  - generic [ref=e793]: News
+              - listitem [ref=e794]:
+                - link "Media Kit" [ref=e795] [cursor=pointer]:
+                  - /url: https://slack.com/media-kit
+                  - generic [ref=e797]: Media Kit
+              - listitem [ref=e798]:
+                - link "Brand Center" [ref=e799] [cursor=pointer]:
+                  - /url: https://brand.slackhq.com/
+                  - generic [ref=e801]: Brand Center
+              - listitem [ref=e802]:
+                - link "Careers" [ref=e803] [cursor=pointer]:
+                  - /url: https://slack.com/careers
+                  - generic [ref=e805]: Careers
+              - listitem [ref=e806]:
+                - link "Swag Store" [ref=e807] [cursor=pointer]:
+                  - /url: https://www.salesforcestore.com/Slack-C124.aspx
+                  - generic [ref=e809]: Swag Store
+              - listitem [ref=e810]:
+                - link "Engineering Blog" [ref=e811] [cursor=pointer]:
+                  - /url: https://slack.engineering/
+                  - generic [ref=e813]: Engineering Blog
+              - listitem [ref=e814]:
+                - link "Design Blog" [ref=e815] [cursor=pointer]:
+                  - /url: https://slack.design/
+                  - generic [ref=e817]: Design Blog
+              - listitem [ref=e818]:
+                - link "Contact Us" [ref=e819] [cursor=pointer]:
+                  - /url: https://slack.com/help
+                  - generic [ref=e821]: Contact Us
+    - generic [ref=e822]:
+      - generic [ref=e823]:
+        - link "Download Slack" [ref=e824] [cursor=pointer]:
+          - /url: https://slack.com/get
+        - list "Legal links" [ref=e825]:
+          - listitem [ref=e826]:
+            - link "Privacy" [ref=e827] [cursor=pointer]:
+              - /url: https://slack.com/trust/privacy/privacy-policy
+          - listitem [ref=e828]:
+            - link "Terms" [ref=e829] [cursor=pointer]:
+              - /url: https://slack.com/legal
+          - listitem [ref=e830]:
+            - link "Cookie Preferences" [ref=e831] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e832]:
+            - link "Your Privacy Choices" [ref=e833] [cursor=pointer]:
+              - /url: https://www.salesforce.com/form/other/privacy-request/
+      - generic [ref=e834]: ©2026 Slack Technologies, LLC, a Salesforce company. All rights reserved. Various trademarks held by their respective owners.

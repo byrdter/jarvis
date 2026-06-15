@@ -1,1 +1,0 @@
-If you are fixing your own setup, start with the free wins. Check your MCP token load. Disconnect servers you do not use. Turn on Tool Search where your client supports it. Scope big MCP servers by group or explicit tool list. You can do that in an hour, and it immediately reduces noise.

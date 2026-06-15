@@ -1,1 +1,0 @@
-And the third one. The pause protocol is the secret weapon. Your one-second pauses become scene boundaries the pipeline can trust. That's the pipeline. Pick your path, build it once, ship videos every week. <break time="1s"/>

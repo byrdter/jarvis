@@ -1,1 +1,0 @@
-Here is the rule we use now. If the agent needs permissioned access to an external system, consider MCP. If it needs to know how we do something, use a skill. If it needs to run a local deterministic operation, use a CLI script. If it needs to move or transform a lot of data across steps, use code execution. Do not make one tool carry every job.

@@ -460,6 +460,48 @@ The bracketed lines are stripped before HeyGen rendering but kept in the script-
 
 Pure text-based topic detection is ~70% accurate. Pause-detection is 100% accurate — you intentionally signaled the cut. The pipeline can't misread your intent.
 
+### HeyGen Segment-to-Image Mapping (CRITICAL)
+
+**HeyGen assigns ONE image/video per segment.**
+
+This means:
+- Each 1s+ pause = NEW segment = NEW image
+- You CANNOT have multiple images within a single segment
+- Script breaks at 1s+ pauses define your segment boundaries
+- Each segment gets exactly one Nana Banana image, video clip, or static graphic
+
+**Practical implication for script writing:**
+
+```
+❌ WRONG - Multiple pauses within one segment:
+Segment 002 (28 seconds):
+Here's the problem. <break time="1s"/>
+You built this system. It's automated. <break time="1.5s"/>
+But you're stuck at your desk. <break time="1.5s"/>
+[Would need 3 images but HeyGen only allows 1 per segment]
+
+✅ RIGHT - Each pause creates new segment:
+Segment 002 (8 seconds):
+Here's the problem. <break time="1.5s"/>
+[Image 002: Problem title card]
+
+Segment 003 (12 seconds):
+You built this system. It's automated. <break time="1.5s"/>
+[Image 003: System visual]
+
+Segment 004 (13 seconds):
+But you're stuck at your desk. <break time="1.5s"/>
+[Image 004: Constraint visual]
+```
+
+**For optimal engagement:**
+- Each distinct idea = new segment = new image
+- Visual change every 8-15 seconds maintains viewer attention
+- 1s+ pauses already mark natural idea transitions
+- More segments (25-30) with focused images beats fewer segments (10-15) with generic images
+
+**Rule of thumb:** If you're tempted to write a 1s+ pause, start a new segment instead.
+
 ### See also
 
 - `/jarvis/AUTOMATED-VIDEO-PIPELINE-PLAN.md` — full automation architecture

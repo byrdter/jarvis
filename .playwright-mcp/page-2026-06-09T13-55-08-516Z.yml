@@ -1,0 +1,1518 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Cookie settings" [level=3] [ref=e3]
+    - paragraph [ref=e4]:
+      - text: We use cookies to deliver and improve our services, analyze site usage, and if you agree, to customize or personalize your experience and market our services to you. You can read our Cookie Policy
+      - link "here" [ref=e5] [cursor=pointer]:
+        - /url: https://www.anthropic.com/legal/cookies
+      - text: .
+    - generic [ref=e6]:
+      - button "Customize Cookie Settings" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: Customize Cookie Settings
+      - button "Reject All Cookies" [ref=e9] [cursor=pointer]:
+        - generic [ref=e10]: Reject All Cookies
+      - button "Accept All Cookies" [ref=e11] [cursor=pointer]:
+        - generic [ref=e12]: Accept All Cookies
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - link "Claude API Docs Home" [ref=e17] [cursor=pointer]:
+        - /url: /docs/en/home
+        - img "Claude API Docs" [ref=e18]
+      - navigation [ref=e21]:
+        - list [ref=e22]:
+          - listitem [ref=e23]:
+            - link "Messages" [ref=e24] [cursor=pointer]:
+              - /url: /docs/en/intro
+          - listitem [ref=e25]:
+            - link "Managed Agents" [ref=e26] [cursor=pointer]:
+              - /url: /docs/en/managed-agents/overview
+          - listitem [ref=e27]:
+            - link "Admin" [ref=e28] [cursor=pointer]:
+              - /url: /docs/en/manage-claude/admin-api
+          - listitem [ref=e29]:
+            - button "Resources" [ref=e30] [cursor=pointer]:
+              - text: Resources
+              - img [ref=e32]
+      - generic [ref=e35]:
+        - link "API reference" [ref=e36] [cursor=pointer]:
+          - /url: /docs/en/api/overview
+          - button "API reference" [ref=e37]:
+            - img [ref=e39]
+            - text: API reference
+        - button [ref=e42] [cursor=pointer]:
+          - img [ref=e44]
+        - button "English" [ref=e46] [cursor=pointer]:
+          - text: English
+          - img [ref=e48]
+        - link "Console" [ref=e50] [cursor=pointer]:
+          - /url: /
+          - button "Console" [ref=e51]:
+            - img [ref=e53]
+            - text: Console
+        - link "Log in" [ref=e56] [cursor=pointer]:
+          - /url: /login?returnTo=%2Fdocs%2Fen%2Fagents-and-tools%2Ftool-use%2Fcode-execution-tool
+          - button "Log in" [ref=e57]
+    - generic [ref=e59]:
+      - complementary [ref=e60]:
+        - button "Search documentation" [ref=e62] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img
+          - generic [ref=e63]: Search...
+          - generic:
+            - generic: ⌘K
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: First steps
+            - generic [ref=e69]:
+              - link "Intro to Claude" [ref=e70] [cursor=pointer]:
+                - /url: /docs/en/intro
+                - generic [ref=e72]: Intro to Claude
+              - link "Quickstart" [ref=e73] [cursor=pointer]:
+                - /url: /docs/en/get-started
+                - generic [ref=e75]: Quickstart
+          - generic [ref=e76]:
+            - generic [ref=e77]: Building with Claude
+            - generic [ref=e78]:
+              - link "Features overview" [ref=e79] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/overview
+                - generic [ref=e81]: Features overview
+              - link "Using the Messages API" [ref=e82] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/working-with-messages
+                - generic [ref=e84]: Using the Messages API
+              - link "Handling stop reasons" [ref=e85] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/handling-stop-reasons
+                - generic [ref=e87]: Handling stop reasons
+          - generic [ref=e88]:
+            - generic [ref=e89]: Model capabilities
+            - generic [ref=e90]:
+              - link "Extended thinking" [ref=e91] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/extended-thinking
+                - generic [ref=e93]: Extended thinking
+              - link "Adaptive thinking" [ref=e94] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/adaptive-thinking
+                - generic [ref=e96]: Adaptive thinking
+              - link "Effort" [ref=e97] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/effort
+                - generic [ref=e99]: Effort
+              - link "Task budgets (beta)" [ref=e100] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/task-budgets
+                - generic [ref=e102]: Task budgets (beta)
+              - link "Fast mode (research preview)" [ref=e103] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/fast-mode
+                - generic [ref=e105]: Fast mode (research preview)
+              - link "Structured outputs" [ref=e106] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/structured-outputs
+                - generic [ref=e108]: Structured outputs
+              - link "Citations" [ref=e109] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/citations
+                - generic [ref=e111]: Citations
+              - link "Streaming Messages" [ref=e112] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/streaming
+                - generic [ref=e114]: Streaming Messages
+              - link "Batch processing" [ref=e115] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/batch-processing
+                - generic [ref=e117]: Batch processing
+              - link "Search results" [ref=e118] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/search-results
+                - generic [ref=e120]: Search results
+              - link "Streaming refusals" [ref=e121] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
+                - generic [ref=e123]: Streaming refusals
+              - link "Multilingual support" [ref=e124] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/multilingual-support
+                - generic [ref=e126]: Multilingual support
+              - link "Embeddings" [ref=e127] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/embeddings
+                - generic [ref=e129]: Embeddings
+          - generic [ref=e130]:
+            - generic [ref=e131]: Tools
+            - generic [ref=e132]:
+              - link "Overview" [ref=e133] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/overview
+                - generic [ref=e135]: Overview
+              - link "How tool use works" [ref=e136] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/how-tool-use-works
+                - generic [ref=e138]: How tool use works
+              - 'link "Tutorial: Build a tool-using agent" [ref=e139] [cursor=pointer]':
+                - /url: /docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
+                - generic [ref=e141]: "Tutorial: Build a tool-using agent"
+              - link "Define tools" [ref=e142] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/define-tools
+                - generic [ref=e144]: Define tools
+              - link "Handle tool calls" [ref=e145] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/handle-tool-calls
+                - generic [ref=e147]: Handle tool calls
+              - link "Parallel tool use" [ref=e148] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/parallel-tool-use
+                - generic [ref=e150]: Parallel tool use
+              - link "Tool Runner (SDK)" [ref=e151] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-runner
+                - generic [ref=e153]: Tool Runner (SDK)
+              - link "Strict tool use" [ref=e154] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/strict-tool-use
+                - generic [ref=e156]: Strict tool use
+              - link "Tool use with prompt caching" [ref=e157] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching
+                - generic [ref=e159]: Tool use with prompt caching
+              - link "Server tools" [ref=e160] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/server-tools
+                - generic [ref=e162]: Server tools
+              - link "Troubleshooting" [ref=e163] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/troubleshooting-tool-use
+                - generic [ref=e165]: Troubleshooting
+              - link "Web search tool" [ref=e166] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-search-tool
+                - generic [ref=e168]: Web search tool
+              - link "Web fetch tool" [ref=e169] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-fetch-tool
+                - generic [ref=e171]: Web fetch tool
+              - link "Code execution tool" [ref=e172] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool
+                - generic [ref=e174]: Code execution tool
+              - link "Advisor tool" [ref=e175] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/advisor-tool
+                - generic [ref=e177]: Advisor tool
+              - link "Memory tool" [ref=e178] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/memory-tool
+                - generic [ref=e180]: Memory tool
+              - link "Bash tool" [ref=e181] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/bash-tool
+                - generic [ref=e183]: Bash tool
+              - link "Computer use tool" [ref=e184] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/computer-use-tool
+                - generic [ref=e186]: Computer use tool
+              - link "Text editor tool" [ref=e187] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/text-editor-tool
+                - generic [ref=e189]: Text editor tool
+          - generic [ref=e190]:
+            - generic [ref=e191]: Tool infrastructure
+            - generic [ref=e192]:
+              - link "Tool reference" [ref=e193] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-reference
+                - generic [ref=e195]: Tool reference
+              - link "Manage tool context" [ref=e196] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/manage-tool-context
+                - generic [ref=e198]: Manage tool context
+              - link "Tool combinations" [ref=e199] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-combinations
+                - generic [ref=e201]: Tool combinations
+              - link "Tool search" [ref=e202] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-search-tool
+                - generic [ref=e204]: Tool search
+              - link "Programmatic tool calling" [ref=e205] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+                - generic [ref=e207]: Programmatic tool calling
+              - link "Fine-grained tool streaming" [ref=e208] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+                - generic [ref=e210]: Fine-grained tool streaming
+          - generic [ref=e211]:
+            - generic [ref=e212]: Context management
+            - generic [ref=e213]:
+              - link "Context windows" [ref=e214] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-windows
+                - generic [ref=e216]: Context windows
+              - link "Compaction" [ref=e217] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/compaction
+                - generic [ref=e219]: Compaction
+              - link "Context editing" [ref=e220] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-editing
+                - generic [ref=e222]: Context editing
+              - link "Prompt caching" [ref=e223] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-caching
+                - generic [ref=e225]: Prompt caching
+              - link "Mid-conversation system messages" [ref=e226] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/mid-conversation-system-messages
+                - generic [ref=e228]: Mid-conversation system messages
+              - link "Build an orchestration mode" [ref=e229] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/mid-conversation-effort-example
+                - generic [ref=e231]: Build an orchestration mode
+              - link "Cache diagnostics (beta)" [ref=e232] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/cache-diagnostics
+                - generic [ref=e234]: Cache diagnostics (beta)
+              - link "Token counting" [ref=e235] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/token-counting
+                - generic [ref=e237]: Token counting
+          - generic [ref=e238]:
+            - generic [ref=e239]: Working with files
+            - generic [ref=e240]:
+              - link "Files API" [ref=e241] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/files
+                - generic [ref=e243]: Files API
+              - link "PDF support" [ref=e244] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/pdf-support
+                - generic [ref=e246]: PDF support
+              - link "Images and vision" [ref=e247] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/vision
+                - generic [ref=e249]: Images and vision
+          - generic [ref=e250]:
+            - generic [ref=e251]: Skills
+            - generic [ref=e252]:
+              - link "Overview" [ref=e253] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/overview
+                - generic [ref=e255]: Overview
+              - link "Quickstart" [ref=e256] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/quickstart
+                - generic [ref=e258]: Quickstart
+              - link "Best practices" [ref=e259] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/best-practices
+                - generic [ref=e261]: Best practices
+              - link "Skills for enterprise" [ref=e262] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/enterprise
+                - generic [ref=e264]: Skills for enterprise
+              - link "Skills in the API" [ref=e265] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/skills-guide
+                - generic [ref=e267]: Skills in the API
+          - generic [ref=e268]:
+            - generic [ref=e269]: MCP
+            - generic [ref=e270]:
+              - link "Remote MCP servers" [ref=e271] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/remote-mcp-servers
+                - generic [ref=e273]: Remote MCP servers
+              - link "MCP connector" [ref=e274] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/mcp-connector
+                - generic [ref=e276]: MCP connector
+              - button "MCP tunnels" [ref=e278] [cursor=pointer]:
+                - generic [ref=e279]: MCP tunnels
+                - img [ref=e282]
+          - generic [ref=e284]:
+            - generic [ref=e285]: Claude on cloud platforms
+            - generic [ref=e286]:
+              - link "Amazon Bedrock" [ref=e287] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-amazon-bedrock
+                - generic [ref=e289]: Amazon Bedrock
+              - link "Amazon Bedrock (legacy)" [ref=e290] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
+                - generic [ref=e292]: Amazon Bedrock (legacy)
+              - link "Claude Platform on AWS" [ref=e293] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-platform-on-aws
+                - generic [ref=e295]: Claude Platform on AWS
+              - link "Microsoft Foundry" [ref=e296] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-in-microsoft-foundry
+                - generic [ref=e298]: Microsoft Foundry
+              - link "Vertex AI" [ref=e299] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/claude-on-vertex-ai
+                - generic [ref=e301]: Vertex AI
+      - main [ref=e305]:
+        - generic [ref=e306]:
+          - article [ref=e308]:
+            - generic [ref=e309]:
+              - generic [ref=e311]:
+                - generic [ref=e312]: Messages
+                - generic [ref=e313]: /
+                - generic [ref=e314]: Tools
+              - generic [ref=e315]:
+                - heading "Code execution tool" [level=1] [ref=e316]
+                - generic [ref=e318]:
+                  - button "Copy page" [ref=e319] [cursor=pointer]:
+                    - generic [ref=e320]:
+                      - generic [ref=e321]:
+                        - img
+                        - img [ref=e322]
+                        - img
+                        - img
+                      - generic [ref=e324]: Copy page
+                  - button [ref=e325] [cursor=pointer]:
+                    - img [ref=e327]
+              - generic [ref=e329]: Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
+            - paragraph [ref=e330]: Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
+            - paragraph [ref=e331]:
+              - strong [ref=e332]: Code execution is free when used with web search or web fetch.
+              - text: When
+              - code [ref=e333]: web_search_20260209
+              - text: or
+              - code [ref=e334]: web_fetch_20260209
+              - text: is included in your request, there are no additional charges for code execution tool calls beyond the standard input and output token costs. Standard code execution charges apply when these tools are not included.
+            - paragraph [ref=e335]: Code execution is a core primitive for building high-performance agents. It enables dynamic filtering in web search and web fetch tools, allowing Claude to process results before they reach the context window, improving accuracy while reducing token consumption.
+            - generic [ref=e336]:
+              - img [ref=e339]
+              - paragraph [ref=e342]:
+                - text: Reach out through the
+                - link "feedback form" [ref=e343] [cursor=pointer]:
+                  - /url: https://forms.gle/LTAU6Xn2puCJMi1n6
+                - text: to share your feedback on this feature.
+            - generic [ref=e344]:
+              - img [ref=e347]
+              - paragraph [ref=e350]:
+                - text: This feature is
+                - strong [ref=e351]: not
+                - text: eligible for
+                - link "Zero Data Retention (ZDR)" [ref=e352] [cursor=pointer]:
+                  - /url: /docs/en/build-with-claude/api-and-data-retention
+                - text: . Data is retained according to the feature's standard retention policy.
+            - heading "Copy link to clipboard Model compatibility" [level=2] [ref=e353]:
+              - generic [ref=e354]:
+                - button "Copy link to clipboard" [ref=e356] [cursor=pointer]:
+                  - img [ref=e358]
+                - generic [ref=e360]: Model compatibility
+            - paragraph [ref=e361]: "The code execution tool is available on the following models:"
+            - table [ref=e363]:
+              - rowgroup [ref=e364]:
+                - row "Model Tool versions" [ref=e365]:
+                  - columnheader "Model" [ref=e366]
+                  - columnheader "Tool versions" [ref=e367]
+              - rowgroup [ref=e368]:
+                - row "Claude Opus 4.8 ( claude-opus-4-8 ) code_execution_20250825, code_execution_20260120" [ref=e369]:
+                  - cell "Claude Opus 4.8 ( claude-opus-4-8 )" [ref=e370]:
+                    - text: Claude Opus 4.8 (
+                    - generic [ref=e371] [cursor=pointer]: claude-opus-4-8
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e372]:
+                    - code [ref=e373]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e374]: code_execution_20260120
+                - row "Claude Opus 4.7 ( claude-opus-4-7 ) code_execution_20250825, code_execution_20260120" [ref=e375]:
+                  - cell "Claude Opus 4.7 ( claude-opus-4-7 )" [ref=e376]:
+                    - text: Claude Opus 4.7 (
+                    - generic [ref=e377] [cursor=pointer]: claude-opus-4-7
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e378]:
+                    - code [ref=e379]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e380]: code_execution_20260120
+                - row "Claude Opus 4.6 ( claude-opus-4-6 ) code_execution_20250825, code_execution_20260120" [ref=e381]:
+                  - cell "Claude Opus 4.6 ( claude-opus-4-6 )" [ref=e382]:
+                    - text: Claude Opus 4.6 (
+                    - generic [ref=e383] [cursor=pointer]: claude-opus-4-6
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e384]:
+                    - code [ref=e385]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e386]: code_execution_20260120
+                - row "Claude Sonnet 4.6 ( claude-sonnet-4-6 ) code_execution_20250825, code_execution_20260120" [ref=e387]:
+                  - cell "Claude Sonnet 4.6 ( claude-sonnet-4-6 )" [ref=e388]:
+                    - text: Claude Sonnet 4.6 (
+                    - generic [ref=e389] [cursor=pointer]: claude-sonnet-4-6
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e390]:
+                    - code [ref=e391]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e392]: code_execution_20260120
+                - row "Claude Opus 4.5 ( claude-opus-4-5-20251101 ) code_execution_20250825, code_execution_20260120" [ref=e393]:
+                  - cell "Claude Opus 4.5 ( claude-opus-4-5-20251101 )" [ref=e394]:
+                    - text: Claude Opus 4.5 (
+                    - generic [ref=e395] [cursor=pointer]: claude-opus-4-5-20251101
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e396]:
+                    - code [ref=e397]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e398]: code_execution_20260120
+                - row "Claude Sonnet 4.5 ( claude-sonnet-4-5-20250929 ) code_execution_20250825, code_execution_20260120" [ref=e399]:
+                  - cell "Claude Sonnet 4.5 ( claude-sonnet-4-5-20250929 )" [ref=e400]:
+                    - text: Claude Sonnet 4.5 (
+                    - generic [ref=e401] [cursor=pointer]: claude-sonnet-4-5-20250929
+                    - text: )
+                  - cell "code_execution_20250825, code_execution_20260120" [ref=e402]:
+                    - code [ref=e403]: code_execution_20250825
+                    - text: ","
+                    - code [ref=e404]: code_execution_20260120
+                - row "Claude Haiku 4.5 ( claude-haiku-4-5-20251001 ) code_execution_20250825" [ref=e405]:
+                  - cell "Claude Haiku 4.5 ( claude-haiku-4-5-20251001 )" [ref=e406]:
+                    - text: Claude Haiku 4.5 (
+                    - generic [ref=e407] [cursor=pointer]: claude-haiku-4-5-20251001
+                    - text: )
+                  - cell "code_execution_20250825" [ref=e408]:
+                    - code [ref=e409]: code_execution_20250825
+                - row "Claude Opus 4.1 ( claude-opus-4-1-20250805 ) (deprecated) code_execution_20250825" [ref=e410]:
+                  - cell "Claude Opus 4.1 ( claude-opus-4-1-20250805 ) (deprecated)" [ref=e411]:
+                    - text: Claude Opus 4.1 (
+                    - generic [ref=e412] [cursor=pointer]: claude-opus-4-1-20250805
+                    - text: ) (
+                    - link "deprecated" [ref=e413] [cursor=pointer]:
+                      - /url: /docs/en/about-claude/model-deprecations
+                    - text: )
+                  - cell "code_execution_20250825" [ref=e414]:
+                    - code [ref=e415]: code_execution_20250825
+                - row "Claude Opus 4 ( claude-opus-4-20250514 ) (deprecated) code_execution_20250825" [ref=e416]:
+                  - cell "Claude Opus 4 ( claude-opus-4-20250514 ) (deprecated)" [ref=e417]:
+                    - text: Claude Opus 4 (
+                    - generic [ref=e418] [cursor=pointer]: claude-opus-4-20250514
+                    - text: ) (
+                    - link "deprecated" [ref=e419] [cursor=pointer]:
+                      - /url: /docs/en/about-claude/model-deprecations
+                    - text: )
+                  - cell "code_execution_20250825" [ref=e420]:
+                    - code [ref=e421]: code_execution_20250825
+                - row "Claude Sonnet 4 ( claude-sonnet-4-20250514 ) (deprecated) code_execution_20250825" [ref=e422]:
+                  - cell "Claude Sonnet 4 ( claude-sonnet-4-20250514 ) (deprecated)" [ref=e423]:
+                    - text: Claude Sonnet 4 (
+                    - generic [ref=e424] [cursor=pointer]: claude-sonnet-4-20250514
+                    - text: ) (
+                    - link "deprecated" [ref=e425] [cursor=pointer]:
+                      - /url: /docs/en/about-claude/model-deprecations
+                    - text: )
+                  - cell "code_execution_20250825" [ref=e426]:
+                    - code [ref=e427]: code_execution_20250825
+            - generic [ref=e428]:
+              - img [ref=e431]
+              - paragraph [ref=e434]:
+                - code [ref=e435]: code_execution_20250825
+                - text: supports Bash commands and file operations and is available on every model listed above.
+                - code [ref=e436]: code_execution_20260120
+                - text: adds REPL state persistence and
+                - link "programmatic tool calling" [ref=e437] [cursor=pointer]:
+                  - /url: /docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+                - text: from within the sandbox, and is available on Opus 4.5+ and Sonnet 4.5+ only. If you're still using the legacy
+                - code [ref=e438]: code_execution_20250522
+                - text: (Python only), see
+                - link "Upgrade to latest tool version" [ref=e439] [cursor=pointer]:
+                  - /url: "#upgrade-to-latest-tool-version"
+                - text: to migrate from it.
+            - generic [ref=e440]:
+              - img [ref=e443]
+              - paragraph [ref=e446]: Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+            - heading "Copy link to clipboard Platform availability" [level=2] [ref=e447]:
+              - generic [ref=e448]:
+                - button "Copy link to clipboard" [ref=e450] [cursor=pointer]:
+                  - img [ref=e452]
+                - generic [ref=e454]: Platform availability
+            - paragraph [ref=e455]: "Code execution is available on:"
+            - list [ref=e456]:
+              - listitem [ref=e457]:
+                - text: •
+                - strong [ref=e458]: Claude API
+                - text: (Anthropic)
+              - listitem [ref=e459]:
+                - text: •
+                - strong [ref=e460]:
+                  - link "Claude Platform on AWS" [ref=e461] [cursor=pointer]:
+                    - /url: /docs/en/build-with-claude/claude-platform-on-aws
+              - listitem [ref=e462]:
+                - text: •
+                - strong [ref=e463]:
+                  - link "Microsoft Foundry" [ref=e464] [cursor=pointer]:
+                    - /url: /docs/en/build-with-claude/claude-in-microsoft-foundry
+            - paragraph [ref=e465]: Code execution is not currently available on Amazon Bedrock or Vertex AI.
+            - generic [ref=e466]:
+              - img [ref=e469]
+              - paragraph [ref=e472]:
+                - text: For
+                - link "Claude Mythos Preview" [ref=e473] [cursor=pointer]:
+                  - /url: https://anthropic.com/glasswing
+                - text: ", code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Vertex AI, or Claude Platform on AWS."
+            - heading "Copy link to clipboard Quick start" [level=2] [ref=e474]:
+              - generic [ref=e475]:
+                - button "Copy link to clipboard" [ref=e477] [cursor=pointer]:
+                  - img [ref=e479]
+                - generic [ref=e481]: Quick start
+            - paragraph [ref=e482]: "Here's a simple example that asks Claude to perform a calculation:"
+            - generic [ref=e483]:
+              - generic [ref=e484]:
+                - generic [ref=e485]:
+                  - button "cURL" [ref=e486] [cursor=pointer]
+                  - button "CLI" [ref=e487] [cursor=pointer]
+                  - button "Python" [ref=e488] [cursor=pointer]
+                  - button "TypeScript" [ref=e489] [cursor=pointer]
+                  - button "C#" [ref=e490] [cursor=pointer]
+                  - button "Go" [ref=e491] [cursor=pointer]
+                  - button "Java" [ref=e492] [cursor=pointer]
+                  - button "PHP" [ref=e493] [cursor=pointer]
+                  - button "Ruby" [ref=e494] [cursor=pointer]
+                - button "Copy code" [ref=e496] [cursor=pointer]:
+                  - generic [ref=e499]: 
+              - code [ref=e503]:
+                - generic [ref=e504]: client = anthropic.Anthropic()
+                - generic [ref=e505]: response = client.messages.create(
+                - generic [ref=e506]: model="claude-opus-4-8",
+                - generic [ref=e507]: max_tokens=4096,
+                - generic [ref=e508]: messages=[
+                - generic [ref=e509]: "{"
+                - generic [ref=e510]: "\"role\": \"user\","
+                - generic [ref=e511]: "\"content\": \"Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\","
+                - generic [ref=e512]: "}"
+                - generic [ref=e513]: "],"
+                - generic [ref=e514]: "tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],"
+                - generic [ref=e515]: )
+                - generic [ref=e516]: print(response)
+            - heading "Copy link to clipboard How code execution works" [level=2] [ref=e517]:
+              - generic [ref=e518]:
+                - button "Copy link to clipboard" [ref=e520] [cursor=pointer]:
+                  - img [ref=e522]
+                - generic [ref=e524]: How code execution works
+            - paragraph [ref=e525]: "When you add the code execution tool to your API request:"
+            - list [ref=e526]:
+              - listitem [ref=e527]: Claude evaluates whether code execution would help answer your question
+              - listitem [ref=e528]:
+                - text: "The tool automatically provides Claude with the following capabilities:"
+                - list [ref=e529]:
+                  - listitem [ref=e530]:
+                    - text: •
+                    - strong [ref=e531]: Bash commands
+                    - text: ": Execute shell commands for system operations and package management"
+                  - listitem [ref=e532]:
+                    - text: •
+                    - strong [ref=e533]: File operations
+                    - text: ": Create, view, and edit files directly, including writing code"
+              - listitem [ref=e534]: Claude can use any combination of these capabilities in a single request
+              - listitem [ref=e535]: All operations run in a secure sandbox environment
+              - listitem [ref=e536]: Claude provides results with any generated charts, calculations, or analysis
+            - heading "Copy link to clipboard When Claude runs code" [level=3] [ref=e537]:
+              - generic [ref=e538]:
+                - button "Copy link to clipboard" [ref=e540] [cursor=pointer]:
+                  - img [ref=e542]
+                - generic [ref=e544]: When Claude runs code
+            - paragraph [ref=e545]: "Claude runs code when the request benefits from computation or file handling:"
+            - list [ref=e546]:
+              - listitem [ref=e547]: • Non-trivial math (large numbers, many steps, precision-sensitive results)
+              - listitem [ref=e548]: • Data analysis, file parsing, or visualization
+              - listitem [ref=e549]: • Algorithm execution or simulation
+              - listitem [ref=e550]: • Explicit requests to "run", "compute", or "execute"
+            - paragraph [ref=e551]: "Claude answers directly without running code for:"
+            - list [ref=e552]:
+              - listitem [ref=e553]: • Simple arithmetic and well-known math facts
+              - listitem [ref=e554]: • Factual, conversational, or creative requests
+              - listitem [ref=e555]: • Simple unit conversions or translations
+            - paragraph [ref=e556]: If you want Claude to run code for a borderline request, ask explicitly (for example, "run code to verify this").
+            - heading "Copy link to clipboard Using code execution with other execution tools" [level=2] [ref=e557]:
+              - generic [ref=e558]:
+                - button "Copy link to clipboard" [ref=e560] [cursor=pointer]:
+                  - img [ref=e562]
+                - generic [ref=e564]: Using code execution with other execution tools
+            - paragraph [ref=e565]:
+              - text: When you provide code execution alongside client-provided tools that also run code (such as a
+              - link "bash tool" [ref=e566] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/bash-tool
+              - text: or custom REPL), Claude is operating in a multi-computer environment. The code execution tool runs in Anthropic's sandboxed container, while your client-provided tools run in a separate environment that you control. Claude can sometimes confuse these environments, attempting to use the wrong tool or assuming state is shared between them.
+            - paragraph [ref=e567]: "To avoid this, add instructions to your system prompt that clarify the distinction:"
+            - generic [ref=e568]:
+              - code [ref=e571]: "When multiple code execution environments are available, be aware that: - Variables, files, and state do NOT persist between different execution environments - Use the code_execution tool for general-purpose computation in Anthropic's sandboxed environment - Use client-provided execution tools (e.g., bash) when you need access to the user's local system, files, or data - If you need to pass results between environments, explicitly include outputs in subsequent tool calls rather than assuming shared state"
+              - button "Copy code" [ref=e573] [cursor=pointer]:
+                - generic [ref=e576]: 
+            - paragraph [ref=e577]:
+              - text: This is especially important when combining code execution with
+              - link "web search" [ref=e578] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-search-tool
+              - text: or
+              - link "web fetch" [ref=e579] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-fetch-tool
+              - text: ", which enable code execution automatically. If your application already provides a client-side shell tool, the automatic code execution creates a second execution environment that Claude needs to distinguish between."
+            - heading "Copy link to clipboard How to use the tool" [level=2] [ref=e580]:
+              - generic [ref=e581]:
+                - button "Copy link to clipboard" [ref=e583] [cursor=pointer]:
+                  - img [ref=e585]
+                - generic [ref=e587]: How to use the tool
+            - heading "Copy link to clipboard Upload and analyze your own files" [level=3] [ref=e588]:
+              - generic [ref=e589]:
+                - button "Copy link to clipboard" [ref=e591] [cursor=pointer]:
+                  - img [ref=e593]
+                - generic [ref=e595]: Upload and analyze your own files
+            - paragraph [ref=e596]: "To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:"
+            - generic [ref=e597]:
+              - img [ref=e600]
+              - paragraph [ref=e603]:
+                - text: "Using the Files API with Code Execution requires the Files API beta header:"
+                - code [ref=e604]: "\"anthropic-beta\": \"files-api-2025-04-14\""
+            - paragraph [ref=e605]: "The Python environment can process various file types uploaded through the Files API, including:"
+            - list [ref=e606]:
+              - listitem [ref=e607]: • CSV
+              - listitem [ref=e608]: • Excel (.xlsx, .xls)
+              - listitem [ref=e609]: • JSON
+              - listitem [ref=e610]: • XML
+              - listitem [ref=e611]: • Images (JPEG, PNG, GIF, WebP)
+              - listitem [ref=e612]: • Text files (.txt, .md, .py, and others)
+            - heading "Copy link to clipboard Upload and analyze files" [level=4] [ref=e613]:
+              - generic [ref=e614]:
+                - button "Copy link to clipboard" [ref=e616] [cursor=pointer]:
+                  - img [ref=e618]
+                - generic [ref=e620]: Upload and analyze files
+            - list [ref=e621]:
+              - listitem [ref=e622]:
+                - strong [ref=e623]: Upload your file
+                - text: using the
+                - link "Files API" [ref=e624] [cursor=pointer]:
+                  - /url: /docs/en/build-with-claude/files
+              - listitem [ref=e625]:
+                - strong [ref=e626]: Reference the file
+                - text: in your message using a
+                - code [ref=e627]: container_upload
+                - text: content block
+              - listitem [ref=e628]:
+                - strong [ref=e629]: Include the code execution tool
+                - text: in your API request
+            - generic [ref=e630]:
+              - generic [ref=e631]:
+                - generic [ref=e632]:
+                  - button "cURL" [ref=e633] [cursor=pointer]
+                  - button "CLI" [ref=e634] [cursor=pointer]
+                  - button "Python" [ref=e635] [cursor=pointer]
+                  - button "TypeScript" [ref=e636] [cursor=pointer]
+                  - button "C#" [ref=e637] [cursor=pointer]
+                  - button "Go" [ref=e638] [cursor=pointer]
+                  - button "Java" [ref=e639] [cursor=pointer]
+                  - button "PHP" [ref=e640] [cursor=pointer]
+                  - button "Ruby" [ref=e641] [cursor=pointer]
+                - button "Copy code" [ref=e643] [cursor=pointer]:
+                  - generic [ref=e646]: 
+              - code [ref=e650]:
+                - generic [ref=e651]: client = anthropic.Anthropic()
+                - generic [ref=e652]: "# Upload a file"
+                - generic [ref=e653]: file_object = client.beta.files.upload(
+                - generic [ref=e654]: file=open("data.csv", "rb"),
+                - generic [ref=e655]: )
+                - generic [ref=e656]: "# Use the file_id with code execution"
+                - generic [ref=e657]: response = client.beta.messages.create(
+                - generic [ref=e658]: model="claude-opus-4-8",
+                - generic [ref=e659]: betas=["files-api-2025-04-14"],
+                - generic [ref=e660]: max_tokens=4096,
+                - generic [ref=e661]: messages=[
+                - generic [ref=e662]: "{"
+                - generic [ref=e663]: "\"role\": \"user\","
+                - generic [ref=e664]: "\"content\": ["
+                - generic [ref=e665]: "{\"type\": \"text\", \"text\": \"Analyze this CSV data\"},"
+                - generic [ref=e666]: "{\"type\": \"container_upload\", \"file_id\": file_object.id},"
+                - generic [ref=e667]: "],"
+                - generic [ref=e668]: "}"
+                - generic [ref=e669]: "],"
+                - generic [ref=e670]: "tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],"
+                - generic [ref=e671]: )
+                - generic [ref=e672]: print(response)
+            - heading "Copy link to clipboard Retrieve generated files" [level=3] [ref=e673]:
+              - generic [ref=e674]:
+                - button "Copy link to clipboard" [ref=e676] [cursor=pointer]:
+                  - img [ref=e678]
+                - generic [ref=e680]: Retrieve generated files
+            - paragraph [ref=e681]: "When Claude creates files during code execution, you can retrieve these files using the Files API:"
+            - generic [ref=e682]:
+              - generic [ref=e683]:
+                - generic [ref=e684]:
+                  - button "CLI" [ref=e685] [cursor=pointer]
+                  - button "Python" [ref=e686] [cursor=pointer]
+                  - button "TypeScript" [ref=e687] [cursor=pointer]
+                  - button "C#" [ref=e688] [cursor=pointer]
+                  - button "Go" [ref=e689] [cursor=pointer]
+                  - button "Java" [ref=e690] [cursor=pointer]
+                  - button "PHP" [ref=e691] [cursor=pointer]
+                  - button "Ruby" [ref=e692] [cursor=pointer]
+                - button "Copy code" [ref=e694] [cursor=pointer]:
+                  - generic [ref=e697]: 
+              - code [ref=e701]:
+                - generic [ref=e702]: "# Initialize the client"
+                - generic [ref=e703]: client = Anthropic()
+                - generic [ref=e704]: "# Request code execution that creates files"
+                - generic [ref=e705]: response = client.beta.messages.create(
+                - generic [ref=e706]: model="claude-opus-4-8",
+                - generic [ref=e707]: betas=["files-api-2025-04-14"],
+                - generic [ref=e708]: max_tokens=4096,
+                - generic [ref=e709]: messages=[
+                - generic [ref=e710]: "{"
+                - generic [ref=e711]: "\"role\": \"user\","
+                - generic [ref=e712]: "\"content\": \"Create a matplotlib visualization and save it as output.png\","
+                - generic [ref=e713]: "}"
+                - generic [ref=e714]: "],"
+                - generic [ref=e715]: "tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],"
+                - generic [ref=e716]: )
+                - generic [ref=e717]: "# Extract file IDs from the response"
+                - generic [ref=e718]: "def extract_file_ids(response):"
+                - generic [ref=e719]: file_ids = []
+                - generic [ref=e720]: "for item in response.content:"
+                - generic [ref=e721]: "if item.type == \"bash_code_execution_tool_result\":"
+                - generic [ref=e722]: content_item = item.content
+                - generic [ref=e723]: "if content_item.type == \"bash_code_execution_result\":"
+                - generic [ref=e724]: "# concrete-typed list: List[BashCodeExecutionOutputBlock]"
+                - generic [ref=e725]: "for file in content_item.content:"
+                - generic [ref=e726]: file_ids.append(file.file_id)
+                - generic [ref=e727]: return file_ids
+                - generic [ref=e728]: "# Download the created files"
+                - generic [ref=e729]: "for file_id in extract_file_ids(response):"
+                - generic [ref=e730]: file_metadata = client.beta.files.retrieve_metadata(file_id)
+                - generic [ref=e731]: file_content = client.beta.files.download(file_id)
+                - generic [ref=e732]: file_content.write_to_file(file_metadata.filename)
+                - generic [ref=e733]: "print(f\"Downloaded: {file_metadata.filename}\")"
+            - heading "Copy link to clipboard Tool definition" [level=2] [ref=e734]:
+              - generic [ref=e735]:
+                - button "Copy link to clipboard" [ref=e737] [cursor=pointer]:
+                  - img [ref=e739]
+                - generic [ref=e741]: Tool definition
+            - paragraph [ref=e742]: "The code execution tool requires no additional parameters:"
+            - generic [ref=e743]:
+              - generic [ref=e744]:
+                - generic [ref=e745]: JSON
+                - button "Copy code" [ref=e747] [cursor=pointer]:
+                  - generic [ref=e750]: 
+              - code [ref=e754]:
+                - generic [ref=e755]: "{"
+                - generic [ref=e756]: "\"type\": \"code_execution_20250825\","
+                - generic [ref=e757]: "\"name\": \"code_execution\""
+                - generic [ref=e758]: "}"
+            - paragraph [ref=e759]: "When this tool is provided, Claude automatically gains access to two sub-tools:"
+            - list [ref=e760]:
+              - listitem [ref=e761]:
+                - text: •
+                - code [ref=e762]: bash_code_execution
+                - text: ": Run shell commands"
+              - listitem [ref=e763]:
+                - text: •
+                - code [ref=e764]: text_editor_code_execution
+                - text: ": View, create, and edit files, including writing code"
+            - heading "Copy link to clipboard Response format" [level=2] [ref=e765]:
+              - generic [ref=e766]:
+                - button "Copy link to clipboard" [ref=e768] [cursor=pointer]:
+                  - img [ref=e770]
+                - generic [ref=e772]: Response format
+            - paragraph [ref=e773]: "The code execution tool can return two types of results depending on the operation:"
+            - heading "Copy link to clipboard Bash command response" [level=3] [ref=e774]:
+              - generic [ref=e775]:
+                - button "Copy link to clipboard" [ref=e777] [cursor=pointer]:
+                  - img [ref=e779]
+                - generic [ref=e781]: Bash command response
+            - generic [ref=e782]:
+              - generic [ref=e783]:
+                - generic [ref=e784]: Output
+                - button "Copy code" [ref=e786] [cursor=pointer]:
+                  - generic [ref=e789]: 
+              - code [ref=e793]:
+                - generic [ref=e794]: "{"
+                - generic [ref=e795]: "\"type\": \"server_tool_use\","
+                - generic [ref=e796]: "\"id\": \"srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3\","
+                - generic [ref=e797]: "\"name\": \"bash_code_execution\","
+                - generic [ref=e798]: "\"input\": {"
+                - generic [ref=e799]: "\"command\": \"ls -la | head -5\""
+                - generic [ref=e800]: "}"
+                - generic [ref=e801]: "},"
+                - generic [ref=e802]: "{"
+                - generic [ref=e803]: "\"type\": \"bash_code_execution_tool_result\","
+                - generic [ref=e804]: "\"tool_use_id\": \"srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3\","
+                - generic [ref=e805]: "\"content\": {"
+                - generic [ref=e806]: "\"type\": \"bash_code_execution_result\","
+                - generic [ref=e807]: "\"stdout\": \"total 24\\ndrwxr-xr-x 2 user user 4096 Jan 1 12:00 .\\ndrwxr-xr-x 3 user user 4096 Jan 1 11:00 ..\\n-rw-r--r-- 1 user user 220 Jan 1 12:00 data.csv\\n-rw-r--r-- 1 user user 180 Jan 1 12:00 config.json\","
+                - generic [ref=e808]: "\"stderr\": \"\","
+                - generic [ref=e809]: "\"return_code\": 0"
+                - generic [ref=e810]: "}"
+                - generic [ref=e811]: "}"
+            - heading "Copy link to clipboard File operation responses" [level=3] [ref=e812]:
+              - generic [ref=e813]:
+                - button "Copy link to clipboard" [ref=e815] [cursor=pointer]:
+                  - img [ref=e817]
+                - generic [ref=e819]: File operation responses
+            - paragraph [ref=e820]:
+              - strong [ref=e821]: "View file:"
+            - generic [ref=e822]:
+              - generic [ref=e823]:
+                - generic [ref=e824]: Output
+                - button "Copy code" [ref=e826] [cursor=pointer]:
+                  - generic [ref=e829]: 
+              - code [ref=e833]:
+                - generic [ref=e834]: "{"
+                - generic [ref=e835]: "\"type\": \"server_tool_use\","
+                - generic [ref=e836]: "\"id\": \"srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4\","
+                - generic [ref=e837]: "\"name\": \"text_editor_code_execution\","
+                - generic [ref=e838]: "\"input\": {"
+                - generic [ref=e839]: "\"command\": \"view\","
+                - generic [ref=e840]: "\"path\": \"config.json\""
+                - generic [ref=e841]: "}"
+                - generic [ref=e842]: "},"
+                - generic [ref=e843]: "{"
+                - generic [ref=e844]: "\"type\": \"text_editor_code_execution_tool_result\","
+                - generic [ref=e845]: "\"tool_use_id\": \"srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4\","
+                - generic [ref=e846]: "\"content\": {"
+                - generic [ref=e847]: "\"type\": \"text_editor_code_execution_result\","
+                - generic [ref=e848]: "\"file_type\": \"text\","
+                - generic [ref=e849]: "\"content\": \"{\\n \\\"setting\\\": \\\"value\\\",\\n \\\"debug\\\": true\\n}\","
+                - generic [ref=e850]: "\"numLines\": 4,"
+                - generic [ref=e851]: "\"startLine\": 1,"
+                - generic [ref=e852]: "\"totalLines\": 4"
+                - generic [ref=e853]: "}"
+                - generic [ref=e854]: "}"
+            - paragraph [ref=e855]:
+              - strong [ref=e856]: "Create file:"
+            - generic [ref=e857]:
+              - generic [ref=e858]:
+                - generic [ref=e859]: Output
+                - button "Copy code" [ref=e861] [cursor=pointer]:
+                  - generic [ref=e864]: 
+              - code [ref=e868]:
+                - generic [ref=e869]: "{"
+                - generic [ref=e870]: "\"type\": \"server_tool_use\","
+                - generic [ref=e871]: "\"id\": \"srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5\","
+                - generic [ref=e872]: "\"name\": \"text_editor_code_execution\","
+                - generic [ref=e873]: "\"input\": {"
+                - generic [ref=e874]: "\"command\": \"create\","
+                - generic [ref=e875]: "\"path\": \"new_file.txt\","
+                - generic [ref=e876]: "\"file_text\": \"Hello, World!\""
+                - generic [ref=e877]: "}"
+                - generic [ref=e878]: "},"
+                - generic [ref=e879]: "{"
+                - generic [ref=e880]: "\"type\": \"text_editor_code_execution_tool_result\","
+                - generic [ref=e881]: "\"tool_use_id\": \"srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5\","
+                - generic [ref=e882]: "\"content\": {"
+                - generic [ref=e883]: "\"type\": \"text_editor_code_execution_result\","
+                - generic [ref=e884]: "\"is_file_update\": false"
+                - generic [ref=e885]: "}"
+                - generic [ref=e886]: "}"
+            - paragraph [ref=e887]:
+              - strong [ref=e888]: "Edit file (str_replace):"
+            - generic [ref=e889]:
+              - generic [ref=e890]:
+                - generic [ref=e891]: Output
+                - button "Copy code" [ref=e893] [cursor=pointer]:
+                  - generic [ref=e896]: 
+              - code [ref=e900]:
+                - generic [ref=e901]: "{"
+                - generic [ref=e902]: "\"type\": \"server_tool_use\","
+                - generic [ref=e903]: "\"id\": \"srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6\","
+                - generic [ref=e904]: "\"name\": \"text_editor_code_execution\","
+                - generic [ref=e905]: "\"input\": {"
+                - generic [ref=e906]: "\"command\": \"str_replace\","
+                - generic [ref=e907]: "\"path\": \"config.json\","
+                - generic [ref=e908]: "\"old_str\": \"\\\"debug\\\": true\","
+                - generic [ref=e909]: "\"new_str\": \"\\\"debug\\\": false\""
+                - generic [ref=e910]: "}"
+                - generic [ref=e911]: "},"
+                - generic [ref=e912]: "{"
+                - generic [ref=e913]: "\"type\": \"text_editor_code_execution_tool_result\","
+                - generic [ref=e914]: "\"tool_use_id\": \"srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6\","
+                - generic [ref=e915]: "\"content\": {"
+                - generic [ref=e916]: "\"type\": \"text_editor_code_execution_result\","
+                - generic [ref=e917]: "\"oldStart\": 3,"
+                - generic [ref=e918]: "\"oldLines\": 1,"
+                - generic [ref=e919]: "\"newStart\": 3,"
+                - generic [ref=e920]: "\"newLines\": 1,"
+                - generic [ref=e921]: "\"lines\": [\"- \\\"debug\\\": true\", \"+ \\\"debug\\\": false\"]"
+                - generic [ref=e922]: "}"
+                - generic [ref=e923]: "}"
+            - heading "Copy link to clipboard Results" [level=3] [ref=e924]:
+              - generic [ref=e925]:
+                - button "Copy link to clipboard" [ref=e927] [cursor=pointer]:
+                  - img [ref=e929]
+                - generic [ref=e931]: Results
+            - paragraph [ref=e932]: "All execution results include:"
+            - list [ref=e933]:
+              - listitem [ref=e934]:
+                - text: •
+                - code [ref=e935]: stdout
+                - text: ": Output from successful execution"
+              - listitem [ref=e936]:
+                - text: •
+                - code [ref=e937]: stderr
+                - text: ": Error messages if execution fails"
+              - listitem [ref=e938]:
+                - text: •
+                - code [ref=e939]: return_code
+                - text: ": 0 for success, non-zero for failure"
+            - paragraph [ref=e940]: "Additional fields for file operations:"
+            - list [ref=e941]:
+              - listitem [ref=e942]:
+                - text: •
+                - strong [ref=e943]: View
+                - text: ":"
+                - code [ref=e944]: file_type
+                - text: ","
+                - code [ref=e945]: content
+                - text: ","
+                - code [ref=e946]: numLines
+                - text: ","
+                - code [ref=e947]: startLine
+                - text: ","
+                - code [ref=e948]: totalLines
+              - listitem [ref=e949]:
+                - text: •
+                - strong [ref=e950]: Create
+                - text: ":"
+                - code [ref=e951]: is_file_update
+                - text: (whether file already existed)
+              - listitem [ref=e952]:
+                - text: •
+                - strong [ref=e953]: Edit
+                - text: ":"
+                - code [ref=e954]: oldStart
+                - text: ","
+                - code [ref=e955]: oldLines
+                - text: ","
+                - code [ref=e956]: newStart
+                - text: ","
+                - code [ref=e957]: newLines
+                - text: ","
+                - code [ref=e958]: lines
+                - text: (diff format)
+            - heading "Copy link to clipboard Errors" [level=3] [ref=e959]:
+              - generic [ref=e960]:
+                - button "Copy link to clipboard" [ref=e962] [cursor=pointer]:
+                  - img [ref=e964]
+                - generic [ref=e966]: Errors
+            - paragraph [ref=e967]: "Each tool type can return specific errors:"
+            - paragraph [ref=e968]:
+              - strong [ref=e969]: "Common errors (all tools):"
+            - generic [ref=e970]:
+              - generic [ref=e971]:
+                - generic [ref=e972]: Output
+                - button "Copy code" [ref=e974] [cursor=pointer]:
+                  - generic [ref=e977]: 
+              - code [ref=e981]:
+                - generic [ref=e982]: "{"
+                - generic [ref=e983]: "\"type\": \"bash_code_execution_tool_result\","
+                - generic [ref=e984]: "\"tool_use_id\": \"srvtoolu_01VfmxgZ46TiHbmXgy928hQR\","
+                - generic [ref=e985]: "\"content\": {"
+                - generic [ref=e986]: "\"type\": \"bash_code_execution_tool_result_error\","
+                - generic [ref=e987]: "\"error_code\": \"unavailable\""
+                - generic [ref=e988]: "}"
+                - generic [ref=e989]: "}"
+            - paragraph [ref=e990]:
+              - strong [ref=e991]: "Error codes by tool type:"
+            - table [ref=e993]:
+              - rowgroup [ref=e994]:
+                - row "Tool Error Code Description" [ref=e995]:
+                  - columnheader "Tool" [ref=e996]
+                  - columnheader "Error Code" [ref=e997]
+                  - columnheader "Description" [ref=e998]
+              - rowgroup [ref=e999]:
+                - row "All tools unavailable The tool is temporarily unavailable" [ref=e1000]:
+                  - cell "All tools" [ref=e1001]
+                  - cell "unavailable" [ref=e1002]:
+                    - code [ref=e1003]: unavailable
+                  - cell "The tool is temporarily unavailable" [ref=e1004]
+                - row "All tools execution_time_exceeded Execution exceeded maximum time limit" [ref=e1005]:
+                  - cell "All tools" [ref=e1006]
+                  - cell "execution_time_exceeded" [ref=e1007]:
+                    - code [ref=e1008]: execution_time_exceeded
+                  - cell "Execution exceeded maximum time limit" [ref=e1009]
+                - row "All tools container_expired Container expired and is no longer available" [ref=e1010]:
+                  - cell "All tools" [ref=e1011]
+                  - cell "container_expired" [ref=e1012]:
+                    - code [ref=e1013]: container_expired
+                  - cell "Container expired and is no longer available" [ref=e1014]
+                - row "All tools invalid_tool_input Invalid parameters provided to the tool" [ref=e1015]:
+                  - cell "All tools" [ref=e1016]
+                  - cell "invalid_tool_input" [ref=e1017]:
+                    - code [ref=e1018]: invalid_tool_input
+                  - cell "Invalid parameters provided to the tool" [ref=e1019]
+                - row "All tools too_many_requests Rate limit exceeded for tool usage" [ref=e1020]:
+                  - cell "All tools" [ref=e1021]
+                  - cell "too_many_requests" [ref=e1022]:
+                    - code [ref=e1023]: too_many_requests
+                  - cell "Rate limit exceeded for tool usage" [ref=e1024]
+                - row "bash output_file_too_large Command output exceeded the maximum size" [ref=e1025]:
+                  - cell "bash" [ref=e1026]
+                  - cell "output_file_too_large" [ref=e1027]:
+                    - code [ref=e1028]: output_file_too_large
+                  - cell "Command output exceeded the maximum size" [ref=e1029]
+                - row "text_editor file_not_found File doesn't exist (for view/edit operations)" [ref=e1030]:
+                  - cell "text_editor" [ref=e1031]
+                  - cell "file_not_found" [ref=e1032]:
+                    - code [ref=e1033]: file_not_found
+                  - cell "File doesn't exist (for view/edit operations)" [ref=e1034]
+                - row "text_editor string_not_found The old_str not found in file (for str_replace)" [ref=e1035]:
+                  - cell "text_editor" [ref=e1036]
+                  - cell "string_not_found" [ref=e1037]:
+                    - code [ref=e1038]: string_not_found
+                  - cell "The old_str not found in file (for str_replace)" [ref=e1039]:
+                    - text: The
+                    - code [ref=e1040]: old_str
+                    - text: not found in file (for str_replace)
+            - heading "Copy link to clipboard pause_turn stop reason" [level=4] [ref=e1041]:
+              - generic [ref=e1042]:
+                - button "Copy link to clipboard" [ref=e1044] [cursor=pointer]:
+                  - img [ref=e1046]
+                - generic [ref=e1048]:
+                  - code [ref=e1049]: pause_turn
+                  - text: stop reason
+            - paragraph [ref=e1050]:
+              - text: The response may include a
+              - code [ref=e1051]: pause_turn
+              - text: stop reason, which indicates that the API paused a long-running turn. You may provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation.
+            - heading "Copy link to clipboard Containers" [level=2] [ref=e1052]:
+              - generic [ref=e1053]:
+                - button "Copy link to clipboard" [ref=e1055] [cursor=pointer]:
+                  - img [ref=e1057]
+                - generic [ref=e1059]: Containers
+            - paragraph [ref=e1060]: The code execution tool runs in a secure, containerized environment designed specifically for code execution, with a higher focus on Python.
+            - heading "Copy link to clipboard Runtime environment" [level=3] [ref=e1061]:
+              - generic [ref=e1062]:
+                - button "Copy link to clipboard" [ref=e1064] [cursor=pointer]:
+                  - img [ref=e1066]
+                - generic [ref=e1068]: Runtime environment
+            - list [ref=e1069]:
+              - listitem [ref=e1070]:
+                - text: •
+                - strong [ref=e1071]: Python version
+                - text: ": 3.11.12"
+              - listitem [ref=e1072]:
+                - text: •
+                - strong [ref=e1073]: Operating system
+                - text: ": Linux-based container"
+              - listitem [ref=e1074]:
+                - text: •
+                - strong [ref=e1075]: Architecture
+                - text: ": x86_64 (AMD64)"
+            - heading "Copy link to clipboard Resource limits" [level=3] [ref=e1076]:
+              - generic [ref=e1077]:
+                - button "Copy link to clipboard" [ref=e1079] [cursor=pointer]:
+                  - img [ref=e1081]
+                - generic [ref=e1083]: Resource limits
+            - list [ref=e1084]:
+              - listitem [ref=e1085]:
+                - text: •
+                - strong [ref=e1086]: Memory
+                - text: ": 5GiB RAM"
+              - listitem [ref=e1087]:
+                - text: •
+                - strong [ref=e1088]: Disk space
+                - text: ": 5GiB workspace storage"
+              - listitem [ref=e1089]:
+                - text: •
+                - strong [ref=e1090]: CPU
+                - text: ": 1 CPU"
+            - heading "Copy link to clipboard Networking and security" [level=3] [ref=e1091]:
+              - generic [ref=e1092]:
+                - button "Copy link to clipboard" [ref=e1094] [cursor=pointer]:
+                  - img [ref=e1096]
+                - generic [ref=e1098]: Networking and security
+            - list [ref=e1099]:
+              - listitem [ref=e1100]:
+                - text: •
+                - strong [ref=e1101]: Internet access
+                - text: ": Completely disabled for security"
+              - listitem [ref=e1102]:
+                - text: •
+                - strong [ref=e1103]: External connections
+                - text: ": No outbound network requests permitted"
+              - listitem [ref=e1104]:
+                - text: •
+                - strong [ref=e1105]: Sandbox isolation
+                - text: ": Full isolation from host system and other containers"
+              - listitem [ref=e1106]:
+                - text: •
+                - strong [ref=e1107]: File access
+                - text: ": Limited to workspace directory only"
+              - listitem [ref=e1108]:
+                - text: •
+                - strong [ref=e1109]: Workspace scoping
+                - text: ": Like"
+                - link "Files" [ref=e1110] [cursor=pointer]:
+                  - /url: /docs/en/build-with-claude/files
+                - text: ", containers are scoped to the workspace of the API key"
+              - listitem [ref=e1111]:
+                - text: •
+                - strong [ref=e1112]: Expiration
+                - text: ": Containers expire 30 days after creation"
+            - heading "Copy link to clipboard Pre-installed libraries" [level=3] [ref=e1113]:
+              - generic [ref=e1114]:
+                - button "Copy link to clipboard" [ref=e1116] [cursor=pointer]:
+                  - img [ref=e1118]
+                - generic [ref=e1120]: Pre-installed libraries
+            - paragraph [ref=e1121]: "The sandboxed Python environment includes these commonly used libraries:"
+            - list [ref=e1122]:
+              - listitem [ref=e1123]:
+                - text: •
+                - strong [ref=e1124]: Data Science
+                - text: ": pandas, numpy, scipy, scikit-learn, statsmodels"
+              - listitem [ref=e1125]:
+                - text: •
+                - strong [ref=e1126]: Visualization
+                - text: ": matplotlib, seaborn"
+              - listitem [ref=e1127]:
+                - text: •
+                - strong [ref=e1128]: File Processing
+                - text: ": pyarrow, openpyxl, xlsxwriter, xlrd, pillow, python-pptx, python-docx, pypdf, pdfplumber, pypdfium2, pdf2image, pdfkit, tabula-py, reportlab[pycairo], Img2pdf"
+              - listitem [ref=e1129]:
+                - text: •
+                - strong [ref=e1130]: Math & Computing
+                - text: ": sympy, mpmath"
+              - listitem [ref=e1131]:
+                - text: •
+                - strong [ref=e1132]: Utilities
+                - text: ": tqdm, python-dateutil, pytz, joblib, unzip, unrar, 7zip, bc, rg (ripgrep), fd, sqlite"
+            - heading "Copy link to clipboard Container reuse" [level=2] [ref=e1133]:
+              - generic [ref=e1134]:
+                - button "Copy link to clipboard" [ref=e1136] [cursor=pointer]:
+                  - img [ref=e1138]
+                - generic [ref=e1140]: Container reuse
+            - paragraph [ref=e1141]: You can reuse an existing container across multiple API requests by providing the container ID from a previous response. This allows you to maintain created files between requests.
+            - heading "Copy link to clipboard Example" [level=3] [ref=e1142]:
+              - generic [ref=e1143]:
+                - button "Copy link to clipboard" [ref=e1145] [cursor=pointer]:
+                  - img [ref=e1147]
+                - generic [ref=e1149]: Example
+            - generic [ref=e1150]:
+              - generic [ref=e1151]:
+                - generic [ref=e1152]:
+                  - button "cURL" [ref=e1153] [cursor=pointer]
+                  - button "CLI" [ref=e1154] [cursor=pointer]
+                  - button "Python" [ref=e1155] [cursor=pointer]
+                  - button "TypeScript" [ref=e1156] [cursor=pointer]
+                  - button "C#" [ref=e1157] [cursor=pointer]
+                  - button "Go" [ref=e1158] [cursor=pointer]
+                  - button "Java" [ref=e1159] [cursor=pointer]
+                  - button "PHP" [ref=e1160] [cursor=pointer]
+                  - button "Ruby" [ref=e1161] [cursor=pointer]
+                - button "Copy code" [ref=e1163] [cursor=pointer]:
+                  - generic [ref=e1166]: 
+              - code [ref=e1170]:
+                - generic [ref=e1171]: "# First request: Create a file with a random number"
+                - generic [ref=e1172]: response1 = client.messages.create(
+                - generic [ref=e1173]: model="claude-opus-4-8",
+                - generic [ref=e1174]: max_tokens=4096,
+                - generic [ref=e1175]: messages=[
+                - generic [ref=e1176]: "{"
+                - generic [ref=e1177]: "\"role\": \"user\","
+                - generic [ref=e1178]: "\"content\": \"Write a file with a random number and save it to '/tmp/number.txt'\","
+                - generic [ref=e1179]: "}"
+                - generic [ref=e1180]: "],"
+                - generic [ref=e1181]: "tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],"
+                - generic [ref=e1182]: )
+                - generic [ref=e1183]: "# Extract the container ID from the first response"
+                - generic [ref=e1184]: container_id = response1.container.id
+                - generic [ref=e1185]: "# Second request: Reuse the container to read the file"
+                - generic [ref=e1186]: response2 = client.messages.create(
+                - generic [ref=e1187]: "container=container_id, # Reuse the same container"
+                - generic [ref=e1188]: model="claude-opus-4-8",
+                - generic [ref=e1189]: max_tokens=4096,
+                - generic [ref=e1190]: messages=[
+                - generic [ref=e1191]: "{"
+                - generic [ref=e1192]: "\"role\": \"user\","
+                - generic [ref=e1193]: "\"content\": \"Read the number from '/tmp/number.txt' and calculate its square\","
+                - generic [ref=e1194]: "}"
+                - generic [ref=e1195]: "],"
+                - generic [ref=e1196]: "tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}],"
+                - generic [ref=e1197]: )
+                - generic [ref=e1198]: print(response2)
+            - heading "Copy link to clipboard Streaming" [level=2] [ref=e1199]:
+              - generic [ref=e1200]:
+                - button "Copy link to clipboard" [ref=e1202] [cursor=pointer]:
+                  - img [ref=e1204]
+                - generic [ref=e1206]: Streaming
+            - paragraph [ref=e1207]: "With streaming enabled, you'll receive code execution events as they occur:"
+            - generic [ref=e1208]:
+              - code [ref=e1212]:
+                - generic [ref=e1213]: "event: content_block_start"
+                - generic [ref=e1214]: "data: {\"type\": \"content_block_start\", \"index\": 1, \"content_block\": {\"type\": \"server_tool_use\", \"id\": \"srvtoolu_xyz789\", \"name\": \"code_execution\"}}"
+                - generic [ref=e1215]: // Code execution streamed
+                - generic [ref=e1216]: "event: content_block_delta"
+                - generic [ref=e1217]: "data: {\"type\": \"content_block_delta\", \"index\": 1, \"delta\": {\"type\": \"input_json_delta\", \"partial_json\": \"{\\\"code\\\":\\\"import pandas as pd\\\\ndf = pd.read_csv('data.csv')\\\\nprint(df.head())\\\"}\"}}"
+                - generic [ref=e1218]: // Pause while code executes
+                - generic [ref=e1219]: // Execution results streamed
+                - generic [ref=e1220]: "event: content_block_start"
+                - generic [ref=e1221]: "data: {\"type\": \"content_block_start\", \"index\": 2, \"content_block\": {\"type\": \"code_execution_tool_result\", \"tool_use_id\": \"srvtoolu_xyz789\", \"content\": {\"stdout\": \" A B C\\n0 1 2 3\\n1 4 5 6\", \"stderr\": \"\"}}}"
+              - button "Copy code" [ref=e1223] [cursor=pointer]:
+                - generic [ref=e1226]: 
+            - heading "Copy link to clipboard Batch requests" [level=2] [ref=e1227]:
+              - generic [ref=e1228]:
+                - button "Copy link to clipboard" [ref=e1230] [cursor=pointer]:
+                  - img [ref=e1232]
+                - generic [ref=e1234]: Batch requests
+            - paragraph [ref=e1235]:
+              - text: You can include the code execution tool in the
+              - link "Messages Batches API" [ref=e1236] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/batch-processing
+              - text: . Code execution tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
+            - heading "Copy link to clipboard Usage and pricing" [level=2] [ref=e1237]:
+              - generic [ref=e1238]:
+                - button "Copy link to clipboard" [ref=e1240] [cursor=pointer]:
+                  - img [ref=e1242]
+                - generic [ref=e1244]: Usage and pricing
+            - paragraph [ref=e1245]:
+              - strong [ref=e1246]: Code execution is free when used with web search or web fetch.
+              - text: When
+              - code [ref=e1247]: web_search_20260209
+              - text: or
+              - code [ref=e1248]: web_fetch_20260209
+              - text: is included in your API request, there are no additional charges for code execution tool calls beyond the standard input and output token costs.
+            - paragraph [ref=e1249]: "When used without these tools, code execution is billed by execution time, tracked separately from token usage:"
+            - list [ref=e1250]:
+              - listitem [ref=e1251]: • Execution time has a minimum of 5 minutes
+              - listitem [ref=e1252]:
+                - text: • Each organization receives
+                - strong [ref=e1253]: 1,550 free hours
+                - text: of usage per month
+              - listitem [ref=e1254]:
+                - text: • Additional usage beyond 1,550 hours is billed at
+                - strong [ref=e1255]: $0.05 per hour, per container
+              - listitem [ref=e1256]: • If files are included in the request, execution time is billed even if the tool is not invoked, due to files being preloaded onto the container
+            - paragraph [ref=e1257]: "Code execution usage is tracked in the response:"
+            - generic [ref=e1258]:
+              - code [ref=e1262]:
+                - generic [ref=e1263]: "{"
+                - generic [ref=e1264]: "\"usage\": {"
+                - generic [ref=e1265]: "\"input_tokens\": 105,"
+                - generic [ref=e1266]: "\"output_tokens\": 239,"
+                - generic [ref=e1267]: "\"server_tool_use\": {"
+                - generic [ref=e1268]: "\"code_execution_requests\": 1"
+                - generic [ref=e1269]: "}"
+                - generic [ref=e1270]: "}"
+                - generic [ref=e1271]: "}"
+              - button "Copy code" [ref=e1273] [cursor=pointer]:
+                - generic [ref=e1276]: 
+            - heading "Copy link to clipboard Upgrade to latest tool version" [level=2] [ref=e1277]:
+              - generic [ref=e1278]:
+                - button "Copy link to clipboard" [ref=e1280] [cursor=pointer]:
+                  - img [ref=e1282]
+                - generic [ref=e1284]: Upgrade to latest tool version
+            - paragraph [ref=e1285]:
+              - text: By upgrading to
+              - code [ref=e1286]: code-execution-2025-08-25
+              - text: ", you get access to file manipulation and Bash capabilities, including code in multiple languages. There is no price difference."
+            - heading "Copy link to clipboard What's changed" [level=3] [ref=e1287]:
+              - generic [ref=e1288]:
+                - button "Copy link to clipboard" [ref=e1290] [cursor=pointer]:
+                  - img [ref=e1292]
+                - generic [ref=e1294]: What's changed
+            - table [ref=e1296]:
+              - rowgroup [ref=e1297]:
+                - row "Component Legacy Current" [ref=e1298]:
+                  - columnheader "Component" [ref=e1299]
+                  - columnheader "Legacy" [ref=e1300]
+                  - columnheader "Current" [ref=e1301]
+              - rowgroup [ref=e1302]:
+                - row "Beta header code-execution-2025-05-22 code-execution-2025-08-25" [ref=e1303]:
+                  - cell "Beta header" [ref=e1304]
+                  - cell "code-execution-2025-05-22" [ref=e1305]:
+                    - code [ref=e1306]: code-execution-2025-05-22
+                  - cell "code-execution-2025-08-25" [ref=e1307]:
+                    - code [ref=e1308]: code-execution-2025-08-25
+                - row "Tool type code_execution_20250522 code_execution_20250825" [ref=e1309]:
+                  - cell "Tool type" [ref=e1310]
+                  - cell "code_execution_20250522" [ref=e1311]:
+                    - code [ref=e1312]: code_execution_20250522
+                  - cell "code_execution_20250825" [ref=e1313]:
+                    - code [ref=e1314]: code_execution_20250825
+                - row "Capabilities Python only Bash commands, file operations" [ref=e1315]:
+                  - cell "Capabilities" [ref=e1316]
+                  - cell "Python only" [ref=e1317]
+                  - cell "Bash commands, file operations" [ref=e1318]
+                - row "Response types code_execution_result bash_code_execution_result, text_editor_code_execution_result" [ref=e1319]:
+                  - cell "Response types" [ref=e1320]
+                  - cell "code_execution_result" [ref=e1321]:
+                    - code [ref=e1322]: code_execution_result
+                  - cell "bash_code_execution_result, text_editor_code_execution_result" [ref=e1323]:
+                    - code [ref=e1324]: bash_code_execution_result
+                    - text: ","
+                    - code [ref=e1325]: text_editor_code_execution_result
+            - heading "Copy link to clipboard Backward compatibility" [level=3] [ref=e1326]:
+              - generic [ref=e1327]:
+                - button "Copy link to clipboard" [ref=e1329] [cursor=pointer]:
+                  - img [ref=e1331]
+                - generic [ref=e1333]: Backward compatibility
+            - list [ref=e1334]:
+              - listitem [ref=e1335]: • All existing Python code execution continues to work exactly as before
+              - listitem [ref=e1336]: • No changes required to existing Python-only workflows
+            - heading "Copy link to clipboard Upgrade steps" [level=3] [ref=e1337]:
+              - generic [ref=e1338]:
+                - button "Copy link to clipboard" [ref=e1340] [cursor=pointer]:
+                  - img [ref=e1342]
+                - generic [ref=e1344]: Upgrade steps
+            - paragraph [ref=e1345]: "To upgrade, update the tool type in your API requests:"
+            - generic [ref=e1346]:
+              - code [ref=e1350]:
+                - generic [ref=e1351]: "- \"type\": \"code_execution_20250522\""
+                - generic [ref=e1352]: "+ \"type\": \"code_execution_20250825\""
+              - button "Copy code" [ref=e1354] [cursor=pointer]:
+                - generic [ref=e1357]: 
+            - paragraph [ref=e1358]:
+              - strong [ref=e1359]: Review response handling
+              - text: "(if parsing responses programmatically):"
+            - list [ref=e1360]:
+              - listitem [ref=e1361]: • The previous blocks for Python execution responses will no longer be sent
+              - listitem [ref=e1362]: • Instead, new response types for Bash and file operations will be sent (see Response Format section)
+            - heading "Copy link to clipboard Programmatic tool calling" [level=2] [ref=e1363]:
+              - generic [ref=e1364]:
+                - button "Copy link to clipboard" [ref=e1366] [cursor=pointer]:
+                  - img [ref=e1368]
+                - generic [ref=e1370]: Programmatic tool calling
+            - paragraph [ref=e1371]:
+              - text: For running tools inside the code execution container, see
+              - link "Programmatic tool calling" [ref=e1372] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+              - text: .
+            - heading "Copy link to clipboard Data retention" [level=2] [ref=e1373]:
+              - generic [ref=e1374]:
+                - button "Copy link to clipboard" [ref=e1376] [cursor=pointer]:
+                  - img [ref=e1378]
+                - generic [ref=e1380]: Data retention
+            - paragraph [ref=e1381]:
+              - text: Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the
+              - link "Files API" [ref=e1382] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/files
+              - text: (retrievable via
+              - code [ref=e1383]: client.beta.files.download()
+              - text: ) persist until explicitly deleted.
+            - paragraph [ref=e1384]:
+              - text: For ZDR eligibility across all features, see
+              - link "API and data retention" [ref=e1385] [cursor=pointer]:
+                - /url: /docs/en/manage-claude/api-and-data-retention
+              - text: .
+            - heading "Copy link to clipboard Using code execution with Agent Skills" [level=2] [ref=e1386]:
+              - generic [ref=e1387]:
+                - button "Copy link to clipboard" [ref=e1389] [cursor=pointer]:
+                  - img [ref=e1391]
+                - generic [ref=e1393]: Using code execution with Agent Skills
+            - paragraph [ref=e1394]:
+              - text: The code execution tool enables Claude to use
+              - link "Agent Skills" [ref=e1395] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/overview
+              - text: . Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.
+            - paragraph [ref=e1396]:
+              - text: Learn more in
+              - link "Agent Skills" [ref=e1397] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/overview
+              - text: and
+              - link "Using Agent Skills with the API" [ref=e1398] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/skills-guide
+              - text: .
+            - generic [ref=e1399]:
+              - paragraph [ref=e1400]: Was this page helpful?
+              - generic [ref=e1401]:
+                - button "Thumbs up" [ref=e1402] [cursor=pointer]:
+                  - img [ref=e1404]
+                - button "Thumbs down" [ref=e1406] [cursor=pointer]:
+                  - img [ref=e1408]
+          - button "Toggle table of contents" [ref=e1410] [cursor=pointer]:
+            - img [ref=e1411]
+        - generic [ref=e1414]:
+          - generic [ref=e1415]:
+            - link "Claude API Docs home page" [ref=e1417] [cursor=pointer]:
+              - /url: /docs
+              - img "Claude API Docs" [ref=e1418]
+            - generic [ref=e1421]:
+              - link "X (Twitter)" [ref=e1422] [cursor=pointer]:
+                - /url: https://x.com/claudeai
+                - img [ref=e1423]
+              - link "Threads" [ref=e1425] [cursor=pointer]:
+                - /url: https://www.threads.com/@claudeai
+                - img [ref=e1426]
+              - link "LinkedIn" [ref=e1428] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/claude
+                - img [ref=e1429]
+              - link "YouTube" [ref=e1431] [cursor=pointer]:
+                - /url: https://www.youtube.com/@anthropic-ai
+                - img [ref=e1432]
+              - link "Instagram" [ref=e1434] [cursor=pointer]:
+                - /url: https://instagram.com/claudeai
+                - img [ref=e1435]
+          - generic [ref=e1438]:
+            - generic [ref=e1439]:
+              - generic [ref=e1440]:
+                - heading "Solutions" [level=3] [ref=e1441]
+                - list [ref=e1442]:
+                  - listitem [ref=e1443]:
+                    - link "AI agents" [ref=e1444] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/agents
+                  - listitem [ref=e1445]:
+                    - link "Code modernization" [ref=e1446] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/code-modernization
+                  - listitem [ref=e1447]:
+                    - link "Coding" [ref=e1448] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/coding
+                  - listitem [ref=e1449]:
+                    - link "Customer support" [ref=e1450] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/customer-support
+                  - listitem [ref=e1451]:
+                    - link "Education" [ref=e1452] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/education
+                  - listitem [ref=e1453]:
+                    - link "Financial services" [ref=e1454] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/financial-services
+                  - listitem [ref=e1455]:
+                    - link "Government" [ref=e1456] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/government
+                  - listitem [ref=e1457]:
+                    - link "Life sciences" [ref=e1458] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/life-sciences
+              - generic [ref=e1459]:
+                - heading "Partners" [level=3] [ref=e1460]
+                - list [ref=e1461]:
+                  - listitem [ref=e1462]:
+                    - link "Amazon Bedrock" [ref=e1463] [cursor=pointer]:
+                      - /url: https://claude.com/partners/amazon-bedrock
+                  - listitem [ref=e1464]:
+                    - link "Google Cloud's Vertex AI" [ref=e1465] [cursor=pointer]:
+                      - /url: https://claude.com/partners/google-cloud-vertex-ai
+            - generic [ref=e1466]:
+              - generic [ref=e1467]:
+                - heading "Learn" [level=3] [ref=e1468]
+                - list [ref=e1469]:
+                  - listitem [ref=e1470]:
+                    - link "Blog" [ref=e1471] [cursor=pointer]:
+                      - /url: https://claude.com/blog
+                  - listitem [ref=e1472]:
+                    - link "Courses" [ref=e1473] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/learn
+                  - listitem [ref=e1474]:
+                    - link "Use cases" [ref=e1475] [cursor=pointer]:
+                      - /url: https://claude.com/resources/use-cases
+                  - listitem [ref=e1476]:
+                    - link "Connectors" [ref=e1477] [cursor=pointer]:
+                      - /url: https://claude.com/partners/mcp
+                  - listitem [ref=e1478]:
+                    - link "Customer stories" [ref=e1479] [cursor=pointer]:
+                      - /url: https://claude.com/customers
+                  - listitem [ref=e1480]:
+                    - link "Engineering at Anthropic" [ref=e1481] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/engineering
+                  - listitem [ref=e1482]:
+                    - link "Events" [ref=e1483] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/events
+                  - listitem [ref=e1484]:
+                    - link "Powered by Claude" [ref=e1485] [cursor=pointer]:
+                      - /url: https://claude.com/partners/powered-by-claude
+                  - listitem [ref=e1486]:
+                    - link "Service partners" [ref=e1487] [cursor=pointer]:
+                      - /url: https://claude.com/partners/services
+                  - listitem [ref=e1488]:
+                    - link "Startups program" [ref=e1489] [cursor=pointer]:
+                      - /url: https://claude.com/programs/startups
+              - generic [ref=e1490]:
+                - heading "Company" [level=3] [ref=e1491]
+                - list [ref=e1492]:
+                  - listitem [ref=e1493]:
+                    - link "Anthropic" [ref=e1494] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/company
+                  - listitem [ref=e1495]:
+                    - link "Careers" [ref=e1496] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/careers
+                  - listitem [ref=e1497]:
+                    - link "Economic Futures" [ref=e1498] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/economic-futures
+                  - listitem [ref=e1499]:
+                    - link "Research" [ref=e1500] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/research
+                  - listitem [ref=e1501]:
+                    - link "News" [ref=e1502] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news
+                  - listitem [ref=e1503]:
+                    - link "Responsible Scaling Policy" [ref=e1504] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy
+                  - listitem [ref=e1505]:
+                    - link "Security and compliance" [ref=e1506] [cursor=pointer]:
+                      - /url: https://trust.anthropic.com
+                  - listitem [ref=e1507]:
+                    - link "Transparency" [ref=e1508] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/transparency
+            - generic [ref=e1509]:
+              - generic [ref=e1510]:
+                - heading "Help and security" [level=3] [ref=e1511]
+                - list [ref=e1512]:
+                  - listitem [ref=e1513]:
+                    - link "Availability" [ref=e1514] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/supported-countries
+                  - listitem [ref=e1515]:
+                    - link "Status" [ref=e1516] [cursor=pointer]:
+                      - /url: https://status.claude.com/
+                  - listitem [ref=e1517]:
+                    - link "Support" [ref=e1518] [cursor=pointer]:
+                      - /url: https://support.claude.com/
+                  - listitem [ref=e1519]:
+                    - link "Discord" [ref=e1520] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/discord
+              - generic [ref=e1521]:
+                - heading "Terms and policies" [level=3] [ref=e1522]
+                - list [ref=e1523]:
+                  - listitem [ref=e1524]:
+                    - link "Privacy policy" [ref=e1525] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/privacy
+                  - listitem [ref=e1526]:
+                    - link "Responsible disclosure policy" [ref=e1527] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/responsible-disclosure-policy
+                  - listitem [ref=e1528]:
+                    - 'link "Terms of service: Commercial" [ref=e1529] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/commercial-terms
+                  - listitem [ref=e1530]:
+                    - 'link "Terms of service: Consumer" [ref=e1531] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/consumer-terms
+                  - listitem [ref=e1532]:
+                    - link "Usage policy" [ref=e1533] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/aup
+  - button "Ask Docs" [ref=e1537] [cursor=pointer]:
+    - generic [ref=e1538]: Ask Docs
+  - generic:
+    - generic:
+      - region "Notifications"
+  - alert [ref=e1539]

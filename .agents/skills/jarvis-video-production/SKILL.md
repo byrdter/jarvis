@@ -30,6 +30,7 @@ Read only what the task needs:
 - Codex Sites as production tools, on-screen visual sources, or companion assets: [references/SITES.md](references/SITES.md)
 - V14-proven palette, tooling, Runway prompts, shot vocabulary, or anti-patterns: [references/v14/INDEX.md](references/v14/INDEX.md)
 - Reusable channel shapes, recipes, and interaction vocabulary: [references/channel-library/INDEX.md](references/channel-library/INDEX.md)
+- **Parameterized HyperFrames blocks for code editors, terminals, UI mockups, 3D, character SVG, shader BGs, callouts, audio-reactive elements: `byrddynasty-blocks/README.md`** — drop-in alternative to building these scenes from scratch every time. ALWAYS check the block library before authoring a new scene of one of those categories.
 
 ## Required Workflow
 
@@ -60,7 +61,40 @@ Read only what the task needs:
 - `.agents/skills/remotion-video-qa/` is for legacy/special Remotion or talking-head QA.
 - `references/channel-library/` carries the mirrored channel-level shape catalog, recipes, identity, and interaction vocabulary.
 - `references/v14/` carries the mirrored Video 14-proven palette, shot vocabulary, tooling, Runway prompts, and anti-patterns.
+- `byrddynasty-blocks/` — production block library of 19 parameterized sub-compositions covering 8 capability categories we previously underused (code editor / terminal / UI mockup / 3D / character SVG / shader BG / callout / audio-reactive). Drop these into any video project to escape the "box + arrow + headline" default.
 - `~/.claude/skills/byrddynasty-video-v14/` should delegate to this repo skill. Do not treat it as the source of truth.
+
+## Block Library Usage (byrddynasty-blocks/)
+
+When the script calls for a code-editor scene, terminal session, browser/iPhone mockup, 3D object, animated character, shader background, hand-drawn callout, or audio-reactive element — **reach into `byrddynasty-blocks/blocks/` first.** Do not author from scratch.
+
+1. Copy the block(s) you need into the episode's HyperFrames project:
+   ```bash
+   cp byrddynasty-blocks/blocks/<block-name>.html video-XX/blocks/
+   cp byrddynasty-blocks/assets/three.min.js video-XX/assets/  # only if using a 3D block
+   ```
+2. Reference from the root composition with a `data-variable-values` JSON override:
+   ```html
+   <div data-composition-id="ep14-yaml-scene"
+        data-composition-src="blocks/editor-typewriter.html"
+        data-start="40" data-duration="8"
+        data-width="1920" data-height="1080" data-track-index="1"
+        data-variable-values='{"filename":"config.yaml","lines":"video:\n  name: Episode 14","language":"yaml"}'></div>
+   ```
+3. Variables and defaults for every block are in the file's header comment. Read it before overriding.
+
+**Block inventory:**
+- Code editor: `editor-typewriter`, `editor-diff`, `editor-debugger`
+- Terminal: `terminal-stream`, `terminal-session`
+- UI mockup: `ui-chrome-browser`, `ui-vscode`, `ui-iphone-messages`
+- 3D: `three-rotating-object`, `three-exploded-layers`
+- Character SVG: `character-svg-pointer`, `character-svg-typing`
+- Shader BG: `bg-liquid-glass`, `bg-animated-gradient`, `bg-nebula-reactive`
+- Callout: `callout-marker-circle`, `callout-scribble-arrow`
+- Audio-reactive: `audio-bars`, `audio-pulse`
+- Utility: `utility-title-card`, `utility-end-card`
+
+**When you improve a block during production**, push the improvement back to `byrddynasty-blocks/blocks/` so the next video inherits it (per Maintenance Rule).
 
 ## Maintenance Rule
 

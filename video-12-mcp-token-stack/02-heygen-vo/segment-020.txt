@@ -1,1 +1,0 @@
-Compact formats like TOON can help, but only in the right shape. TOON is strongest for flat, repetitive, tabular data where JSON repeats the same keys over and over. Independent benchmarks are more cautious than the hype. For small payloads, nested objects, or very wide rows, the instruction overhead and ambiguity can eat the savings.

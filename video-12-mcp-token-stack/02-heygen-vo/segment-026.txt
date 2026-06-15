@@ -1,1 +1,0 @@
-Then move procedural knowledge into skills. Stop stuffing every rule into the main context file. Move deterministic local work into scripts. Filter tool outputs at the source. If the agent only needs three fields, return three fields. Do not make the model carry a full object because the tool was easy to write.

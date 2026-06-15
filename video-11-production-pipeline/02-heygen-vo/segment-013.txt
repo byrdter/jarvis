@@ -1,1 +1,0 @@
-Then you drop the avatar video into the pipeline folder. That's the handoff. Everything else is automated from there. Best for ninety percent of creators. <break time="1s"/>

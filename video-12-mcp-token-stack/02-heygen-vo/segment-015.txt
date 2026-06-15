@@ -1,1 +1,0 @@
-Skills solve a different problem. A skill is not a live connector. It is procedural knowledge. It tells the agent how to do a job: what files matter, what commands to run, what patterns to follow, what mistakes to avoid. That kind of knowledge does not belong in a massive always-loaded context file.

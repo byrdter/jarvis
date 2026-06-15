@@ -1,1 +1,0 @@
-Then a QA loop. A Claude subagent watches the output, checks for motion defects, transition glitches, audio drift. If it passes, you have a finished video. If it doesn't, the pipeline reports what to fix. <break time="1s"/>

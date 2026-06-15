@@ -1,1 +1,0 @@
-That is the waste. The model is not thinking about the transcript twice. It is transporting the transcript twice. Anthropic estimates a two-hour sales meeting could add fifty thousand intermediate-result tokens. With code execution, the transcript stays inside the execution environment as a variable, and only the final status comes back to the model.

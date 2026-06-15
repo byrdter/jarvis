@@ -1,1 +1,0 @@
-The next layer is output filtering. Many tools return too much. A web scrape returns navigation, ads, related links, formatting, and metadata. A search result returns fields the agent never asked for. If the agent only needs title, URL, and price, return title, URL, and price. Every extra field competes with the user's actual task.

@@ -1,1 +1,0 @@
-The next step is measuring it. Pick one real task: look up the current MACD value for QQQ, compare it to last week, and write a one-paragraph report. Run it four ways: naive MCP, Tool Search, the current JARVIS stack with skills plus CLI, and a code-execution version. Capture tokens, latency, reliability, and context used.

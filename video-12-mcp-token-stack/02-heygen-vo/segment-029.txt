@@ -1,1 +1,0 @@
-The reason this video matters is that the debate is moving from opinions to evidence. Cloudflare has the one-thousand-token API. Anthropic has Tool Search and code execution numbers. Arcade has a four-thousand-tool stress test. Scalekit has CLI versus MCP cost and failure data. JARVIS gives us a place to test the stack on real work.

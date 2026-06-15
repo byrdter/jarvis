@@ -1,1 +1,0 @@
-You only pay for your existing HeyGen subscription. No API fees. Same avatar, same voice, same output. The trade-off is reliability. Browsers break. UIs change. Build retry logic. Best for solo creators on a budget who still want automation. <break time="1s"/>

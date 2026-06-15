@@ -1,1 +1,0 @@
-Put the stack on one screen. Direct MCP is simple but expensive when schemas and outputs are large. Tool Search reduces idle load. Scoped MCP narrows production surfaces. Skills carry procedure. CLI handles local deterministic work. Code execution keeps intermediate data out of context. Output filtering and compact notation reduce payloads after the call.

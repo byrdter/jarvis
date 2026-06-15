@@ -1,1 +1,0 @@
-Path B. Browser automation. Claude Code has a Chrome connector. Codex can run in the browser too. Both can drive the HeyGen web app the same way you would. Log in, paste each segment into the editor, click generate, wait, download. <break time="1s"/>

@@ -1,1 +1,0 @@
-The pipeline runs in five stages. <break time="1s"/>

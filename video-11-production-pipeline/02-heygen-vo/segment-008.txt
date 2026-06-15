@@ -1,1 +1,0 @@
-Zero human touch on the avatar side. The trade-off is cost. HeyGen API is pay-as-you-go. No monthly minimum. One dollar a minute for Avatar Three at 1080p. Four dollars a minute for Avatar Four. Up to five dollars a minute for the 4K Digital Twin. Best for high volume, repeatable formats, no patience for clicking. <break time="1s"/>

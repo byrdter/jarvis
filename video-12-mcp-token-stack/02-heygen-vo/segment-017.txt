@@ -1,1 +1,0 @@
-Then there is the boring layer that keeps winning: CLI scripts. If a task is deterministic and local, a command-line tool is often cheaper and more reliable than an MCP server. Scalekit measured a simple GitHub repo question at one thousand three hundred sixty-five tokens with CLI, compared with forty-four thousand twenty-six tokens through MCP.

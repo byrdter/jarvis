@@ -1,1 +1,0 @@
-That number matters because it changes the mental model. The agent does not need every API endpoint poured into its context window. It needs a way to discover what exists, inspect what matters, execute the operation, and return the result. The context window should carry reasoning, not every possible instruction manual.

@@ -1,1 +1,0 @@
-The lighter-weight fix is scoped MCP. Bright Data is a good example. Their MCP docs expose Rapid mode, Pro mode, and eleven tool groups. You can turn on a group like browser, finance, ecommerce, or code. You can also allowlist specific tools. That is not as dramatic as Code Mode, but for production agents it is often the first sane move.

@@ -1,0 +1,19 @@
+{
+  "id": "INV-0001",
+  "client": "Acme Corp",
+  "date": "2026-06-09",
+  "due_date": "2026-06-23",
+  "currency": "USD",
+  "items": [
+    {
+      "description": "Website redesign \u2014 May sprint",
+      "quantity": 1,
+      "unit_price": 4200.0,
+      "subtotal": 4200.0
+    }
+  ],
+  "subtotal": 4200.0,
+  "tax": 0.0,
+  "total": 4200.0,
+  "status": "draft"
+}

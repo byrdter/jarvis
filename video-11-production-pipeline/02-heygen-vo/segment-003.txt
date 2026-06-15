@@ -1,1 +1,0 @@
-A single ten-minute educational video used to take us a full day. Record on camera. Edit. Find B-roll. Build title cards. Render. Re-render when something breaks. That doesn't scale. If you want to ship one video a week, you need a pipeline, not a manual workflow. <break time="1s"/>

@@ -1,1 +1,0 @@
-Stage five. Render. One command. Remotion renders every frame in parallel using a headless Chrome cluster. Ten-minute video, ten minutes to render. <break time="1s"/>

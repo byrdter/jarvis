@@ -1,1 +1,0 @@
-Anthropic published the same pattern from another angle. Their example is simple: download a meeting transcript from Google Drive and attach it to a Salesforce lead. In the naive tool-call path, the transcript enters the model context when it is read, then enters again when the model passes it to Salesforce.

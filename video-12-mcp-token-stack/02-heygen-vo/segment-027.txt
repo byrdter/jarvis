@@ -1,1 +1,0 @@
-Only then reach for the heavy patterns. For multi-step workflows with large intermediate data, use programmatic tool calling where it fits. For MCP connector workflows that cannot be called programmatically, use Code Mode or code execution with MCP wrappers. If you do this, sandboxing is not optional. It is the product.

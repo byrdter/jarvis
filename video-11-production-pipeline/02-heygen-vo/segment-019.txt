@@ -1,1 +1,0 @@
-Stage four. Compose. Remotion is React for video. Every scene is a component. The avatar clip, the overlay graphic, the captions, the background — all just JSX. Every frame is deterministic. Frame three hundred always looks the same. No render lottery. <break time="1s"/>

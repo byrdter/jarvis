@@ -1,1 +1,0 @@
-So the answer is not "skills beat MCP." The answer is that MCP is one layer in a larger agent architecture. Use Tool Search to avoid loading everything. Use scoped MCP to narrow production access. Use skills for procedures. Use CLI for local deterministic work. Use code execution when intermediate data should stay out of the model.

@@ -1,0 +1,1 @@
+{"detail":{"type":"authorization_error","code":"subscription_required","message":"Output format 'pcm_44100' is only available on the Pro tier and above.","status":"output_format_not_allowed","request_id":"7841c2aadfa1cb06cb3e18b25d0bfea2"}}
