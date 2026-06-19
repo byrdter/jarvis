@@ -1,0 +1,43 @@
+Create a comprehensive `/youtube-video` skill that automates YouTube video production from HeyGen raw video to final `.mp4`. The skill must eliminate all manual debugging of blank screens, timing issues, and B-roll selection.
+
+RESEARCH REQUIRED (investigate ALL before writing skill):
+
+1. **Jarvis repositories**: Read entire `jarvis/` and `jarvis-private/` directories for all video production patterns, rules, anti-patterns, and proven workflows
+
+2. **Existing skills**: Study `.agents/skills/byrddynasty-video-production/`, `.agents/skills/hyperframes/`, `.agents/skills/gsap/`, and any other video-related skills
+
+3. **Memory files**: Read all auto-memory files in `~/.claude/projects/.../memory/` related to video production (project_video_workflow_v14.md, feedback_vo_anchored_timing.md, reference_brain_color_palettes.md, etc.)
+
+4. **HyperFrames capabilities**: Review HyperFrames website (https://hyperframes.io) and GitHub repo (https://github.com/hyperframes-io/hyperframes) to map ALL relevant capabilities for automation
+
+5. **YouTube automation**: Research best practices for YouTube video automation pipelines, HeyGen post-production workflows, and B-roll automation systems
+
+INPUT SPEC:
+- HeyGen video file with avatar at beginning, ending, and selective key scenes
+- Pre-recorded B-roll catalog (videos, images, screenshots, web-rolls) with metadata
+- Optional manifest for B-roll preferences/overrides
+
+OUTPUT SPEC:
+- Final YouTube-ready `.mp4`
+- Automated QA verification report confirming:
+  ✓ Zero blank screens (frame analysis)
+  ✓ Scene changes every ≤5 seconds
+  ✓ Perfect audio-visual sync (VO-anchored timing)
+  ✓ Complete coverage (no gaps in visual content)
+  ✓ Branding consistency
+
+CRITICAL REQUIREMENTS (extract from past work):
+- VO-anchored timing: pin every visual to transcript timestamps, NEVER use timeScale() to stretch
+- B-roll metadata system: searchable catalog with auto-selection based on VO keywords
+- Scene duration rule: no scene >5 seconds without motion or scene change
+- Zero blank screens: automated frame analysis verification
+- Asset catalog schema: structured metadata for all B-roll, searchable and validatable
+
+DELIVERABLES:
+1. Complete SKILL.md with trigger conditions, workflow, HyperFrames integration patterns, QA process
+2. Runbook: step-by-step guide for preparing HeyGen video, populating catalog, running skill
+3. Asset catalog template with JSON schema and validation rules
+4. QA verification script for automated quality checks
+5. Example project demonstrating the complete workflow
+
+The skill should capture ALL accumulated video production knowledge so future execution requires zero manual debugging or pattern recall. It should be the definitive automation workflow going forward.
