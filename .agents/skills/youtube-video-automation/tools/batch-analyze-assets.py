@@ -83,7 +83,7 @@ def analyze_with_claude(image_path, client):
 
     # Call Claude
     response = client.messages.create(
-        model="claude-sonnet-4",
+        model="claude-sonnet-4-6",
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -244,7 +244,7 @@ def store_asset_metadata(db_path, file_path, metadata, embedding, asset_type, du
     cursor.execute("""
         INSERT OR REPLACE INTO metadata_cache (asset_id, ai_metadata, model_used, analyzed_at)
         VALUES (?, ?, ?, ?)
-    """, (asset_id, json.dumps(metadata), 'claude-sonnet-4', now))
+    """, (asset_id, json.dumps(metadata), 'claude-sonnet-4-6', now))
 
     conn.commit()
     conn.close()

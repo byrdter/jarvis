@@ -83,7 +83,7 @@ def insert_asset(db_path, file_path, metadata):
     cursor.execute("""
         INSERT OR REPLACE INTO metadata_cache (asset_id, ai_metadata, model_used, analyzed_at)
         VALUES (?, ?, ?, ?)
-    """, (asset_id, json.dumps(metadata), 'claude-sonnet-4', now))
+    """, (asset_id, json.dumps(metadata), 'claude-sonnet-4-20250514', now))
 
     conn.commit()
     conn.close()
