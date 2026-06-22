@@ -34,9 +34,14 @@ is the #1 bug.
 
 ## Step 3 — Treatment / variety pass
 Choose each scene's register from `references/PRESENTATION-VARIETY.md` (≥6 registers per episode, ≤3
-consecutive sharing one). Prefer imagination over text: isotype grids, self-drawing diagrams,
-data-viz, B-roll backgrounds, exec headshots — not headline+bullets. Pull assets from the asset
-library (see `references/ASSET-CONTRACT.md`).
+consecutive sharing one). **Do NOT default to HyperFrames** — read `knowledge/VISUAL-SOURCING.md` and,
+for each scene, ask "what is the BEST way to carry this moment?": a standalone B-roll clip, a
+screenshot/web-roll, a real or fabricated document, a symbolic/atmospheric visual, or a HyperFrames
+composition. Visuals need NOT be literal — symbolic (papers piling = overwhelm) and atmospheric beats
+count. Explicitly assign some scenes to non-HyperFrames registers, and plan **at least one breather
+(~3–6s clip) and one symbolic beat** per video. Prefer imagination over headline+bullet text. Pull
+assets from the asset library by querying its metadata (see `references/ASSET-CONTRACT.md` +
+`knowledge/VISUAL-SOURCING.md` "How the asset database drives this").
 
 ## Step 4 — Author scenes (HyperFrames)
 Build each `index.html`. ALL motion on the registered `tl` (never free gsap). Add the ambient glow

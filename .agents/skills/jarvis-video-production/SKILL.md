@@ -25,6 +25,10 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   and [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md)** — read before authoring
   or assembling. Cover motion-must-be-on-`tl`, the 5-second rule + QC gate commands, VO-anchored
   timing, treatment registers, HeyGen avatar white-frame handling, and varied transitions.
+- **Visual sourcing (DON'T default to HyperFrames): [knowledge/VISUAL-SOURCING.md](knowledge/VISUAL-SOURCING.md)**
+  — HyperFrames is one register among many; visuals need not be literal. Standalone B-roll breathers,
+  symbolic/atmospheric clips, screenshots, web-rolls, real/fabricated documents — and how the asset
+  database's metadata drives selection.
 - **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (QC gate) and
   **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
   these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
