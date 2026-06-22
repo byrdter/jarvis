@@ -320,3 +320,7 @@ agent-sdk/
 .dolt/
 .beads-credential-key
 .claude-mem/
+
+# Asset library: track only the metadata DB, not the (large/licensed) media (decision: option b)
+asset-library/*
+!asset-library/assets.db
