@@ -17,9 +17,16 @@ scene markers**, and the operator produces a complete first-cut master, running 
   `hyperframes-v3/scenes/NN-name/` per scene (each: `index.html`, `hyperframes.json` with top-level
   `duration`, `assets/`, `renders/`).
 
-## Step 0 — Tell Terry which skill is running (the standing rule)
-Before any work, state that this is `jarvis-video-production` and what it does. Then proceed. Do NOT
-run from raw directions or skip the QC gate; surface to Terry only at Step 8.
+**Standing rule:** before any work, state that this is `jarvis-video-production` and what it does;
+don't run from raw directions or skip the QC gate; surface to Terry only at Step 8.
+
+## Step 0 — Script the video (topic → VO script)  →  `SCRIPTING.md`
+If you're starting from a TOPIC (not an existing script), produce the VO script first — see
+[SCRIPTING.md](SCRIPTING.md): research the wikis (`tools/research-topic.py`), write in the Show
+Bible voice/lenses, structure into 6–9 scenes each with a verbatim first-line **anchor**, and
+fact-check into a claim-source map. Scaffold the folder with `tools/scaffold-script.py` (emits
+`01-script/` + a `scenes.json` that Step 1 consumes). Output: `VO-ONLY.md` (Terry records it in
+HeyGen) + `scenes.json`. If a finished script + take already exist, skip to Step 1.
 
 ## Step 1 — Intake / split  →  `tools/split-heygen.py`
 Split the HeyGen take into per-scene `assets/audio.mp3` + `transcript.json` (word-level,

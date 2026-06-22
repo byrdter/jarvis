@@ -21,6 +21,10 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 
 - **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
   9-step runbook. Start here when producing a full video from a HeyGen recording.
+- **SCRIPTING (topic → VO script, PIPELINE Step 0): [SCRIPTING.md](SCRIPTING.md)** — research the
+  wikis (`tools/research-topic.py`), write in the Show Bible voice/lenses, structure into
+  anchor-tagged scenes, scaffold the folder (`tools/scaffold-script.py`). Produces the script +
+  `scenes.json` that the production pipeline consumes.
 - **Hard-won production lessons: [knowledge/HYPERFRAMES-LESSONS.md](knowledge/HYPERFRAMES-LESSONS.md)
   and [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md)** — read before authoring
   or assembling. Cover motion-must-be-on-`tl`, the 5-second rule + QC gate commands, VO-anchored
