@@ -1,44 +1,62 @@
 # Asset Contract
 
-`asset-library/MANIFEST.json` is the source of truth for reusable production assets.
+## Canonical library + how to query it
 
-## Contract
+The canonical asset library is the **searchable DB**:
 
-- Look up assets by semantic key, not remembered path.
-- Copy assets into scene-local `assets/` folders.
-- Do not symlink final scene assets.
+```
+~/Library/CloudStorage/Dropbox/jarvis/asset-library/assets.db   (+ clip-library/ media, products/ screenshots)
+```
+
+196+ assets, each with AI metadata (description, mood, setting, people, color_palette) PLUS
+`symbolizes` (abstract ideas it can represent) and `usable_as` (breather / background /
+establishing / symbolic / literal). All `file_path`s are absolute and resolve.
+
+**Query it** with the tool in the youtube-video-automation skill (referenced, not duplicated —
+see PIPELINE / VISUAL-SOURCING):
+
+```bash
+# hybrid semantic + keyword search (needs OPENAI_API_KEY for the query embedding)
+python3 .agents/skills/youtube-video-automation/tools/search-assets-db.py "5s calm clip, relief" \
+  --db-path ~/Library/CloudStorage/Dropbox/jarvis/asset-library/assets.db --top 8 --json
+# filter by type/duration:  --type video --min-duration 4
+```
+
+For non-HyperFrames sourcing, query by what an asset can REPRESENT and how it can be USED (the
+`symbolizes` / `usable_as` fields) — see `knowledge/VISUAL-SOURCING.md`.
+
+### Tooling (all in youtube-video-automation/tools/, run against the canonical DB)
+- `search-assets-db.py` — find assets (semantic + keyword)
+- `batch-analyze-assets.py` — AI-tag NEW assets (Claude vision → description/mood/.../symbolizes/usable_as) + embeddings
+- `enrich-symbolic-tags.py` — backfill `symbolizes`/`usable_as` on existing rows from their metadata
+- `init-asset-db.py`, `generate-embeddings.py`, `resolve-assets.py`
+
+### Adding new assets (the loop)
+1. Drop files into `asset-library/clip-library/<category>/` (or `products/`).
+2. Tag: `python3 .../batch-analyze-assets.py --asset-dir <dir> --db-path <canonical db>` (writes
+   metadata + embeddings + symbolizes/usable_as).
+3. They're now queryable. Update this contract / VISUAL-SOURCING if a new category or tag emerges.
+
+## Secondary library (migrating in)
+`${JARVIS_PRIVATE}/video-production/asset-library/` (MANIFEST.json semantic keys for V14 brand
+icons + `capture-runner.js` web-roll capture). Treat the DB above as canonical; migrate this
+library's assets into the DB as they're used, and point `capture-runner.js` output at the DB.
+
+## Contract (per scene)
+- Find assets by **querying the DB**, not by remembering paths.
+- Copy chosen assets into the scene-local `assets/` folder. Do NOT symlink final scene assets.
 - Do not reference temporary screenshots, desktop files, or session folders from production HTML.
-- Update the manifest whenever a reusable asset is added, moved, renamed, or replaced.
+- After using/adding a reusable asset, make sure it's tagged in the DB.
 
-## Naming For New Assets
-
-- Brain icons: `<brain>-brain.png`
-- Product screenshots: `<product>-<surface>-<state>.png`
-- B-roll variants: `<subject>-<action>--silent.mp4` and `<subject>-<action>--audio.mp4`
-- Runway/Higgsfield clips: `<scene>-<purpose>.mp4`
+## Naming for new assets
+- B-roll variants: `<subject>-<action>--silent.mp4` / `--audio.mp4` (strip audio under VO)
+- Product/tool screenshots: `<product>-<surface>-<state>.png`
 - Web proof screenshots: `<source>-<page>-<state>.png`
-- Thumbnails/concept frames: `<video>-thumbnail-<variant>.png`
+- Runway/Higgsfield clips: `<scene>-<purpose>.mp4`
+- Brain icons: `<brain>-brain.png`
+Older names are grandfathered; migrate only when touched for another reason.
 
-Existing files with older names are grandfathered. Migrate only when touched for another reason.
-
-## Required Metadata
-
-For manifest entries, capture what automation needs:
-
-- path
-- root if outside asset-library
-- dimensions or duration when known
-- tags
-- description
-- audio/silent variant when applicable
-- source/provenance for web or claim evidence
-
-## Automation Direction
-
-Future helpers should:
-
-- resolve semantic keys
-- copy assets to a scene folder
-- validate manifest paths exist
-- warn when a production scene references files outside its scene assets
-- scaffold a scene with required assets and shared libraries
+## Required metadata (the DB captures this)
+path · type · duration/dimensions · description · mood · setting · people · color_palette ·
+**symbolizes** · **usable_as** · keywords · source/provenance (for web/claim evidence) ·
+audio/silent variant when applicable.

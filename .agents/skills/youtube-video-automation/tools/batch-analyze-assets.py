@@ -114,6 +114,8 @@ Generate comprehensive, searchable metadata in JSON format:
   "actions": ["what's happening in the scene, or 'static'"],
   "color_palette": ["3-5 dominant colors"],
   "use_cases": ["5-8 specific video topics/contexts where this would work well"],
+  "symbolizes": ["2-5 ABSTRACT ideas this could REPRESENT symbolically (not literal objects), e.g. 'overwhelm','relief','choice','growth','isolation'"],
+  "usable_as": ["all that apply from EXACTLY: breather, background, establishing, symbolic, literal"],
   "quality_notes": "technical quality, composition, suitability for production"
 }
 
@@ -174,8 +176,9 @@ def store_asset_metadata(db_path, file_path, metadata, embedding, asset_type, du
         INSERT OR REPLACE INTO assets (
             file_path, file_name, type, duration, resolution, file_size,
             description, mood, setting, people, color_palette, quality_notes,
+            symbolizes, usable_as,
             added_at, tagged_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         str(file_path),
         Path(file_path).name,
@@ -189,6 +192,8 @@ def store_asset_metadata(db_path, file_path, metadata, embedding, asset_type, du
         metadata.get('people', ''),
         json.dumps(metadata.get('color_palette', [])),
         metadata.get('quality_notes', ''),
+        ", ".join(metadata.get('symbolizes', [])) if isinstance(metadata.get('symbolizes'), list) else (metadata.get('symbolizes') or ''),
+        ", ".join([u for u in metadata.get('usable_as', []) if u in ('breather','background','establishing','symbolic','literal')]) if isinstance(metadata.get('usable_as'), list) else (metadata.get('usable_as') or ''),
         now,
         now
     ))
