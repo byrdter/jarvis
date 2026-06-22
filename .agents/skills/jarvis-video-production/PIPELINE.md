@@ -21,11 +21,18 @@ scene markers**, and the operator produces a complete first-cut master, running 
 Before any work, state that this is `jarvis-video-production` and what it does. Then proceed. Do NOT
 run from raw directions or skip the QC gate; surface to Terry only at Step 8.
 
-## Step 1 — Intake / split
-Extract audio, transcribe, and split the HeyGen take into per-scene `audio` + `transcript.json`
-(+ `avatar.mp4` for avatar-visible scenes), anchored to the script's scene boundaries.
-(Phase-2: `tools/split-heygen.py` will automate this; until then split with ffmpeg + whisper by the
-script's segment timings.) Verify each scene's audio duration matches its `hyperframes.json` duration.
+## Step 1 — Intake / split  →  `tools/split-heygen.py`
+Split the HeyGen take into per-scene `assets/audio.mp3` + `transcript.json` (word-level,
+scene-relative) + `avatar.mp4` (avatar scenes) + `hyperframes.json`. It transcribes the whole take
+once (whisper-1, word timestamps) then slices by scene boundaries — given either explicit start/end
+times OR first-line "anchor" phrases from the script (the hands-off path).
+```bash
+python3 <skill>/tools/split-heygen.py --video heygen.mp4 --spec scenes.json \
+  --out <project>/hyperframes-v3/scenes            # --dry-run to preview boundaries first
+```
+`scenes.json` = ordered `[{name, avatar?, anchor:"first ~6 words"} | {name, start, end}]`.
+Always `--dry-run` first to confirm the located boundaries look right; then write. Needs
+OPENAI_API_KEY (for whisper) unless `--no-transcribe`.
 
 ## Step 2 — Per-scene VO map (correctness foundation)
 For each scene, print the sentence-level transcript with timestamps. Build the beat plan anchored to
