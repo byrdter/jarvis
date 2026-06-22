@@ -232,27 +232,30 @@ claude --dangerously-skip-permissions
 
 ## Byrddynasty Video Content
 
-**CRITICAL: ALWAYS check this skill FIRST when user requests Byrddynasty video content:**
-- `skills/video-image-creation/SKILL.md`
+**CRITICAL — for ANY video work (Byrddynasty / faceless / "Understanding AI" / produce a video
+from a HeyGen take), the canonical skill is `jarvis-video-production`. Read it FIRST:**
+- `.agents/skills/jarvis-video-production/SKILL.md` — then its `PIPELINE.md` (the end-to-end
+  runbook: raw HeyGen take → finished master) and the `knowledge/` docs.
 
-**When user asks for:**
-- Long-form Byrddynasty videos (10-15 minutes)
-- Video scripts and image prompts
-- Multi-part video series
-- Educational/tutorial content for the channel
-- ANY Byrddynasty video-related requests
+**When the user asks for:** long-form videos, producing a video from a HeyGen recording, scene/visual
+work, revisions, QC, or packaging → load `jarvis-video-production` and follow `PIPELINE.md` (9 steps).
+State which skill you're using before acting, then run it; surface to the user at the final review.
 
-**You MUST:**
-1. Read `skills/video-image-creation/SKILL.md` FIRST (before creating anything)
-2. Follow **20-30 second script segments** (break longer segments into multiple images)
-3. Create **1:1 script-to-image ratio** (each segment = one numbered image)
-4. Use **large headings, vibrant colors, simple visuals** (not text-heavy)
-5. Sequential numbering only (001, 002, 003... NO sub-versions like 001A)
-6. Reference quality examples in SKILL.md
+**Everything needed lives in that one hub:**
+- `PIPELINE.md` — the runbook. `tools/split-heygen.py` (intake), `tools/scene-validator.py` (QC gate),
+  `tools/assemble-master.py` (master assembly).
+- `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`, `knowledge/VISUAL-SOURCING.md`
+  (don't default to HyperFrames; non-literal/symbolic visuals; breathers).
+- Asset library: canonical `asset-library/assets.db` (query by meaning via `search-assets-db.py`;
+  see `references/ASSET-CONTRACT.md`). 196 assets tagged with `symbolizes`/`usable_as`.
 
-**KEY REQUIREMENT:** Each script segment must be 20-30 seconds MAX. If longer, break into multiple segments with separate images.
+**Hard rules learned in production:** all animation on the registered `tl` (free `gsap.to` does NOT
+render); no static hold >5s (ambient motion + the freeze gate); VO-anchored timing; kicker labels
+≥26px; run the QC gate on every scene before the user sees anything.
 
-**This is AUTOMATIC - do NOT wait to be reminded.**
+**Legacy (superseded):** `skills/video-image-creation/SKILL.md` (the old 20–30s still-image
+workflow) is NOT the current process. Use `jarvis-video-production` unless the user explicitly asks
+for the old still-image approach.
 
 ## Important Documentation
 
