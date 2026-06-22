@@ -19,7 +19,17 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 
 ## First Read
 
-Read only what the task needs:
+- **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
+  9-step runbook. Start here when producing a full video from a HeyGen recording.
+- **Hard-won production lessons: [knowledge/HYPERFRAMES-LESSONS.md](knowledge/HYPERFRAMES-LESSONS.md)
+  and [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md)** — read before authoring
+  or assembling. Cover motion-must-be-on-`tl`, the 5-second rule + QC gate commands, VO-anchored
+  timing, treatment registers, HeyGen avatar white-frame handling, and varied transitions.
+- **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (QC gate) and
+  **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
+  these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
+
+Then read only what the task needs:
 
 - New or resumed episode: [references/WORKFLOW.md](references/WORKFLOW.md)
 - Skill routing / legacy status: [references/SKILL-ROUTING.md](references/SKILL-ROUTING.md)
@@ -44,13 +54,12 @@ Read only what the task needs:
 3. Produce a visual treatment board before final VO or scene builds.
 4. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
 5. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.
-6. Run scene QC on rendered MP4s, not only previews. For HyperFrames scene sets, run `python3 tools/scene-validator.py <project-dir>` and the post-render `--frames` pass before Terry reviews the video.
-7. Validate and stitch scenes with the bundled scripts:
-
-```bash
-.agents/skills/jarvis-video-production/scripts/validate-scenes.sh video-XX-name
-.agents/skills/jarvis-video-production/scripts/build-master.sh video-XX-name
-```
+6. Run scene QC on rendered MP4s, not only previews. Run the canonical gate
+   `python3 .agents/skills/jarvis-video-production/tools/scene-validator.py <project>/hyperframes-v3 --frames`
+   (static-hold + white-frame + duration checks) and fix every flag before Terry reviews.
+7. Assemble the master with `tools/assemble-master.py` (varied xfade transitions + HeyGen avatar
+   white-frame handling). See [PIPELINE.md](PIPELINE.md) Step 7 + [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md).
+   (The legacy `scripts/build-master.sh` plain-concat path is superseded — do not use it for avatar videos.)
 
 8. Package title, thumbnail brief, description, chapters, sources, and handoff notes.
 9. Close beads issues and follow the project session-close protocol, including push.

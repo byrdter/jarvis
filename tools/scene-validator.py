@@ -40,13 +40,25 @@ def media_duration(path):
     except Exception:
         return None
 
-def parse_hf_json(p):
+def parse_hf_json(p, html=None):
+    """Composition duration from hyperframes.json (top-level OR compositions[0]),
+    falling back to the largest data-duration in index.html (the root clip span).
+    The legacy code only read compositions[0].duration, so the common top-level
+    {"duration": N} shape returned None and the scene was silently dropped."""
     try:
         d = json.loads(pathlib.Path(p).read_text())
-        comps = d.get('compositions', [])
-        if comps: return float(comps[0].get('duration', 0))
+        if isinstance(d, dict):
+            if d.get('duration'):
+                return float(d['duration'])
+            comps = d.get('compositions', [])
+            if comps and comps[0].get('duration'):
+                return float(comps[0]['duration'])
     except Exception:
-        return None
+        pass
+    if html:
+        durs = extract_data_durations(html)
+        if durs:
+            return max(durs)
     return None
 
 def extract_data_durations(html):
@@ -78,15 +90,30 @@ def extract_animation_ats(html):
             events.append((f"tl.{m.group(1)}", float(pos_m.group(1)), dur))
     return events
 
-def check_lib_bugs(scene_dir):
-    """Look for known runtime-killing patterns."""
+def check_lib_bugs(scene_dir, html=""):
+    """Known runtime-killing patterns — but only if the lib is actually loaded.
+    A byrd-transitions.js copied into lib/ but never <script>-included is inert,
+    so flagging it is noise."""
     bugs = []
+    if 'byrd-transitions' not in html:
+        return bugs
     lib = scene_dir / 'lib' / 'byrd-transitions.js'
     if lib.exists():
         s = lib.read_text()
         if 'tl.call(' in s:
-            bugs.append("tl.call(...) present — known to throw in HyperFrames GSAP runtime")
+            bugs.append("tl.call(...) present in loaded byrd-transitions.js — throws in HyperFrames GSAP runtime")
     return bugs
+
+def root_audio_durations(html):
+    """data-duration on the ROOT composition clip and the <audio> tag only.
+    Nested <video> B-roll clips legitimately have their own shorter durations,
+    so they must NOT be compared against comp_dur."""
+    durs = []
+    m = re.search(r'data-composition-id="root"[^>]*?data-duration="([\d.]+)"', html)
+    if m: durs.append(float(m.group(1)))
+    for m in re.finditer(r'<audio\b[^>]*?data-duration="([\d.]+)"', html):
+        durs.append(float(m.group(1)))
+    return durs
 
 def frame_variance_sweep(render_path, comp_dur, samples=None):
     """Render keyframes every 2s and report mean pixel std-dev.
@@ -115,20 +142,89 @@ def frame_variance_sweep(render_path, comp_dur, samples=None):
         out.append((t, std))
     return out
 
+def find_render(scene_dir, render_dir, sn):
+    """Newest scenes/NN/renders/*.mp4, else flat render_dir/{sn}.mp4."""
+    rd = scene_dir / 'renders'
+    if rd.exists():
+        mp4s = sorted(rd.glob('*.mp4'), key=lambda p: p.stat().st_mtime)
+        if mp4s:
+            return mp4s[-1]
+    if render_dir:
+        cand = render_dir / f"{sn}.mp4"
+        if cand.exists():
+            return cand
+    return None
+
+def _ff_intervals(render, vf, label_start, label_end):
+    """Run an ffmpeg detect filter and return (start,duration) pairs."""
+    try:
+        out = subprocess.run(
+            ["ffmpeg","-hide_banner","-nostats","-i",str(render),
+             "-vf",vf,"-an","-f","null","-"],
+            capture_output=True, text=True).stderr
+    except Exception:
+        return []
+    spans, cur = [], None
+    for line in out.splitlines():
+        m = re.search(label_start + r":\s*([\d.]+)", line)
+        if m: cur = float(m.group(1))
+        m = re.search(label_end + r":\s*([\d.]+)", line)
+        if m and cur is not None:
+            spans.append((cur, float(m.group(1)))); cur = None
+    return spans
+
+def render_qc(render, comp_dur):
+    """Post-render checks tuned for the dark editorial aesthetic:
+       - static holds >5s (freezedetect) — full-but-frozen compositions
+       - true white frames (negate+blackdetect) — e.g. blank avatar head/tail
+       - true black gaps (blackdetect, strict pix_th so dark navy bg is NOT flagged)
+    Returns list of issue tuples."""
+    issues = []
+    # Static holds >5s (the "no static >5s" rule). freezedetect emits freeze_duration.
+    freezes = _ff_intervals(render, "freezedetect=n=-50dB:d=5", "freeze_start", "freeze_duration")
+    big = [(s, d) for (s, d) in freezes if d >= 5.0]
+    if big:
+        for s, d in big[:6]:
+            fail(f"STATIC HOLD {d:.1f}s at {s:.1f}s (>5s rule) — add motion/B-roll/animation")
+        issues.append(("static_hold", [(round(s,1), round(d,1)) for s, d in big]))
+    # True white frames (blank): negate, then blackdetect on near-pure-white only.
+    whites = _ff_intervals(render, "negate,blackdetect=d=0.06:pix_th=0.02", "black_start", "black_duration")
+    if whites:
+        for s, d in whites[:6]:
+            fail(f"WHITE/BLANK FRAMES {d:.2f}s at {s:.1f}s — trim or cover (avatar head/tail?)")
+        issues.append(("white_frames", [(round(s,2), round(d,2)) for s, d in whites]))
+    # True black gaps only (strict pix_th=0.02 so the #0A0E14 navy bg is NOT flagged).
+    blacks = _ff_intervals(render, "blackdetect=d=0.10:pix_th=0.02", "black_start", "black_duration")
+    blacks = [(s, d) for (s, d) in blacks if d >= 0.10]
+    if blacks:
+        for s, d in blacks[:6]:
+            fail(f"BLACK GAP {d:.2f}s at {s:.1f}s")
+        issues.append(("black_gap", [(round(s,2), round(d,2)) for s, d in blacks]))
+    return issues
+
 def validate_scene(scene_dir, render_dir=None, sample_frames=False):
     sn = scene_dir.name
     print(f"\n{BOLD}🎬 {sn}{RESET}")
     html_path = scene_dir / 'index.html'
     hf_path   = scene_dir / 'hyperframes.json'
-    if not html_path.exists() or not hf_path.exists():
+    if not html_path.exists():
         info("not a scene dir, skip"); return None
     html = html_path.read_text()
-    comp_dur = parse_hf_json(hf_path)
+    comp_dur = parse_hf_json(hf_path, html) if hf_path.exists() else None
     if comp_dur is None:
-        fail("hyperframes.json missing duration"); return None
+        comp_dur = max(extract_data_durations(html), default=None)
+    if comp_dur is None:
+        # Real error — do NOT drop silently (legacy bug: bailed scenes vanished
+        # from the summary, producing a false "ALL CLEAN").
+        fail("could not determine composition duration (hyperframes.json + index.html)")
+        return {"scene": sn, "issues": [("no_duration", True)], "comp_dur": None}
     info(f"composition duration = {comp_dur:.2f}s")
 
     issues = []
+    # A scene backed by a full-duration <video> (avatar passthrough) is "alive"
+    # for its whole length even if GSAP events stop early — don't flag dead air.
+    video_durs = [float(m.group(1)) for m in re.finditer(r'<video\b[^>]*?data-duration="([\d.]+)"', html)]
+    scene_is_video_backed = any(abs(v - comp_dur) < 1.5 for v in video_durs)
 
     # A. audio duration vs composition
     audio_files = list((scene_dir / 'assets').glob('scene-*.wav')) + \
@@ -166,7 +262,9 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
         # C. dead-air gap at end (last anim event end vs comp end)
         last_end = max(t + d for (_,t,d) in events)
         gap = comp_dur - last_end
-        if gap > 2.5:
+        if scene_is_video_backed:
+            ok(f"video-backed scene — {gap:.2f}s GSAP gap covered by full-length video")
+        elif gap > 2.5:
             fail(f"DEAD AIR: last anim ends at {last_end:.2f}s, comp ends at {comp_dur:.2f}s (gap {gap:.2f}s)")
             issues.append(("dead_air", gap))
         elif gap > 1.2:
@@ -174,18 +272,18 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
         else:
             ok(f"timeline ends within {gap:.2f}s of comp end")
 
-    # D. stale data-duration attrs
-    durs = extract_data_durations(html)
+    # D. stale data-duration attrs — only the root comp + audio (B-roll clips keep their own)
+    durs = root_audio_durations(html)
     if durs:
         bad = [x for x in durs if abs(x - comp_dur) > 0.05]
         if bad:
-            warn(f"stale data-duration values: {bad} (expected {comp_dur})")
+            warn(f"stale root/audio data-duration: {bad} (expected {comp_dur})")
             issues.append(("stale_data_duration", bad))
         else:
-            ok(f"all {len(durs)} data-duration attrs match")
+            ok(f"root/audio data-duration matches comp ({len(durs)} checked)")
 
     # F. lib bugs
-    bugs = check_lib_bugs(scene_dir)
+    bugs = check_lib_bugs(scene_dir, html)
     for b in bugs:
         fail(f"library bug: {b}")
         issues.append(("lib_bug", b))
@@ -223,10 +321,14 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
             warn(f"text-overflow risk: '{text[:40]}...' at {fs}px nowrap ≈ {int(est_w)}px wide (canvas 1920px)")
             issues.append(("text_overflow", text[:40]))
 
-    # E. (optional) frame variance — only if a render exists
-    if sample_frames and render_dir:
-        render = render_dir / f"{sn}.mp4"
-        if render.exists():
+    # E. (optional) post-render checks — static holds, white/blank frames, black gaps,
+    #    plus near-empty frame variance. Resolves the real render path (scenes/NN/renders/).
+    if sample_frames:
+        render = find_render(scene_dir, render_dir, sn)
+        if not render:
+            warn("no render found for frame checks (scenes/<scene>/renders/*.mp4)")
+        else:
+            issues.extend(render_qc(render, comp_dur))
             fv = frame_variance_sweep(render, comp_dur)
             if fv:
                 stds = [s for _, s in fv]
