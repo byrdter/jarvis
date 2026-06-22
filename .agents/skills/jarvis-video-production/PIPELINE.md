@@ -77,10 +77,17 @@ Run the FINAL master gate (freeze + white). Spot-check avatar boundaries and reb
 ## Step 8 — Human review (the one checkpoint)
 Surface the finished master to Terry with: what changed, the gate results, and any flags. Iterate on
 his notes. Promote to `master.mp4`, keep the prior as a `.prev.mp4` rollback.
+**Update the project's `DECISIONS.md`** (in the video folder) as you go — a video-specific log of WHAT
+was chosen and WHY: per-scene treatments, every bug found + fix, the `assemble-master.py` parameters
+and their reason, and known/open items. This is what lets a future session continue THIS video without
+re-deriving (the scene code records the *what*; DECISIONS.md records the *why*). See video-01's
+`DECISIONS.md` for the format. Keep it current — it is a required deliverable, not optional.
 
 ## Step 9 — Close out (Maintenance Rule)
-- Fold any NEW lesson learned this video into `knowledge/` or the matching `references/` doc.
-- Add new reusable assets to the asset library.
+- Confirm `DECISIONS.md` is complete for this video.
+- Fold any NEW *general* lesson into `knowledge/` or the matching `references/` doc (video-specific
+  choices stay in the video's `DECISIONS.md`).
+- Add new reusable assets to the asset library (tag them via `batch-analyze-assets.py`).
 - Commit + push (skill is in the public repo): `git add -A && git commit && git push`.
 
 ---
