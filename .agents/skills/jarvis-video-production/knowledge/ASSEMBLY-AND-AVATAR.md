@@ -23,6 +23,31 @@ head is usually accompanied by a short SILENT lead before the first word.
   (1.546 = where white/silence ends. Result: no white, audio intact, same duration.)
 - Trimming alone can clip the first word (white and speech meet at the same instant) — that's why
   freeze-fill, which keeps the silent lead, is preferred for the closing avatar.
+- **White TAIL while the VO is still talking** (seen on video-02 scene 01: avatar goes white ~56.9s
+  but the last word runs to ~57.3s). Do NOT trim (you'd cut the word) — **freeze-fill the tail**:
+  hold the last good frame over the white, keep full audio:
+  ```bash
+  ffmpeg -y -i sceneN.mp4 -filter_complex \
+    "[0:v]trim=end=<last_good_t>,setpts=PTS-STARTPTS,tpad=stop_duration=<white_len>:stop_mode=clone,fps=30,setsar=1[v]" \
+    -map "[v]" -map 0:a -c:v libx264 -crf 18 -pix_fmt yuv420p -c:a copy sceneN-fixed.mp4
+  ```
+  Pick `<last_good_t>` a few frames BEFORE white starts (the boundary frame itself may already be
+  white). Verify the tail luma is no longer 235 afterward.
+- **A whole avatar segment can render BLANK/white** (video-02 CTA: the 36s CTA segment was pure white
+  the entire time — the avatar simply wasn't there). Don't pass it through. Rebuild that scene as
+  GRAPHICS over the recorded VO (e.g. the graphics CTA pattern) and flag it for a possible re-record.
+- **Detect ALL of this at assembly:** run the white gate on the final master
+  (`negate,blackdetect=d=0.06:pix_th=0.02`). NOTE the negate/blackdetect gate can also false-positive
+  on genuinely BRIGHT photographic frames — but verify each hit with an extracted frame (a real blank
+  is uniform white; a bright room is not).
+
+## Padding tails so crossfades never clip a word
+
+When the take is split at sentence ANCHORS (split-heygen), a scene's audio often runs right to its
+last word with no trailing silence — an audio crossfade there clips it. Robust default: **pad every
+non-final scene's tail** with a held frame + silence so each crossfade lands in silence:
+`[i:v]…,tpad=stop_duration=0.45:stop_mode=clone` and `[i:a]…,apad=pad_dur=0.45` (then xfade/acrossfade
+as usual). video-02's `assemble.py` does this for all 9 scenes.
 
 ## Varied transitions (don't ship the same cut 7 times)
 
