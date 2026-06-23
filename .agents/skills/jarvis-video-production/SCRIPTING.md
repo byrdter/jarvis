@@ -33,10 +33,16 @@ Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
 - **Length:** 10–15 min ≈ **1,500–2,200 spoken words** (~140 wpm). Don't pad; add evidence/examples.
 - **Arc:** hook (a stop-you-in-your-tracks open) → body via the chosen lens framework → close that
   lands the choice back on the viewer.
-- **Scenes:** break the script into **6–9 scenes**, each a coherent beat (~60–180s). For EACH scene,
-  write a **distinctive first line** — this is the *anchor* `split-heygen.py` locates in the recorded
-  take to split it. First lines must be unique and verbatim-stable (don't reword after recording).
-- Mark which scenes are **avatar-visible** vs graphics (intro/CTA/close are usually avatar).
+- **Standard structure (Byrddynasty):** **avatar intro → body beats → CTA (penultimate) → avatar
+  close.** The intro, CTA, and close are all spoken/recorded by the avatar. `scaffold-script.py`
+  builds exactly this and **pre-fills the intro opener** ("I'm an avatar for Dr. Terry Byrd…") and the
+  **full CTA** (subscribe · like · ring the bell) so you only write the body + close. Total ≈ 8–10
+  scenes (6–7 body beats).
+- For EACH scene, write a **distinctive first line** — the *anchor* `split-heygen.py` locates in the
+  recorded take to split it. Unique and verbatim-stable; **don't reword after recording** (verify the
+  anchors against the recorded VO, then split).
+- The CTA + close are avatar; body beats are usually graphics (but can use any register — see
+  VISUAL-SOURCING). Mark `avatar` in `scenes.json` accordingly (scaffold does this for you).
 
 ## Step 0d — Fact-check + claim-source map
 Every meaningful on-screen/spoken claim needs a source (or be framed as interpretation). Fill
