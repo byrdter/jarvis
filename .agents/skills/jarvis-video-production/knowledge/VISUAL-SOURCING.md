@@ -72,3 +72,12 @@ this; see PIPELINE Step 3 + the asset-library audit task.)
   representation, no real source-proof web-rolls.
 - Going forward: in the Step-3 treatment pass, explicitly assign some scenes to non-HyperFrames
   registers and plan at least one breather and one symbolic beat per video.
+
+## Background/foreground motion: don't loop short literal clips (Terry, video-02)
+A short human/office video clip looped to fill a long beat reads as an obvious repeat — avoid it.
+- **Long holds → use a STILL** (faded + scrimmed, Video-1 style), not a looped clip.
+- **One-shot clips** (play once, ≤ their length, fade out before the loop point) are fine as ≤5–15s accents.
+- **Only abstract "light-show" / particle / shader clips may loop** as a background (no recognizable
+  subject to betray the repeat).
+- Prefer the BEST presentation per scene — a single still throughout, or genuine change via distinct
+  clips — but never the same recognizable clip cycling.
