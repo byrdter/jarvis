@@ -12,6 +12,7 @@ Usage:
 
 import argparse
 import hashlib
+import html
 import json
 import os
 import re
@@ -23,6 +24,21 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import requests
 from difflib import SequenceMatcher
+
+
+# Some RSS feeds (notably Reddit) embed HTML — <table>, <a>, <img>, <p> — inside
+# the <summary>. If we drop that verbatim into the markdown digest, send-email.py's
+# naive line-by-line converter wraps it in <p>…</p>, Gmail renders the mangled
+# tags, and the visible "Read more" anchors point to garbage. Strip tags + decode
+# entities + normalize whitespace before any user-facing rendering.
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+_WS_RE = re.compile(r"\s+")
+
+
+def strip_html(s: str) -> str:
+    if not s:
+        return ""
+    return _WS_RE.sub(" ", html.unescape(_HTML_TAG_RE.sub(" ", s))).strip()
 import feedparser
 
 try:
@@ -611,8 +627,9 @@ def generate_digest(
             if topics:
                 md += f"  *Topics:* {', '.join(topics)}  \n"
             if summary:
-                snippet = summary[:280].replace('\n', ' ').strip()
-                if len(summary) > 280:
+                clean = strip_html(summary)
+                snippet = clean[:280]
+                if len(clean) > 280:
                     snippet = snippet.rsplit(' ', 1)[0] + '…'
                 md += f"  {snippet}\n"
             md += "\n"
