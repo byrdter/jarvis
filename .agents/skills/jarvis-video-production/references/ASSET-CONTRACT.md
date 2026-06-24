@@ -18,9 +18,13 @@ see PIPELINE / VISUAL-SOURCING):
 ```bash
 # hybrid semantic + keyword search (needs OPENAI_API_KEY for the query embedding)
 python3 .agents/skills/youtube-video-automation/tools/search-assets-db.py "5s calm clip, relief" \
-  --db-path ~/Library/CloudStorage/Dropbox/jarvis/asset-library/assets.db --top 8 --json
+  --db ~/Library/CloudStorage/Dropbox/jarvis/asset-library/assets.db --top 8 --json
 # filter by type/duration:  --type video --min-duration 4
 ```
+
+> Both `search-assets-db.py` and `batch-analyze-assets.py` use the flag **`--db`** (not
+> `--db-path`). Web-roll PNGs taller than ~8000px will be rejected by the vision API — capture
+> at viewport height or split before tagging.
 
 For non-HyperFrames sourcing, query by what an asset can REPRESENT and how it can be USED (the
 `symbolizes` / `usable_as` fields) — see `knowledge/VISUAL-SOURCING.md`.
@@ -33,8 +37,9 @@ For non-HyperFrames sourcing, query by what an asset can REPRESENT and how it ca
 
 ### Adding new assets (the loop)
 1. Drop files into `asset-library/clip-library/<category>/` (or `products/`).
-2. Tag: `python3 .../batch-analyze-assets.py --asset-dir <dir> --db-path <canonical db>` (writes
-   metadata + embeddings + symbolizes/usable_as).
+2. Tag: `python3 .../batch-analyze-assets.py --asset-dir <dir> --db <canonical db> --skip-existing`
+   (writes metadata + embeddings + symbolizes/usable_as; `--skip-existing` avoids re-billing API
+   calls on assets already tagged).
 3. They're now queryable. Update this contract / VISUAL-SOURCING if a new category or tag emerges.
 
 ## Secondary library (migrating in)

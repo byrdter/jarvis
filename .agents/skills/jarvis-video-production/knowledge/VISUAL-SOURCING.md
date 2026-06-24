@@ -81,3 +81,16 @@ A short human/office video clip looped to fill a long beat reads as an obvious r
   subject to betray the repeat).
 - Prefer the BEST presentation per scene — a single still throughout, or genuine change via distinct
   clips — but never the same recognizable clip cycling.
+
+## Representation (Terry — required)
+When generating or selecting imagery with people, **represent all people and races** — do NOT default
+to a white person. Across a video (and the channel), vary race, gender, and age deliberately so the
+audience sees everyone represented. In Nano Banana / Higgsfield prompts, specify diverse subjects
+explicitly and vary them scene to scene.
+
+## Foreground is not always HyperFrames (Terry — don't forget)
+HyperFrames is the primary tool, NOT the only one. The FOREGROUND/primary of a beat can itself be a
+non-HyperFrames format — a full real screenshot (register A), a full-bleed B-roll/clip carrying the
+point, a real document/web-roll, a photo. Don't reflexively make every beat "HyperFrames spine +
+images layered behind." Some beats should lead with the screenshot/clip/document as the main act, with
+HyperFrames reduced to a caption/lower-third. Mix foreground formats across a scene and across scenes.
