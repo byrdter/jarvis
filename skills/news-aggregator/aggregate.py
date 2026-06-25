@@ -396,10 +396,31 @@ def deduplicate_articles(articles: List[Dict]) -> List[Dict]:
 # ===========================================================================
 
 def open_knowledge_db():
-    """Open ai-knowledge.db. Returns None if missing (we'll log and proceed)."""
+    """Open ai-knowledge.db. Returns None if missing (we'll log and proceed).
+
+    Retries on transient sqlite3.OperationalError ("disk I/O error", "database
+    is locked") because the DB lives inside the Dropbox CloudStorage mount and
+    Dropbox's file provider sporadically grabs the file mid-sync, racing with
+    sqlite3. Yesterday worked, today threw — that's the signature. Up to 5
+    tries with exponential backoff (~10s total) usually unsticks it.
+    """
+    import time
     if not KNOWLEDGE_DB.exists():
         return None
-    return sqlite3.connect(str(KNOWLEDGE_DB))
+    last_err = None
+    for attempt in range(5):
+        try:
+            conn = sqlite3.connect(str(KNOWLEDGE_DB), timeout=10)
+            # Validate by running a trivial query — connect() can succeed but
+            # subsequent ops fail with the same error.
+            conn.execute("SELECT 1").fetchone()
+            return conn
+        except sqlite3.OperationalError as e:
+            last_err = e
+            if attempt < 4:
+                time.sleep(0.5 * (2 ** attempt))  # 0.5, 1, 2, 4 → ~7.5s total
+    print(f"[open_knowledge_db] gave up after 5 retries: {last_err}", file=sys.stderr)
+    return None
 
 
 def filter_already_seen(articles: List[Dict]) -> List[Dict]:
