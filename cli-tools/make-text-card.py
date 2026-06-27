@@ -79,11 +79,21 @@ def main():
         base = img
     elif a.bg == "cream":
         base = Image.new("RGB",(W,H),CREAM)
+    elif a.bg == "transparent":
+        base = Image.new("RGBA",(W,H),(0,0,0,0))
     else:
         base = Image.new("RGB",(W,H),DARK)
 
     draw = ImageDraw.Draw(base)
     text_color = (238,238,238) if a.bg!="cream" else (20,20,20)
+    # over video/image, drop a shadow so text stays legible
+    shadow = a.bg.startswith("image:") or a.bg == "transparent"
+
+    def t(x, y, s, font, fill, stroke=0):
+        if shadow:
+            draw.text((x+2, y+3), s, font=font, fill=(0,0,0,180))
+        draw.text((x, y), s, font=font, fill=fill, stroke_width=stroke,
+                  stroke_fill=fill if stroke else None)
 
     head_font = load_font(SERIF_CANDIDATES, 92)
     sub_font  = load_font(SERIF_CANDIDATES, 54)
@@ -105,12 +115,12 @@ def main():
         # letter-spaced kicker
         spaced = "  ".join(list(kt.replace(" ","   ")))
         kw = draw.textlength(spaced, font=kick_font)
-        draw.text(((W-kw)//2, y), spaced, fill=GOLD, font=kick_font)
+        t((W-kw)//2, y, spaced, kick_font, GOLD)
         y += 60
 
     for ln in head_lines:
         tw = draw.textlength(ln, font=head_font)
-        draw.text(((W-tw)//2, y), ln, fill=text_color, font=head_font)
+        t((W-tw)//2, y, ln, head_font, text_color, stroke=2 if shadow else 0)
         y += line_h
     # accent rule under headline
     rule_w = 120
@@ -118,7 +128,7 @@ def main():
     y += 40
     for ln in sub_lines:
         tw = draw.textlength(ln, font=sub_font)
-        draw.text(((W-tw)//2, y), ln, fill=(190,190,190) if a.bg!="cream" else (70,70,70), font=sub_font)
+        t((W-tw)//2, y, ln, sub_font, (205,205,205) if a.bg!="cream" else (70,70,70))
         y += sub_h
 
     base.save(a.out, "PNG")
