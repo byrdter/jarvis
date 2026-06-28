@@ -43,7 +43,7 @@ def main():
     accent = ORANGE if a.path=="auto" else GREEN
     pathlabel = "AUTOMATION PATH" if a.path=="auto" else "AUGMENTATION PATH"
 
-    f_kick=font(MONO,26); f_path=font(MONO,24); f_co=font(SERIF,96); f_ceo=font(SANS,40)
+    f_kick=font(MONO,28); f_path=font(MONO,26); f_co=font(SERIF,116); f_ceo=font(SANS,46)
 
     if a.photo:
         img=Image.open(a.photo).convert("RGB")

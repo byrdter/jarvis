@@ -95,17 +95,17 @@ def main():
         draw.text((x, y), s, font=font, fill=fill, stroke_width=stroke,
                   stroke_fill=fill if stroke else None)
 
-    head_font = load_font(SERIF_CANDIDATES, 92)
-    sub_font  = load_font(SERIF_CANDIDATES, 54)
-    kick_font = load_font(SANS_CANDIDATES, 30)
+    head_font = load_font(SERIF_CANDIDATES, 112)
+    sub_font  = load_font(SERIF_CANDIDATES, 64)
+    kick_font = load_font(SANS_CANDIDATES, 34)
 
-    max_w = int(W*0.74)
+    max_w = int(W*0.80)
     head_lines = wrap(draw, a.headline, head_font, max_w)
     sub_lines  = wrap(draw, a.sub, sub_font, max_w) if a.sub else []
 
     # vertical layout, centered
-    line_h = 110
-    sub_h  = 70
+    line_h = 132
+    sub_h  = 84
     total = len(head_lines)*line_h + (len(sub_lines)*sub_h if sub_lines else 0)
     if a.kicker: total += 60
     y = (H - total)//2
@@ -120,7 +120,7 @@ def main():
 
     for ln in head_lines:
         tw = draw.textlength(ln, font=head_font)
-        t((W-tw)//2, y, ln, head_font, text_color, stroke=2 if shadow else 0)
+        t((W-tw)//2, y, ln, head_font, text_color, stroke=3)   # bolder headline
         y += line_h
     # accent rule under headline
     rule_w = 120

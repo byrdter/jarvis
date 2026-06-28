@@ -80,12 +80,12 @@ def main():
     img = Image.alpha_composite(img, scrim)
     d = ImageDraw.Draw(img)
 
-    f_kick  = font(MONO, 26)
-    f_phase = font(MONO, 32)
-    f_head  = font(SERIF, 92)
-    f_rail  = font(SANS, 27)
-    f_railA = font(SERIF, 36)
-    f_hint  = font(MONO, 22)
+    f_kick  = font(MONO, 28)
+    f_phase = font(MONO, 34)
+    f_head  = font(SERIF, 106)
+    f_rail  = font(SANS, 30)
+    f_railA = font(SERIF, 42)
+    f_hint  = font(MONO, 24)
 
     # ---------- LEFT HEADER ----------
     pathlabel = "AUTOMATION PATH" if a.path=="auto" else "AUGMENTATION PATH"
@@ -97,13 +97,13 @@ def main():
     words = title.split(); lines=[]; cur=""
     for w in words:
         t=(cur+" "+w).strip()
-        if d.textlength(t, font=f_head) <= 800: cur=t
+        if d.textlength(t, font=f_head) <= 860: cur=t
         else: lines.append(cur); cur=w
     if cur: lines.append(cur)
-    y=476
+    y=470
     for ln in lines:
-        text_s(d, (140, y), ln, f_head, CREAM, sx=3, sy=4, stroke=3)   # thicker + shadow
-        y+=104
+        text_s(d, (140, y), ln, f_head, CREAM, sx=3, sy=4, stroke=4)   # bigger + bolder + shadow
+        y+=118
     # accent underline
     d.rectangle([140, y+8, 268, y+14], fill=accent)
 
