@@ -41,7 +41,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("scene_dir", nargs="?")
     ap.add_argument("--timeline"); ap.add_argument("--transcript")
-    ap.add_argument("--maxlead", type=float, default=0.8, help="max seconds a visual may lead its VO cue")
+    ap.add_argument("--maxlead", type=float, default=1.0, help="max seconds a visual may lead its VO cue (HF clips have a brief intro before their keyed reveal)")
     ap.add_argument("--maxlag",  type=float, default=0.4, help="max seconds a visual may lag its VO cue")
     a=ap.parse_args()
     if a.scene_dir:
