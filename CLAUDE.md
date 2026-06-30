@@ -246,6 +246,10 @@ State which skill you're using before acting, then run it; surface to the user a
   `tools/assemble-master.py` (master assembly).
 - `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`, `knowledge/VISUAL-SOURCING.md`
   (don't default to HyperFrames; non-literal/symbolic visuals; breathers).
+- **`knowledge/CITATION-CARD-FORMAT.md` — the CURRENT STANDARD for evidence/argument explainers**
+  (dark register + cream citation cards, hard-cut concat-FILTER assembly, dead-space QC gate,
+  VO-anchored via `tools/cue.py`, and the 9:16 shorts system). Proven on *The Choice* (V1) &
+  *Death of the Junior Engineer* (V2). Use this mode for research videos; avatar/xfade mode is for talking-head episodes.
 - Asset library: canonical `asset-library/assets.db` (query by meaning via `search-assets-db.py`;
   see `references/ASSET-CONTRACT.md`). 196 assets tagged with `symbolizes`/`usable_as`.
 
@@ -253,9 +257,10 @@ State which skill you're using before acting, then run it; surface to the user a
 render); no static hold >5s (ambient motion + the freeze gate); VO-anchored timing; kicker labels
 ≥26px; run the QC gate on every scene before the user sees anything.
 
-**Legacy (superseded):** `skills/video-image-creation/SKILL.md` (the old 20–30s still-image
-workflow) is NOT the current process. Use `jarvis-video-production` unless the user explicitly asks
-for the old still-image approach.
+**Legacy (removed 2026-06-29):** the old `skills/video-production` (Remotion+HeyGen avatar) and
+`skills/video-image-creation` (20–30s still-image) skills were deleted in favor of the single canonical
+hub `jarvis-video-production` (git-recoverable if ever needed). The old global `byrddynasty-video-production`
+skill is now a redirect to it. For one-off thumbnails/stills use `image-generation` + `cli-tools/make-text-card.py`.
 
 ## Important Documentation
 

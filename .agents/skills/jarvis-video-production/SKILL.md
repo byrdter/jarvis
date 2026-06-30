@@ -10,6 +10,7 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 ## Default Position
 
 - **Faceless video is the default.** Use HyperFrames, real screenshots, web artifacts, B-roll, code/terminal simulations, diagrams, data visualization, and cinematic clips.
+- **Two production formats — pick by content:** (a) **Citation-card / evidence mode** for research & argument explainers — dark register + cream paper citation cards that land on verified quotes, hard cuts, avatar only for intro/CTA/closing. **This is the current standard for evidence-driven videos** (proven on *The Choice* & *Death of the Junior Engineer*). See **[knowledge/CITATION-CARD-FORMAT.md](knowledge/CITATION-CARD-FORMAT.md)**. (b) **Avatar / xfade mode** for talking-head-led episodes — see [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md). Shorts (9:16 promo cuts) are covered in the citation-card doc.
 - **Cinematic WebGL / layered depth is the default visual language.** Treat screenshots, web-rolls, Sites, code, diagrams, data cards, and B-roll as layered objects in a spatial composition with depth, parallax, camera motion, light sweeps, scroll-chapter reveals, and foreground/background contrast. Do not reduce this to generic floating cards.
 - **Sites are supporting surfaces.** Use Codex Sites for dashboards, simulators, review boards, command centers, or companion resources; capture them into HyperFrames for final video composition.
 - **Talking heads are special appearances.** Use avatars, HeyGen, or Remotion talking-head pipelines only when the user intentionally asks for a guest/talking-head moment.
@@ -33,9 +34,15 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   — HyperFrames is one register among many; visuals need not be literal. Standalone B-roll breathers,
   symbolic/atmospheric clips, screenshots, web-rolls, real/fabricated documents — and how the asset
   database's metadata drives selection.
-- **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (QC gate) and
+- **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (avatar-mode QC gate) and
   **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
   these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
+- **Citation-card-mode tools:** **[tools/cue.py](tools/cue.py)** (exact Whisper word-start for any cue
+  phrase — VO-anchoring) and **[tools/assemble-master-concat.py](tools/assemble-master-concat.py)**
+  (hard-cut master via the concat FILTER — avoids the demuxer+cfr duration-balloon bug). The
+  citation-card QC gate is the **dead-space scan** (see CITATION-CARD-FORMAT.md). Card generators live
+  in `jarvis/cli-tools/`: `make-citation-card.py`, `make-text-card.py`, `make-logo-card.py`,
+  `make-phase-rail.py`, `verify-vo-sync.py`.
 
 Then read only what the task needs:
 
