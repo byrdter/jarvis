@@ -154,6 +154,16 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
   Audit fast: list all `data-start` values — clustered near 0 with reveals spread across the scene =
   the bug. Auto-fix: `fix-media-windows.py` (V-POPE `build-scripts/`) aligns windows to `clip()`
   calls and clones reused elements.
+- **VO-SYNC verification (do a pass before shipping).** Text that fades in over ~0.5s and is
+  triggered AT its cue word only becomes readable ~0.5s AFTER the word — reads as "late." Aim to set
+  each text reveal ~0.3–0.4s BEFORE its cue word (Δ = reveal−spoken ≈ −0.35). Verify with a
+  sync-report that extracts every `line()`/`lt()` reveal, maps it to the transcript word, and reports
+  the delta (see V-POPE `build-scripts/sync-report.py`). **Its distinctive-word match is noisy** on
+  multi-word lines and repeated words — confirm any flagged beat with ground-truth `cue.py` on the
+  exact phrase before moving it. The reliable signal is LATE beats (positive Δ); most "early" flags
+  are the tool matching a later word in the same line. Subagents systematically drift here — one
+  V-POPE scene ran its whole middle 5–8s AHEAD of the VO ("pulled forward to fill a gap"), another ran
+  2–4s LATE from bad cue estimates. Re-anchor clips AND their text together to the true cue.
 - **Run renders SEQUENTIALLY.** 6 concurrent `hyperframes render` processes (load avg 400+)
   corrupted one scene's output mp4 (97% decode-error rate — probes fine by duration, fails on
   decode) and killed other renders mid-mux. Queue renders one at a time; verify outputs with a
