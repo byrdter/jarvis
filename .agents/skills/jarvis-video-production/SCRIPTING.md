@@ -21,9 +21,27 @@ each tagged with its anchor source.)
 
 ## Step 0b — Voice + thesis (non-negotiable)
 Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
-- **Thesis:** "Technology is neutral. Choices aren't." Every claim serves it.
+- **Thesis (sharpened — channel canon):** "Technology is neutral. The choices aren't." As of the
+  Pope-encyclical video (V01, *Never Neutral*) this is deployed in its **sharpened** form: technology
+  is neutral only for a **brief, upstream moment, in a room you're not in** — by the time it reaches
+  the viewer the choices are already **poured into the artifact** (who devised it, financed it,
+  regulated it — or chose not to — and who uses it, on whom). "Technology is neutral" is true the way
+  "a ballot is neutral" is true: the paper doesn't care; the election still decides everything. Never
+  state the bare tagline as an unexamined axiom — honor the sharpened version, and keep it consistent
+  across every video. Every claim serves the thesis.
 - **Voice:** Dr. Terry Byrd — measured, explorer's tone. **Explore, don't predict.** Pose the
   trade-off; show the evidence; let the viewer weigh it. No hype, no doom.
+  - **First-person PLURAL — always.** The narrator speaks as **"we / us / our,"** never "I / me / my."
+    The ONE exception is the avatar's self-identification — "I am an avatar for Dr. Terry Byrd" (and
+    its close variant "I'm the avatar for Dr. Terry Byrd") stays singular. Everything else ("we went
+    looking," "we'd be suspicious," "we'll leave you," "we'll see you next time") is plural — the
+    collective-builder voice.
+  - **No "series" framing — each video STANDS ALONE.** Never say "the series," "this series," "the
+    rest of the series," or imply the viewer must watch in any order. Videos relate to one another
+    **only through the Show Bible** (shared thesis, lenses, recurring questions) — viewers search and
+    connect them however they like. "This channel" and "the next one / next time" are fine; serialized
+    language is not. Use a "series" word only if Terry explicitly frames something as a series for a
+    specific video.
 - **Lenses (use 1 or combine):** power & choices · scenarios & trade-offs · strategic navigation ·
   meaning & identity · social consequences. Aim for the channel's lens balance over time (the
   meaning/identity lens is currently lightest — favor it when the topic allows).
@@ -33,16 +51,20 @@ Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
 - **Length:** 10–15 min ≈ **1,500–2,200 spoken words** (~140 wpm). Don't pad; add evidence/examples.
 - **Arc:** hook (a stop-you-in-your-tracks open) → body via the chosen lens framework → close that
   lands the choice back on the viewer.
-- **Standard structure (Byrddynasty):** **avatar intro → body beats → CTA (penultimate) → avatar
-  close.** The intro, CTA, and close are all spoken/recorded by the avatar. `scaffold-script.py`
-  builds exactly this and **pre-fills the intro opener** ("I'm an avatar for Dr. Terry Byrd…") and the
-  **full CTA** (subscribe · like · ring the bell) so you only write the body + close. Total ≈ 8–10
-  scenes (6–7 body beats).
+- **Standard structure (Byrddynasty):** **avatar intro → body beats → CTA scene → avatar close.**
+  The **CTA is its OWN scene** (subscribe · like · ring the bell), placed just before the close, and
+  is **AVATARLESS by default** — the copy renders as graphics over the register, no avatar shown
+  (avatar on the CTA only if Terry explicitly asks for it on a specific video). The **intro and close**
+  are the avatar-visible scenes. The avatar still *voices* the CTA (VO only) — it just isn't *shown*.
+  `scaffold-script.py` pre-fills the intro opener ("I am an avatar for Dr. Terry Byrd…") and the full
+  CTA copy — keep the CTA as a separate scene, never tacked onto the close. Total ≈ 9–11 scenes (6–7
+  body beats + a separate CTA scene + the close).
 - For EACH scene, write a **distinctive first line** — the *anchor* `split-heygen.py` locates in the
   recorded take to split it. Unique and verbatim-stable; **don't reword after recording** (verify the
   anchors against the recorded VO, then split).
-- The CTA + close are avatar; body beats are usually graphics (but can use any register — see
-  VISUAL-SOURCING). Mark `avatar` in `scenes.json` accordingly (scaffold does this for you).
+- The **close** is avatar; the **CTA is avatarless graphics** (unless Terry asks otherwise); body
+  beats are usually graphics (but can use any register — see VISUAL-SOURCING). Mark `avatar` in
+  `scenes.json` accordingly — the CTA scene is **NOT** `avatar` by default.
 
 ## Step 0d — Fact-check + claim-source map
 Every meaningful on-screen/spoken claim needs a source (or be framed as interpretation). Fill

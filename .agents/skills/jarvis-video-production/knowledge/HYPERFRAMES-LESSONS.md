@@ -77,5 +77,35 @@ use ≥6 per episode, ≤3 consecutive scenes sharing one. Proven upgrades on re
 - Count-ups: keep them short (~0.5–0.6s) so a number doesn't *dwell* at a value that collides
   with another on-screen number (two 32%s for ~1s reads as a bug). Land on the VO word.
 
+## Production / assembly gotchas (V5, this repo)
+
+### L-Dropbox — renders get evicted to online-only placeholders
+This project lives in Dropbox CloudStorage, which **dehydrates** finished render mp4s within minutes
+(full logical size, 0 disk blocks). Reading one then HANGS on re-download, so assembling 10 scenes
+stalls. **Fix:** stage every scene render to a LOCAL dir off Dropbox (scratchpad/`/tmp`), assemble
+there, and copy only the final master back. `du -h` shows 0B for an evicted file even though `ls -l`
+shows the real size — that's the tell.
+
+### L-frames — a render can silently truncate; check the frame count, not the container duration
+A hyperframes render occasionally stamps the full container duration from the audio but encodes fewer
+video frames. Always verify `nb_read_frames ≈ duration × fps` before trusting a render:
+`ffprobe -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -show_entries format=duration ...`.
+
+### L-concat — assemble the master with the concat FILTER via a PYTHON script, not a bash-built string
+Building the `-filter_complex` string in bash mangles quoting and BALLOONS the master duration
+(video time-stretched, audio 6% long). Run the concat-filter from a Python script (per-input
+`fps,scale,pad,setsar,format,settb=AVTB,setpts=PTS-STARTPTS` + `-video_track_timescale 30000`).
+Inputs summing to 18:35 must produce an 18:35 master — if it's longer, the filter string got mangled.
+
+### L-split — split-heygen per-file: clear the cache, and expect real-take drift
+- Running `split-heygen.py` on several single-scene files to the same `--out` **reuses the cached
+  `full-transcript.json`** from the first file → wrong anchors. `rm -f <out>/full-transcript.json`
+  between files, or slice with explicit `"start":0` (whole file = one scene, no anchor needed).
+- Recorded HeyGen takes may **omit the 1.5s scene gaps, compress, or reword** the script (V5 dropped a
+  scene's intro line). Split by the largest silence gap or a fuzzy anchor, then **re-derive every cue
+  from the actual transcript** — Whisper writes numbers as digits, so look up "42%" as `42`.
+- `zsh` arrays are **1-indexed** (`${a[1]}` is the first element) — a loop that worked in bash will
+  shift by one in the snapshot shell.
+
 See also: `references/ANTI-PATTERNS.md` (text-on-text, boxes-on-boxes, shape reuse) and
 `references/QC-PASS.md`.

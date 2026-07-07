@@ -8,9 +8,13 @@ The canonical asset library is the **searchable DB**:
 ~/Library/CloudStorage/Dropbox/jarvis/asset-library/assets.db   (+ clip-library/ media, products/ screenshots)
 ```
 
-196+ assets, each with AI metadata (description, mood, setting, people, color_palette) PLUS
+280+ assets, each with AI metadata (description, mood, setting, people, color_palette) PLUS
 `symbolizes` (abstract ideas it can represent) and `usable_as` (breather / background /
 establishing / symbolic / literal). All `file_path`s are absolute and resolve.
+
+Media lives under `clip-library/`: `videos/` (B-roll clips), `backgrounds/` (cinematic
+dark-register photographic backgrounds — bg-still Ken-Burns layers, added from V3/V5 in 2026-07),
+`images/`, plus the `pixel*` / `addition-images` variant sets. Query the DB, don't browse by folder.
 
 **Query it** with the tool in the youtube-video-automation skill (referenced, not duplicated —
 see PIPELINE / VISUAL-SOURCING):

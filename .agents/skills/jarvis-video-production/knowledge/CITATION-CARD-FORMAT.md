@@ -124,7 +124,32 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
   assigning a clip to every concrete noun in the VO. Literal matches beat abstractions ("markets" →
   the trader-at-monitors clip; "ballot" → the ballot-marking clip). Where no adequate clip exists,
   put it on a GAP LIST for Terry to generate — do NOT settle for a text beat.
+- **Mine the pixel sets too.** `asset-library/clip-library/pixelvideos/` + `pixelimages/` were
+  underused — they carry **transitions** (`trans-glass-shatter`, `trans-light-sweep-cyan`,
+  `trans-zoom-through-tunnel`, `bg-particle-field`) that punctuate a beat to satisfy the 5-second rule,
+  and **contemplative breathers** (`out-window-city-night-view`, `out-park-walking-thinking`,
+  `pov-phone-in-hand-notification`, `tex-paper-stack-raking-light`). Check them before generating new.
 - No top-left scene-number/name tag in the chrome.
+
+## Single-use outside visuals + the pre-build variety gate — Terry's standing rule (2026-07-07; EVERY video)
+- **An "outside" visual may appear at most ONCE in a video.** Anything **not made specifically for
+  this video** — generic `clip-library/videos/` clips, pixel assets, other episodes' `*__br-*` clips,
+  product screenshots, stock — gets **exactly one** on-screen appearance. Reusing the same outside
+  clip for two beats reads as "they ran out of footage." **Assets MADE for this video** (this episode's
+  own `br-*` / `bg-*`) may recur — backgrounds are meant to. When you'd otherwise repeat an outside
+  clip, either pick a different one or **make a new episode-specific clip** (addendum, below).
+- **Maximize B-roll variety** — no two adjacent beats should share a look; spread clip *kinds*
+  (document macro / crowd / civic space / lab / abstract / breather) across the runtime.
+- **The 5-second rule is a PRE-BUILD PLANNING GATE, not just a QC check.** *Before* you write the
+  visuals map: take the scene's runtime, divide by 5s, and confirm you have that many **distinct**
+  visual changes available (clip cut, new lower-third, card, highlight shift, re-frame, transition —
+  ambient drift does NOT count). If the count comes up short, you don't have enough visuals yet — put
+  the missing ones on the **GAP LIST** and add them to the video's `ASSET-GENERATION.md` in an
+  **`## ADDENDUM`** section at the bottom (house-style prompts) for Terry to generate. Never paper over
+  a shortfall with a held text card.
+- **Rethink the asset plan against these rules every time.** The first-pass asset list (written before
+  the VO was final) usually under-supplies variety — re-derive the beat-by-beat map from the *locked*
+  VO and reconcile it with single-use + 5s before building any scene HTML.
 
 ## Production hardening (learned on the Pope encyclical, V-POPE, 2026-07)
 - **Dead-space remedy that reliably works = raise the luminance FLOOR, not just the beat content.**

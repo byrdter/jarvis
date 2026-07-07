@@ -94,3 +94,26 @@ non-HyperFrames format — a full real screenshot (register A), a full-bleed B-r
 point, a real document/web-roll, a photo. Don't reflexively make every beat "HyperFrames spine +
 images layered behind." Some beats should lead with the screenshot/clip/document as the main act, with
 HyperFrames reduced to a caption/lower-third. Mix foreground formats across a scene and across scenes.
+
+## Non-literal is the default — but a NAMED thing must be shown literally (Terry, V5)
+Symbolic/atmospheric visuals are the default for general lines. The exception: when the VO **names a
+specific example, entity, or number**, the visual must be THAT one, at THAT moment.
+- Don't play a high-breadth example (a self-driving car) under a "narrow, stable lane" line — even if
+  the car is correct elsewhere. Wrong example at the wrong moment reads as a mistake.
+- Don't reuse one distinctive "hero" clip for two different named examples (the same brain-scan for
+  both the IBM cancer beat and the Siemens imaging beat). Give each its own shot; generate/source a
+  distinct one, or extract a still — the audience notices the repeat. Reserve a clip that's a *later*
+  example (the autonomous car = the BMW beat) for that beat only; use a quick still elsewhere.
+- Match the noun: "sells the finished phone" needs an electronics/phone shot, not a grocery aisle.
+
+## Name it, THEN show it (contextualize an ambiguous clip)
+If a clip only makes sense once you know what it is (a brain scan, a lab, a scanner), reveal the
+identifying text FIRST — then play the clip behind/after it. On V5 the brain scan was confusing until
+the "IBM Watson × MD Anderson · cancer care" title landed ahead of it; then it read as the example.
+
+## Quick still MONTAGE (a register of its own)
+A still held 2–3s with a slow Ken-Burns already carries a point (see above). A **still-to-still
+montage** — a new still every ~2–3s — carries a *list* or a build, costs nothing to source, and adds
+variety without generating a single clip. Use it when generation is unavailable, for a fast sequence
+(chip → phone → customer), or just to break the clip/HyperFrames rhythm. Pull from `clip-library/
+images`, `backgrounds/`, `products/`, or extract a frame from an existing clip.

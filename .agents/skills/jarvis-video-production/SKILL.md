@@ -18,6 +18,21 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 - **Minimum runtime is 8 minutes.** Preferred runtime is 10-15 minutes unless the user explicitly requests a short.
 - **Every episode needs variety.** Avoid long runs of the same floating-card/orb/text presentation mode.
 
+**Standing channel rules (apply to EVERY video — details in SCRIPTING.md / CITATION-CARD-FORMAT.md):**
+- **Voice = first-person PLURAL** ("we/us/our"). The only singular is the avatar self-ID "I am an
+  avatar for Dr. Terry Byrd." Never "I/me/my" anywhere else.
+- **The CTA (subscribe/like/bell) is its OWN scene and is AVATARLESS by default** — graphics only, no
+  avatar, unless Terry explicitly asks for the avatar on a specific video's CTA. The close is a
+  separate avatar scene.
+- **No "series" framing.** Each video STANDS ALONE; relate videos only through the Show Bible. No "the
+  series / rest of the series" language unless Terry explicitly calls something a series.
+- **Outside visuals are single-use** (once per video); only this-video's own `br-*`/`bg-*` may recur.
+  Maximize B-roll variety and **plan the 5-second rule BEFORE the visuals map** — short on distinct
+  visuals ⇒ add a GAP LIST to the video's `ASSET-GENERATION.md` addendum. Mine the pixel sets too.
+- **The "technology is neutral — the choices aren't" tagline is SHARPENED** (Pope-encyclical canon):
+  neutral only for a brief upstream moment, in a room you're not in; the choices are poured into the
+  artifact before it reaches the viewer. Deploy the sharpened form, consistently.
+
 ## First Read
 
 - **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
