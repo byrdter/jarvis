@@ -41,6 +41,29 @@ Each content scene is ONE HyperFrames composition (`hyperframes-v3/scenes/<name>
   there with a small ~0.3s lead. Whisper renders numbers as digits ("62%") and mis-hears names
   (Kuyda→"Kaida", Skip→"Skimp") — match the transcribed tokens, not the script spelling.
 
+## Evidence-first timing + avatar side-text (V5 review — hard rules)
+Every recurring note on V5 reduced to these. Apply by default:
+1. **Evidence lands ON the VO stat, THEN elaborate.** When the VO says a number, the highlighted
+   article card lands *at that word* (evidence + VO together) and holds until the sentence finishes —
+   then cut to a clip/graphic to elaborate. NEVER show a HyperFrames stat first and the same number in
+   the article seconds later. If the stat is in the source, **the highlight IS the reveal** — delete
+   the redundant HyperFrames stat scene.
+2. **One page, moving highlight.** For a passage with several stats (42% → 46% → ⅓ → 73% → 62/63 →
+   25%), reuse the SAME source page and **cross-fade between highlight cards** as the VO hits each
+   number (one card per stat via `make-citation-card.py`). Reads as "the evidence, line by line."
+3. **Label B-roll with a lower-third — don't narrate it in a text box.** A company/example clip gets a
+   kicker + one serif line in the corner, not a centred full-screen text card. The lower-third also
+   lifts base luminance past the dead-space floor. Reserve full-frame text beats for titles/landings.
+4. **Name it, THEN show it.** If a clip is ambiguous (a brain scan, a lab bench), reveal the
+   identifying text FIRST ("IBM Watson × MD Anderson · cancer care") and play the clip behind/after it.
+5. **Avatar text goes to the SIDE, never over the face.** In avatar scenes (intro/CTA), put brand/
+   landing text in a left- (or right-) gradient **side-panel** with the avatar visible and lit — not a
+   full-frame scrim + centred text over the face. (See `ASSEMBLY-AND-AVATAR.md`.)
+6. **Don't reuse one "hero" clip for two different named examples** (same radiology clip for both the
+   IBM cancer beat and the Siemens imaging beat) — the audience notices. Give each a distinct shot; and
+   when the VO names a specific example, the visual must be THAT example (not a high-breadth car under a
+   "narrow lane" line). See `VISUAL-SOURCING.md`.
+
 ## Card & overlay toolkit (shared, in `jarvis/cli-tools/`)
 - `make-citation-card.py` — PDF page → highlighted document card (the cream evidence card).
 - `make-text-card.py` — dark/serif/gold text card (`--bg dark|transparent|cream|image:PATH --dim N`).
@@ -86,3 +109,57 @@ inline Python, kept in each project's `build-scripts/verify-all.py`.)
 ## Reuse > rebuild
 V2's whole win was re-using the existing strong dark scene comps, re-timing them to the locked VO, and
 inserting cream citation cards — not rebuilding from scratch. Check for an existing comp/asset first.
+
+## Visual density — Terry's standing rule (V-POPE review, 2026-07-07; applies to EVERY video)
+- **Clips and images CARRY the presentation; HyperFrames text is an OVERLAY** (lower-thirds + ≤4s
+  full-frame landings on a light ~.30 scrim). Text-only beats parked on a dark bg are the #1 rejected
+  pattern.
+- **HARD CEILING: 5 seconds or less on anything on screen without a perceptible change** — a new
+  clip, a new lower-third, a card, a highlight shift, or a re-frame. Slow push-in / ambient drift
+  alone does NOT count. A 12s VO stretch = 2–3 visual changes, not one held text card.
+- **Citation cards >5s** get a mid-hold change at ~4–5s: second highlight lands, highlight
+  cross-fades to the next phrase, or the frame re-crops to the quoted passage.
+- **Asset-library FIRST:** before authoring any scene, query `asset-library/assets.db`
+  (`symbolizes`/`usable_as`) + the video's custom clip set, and build a beat-by-beat visuals map
+  assigning a clip to every concrete noun in the VO. Literal matches beat abstractions ("markets" →
+  the trader-at-monitors clip; "ballot" → the ballot-marking clip). Where no adequate clip exists,
+  put it on a GAP LIST for Terry to generate — do NOT settle for a text beat.
+- No top-left scene-number/name tag in the chrome.
+
+## Production hardening (learned on the Pope encyclical, V-POPE, 2026-07)
+- **Dead-space remedy that reliably works = raise the luminance FLOOR, not just the beat content.**
+  The gate flags `stddev<13 AND (mean<22 or mean>234)` for ≥1.2s. Dark scenes trip it wherever only a
+  dim bg-still or a small/dimmed label shows. Fix by lightening the bgscrim, lifting bg-still opacity
+  from ~.30 to ~.50–.62, and brightening+enlarging the ambient glows (a reusable `brighten.py` patch).
+  This clears "black" holes AND makes the moody bg-stills read as intentional atmosphere. Residual
+  transition dips still need targeted fixes: overlap adjacent beats (never fade one fully out before
+  the next starts), raise/extend the B-roll opacity and lighten the `.broll-scrim`, or land the cream
+  card ~1s earlier to cover a title→card gap. A lone eyebrow/kicker on dark bg for >~1s always trips it.
+- **Fan-out is great for AUTHORING, unreliable for self-QC.** Parallel subagents build strong scenes
+  against a locked reference, but they race their own edit→render→scan loop and will claim "ALL CLEAN"
+  on a stale/failed render. The operator MUST re-run `verify-all.py` on every FINAL render and own the
+  fixes. Stop stragglers (TaskStop) before assembling so nothing re-renders under you.
+- **Dropbox online-only eviction corrupts assets under heavy parallel render load.** A copied card/bg
+  can end up the right SIZE but unreadable → `hyperframes render` silently FAILS on the asset and
+  leaves the OLD render (so a scene's dead runs "won't change" no matter what you edit). Detect with
+  `hyperframes validate` (`net::ERR_CONTENT_LENGTH_MISMATCH`) and a stale render mtime. Fix: re-copy
+  from the verified-good source, `sync`, re-render. **Verify card PRESENCE in the render** (sample the
+  frame at the card cue; a real cream card reads mean-luma >200) — a missing card still passes the
+  dead-space gate, so the gate alone won't catch it.
+- **`<video data-start>` is the TIMELINE position, not a media offset** (V-POPE V2 rework: 3 of 6
+  scene subagents set `data-start="0"` on clips revealed at t=40–99s → the clip played at t=0,
+  froze on its last frame long before its GSAP reveal → dark dead runs + lost motion). Every clip's
+  `data-start`/`data-duration` must equal its visible GSAP window (and stay ≤ the source's real
+  length — ffprobe it); reusing one source at two moments needs TWO elements on separate tracks.
+  Audit fast: list all `data-start` values — clustered near 0 with reveals spread across the scene =
+  the bug. Auto-fix: `fix-media-windows.py` (V-POPE `build-scripts/`) aligns windows to `clip()`
+  calls and clones reused elements.
+- **Run renders SEQUENTIALLY.** 6 concurrent `hyperframes render` processes (load avg 400+)
+  corrupted one scene's output mp4 (97% decode-error rate — probes fine by duration, fails on
+  decode) and killed other renders mid-mux. Queue renders one at a time; verify outputs with a
+  decode pass (`ffmpeg -v error -i out -f null -`), not just ffprobe duration.
+- **Splitting a continuous HeyGen take:** local `whisper-cli` (small.en, `-ml 1 -sow`) gives
+  word-level timings with no API key. Split by first-line ANCHOR phrases, not silence (a HeyGen take
+  is often gap-free). Strip apostrophes when matching (Whisper writes "Alright"→"All right", numbers
+  as digits). HeyGen may put a ~1s WHITE frame at a mid-take scene boundary while audio already
+  speaks — cover it with an opaque opening graphic (don't trim; that desyncs the VO).
