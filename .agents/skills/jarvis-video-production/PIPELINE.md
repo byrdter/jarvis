@@ -62,6 +62,19 @@ Build each `index.html`. ALL motion on the registered `tl` (never free gsap). Ad
 layer. Anchor every reveal to its VO word. Kicker labels ≥26px/700. No text-on-text / boxes-on-boxes.
 For avatar-visible scenes, pass the avatar through (light chrome only).
 
+**Before authoring each scene, pick its technique from `knowledge/HYPERFRAMES-TECHNIQUE-PALETTE.md`**
+(match the beat's JOB — proportion/place/timeline/relationship/comparison — never default to a text
+card). The load-bearing capability docs are ALWAYS available on every machine at
+`~/.claude/skills/hyperframes-{animation,creative,registry}/` — read the specific rule/blueprint there.
+**For real "this is what it should look like" examples, consult the maker compositions** — but they
+live on the external ORICO drive, so guard first:
+```bash
+REF=/Volumes/ORICO/hyperframes-upstream
+[ -d "$REF" ] && echo "ref available: $REF/hyperframes-launches (vfx-heygen-combined, spacex-launch, texture-launch…)" \
+             || echo "ORICO not mounted — skip example lookup; plugin skills at ~/.claude/skills/hyperframes-* are sufficient"
+```
+If ORICO isn't mounted, proceed with the plugin skills (nothing critical is gated behind the drive).
+
 ## Step 5 — Render each scene
 `cd <scene> && hyperframes render .` — confirm render duration == `assets/audio.mp3`.
 
