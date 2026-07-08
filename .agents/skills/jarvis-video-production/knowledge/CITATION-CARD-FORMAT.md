@@ -198,3 +198,29 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
   is often gap-free). Strip apostrophes when matching (Whisper writes "Alright"→"All right", numbers
   as digits). HeyGen may put a ~1s WHITE frame at a mid-take scene boundary while audio already
   speaks — cover it with an opaque opening graphic (don't trim; that desyncs the VO).
+
+## Elevated-graphics review — Terry's standing rules (V03/V04/V05 flagship review, 2026-07-08)
+Locked while reviewing the first "beyond text+boxes" flagships. Apply to EVERY scene:
+- **NO four-corner chrome text.** Drop the top-right channel mark and both bottom footer captions/rule —
+  Terry cut them ("not needed"). Keep the frame clean; the content carries it.
+- **Never text OVER the avatar, never text OVER other text.** In avatar scenes (intro/CTA/close) text
+  goes to a side panel, never across the face (see `ASSEMBLY-AND-AVATAR.md`). In graphic scenes,
+  stacked labels must **FLOW** (block children with margins), never be absolutely positioned at the same
+  coordinates — the V04 bug was a big number's multi-line caption colliding with a note pinned beneath it.
+- **Faded background as needed.** A bare gradient reads as "no background." Put the scene's `bg-*` still
+  behind the graphics at ~.30-.34 opacity with a scrim + slow ken-burns (the `.bgstill`+`.bgscrim`
+  pattern) — it adds depth and variety and helps the luminance floor. Full-frame-hero scenes are the
+  exception (the V05 map needed none).
+- **Raise the luminance floor on code/graphic scenes.** Pure-navy scenes trip the dead-space gate at
+  the floor (mean ~21). Add a persistent `.stagelight` radial + brighter/enlarged ambient glows +
+  lighter base gradient -> mean ~40. Bake this into the scene chrome from the start.
+- **Variety is required** — no long stretch in one layout. Rotate devices (grid -> ledger -> comparison
+  -> breather -> closer), and cut in real footage or a **still image** for beats, especially **fast
+  idea-to-idea transitions** (a still is fine when the beat is short and fast-moving — no clip needed for
+  a <~3s hit). Re-confirm the 5-second rule as a pre-build gate.
+- **Model the STORYTELLING on V05** — Terry singled out how the datacenter scene *told the story*
+  (title -> build the map -> scale it up -> the money -> the human twist). Carry that narrative
+  escalation into every scene: each beat advances the argument, not just displays a stat.
+- **Lean on the HyperFrames repos/skills for innovation** — `~/.claude/skills/hyperframes*` +
+  `~/.claude/plugins/cache/.../hyperframes/*/registry` (maps, `data-chart`, `flowchart`, `constellation`,
+  code/terminal, shader transitions, VFX). Reach past text+cards every scene.
