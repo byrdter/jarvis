@@ -237,6 +237,17 @@ from a HeyGen take), the canonical skill is `jarvis-video-production`. Read it F
 - `.agents/skills/jarvis-video-production/SKILL.md` — then its `PIPELINE.md` (the end-to-end
   runbook: raw HeyGen take → finished master) and the `knowledge/` docs.
 
+**MAXIMIZE HYPERFRAMES — do not settle for text + boxes.** Every scene must pick a technique whose
+JOB matches the beat (proportion → dot-grid/ring, place → map, chronology → spatial-pan timeline,
+relationship → constellation, comparison → split, verdict → ticker) from
+`knowledge/HYPERFRAMES-TECHNIQUE-PALETTE.md`; a plain full-frame text card is allowed ONLY for a title
+or landing line. The full capability set is installed and active (`hyperframes-animation`,
+`hyperframes-keyframes`, `hyperframes-creative`, `hyperframes-registry`, `figma`, + the 142-block
+`hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
+registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
+scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
+Use the PINNED CLI (`hyperframes`, global 0.7.42) — never bare `npx hyperframes`.
+
 **When the user asks for:** long-form videos, producing a video from a HeyGen recording, scene/visual
 work, revisions, QC, or packaging → load `jarvis-video-production` and follow `PIPELINE.md` (9 steps).
 State which skill you're using before acting, then run it; surface to the user at the final review.
