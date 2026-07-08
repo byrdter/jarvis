@@ -81,8 +81,24 @@ Creates `01-script/` with `COMPLETE-SCRIPT.md` (script + [SCENE NN] markers + vi
 ~duration, first-line anchor, treatment idea), `claim-source-map.md`, and `scenes.json` (the
 `split-heygen.py` spec skeleton). Then fill them in with the researched, voiced script.
 
+## The clean HeyGen script — REQUIRED for every video (Terry's standing rule, 2026-07-08)
+HeyGen records **literally everything pasted into it**, so Terry never records from the annotated
+`VO-SCRIPT.md`. Every video ships a **paste-ready clean version** — `VO-CLEAN.md` — that contains
+**only spoken words**, generated with:
+```bash
+python3 <skill>/tools/make-clean-vo.py <project>/VO-SCRIPT.md      # → sibling VO-CLEAN.md
+```
+The clean version strips **all** of: `[CITE-n]`, `[beat]`, `**[…s silence]**`/`[END]` stage directions,
+the blockquote channel-standard notes — and **every markdown emphasis mark** (`*`, `**`, `_`, `` ` ``),
+because HeyGen renders those as junk symbols in the read. Keep numbers **spelled-out** (TTS reads them
+as written) and keep letter-hyphenations like **A-I / U-S / C-E-O / I-B-E-W** (HeyGen says them as
+letters). Scenes stay as `==== SCENE NN — … ====` label blocks so Terry can copy **one scene at a
+time** (per-scene recording is the cleaner split path). Regenerate `VO-CLEAN.md` any time the
+VO-SCRIPT changes — it is derived, never hand-edited. `VO-ONLY.md` from the scaffold serves the same
+role; `make-clean-vo.py` is the canonical, always-run cleaner.
+
 ## Handoff to production
-1. `VO-ONLY.md` → Terry records in HeyGen → `heygen.mp4`.
+1. `make-clean-vo.py` → `VO-CLEAN.md` → Terry pastes into HeyGen → records → `heygen.mp4`.
 2. Finalize `scenes.json` anchors to match the **recorded** first lines (verify, don't assume).
 3. PIPELINE Step 1: `split-heygen.py --video heygen.mp4 --spec scenes.json --out …/hyperframes-v3/scenes`.
 4. Continue PIPELINE Steps 2–9.
