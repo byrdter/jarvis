@@ -122,3 +122,16 @@ default because it was quick.
 rules/*, blueprints/*, adapters/*}` · `~/.claude/skills/hyperframes-creative/references/{data-in-motion,
 video-composition, motion-principles, visual-styles, typography, composition-patterns}.md` ·
 `~/.claude/skills/hyperframes-registry/references/discovery.md`.
+
+## Reference library — real production compositions (what "possible" looks like)
+Cloned 2026-07-08 (public `heygen-com` repos), stored on the **ORICO drive** to avoid Dropbox eviction:
+`/Volumes/ORICO/hyperframes-upstream/` (breadcrumb: `${JARVIS_PRIVATE}/references/HYPERFRAMES-UPSTREAM-MOVED-TO-ORICO.txt`).
+- **`hyperframes-launches/`** — 15+ finished showcase videos by the HyperFrames makers, each with the
+  actual `compositions/*.html`, `renders/`, `fonts/`, `assets/`. When you want a technique done RIGHT,
+  open the composition and read how they timed it on `tl`. Effects-heavy ones to study first:
+  `vfx-heygen-combined`, `spacex-launch`, `texture-launch-video`, `timeline-launch`, `claude-paper-launch`.
+- **`hyperframes/`** — the product monorepo: `registry/` (the SOURCE for all 142 `add` blocks +
+  `registry/examples/`), `examples/`, `docs/`, and `skills/` (same skill docs as the plugin, at HEAD).
+- **`hyperframes-launch-video/`** — the flagship launch film (heavy: renders + assets).
+- **CLI is pinned:** run `hyperframes` (global, 0.7.42) — NEVER bare `npx hyperframes` (version roulette).
+- Re-pull with `git -C <repo> pull`. These are read-only reference; do not build inside them.

@@ -104,6 +104,70 @@ def check_lib_bugs(scene_dir, html=""):
             bugs.append("tl.call(...) present in loaded byrd-transitions.js — throws in HyperFrames GSAP runtime")
     return bugs
 
+def check_determinism(html):
+    """H. Pre-render static analysis for the render-killer class.
+
+    HyperFrames renders from ONE paused GSAP timeline, seeked frame-by-frame.
+    Motion that is NOT attached to that timeline — a bare gsap.to(), a CSS
+    @keyframes animation, requestAnimationFrame, or a wall-clock timer — LOOKS
+    animated in a browser but renders as a FROZEN frame. Non-deterministic
+    sources (Date.now / performance.now / Math.random) make the render vary
+    frame-to-frame. Both are the top reason 'the effects don't show up'.
+
+    This runs WITHOUT a render (unlike render_qc's freezedetect), so it catches
+    the cause before a render is wasted. A line may opt out with a trailing
+    `// hf-ok` comment for the rare deliberate case.
+
+    Returns list of (kind, detail) issue tuples; kind starts with 'det_'.
+    """
+    issues = []
+    # Only inspect <script> bodies + <style> blocks; ignore prose/comments loosely.
+    def _count(pattern, flags=0):
+        hits = []
+        for m in re.finditer(pattern, html, flags):
+            line_start = html.rfind('\n', 0, m.start()) + 1
+            line_end = html.find('\n', m.end())
+            line = html[line_start:(line_end if line_end != -1 else len(html))]
+            if 'hf-ok' in line:            # explicit opt-out
+                continue
+            if line.lstrip().startswith(('//', '*', '<!--')):  # commented out
+                continue
+            if len(line) > 400:            # minified/vendored lib (e.g. bundled GSAP), not authored code
+                continue
+            hits.append(m.group(0))
+        return hits
+
+    # 1. Off-timeline animated tweens — the subtle killer. gsap.set() is fine
+    #    (instantaneous static state); only .to/.from/.fromTo animate on the
+    #    global wall-clock when called on `gsap` instead of a registered timeline.
+    off_tl = _count(r'\bgsap\.(?:to|from|fromTo)\s*\(')
+    if off_tl:
+        issues.append(("det_off_timeline_gsap", len(off_tl)))
+
+    # 2. CSS keyframe animations — auto-play on wall-clock, never seeked → frozen.
+    if _count(r'@keyframes\b') or _count(r'(?<![-\w])animation\s*:\s*[^;]*\b\d'):
+        n = len(_count(r'@keyframes\b')) + len(_count(r'(?<![-\w])animation\s*:\s*[^;]*\b\d'))
+        issues.append(("det_css_animation", n))
+
+    # 3. Wall-clock animation drivers — won't advance under a paused seek.
+    raf = _count(r'\brequestAnimationFrame\s*\(')
+    timers = _count(r'\b(?:setInterval|setTimeout)\s*\(')
+    if raf:
+        issues.append(("det_raf", len(raf)))
+    if timers:
+        issues.append(("det_timer", len(timers)))
+
+    # 4. Non-deterministic sources — make each render differ; banned outright.
+    now = _count(r'\b(?:Date\.now|performance\.now)\s*\(')
+    rnd = _count(r'\bMath\.random\s*\(')
+    if now:
+        issues.append(("det_wallclock_now", len(now)))
+    if rnd:
+        issues.append(("det_math_random", len(rnd)))
+
+    return issues
+
+
 def root_audio_durations(html):
     """data-duration on the ROOT composition clip and the <audio> tag only.
     Nested <video> B-roll clips legitimately have their own shorter durations,
@@ -293,6 +357,22 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
     if tlcalls > 0:
         fail(f"SCENE HTML has {tlcalls} tl.call(...) — will throw at runtime, kills timeline silently")
         issues.append(("scene_tl_call", tlcalls))
+
+    # H. determinism (pre-render static analysis) — the render-killer class.
+    #    These make motion silently render FROZEN or vary frame-to-frame. Catching
+    #    them here avoids wasting a render on a scene that will look dead.
+    det = check_determinism(html)
+    _DET_MSG = {
+        "det_off_timeline_gsap": "off-timeline gsap.to/from/fromTo — attach to the registered `tl` (tl.to(...)); a bare gsap tween renders FROZEN",
+        "det_css_animation":     "CSS @keyframes / animation — wall-clock, never seeked → renders FROZEN. Drive it with GSAP on `tl`",
+        "det_raf":               "requestAnimationFrame — does not advance under a paused seek → renders FROZEN. Use a tl proxy tween (onUpdate)",
+        "det_timer":             "setTimeout/setInterval driving motion — wall-clock, won't render. Use the timeline",
+        "det_wallclock_now":     "Date.now()/performance.now() — non-deterministic; use tl.time()",
+        "det_math_random":       "Math.random() — non-deterministic across renders; use a seeded PRNG (mulberry32)",
+    }
+    for kind, n in det:
+        fail(f"DETERMINISM: {n}× {_DET_MSG.get(kind, kind)}")
+        issues.append((kind, n))
 
     # G. text overflow heuristic — wide text with white-space: nowrap may exceed 1920px
     # Parse CSS rules: class { ... font-size: NNNpx ... white-space: nowrap ... }

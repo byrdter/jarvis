@@ -63,12 +63,24 @@ layer. Anchor every reveal to its VO word. Kicker labels ≥26px/700. No text-on
 For avatar-visible scenes, pass the avatar through (light chrome only).
 
 ## Step 5 — Render each scene
-`cd <scene> && npx hyperframes render .` — confirm render duration == `assets/audio.mp3`.
+`cd <scene> && hyperframes render .` — confirm render duration == `assets/audio.mp3`.
+
+> **Use the PINNED global CLI, never bare `npx hyperframes`.** `npx` grabs whatever version is in its
+> cache (this machine had 0.6.7 → 0.7.42 side by side); a scene that needs a registry block or adapter
+> from a newer version then renders wrong or fails silently. The pinned binary is installed globally
+> (`hyperframes --version` → 0.7.42, at `/opt/homebrew/bin/hyperframes`). Re-pin with
+> `npm install -g hyperframes@<ver>` and bump this line when you deliberately upgrade.
 
 ## Step 6 — QC GATE per scene (iterate until clean) — do NOT show Terry before this passes
 ```bash
 python3 <skill>/tools/scene-validator.py <project>/hyperframes-v3 --frames
 ```
+The validator now runs a **pre-render determinism gate** (check H) that hard-fails a scene using the
+render-killer class — off-timeline `gsap.to/from/fromTo`, CSS `@keyframes`/`animation`,
+`requestAnimationFrame`, wall-clock timers, `Date.now`/`performance.now`, `Math.random`. These LOOK
+animated in a browser but render FROZEN (or vary frame-to-frame), and are the #1 reason "the effects
+don't show up." Fix at the source (attach to `tl`, use `tl.time()` + a seeded PRNG); a deliberate
+exception opts out with a trailing `// hf-ok`. Run it BEFORE rendering to avoid wasting a render.
 Plus the raw gates from HYPERFRAMES-LESSONS (freeze >=5s, white frames). Fix and re-render any scene
 that fails (static hold → ambient/breath; sync drift → re-anchor; white → trim/freeze-fill).
 
