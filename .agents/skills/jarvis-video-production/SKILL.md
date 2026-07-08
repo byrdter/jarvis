@@ -49,6 +49,12 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   — HyperFrames is one register among many; visuals need not be literal. Standalone B-roll breathers,
   symbolic/atmospheric clips, screenshots, web-rolls, real/fabricated documents — and how the asset
   database's metadata drives selection.
+- **HyperFrames technique palette — STOP settling for text + boxes: [knowledge/HYPERFRAMES-TECHNIQUE-PALETTE.md](knowledge/HYPERFRAMES-TECHNIQUE-PALETTE.md)**
+  — the reach-for menu when authoring a scene: real data-viz (count-up + ring, dot-grid/waffle, growth
+  bars, trend draw-on, comparison-split), diagrams/networks (constellation-hub, spatial-pan timeline,
+  power-ladder, flowchart, **maps** via `us-map`/`us-map-bubble`), kinetic type (typewriter/terminal,
+  ticker-takeover, overwhelm-surround, keyword-glow), and generative/canvas/3D + the `hyperframes add`
+  registry. Pick the technique that matches the beat's JOB; a plain text card is only for a true title.
 - **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (avatar-mode QC gate) and
   **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
   these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
