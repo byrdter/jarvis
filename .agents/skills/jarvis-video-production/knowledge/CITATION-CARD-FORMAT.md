@@ -224,3 +224,29 @@ Locked while reviewing the first "beyond text+boxes" flagships. Apply to EVERY s
 - **Lean on the HyperFrames repos/skills for innovation** — `~/.claude/skills/hyperframes*` +
   `~/.claude/plugins/cache/.../hyperframes/*/registry` (maps, `data-chart`, `flowchart`, `constellation`,
   code/terminal, shader transitions, VFX). Reach past text+cards every scene.
+
+## Full-batch fan-out production lessons (V03/V04/V05 build, 2026-07-09)
+Building 3 whole videos (32 scenes) via parallel subagents + operator render/QC. Hard-won:
+- **Avatar-scene layering:** the avatar `<video>` fills the frame at a positive z-index; a positive
+  z-index PAINTS OVER auto/`z:0` children, so side-panel text put at auto z is INVISIBLE in the render
+  (validate still "sees" it → looks fine, renders blank). Put the avatar `.av` at z1, the gradient
+  side-panel at z3, and ALL text at **z≥6** (matches the working b-roll layering). Verify with a rendered
+  frame, not just validate.
+- **Renders must run SEQUENTIALLY and ALONE.** Concurrent `hyperframes render`, OR many subagents each
+  running `hyperframes validate` (headless Chrome) *during* a render, starve/HANG it (an avatar 117s
+  scene hung >30 min under 7 concurrent authoring agents; killed + re-ran solo = ~3 min). Fan out
+  AUTHORING with subagents but tell them **"do NOT validate or render"** while an operator render is in
+  flight; the operator validates + renders solo afterward. (`load avg` from the user's own Chrome tabs
+  is a normal baseline — don't kill their browser; only the render's own headless Chrome is yours.)
+- **A render can silently drop the audio track.** Before assembling, `ffprobe -select_streams a` every
+  scene render; if missing, mux the scene's t=0-aligned `assets/audio.mp3`
+  (`ffmpeg -i v.mp4 -i audio.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 -shortest`). The concat FILTER
+  errors out ("`:a:0` matches no streams") if any input lacks audio.
+- **Dark cinematic beats trip the dead-space gate even with content+motion** (terminal typing, a dim
+  b-roll). Lift by brightening the dominant panel (terminal body → `#27394f`), raising bg-still opacity,
+  and/or landing a bright headline. Counter-intuitive: a DARK b-roll clip at high opacity LOWERS luma
+  (footage is darker than the gradient bg) — keep dark clips ≤~.45 and let the brighter bg/graphics show.
+- **Assemble via the concat list-file** (`--list concat.txt` with `file '<abs path>'` per line) — shell
+  `$FILES` word-splitting mangles a long inline arg list.
+- Whisper mis-hears proper names (Kathryn Anne Edwards → "Catherine Ann"); match the transcript token
+  for CUE timing but put the CORRECT spelling on screen.
