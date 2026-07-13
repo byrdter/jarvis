@@ -109,3 +109,12 @@ Inputs summing to 18:35 must produce an 18:35 master — if it's longer, the fil
 
 See also: `references/ANTI-PATTERNS.md` (text-on-text, boxes-on-boxes, shape reuse) and
 `references/QC-PASS.md`.
+
+## The cold open is a HERO scene (V2 hallucinations, 2026-07-13)
+The first ~20 seconds decide retention. A cold open is NEVER a title card — spec it at hero-scene
+density: motion from frame 0 (particles/seam/texture, no flat black), display type ≥120px, a new
+visual event every 2–4s pinned to the VO, and one "money" moment on the hook's key word. V2's
+first cold open ("ONE WORD" small + alone ~10s) was rejected by Terry; the rebuild ("two worlds
+ignite → collide → the word stamps full-width → tears in half along a red crack") passed. When
+briefing a cold-open scene, "minimal/bare" is a defect, not a style. Blank-white HeyGen intro
+takes (VO-only exports) are normal — build graphics over the VO, don't wait for an avatar.
