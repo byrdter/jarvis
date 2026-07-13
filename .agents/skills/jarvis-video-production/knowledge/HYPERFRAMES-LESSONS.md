@@ -3,6 +3,49 @@
 These are failure-modes and techniques proven on real videos. Read before authoring or
 debugging a HyperFrames scene. Each one cost a re-render (or a round of user feedback) to learn.
 
+## The frozen-scene class (a scene that renders as ONE static frame) — V3-V7 batch, 2026-07-13
+Two authoring bugs make a scene render FROZEN start-to-end while `scene-validator.py` PASSES (it
+parses the DOM/timeline but does NOT execute the JS). Both throw before
+`window.__timelines["root"]=tl` registers, so the headless renderer never gets a driven timeline and
+emits a single static frame. **Signature in the render: constant mean luma (min==max in the fps=2
+scan).** Cost this batch: V4-03 and V5-02 shipped frozen into a first render before being caught.
+- **JS syntax error** (V5-02: a missing `)` on a `.forEach` arrow call). PAGEERROR "missing ) after
+  argument list" in the render log.
+- **Reference to a nonexistent element id** (V4-03: a dead `split('grayexpNO',…)` line →
+  `Cannot read properties of null`).
+**Two cheap static gates now in `tools/`, run BOTH before every render:**
+- `tools/check-syntax.py <sceneDir>…` — `node --check` each scene's `<script>` body.
+- `tools/check-ids.py <sceneDir>…` — every id referenced in JS (`getElementById`, `'#foo'`) must
+  exist in markup. Ignores hex-color false positives; dynamic ids built via `createElement`+`id=`
+  (e.g. `'tick'+i`) show as false positives — confirm those by eye.
+Also a bare-asset check pays off: grep every `src=/href=/url("assets/…")` and confirm the file
+exists in the scene's `assets/` (a missing bg/br/card renders silently wrong, not frozen).
+`render-qc.sh` now prints `*** FROZEN SCENE? ***` when a render's luma range is <3.
+
+## freezedetect fires on legit static holds — and the MASTER exposes more than the scenes
+`freezedetect n=-50dB:d=5` flags any held graphic (a revealed grid/ring/bar/card sitting while VO
+continues) even with ambient glow + a slow inner push — the per-frame delta over a mostly-uniform
+region falls below −50dB. This is NOT the frozen-scene class (luma varies healthily). **Fix that is
+tone-safe (used on all of V6's calm scenes): a gentle continuous `#cam` push-in
+(`tl.fromTo('#cam',{scale:1.0},{scale:1.04–1.05,ease:'sine.inOut'},start)` then a short return) across
+the flagged window** — scaling `#cam` moves every edge in-frame. Check the held element is INSIDE
+`#cam` first (cards are often mounted outside it). **Whack-a-mole warning:** fixing one hold surfaces
+the next ≥5s hold in the same scene (freezedetect reports only the first). **And always re-run
+freezedetect on the ASSEMBLED master** — the concat-FILTER crf-20 re-encode smooths the marginal
+per-frame grain that kept a hold under threshold at the scene level, so holds appear on the master
+that the per-scene render passed (V6 had 2 master-only holds). Master-exposed holds need a stronger
+push (≥~0.8%/s) to survive the re-encode; re-render the scene and REASSEMBLE, then re-gate.
+
+## Splitting a multi-scene HeyGen take with local whisper (no API key) — V3-V7 batch
+`whisper-cli` (whisper.cpp) with `~/.whisper-models/ggml-base.en.bin`, `-ml 1 -sow -oj` gives
+word-level timings offline. On a 15-min take, whisper DRIFTS several seconds by the end, so splitting
+by a global transcript's anchor time cuts in the wrong place. The batch's `split-scenes.py` fixes it:
+locate each scene's first-line anchor in the global transcript for a COARSE time, then re-whisper a
+local 20s window around it to PIN the exact word-start, and cut at the gap just before it; then
+re-transcribe each slice for a scene-relative `transcript.json`. Whisper also rewrites "Act II" as
+roman numerals and numbers as digits — pick DISTINCTIVE multi-word anchors, not ones starting with a
+number/ordinal. Cold-open intro takes are blank-white VO-only exports (build graphics over the VO).
+
 ## Motion / rendering
 
 ### L1 — Free `gsap.to()` does NOT render under HyperFrames

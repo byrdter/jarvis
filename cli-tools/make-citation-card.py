@@ -146,6 +146,20 @@ def normalize(s: str) -> str:
 # ------------------------------------------------------------------------------
 
 
+def _merge_rects_by_line(rects: list["fitz.Rect"]) -> list["fitz.Rect"]:
+    """Union rects that sit on the same text line (vertical centers close),
+    so fragmented per-word search hits become one highlight box per line."""
+    lines: list[fitz.Rect] = []
+    for r in sorted(rects, key=lambda r: (r.y0, r.x0)):
+        for line in lines:
+            if abs(((r.y0 + r.y1) - (line.y0 + line.y1)) / 2) < max(r.height, line.height) * 0.6:
+                line.include_rect(r)
+                break
+        else:
+            lines.append(fitz.Rect(r))
+    return lines
+
+
 def find_quote_rects(page: "fitz.Page", quote: str, threshold: int = 80) -> list[fitz.Rect]:
     """
     Locate the bounding rects of the quoted text on a page.
@@ -158,9 +172,12 @@ def find_quote_rects(page: "fitz.Page", quote: str, threshold: int = 80) -> list
     """
     # Try native first — handles many cases. pymupdf 1.27 dropped the hit_max
     # kwarg; the call returns all hits by default which is fine for our use.
+    # NOTE: on justified text search_for fragments the match into many per-word
+    # quads; keep them ALL and merge per text-line (the old hits[:8] cap
+    # silently truncated long quotes to their first 8 words).
     hits = page.search_for(quote)
     if hits:
-        return list(hits[:8])
+        return _merge_rects_by_line(list(hits))
 
     # Fuzzy fallback. word tuples: (x0, y0, x1, y1, "text", block_no, line_no, word_no)
     words = page.get_text("words")
@@ -181,7 +198,25 @@ def find_quote_rects(page: "fitz.Page", quote: str, threshold: int = 80) -> list
     best_end = -1
     n = len(words)
 
-    for start in range(n):
+    # 2a. Exact normalized-substring match first (deterministic — handles
+    # line-wrap hyphenation and ligatures that defeat search_for, without the
+    # drift the fuzzy window can introduce). Map the char span back to words.
+    stream = "".join(normalize(w[4]) for w in words)
+    idx = stream.find(norm_quote)
+    if idx >= 0:
+        pos = 0
+        s_word = e_word = -1
+        for i, wl in enumerate(norm_word_lens):
+            if s_word < 0 and pos + wl > idx:
+                s_word = i
+            if pos + wl >= idx + len(norm_quote):
+                e_word = i
+                break
+            pos += wl
+        if s_word >= 0 and e_word >= s_word:
+            best_score, best_start, best_end = 100, s_word, e_word
+
+    for start in range(n if best_score < 100 else 0):
         running = 0
         for end in range(start, n):
             running += norm_word_lens[end]
