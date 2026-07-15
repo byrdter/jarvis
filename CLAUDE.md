@@ -253,6 +253,12 @@ work, revisions, QC, or packaging → load `jarvis-video-production` and follow 
 State which skill you're using before acting, then run it; surface to the user at the final review.
 
 **Everything needed lives in that one hub:**
+- **`knowledge/RETENTION-AND-HOOKS.md` — READ FIRST when scripting. The channel standard from our real
+  YouTube retention data: ~8-MIN target (keep viewers to the end), the FACE-FIRST cold open that gives
+  viewers a reason to continue (hook → avatar-joke → named-question loop; NO dark-abstract opens, NO
+  38-yr-bio/on-this-channel/today-we'll-explore boilerplate), the curiosity-gap hook rule (reveal
+  FACTS, withhold MEANING; prefer a paradox; reveal up to the QUESTION, stop before the ANSWER), and
+  the 2-shorts-per-video rule.** Proven on the V6 & V5 8-min recuts.
 - `PIPELINE.md` — the runbook. `tools/split-heygen.py` (intake), `tools/scene-validator.py` (QC gate),
   `tools/assemble-master.py` (master assembly).
 - `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`, `knowledge/VISUAL-SOURCING.md`

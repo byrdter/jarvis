@@ -15,10 +15,20 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 - **Sites are supporting surfaces.** Use Codex Sites for dashboards, simulators, review boards, command centers, or companion resources; capture them into HyperFrames for final video composition.
 - **Talking heads are special appearances.** Use avatars, HeyGen, or Remotion talking-head pipelines only when the user intentionally asks for a guest/talking-head moment.
 - **Visual-first beats script-first.** Decide what the viewer sees before locking final VO.
-- **Minimum runtime is 8 minutes.** Preferred runtime is 10-15 minutes unless the user explicitly requests a short.
+- **Target runtime is ~8 minutes** (7:30–9:00) — RETENTION-FIRST (supersedes the old "10–15 min"
+  guidance). A small channel's viewers give an unknown creator ≤8 min, and % viewed (what YouTube
+  rewards) is structurally higher on a tight 8-min cut; 8:00 also clears the mid-roll threshold. Recut
+  longer videos to ~8, keeping every verified fact. See **[knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md)**.
 - **Every episode needs variety.** Avoid long runs of the same floating-card/orb/text presentation mode.
 
 **Standing channel rules (apply to EVERY video — details in SCRIPTING.md / CITATION-CARD-FORMAT.md):**
+- **RETENTION-FIRST (see [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md) — READ
+  when scripting):** ~8-min target; **face-first cold open** (avatar ON CAMERA delivering the hook →
+  one avatar-joke line → a named-question loop) — NEVER open on a dark abstract graphic, and DELETE the
+  "38-years bio + on-this-channel-we-keep-asking + welcome-back + today-we'll-explore" boilerplate that
+  killed our first-30s retention. Hooks **reveal facts, withhold meaning** (prefer a paradox; reveal up
+  to the QUESTION, stop before the ANSWER). End every scene on a pull; plant a mid-video reversal.
+  **Every 8-min video also gets 2 shorts** (~60s 9:16, recut from the main visuals — see §5 of that doc).
 - **Voice = first-person PLURAL** ("we/us/our"). The only singular is the avatar self-ID "I am an
   avatar for Dr. Terry Byrd." Never "I/me/my" anywhere else.
 - **The CTA (subscribe/like/bell) is its OWN scene and is AVATARLESS by default** — graphics only, no
@@ -35,6 +45,10 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 
 ## First Read
 
+- **RETENTION & HOOKS — the channel standard (READ FIRST when scripting): [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md)** —
+  the ~8-min rule, the face-first cold-open template, the curiosity-gap "reveal facts / withhold
+  meaning / reveal-up-to-the-question" hook rule, mid-video reversals, and the 2-shorts-per-video rule.
+  Derived from the channel's real Studio retention data; governs every video and short.
 - **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
   9-step runbook. Start here when producing a full video from a HeyGen recording.
 - **SCRIPTING (topic → VO script, PIPELINE Step 0): [SCRIPTING.md](SCRIPTING.md)** — research the
