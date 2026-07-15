@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="260" viewBox="0 0 420 260" role="img" aria-labelledby="title desc">
+  <title id="title">bar-chart.svg</title>
+  <desc id="desc">Reusable explainer diagram element for labels, callouts, charts, and motion paths.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="420" height="260" rx="24" fill="none"/>
+  <g id="diagram">
+    <path class="ink no-fill" d="M61 214 V55 M61 214 h304"/><rect class="ink" x="92" y="151" width="42" height="63" rx="8" fill="#55a6c8"/><rect class="ink" x="162" y="110" width="42" height="104" rx="8" fill="#7bb36a"/><rect class="ink" x="232" y="75" width="42" height="139" rx="8" fill="#f2c14e"/><rect class="ink" x="302" y="130" width="42" height="84" rx="8" fill="#e96f5f"/>
+  </g>
+</svg>

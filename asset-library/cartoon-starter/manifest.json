@@ -1,0 +1,398 @@
+{
+  "generatedAt": "2026-07-15T11:16:30.096Z",
+  "totalAssets": 50,
+  "assets": [
+    {
+      "path": "characters/host-a/poses/neutral.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "neutral",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/neutral.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "neutral",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/happy.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "happy",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/happy.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "happy",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/thinking.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "thinking",
+        "hold"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/thinking.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "thinking",
+        "hold"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/worried.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "worried",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/worried.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "worried",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/shocked.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "shocked",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/shocked.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "shocked",
+        "rest"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/point-left.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "neutral",
+        "point-left"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/point-left.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "neutral",
+        "point-left"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/point-right.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "neutral",
+        "point-right"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/point-right.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "neutral",
+        "point-right"
+      ]
+    },
+    {
+      "path": "characters/host-a/poses/explaining-card.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-a",
+        "happy",
+        "hold"
+      ]
+    },
+    {
+      "path": "characters/host-b/poses/explaining-card.svg",
+      "type": "character-pose",
+      "tags": [
+        "host-b",
+        "happy",
+        "hold"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-neutral.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "neutral"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-happy.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "happy"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-thinking.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "thinking"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-worried.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "worried"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-shocked.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "shocked"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-neutral.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "neutral"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-happy.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "happy"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-thinking.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "thinking"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-worried.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "worried"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-shocked.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "shocked"
+      ]
+    },
+    {
+      "path": "props/science/atom.svg",
+      "type": "prop",
+      "tags": [
+        "atom"
+      ]
+    },
+    {
+      "path": "props/science/microscope.svg",
+      "type": "prop",
+      "tags": [
+        "microscope"
+      ]
+    },
+    {
+      "path": "props/science/syringe.svg",
+      "type": "prop",
+      "tags": [
+        "syringe"
+      ]
+    },
+    {
+      "path": "props/science/shield.svg",
+      "type": "prop",
+      "tags": [
+        "shield"
+      ]
+    },
+    {
+      "path": "props/science/virus.svg",
+      "type": "prop",
+      "tags": [
+        "virus"
+      ]
+    },
+    {
+      "path": "props/everyday/book.svg",
+      "type": "prop",
+      "tags": [
+        "book"
+      ]
+    },
+    {
+      "path": "props/everyday/laptop.svg",
+      "type": "prop",
+      "tags": [
+        "laptop"
+      ]
+    },
+    {
+      "path": "props/everyday/document.svg",
+      "type": "prop",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "path": "props/everyday/magnifier.svg",
+      "type": "prop",
+      "tags": [
+        "magnifier"
+      ]
+    },
+    {
+      "path": "props/everyday/speech-bubble.svg",
+      "type": "prop",
+      "tags": [
+        "speech-bubble"
+      ]
+    },
+    {
+      "path": "diagrams/arrow-curved.svg",
+      "type": "diagram",
+      "tags": [
+        "arrow-curved"
+      ]
+    },
+    {
+      "path": "diagrams/callout-bubble.svg",
+      "type": "diagram",
+      "tags": [
+        "callout-bubble"
+      ]
+    },
+    {
+      "path": "diagrams/comparison-panel.svg",
+      "type": "diagram",
+      "tags": [
+        "comparison-panel"
+      ]
+    },
+    {
+      "path": "diagrams/timeline.svg",
+      "type": "diagram",
+      "tags": [
+        "timeline"
+      ]
+    },
+    {
+      "path": "diagrams/bar-chart.svg",
+      "type": "diagram",
+      "tags": [
+        "bar-chart"
+      ]
+    },
+    {
+      "path": "diagrams/flow-nodes.svg",
+      "type": "diagram",
+      "tags": [
+        "flow-nodes"
+      ]
+    },
+    {
+      "path": "diagrams/question-card.svg",
+      "type": "diagram",
+      "tags": [
+        "question-card"
+      ]
+    },
+    {
+      "path": "diagrams/map-pin.svg",
+      "type": "diagram",
+      "tags": [
+        "map-pin"
+      ]
+    },
+    {
+      "path": "backgrounds/lab.svg",
+      "type": "background",
+      "tags": [
+        "lab"
+      ]
+    },
+    {
+      "path": "backgrounds/classroom.svg",
+      "type": "background",
+      "tags": [
+        "classroom"
+      ]
+    },
+    {
+      "path": "backgrounds/space.svg",
+      "type": "background",
+      "tags": [
+        "space"
+      ]
+    },
+    {
+      "path": "backgrounds/living-room.svg",
+      "type": "background",
+      "tags": [
+        "living-room"
+      ]
+    },
+    {
+      "path": "textures/paper-grain.svg",
+      "type": "texture",
+      "tags": [
+        "paper-grain"
+      ]
+    },
+    {
+      "path": "textures/halftone-dots.svg",
+      "type": "texture",
+      "tags": [
+        "halftone-dots"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">space.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#202b40"/><g fill="#fff8e8" opacity=".9"><circle cx="100" cy="110" r="5"/><circle cx="265" cy="208" r="3"/><circle cx="484" cy="84" r="4"/><circle cx="722" cy="154" r="5"/><circle cx="1020" cy="102" r="4"/><circle cx="1132" cy="310" r="3"/><circle cx="908" cy="552" r="5"/><circle cx="352" cy="602" r="3"/></g><circle class="ink" cx="676" cy="363" r="138" fill="#8067b7"/><path class="thin no-fill" d="M556 356 q117 -69 241 -9 M579 420 q94 53 213 0"/><ellipse class="thin no-fill" cx="676" cy="363" rx="248" ry="64" transform="rotate(-12 676 363)"/>
+  </g>
+</svg>
