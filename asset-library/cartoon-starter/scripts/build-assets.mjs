@@ -31,8 +31,13 @@ const palette = {
 const dirs = [
   "characters/host-a/poses",
   "characters/host-b/poses",
+  "characters/host-c/poses",
+  "characters/host-d/poses",
   "characters/expressions",
   "props/science",
+  "props/tech",
+  "props/media",
+  "props/legal",
   "props/everyday",
   "diagrams",
   "backgrounds",
@@ -203,6 +208,13 @@ function texture(name, body) {
 async function main() {
   await Promise.all(dirs.map((dir) => mkdir(path.join(root, dir), { recursive: true })));
 
+  const hosts = [
+    { id: "host-a", skin: palette.skinC, hair: palette.hairA, shirt: palette.blue, pants: palette.purple },
+    { id: "host-b", skin: palette.skinB, hair: palette.hairB, shirt: palette.green, pants: palette.slate, mirrorLeft: true },
+    { id: "host-c", skin: palette.skinA, hair: palette.hairB, shirt: palette.coral, pants: palette.blue },
+    { id: "host-d", skin: "#7a4d37", hair: palette.hairA, shirt: palette.gold, pants: palette.green, mirrorRight: true },
+  ];
+
   const poses = [
     ["neutral", "neutral", "rest", null],
     ["happy", "happy", "rest", null],
@@ -212,58 +224,33 @@ async function main() {
     ["point-left", "neutral", "point-left", "pointer"],
     ["point-right", "neutral", "point-right", "pointer"],
     ["explaining-card", "happy", "hold", "card"],
+    ["skeptical-cross", "skeptical", "hold", null],
+    ["excited-present", "excited", "point-right", "card"],
   ];
 
-  for (const [name, expression, arm, prop] of poses) {
-    await saveAsset(`characters/host-a/poses/${name}.svg`, "character-pose", ["host-a", expression, arm].filter(Boolean), poseSvg({
-      name,
-      host: "host-a",
-      skin: palette.skinC,
-      hair: palette.hairA,
-      shirt: palette.blue,
-      pants: palette.purple,
-      expression,
-      arm,
-      prop,
-    }));
-    await saveAsset(`characters/host-b/poses/${name}.svg`, "character-pose", ["host-b", expression, arm].filter(Boolean), poseSvg({
-      name,
-      host: "host-b",
-      skin: palette.skinB,
-      hair: palette.hairB,
-      shirt: palette.green,
-      pants: palette.slate,
-      expression,
-      arm,
-      prop,
-      mirror: name === "point-left",
-    }));
+  for (const host of hosts) {
+    for (const [name, expression, arm, prop] of poses) {
+      await saveAsset(`characters/${host.id}/poses/${name}.svg`, "character-pose", [host.id, expression, arm].filter(Boolean), poseSvg({
+        name,
+        host: host.id,
+        skin: host.skin,
+        hair: host.hair,
+        shirt: host.shirt,
+        pants: host.pants,
+        expression,
+        arm,
+        prop,
+        mirror: (host.mirrorLeft && name === "point-left") || (host.mirrorRight && name === "point-right"),
+      }));
+    }
   }
 
-  const expressions = [
-    ["host-a-neutral", palette.skinC, palette.hairA, "neutral"],
-    ["host-a-happy", palette.skinC, palette.hairA, "happy"],
-    ["host-a-thinking", palette.skinC, palette.hairA, "thinking"],
-    ["host-a-worried", palette.skinC, palette.hairA, "worried"],
-    ["host-a-shocked", palette.skinC, palette.hairA, "shocked"],
-    ["host-a-skeptical", palette.skinC, palette.hairA, "skeptical"],
-    ["host-a-angry", palette.skinC, palette.hairA, "angry"],
-    ["host-a-confused", palette.skinC, palette.hairA, "confused"],
-    ["host-a-tired", palette.skinC, palette.hairA, "tired"],
-    ["host-a-excited", palette.skinC, palette.hairA, "excited"],
-    ["host-b-neutral", palette.skinB, palette.hairB, "neutral"],
-    ["host-b-happy", palette.skinB, palette.hairB, "happy"],
-    ["host-b-thinking", palette.skinB, palette.hairB, "thinking"],
-    ["host-b-worried", palette.skinB, palette.hairB, "worried"],
-    ["host-b-shocked", palette.skinB, palette.hairB, "shocked"],
-    ["host-b-skeptical", palette.skinB, palette.hairB, "skeptical"],
-    ["host-b-angry", palette.skinB, palette.hairB, "angry"],
-    ["host-b-confused", palette.skinB, palette.hairB, "confused"],
-    ["host-b-tired", palette.skinB, palette.hairB, "tired"],
-    ["host-b-excited", palette.skinB, palette.hairB, "excited"],
-  ];
-  for (const [name, skin, hair, expression] of expressions) {
-    await saveAsset(`characters/expressions/${name}.svg`, "expression", [name.split("-").slice(0, 2).join("-"), expression], expressionSvg({ name, skin, hair, expression }));
+  const expressions = ["neutral", "happy", "thinking", "worried", "shocked", "skeptical", "angry", "confused", "tired", "excited"];
+  for (const host of hosts) {
+    for (const expression of expressions) {
+      const name = `${host.id}-${expression}`;
+      await saveAsset(`characters/expressions/${name}.svg`, "expression", [host.id, expression], expressionSvg({ name, skin: host.skin, hair: host.hair, expression }));
+    }
   }
 
   const props = [
@@ -287,6 +274,26 @@ async function main() {
     ["science/brain.svg", "brain", `<path class="ink" d="M82 143 q-36 -9 -31 -48 q3 -26 29 -30 q8 -34 44 -28 q30 -20 58 5 q31 1 38 32 q27 12 20 45 q-5 33 -39 35 q-20 35 -58 14 q-34 16 -61 -25z" fill="${palette.violet}"/><path class="thin no-fill" d="M91 75 q24 15 17 40 M145 61 q-24 30 5 56 M188 75 q-31 13 -23 47 M101 143 q32 -18 55 6"/>`],
     ["science/telescope.svg", "telescope", `<path class="ink" d="M73 91 l96 -38 16 39 -96 38z" fill="${palette.blue}"/><path class="ink" d="M93 130 l-32 55 M119 121 l-3 70 M145 111 l40 50" fill="none"/><circle class="thin" cx="56" cy="190" r="10" fill="${palette.gold}"/><path class="thin no-fill" d="M174 52 l22 -10"/>`],
     ["science/molecule.svg", "molecule", `<circle class="ink" cx="83" cy="118" r="34" fill="${palette.sky}"/><circle class="ink" cx="166" cy="76" r="28" fill="${palette.gold}"/><circle class="ink" cx="166" cy="166" r="28" fill="${palette.green}"/><path class="thin no-fill" d="M113 102 l29 -14 M113 134 l29 18"/><circle cx="83" cy="118" r="8" fill="${palette.ink}"/>`],
+    ["tech/server-stack.svg", "server-stack", `<rect class="ink" x="54" y="42" width="132" height="46" rx="10" fill="${palette.slate}"/><rect class="ink" x="54" y="97" width="132" height="46" rx="10" fill="${palette.blue}"/><rect class="ink" x="54" y="152" width="132" height="46" rx="10" fill="${palette.slate}"/><circle cx="82" cy="65" r="6" fill="${palette.mint}"/><circle cx="82" cy="120" r="6" fill="${palette.gold}"/><circle cx="82" cy="175" r="6" fill="${palette.coral}"/><path class="thin no-fill" d="M105 65 h48 M105 120 h48 M105 175 h48"/>`],
+    ["tech/code-window.svg", "code-window", `<rect class="ink" x="36" y="50" width="168" height="138" rx="16" fill="${palette.cream}"/><path class="thin no-fill" d="M36 86 h168"/><circle cx="62" cy="68" r="6" fill="${palette.coral}"/><circle cx="84" cy="68" r="6" fill="${palette.gold}"/><circle cx="106" cy="68" r="6" fill="${palette.green}"/><path class="thin no-fill" d="M76 122 l-24 20 l24 20 M164 122 l24 20 l-24 20 M111 168 l28 -62"/>`],
+    ["tech/cloud.svg", "cloud", `<path class="ink" d="M72 165 q-39 0 -39 -35 q0 -31 31 -35 q12 -45 61 -38 q36 -28 78 2 q36 4 43 41 q31 9 31 38 q0 37 -43 37H72z" fill="${palette.sky}"/><path class="thin no-fill" d="M91 132 h96 M112 105 h62"/>`],
+    ["tech/robot-head.svg", "robot-head", `<rect class="ink" x="55" y="72" width="130" height="102" rx="24" fill="${palette.mint}"/><path class="ink no-fill" d="M120 72 v-30"/><circle class="thin" cx="120" cy="34" r="12" fill="${palette.gold}"/><circle cx="91" cy="117" r="9" fill="${palette.ink}"/><circle cx="149" cy="117" r="9" fill="${palette.ink}"/><path class="thin no-fill" d="M91 146 h58"/>`],
+    ["tech/api-plug.svg", "api-plug", `<rect class="ink" x="60" y="75" width="85" height="74" rx="15" fill="${palette.gold}"/><path class="ink no-fill" d="M145 112 h36 q25 0 25 25 v23"/><path class="thin no-fill" d="M81 55 v20 M123 55 v20 M77 112 h50"/>`],
+    ["tech/terminal.svg", "terminal", `<rect class="ink" x="36" y="52" width="168" height="136" rx="16" fill="${palette.ink}"/><path d="M63 96 l25 21 l-25 21" stroke="${palette.cream}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M105 141 h60" stroke="${palette.gold}" stroke-width="7" stroke-linecap="round"/>`],
+    ["media/camera.svg", "camera", `<path class="ink" d="M42 80 h45 l16 -24 h48 l16 24 h31 q24 0 24 24 v72 q0 24 -24 24H42q-24 0 -24 -24v-72q0 -24 24 -24z" fill="${palette.slate}"/><circle class="ink" cx="120" cy="140" r="42" fill="${palette.sky}"/><circle class="thin" cx="120" cy="140" r="22" fill="${palette.cream}"/>`],
+    ["media/microphone.svg", "microphone", `<rect class="ink" x="84" y="35" width="72" height="116" rx="36" fill="${palette.coral}"/><path class="ink no-fill" d="M54 112 q0 66 66 66 q66 0 66 -66 M120 178 v35 M82 213 h76"/><path class="thin no-fill" d="M102 70 h36 M102 101 h36"/>`],
+    ["media/play-button.svg", "play-button", `<circle class="ink" cx="120" cy="120" r="82" fill="${palette.coral}"/><path class="ink" d="M98 74 l82 46 -82 46z" fill="${palette.cream}"/>`],
+    ["media/thumbnail-frame.svg", "thumbnail-frame", `<rect class="ink" x="38" y="55" width="164" height="116" rx="16" fill="${palette.sky}"/><path class="thin no-fill" d="M62 145 l42 -42 l31 31 l20 -20 l25 31"/><circle class="thin" cx="164" cy="88" r="14" fill="${palette.gold}"/><rect class="ink" x="58" y="181" width="124" height="22" rx="10" fill="${palette.coral}"/>`],
+    ["media/waveform.svg", "waveform", `<path class="ink no-fill" d="M28 126 h30 l16 -47 l29 102 l31 -127 l29 127 l29 -102 l16 47 h24"/><path class="thin no-fill" d="M50 197 h140"/>`],
+    ["legal/gavel.svg", "gavel", `<g transform="rotate(-36 120 120)"><rect class="ink" x="73" y="62" width="93" height="37" rx="9" fill="${palette.tan}"/><rect class="ink" x="91" y="99" width="57" height="24" rx="7" fill="${palette.gold}"/><path class="ink no-fill" d="M120 123 v88"/></g><rect class="thin" x="56" y="189" width="120" height="24" rx="8" fill="${palette.slate}"/>`],
+    ["legal/scales.svg", "scales", `<path class="ink no-fill" d="M120 45 v150 M75 76 h90 M120 76 l-48 70 M120 76 l48 70"/><path class="ink" d="M45 146 h54 q-5 35 -27 35 q-22 0 -27 -35z" fill="${palette.gold}"/><path class="ink" d="M141 146 h54 q-5 35 -27 35 q-22 0 -27 -35z" fill="${palette.gold}"/><path class="thin no-fill" d="M82 205 h76"/>`],
+    ["legal/contract.svg", "contract", `<path class="ink" d="M64 32 h84 l38 38 v137H64z" fill="${palette.cream}"/><path class="thin no-fill" d="M148 33 v37 h38 M88 96 h70 M88 124 h70 M88 152 h44"/><path class="ink" d="M145 165 l35 35" fill="none"/><circle class="thin" cx="184" cy="204" r="13" fill="${palette.coral}"/>`],
+    ["everyday/calendar.svg", "calendar", `<rect class="ink" x="42" y="58" width="156" height="136" rx="16" fill="${palette.cream}"/><path class="thin no-fill" d="M42 94 h156 M80 41 v35 M160 41 v35 M75 124 h24 M112 124 h24 M149 124 h24 M75 159 h24 M112 159 h24"/>`],
+    ["everyday/map-fold.svg", "map-fold", `<path class="ink" d="M43 65 l52 -22 l50 22 l52 -22 v132 l-52 22 l-50 -22 l-52 22z" fill="${palette.cream}"/><path class="thin no-fill" d="M95 43 v132 M145 65 v132 M67 103 q35 -25 68 0 q31 24 75 -8"/><circle class="thin" cx="151" cy="119" r="12" fill="${palette.coral}"/>`],
+    ["everyday/clipboard.svg", "clipboard", `<rect class="ink" x="61" y="55" width="118" height="152" rx="18" fill="${palette.cream}"/><rect class="ink" x="88" y="33" width="64" height="42" rx="12" fill="${palette.gold}"/><path class="thin no-fill" d="M91 104 h57 M91 134 h57 M91 164 h42"/>`],
+    ["everyday/toolbox.svg", "toolbox", `<rect class="ink" x="42" y="82" width="156" height="108" rx="18" fill="${palette.coral}"/><path class="ink no-fill" d="M87 82 v-22 h66 v22"/><path class="thin no-fill" d="M42 125 h156 M120 125 v65"/><circle cx="120" cy="145" r="8" fill="${palette.gold}"/>`],
+    ["everyday/graduation-cap.svg", "graduation-cap", `<path class="ink" d="M32 91 l88 -42 l88 42 l-88 42z" fill="${palette.slate}"/><path class="ink" d="M73 122 q47 27 94 0 v49 q-47 31 -94 0z" fill="${palette.blue}"/><path class="thin no-fill" d="M208 91 v63"/><circle class="thin" cx="208" cy="168" r="12" fill="${palette.gold}"/>`],
+    ["tech/database.svg", "database", `<ellipse class="ink" cx="120" cy="66" rx="72" ry="30" fill="${palette.sky}"/><path class="ink" d="M48 66 v104 q0 30 72 30 q72 0 72 -30V66" fill="${palette.sky}"/><path class="thin no-fill" d="M48 112 q0 30 72 30 q72 0 72 -30 M48 154 q0 30 72 30 q72 0 72 -30"/>`],
   ];
   for (const [rel, name, body] of props) {
     await saveAsset(`props/${rel}`, "prop", [name], propIcon(name, body));
@@ -313,6 +320,26 @@ async function main() {
     ["decision-tree.svg", `<circle class="ink" cx="210" cy="56" r="30" fill="${palette.gold}"/><circle class="ink" cx="105" cy="175" r="30" fill="${palette.sky}"/><circle class="ink" cx="210" cy="175" r="30" fill="${palette.green}"/><circle class="ink" cx="315" cy="175" r="30" fill="${palette.violet}"/><path class="thin no-fill" d="M194 82 l-70 70 M210 87 v58 M226 82 l70 70"/>`],
     ["axis-matrix.svg", `<rect class="ink" x="72" y="42" width="276" height="176" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M210 42 v176 M72 130 h276"/><circle class="thin" cx="145" cy="88" r="20" fill="${palette.coral}"/><circle class="thin" cx="278" cy="172" r="20" fill="${palette.green}"/>`],
     ["data-table.svg", `<rect class="ink" x="56" y="48" width="308" height="172" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M56 96 h308 M56 140 h308 M56 184 h308 M160 48 v172 M262 48 v172"/><circle cx="108" cy="118" r="10" fill="${palette.blue}"/><circle cx="210" cy="162" r="10" fill="${palette.gold}"/><circle cx="312" cy="206" r="10" fill="${palette.green}"/>`],
+    ["stacked-cards.svg", `<rect class="ink" x="96" y="70" width="210" height="120" rx="18" fill="${palette.sky}" opacity=".7"/><rect class="ink" x="78" y="54" width="210" height="120" rx="18" fill="${palette.gold}" opacity=".8"/><rect class="ink" x="60" y="38" width="210" height="120" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M96 83 h126 M96 116 h92"/>`],
+    ["spotlight-callout.svg", `<circle class="ink" cx="210" cy="130" r="76" fill="${palette.gold}" opacity=".85"/><path class="ink no-fill" d="M210 24 v38 M210 198 v38 M104 130H66 M354 130h-38 M135 55 l28 28 M285 177 l28 28 M135 205 l28 -28 M285 83 l28 -28"/><circle class="thin" cx="210" cy="130" r="36" fill="${palette.cream}"/>`],
+    ["myth-vs-fact.svg", `<rect class="ink" x="35" y="45" width="160" height="170" rx="18" fill="${palette.coral}"/><rect class="ink" x="225" y="45" width="160" height="170" rx="18" fill="${palette.green}"/><text x="82" y="116" font-size="34" fill="${palette.cream}">MYTH</text><text x="270" y="116" font-size="34" fill="${palette.cream}">FACT</text><path class="thin no-fill" d="M75 160 h80 M265 160 h80"/>`],
+    ["risk-ladder.svg", `<path class="ink no-fill" d="M118 214 V48 M302 214 V48"/><path class="thin no-fill" d="M118 80 h184 M118 118 h184 M118 156 h184 M118 194 h184"/><circle class="ink" cx="210" cy="194" r="20" fill="${palette.green}"/><circle class="ink" cx="210" cy="118" r="20" fill="${palette.gold}"/><circle class="ink" cx="210" cy="80" r="20" fill="${palette.coral}"/>`],
+    ["evidence-card.svg", `<rect class="ink" x="62" y="36" width="296" height="188" rx="24" fill="${palette.cream}"/><path class="thin no-fill" d="M105 91 h166 M105 126 h210 M105 161 h138"/><circle class="thin" cx="305" cy="88" r="28" fill="${palette.green}"/><path class="thin no-fill" d="M291 88 l10 12 l22 -26"/>`],
+    ["source-tag.svg", `<path class="ink" d="M52 74 h224 l72 56 l-72 56H52z" fill="${palette.sky}"/><circle class="thin" cx="92" cy="130" r="18" fill="${palette.cream}"/><path class="thin no-fill" d="M133 112 h117 M133 146 h80"/>`],
+    ["before-after-slider.svg", `<rect class="ink" x="48" y="54" width="324" height="152" rx="20" fill="${palette.cream}"/><path class="thin no-fill" d="M210 54 v152"/><rect x="50" y="56" width="160" height="148" rx="18" fill="${palette.coral}" opacity=".32"/><rect x="210" y="56" width="160" height="148" rx="18" fill="${palette.green}" opacity=".32"/><circle class="ink" cx="210" cy="130" r="28" fill="${palette.gold}"/><path class="thin no-fill" d="M201 112 v36 M219 112 v36"/>`],
+    ["zoom-lens.svg", `<circle class="ink" cx="175" cy="111" r="68" fill="${palette.sky}" opacity=".75"/><path class="ink no-fill" d="M224 160 l70 62"/><rect class="thin" x="127" y="78" width="96" height="62" rx="10" fill="${palette.cream}"/><path class="thin no-fill" d="M146 108 h58"/>`],
+    ["branching-path.svg", `<path class="ink no-fill" d="M58 130 h86 q46 0 46 -46 v-26 M144 130 q46 0 46 46 v26 M190 130 h174"/><circle class="ink" cx="58" cy="130" r="24" fill="${palette.gold}"/><circle class="ink" cx="190" cy="58" r="24" fill="${palette.sky}"/><circle class="ink" cx="190" cy="202" r="24" fill="${palette.coral}"/><circle class="ink" cx="364" cy="130" r="24" fill="${palette.green}"/>`],
+    ["feedback-loop.svg", `<rect class="ink" x="78" y="58" width="102" height="64" rx="16" fill="${palette.sky}"/><rect class="ink" x="240" y="138" width="102" height="64" rx="16" fill="${palette.gold}"/><path class="ink no-fill" d="M180 90 q92 -28 124 39"/><path class="ink" d="M314 116 l12 49 -44 -25z" fill="${palette.coral}"/><path class="ink no-fill" d="M240 170 q-92 28 -124 -39"/><path class="ink" d="M106 144 l-12 -49 44 25z" fill="${palette.green}"/>`],
+    ["heatmap-grid.svg", `<rect class="ink" x="70" y="40" width="280" height="180" rx="18" fill="${palette.cream}"/><g>${Array.from({ length: 4 }, (_, y) => Array.from({ length: 6 }, (_, x) => `<rect x="${95 + x * 39}" y="${66 + y * 34}" width="28" height="24" rx="5" fill="${[palette.sky, palette.gold, palette.coral, palette.green][(x + y) % 4]}" opacity="${0.45 + ((x * y + 1) % 4) * 0.12}"/>`).join("")).join("")}</g>`],
+    ["probability-balls.svg", `<rect class="ink" x="65" y="56" width="290" height="148" rx="22" fill="${palette.cream}"/><g>${Array.from({ length: 24 }, (_, i) => `<circle cx="${94 + (i % 8) * 31}" cy="${91 + Math.floor(i / 8) * 39}" r="11" fill="${i % 7 === 0 ? palette.coral : palette.sky}" stroke="${palette.ink}" stroke-width="4"/>`).join("")}</g>`],
+    ["network-map.svg", `<circle class="ink" cx="102" cy="92" r="26" fill="${palette.sky}"/><circle class="ink" cx="210" cy="60" r="26" fill="${palette.gold}"/><circle class="ink" cx="310" cy="126" r="26" fill="${palette.green}"/><circle class="ink" cx="168" cy="190" r="26" fill="${palette.coral}"/><circle class="ink" cx="255" cy="194" r="20" fill="${palette.violet}"/><path class="thin no-fill" d="M128 86 l56 -17 M232 76 l57 38 M292 141 l-25 37 M235 194 h-41 M184 174 l-66 -66 M194 80 l-20 87"/>`],
+    ["annotation-pin.svg", `<path class="ink" d="M210 40 q58 0 58 55 q0 48 -58 105 q-58 -57 -58 -105 q0 -55 58 -55z" fill="${palette.coral}"/><circle class="thin" cx="210" cy="96" r="24" fill="${palette.cream}"/><rect class="ink" x="68" y="183" width="284" height="42" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M101 204 h190"/>`],
+    ["swimlane.svg", `<rect class="ink" x="45" y="42" width="330" height="176" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M45 101 h330 M45 160 h330 M150 42 v176"/><rect class="thin" x="178" y="63" width="68" height="28" rx="8" fill="${palette.sky}"/><rect class="thin" x="270" y="122" width="68" height="28" rx="8" fill="${palette.gold}"/><rect class="thin" x="178" y="181" width="68" height="28" rx="8" fill="${palette.green}"/>`],
+    ["formula-strip.svg", `<rect class="ink" x="45" y="83" width="330" height="94" rx="24" fill="${palette.cream}"/><text x="78" y="145" font-size="42" fill="${palette.ink}">A + B = C</text><circle class="thin" cx="320" cy="130" r="25" fill="${palette.gold}"/>`],
+    ["timer-ring.svg", `<circle class="ink" cx="210" cy="130" r="80" fill="${palette.cream}"/><path class="ink no-fill" d="M210 50 a80 80 0 0 1 69 120"/><path class="ink" d="M267 163 l34 24 l-40 11z" fill="${palette.coral}"/><path class="thin no-fill" d="M210 88 v45 l35 20"/>`],
+    ["ranking-podium.svg", `<rect class="ink" x="158" y="83" width="104" height="128" rx="14" fill="${palette.gold}"/><rect class="ink" x="62" y="132" width="104" height="79" rx="14" fill="${palette.sky}"/><rect class="ink" x="254" y="156" width="104" height="55" rx="14" fill="${palette.green}"/><text x="197" y="151" font-size="42" fill="${palette.ink}">1</text><text x="101" y="183" font-size="34" fill="${palette.ink}">2</text><text x="293" y="194" font-size="30" fill="${palette.ink}">3</text>`],
+    ["split-screen.svg", `<rect class="ink" x="48" y="44" width="324" height="172" rx="20" fill="${palette.cream}"/><path class="thin no-fill" d="M210 44 v172"/><circle class="thin" cx="129" cy="130" r="42" fill="${palette.sky}"/><rect class="thin" x="254" y="88" width="76" height="84" rx="14" fill="${palette.gold}"/>`],
+    ["caption-box.svg", `<rect class="ink" x="48" y="151" width="324" height="62" rx="18" fill="${palette.ink}"/><path d="M86 182 h160 M86 202 h92" stroke="${palette.cream}" stroke-width="7" stroke-linecap="round"/><circle cx="313" cy="182" r="13" fill="${palette.coral}"/>`],
   ];
   for (const [rel, body] of diagramBodies) {
     await saveAsset(`diagrams/${rel}`, "diagram", [rel.replace(".svg", "")], diagram(rel, body));
@@ -329,6 +356,16 @@ async function main() {
     ["dashboard.svg", `<rect width="1280" height="720" fill="#dfecef"/><rect class="ink" x="95" y="92" width="1090" height="525" rx="26" fill="${palette.cream}"/><rect class="thin" x="145" y="145" width="295" height="160" rx="18" fill="${palette.sky}"/><rect class="thin" x="485" y="145" width="295" height="160" rx="18" fill="${palette.gold}"/><rect class="thin" x="825" y="145" width="295" height="160" rx="18" fill="${palette.green}"/><path class="thin no-fill" d="M165 512 h880 M220 470 v42 M325 430 v82 M430 390 v122 M535 455 v57 M640 350 v162 M745 410 v102 M850 370 v142 M955 448 v64"/>`],
     ["courtroom.svg", `<rect width="1280" height="720" fill="#c99b71"/><rect x="0" y="500" width="1280" height="220" fill="#8f6a4f"/><rect class="ink" x="355" y="190" width="570" height="190" rx="18" fill="${palette.tan}"/><rect class="ink" x="435" y="380" width="410" height="130" rx="18" fill="${palette.slate}"/><path class="thin no-fill" d="M420 250 h440 M475 314 h330"/><circle class="thin" cx="640" cy="132" r="50" fill="${palette.gold}"/>`],
     ["abstract-grid.svg", `<rect width="1280" height="720" fill="#efe4c7"/><g opacity=".55"><path class="thin no-fill" d="M0 120 h1280 M0 240 h1280 M0 360 h1280 M0 480 h1280 M0 600 h1280 M160 0 v720 M320 0 v720 M480 0 v720 M640 0 v720 M800 0 v720 M960 0 v720 M1120 0 v720"/></g><circle class="ink" cx="880" cy="260" r="95" fill="${palette.purple}"/><rect class="ink" x="220" y="250" width="310" height="180" rx="30" fill="${palette.sky}"/>`],
+    ["newsroom.svg", `<rect width="1280" height="720" fill="#c9dde2"/><rect x="0" y="492" width="1280" height="228" fill="${palette.slate}"/><rect class="ink" x="86" y="86" width="510" height="300" rx="24" fill="${palette.cream}"/><rect class="ink" x="700" y="112" width="410" height="250" rx="24" fill="${palette.blue}"/><path class="thin no-fill" d="M140 160 h390 M140 220 h310 M140 280 h350 M754 180 h298 M754 240 h220 M754 300 h260"/><rect class="ink" x="415" y="456" width="450" height="80" rx="22" fill="${palette.coral}"/>`],
+    ["podcast-studio.svg", `<rect width="1280" height="720" fill="#dfc2d8"/><rect x="0" y="500" width="1280" height="220" fill="#786f86"/><rect class="ink" x="130" y="116" width="330" height="260" rx="24" fill="${palette.cream}"/><rect class="ink" x="820" y="120" width="260" height="260" rx="24" fill="${palette.slate}"/><circle class="thin" cx="640" cy="310" r="96" fill="${palette.gold}"/><path class="thin no-fill" d="M640 125 v142 M595 265 q45 42 90 0 M872 190 h155 M872 250 h125"/>`],
+    ["hospital.svg", `<rect width="1280" height="720" fill="#d8eef0"/><rect x="0" y="510" width="1280" height="210" fill="#bad1c7"/><rect class="ink" x="160" y="118" width="400" height="360" rx="24" fill="${palette.cream}"/><rect class="ink" x="760" y="160" width="310" height="300" rx="24" fill="${palette.white}"/><path class="ink" d="M336 210 h54 v-54 h62 v54 h54 v62 h-54 v54 h-62 v-54 h-54z" fill="${palette.coral}"/><path class="thin no-fill" d="M820 230 h190 M820 292 h150 M820 354 h170"/>`],
+    ["library.svg", `<rect width="1280" height="720" fill="#ead4aa"/><rect x="0" y="512" width="1280" height="208" fill="#9c7250"/><rect class="ink" x="90" y="100" width="350" height="380" rx="18" fill="${palette.tan}"/><rect class="ink" x="820" y="100" width="350" height="380" rx="18" fill="${palette.tan}"/><g>${Array.from({ length: 5 }, (_, y) => `<path class="thin no-fill" d="M125 ${158 + y * 58} h280 M855 ${158 + y * 58} h280"/>`).join("")}</g><rect class="ink" x="510" y="330" width="240" height="110" rx="18" fill="${palette.cream}"/>`],
+    ["factory.svg", `<rect width="1280" height="720" fill="#c9d8dd"/><rect x="0" y="510" width="1280" height="210" fill="#858f91"/><path class="ink" d="M100 505 V260 l160 82 v-82 l160 82 v-82 l160 82 v163z" fill="${palette.slate}"/><rect class="ink" x="760" y="188" width="260" height="317" rx="18" fill="${palette.cream}"/><path class="thin no-fill" d="M155 425 h370 M805 248 h170 M805 310 h170 M805 372 h170"/><circle class="thin" cx="1040" cy="160" r="52" fill="${palette.gold}"/>`],
+    ["internet-map.svg", `<rect width="1280" height="720" fill="#cfe9e2"/><path class="thin no-fill" d="M188 192 q210 -120 430 0 q230 124 470 0 M180 500 q240 -130 450 0 q235 135 470 -10 M240 330 h780"/><circle class="ink" cx="250" cy="330" r="54" fill="${palette.sky}"/><circle class="ink" cx="640" cy="330" r="70" fill="${palette.gold}"/><circle class="ink" cx="1020" cy="330" r="54" fill="${palette.green}"/><path class="thin no-fill" d="M304 330 h266 M710 330 h256"/>`],
+    ["whiteboard-room.svg", `<rect width="1280" height="720" fill="#e8dcc4"/><rect x="0" y="510" width="1280" height="210" fill="#c1a889"/><rect class="ink" x="135" y="90" width="760" height="350" rx="20" fill="${palette.white}"/><path class="thin no-fill" d="M205 178 h270 M205 244 h420 M205 310 h310"/><circle class="thin" cx="710" cy="260" r="72" fill="${palette.sky}"/><rect class="ink" x="965" y="155" width="150" height="240" rx="18" fill="${palette.gold}"/>`],
+    ["data-center.svg", `<rect width="1280" height="720" fill="#d4e3e8"/><rect x="0" y="520" width="1280" height="200" fill="#96a6ad"/><rect class="ink" x="140" y="110" width="220" height="400" rx="22" fill="${palette.slate}"/><rect class="ink" x="530" y="110" width="220" height="400" rx="22" fill="${palette.slate}"/><rect class="ink" x="920" y="110" width="220" height="400" rx="22" fill="${palette.slate}"/><g>${[190, 580, 970].map((x) => `<circle cx="${x}" cy="180" r="12" fill="${palette.green}"/><circle cx="${x}" cy="250" r="12" fill="${palette.gold}"/><circle cx="${x}" cy="320" r="12" fill="${palette.coral}"/><path class="thin no-fill" d="M225 180 h85 M615 180 h85 M1005 180 h85 M225 250 h85 M615 250 h85 M1005 250 h85"/>`).join("")}</g>`],
+    ["museum.svg", `<rect width="1280" height="720" fill="#f0dfc1"/><rect x="0" y="520" width="1280" height="200" fill="#bca782"/><path class="ink" d="M230 500 V250 h820 v250z" fill="${palette.cream}"/><path class="ink" d="M190 250 l450 -130 l450 130z" fill="${palette.tan}"/><path class="thin no-fill" d="M330 500 V290 M480 500 V290 M640 500 V290 M800 500 V290 M950 500 V290"/><rect class="thin" x="540" y="340" width="200" height="110" rx="16" fill="${palette.sky}"/>`],
+    ["forest-field.svg", `<rect width="1280" height="720" fill="#bee4e8"/><rect x="0" y="490" width="1280" height="230" fill="${palette.green}"/><circle class="ink" cx="230" cy="300" r="100" fill="${palette.mint}"/><circle class="ink" cx="430" cy="330" r="130" fill="${palette.green}"/><circle class="ink" cx="930" cy="310" r="118" fill="${palette.mint}"/><path class="ink no-fill" d="M230 392 v148 M430 454 v118 M930 420 v130"/><path class="thin no-fill" d="M145 565 q235 -80 455 0 q245 88 520 -10"/>`],
   ];
   for (const [rel, body] of backgroundBodies) {
     await saveAsset(`backgrounds/${rel}`, "background", [rel.replace(".svg", "")], background(rel, body));
@@ -340,6 +377,16 @@ async function main() {
     ["diagonal-hatch.svg", `<g stroke="${palette.ink}" stroke-width="3" opacity=".08">${Array.from({ length: 33 }, (_, i) => `<path d="M${i * 55 - 420} 720 L${i * 55 + 300} 0"/>`).join("")}</g>`],
     ["soft-vignette.svg", `<radialGradient id="v" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="${palette.ink}" stop-opacity="0"/><stop offset="100%" stop-color="${palette.ink}" stop-opacity=".18"/></radialGradient><rect width="1280" height="720" fill="url(#v)"/>`],
     ["speckle.svg", `<g fill="${palette.ink}" opacity=".09">${Array.from({ length: 180 }, (_, i) => `<circle cx="${(i * 197) % 1280}" cy="${(i * 113) % 720}" r="${1 + (i % 4)}"/>`).join("")}</g>`],
+    ["fold-lines.svg", `<g stroke="${palette.ink}" stroke-width="4" opacity=".07"><path d="M0 180 h1280 M0 360 h1280 M0 540 h1280 M320 0 v720 M640 0 v720 M960 0 v720"/></g>`],
+    ["comic-burst.svg", `<g fill="none" stroke="${palette.gold}" stroke-width="18" stroke-linecap="round" opacity=".22">${Array.from({ length: 18 }, (_, i) => {
+      const angle = (Math.PI * 2 * i) / 18;
+      const x1 = 640 + Math.cos(angle) * 90;
+      const y1 = 360 + Math.sin(angle) * 90;
+      const x2 = 640 + Math.cos(angle) * 620;
+      const y2 = 360 + Math.sin(angle) * 340;
+      return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}"/>`;
+    }).join("")}</g>`],
+    ["scanlines.svg", `<g stroke="${palette.ink}" stroke-width="2" opacity=".06">${Array.from({ length: 36 }, (_, i) => `<path d="M0 ${i * 20} h1280"/>`).join("")}</g>`],
   ];
   for (const [rel, body] of textureBodies) {
     await saveAsset(`textures/${rel}`, "texture", [rel.replace(".svg", "")], texture(rel, body));

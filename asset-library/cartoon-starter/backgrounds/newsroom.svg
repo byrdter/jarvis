@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">newsroom.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#c9dde2"/><rect x="0" y="492" width="1280" height="228" fill="#60707c"/><rect class="ink" x="86" y="86" width="510" height="300" rx="24" fill="#fff8e8"/><rect class="ink" x="700" y="112" width="410" height="250" rx="24" fill="#55a6c8"/><path class="thin no-fill" d="M140 160 h390 M140 220 h310 M140 280 h350 M754 180 h298 M754 240 h220 M754 300 h260"/><rect class="ink" x="415" y="456" width="450" height="80" rx="22" fill="#e96f5f"/>
+  </g>
+</svg>

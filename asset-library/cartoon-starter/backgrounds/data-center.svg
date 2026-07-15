@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">data-center.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#d4e3e8"/><rect x="0" y="520" width="1280" height="200" fill="#96a6ad"/><rect class="ink" x="140" y="110" width="220" height="400" rx="22" fill="#60707c"/><rect class="ink" x="530" y="110" width="220" height="400" rx="22" fill="#60707c"/><rect class="ink" x="920" y="110" width="220" height="400" rx="22" fill="#60707c"/><g><circle cx="190" cy="180" r="12" fill="#7bb36a"/><circle cx="190" cy="250" r="12" fill="#f2c14e"/><circle cx="190" cy="320" r="12" fill="#e96f5f"/><path class="thin no-fill" d="M225 180 h85 M615 180 h85 M1005 180 h85 M225 250 h85 M615 250 h85 M1005 250 h85"/><circle cx="580" cy="180" r="12" fill="#7bb36a"/><circle cx="580" cy="250" r="12" fill="#f2c14e"/><circle cx="580" cy="320" r="12" fill="#e96f5f"/><path class="thin no-fill" d="M225 180 h85 M615 180 h85 M1005 180 h85 M225 250 h85 M615 250 h85 M1005 250 h85"/><circle cx="970" cy="180" r="12" fill="#7bb36a"/><circle cx="970" cy="250" r="12" fill="#f2c14e"/><circle cx="970" cy="320" r="12" fill="#e96f5f"/><path class="thin no-fill" d="M225 180 h85 M615 180 h85 M1005 180 h85 M225 250 h85 M615 250 h85 M1005 250 h85"/></g>
+  </g>
+</svg>

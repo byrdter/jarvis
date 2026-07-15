@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">scanlines.svg</title>
+  <desc id="desc">Transparent overlay texture for subtle visual variance.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="transparent"/>
+  <g id="texture">
+    <g stroke="#28313b" stroke-width="2" opacity=".06"><path d="M0 0 h1280"/><path d="M0 20 h1280"/><path d="M0 40 h1280"/><path d="M0 60 h1280"/><path d="M0 80 h1280"/><path d="M0 100 h1280"/><path d="M0 120 h1280"/><path d="M0 140 h1280"/><path d="M0 160 h1280"/><path d="M0 180 h1280"/><path d="M0 200 h1280"/><path d="M0 220 h1280"/><path d="M0 240 h1280"/><path d="M0 260 h1280"/><path d="M0 280 h1280"/><path d="M0 300 h1280"/><path d="M0 320 h1280"/><path d="M0 340 h1280"/><path d="M0 360 h1280"/><path d="M0 380 h1280"/><path d="M0 400 h1280"/><path d="M0 420 h1280"/><path d="M0 440 h1280"/><path d="M0 460 h1280"/><path d="M0 480 h1280"/><path d="M0 500 h1280"/><path d="M0 520 h1280"/><path d="M0 540 h1280"/><path d="M0 560 h1280"/><path d="M0 580 h1280"/><path d="M0 600 h1280"/><path d="M0 620 h1280"/><path d="M0 640 h1280"/><path d="M0 660 h1280"/><path d="M0 680 h1280"/><path d="M0 700 h1280"/></g>
+  </g>
+</svg>

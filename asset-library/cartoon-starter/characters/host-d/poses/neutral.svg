@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="360" viewBox="0 0 320 360" role="img" aria-labelledby="title desc">
+  <title id="title">host-d neutral</title>
+  <desc id="desc">Layered host pose with stable group ids: character, head, torso, arms, legs, and held-prop.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="320" height="360" rx="24" fill="none"/>
+  <g id="character" transform="">
+    <ellipse class="asset-shadow" cx="161" cy="329" rx="78" ry="16"/>
+    <g id="legs">
+      <path class="ink" d="M133 261 v57" fill="none"/>
+      <path class="ink" d="M188 261 v57" fill="none"/>
+      <path class="ink" d="M111 324 h35" fill="none"/>
+      <path class="ink" d="M175 324 h35" fill="none"/>
+    </g>
+    <g id="torso">
+      <path class="ink" d="M107 174 q52 -39 107 0 l24 96 q-72 28 -154 0z" fill="#f2c14e"/>
+      <path class="thin no-fill" d="M159 184 v86"/>
+      <path class="ink" d="M106 270 q55 17 109 0" fill="#7bb36a"/>
+    </g>
+    <g id="arm-left"><path class="ink" d="M111 190 q-32 31 -30 83" fill="none"/><circle class="ink" cx="80" cy="276" r="12" fill="#7a4d37"/></g>
+    <g id="arm-right"><path class="ink" d="M210 190 q34 32 31 83" fill="none"/><circle class="ink" cx="242" cy="276" r="12" fill="#7a4d37"/></g>
+    
+    <g id="head">
+      <path class="ink" d="M101 94 q3 -46 59 -61 q63 11 62 64 q2 52 -59 64 q-61 -11 -62 -67z" fill="#7a4d37"/>
+      <path class="ink" d="M105 87 q12 -55 64 -62 q39 8 54 45 q-28 -17 -58 -16 q-33 0 -60 33z" fill="#2b2a35"/>
+      <path class="thin no-fill" d="M126 81 q12 -7 24 0 M174 81 q12 -7 24 0"/>
+      <circle cx="141" cy="94" r="5" fill="#28313b"/>
+      <circle cx="181" cy="94" r="5" fill="#28313b"/>
+      <path class="thin no-fill" d="M161 94 q-8 15 5 22"/>
+      <path class="thin no-fill" d="M140 120 q18 8 36 0"/>
+    </g>
+  </g>
+</svg>

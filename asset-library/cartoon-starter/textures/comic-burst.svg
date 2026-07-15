@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">comic-burst.svg</title>
+  <desc id="desc">Transparent overlay texture for subtle visual variance.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="transparent"/>
+  <g id="texture">
+    <g fill="none" stroke="#f2c14e" stroke-width="18" stroke-linecap="round" opacity=".22"><path d="M730.0 360.0 L1260.0 360.0"/><path d="M724.6 390.8 L1222.6 476.3"/><path d="M708.9 417.9 L1114.9 578.5"/><path d="M685.0 437.9 L950.0 654.4"/><path d="M655.6 448.6 L747.7 694.8"/><path d="M624.4 448.6 L532.3 694.8"/><path d="M595.0 437.9 L330.0 654.4"/><path d="M571.1 417.9 L165.1 578.5"/><path d="M555.4 390.8 L57.4 476.3"/><path d="M550.0 360.0 L20.0 360.0"/><path d="M555.4 329.2 L57.4 243.7"/><path d="M571.1 302.1 L165.1 141.5"/><path d="M595.0 282.1 L330.0 65.6"/><path d="M624.4 271.4 L532.3 25.2"/><path d="M655.6 271.4 L747.7 25.2"/><path d="M685.0 282.1 L950.0 65.6"/><path d="M708.9 302.1 L1114.9 141.5"/><path d="M724.6 329.2 L1222.6 243.7"/></g>
+  </g>
+</svg>

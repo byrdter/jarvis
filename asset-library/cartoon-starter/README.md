@@ -6,14 +6,25 @@ This starter kit is intentionally source-first: assets are SVG, grouped with sta
 
 ## What Is Included
 
-- 2 recurring host characters
-- 16 layered host poses across the two hosts
-- 20 standalone expression/head assets, 10 per host
-- 20 science, office, and everyday props
-- 20 diagram and callout elements
-- 10 16:9 cartoon backgrounds
-- 5 transparent texture overlays
-- HyperFrames-oriented animation presets
+- 4 recurring/support host characters
+- 40 layered host poses across the four hosts
+- 40 standalone expression/head assets, 10 per host
+- 40 science, tech, media, legal, office, and everyday props
+- 40 diagram and callout elements
+- 20 16:9 cartoon backgrounds
+- 8 transparent texture overlays
+- 16 HyperFrames-oriented animation presets
+
+## Tier 2 Coverage
+
+Tier 2 expands the kit from a minimum viable identity into a reusable production library for explainers:
+
+- Hosts A/B remain the primary recurring presenters.
+- Hosts C/D are supporting characters for expert, skeptic, student, witness, or audience roles.
+- Props now cover science, tech, media production, legal/courtroom, education, and general workflow scenes.
+- Diagrams now include evidence cards, risk ladders, myth/fact panels, network maps, heatmaps, probability balls, source tags, caption boxes, and process systems.
+- Backgrounds now cover newsroom, podcast studio, hospital, library, factory, data center, museum, whiteboard room, internet map, and outdoor field scenes.
+- Motion presets now cover pop, drift, shake, orbit, draw, blink, squash, wiggle, parallax, stamp, wipe, pulse, thought bubble, and diagram build patterns.
 
 Run the generator whenever the source templates change:
 

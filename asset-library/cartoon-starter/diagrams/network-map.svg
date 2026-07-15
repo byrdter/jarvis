@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="260" viewBox="0 0 420 260" role="img" aria-labelledby="title desc">
+  <title id="title">network-map.svg</title>
+  <desc id="desc">Reusable explainer diagram element for labels, callouts, charts, and motion paths.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="420" height="260" rx="24" fill="none"/>
+  <g id="diagram">
+    <circle class="ink" cx="102" cy="92" r="26" fill="#a8dbe8"/><circle class="ink" cx="210" cy="60" r="26" fill="#f2c14e"/><circle class="ink" cx="310" cy="126" r="26" fill="#7bb36a"/><circle class="ink" cx="168" cy="190" r="26" fill="#e96f5f"/><circle class="ink" cx="255" cy="194" r="20" fill="#b57acc"/><path class="thin no-fill" d="M128 86 l56 -17 M232 76 l57 38 M292 141 l-25 37 M235 194 h-41 M184 174 l-66 -66 M194 80 l-20 87"/>
+  </g>
+</svg>
