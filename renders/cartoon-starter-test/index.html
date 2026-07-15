@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #101820;
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        color: #28313b;
+      }
+
+      .clip,
+      .scene,
+      .scene-bg,
+      .texture {
+        position: absolute;
+        inset: 0;
+      }
+
+      .scene {
+        overflow: hidden;
+        background: #f7f1df;
+        opacity: 0;
+      }
+
+      .scene-bg,
+      .texture,
+      .asset {
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .scene-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .texture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.18;
+        mix-blend-mode: multiply;
+      }
+
+      .title {
+        position: absolute;
+        left: 106px;
+        top: 92px;
+        max-width: 990px;
+        padding: 22px 30px 26px;
+        border: 7px solid #28313b;
+        border-radius: 24px;
+        background: rgba(255, 248, 232, 0.94);
+        font-size: 82px;
+        line-height: 0.95;
+        font-weight: 900;
+        letter-spacing: 0;
+        z-index: 5;
+      }
+
+      .kicker {
+        position: absolute;
+        left: 112px;
+        top: 310px;
+        font-size: 34px;
+        font-weight: 800;
+        color: #28313b;
+      }
+
+      .big-card {
+        position: absolute;
+        left: 108px;
+        bottom: 88px;
+        width: 670px;
+        padding: 34px 42px;
+        border: 7px solid #28313b;
+        border-radius: 24px;
+        background: rgba(255, 248, 232, 0.92);
+        font-size: 38px;
+        line-height: 1.12;
+        font-weight: 800;
+      }
+
+      .host-large {
+        position: absolute;
+        width: 430px;
+        height: 486px;
+        object-fit: contain;
+      }
+
+      .host-medium {
+        position: absolute;
+        width: 330px;
+        height: 372px;
+        object-fit: contain;
+      }
+
+      .head {
+        width: 214px;
+        height: 214px;
+        object-fit: contain;
+      }
+
+      .prop {
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        object-fit: contain;
+      }
+
+      .diagram {
+        position: absolute;
+        width: 440px;
+        height: 280px;
+        object-fit: contain;
+      }
+
+      .badge {
+        position: absolute;
+        min-width: 190px;
+        padding: 18px 28px;
+        border: 6px solid #28313b;
+        border-radius: 999px;
+        background: #fff8e8;
+        font-size: 30px;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .scene-label {
+        position: absolute;
+        right: 92px;
+        top: 76px;
+        padding: 16px 24px;
+        border: 5px solid #28313b;
+        border-radius: 18px;
+        background: #f2c14e;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .asset-grid {
+        position: absolute;
+        left: 122px;
+        top: 310px;
+        display: grid;
+        grid-template-columns: repeat(4, 218px);
+        grid-auto-rows: 218px;
+        gap: 28px;
+      }
+
+      .asset-tile {
+        width: 218px;
+        height: 218px;
+        border: 6px solid #28313b;
+        border-radius: 24px;
+        background: rgba(255, 248, 232, 0.9);
+        display: grid;
+        place-items: center;
+      }
+
+      .asset-tile img {
+        width: 170px;
+        height: 170px;
+        object-fit: contain;
+      }
+
+      .diagram-row {
+        position: absolute;
+        left: 105px;
+        bottom: 128px;
+        display: flex;
+        gap: 34px;
+        align-items: center;
+      }
+
+      .diagram-card {
+        width: 380px;
+        height: 236px;
+        border: 6px solid #28313b;
+        border-radius: 24px;
+        background: rgba(255, 248, 232, 0.92);
+        display: grid;
+        place-items: center;
+      }
+
+      .diagram-card img {
+        width: 330px;
+        height: 205px;
+        object-fit: contain;
+      }
+
+      .motion-word {
+        position: absolute;
+        padding: 18px 24px;
+        border: 6px solid #28313b;
+        border-radius: 22px;
+        background: #55a6c8;
+        color: #28313b;
+        font-size: 38px;
+        font-weight: 900;
+      }
+
+      .final-strip {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        bottom: 86px;
+        display: flex;
+        gap: 26px;
+        align-items: center;
+      }
+
+      .final-strip img {
+        width: 300px;
+        height: 190px;
+        object-fit: contain;
+        border: 6px solid #28313b;
+        border-radius: 24px;
+        background: rgba(255, 248, 232, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="70"
+      data-width="1920"
+      data-height="1080"
+    >
+      <audio
+        id="voiceover"
+        src="assets/audio/narration.m4a"
+        data-start="0"
+        data-duration="68.51"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <section id="scene-1" class="clip scene" data-start="0" data-duration="8" data-track-index="0">
+        <img class="scene-bg" src="assets/cartoon/classroom.svg" alt="" />
+        <img class="texture" src="assets/cartoon/paper-grain.svg" alt="" />
+        <div id="s1-title" class="title">Reusable cartoons, not one-off drawings.</div>
+        <div id="s1-kicker" class="kicker">A 50-asset explainer kit</div>
+        <img id="s1-host" class="host-large asset" style="right: 210px; bottom: 78px" src="assets/cartoon/host-a-point-right.svg" alt="" />
+        <img id="s1-question" class="diagram asset" style="right: 555px; top: 185px" src="assets/cartoon/question-card.svg" alt="" />
+        <div id="s1-card" class="big-card">Fast, consistent, and cheap to animate in HyperFrames.</div>
+      </section>
+
+      <section id="scene-2" class="clip scene" data-start="8" data-duration="10" data-track-index="0">
+        <img class="scene-bg" src="assets/cartoon/living-room.svg" alt="" />
+        <img class="texture" src="assets/cartoon/halftone-dots.svg" alt="" />
+        <div class="scene-label">Host System</div>
+        <div id="s2-title" class="title">Characters become reusable parts.</div>
+        <img id="s2-host-a" class="host-medium asset" style="left: 140px; bottom: 92px" src="assets/cartoon/host-a-thinking.svg" alt="" />
+        <img id="s2-host-b" class="host-medium asset" style="right: 155px; bottom: 92px" src="assets/cartoon/host-b-explaining-card.svg" alt="" />
+        <div id="s2-heads" style="position:absolute; left: 585px; top: 330px; display:flex; gap:34px">
+          <img class="head asset" src="assets/cartoon/host-a-happy.svg" alt="" />
+          <img class="head asset" src="assets/cartoon/host-a-shocked.svg" alt="" />
+          <img class="head asset" src="assets/cartoon/host-b-happy.svg" alt="" />
+        </div>
+        <div id="s2-card" class="big-card" style="left: 603px; bottom: 100px; width: 700px">Swap poses. Swap expressions. Keep the channel style intact.</div>
+      </section>
+
+      <section id="scene-3" class="clip scene" data-start="18" data-duration="12" data-track-index="0">
+        <img class="scene-bg" src="assets/cartoon/lab.svg" alt="" />
+        <img class="texture" src="assets/cartoon/paper-grain.svg" alt="" />
+        <div class="scene-label">Prop Packs</div>
+        <div id="s3-title" class="title">Props turn abstract ideas into pictures.</div>
+        <div id="s3-grid" class="asset-grid">
+          <div class="asset-tile"><img src="assets/cartoon/laptop.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/document.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/syringe.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/shield.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/virus.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/atom.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/microscope.svg" alt="" /></div>
+          <div class="asset-tile"><img src="assets/cartoon/speech-bubble.svg" alt="" /></div>
+        </div>
+        <img id="s3-host" class="host-medium asset" style="right: 160px; bottom: 85px" src="assets/cartoon/host-a-explaining-card.svg" alt="" />
+      </section>
+
+      <section id="scene-4" class="clip scene" data-start="30" data-duration="12" data-track-index="0">
+        <img class="scene-bg" data-layout-allow-overflow src="assets/cartoon/space.svg" alt="" />
+        <img class="texture" src="assets/cartoon/halftone-dots.svg" alt="" />
+        <div class="scene-label">Diagram Layer</div>
+        <div id="s4-title" class="title">Diagrams do the heavy lifting.</div>
+        <div id="s4-row" class="diagram-row">
+          <div class="diagram-card"><img src="assets/cartoon/arrow-curved.svg" alt="" /></div>
+          <div class="diagram-card"><img src="assets/cartoon/timeline.svg" alt="" /></div>
+          <div class="diagram-card"><img src="assets/cartoon/bar-chart.svg" alt="" /></div>
+          <div class="diagram-card"><img src="assets/cartoon/flow-nodes.svg" alt="" /></div>
+        </div>
+        <img id="s4-bubble" class="diagram asset" style="right: 158px; top: 250px" src="assets/cartoon/callout-bubble.svg" alt="" />
+      </section>
+
+      <section id="scene-5" class="clip scene" data-start="42" data-duration="12" data-track-index="0">
+        <img class="scene-bg" src="assets/cartoon/classroom.svg" alt="" />
+        <img class="texture" src="assets/cartoon/paper-grain.svg" alt="" />
+        <div class="scene-label">Motion Recipe</div>
+        <div id="s5-title" class="title">Small motion is enough.</div>
+        <img id="s5-host" class="host-large asset" style="left: 130px; bottom: 68px" src="assets/cartoon/host-b-point-left.svg" alt="" />
+        <img id="s5-virus" class="prop asset" style="right: 275px; top: 224px" src="assets/cartoon/virus.svg" alt="" />
+        <img id="s5-shield" class="prop asset" style="right: 520px; bottom: 175px" src="assets/cartoon/shield.svg" alt="" />
+        <div id="s5-pop" class="motion-word" style="left: 690px; top: 355px">pop</div>
+        <div id="s5-slide" class="motion-word" style="left: 880px; top: 515px; background:#7bb36a">slide</div>
+        <div id="s5-zoom" class="motion-word" style="left: 1080px; top: 350px; background:#e96f5f">zoom</div>
+        <div id="s5-orbit" class="motion-word" style="left: 1265px; top: 515px; background:#8067b7; color:#fff8e8">orbit</div>
+      </section>
+
+      <section id="scene-6" class="clip scene" data-start="54" data-duration="16" data-track-index="0">
+        <img class="scene-bg" src="assets/cartoon/lab.svg" alt="" />
+        <img class="texture" src="assets/cartoon/paper-grain.svg" alt="" />
+        <div id="s6-title" class="title">One workflow, many episodes.</div>
+        <div id="s6-kicker" class="kicker">Script → assets → simple motion → rendered explainer</div>
+        <img id="s6-host-a" class="host-medium asset" style="left: 120px; bottom: 340px" src="assets/cartoon/host-a-neutral.svg" alt="" />
+        <img id="s6-host-b" class="host-medium asset" style="right: 120px; bottom: 340px" src="assets/cartoon/host-b-happy.svg" alt="" />
+        <div class="final-strip">
+          <img id="s6-compare" src="assets/cartoon/comparison-panel.svg" alt="" />
+          <img id="s6-map" src="assets/cartoon/map-pin.svg" alt="" />
+          <img id="s6-chart" src="assets/cartoon/bar-chart.svg" alt="" />
+          <img id="s6-callout" src="assets/cartoon/callout-bubble.svg" alt="" />
+          <img id="s6-doc" src="assets/cartoon/document.svg" alt="" />
+        </div>
+        <div id="s6-card" class="big-card" style="left: 575px; top: 410px; bottom:auto; width: 770px">No paid video generation required for the routine scenes.</div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const showScene = (id, at, duration) => {
+        tl.fromTo(id, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: "power1.out" }, at);
+        tl.to(id, { autoAlpha: 0, duration: 0.35, ease: "power1.in" }, at + duration - 0.35);
+        tl.set(id, { autoAlpha: 0 }, at + duration);
+      };
+
+      showScene("#scene-1", 0, 8);
+      tl.from("#s1-title", { y: 46, autoAlpha: 0, duration: 0.65, ease: "power2.out" }, 0.25)
+        .from("#s1-kicker", { x: -32, autoAlpha: 0, duration: 0.45, ease: "power2.out" }, 0.75)
+        .from("#s1-host", { x: 90, scale: 0.9, autoAlpha: 0, duration: 0.7, ease: "back.out(1.4)" }, 1.05)
+        .from("#s1-question", { scale: 0.55, rotation: -8, autoAlpha: 0, duration: 0.55, ease: "back.out(1.8)" }, 1.45)
+        .from("#s1-card", { y: 34, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 2.15)
+        .to("#s1-question", { y: -12, duration: 1.4, repeat: 3, yoyo: true, ease: "sine.inOut" }, 2.3);
+
+      showScene("#scene-2", 8, 10);
+      tl.from("#s2-title", { y: 40, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 8.25)
+        .from("#s2-host-a", { x: -70, autoAlpha: 0, duration: 0.55, ease: "back.out(1.5)" }, 8.8)
+        .from("#s2-host-b", { x: 70, autoAlpha: 0, duration: 0.55, ease: "back.out(1.5)" }, 9.05)
+        .from("#s2-heads .head", { scale: 0.55, autoAlpha: 0, duration: 0.36, stagger: 0.22, ease: "back.out(1.9)" }, 10.0)
+        .from("#s2-card", { y: 38, autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 12.1)
+        .to("#s2-host-a", { y: -10, duration: 1.5, repeat: 4, yoyo: true, ease: "sine.inOut" }, 10.4)
+        .to("#s2-host-b", { y: -8, duration: 1.7, repeat: 4, yoyo: true, ease: "sine.inOut" }, 10.2);
+
+      showScene("#scene-3", 18, 12);
+      tl.from("#s3-title", { y: 42, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 18.25)
+        .from("#s3-grid .asset-tile", { scale: 0.7, autoAlpha: 0, duration: 0.28, stagger: 0.16, ease: "back.out(1.7)" }, 19.1)
+        .from("#s3-host", { x: 80, autoAlpha: 0, duration: 0.55, ease: "back.out(1.5)" }, 21.1)
+        .to("#s3-grid .asset-tile", { y: -9, duration: 1.15, repeat: 5, yoyo: true, stagger: 0.06, ease: "sine.inOut" }, 22.0);
+
+      showScene("#scene-4", 30, 12);
+      tl.from("#s4-title", { y: 46, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 30.25)
+        .from("#s4-row .diagram-card", { y: 80, autoAlpha: 0, duration: 0.42, stagger: 0.22, ease: "power2.out" }, 31.0)
+        .from("#s4-bubble", { x: 90, scale: 0.8, autoAlpha: 0, duration: 0.55, ease: "back.out(1.6)" }, 32.8)
+        .to("#scene-4 .scene-bg", { scale: 1.08, duration: 11, ease: "sine.inOut" }, 30.0)
+        .to("#s4-bubble", { y: -10, duration: 1.4, repeat: 4, yoyo: true, ease: "sine.inOut" }, 34.0);
+
+      showScene("#scene-5", 42, 12);
+      tl.from("#s5-title", { y: 46, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 42.25)
+        .from("#s5-host", { x: -90, autoAlpha: 0, duration: 0.6, ease: "back.out(1.4)" }, 42.8)
+        .from(["#s5-pop", "#s5-slide", "#s5-zoom", "#s5-orbit"], { scale: 0.6, autoAlpha: 0, duration: 0.32, stagger: 0.22, ease: "back.out(1.8)" }, 44.0)
+        .from("#s5-virus", { y: -80, scale: 0.7, autoAlpha: 0, duration: 0.45, ease: "back.out(1.6)" }, 45.2)
+        .from("#s5-shield", { x: 80, autoAlpha: 0, duration: 0.45, ease: "power2.out" }, 46.0)
+        .to("#s5-virus", { rotation: 360, transformOrigin: "50% 50%", duration: 4, repeat: 2, ease: "none" }, 46.0)
+        .to("#s5-shield", { scale: 1.08, duration: 1.0, repeat: 5, yoyo: true, ease: "sine.inOut" }, 46.2);
+
+      showScene("#scene-6", 54, 16);
+      tl.from("#s6-title", { y: 44, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, 54.25)
+        .from("#s6-kicker", { x: -40, autoAlpha: 0, duration: 0.45, ease: "power2.out" }, 54.8)
+        .from(["#s6-host-a", "#s6-host-b"], { y: 44, autoAlpha: 0, duration: 0.5, stagger: 0.2, ease: "back.out(1.5)" }, 55.5)
+        .from(".final-strip img", { y: 70, autoAlpha: 0, duration: 0.35, stagger: 0.16, ease: "power2.out" }, 56.5)
+        .from("#s6-card", { scale: 0.86, autoAlpha: 0, duration: 0.45, ease: "back.out(1.6)" }, 59.5)
+        .to(".final-strip img", { y: -8, duration: 1.2, repeat: 7, yoyo: true, stagger: 0.05, ease: "sine.inOut" }, 58.0)
+        .to(["#s6-host-a", "#s6-host-b"], { y: -8, duration: 1.5, repeat: 7, yoyo: true, stagger: 0.12, ease: "sine.inOut" }, 57.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
