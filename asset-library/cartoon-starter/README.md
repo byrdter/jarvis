@@ -6,12 +6,13 @@ This starter kit is intentionally source-first: assets are SVG, grouped with sta
 
 ## What Is Included
 
-- 16 layered host poses across two recurring characters
-- 10 standalone expression/head assets
-- 10 science and everyday props
-- 8 diagram and callout elements
-- 4 16:9 cartoon backgrounds
-- 2 transparent texture overlays
+- 2 recurring host characters
+- 16 layered host poses across the two hosts
+- 20 standalone expression/head assets, 10 per host
+- 20 science, office, and everyday props
+- 20 diagram and callout elements
+- 10 16:9 cartoon backgrounds
+- 5 transparent texture overlays
 - HyperFrames-oriented animation presets
 
 Run the generator whenever the source templates change:
@@ -40,4 +41,3 @@ Recommended scene workflow:
 3. Add props and diagram elements as independent layers.
 4. Animate with small, readable moves: pop, drift, push, shake, reveal, orbit, label draw.
 5. Save any genuinely reusable new element back into this library.
-

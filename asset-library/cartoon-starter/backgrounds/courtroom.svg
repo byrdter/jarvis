@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">courtroom.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#c99b71"/><rect x="0" y="500" width="1280" height="220" fill="#8f6a4f"/><rect class="ink" x="355" y="190" width="570" height="190" rx="18" fill="#d9a36c"/><rect class="ink" x="435" y="380" width="410" height="130" rx="18" fill="#60707c"/><path class="thin no-fill" d="M420 250 h440 M475 314 h330"/><circle class="thin" cx="640" cy="132" r="50" fill="#f2c14e"/>
+  </g>
+</svg>

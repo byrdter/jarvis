@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">abstract-grid.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#efe4c7"/><g opacity=".55"><path class="thin no-fill" d="M0 120 h1280 M0 240 h1280 M0 360 h1280 M0 480 h1280 M0 600 h1280 M160 0 v720 M320 0 v720 M480 0 v720 M640 0 v720 M800 0 v720 M960 0 v720 M1120 0 v720"/></g><circle class="ink" cx="880" cy="260" r="95" fill="#8067b7"/><rect class="ink" x="220" y="250" width="310" height="180" rx="30" fill="#a8dbe8"/>
+  </g>
+</svg>

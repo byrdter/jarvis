@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">diagonal-hatch.svg</title>
+  <desc id="desc">Transparent overlay texture for subtle visual variance.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="transparent"/>
+  <g id="texture">
+    <g stroke="#28313b" stroke-width="3" opacity=".08"><path d="M-420 720 L300 0"/><path d="M-365 720 L355 0"/><path d="M-310 720 L410 0"/><path d="M-255 720 L465 0"/><path d="M-200 720 L520 0"/><path d="M-145 720 L575 0"/><path d="M-90 720 L630 0"/><path d="M-35 720 L685 0"/><path d="M20 720 L740 0"/><path d="M75 720 L795 0"/><path d="M130 720 L850 0"/><path d="M185 720 L905 0"/><path d="M240 720 L960 0"/><path d="M295 720 L1015 0"/><path d="M350 720 L1070 0"/><path d="M405 720 L1125 0"/><path d="M460 720 L1180 0"/><path d="M515 720 L1235 0"/><path d="M570 720 L1290 0"/><path d="M625 720 L1345 0"/><path d="M680 720 L1400 0"/><path d="M735 720 L1455 0"/><path d="M790 720 L1510 0"/><path d="M845 720 L1565 0"/><path d="M900 720 L1620 0"/><path d="M955 720 L1675 0"/><path d="M1010 720 L1730 0"/><path d="M1065 720 L1785 0"/><path d="M1120 720 L1840 0"/><path d="M1175 720 L1895 0"/><path d="M1230 720 L1950 0"/><path d="M1285 720 L2005 0"/><path d="M1340 720 L2060 0"/></g>
+  </g>
+</svg>

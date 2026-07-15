@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">phone</title>
+  <desc id="desc">Reusable cartoon prop with thick outline and transparent background.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="240" height="240" rx="24" fill="none"/>
+  <g id="prop" filter="url(#paperNoise)">
+    <ellipse class="asset-shadow" cx="120" cy="205" rx="70" ry="12"/>
+    <rect class="ink" x="78" y="29" width="84" height="174" rx="18" fill="#60707c"/><rect x="91" y="52" width="58" height="112" rx="7" fill="#a8dbe8"/><circle cx="120" cy="183" r="8" fill="#fff8e8"/>
+  </g>
+</svg>

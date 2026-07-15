@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">office.svg</title>
+  <desc id="desc">Reusable 16:9 flat cartoon background for explainer scenes.</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+    <style>
+      .ink{stroke:#28313b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#28313b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .no-fill{fill:none}
+      .asset-shadow{fill:#1f2a33;opacity:.16}
+      text{font-family:Inter,Arial,sans-serif;font-weight:800;letter-spacing:0}
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f7f1df"/>
+  <g id="background" filter="url(#paperNoise)">
+    <rect width="1280" height="720" fill="#d6e4e8"/><rect x="0" y="496" width="1280" height="224" fill="#d2b48a"/><rect class="ink" x="95" y="112" width="300" height="205" rx="18" fill="#fff8e8"/><rect class="ink" x="785" y="126" width="350" height="225" rx="20" fill="#a8dbe8"/><rect class="ink" x="492" y="432" width="260" height="78" rx="18" fill="#60707c"/><path class="thin no-fill" d="M532 471 h180 M830 181 h250 M830 234 h190 M830 287 h220"/>
+  </g>
+</svg>

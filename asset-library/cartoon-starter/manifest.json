@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-15T11:16:30.096Z",
-  "totalAssets": 50,
+  "generatedAt": "2026-07-15T17:54:44.186Z",
+  "totalAssets": 91,
   "assets": [
     {
       "path": "characters/host-a/poses/neutral.svg",
@@ -187,6 +187,46 @@
       ]
     },
     {
+      "path": "characters/expressions/host-a-skeptical.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "skeptical"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-angry.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "angry"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-confused.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "confused"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-tired.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "tired"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-a-excited.svg",
+      "type": "expression",
+      "tags": [
+        "host-a",
+        "excited"
+      ]
+    },
+    {
       "path": "characters/expressions/host-b-neutral.svg",
       "type": "expression",
       "tags": [
@@ -224,6 +264,46 @@
       "tags": [
         "host-b",
         "shocked"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-skeptical.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "skeptical"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-angry.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "angry"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-confused.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "confused"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-tired.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "tired"
+      ]
+    },
+    {
+      "path": "characters/expressions/host-b-excited.svg",
+      "type": "expression",
+      "tags": [
+        "host-b",
+        "excited"
       ]
     },
     {
@@ -297,6 +377,76 @@
       ]
     },
     {
+      "path": "props/everyday/phone.svg",
+      "type": "prop",
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "path": "props/everyday/clock.svg",
+      "type": "prop",
+      "tags": [
+        "clock"
+      ]
+    },
+    {
+      "path": "props/everyday/money.svg",
+      "type": "prop",
+      "tags": [
+        "money"
+      ]
+    },
+    {
+      "path": "props/everyday/folder.svg",
+      "type": "prop",
+      "tags": [
+        "folder"
+      ]
+    },
+    {
+      "path": "props/everyday/lightbulb.svg",
+      "type": "prop",
+      "tags": [
+        "lightbulb"
+      ]
+    },
+    {
+      "path": "props/science/dna.svg",
+      "type": "prop",
+      "tags": [
+        "dna"
+      ]
+    },
+    {
+      "path": "props/science/pill.svg",
+      "type": "prop",
+      "tags": [
+        "pill"
+      ]
+    },
+    {
+      "path": "props/science/brain.svg",
+      "type": "prop",
+      "tags": [
+        "brain"
+      ]
+    },
+    {
+      "path": "props/science/telescope.svg",
+      "type": "prop",
+      "tags": [
+        "telescope"
+      ]
+    },
+    {
+      "path": "props/science/molecule.svg",
+      "type": "prop",
+      "tags": [
+        "molecule"
+      ]
+    },
+    {
       "path": "diagrams/arrow-curved.svg",
       "type": "diagram",
       "tags": [
@@ -353,6 +503,90 @@
       ]
     },
     {
+      "path": "diagrams/process-steps.svg",
+      "type": "diagram",
+      "tags": [
+        "process-steps"
+      ]
+    },
+    {
+      "path": "diagrams/venn.svg",
+      "type": "diagram",
+      "tags": [
+        "venn"
+      ]
+    },
+    {
+      "path": "diagrams/checklist.svg",
+      "type": "diagram",
+      "tags": [
+        "checklist"
+      ]
+    },
+    {
+      "path": "diagrams/warning-sign.svg",
+      "type": "diagram",
+      "tags": [
+        "warning-sign"
+      ]
+    },
+    {
+      "path": "diagrams/quote-card.svg",
+      "type": "diagram",
+      "tags": [
+        "quote-card"
+      ]
+    },
+    {
+      "path": "diagrams/number-badge.svg",
+      "type": "diagram",
+      "tags": [
+        "number-badge"
+      ]
+    },
+    {
+      "path": "diagrams/meter.svg",
+      "type": "diagram",
+      "tags": [
+        "meter"
+      ]
+    },
+    {
+      "path": "diagrams/funnel.svg",
+      "type": "diagram",
+      "tags": [
+        "funnel"
+      ]
+    },
+    {
+      "path": "diagrams/cycle.svg",
+      "type": "diagram",
+      "tags": [
+        "cycle"
+      ]
+    },
+    {
+      "path": "diagrams/decision-tree.svg",
+      "type": "diagram",
+      "tags": [
+        "decision-tree"
+      ]
+    },
+    {
+      "path": "diagrams/axis-matrix.svg",
+      "type": "diagram",
+      "tags": [
+        "axis-matrix"
+      ]
+    },
+    {
+      "path": "diagrams/data-table.svg",
+      "type": "diagram",
+      "tags": [
+        "data-table"
+      ]
+    },
+    {
       "path": "backgrounds/lab.svg",
       "type": "background",
       "tags": [
@@ -381,6 +615,48 @@
       ]
     },
     {
+      "path": "backgrounds/office.svg",
+      "type": "background",
+      "tags": [
+        "office"
+      ]
+    },
+    {
+      "path": "backgrounds/city.svg",
+      "type": "background",
+      "tags": [
+        "city"
+      ]
+    },
+    {
+      "path": "backgrounds/map.svg",
+      "type": "background",
+      "tags": [
+        "map"
+      ]
+    },
+    {
+      "path": "backgrounds/dashboard.svg",
+      "type": "background",
+      "tags": [
+        "dashboard"
+      ]
+    },
+    {
+      "path": "backgrounds/courtroom.svg",
+      "type": "background",
+      "tags": [
+        "courtroom"
+      ]
+    },
+    {
+      "path": "backgrounds/abstract-grid.svg",
+      "type": "background",
+      "tags": [
+        "abstract-grid"
+      ]
+    },
+    {
       "path": "textures/paper-grain.svg",
       "type": "texture",
       "tags": [
@@ -392,6 +668,27 @@
       "type": "texture",
       "tags": [
         "halftone-dots"
+      ]
+    },
+    {
+      "path": "textures/diagonal-hatch.svg",
+      "type": "texture",
+      "tags": [
+        "diagonal-hatch"
+      ]
+    },
+    {
+      "path": "textures/soft-vignette.svg",
+      "type": "texture",
+      "tags": [
+        "soft-vignette"
+      ]
+    },
+    {
+      "path": "textures/speckle.svg",
+      "type": "texture",
+      "tags": [
+        "speckle"
       ]
     }
   ]
