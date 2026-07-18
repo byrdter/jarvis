@@ -117,3 +117,32 @@ montage** — a new still every ~2–3s — carries a *list* or a build, costs n
 variety without generating a single clip. Use it when generation is unavailable, for a fast sequence
 (chip → phone → customer), or just to break the clip/HyperFrames rhythm. Pull from `clip-library/
 images`, `backgrounds/`, `products/`, or extract a frame from an existing clip.
+
+## The I2V prompt contract — a global MOTION STYLE is NOT an animation prompt (Terry, 2026-07-18)
+Terry caught this on the video-projects batch: the `ASSET-GENERATION.md` sheets listed each `br-` still
+with only `— + HOUSE STYLE + MOTION STYLE`. That is **incomplete**. A global MOTION STYLE describes how the
+**camera** behaves ("slow push-in or lateral drift"); it says nothing about what the **subject** does. Animate
+a shell-game still with MOTION STYLE alone and you get a beautiful slow push-in on hands that never shuffle.
+
+**Every image→video prompt has THREE parts:**
+
+> **[the shot's own `Motion:` line]  +  MOTION STYLE  +  I2V NEGATIVES**
+
+1. **`Motion:` (per-shot, required).** What the subject actually does, in this frame, for these 8 seconds.
+   Be concrete and bounded — one completed action, not a vague verb: "the hands slide the cups through one
+   slow circular shuffle, crossing twice, then settle; at the end one cup lifts to reveal nothing." Name what
+   must NOT happen if the shot depends on it ("they never turn to camera," "the door never opens").
+   The older `ASSET-GENERATION-AIDOOMED.md` sheet did this correctly (`BR-02` fiber) — that is the format.
+2. **MOTION STYLE (global).** The camera grade + pacing. Unchanged, appended to every clip.
+3. **I2V NEGATIVES (global).** The failures that actually kill an I2V take:
+   > No warping or morphing of hands, fingers, or faces. No extra limbs or fingers. The subject does not turn
+   > to face the camera. No text, captions, logos or watermarks appearing during the motion. No cuts, no scene
+   > change, no camera shake. Preserve the framing and lighting of the source image.
+
+**Stillness is a legitimate — sometimes essential — motion direction.** The meaning of a shot often lives in
+what refuses to move: the jobseeker who re-settles her bag and then *stays*, waiting rather than entering; the
+unplugged connector that never connects; the dead rack whose fans stay motionless while the newer racks behind
+it blink alive. Say so explicitly, or the model will invent movement and erase the point.
+
+**Rule:** an `ASSET-GENERATION.md` clip entry is not finished until it carries its own `Motion:` line. A still
+prompt + the two globals is a half-written asset.
