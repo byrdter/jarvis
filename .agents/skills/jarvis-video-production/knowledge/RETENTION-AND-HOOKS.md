@@ -182,12 +182,31 @@ outperformed its own distribution.**
 > 66K views on a 1K-sub channel = **50×** — that idea broke containment. 500K views on a 2M-sub
 > channel = **0.25×** — that idea *underperformed*.
 
+**Run it:** `python3 tools/outlier-scan.py` (canonical channel set baked in; `--refresh` to re-fetch,
+`--all` to drop the recency floor). Writes `tools/outliers.csv`.
+
 Method:
 1. Assemble **≥15 competitor channels** in the AI-explainer / tech-explainer space, weighted toward
    channels our size or a little larger (their outliers are reachable; MKBHD's are not).
 2. Pull each channel's videos with view count + the channel's sub count; compute the ratio.
-3. Sort descending. **Everything above ~5× is a candidate concept.** Read the top ~30.
+3. Sort descending. **≥1.5× is a candidate concept** in this space — see the calibration note below.
 4. Ignore the top-line topic; extract *why it broke out* — the tension, the stake, the framing.
+
+> **CALIBRATION — the threshold is domain-specific, and 5× is wrong here.** The ">5×" figure came
+> from the make-money-online / faceless niche where breakouts are far more extreme. On our actual
+> competitor set (first run 2026-07-20, 366 videos since 2025-01-01) **exactly one video cleared 5×.**
+> In technical AI-explainer content the realistic bands are: **median ~0.2–0.4× is normal, ≥1.5× is
+> a genuine outlier, ≥3× is rare, ≥10× is a once-a-year event.** Recalibrate against a fresh run
+> before trusting any threshold; don't import a number from another niche.
+
+> **AGE CONFOUND — correct for this or the ranking lies.** Views accumulate over a video's whole
+> life, but subscriber count is a **current snapshot**. So (a) an old video on a channel that has
+> since grown scores spuriously high — a 2019 video divided by 2026 subs — and (b) a *recent*
+> breakout scores spuriously LOW, because the subs it just earned are already in the denominator.
+> The scan applies a 2025-01-01 floor by default, which kills (a). Effect (b) means recent high
+> scores are **conservative**: a video that just did 12× probably did more than 12× at the time.
+> On the first run, dropping the floor promoted a cluster of 2019–2020 math videos into the top 10 —
+> pure artifact, and a good check that the filter is doing its job.
 
 Why this matters for us specifically: we are a ~137-sub channel that is **retention-gated, not
 quality-gated** (§0). Outlier scoring is the matching discipline on the input side — it finds ideas
@@ -223,7 +242,52 @@ Corollary worth keeping: **low competition on a topic usually means no proven de
 lane.** Wanting to see competitors already succeeding on a theme is a feature. We want to enter a
 proven conversation with a better frame — not invent an audience.
 
-### 7.4 Provenance and confidence — read this before trusting §7
+### 7.4 First-run result (2026-07-20): REGISTER beats topic
+
+The first scan (17 channels, 486 videos; 366 after the recency floor) produced one finding that
+matters more than any individual title it surfaced. Median outlier, recent window:
+
+| register | channels | median |
+|---|---|---|
+| **Explainer / contrarian / mechanism** | Artem Kirsanov, Welch Labs, Internet of Bugs, bycloud, Dr Waku | **0.26 – 0.45×** |
+| **AI news / hype / model-reaction** | AI Explained, Wes Roth, Matthew Berman, Two Minute Papers, The AI Advantage, TheAIGRID | **0.03 – 0.19×** |
+
+**The news channels underperform their own subscriber base by roughly an order of magnitude versus
+the explainer channels** — TheAIGRID's median is 0.03× against Artem Kirsanov's 0.45×, a ~15× gap.
+Big sub counts are hiding the fact that the *ideas* aren't travelling. Their best-performing titles
+are still hype-cased ("Google's SHOCKING…", "The 10 Most INSANE Things…", "Anthropic is coming for
+EVERYTHING") and still top out around 0.25–0.48×.
+
+**This validates the format we already run.** Byrddynasty's citation-card evidence-explainer sits in
+the high-performing register. The strategic error would be drifting toward model-release reaction
+content to chase volume — that's the register with the worst idea-travel in the entire set.
+
+**What actually breaks out is NEGATION, not news.** Every top performer is a limit, a correction, or
+a reversal — never an announcement:
+
+| score | title | shape |
+|---|---|---|
+| **12.25×** | The AI Scaling Problem *(Edan Meyer, 80K subs, 985K views)* | the ceiling |
+| 3.20× | How Your Brain Chooses What to Remember | mechanism |
+| 1.96× | Your Favorite Science YouTubers Are Wrong About AI | consensus is wrong |
+| 1.92× | The Brain's Learning Algorithm Isn't Backpropagation | negation of an assumed truth |
+| 1.60× | ChatGPT "Physics Result" Reality Check | debunk |
+| 1.02× | AI May DOOM humans After All. I may have been wrong. | public reversal |
+| 1.01× | Yann LeCun's $1B Bet Against LLMs | insider defection |
+| 2.75×¹ | AI can't cross this line and we don't know why | **limit + unexplained = paradox** |
+
+¹ pre-cutoff (2024), shown because it's the cleanest paradox-shaped title in the corpus.
+
+That bottom row is the template: **a hard limit that nobody can explain** is self-sealing exactly the
+way §3 demands — the viewer cannot resolve it alone. Fusions (§7.2) should aim at that shape.
+
+**Caveats, stated honestly:** Edan Meyer's 12.25× is **n=1** in the recent window (he posts rarely),
+so treat it as a strong signal about the *shape* rather than a reliable channel-level benchmark. And
+these outliers run 15–27 min against our 8-min standard (§1) — that is **not** a reason to abandon
+§1, because those are 30K–900K-sub channels spending trust we don't have yet. §1's reasoning
+(long-form is a trust-gated privilege) still holds at our size.
+
+### 7.5 Provenance and confidence — read this before trusting §7
 
 §7.1–§7.3 were extracted on **2026-07-20** from a full-transcript review of the last 30 videos on
 YouTube's `@makemoneymatt` (Matt Par). **That channel is a sales funnel** — he owns the tools he
