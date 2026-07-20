@@ -47,6 +47,20 @@ genuinely can't answer on their own?"**
 
 **One line:** *Give them the locked door and let them see it's locked. Do not hand them the key.*
 
+## Before the hook: pick the idea (§7 of the playbook)
+When the topic ISN'T already chosen, run ideation first — a perfect hook on a dead concept still dies.
+- **Outlier score = views ÷ the posting channel's sub count.** Rank candidates by this, NEVER by raw
+  views. >5× is a candidate; weight toward channels near our size. Raw views measure the channel, not
+  the idea.
+- **Combination titling:** fuse TWO independently-proven concepts into one that doesn't exist yet —
+  don't clone one outlier. Prefer fusions that produce a **paradox**, because that's where the §3 hook
+  is born. If the fused concept can't be stated as a contradiction the viewer can't resolve alone,
+  fuse a different pair before writing any VO.
+- **Burning problem, not mild interest** (job / kid's education / safety / can't tell what's true).
+  Low competition usually means no proven demand, not an open lane.
+
+Full method + provenance: `RETENTION-AND-HOOKS.md` §7.
+
 ## Also standing
 - **~8 min** runtime (7:30–9:00). **2 shorts per video** (distinct angles; same hook rule on
   the first second). Mid-video reversal at ~40–55%. New visual beat every 3–5s.

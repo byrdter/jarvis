@@ -5,6 +5,9 @@ It was derived on 2026-07-14/15 from the channel's real YouTube Studio numbers a
 and V5 8-minute recuts. **Every video and every short follows it.** If any older doc (including this
 skill's own "preferred runtime 10–15 min" line, now superseded) conflicts, this wins.
 
+**§1–§6 are about executing a video well. §7 is about choosing which video to make — it runs
+*upstream* of everything here, so read it first when the topic isn't already decided.**
+
 ---
 
 ## 0. The diagnosis that drives everything (from real Studio data)
@@ -161,6 +164,90 @@ See the V5 build: `SHORTS-V5.md` + `hyperframes-shorts/SHORTS-BUILD-SPEC.md`.
 - **Chapters, pinned engagement-question comment, end-screen subscribe** every time.
 - Prime **external warm traffic** (newsletter + one Reddit post + one X thread per video) — 0% external
   was our widest-open door.
+
+---
+
+## 7. IDEATION — choosing what to make (runs upstream of §1–§6)
+
+§1–§6 make a video hold attention. **This section is about not spending that effort on a topic nobody
+was going to click.** A perfectly executed hook on a dead concept still dies.
+
+### 7.1 Rank candidates by OUTLIER SCORE, never by raw views
+
+Raw view counts measure *the channel*, not *the idea*. A 500K-view video on a 2M-sub channel tells you
+nothing — it got those views because the channel is large. The signal we want is **an idea that
+outperformed its own distribution.**
+
+> **Outlier score = views ÷ subscriber count of the channel that posted it.**
+> 66K views on a 1K-sub channel = **50×** — that idea broke containment. 500K views on a 2M-sub
+> channel = **0.25×** — that idea *underperformed*.
+
+Method:
+1. Assemble **≥15 competitor channels** in the AI-explainer / tech-explainer space, weighted toward
+   channels our size or a little larger (their outliers are reachable; MKBHD's are not).
+2. Pull each channel's videos with view count + the channel's sub count; compute the ratio.
+3. Sort descending. **Everything above ~5× is a candidate concept.** Read the top ~30.
+4. Ignore the top-line topic; extract *why it broke out* — the tension, the stake, the framing.
+
+Why this matters for us specifically: we are a ~137-sub channel that is **retention-gated, not
+quality-gated** (§0). Outlier scoring is the matching discipline on the input side — it finds ideas
+that traveled *without* a subscriber base behind them, which is exactly our situation.
+
+### 7.2 COMBINATION TITLING — fuse two proven concepts, don't clone one
+
+Cloning a single outlier puts us in direct comparison with a video that already won, on a channel with
+more authority. Instead, **take two independently-proven concepts and fuse them into one that doesn't
+exist yet.** The result inherits demand from both parents while having no incumbent.
+
+- The parents must be **independently proven** (each an outlier on its own) — fusing two dead ideas
+  produces a dead idea.
+- The fusion must be **specific**, not a broadening. `AI safety + jobs` is a category, not a concept.
+  `the exam that licenses doctors` + `nobody can tell when it's wrong` → V6. That's a fusion.
+- Prefer fusions that generate a **paradox**, because §3 says a paradox is a self-sealing loop. This is
+  the real payoff of the technique: *the combination step is where the hook gets born.* A fused concept
+  that contains a built-in contradiction hands §2/§3 a working cold open for free.
+
+**Sequencing:** outlier scan (§7.1) → fuse (§7.2) → paradox test (§3) → hook (§2) → script. If the
+fused concept can't be stated as a contradiction a viewer can't resolve alone, fuse a different pair
+before writing a word of VO.
+
+### 7.3 The "burning problem" filter
+
+From the same source, and it survives scrutiny: prefer topics where the audience has a **problem they
+are desperate to solve**, not one they're mildly interested in. Desperation drives clicking, finishing,
+and sharing; curiosity alone drives only a click. For *Understanding AI*, the burning-problem
+register is: **"is this coming for my job / my kid's education / my safety / my ability to tell what's
+true"** — not "here's an interesting capability."
+
+Corollary worth keeping: **low competition on a topic usually means no proven demand, not an open
+lane.** Wanting to see competitors already succeeding on a theme is a feature. We want to enter a
+proven conversation with a better frame — not invent an audience.
+
+### 7.4 Provenance and confidence — read this before trusting §7
+
+§7.1–§7.3 were extracted on **2026-07-20** from a full-transcript review of the last 30 videos on
+YouTube's `@makemoneymatt` (Matt Par). **That channel is a sales funnel** — he owns the tools he
+recommends, most videos are sponsored, ~6 ideas are recycled across all 30, and much of his
+algorithm commentary is unsourced folk claims (see the discard list below). It was mined, not trusted.
+
+**Kept because it's mechanically sound and self-demonstrating** (he shows the technique producing his
+own titles): outlier scoring, combination titling, the burning-problem filter, the
+competition-as-demand-signal heuristic.
+
+**Explicitly rejected from that source — do not import:** "trust points in the algorithm" from letting
+an upload sit unlisted; "YouTube promotes videos with more ads"; "the top 100 YouTubers lost 50% of
+views in a week"; "$50–100 per 1,000 views"; "every channel with 50%+ AVD uses this pattern"; "AI
+avatars keep your channel safe"; "don't share your video with friends and family." All unsourced,
+several arithmetically self-contradicting, all doing sales work.
+
+**Independent corroboration worth noting:** his "re-hook every 60–90 seconds / open a loop and don't
+resolve it" is the same mechanism as our §3 curiosity-gap rule, arrived at separately. Our §1 8-minute
+runtime also matches his recommendation — but for a *different and better* reason: ours came from our
+own retention data, his from mid-roll ad inventory. **No change to §1–§6 resulted from that review;
+this section is the entirety of what was worth adopting.**
+
+Raw transcripts, if the analysis ever needs re-auditing, were pulled with `yt-dlp` auto-captions
+(all 30 available; no paid transcription needed).
 
 ---
 
