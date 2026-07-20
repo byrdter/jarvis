@@ -174,8 +174,11 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
 - **`<video data-start>` is the TIMELINE position, not a media offset** (V-POPE V2 rework: 3 of 6
   scene subagents set `data-start="0"` on clips revealed at t=40–99s → the clip played at t=0,
   froze on its last frame long before its GSAP reveal → dark dead runs + lost motion). Every clip's
-  `data-start`/`data-duration` must equal its visible GSAP window (and stay ≤ the source's real
-  length — ffprobe it); reusing one source at two moments needs TWO elements on separate tracks.
+  `data-start`/`data-duration` must equal its visible GSAP window. **Only `data-duration` is bounded by
+  the source's real length (ffprobe it) — `data-start` is NOT** and routinely exceeds it, because the
+  media plays from its own 0 at whatever timeline position `data-start` names (verified 2026-07-18:
+  ponzi S03 `data-start="44.4"` on a 10.04s source renders correctly). Reusing one source at two moments
+  needs TWO elements on separate tracks.
   Audit fast: list all `data-start` values — clustered near 0 with reveals spread across the scene =
   the bug. Auto-fix: `fix-media-windows.py` (V-POPE `build-scripts/`) aligns windows to `clip()`
   calls and clones reused elements.

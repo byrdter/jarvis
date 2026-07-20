@@ -13,7 +13,7 @@ scene markers**, and the operator produces a complete first-cut master, running 
 - `heygen.mp4` — the recorded take (one continuous VO performance).
 - The VO script broken into N scenes/segments, with per-scene "avatar visible vs graphics" intent
   and any visibility notes.
-- Project dir: `${JARVIS_PRIVATE}/video-production/<series>/<video-NN-name>/` with a
+- Project dir: `${JARVIS_PRIVATE}/video-projects/<video-name>/` with a
   `hyperframes-v3/scenes/NN-name/` per scene (each: `index.html`, `hyperframes.json` with top-level
   `duration`, `assets/`, `renders/`).
 
@@ -76,7 +76,53 @@ REF=/Volumes/ORICO/hyperframes-upstream
 If ORICO isn't mounted, proceed with the plugin skills (nothing critical is gated behind the drive).
 
 ## Step 5 — Render each scene
+**FIRST run `hyperframes check .` in the scene dir — it catches a whole class of defect that
+`scene-validator.py` does not.** Expect `Check passed, 0 errors`. Do not render a scene that errors.
+
+> ### `media_missing_id` — add ids, but it is an ADVISORY, not a frozen-render bug (batch 2026-07-18)
+> `hyperframes check` errors on a timed `<video>` that has `data-start` but no `id`, and its message
+> ("this video will be FROZEN in renders") reads as a hard defect. **On 0.7.63 it is not.** We chased
+> this hard and the fix proved to be a **pure no-op**: old and new renders came back pixel-identical
+> (mean abs diff 0.73–1.29 = encoder noise), and the footage was verified *playing in both*.
+> **Add the ids anyway** — `hyperframes check` is a gate you want passing, and the guarantee may change
+> between versions — but do NOT tear down a finished master over this alone. **Verify before escalating.**
+>
+> **The cautionary tale:** the escalation was built on inference, not measurement — a check error, a
+> scary message, and an inconclusive frame-diff. Composited frames cannot settle it: scrim and opacity
+> scale the difference, and a near-static subject (a talking-head avatar) shows low motion even when
+> playing perfectly. Cost: 18 scenes re-rendered for nothing.
+> ```html
+> <!-- WRONG — renders frozen, silently -->
+> <video src="assets/clip.mp4" data-start="31.8" data-duration="3.2" muted playsinline>
+> <!-- RIGHT -->
+> <video id="vid-clip-1" src="assets/clip.mp4" data-start="31.8" data-duration="3.2" muted playsinline>
+> ```
+> **Audit any project fast:**
+> ```bash
+> python3 - <<'EOF'
+> import re,glob
+> for f in glob.glob('*/hyperframes-v3/scenes/*/index.html'):
+>     for t in re.findall(r'<video[^>]*>', open(f).read()):
+>         if 'data-start' in t and not re.search(r'\bid\s*=', t): print('MISSING id:', f)
+> EOF
+> ```
+> ### ✅ THE way to prove a clip is playing (source-time tracking)
+> Frame-diffing a render against itself is inconclusive. Ask instead: **does the rendered frame at Δ
+> seconds into the clip's window match the SOURCE at Δ, or the source at 0?** Playing tracks Δ; frozen
+> pins to 0. Edge-filter both first so it's brightness/scrim-invariant, and crop to the clip's panel rect
+> if it's an inset (a full-frame compare on a small inset reads as ambiguous):
+> ```python
+> # for delta in (0.5, 2.5):
+> #   render@(data_start+delta)  vs  source@delta   -> score A
+> #   render@(data_start+delta)  vs  source@0.1     -> score B
+> #   A < B  => PLAYING (tracks source time)   |   B < A => FROZEN
+> ```
+> Real numbers from a confirmed-good scene: `render@Δ2.5 vs source@2.5 = 10.31` against
+> `vs source@0 = 11.79` → playing. Use this before claiming any clip is frozen.
+
 `cd <scene> && hyperframes render .` — confirm render duration == `assets/audio.mp3`.
+**One render per shell call.** Chaining two renders in one call fails, and `render.sh … && echo` masks
+HyperFrames render failures — a render can report success while producing nothing.
 
 > **Use the PINNED global CLI, never bare `npx hyperframes`.** `npx` grabs whatever version is in its
 > cache (this machine had 0.6.7 → 0.7.42 side by side); a scene that needs a registry block or adapter
@@ -96,6 +142,61 @@ don't show up." Fix at the source (attach to `tl`, use `tl.time()` + a seeded PR
 exception opts out with a trailing `// hf-ok`. Run it BEFORE rendering to avoid wasting a render.
 Plus the raw gates from HYPERFRAMES-LESSONS (freeze >=5s, white frames). Fix and re-render any scene
 that fails (static hold → ambient/breath; sync drift → re-anchor; white → trim/freeze-fill).
+
+### Step 6b — MANDATORY FRAME PASS (the automated layout gate is currently INERT)
+**`scene-validator.py` is blind to layout defects**, and the tool that is *supposed* to cover them
+**does not currently fire on our compositions.** Across one 4-video batch (2026-07-18) every scene agent
+hit at least one of: overlapping labels / text-on-text, a caption cropped by a camera push-in, an inset
+colliding with a label, a tag firing before its panel exited. ~25 such defects total. **Every single one
+was found by a human-style look at frames.** A clean validator says the scene is *deterministic and
+correctly timed* — it says nothing about whether the scene is *legible*.
+
+> **Status of the automated gate (verified 2026-07-19, CLI 0.7.64).** `hyperframes check` has a Layout
+> section (this is the old `hyperframes layout`, now a deprecated alias) with `--at-transitions` and
+> `--samples=<n>`. On our scenes it reports **`Layout ◇ 0 issues across 0 sample(s)`** — zero samples —
+> and `Contrast ◇ 0/0 text checks`, i.e. it is evaluating nothing. Confirmed on a scene with a KNOWN
+> text-over-text collision, with `--at-transitions --samples=24`: still 0 samples, no detection.
+> So the gate is real and documented but **inert in practice — do not rely on it.** If someone gets it
+> sampling (>0 samples), it becomes the cheap first pass and the manual frame pass becomes the backstop.
+> Until then the frame pass IS the gate.
+
+So after each scene renders, extract frames at every major beat and LOOK at them:
+```bash
+for t in 3 8 13 20 28 36 44 52; do ffmpeg -v error -ss $t -i renders/<render>.mp4 -frames:v 1 frames/t${t}.png; done
+```
+Check each for: text over text · elements clipped by the frame or by a camera move · an inset landing
+on a label · a panel that is empty when it should carry content · a beat that reveals before/after its
+VO word. Fix and re-render. Do not report a scene as done on validator output alone.
+
+### Step 6c — Transcript integrity (do this BEFORE anchoring, not after)
+Whisper silently drops speech. In the same batch it dropped **7.4s** from one scene's
+`assets/transcript.json` — every VO-anchored beat built on that file would have been wrong.
+**There are TWO drop classes and you must screen for BOTH** — gap/density alone catches only the first,
+and in this batch it produced a false "only one scene is corrupted" verdict while three more were broken:
+
+1. **Gap drops** — the words vanish and leave a hole.
+   - word density = `words / audio_duration * 60` → healthy ≈ **130–160 wpm**; **>15% below the project
+     median** = suspect.
+   - max inter-word gap **>2s** mid-scene (trailing silence at the tail is normal).
+2. **Collapsed-token drops (invisible to the above)** — Whisper swallows the speech into ONE long token,
+   so density looks near-normal and there is NO gap. Screen the token durations:
+   - any token **>2.0s**, OR a short function word (`the`, `it`, `a`, ≤4 chars) **>1.0s**.
+   - Real examples: a **3.36s `"the"`** hiding *"skipped is what happened next: Google and Meta"*; a
+     **2.26s `"it"`** hiding the entire *"someone is going to lose a phenomenal amount"* Altman quote;
+     a **4.4s `"a"`** hiding *"hyperscaler proudly breaks out an A-I revenue line."*
+   - **Benign look-alikes — do not "fix" these:** spoken numerals (`"1999"`, `"1990s"`, `"34"`) and
+     letter-by-letter acronyms (`"GPUs"` said G-P-Us) legitimately run 1.0–1.4s. Confirm against
+     `VO-CLEAN.md` before repairing: print the transcript around the token and compare to the script.
+
+**Repair:** re-transcribe that scene's `assets/audio.mp3` alone (a short clip beats a slice of a 9-min
+take). If a plain retry comes back WORSE (it can — one retry went from a 2.26s drop to a 6.36s drop),
+pass a **prompt hint** containing the expected phrasing with `temperature=0`:
+```python
+client.audio.transcriptions.create(model="whisper-1", file=f, response_format="verbose_json",
+    timestamp_granularities=["word"], prompt="<expected sentences from VO-CLEAN.md>", temperature=0)
+```
+That recovered the full Altman quote (6.36s token → 0.74s). **Always re-scan after repairing** — never
+assume the retry worked. Keep the bad file as `.bak-whisper-drop`.
 
 ## Step 7 — Assemble the master
 Handle HeyGen avatar white frames (trim tail / freeze-fill head) per `knowledge/ASSEMBLY-AND-AVATAR.md`,

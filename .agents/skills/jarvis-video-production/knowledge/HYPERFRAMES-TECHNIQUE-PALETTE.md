@@ -21,8 +21,13 @@ HyperFrames renders from ONE paused GSAP timeline, seeked frame-by-frame — det
 - **Non-GSAP runtimes** (Three.js, Lottie, Anime, WAAPI, CSS, TypeGPU) are driven by their adapter's
   seek — register on the `window.__hf*` array / listen for the `hf-seek` event; the adapter sets each
   instance's `currentTime`. See `~/.claude/skills/hyperframes-animation/adapters/`.
-- **`<video data-start>` is the TIMELINE position, not a media offset** (the V-POPE bug). It must equal
-  the clip's visible GSAP window and be ≤ the source's real length.
+- **`<video data-start>` is the TIMELINE position, not a media offset** (the V-POPE bug). `data-start`
+  and `data-duration` must equal the clip's visible GSAP window.
+  **The length constraint is on `data-duration` ONLY — `data-start` may exceed the source's length.**
+  The media always plays from its own 0 at whatever timeline position `data-start` names. Verified
+  2026-07-18 on the approved ponzi S03: `data-start="44.4" data-duration="3.2"` on a **10.04s** source
+  renders correctly. Do not "fix" a `data-start` larger than the clip length — that is normal and
+  correct. (Three scene agents in one batch were sent chasing this by a mis-stated brief.)
 - **`data-in-motion.md` law:** NO pie charts, NO multi-axis, NO dashboards, NO gridlines/legends, NO
   chart-lib output. Build charts with GSAP + SVG/CSS. Every number gets a paired visual (fill/ring/
   shape/color). Same concept = same visual space, only the value changes.
@@ -55,10 +60,14 @@ Our stats are all static number cards. They should be:
   on tier-by-tier, panned upward. For "power moves up: county → state → federal."
 - **Flowchart / decision tree** — SVG connectors draw on, sticky-note nodes. Registry `flowchart` /
   `flowchart-vertical` (9:16). For a logic cascade ("no foreign nationals → can't verify → shut ALL down").
-- **Maps** — registry `us-map` (choropleth, staggered state reveals), `us-map-bubble` (proportional
-  city markers + connection lines), `us-map-flow` (O-D arcs), `us-map-hex`, `world-map`. Pure inline
-  SVG+GSAP (us-map) — **no image asset needed**. For "300 towns / 80,000 sq mi." The single biggest
-  untapped move for any geographic claim.
+- **Maps** — ⚠️ **`us-map` DOES NOT RENDER as shipped (verified 2026-07-18).** The registry block
+  fetches its topology from a CDN *at render time*, so capture dies with
+  `sub_timeline_readiness_timeout`. Renders are offline/deterministic — any block that fetches at
+  render time is unusable. **Workaround that works:** bake the geometry locally once (us-atlas 10m →
+  Albers conic equal-area → simplify offline → inline static SVG paths, e.g. 49 state paths tiered by
+  value), then animate those paths on `tl`. Fully deterministic, no network. Treat `us-map-bubble`,
+  `us-map-flow`, `us-map-hex`, `world-map` as suspect until proven — check for a fetch before using.
+  Maps remain the biggest untapped move for a geographic claim; just bake the geometry first.
 
 ### Kinetic typography — when the words ARE the shot
 - **Typewriter** — a caret types (and can backspace) a line. `blueprints/typewriter-reveal.md`, registry

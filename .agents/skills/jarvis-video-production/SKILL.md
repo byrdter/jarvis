@@ -20,6 +20,14 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   rewards) is structurally higher on a tight 8-min cut; 8:00 also clears the mid-roll threshold. Recut
   longer videos to ~8, keeping every verified fact. See **[knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md)**.
 - **Every episode needs variety.** Avoid long runs of the same floating-card/orb/text presentation mode.
+- **PER-SCENE ASSET FLOOR (Terry's rule, 2026-07-17) — non-negotiable:** every scene must carry
+  **(a) a REAL background** — a generated bg still or a library image, each scene a DIFFERENT one; never
+  ship the flat ambient gradient/basefill as the only background across the video — and
+  **(b) AT LEAST THREE video clips**, drawn from the video's own generated assets or
+  `asset-library/clip-library/` (query `asset-library/assets.db` by meaning FIRST; stage copies into each
+  scene's `assets/`). Clips are single-use across the video.
+  **Anti-pattern that keeps recurring: abstract data-viz text+boxes floating on one dull gradient in every
+  scene.** If a scene has 0 clips or reuses the same backdrop, it is not done.
 
 **Standing channel rules (apply to EVERY video — details in SCRIPTING.md / CITATION-CARD-FORMAT.md):**
 - **RETENTION-FIRST (see [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md) — READ
@@ -104,9 +112,15 @@ Then read only what the task needs:
 3. Produce a visual treatment board before final VO or scene builds.
 4. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
 5. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.
-6. Run scene QC on rendered MP4s, not only previews. Run the canonical gate
+6. Run scene QC on rendered MP4s, not only previews. **TWO gates — both mandatory, fix every ERROR before Terry reviews:**
+   (a) Determinism/static-hold/white-frame:
    `python3 .agents/skills/jarvis-video-production/tools/scene-validator.py <project>/hyperframes-v3 --frames`
-   (static-hold + white-frame + duration checks) and fix every flag before Terry reviews.
+   (b) **Text-over-text / occlusion (scene-validator does NOT catch this):**
+   `hyperframes layout <scene-dir> --at-transitions --json` — run PER SCENE, parse `errorCount`, it MUST be 0.
+   It samples every tween start/end seam and reports `text_occluded` / `content_overlap` / `text_overlap`
+   with time+selector+fixHint. Never trust a scene-build agent's "no-overlap" self-report — run this gate.
+   (Genuinely-intentional layering can be marked `data-layout-allow-overlap` / `data-layout-allow-occlusion`
+   on the element, per the tool's own fixHint.)
 7. Assemble the master with `tools/assemble-master.py` (varied xfade transitions + HeyGen avatar
    white-frame handling). See [PIPELINE.md](PIPELINE.md) Step 7 + [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md).
    (The legacy `scripts/build-master.sh` plain-concat path is superseded — do not use it for avatar videos.)

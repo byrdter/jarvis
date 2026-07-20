@@ -47,7 +47,10 @@ For non-HyperFrames sourcing, query by what an asset can REPRESENT and how it ca
 3. They're now queryable. Update this contract / VISUAL-SOURCING if a new category or tag emerges.
 
 ## Secondary library (migrating in)
-`${JARVIS_PRIVATE}/video-production/asset-library/` (MANIFEST.json semantic keys for V14 brand
+`jarvis/asset-library/` — the CANONICAL live library (664 assets, `assets.db`; query by meaning via
+`search-assets-db.py`). ⚠️ The legacy copy under `${JARVIS_PRIVATE}/video-production/asset-library/`
+was archived to `/Volumes/ORICO/jarvis-private/video-production/` on 2026-07-19 — do NOT use it.
+The V14-era notes below (MANIFEST.json semantic keys for V14 brand
 icons + `capture-runner.js` web-roll capture). Treat the DB above as canonical; migrate this
 library's assets into the DB as they're used, and point `capture-runner.js` output at the DB.
 
