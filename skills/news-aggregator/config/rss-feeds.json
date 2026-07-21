@@ -19,7 +19,6 @@
   "Replicate Blog": "https://replicate.com/blog/rss",
   "ChinAI Newsletter": "https://chinai.substack.com/feed",
   "BAIR Blog": "https://bair.berkeley.edu/blog/feed.xml",
-
   "Import AI (Jack Clark)": "https://jack-clark.net/feed/",
   "Latent Space (swyx)": "https://www.latent.space/feed",
   "AI Snake Oil (Narayanan)": "https://www.aisnakeoil.com/feed",
@@ -29,7 +28,9 @@
   "The Algorithmic Bridge": "https://www.thealgorithmicbridge.com/feed",
   "Astral Codex Ten (Alexander)": "https://www.astralcodexten.com/feed",
   "Last Week in AI": "https://lastweekin.ai/feed",
-
   "Reddit: r/LocalLLaMA": "https://www.reddit.com/r/LocalLLaMA/.rss",
-  "Reddit: r/MachineLearning": "https://www.reddit.com/r/MachineLearning/.rss"
+  "Reddit: r/MachineLearning": "https://www.reddit.com/r/MachineLearning/.rss",
+  "The Gradient": "https://thegradient.pub/rss/",
+  "Simon Willison": "https://simonwillison.net/atom/everything/",
+  "Platformer": "https://www.platformer.news/rss/"
 }
