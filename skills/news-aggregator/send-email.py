@@ -34,17 +34,23 @@ def read_digest(file_path: str) -> tuple[str, str, int]:
     with open(file_path, 'r') as f:
         content = f.read()
 
-    # Extract article count from "New articles today: N" (v2) or "Articles: N" (v1)
+    # Extract item count from "New articles today: N" (v2), "Articles: N" (v1),
+    # or the radar reports' "N new papers"/"N articles ingested"/"N new papers across".
     import re
     article_count = 0
-    m = re.search(r'New articles today:\*?\*?\s*(\d+)', content)
-    if not m:
-        m = re.search(r'^Articles:\s*(\d+)', content, re.MULTILINE)
-    if m:
-        try:
-            article_count = int(m.group(1))
-        except (IndexError, ValueError):
-            pass
+    for pat in (
+        r'New articles today:\*?\*?\s*(\d+)',
+        r'^Articles:\s*(\d+)',
+        r'(\d+)\s+new papers',
+        r'(\d+)\s+articles ingested',
+    ):
+        m = re.search(pat, content, re.MULTILINE)
+        if m:
+            try:
+                article_count = int(m.group(1))
+            except (IndexError, ValueError):
+                pass
+            break
 
     # Extract title (first line starting with #)
     title = "AI News Digest"
@@ -195,9 +201,13 @@ def send_email(digest_file: str):
         print(f"Error reading digest: {e}")
         return 1
 
-    # Create email
+    # Create email. Noun defaults to "articles"; overridable (e.g. "papers")
+    # via EMAIL_ITEM_NOUN. Auto-pluralize.
     date_str = datetime.now().strftime('%Y-%m-%d')
-    subject = f"{subject_prefix} - {date_str} ({article_count} articles)"
+    noun = os.getenv('EMAIL_ITEM_NOUN', 'articles')
+    if article_count == 1 and noun.endswith('s'):
+        noun = noun[:-1]
+    subject = f"{subject_prefix} - {date_str} ({article_count} {noun})"
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
