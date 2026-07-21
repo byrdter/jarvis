@@ -57,6 +57,9 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   the ~8-min rule, the face-first cold-open template, the curiosity-gap "reveal facts / withhold
   meaning / reveal-up-to-the-question" hook rule, mid-video reversals, and the 2-shorts-per-video rule.
   Derived from the channel's real Studio retention data; governs every video and short.
+  Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:
+  `tools/outlier-scan.py` (which competitor ideas out-travelled their distribution) and
+  `tools/teardown.py` (why — pull a proven video apart into a reusable structural spec).
 - **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
   9-step runbook. Start here when producing a full video from a HeyGen recording.
 - **SCRIPTING (topic → VO script, PIPELINE Step 0): [SCRIPTING.md](SCRIPTING.md)** — research the

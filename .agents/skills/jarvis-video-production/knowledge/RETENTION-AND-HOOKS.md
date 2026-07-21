@@ -226,9 +226,9 @@ exist yet.** The result inherits demand from both parents while having no incumb
   the real payoff of the technique: *the combination step is where the hook gets born.* A fused concept
   that contains a built-in contradiction hands §2/§3 a working cold open for free.
 
-**Sequencing:** outlier scan (§7.1) → fuse (§7.2) → paradox test (§3) → hook (§2) → script. If the
-fused concept can't be stated as a contradiction a viewer can't resolve alone, fuse a different pair
-before writing a word of VO.
+**Sequencing:** outlier scan (§7.1) → **teardown (§7.6)** → fuse (§7.2) → paradox test (§3) →
+hook (§2) → script. If the fused concept can't be stated as a contradiction a viewer can't resolve
+alone, fuse a different pair before writing a word of VO.
 
 ### 7.3 The "burning problem" filter
 
@@ -312,6 +312,49 @@ this section is the entirety of what was worth adopting.**
 
 Raw transcripts, if the analysis ever needs re-auditing, were pulled with `yt-dlp` auto-captions
 (all 30 available; no paid transcription needed).
+
+### 7.6 TEARDOWN — reverse-engineer a proven video into a structural spec
+
+§7.1 finds *which* ideas out-travelled their distribution. This finds ***why***, mechanically, so the
+answer is a reusable shape instead of an impression.
+
+> **The move: treat a proven video as a spec to be extracted, not a video to be admired.** Pull the
+> winner apart — cold open verbatim, beat map, pacing curve, where the loop is named, where the
+> reversal lands — then fuse that *structure* (§7.2) onto a different concept.
+
+**Run it:** `python3 tools/teardown.py <url|id>` or `--from-outliers 5` to take the top N straight
+from `outliers.csv`. Writes `tools/teardowns/<id>.md`. Captions only — free, no API key, no download.
+
+Each teardown has two halves, and **the split is the whole design**:
+
+| | |
+|---|---|
+| **EVIDENCE** (1–7) | Mechanical, from the script. Cold open verbatim, chapters or a 10% sample, the reversal window verbatim, timestamped loop-openers and negation markers *with their clauses*, a words-per-minute curve, and the packaging. The script never guesses at intent. |
+| **ANALYSIS** (9 prompts) | Judgment, written by whoever reads the file. Hook shape (§7.4), fact-vs-meaning sort (§3), paradox test, where the loop is named and whether it's held or spent, the reversal, beat cadence, **transferable structure**, **fusion candidates**, and **do-not-import**. |
+
+Rules that make the output worth having:
+
+- **Answer #7 (transferable structure) in terms of MOVES, not topics.** "Opens on a number that
+  contradicts its own title" is transferable. "Talks about scaling laws" is not. If a teardown's
+  §7 bullets name the subject matter, it failed and should be redone.
+- **Never fuse with an unproven parent (#8).** §7.2's requirement is unchanged: name the second
+  parent *and its outlier score*. A teardown makes cloning easier, which is exactly the failure it
+  has to be pointed away from — one outlier torn down and copied puts us head-to-head with a winner
+  on a bigger channel.
+- **#9 is not optional.** These videos run 15–27 min on 30K–900K-sub channels. Runtime, tangents,
+  and assumed authority are things they can afford and we cannot; §1 does not move at our size.
+- **The lexical markers are a place to LOOK, never a score.** `how`/`why`/`but` hits are printed with
+  surrounding clauses precisely because density alone can't tell an opened loop from ordinary usage.
+- **No captions = no teardown.** The cold open is the point. Either watch the first 45s with
+  `/watch --end 45` or drop that candidate.
+
+**Provenance:** the technique was lifted on **2026-07-21** from a Spanish AI-tools tutorial
+(`youtube.com/watch?v=3h89eX-p5sE`) that used it in a different domain — pull the top-ranked ads off
+Ad Forum, hand a winning ad to Gemini, ask for a spec, rebuild it with changes. **The mechanism was
+kept and the implementation was not:** we already read the video ourselves, so routing it through a
+second model to summarize it adds a lossy layer and no judgment. Everything else in that source
+(auto-generate the story, speed-ramp clips to fit the VO — a direct contradiction of our
+VO-anchored-timing rule, AI-generated everything) was rejected.
 
 ---
 
