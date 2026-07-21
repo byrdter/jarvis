@@ -180,6 +180,15 @@ def fetch_rss_feed(source_name: str, feed_url: str, max_days: float = 5.0) -> Li
                 url = entry.get('link', '').strip()
                 summary = entry.get('summary', '').strip()
 
+                # Many open feeds embed the FULL article in content:encoded
+                # (or a very long <summary>). Capture the richest available
+                # body so we can use it directly and skip a blockable URL fetch.
+                feed_body = ''
+                if entry.get('content'):
+                    feed_body = (entry['content'][0].get('value', '') or '').strip()
+                if len(feed_body) < len(summary):
+                    feed_body = summary
+
                 if not title or not url:
                     continue
 
@@ -190,6 +199,7 @@ def fetch_rss_feed(source_name: str, feed_url: str, max_days: float = 5.0) -> Li
                     'url': url,
                     'source': source_name,
                     'summary': summary,  # keep full RSS summary; fetcher gets the body
+                    'feed_body_html': feed_body,  # richest in-feed body (content:encoded/summary)
                     'published_at': pub_date.isoformat() if pub_date else '',
                     'date': pub_date.strftime('%Y-%m-%d') if pub_date else datetime.now().strftime('%Y-%m-%d'),
                     'guid': entry.get('id') or entry.get('guid') or '',
@@ -451,6 +461,54 @@ _USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
+
+
+def html_to_text(html: str) -> str:
+    """Convert a feed's content:encoded / summary HTML into clean article text.
+
+    Prefers trafilatura (same extractor used on fetched pages) and falls back to
+    a crude tag-strip so a full-body feed never gets discarded."""
+    if not html:
+        return ""
+    if HAS_TRAFILATURA:
+        try:
+            t = trafilatura.extract(html, include_comments=False,
+                                    include_tables=False, favor_recall=True)
+            if t and len(t.strip()) > 200:
+                return t.strip()
+        except Exception:
+            pass
+    import re
+    import html as _htmlmod
+    text = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', html, flags=re.S | re.I)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = _htmlmod.unescape(text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+# A feed body at/above this many HTML chars is treated as a full-article feed
+# (use it directly instead of a blockable URL fetch).
+FEED_BODY_MIN_CHARS = 1500
+# Below this many extracted chars we still try a URL fetch to do better.
+FULLTEXT_MIN_CHARS = 600
+
+
+def best_full_text(article: Dict) -> str:
+    """Richest body we can get: in-feed full article > URL fetch > nothing.
+
+    Reddit self-posts use their selftext. Everything else prefers a substantial
+    content:encoded/summary already in the feed, then falls back to fetching."""
+    if article.get('_is_self') and article.get('_selftext'):
+        return article['_selftext']
+    full_text = ""
+    feed_body = article.get('feed_body_html', '') or ''
+    if len(feed_body) >= FEED_BODY_MIN_CHARS:
+        full_text = html_to_text(feed_body)
+    if len(full_text) < FULLTEXT_MIN_CHARS:
+        fetched = extract_full_text(article.get('url', ''))
+        if len(fetched) > len(full_text):
+            full_text = fetched
+    return full_text
 
 
 def extract_full_text(url: str, timeout: int = 15) -> str:
@@ -809,12 +867,9 @@ def main():
     persisted = 0
     extracted = 0
     for i, a in enumerate(fresh_articles, 1):
-        # Reddit self-posts: use selftext directly (no need to refetch).
-        # Reddit link posts: fall through to trafilatura against external URL.
-        if a.get('_is_self') and a.get('_selftext'):
-            full_text = a['_selftext']
-        else:
-            full_text = extract_full_text(a.get('url', ''))
+        # Prefer a full-article body already in the feed (content:encoded /
+        # long summary); else fetch the URL. Reddit self-posts use selftext.
+        full_text = best_full_text(a)
         if full_text:
             extracted += 1
         archive_path = write_archive(a, full_text)
