@@ -108,3 +108,39 @@ caps exceeded, foreign `bg-*` imports. This runs **in addition to** `tools/scene
 
 **Both gates must pass before review.** `scene-validator` proves the scene *renders*;
 `visual-fidelity-check` proves it *means something*.
+
+---
+
+## RULE 7 — Every scene has a persistent generated background (added 2026-07-23)
+
+Every reference video (`ai-ponzi-or-vendor-financing`, `ai-what-has-to-happen`) gives EVERY scene a
+dedicated generated `bg-*.png` that is **always on** behind the content (a `#bgstill`, z-index 1,
+`inset:-40px`, slow Ken-Burns `scale 1.0→~1.12` over the whole comp, opacity ~.6–.85). Scenes with a
+bare gradient/ambient backdrop read as empty and fail review ("there is no backgrounds at all").
+- Generate one purpose-built bg per scene (nano_banana_pro, ~2 credits each), dark-editorial house
+  style, vast negative space for overlays.
+- **Brighten it enough to be a real backdrop** (filter `brightness(~1.4–1.6)`, light scrim). A too-dark
+  bg contributes almost no pixel variance and the near-empty gate still trips. Verify with the
+  `scene-validator --frames` sweep.
+- Avatar scenes: the face is the primary layer; put the bg behind the **content column** (a right-side
+  `#bgPanel`) instead of full-frame behind the face.
+
+## RULE 8 — Build facsimiles, not text-and-boxes. Reach into the whole HyperFrames palette.
+
+"Text + boxes" is the floor, not the bar. HyperFrames can build **facsimiles** that show the receipt
+and are far more engaging. Default to these before a plain card:
+- **Webpage/browser mock** for any web-source citation (chrome, traffic lights, lock, URL bar, the
+  page with the quote highlighted/struck). Proven: the `playersfund.vc` facsimile replacing a cream
+  card. This is the standard for web citations (cream cards remain fine for non-web sources).
+- **Document/spreadsheet facsimiles** — a `cap-table.xlsx` register (rows, classes, a highlighted
+  row, stake bars), a term sheet, a gov.au page. Keep numbers accurate or abstract (bars, not
+  fabricated %).
+- **Registry blocks** (`hyperframes catalog`, 134 of them): `code-snippet-*` (full VS Code / Apple
+  Terminal with typing), `data-chart`, `flowchart`, `news-ticker`, `x-post`/`reddit-post`,
+  `apple-money-count`, `world-map`/`us-map`, 3D devices (`vfx-iphone-device`), liquid-glass/WebGPU
+  shaders. Install with `hyperframes add <block>` → it drops `compositions/<block>.html`; embed via
+  `<div data-composition-src="compositions/<block>.html" ...>`. Build custom inline when you need
+  tight VO-timed control on the registered `tl`.
+- **Keyframe mechanisms** (`hyperframes-keyframes`): SVG morph/draw, clip/mask reveal, FLIP shared-
+  element, SplitText, DOM 3D depth, Three.js camera, shader uniforms, html-in-canvas.
+Pick the facsimile whose FORM matches the beat; a plain text card is the fallback, not the default.
