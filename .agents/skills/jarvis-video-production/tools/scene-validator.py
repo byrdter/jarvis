@@ -413,9 +413,16 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
             if fv:
                 stds = [s for _, s in fv]
                 med = statistics.median(stds)
-                low = [t for t, s in fv if s < med * 0.55]
+                # A frame is "near-empty" only if it is BOTH far below the scene's
+                # median AND genuinely low-variance in absolute terms. The absolute
+                # floor prevents false positives on high-dynamic-range scenes:
+                # an avatar face fills the frame (std ~58), so a calmer b-roll or
+                # title beat (std ~25) reads "far below median" while being perfectly
+                # rich content. Truly dead/frozen/empty frames sit well under ~10.
+                EMPTY_ABS_FLOOR = 12.0
+                low = [t for t, s in fv if s < med * 0.55 and s < EMPTY_ABS_FLOOR]
                 if len(low) >= 2:
-                    fail(f"FRAMES NEAR-EMPTY at t≈{low} (std-dev far below median)")
+                    fail(f"FRAMES NEAR-EMPTY at t≈{low} (std-dev far below median AND below abs floor {EMPTY_ABS_FLOOR})")
                     issues.append(("empty_frames", low))
 
     if not issues:
