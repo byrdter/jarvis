@@ -74,6 +74,49 @@ Proven examples: V6 = "An AI took the exam that licenses American doctors — an
 let it treat someone you love?"; V5 = "A lawyer walked into federal court with a brief full of cases…
 not one of them existed… he'd sworn they were real."
 
+### 2.5 Three devices that sharpen the open (from the competitor teardowns)
+
+These are *construction* techniques for the HOOK and RE-OPEN steps above — the specific moves the
+highest-outlier cold opens in our competitor set use. Source: the Internet of Bugs teardown
+`tools/teardowns/a3-vf78ZwTc.md` (§7.6), first applied to AI-Finance V1 on 2026-07-22. Reach for them
+whenever a hook feels informative but flat.
+
+1. **ADVERSARY IN SENTENCE ONE.** Open on a *conflict with sides*, not a fact or a topic. IoB opens
+   *"They spent a long time trying to convince you that AI wasn't a bubble."* — the viewer is recruited
+   into a fight in two seconds. A fact is something you *watch*; an adversary is something you *take a
+   side against*. The adversary need not be a person — it can be a consensus, an accounting treatment,
+   a received analogy. If your first sentence states a fact, ask what *claim* that fact argues against
+   and lead with the argument.
+   - AI-Finance V1: opened on *"everyone is arguing about which bubble this is"* (the live public
+     argument) instead of the CFO's quote (a fact). Conflict, not topic.
+
+2. **THE NEGATION LADDER.** *"Not because X. Not because Y. Because ——."* Pre-empt the two explanations
+   the viewer would reach for, deny both, and withhold the third. This is a mechanically perfect
+   curiosity gap: it proves the two cheap answers are wrong (so the viewer *can't* resolve it alone)
+   without spending the real one. It is the §3 fact-vs-meaning rule in a fixed grammar — the denied
+   guesses are facts you hand over; the withheld cause is the meaning you keep.
+   - IoB: *"And not just because it's way bigger, and not just because it's a higher percentage of the
+     economy… but because generative AI, unlike the internet, is not a step toward prosperity."*
+   - AI-Finance V1: *"Not because it's hidden. Not because anyone broke a rule. Because of a decision
+     somebody made about what counts as debt."*
+
+3. **DECLINE THE FRAME FIGHT (when a competitor owns the obvious framing).** If a proven video already
+   occupies the natural framing of your topic, don't argue *within* it — name the whole argument as the
+   wrong question and step outside it. This converts the incumbent's video into your setup, and it is
+   paradox-shaped (a viewer can't resolve "which side is right?" if you've told them the sides are the
+   wrong axis). Requires §7.3 demand to already exist — you're re-framing a live conversation, not
+   inventing one.
+   - AI-Finance V1 vs. IoB's 72K-view "dot-com bubble" video: instead of arguing dot-com-vs-crypto, the
+     open says *"everyone is arguing which bubble this is… we read the filings instead, and they say
+     something stranger."* IoB's 11-minute analogy debate becomes the thing our first line rises above.
+
+> **Corollary — cut what the new open already delivers.** Sharpening the first lines usually makes a
+> later paragraph redundant. When you rebuild an open with these devices, re-scan the next two scenes
+> and delete any sentence the stronger open now carries (V1: the "second number / isn't anywhere" block
+> and the "repeated the line the day before" aside both became dead weight once the adversary line
+> landed). A device that adds tension up front but leaves the old scaffolding in place just inflates
+> runtime.
+
 ---
 
 ## 3. HOW MUCH TO REVEAL IN A HOOK — the curiosity-gap rule (use this forever)
