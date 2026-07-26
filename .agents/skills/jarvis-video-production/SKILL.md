@@ -31,17 +31,34 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 
 **Standing channel rules (apply to EVERY video — details in SCRIPTING.md / CITATION-CARD-FORMAT.md):**
 - **RETENTION-FIRST (see [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md) — READ
-  when scripting):** ~8-min target; **face-first cold open** (avatar ON CAMERA delivering the hook →
-  one avatar-joke line → a named-question loop) — NEVER open on a dark abstract graphic, and DELETE the
-  "38-years bio + on-this-channel-we-keep-asking + welcome-back + today-we'll-explore" boilerplate that
-  killed our first-30s retention. Hooks **reveal facts, withhold meaning** (prefer a paradox; reveal up
-  to the QUESTION, stop before the ANSWER). End every scene on a pull; plant a mid-video reversal.
+  when scripting):** ~8-min target; **INFORMATION-FIRST cold open** — the first frame carries concrete,
+  specific information the viewer can read (a named document, a filing, a real number, a labelled
+  chart) and the VO is about that thing → a named-question loop. **NEVER open on a dark ABSTRACT
+  graphic** — mood is not information; dark is fine, vague is what killed our first-30s retention.
+  DELETE the "38-years bio + on-this-channel-we-keep-asking + welcome-back + today-we'll-explore"
+  boilerplate. Hooks **reveal facts, withhold meaning** (prefer a paradox; reveal up to the QUESTION,
+  stop before the ANSWER). End every scene on a pull; plant a mid-video reversal.
   **Every 8-min video also gets 2 shorts** (~60s 9:16, recut from the main visuals — see §5 of that doc).
-- **Voice = first-person PLURAL** ("we/us/our"). The only singular is the avatar self-ID "I am an
-  avatar for Dr. Terry Byrd." Never "I/me/my" anywhere else.
-- **The CTA (subscribe/like/bell) is its OWN scene and is AVATARLESS by default** — graphics only, no
-  avatar, unless Terry explicitly asks for the avatar on a specific video's CTA. The close is a
-  separate avatar scene.
+- **FACELESS MODE (current, from 2026-07-26 — ~1-month test).** No avatar anywhere: no cold-open
+  avatar, no avatar close, no avatar self-ID line. Every competitor in our set is faceless or genuinely
+  on-screen; none uses an avatar. Faceless is also far cheaper to produce automatically. See
+  RETENTION-AND-HOOKS.md §2 for the stop condition — if first-30s retention drops against the
+  face-first videos, face-first returns.
+- **Voice = first-person PLURAL** ("we/us/our") throughout. In faceless mode there is no avatar self-ID,
+  so there is no singular exception. Never "I/me/my."
+- **The CTA (subscribe/like/bell) is its OWN scene**, graphics only.
+- **REAL PEOPLE — [knowledge/CELEBRITY-USE-CHECKLIST.md](knowledge/CELEBRITY-USE-CHECKLIST.md).** Run
+  it before scripting or sourcing any beat that names, shows or discusses a living public figure. It
+  separates the three risks people collapse into one: **copyright** (the photo, owned by the agency —
+  solved by sourcing), **right of publicity** (the likeness — state law, strongest CA/NY/TN), and
+  **defamation / false light** (imputing wrongdoing — the dangerous one, and it's about the *sentence*,
+  not the photo). Governs the per-video PERSON IDENTIFICATION tier tables.
+- **VISUAL SYSTEM — [knowledge/CONDUIT-VISUAL-SYSTEM.md](knowledge/CONDUIT-VISUAL-SYSTEM.md).** Two
+  registers (cream evidence / dark analysis) over a moving scrimmed bed; a named component library;
+  progressive disclosure with ghosted placeholders; **≥90% of runtime DENOTATIVE** (the visual
+  illustrates the claim being made at that second), ≤10% atmospheric and only at transitions/breathers,
+  never on a beat carrying a number, date, name, citation or verdict. Source captures ≤35% of runtime —
+  document pull-outs are one instrument, not the format.
 - **No "series" framing.** Each video STANDS ALONE; relate videos only through the Show Bible. No "the
   series / rest of the series" language unless Terry explicitly calls something a series.
 - **Outside visuals are single-use** (once per video); only this-video's own `br-*`/`bg-*` may recur.
@@ -54,7 +71,7 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 ## First Read
 
 - **RETENTION & HOOKS — the channel standard (READ FIRST when scripting): [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md)** —
-  the ~8-min rule, the face-first cold-open template, the curiosity-gap "reveal facts / withhold
+  the ~8-min rule, the information-first cold-open template, the curiosity-gap "reveal facts / withhold
   meaning / reveal-up-to-the-question" hook rule, mid-video reversals, and the 2-shorts-per-video rule.
   Derived from the channel's real Studio retention data; governs every video and short.
   Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:

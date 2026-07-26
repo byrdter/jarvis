@@ -51,20 +51,44 @@ example-parades, and throat-clearing. (V6 went 15:29→8:32; V5 went 13:00→8:3
 
 ---
 
-## 2. The cold-open template (face-first) — every video, no exceptions
+## 2. The cold-open template (INFORMATION FIRST) — every video, no exceptions
+
+> **CHANGED 2026-07-26.** This section previously mandated FACE FIRST (avatar on camera from frame
+> one). **The channel is now faceless** — a ~1-month test, decided 2026-07-26. Every competitor in our
+> set is either faceless or genuinely on-screen; none uses an avatar. Faceless is also far cheaper to
+> produce automatically, which buys time for the lessons themselves. The avatar requirement is removed;
+> the *mechanism* it served is preserved below.
 
 The opening exists to give the viewer **a reason to keep watching** by creating tension they can't
-resolve alone. Structure:
+resolve alone.
 
-1. **0:00 — FACE FIRST.** Terry's avatar ON CAMERA from frame one, delivering the hook. Never open on a
-   dark abstract graphic. (You may punch in a 2–3s supporting graphic *beside/over* the face, but the
-   face is present.) A human face stops the scroll and reframes "AI voice" as "a person is talking."
+§0 found the dying videos opened on **dark abstract graphics** with a disembodied voice for ~20s —
+"AI slop." The face was never the point; it was one way to satisfy the real requirement:
+
+> **The first frame must carry concrete, specific information the viewer can read, and the VO must be
+> about that thing.**
+
+- ✅ A named document, a filing, a headline, a real number, a chart with a labelled axis.
+- ✅ A face — still valid, simply no longer required.
+- ❌ A gradient, a particle field, an abstract cityscape, a kicker label alone. **Mood is not
+  information.** Dark is fine; *vague* is what killed the old opens.
+
+*Proven instance:* the Messi cold open lands a California Secretary of State filing — entity name
+PLAY TIME — stamped REGISTERED, inside two seconds. Dark register, concrete from frame one.
+
+### Structure
+1. **0:00 — the concrete thing on screen**, VO already inside the story.
 2. **~0:00–0:20 — THE HOOK.** The single most provocative concrete stake, as a **paradox** where
    possible (see §3). A number, a story, a contradiction.
-3. **~0:20 — THE AVATAR JOKE (one line).** The witty self-ID — *"I am an avatar for Dr. Terry Byrd —
-   he writes every word, I just say them…"* It disarms the AI-voice objection with personality. **Keep
-   this. Cut everything else about the bio.**
-4. **~0:20–0:35 — RE-OPEN THE LOOP.** End the intro on a **named question**, not the thesis.
+3. **~0:20–0:35 — RE-OPEN THE LOOP.** End the intro on a **named question**, not the thesis.
+
+### Known open risk in the faceless test
+The old step 3 was **the avatar joke** — *"he writes every word, I just say them"* — which disarmed the
+AI-voice objection with personality. Going faceless removes the avatar but **not** the synthetic voice,
+so the objection survives with nothing disarming it.
+
+**Stop condition:** if first-30s retention drops against the face-first videos over the test month,
+the test has answered and face-first returns. Re-read §0 before deciding — that data is the referee.
 
 > **DELETE FOREVER from openings:** the "38 years" bio paragraph, "on this channel we keep asking one
 > question," "Welcome back to Understanding AI," "today we're going to explore / talk about…" — every

@@ -246,7 +246,7 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global 0.7.42) — never bare `npx hyperframes`.
+Use the PINNED CLI (`hyperframes`, global 0.7.72) — never bare `npx hyperframes`.
 
 **When the user asks for:** long-form videos, producing a video from a HeyGen recording, scene/visual
 work, revisions, QC, or packaging → load `jarvis-video-production` and follow `PIPELINE.md` (9 steps).
@@ -254,13 +254,37 @@ State which skill you're using before acting, then run it; surface to the user a
 
 **Everything needed lives in that one hub:**
 - **`knowledge/RETENTION-AND-HOOKS.md` — READ FIRST when scripting. The channel standard from our real
-  YouTube retention data: ~8-MIN target (keep viewers to the end), the FACE-FIRST cold open that gives
-  viewers a reason to continue (hook → avatar-joke → named-question loop; NO dark-abstract opens, NO
+  YouTube retention data: ~8-MIN target (keep viewers to the end), the **INFORMATION-FIRST** cold open
+  that gives viewers a reason to continue (the first frame carries concrete, readable information — a
+  named document, a filing, a real number — and the VO is about that thing → named-question loop; NO
+  dark-ABSTRACT opens (mood is not information; dark is fine, *vague* is fatal), NO
   38-yr-bio/on-this-channel/today-we'll-explore boilerplate), the curiosity-gap hook rule (reveal
   FACTS, withhold MEANING; prefer a paradox; reveal up to the QUESTION, stop before the ANSWER), and
   the 2-shorts-per-video rule.** Proven on the V6 & V5 8-min recuts.
-- `PIPELINE.md` — the runbook. `tools/split-heygen.py` (intake), `tools/scene-validator.py` (QC gate),
-  `tools/assemble-master.py` (master assembly).
+- **FACELESS MODE is current (from 2026-07-26, ~1-month test).** No avatar anywhere — no cold-open
+  avatar, no avatar close, no avatar self-ID line. First-person PLURAL throughout, no singular
+  exception. Stop condition in RETENTION-AND-HOOKS.md §2: if first-30s retention drops against the
+  face-first videos, face-first returns.
+- **`knowledge/CONDUIT-VISUAL-SYSTEM.md` — what a finished video LOOKS like.** Two registers (cream
+  evidence card / dark navy analysis panel) over a scrimmed, always-moving bed; a named component
+  library (document card, dossier row, one-row-lit table, ghosted-slot grid, stat hero, browser chrome,
+  annotation HUD, funding timeline, schematic map + docket, comparison split, stacked papers,
+  constellation, landing card); progressive disclosure with **ghosted placeholders** (content must
+  resolve within ~1.2s or it reads as a dead frame). **VO BINDING: ≥90% of runtime DENOTATIVE** — the
+  visual illustrates the claim being made at that second; ≤10% atmospheric, only at
+  transitions/breathers, NEVER on a beat carrying a number, date, name, citation or verdict. Source
+  captures ≤35% of runtime — document pull-outs are one instrument, not the format. Density target
+  45–60 change-events/min. Reference build = the Messi "Secretly an AI Investor" master.
+- `PIPELINE.md` — the runbook. `tools/split-heygen.py` (intake), `tools/scene-validator.py`
+  (determinism gate), `tools/deadspace-scan.py` (the citation-mode QC gate — run per scene AND on the
+  assembled master), `tools/assemble-master.py` (master assembly).
+- **VERIFY AGAINST THE ARTIFACT, NEVER AGAINST THE DOCUMENT.** Learned 2026-07-26: every defect found
+  that day was already "documented." The dead-space gate was specified in prose and had never run; a
+  card manifest asserted quotes were verbatim while the pixels disagreed; beat maps described a design
+  two revisions old; the CLI pin disagreed with the installed binary in three files. Read the rendered
+  PNG, not the YAML describing it. A written "verified" line is a claim, not a check. A gate that isn't
+  a runnable script does not exist. And measure before asserting — counting lines in a plan is not
+  measuring a render.
 - `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`, `knowledge/VISUAL-SOURCING.md`
   (don't default to HyperFrames; non-literal/symbolic visuals; breathers).
 - **`knowledge/CITATION-CARD-FORMAT.md` — the CURRENT STANDARD for evidence/argument explainers**

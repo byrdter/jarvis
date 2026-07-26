@@ -127,8 +127,14 @@ HyperFrames render failures — a render can report success while producing noth
 > **Use the PINNED global CLI, never bare `npx hyperframes`.** `npx` grabs whatever version is in its
 > cache (this machine had 0.6.7 → 0.7.42 side by side); a scene that needs a registry block or adapter
 > from a newer version then renders wrong or fails silently. The pinned binary is installed globally
-> (`hyperframes --version` → 0.7.42, at `/opt/homebrew/bin/hyperframes`). Re-pin with
+> (`hyperframes --version` → **0.7.72**, at `/opt/homebrew/bin/hyperframes`). Re-pin with
 > `npm install -g hyperframes@<ver>` and bump this line when you deliberately upgrade.
+>
+> **Verify the pin before a batch, not after.** Bumped 0.7.42 → 0.7.72 on 2026-07-26 after the
+> messi-ai-investor build found the doc and the binary disagreed — scene 06 had been re-rendered on
+> 0.7.72 while the other eleven were still 0.7.42 output. Mixed-version scenes in one master are a
+> silent-difference risk, so when the pin moves, **re-render the whole batch, not just the scene you
+> touched.**
 
 ## Step 6 — QC GATE per scene (iterate until clean) — do NOT show Terry before this passes
 ```bash
@@ -142,6 +148,46 @@ don't show up." Fix at the source (attach to `tl`, use `tl.time()` + a seeded PR
 exception opts out with a trailing `// hf-ok`. Run it BEFORE rendering to avoid wasting a render.
 Plus the raw gates from HYPERFRAMES-LESSONS (freeze >=5s, white frames). Fix and re-render any scene
 that fails (static hold → ambient/breath; sync drift → re-anchor; white → trim/freeze-fill).
+
+### Step 6a — DEAD-SPACE SCAN (citation-card mode) — per scene AND on the assembled master
+```bash
+python3 <skill>/tools/deadspace-scan.py <scene-render>.mp4       # per scene
+python3 <skill>/tools/deadspace-scan.py <MASTER>.mp4             # again on the master
+```
+`scene-validator.py` is the **determinism** gate; this is the **citation-mode** gate. Both must run.
+Sample fps=2, downscale 160×90, flag runs ≥1.2s where `stddev<13 AND (mean<22 or mean>234)`. Run on the
+master too — it samples at a different phase and catches boundary fades the per-scene pass misses.
+
+> **Read the output, don't just count it.** The `mean<22` floor assumes a lighter base than the
+> `#0A0E14` register (luma ~14), so it flags legible, well-designed frames. Beads `jarvis-tfo0.2`
+> tracks recalibration. What it catches *correctly* is the **ghosted-hold** signature — a panel on
+> screen with its content not yet revealed. Remedy is to **raise the luminance floor** (lighter scrim
+> variant, brighter bed, higher ghost opacity), **never** to move a VO-anchored beat.
+
+> **This gate had never run on the Messi V2 project.** It existed as prose here and in
+> CITATION-CARD-FORMAT.md, with an instruction to keep a copy per project. No copy existed. Meanwhile
+> the project's VISUALS-MAP asserted it "must be 0 BEFORE Terry sees anything." Promoted into
+> `tools/` on 2026-07-26 so it ships with the pipeline instead of being re-invented.
+
+### Step 6c — BEAT MAP: generate it FROM the build, don't maintain it beside the build
+Every scene's `index.html` opens with a `BEAT MAP` comment. It is the right artifact — timestamps, cue
+phrases, bed assignments, FACTS/RIGHTS constraints — and on the Messi V2 build it had **drifted from
+the scene in every direction**: the map described a design two revisions old (jersey `#30` / "THE
+INVESTOR" where the render showed `#10` / "FORTUNE'S TENTH"), and two beats present in the scene were
+absent from the map. Drift always runs one way — the scene improves, the doc doesn't.
+
+Two rules:
+1. **Fixed granularity.** One line per *visual event*, not per beat. Messi S07 documented sub-events
+   (`6.35 axis draws · 7.00 chip A · 8.62 label`); S01 documented whole beats. Counting lines across
+   the two produces a meaningless comparison — measure the render, not the plan.
+2. **Classify every beat `DEN` or `ATM`** (CONDUIT-VISUAL-SYSTEM.md §6). ≥90% denotative. A scene that
+   can't say which its beats are isn't planned.
+
+**Write back after the build.** Decisions made during the build currently die there — unresolved
+ASSET-PLAN forks ("office-collaboration OR happy-meeting"), and devices invented at the bench. The
+strongest motion device in the reference build — *progressive disclosure with ghosted placeholders* —
+appears throughout and was written down nowhere. A short reconciliation pass (what did we actually
+pick, what did we invent) closes the loop.
 
 ### Step 6b — MANDATORY FRAME PASS (the automated layout gate is currently INERT)
 **`scene-validator.py` is blind to layout defects**, and the tool that is *supposed* to cover them

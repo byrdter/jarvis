@@ -146,3 +146,31 @@ it blink alive. Say so explicitly, or the model will invent movement and erase t
 
 **Rule:** an `ASSET-GENERATION.md` clip entry is not finished until it carries its own `Motion:` line. A still
 prompt + the two globals is a half-written asset.
+
+---
+
+## FOOTAGE HOMOGENIZATION — the open experiment (added 2026-07-26)
+
+**The problem, stated plainly:** one timeline carries library clips, generated stills, real source
+captures and HyperFrames output. Four provenances, four different grades, four different grain
+structures. Cuts between them read as *cuts between sources* rather than as cuts inside one film.
+
+This is the one idea worth keeping from the Vox-craft teardown (Chris Moran, 2.86× outlier — the only
+non-AI video in that set). Vox faces the same problem harder: archival footage, phone video, fair-use
+clips, screen recordings, all mismatched. Their answer is a **shared treatment pass** applied to
+everything regardless of origin — the specific effects matter less than the *consistency*:
+
+- force a common tonal range (they often go B/W on archival)
+- a blurred adjustment layer with an **inverted, feathered radial mask** — edges soften, the eye is
+  pulled centre-frame, and mismatched framing stops announcing itself
+- light, uniform grain over everything
+- a slight uniform exposure flicker so nothing reads as a clean digital still
+
+**Status: NOT adopted. Run it on ONE scene first.** Two real risks here: grain and blur degrade the
+citation legibility that is this channel's credibility, and a global grade could flatten the two-register
+system (`CONDUIT-VISUAL-SYSTEM.md` §2) that currently does the heavy lifting. Test it on a b-roll-heavy
+scene with no cream card in it, compare against the untreated render, and only then decide.
+
+**What NOT to import from that teardown** (rejected 2026-07-26, do not re-propose): cut-on-twos /
+12fps quantisation, chromatic aberration or heavy grain over text, halftone/paper-texture grading.
+Reasons in `CONDUIT-VISUAL-SYSTEM.md` §10.
