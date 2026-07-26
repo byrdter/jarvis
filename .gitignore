@@ -326,3 +326,7 @@ asset-library/*
 !asset-library/assets.db
 !asset-library/cartoon-starter/
 !asset-library/cartoon-starter/**
+
+# Playwright MCP browser-capture exhaust (a11y trees + console logs from page reads).
+# Not assets — the real citation captures live in each video project under cards/originals/.
+.playwright-mcp/
