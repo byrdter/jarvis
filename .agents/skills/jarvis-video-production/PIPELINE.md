@@ -170,6 +170,41 @@ master too — it samples at a different phase and catches boundary fades the pe
 > `tools/` on 2026-07-26 so it ships with the pipeline instead of being re-invented.
 
 ### Step 6c — BEAT MAP: generate it FROM the build, don't maintain it beside the build
+```bash
+python3 <skill>/tools/beatmap.py check   <scene>          # drift gate — non-zero exit on drift
+python3 <skill>/tools/beatmap.py render  <scene> --write  # regenerate the map from the timeline
+python3 <skill>/tools/beatmap.py ghosts  <scene>          # audit the ghosted-placeholder device
+python3 <skill>/tools/reconcile-assets.py <project> --write   # write back what the build chose
+```
+`beatmap.py` reads the timeline and emits `BEATMAP.json` + the HTML comment: clustered visual
+events, their targets, the VO phrase each lands on (from `assets/transcript.json`), and a seeded
+`DEN`/`ATM` tag per event with a runtime-weighted ratio against the 90/10 rule.
+
+**Run `check` before every render and after every timeline edit.** Measured on the Messi V2 build
+before this existed: the maps documented **171 of 671** visual events, scene coverage ranging 64%
+down to 13%. That spread is why counting lines across two maps is meaningless and why S01 looked
+sparse when it is the densest scene in the video.
+
+> **`render --write` PRESERVES the authored half.** A machine can derive timings, targets and cues;
+> it cannot derive semantic beat names, bed assignments, or the FACTS / RIGHTS / LIKENESS blocks.
+> Those are carried through verbatim under `--- AUTHORED ---`. Two bugs during development silently
+> dropped them from 7 of 14 scenes — including a likeness rule — and were caught only by diffing
+> against backups. **Back up before a bulk `--write`, and diff after.**
+
+> **The `DEN`/`ATM` tag is a SEED, not a verdict.** It classifies by target selector, so a beat whose
+> abstract visual IS the content (S06's wireframe room teaching "spatial intelligence") mis-reads as
+> atmospheric. Correct it by hand; treat `DEN%` as a floor because unknowns are unclassified.
+
+`ghosts` inventories the signature device (§5 of CONDUIT-VISUAL-SYSTEM.md) — elements resting in the
+0.05–0.60 opacity band that the timeline later resolves. Flags any resolving from **below 0.40**,
+which reads as absent rather than ghosted. Class-based groups animated by id report as "permanent";
+read that as "no direct resolve found", not proof.
+
+`reconcile-assets.py` closes the loop one level up: ASSET-PLAN.md leaves forks open on purpose
+("X.mp4 OR Y.mp4 — pick ONE") and the build's choice used to die at the bench. It reports referenced
+/ unused / **missing** assets per scene and appends a RESOLVED section stating outcome next to intent.
+
+
 Every scene's `index.html` opens with a `BEAT MAP` comment. It is the right artifact — timestamps, cue
 phrases, bed assignments, FACTS/RIGHTS constraints — and on the Messi V2 build it had **drifted from
 the scene in every direction**: the map described a design two revisions old (jersey `#30` / "THE
