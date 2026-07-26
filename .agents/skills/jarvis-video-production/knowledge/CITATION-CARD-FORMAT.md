@@ -116,6 +116,40 @@ next scene's opening or bring its title in faster.
 
 (`scene-validator.py` remains the determinism gate. All three run before Terry sees anything.)
 
+## When the source can't be captured — the typographic pull-quote is a FIRST-CLASS path
+```bash
+python3 <skill>/tools/make-pullquote-card.py \
+  --quote "<VERBATIM — do not abridge>" \
+  --attribution "Byline, Outlet, Date" --out cards/out/V2-CN.png \
+  --source-url "https://…" --id V2-CN --scene 06-name
+```
+Some sources bot-block the scraper — `reuters.com` does, so `cards/originals/V2-C5.pdf` and
+`V2-C7.pdf` are 340-character "Access is temporarily restricted" pages. For those the cream
+typographic pull-quote **is the correct output**, not a workaround: the quote is verbatim and the
+attribution names byline, outlet and date. Record the failed capture in the card's sidecar so nobody
+re-attempts it.
+
+> **The bug this tool exists to prevent.** These cards used to be made with
+> `cli-tools/make-text-card.py --bg cream`, whose headline size is hardcoded at 112pt with **no
+> fitting logic** — it silently draws past the frame. So an ABRIDGED string ending in `……` was passed
+> to force a fit, and it shipped: **C5 stopped one clause short of the definition scene 06 exists to
+> teach**, and **C7 cut immediately before "spatial intelligence"**, the term its beat delivers. Both
+> cited Reuters accurately and both under-delivered the claim.
+>
+> DOM text never garbles the way generative video does — but it can be **silently truncated at the
+> worst possible place**, which is quieter and arguably worse, because nothing announces it. It
+> survived a documented verification pass.
+
+`make-pullquote-card.py` **auto-fits and never truncates.** If a quote won't fit even at 64pt it
+exits with an error; shortening the quote is a human decision, not the renderer's. It warns if the
+quote contains an ellipsis, and it writes a sidecar JSON (quote, attribution, source URL, capture
+note, exact render settings) so a later pass can verify against pixels rather than against a manifest
+that merely asserts.
+
+**Pass the text verbatim, including em dashes and typographic quote marks.** Straight quotes render
+different glyphs — that alone accounts for 747 differing pixels on C7. With the exact strings, the
+tool reproduces both shipped cards **pixel-identically** (mean abs diff 0.0000).
+
 ## Per-video working files (the pattern that worked)
 - `RESUME-<vid>.md` — direction + per-scene status + the exact rebuild/assemble/QC commands. Write/keep
   this; it survives context resets and is the fastest re-entry point.

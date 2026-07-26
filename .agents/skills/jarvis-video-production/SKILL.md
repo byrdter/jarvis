@@ -47,6 +47,12 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 - **Voice = first-person PLURAL** ("we/us/our") throughout. In faceless mode there is no avatar self-ID,
   so there is no singular exception. Never "I/me/my."
 - **The CTA (subscribe/like/bell) is its OWN scene**, graphics only.
+- **CITATION CARDS — two renderers.** `cli-tools/make-citation-card.py` for DOCUMENT captures
+  (highlighted source screenshot from a PDF). `tools/make-pullquote-card.py` for the cream
+  TYPOGRAPHIC pull-quote used when a source bot-blocks capture (reuters.com does). The
+  pull-quote tool **auto-fits and never truncates** — the previous renderer had a hardcoded
+  112pt size and no fitting logic, so quotes were abridged with `……` to force a fit and two
+  shipped cut mid-claim. Pass quotes verbatim, em dashes and typographic quote marks included.
 - **REAL PEOPLE — [knowledge/CELEBRITY-USE-CHECKLIST.md](knowledge/CELEBRITY-USE-CHECKLIST.md).** Run
   it before scripting or sourcing any beat that names, shows or discusses a living public figure. It
   separates the three risks people collapse into one: **copyright** (the photo, owned by the agency —
