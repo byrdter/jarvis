@@ -173,6 +173,32 @@ anything resolving from below **0.40** opacity reads as absent rather than ghost
 **Remedy:** raise the luminance FLOOR (lighter scrim, brighter bed, higher ghost opacity) or pull
 the content in. **Never move a VO-anchored beat to satisfy a gate.**
 
+### Step 6b2 — RE-RECORDED a scene's VO? Re-anchor with the tool, don't re-derive by hand
+```bash
+# ALWAYS keep the old transcript before overwriting it — it is what makes this possible
+cp <scene>/assets/transcript.json <scene>/assets/transcript-preRERECORD.json
+# ...drop in the new audio, re-transcribe, then:
+python3 <skill>/tools/reanchor.py <scene> --old-transcript <scene>/assets/transcript-preRERECORD.json
+python3 <skill>/tools/reanchor.py <scene> --old-transcript ... --write     # after reviewing
+```
+Every timeline position in these scenes is a bare number and there are **zero `tl.addLabel()` calls
+across all 14**, so nothing records which word produced `15.28`. That is why the S10 re-record cost a
+full production cycle. The positions *are* word-derived though — across 1417 of them, 85.7% sit within
+0.20s of a word start — so the anchor is recoverable by aligning the old and new transcripts.
+
+`reanchor.py` aligns the two word sequences (difflib; the takes tokenize differently, so positional
+comparison is useless), builds a piecewise-linear old→new time map, and rewrites every position
+through it. **Measured against the S10 ground truth — its pre-re-record HTML, old transcript and the
+human's hand re-anchor all survive — median error 0.070s, 85.2% within 0.25s.**
+
+> **It is an ASSIST, not an oracle.** The >1s deviations are beats the human moved *further than the
+> take stretched* — content decisions the tool should not predict. Dry-run first, read the LOW-
+> confidence list and the >1s deviations it prints, fix those by hand, then render and watch.
+> It turns "re-derive 66 numbers" into "check a short list."
+
+**Consequence for Step 1:** never overwrite `assets/transcript.json` on a re-record without keeping
+the old one. It is the only record of what the timeline was anchored to.
+
 ### Step 6c — BEAT MAP: generate it FROM the build, don't maintain it beside the build
 ```bash
 python3 <skill>/tools/beatmap.py check   <scene>          # drift gate — non-zero exit on drift
