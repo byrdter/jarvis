@@ -149,25 +149,29 @@ exception opts out with a trailing `// hf-ok`. Run it BEFORE rendering to avoid 
 Plus the raw gates from HYPERFRAMES-LESSONS (freeze >=5s, white frames). Fix and re-render any scene
 that fails (static hold → ambient/breath; sync drift → re-anchor; white → trim/freeze-fill).
 
-### Step 6a — DEAD-SPACE SCAN (citation-card mode) — per scene AND on the assembled master
+### Step 6a — RENDER-FAILURE scan + GHOSTED-HOLD audit (two gates, not one)
 ```bash
-python3 <skill>/tools/deadspace-scan.py <scene-render>.mp4       # per scene
-python3 <skill>/tools/deadspace-scan.py <MASTER>.mp4             # again on the master
+python3 <skill>/tools/deadspace-scan.py <scene-render>.mp4   # near-black / blown-white
+python3 <skill>/tools/deadspace-scan.py <MASTER>.mp4         # again on the master
+python3 <skill>/tools/beatmap.py ghosts <scene>              # the ghosted-hold defect
 ```
-`scene-validator.py` is the **determinism** gate; this is the **citation-mode** gate. Both must run.
-Sample fps=2, downscale 160×90, flag runs ≥1.2s where `stddev<13 AND (mean<22 or mean>234)`. Run on the
-master too — it samples at a different phase and catches boundary fades the per-scene pass misses.
+> **CORRECTED 2026-07-26 (jarvis-tfo0.2).** Step 6a used to be a single photometric "dead-space"
+> gate at `mean<22 or mean>234`. On the `#0A0E14` register that is broken: the Messi V2 master's
+> *median* frame luma is **23.5** against a floor of **22**, so it flagged ~half the video — 28 runs
+> on a good master. The axis was also inverted: genuinely dead frames measured 17.9–21.8 while the
+> good frames it rejected measured 13.9–14.3. **Do not restore those thresholds.** Full evidence and
+> the four ruled-out alternatives are in the `deadspace-scan.py` docstring and
+> CITATION-CARD-FORMAT.md.
 
-> **Read the output, don't just count it.** The `mean<22` floor assumes a lighter base than the
-> `#0A0E14` register (luma ~14), so it flags legible, well-designed frames. Beads `jarvis-tfo0.2`
-> tracks recalibration. What it catches *correctly* is the **ghosted-hold** signature — a panel on
-> screen with its content not yet revealed. Remedy is to **raise the luminance floor** (lighter scrim
-> variant, brighter bed, higher ghost opacity), **never** to move a VO-anchored beat.
+`deadspace-scan.py` now detects **render failure only** — a hole in the render, a white flash, a
+missing asset — at floor 10 / ceiling 245. Zero hits on a healthy master, immediate on a real one.
 
-> **This gate had never run on the Messi V2 project.** It existed as prose here and in
-> CITATION-CARD-FORMAT.md, with an instruction to keep a copy per project. No copy existed. Meanwhile
-> the project's VISUALS-MAP asserted it "must be 0 BEFORE Terry sees anything." Promoted into
-> `tools/` on 2026-07-26 so it ships with the pipeline instead of being re-invented.
+The **ghosted-hold** defect (a panel present, content unresolved) is semantic and is caught
+structurally from the build by `beatmap.py ghosts`: a ghost must resolve within **~1.2s**, and
+anything resolving from below **0.40** opacity reads as absent rather than ghosted.
+
+**Remedy:** raise the luminance FLOOR (lighter scrim, brighter bed, higher ghost opacity) or pull
+the content in. **Never move a VO-anchored beat to satisfy a gate.**
 
 ### Step 6c — BEAT MAP: generate it FROM the build, don't maintain it beside the build
 ```bash

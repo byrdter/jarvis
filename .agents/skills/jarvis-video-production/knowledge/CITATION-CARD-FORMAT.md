@@ -78,16 +78,43 @@ normalization (`tools/assemble-master-concat.py`).
 duplicated frames at segment timestamp gaps). The concat **filter** with `fps=30,setsar=1,settb=AVTB,
 setpts=PTS-STARTPTS` per input gives the exact summed duration. Re-encode the master ONCE per batch.
 
-## QC gate — dead-space scan (must be 0 runs end-to-end)
-Sample at fps=2, downscale 160×90, flag any run ≥1.2s where `stddev<13 AND (mean<22 or mean>234)`
-(near-black OR near-white/cream holds). Run per-scene AND on the assembled master (the master samples
-scenes at a different phase and catches boundary fades the per-scene pass misses).
-- The recurring offender is an **eyebrow-label-alone moment** → fill it with the scene's photo accent,
-  lift bg-still opacity (~.32 + lightened scrim), or pull the beat's main content in within ~1.2s.
-- A near-black SCENE BOUNDARY = two fades meeting → lighten the next scene's opening / overlap, OR
-  bring its title in faster.
-(`scene-validator.py` is the avatar-mode gate; the dead-space scan is the citation-card-mode gate —
-inline Python, kept in each project's `build-scripts/verify-all.py`.)
+## QC gate — TWO gates, and the old single one was wrong
+
+> **CORRECTED 2026-07-26 (beads jarvis-tfo0.2).** This section used to specify one photometric
+> gate: fps=2, 160×90, flag runs ≥1.2s where `stddev<13 AND (mean<22 or mean>234)`. **On the
+> `#0A0E14` register that is broken.** The Messi V2 master's *median* frame luma is **23.5**
+> against a floor of **22** — the threshold sat at the median of the register's own distribution,
+> so it flagged ~half the video by construction: 28 runs on a finished, good master, including
+> frames confirmed legible by eye. Worse, the axis was inverted — the genuinely dead frames
+> measured 17.9–21.8 while the good frames it rejected measured 13.9–14.3. **The dead frames were
+> brighter than the ones it failed.** Do not restore those thresholds.
+
+The defect that gate was standing in for — *a panel is present whose content has not resolved yet*
+— is **semantic, not photometric**. A held, resolved dossier card and an unresolved ghosted panel
+are statistically identical in a single frame. Ruled out empirically against a labelled set: mean
+luma, edge density, peak contrast (edge p99/p99.5/max), and beat-gap length all overlap; beat gaps
+additionally *miss* the worst case, because the S12 opening had beats firing continuously for ~7s
+while its content stayed ghosted.
+
+So it splits into two gates, each doing something it can actually do:
+
+**1. Render failure — `tools/deadspace-scan.py`** (photometric, on the render)
+Near-black or blown-white frames: a hole in the render, a white flash, a missing asset. Floor 10 /
+ceiling 245. Fires **zero** times on a healthy master and immediately on a real failure. Run
+per-scene AND on the assembled master (the master samples at a different phase and catches
+boundary fades the per-scene pass misses).
+
+**2. Ghosted-hold — `tools/beatmap.py ghosts`** (structural, from the build)
+The real defect. Finds elements resting in the 0.05–0.60 opacity band and reports when the timeline
+resolves them. **A ghost must resolve within ~1.2s** (CONDUIT-VISUAL-SYSTEM.md §5); anything
+resolving from below **0.40** reads as absent rather than ghosted.
+
+**Remedy when a ghosted hold is real:** raise the luminance FLOOR — lighter scrim variant, brighter
+bed, higher ghost opacity — or pull the beat's main content in within ~1.2s. **Never move a
+VO-anchored beat to satisfy a gate.** A near-black SCENE BOUNDARY (two fades meeting) → lighten the
+next scene's opening or bring its title in faster.
+
+(`scene-validator.py` remains the determinism gate. All three run before Terry sees anything.)
 
 ## Per-video working files (the pattern that worked)
 - `RESUME-<vid>.md` — direction + per-scene status + the exact rebuild/assemble/QC commands. Write/keep
@@ -152,8 +179,10 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
   VO and reconcile it with single-use + 5s before building any scene HTML.
 
 ## Production hardening (learned on the Pope encyclical, V-POPE, 2026-07)
-- **Dead-space remedy that reliably works = raise the luminance FLOOR, not just the beat content.**
-  The gate flags `stddev<13 AND (mean<22 or mean>234)` for ≥1.2s. Dark scenes trip it wherever only a
+- **Remedy that reliably works = raise the luminance FLOOR, not just the beat content.** *(The
+  threshold quoted here originally — `stddev<13 AND (mean<22 or mean>234)` — was retired 2026-07-26;
+  see the QC-gate section above. The REMEDY below is still correct and is what fixed all three
+  ghosted holds on the Messi build; only the detector changed.)* Dark scenes trip wherever only a
   dim bg-still or a small/dimmed label shows. Fix by lightening the bgscrim, lifting bg-still opacity
   from ~.30 to ~.50–.62, and brightening+enlarging the ambient glows (a reusable `brighten.py` patch).
   This clears "black" holes AND makes the moody bg-stills read as intentional atmosphere. Residual

@@ -167,11 +167,16 @@ generated from the build, not maintained beside it (`PIPELINE.md`).
 ## 9. QC — what must pass before Terry sees anything
 
 1. `scene-validator.py` — determinism gate. `0 errors`, no exceptions.
-2. `verify-all.py` — dead-space scan, per-scene **and** on the assembled master.
-3. **Card presence:** frame at each citation cue reads mean-luma > 200.
-4. **Card integrity:** read the rendered PNG. A quote must not be truncated mid-clause. Verify against
+2. `deadspace-scan.py` — render failure (near-black / blown-white) only, per-scene **and** on the
+   assembled master. Its old `mean<22` dead-space threshold sat at this register's *median* luma
+   and flagged half a good video; corrected 2026-07-26, do not restore it.
+3. `beatmap.py ghosts` — the ghosted-hold gate. Every ghost resolves within ~1.2s; nothing resolves
+   from below 0.40 opacity.
+4. `beatmap.py check` — beat-map drift gate; the map must match the build.
+5. **Card presence:** frame at each citation cue reads mean-luma > 200.
+6. **Card integrity:** read the rendered PNG. A quote must not be truncated mid-clause. Verify against
    pixels, never against the manifest that describes them.
-5. **Beat-gap check:** no interval > ~5s without a cued visual event.
+7. **Beat-gap check:** no interval > ~5s without a cued visual event.
 
 ---
 
