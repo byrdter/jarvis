@@ -309,7 +309,7 @@ client.audio.transcriptions.create(model="whisper-1", file=f, response_format="v
 That recovered the full Altman quote (6.36s token → 0.74s). **Always re-scan after repairing** — never
 assume the retry worked. Keep the bad file as `.bak-whisper-drop`.
 
-## Step 6c — Today's Dispatch end-card (STANDARD final scene for 3-video sets)
+## Step 6d — Today's Dispatch end-card (STANDARD final scene for 3-video sets)
 For any video that is part of a daily **3-video set** (the default cadence — see the daily-ideas
 "Today's Dispatch" block), the LAST scene is always the dispatch end-card. It names the day's set and
 marks the other two "watch next", leaving the right side clear for YouTube's clickable end screens.
