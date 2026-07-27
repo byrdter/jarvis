@@ -318,6 +318,21 @@ categories:
       handle: "t3dotgg"
       focus: "AI dev tooling commentary and TypeScript/AI ecosystem"
 
+  tier12_format_reference:  # faceless / animation-dominant format competitors (low-face-% peers)
+    # (Two Minute Papers, AI Explained, sentdex, TheAIGRID, bycloud already monitored in other tiers)
+    - name: "Edan Meyer"
+      channel_id: "UC66Ggxy8MHX9DCDohdRYDTA"
+      focus: "Slides + animation, 1-4% face — RL/ML explainer format reference"
+    - name: "vcubingx"
+      channel_id: "UCv0nF8zWevEsSVcmz6mlw6A"
+      focus: "manim animation + VO, 1-18% face — math/AI animation format reference"
+    - name: "Welch Labs"
+      channel_id: "UConVfxXodg78Tzh5nNu85Ew"
+      focus: "Animation-dominant, 17-27% face — high-craft explainer format reference"
+    - name: "Artem Kirsanov"
+      channel_id: "UCR2uRTQ53V_egXKFflMMaaw"
+      focus: "Animation-dominant, appears in segments (14-38% face) — neuroscience/AI format reference"
+
 # Filtering preferences
 filters:
   min_duration_seconds: 120
