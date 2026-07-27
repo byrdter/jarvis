@@ -6,7 +6,7 @@ scene markers**, and the operator produces a complete first-cut master, running 
 
 > Read first: this file, then `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`,
 > `references/PRESENTATION-VARIETY.md`, `references/ANTI-PATTERNS.md`, `references/QC-PASS.md`.
-> Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`). The legacy
+> Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`, `make-dispatch-endcard.py`). The legacy
 > `scripts/build-master.sh` / `validate-scenes.sh` are superseded — see LEGACY note at bottom.
 
 ## Inputs the operator needs
@@ -309,7 +309,29 @@ client.audio.transcriptions.create(model="whisper-1", file=f, response_format="v
 That recovered the full Altman quote (6.36s token → 0.74s). **Always re-scan after repairing** — never
 assume the retry worked. Keep the bad file as `.bak-whisper-drop`.
 
+## Step 6c — Today's Dispatch end-card (STANDARD final scene for 3-video sets)
+For any video that is part of a daily **3-video set** (the default cadence — see the daily-ideas
+"Today's Dispatch" block), the LAST scene is always the dispatch end-card. It names the day's set and
+marks the other two "watch next", leaving the right side clear for YouTube's clickable end screens.
+**Placement is load-bearing: it is the FINAL ~12s only — never during the hook** (retention-gated
+channel; connection happens on the way out). Generate it per video with `--current` = which of the
+three THIS video is:
+```bash
+python3 <skill>/tools/make-dispatch-endcard.py \
+  --theme "<3-5 word through-line>" \
+  --titles "Video A|Video B|Video C" \
+  --current 1 \
+  --dispatch-line "Today's dispatch: <one punchy sentence>" \
+  --out <project>/hyperframes-v3/scenes/99-dispatch-endcard   # 99- so it sorts LAST
+```
+Copy the theme / titles / dispatch line straight from the daily-ideas email's "Today's Dispatch"
+block. It emits a faceless-conduit scene (silent, all motion on the registered `tl`) — run it through
+the **Step 6 validator** like any scene (`scene-validator.py`). Full contract + the end-screen /
+playlist / pinned-comment connection stack: `references/DISPATCH-ENDCARD.md`. A one-off video (not
+part of a set) skips this step.
+
 ## Step 7 — Assemble the master
+Order scenes ascending by name, so the `99-dispatch-endcard` (Step 6c) lands LAST in the concat.
 Handle HeyGen avatar white frames (trim tail / freeze-fill head) per `knowledge/ASSEMBLY-AND-AVATAR.md`,
 then:
 ```bash
