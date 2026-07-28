@@ -18,7 +18,7 @@ _Exact figures live in the private analytics notes, not in this public repo. The
 
 - **The large majority of viewers left in the first ~30 seconds.**
 - A 15-minute video averaged well under a minute of view duration.
-- Traffic was effectively **effectively 0% Browse / Search / External** — no algorithmic distribution.
+- Traffic was **effectively 0% Browse / Search / External** — no algorithmic distribution.
 
 **The channel is retention-gated, not quality-gated.** The product was never the problem; the first
 thirty seconds and the runtime were. Everything below follows from that one finding.
