@@ -11,10 +11,14 @@ Two axes, labelled from the title:
 
 Cells: PEG+STANCE, PEG+REPORT, EVERGREEN+STANCE, EVERGREEN+REPORT
 """
-import csv, statistics, sys
+import csv, os, statistics, sys
 from collections import defaultdict
 
 SRC = sys.argv[1] if len(sys.argv) > 1 else "outliers.csv"
+
+# Our own subscriber count -- set via env so the real number stays out of this
+# public repo. Only affects the illustrative "what would that median be for us" line.
+OUR_SUBS = int(os.environ.get("BYRDDYNASTY_SUBS", "1000"))
 
 # Named entities = a dated peg. If the title carries one, a viewer could ask
 # "when did that happen?" and get an answer.
@@ -84,8 +88,8 @@ def main():
         if o:
             subs = next(r["subs"] for r in rows if r["channel"] == c)
             print(f"{c:>18} {subs:>9,} subs  n={len(o):<3} median {statistics.median(o):>5.2f}x  "
-                  f"max {max(o):>5.2f}x   -> at our size that median is "
-                  f"{statistics.median(o) * 145:>5.0f} views")
+                  f"max {max(o):>5.2f}x   -> at OUR_SUBS subs that median is "
+                  f"{statistics.median(o) * OUR_SUBS:>5.0f} views")
 
 
 main()

@@ -12,14 +12,16 @@ skill's own "preferred runtime 10–15 min" line, now superseded) conflicts, thi
 
 ## 0. The diagnosis that drives everything (from real Studio data)
 
-Pulled from YouTube Studio, 2026-07-14 (channel = Byrddynasty · Understanding AI, our size):
+Diagnosed from our own YouTube Studio analytics, 2026-07-14. (The specific figures are kept
+out of this public repo — see the private analytics notes. The shape of the finding is what
+matters, and it generalises.)
 
-- The channel is **alive and growing** (steady subscriber growth) — **not** a quality
-  problem.
-- **the large majority of viewers leave in the first ~30 seconds.** The best video still showed a low completion rate
-  with a cliff in the first 30s; a weak one sat at well under a minute of average view duration on a 15-min video.
-- Traffic was **effectively 0% Browse / Search / External** — i.e. the algorithm was **not distributing**
-  the videos at all.
+- The channel was **growing on subscribers** — **not** a quality problem.
+- **The large majority of viewers left in the first ~30 seconds.** Our best-performing video still
+  showed a steep cliff inside the first 30s; a weak one averaged well under a minute of view
+  duration on a 15-minute runtime.
+- Traffic was **effectively effectively 0% Browse / Search / External** — i.e. the algorithm was **not
+  distributing** the videos at all.
 
 **The mechanism:** YouTube only pushes a video into Browse/Suggested once it trusts the video will
 hold attention. Low first-30-seconds retention → no Browse → ~single-digit views. **The channel is

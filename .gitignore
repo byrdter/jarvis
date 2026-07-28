@@ -336,3 +336,9 @@ asset-library/*
 # --refresh); the .csv files are per-run outputs, not source.
 .agents/skills/jarvis-video-production/tools/raw-probe/
 .agents/skills/jarvis-video-production/tools/demand-probe.csv
+
+# Auto-regenerated each session with a claude-mem context block (session
+# observations, internal paths, project detail). This repo is public, and the
+# hook rewrites the file constantly, so tracking it re-leaks silently.
+# The beads guidance it carries is generic and lives in CLAUDE.md / `bd prime`.
+AGENTS.md

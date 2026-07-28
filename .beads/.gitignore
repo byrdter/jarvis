@@ -71,3 +71,8 @@ bd.db
 # They would override fork protection in .git/info/exclude.
 # Config files (metadata.json, config.yaml) are tracked by git by default
 # since no pattern above ignores them.
+
+# Issues + beads MEMORIES export. Untracked 2026-07-28: this repo is public and
+# the memories contain strategy, internal paths and business detail. Sync happens
+# via Dropbox and the private Dolt remote (byrdter/jarvis-beads), not via this repo.
+issues.jsonl

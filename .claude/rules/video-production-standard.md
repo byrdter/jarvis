@@ -12,11 +12,13 @@ Canonical detail lives in the skill — read it before scripting or building:
 
 ---
 
-## 0. Why any of this exists (real Studio data, 2026-07-14)
+## 0. Why any of this exists (our own Studio analytics, 2026-07-14)
 
-- **the large majority of viewers left in the first ~30 seconds.**
-- One 15-minute video averaged **well under a minute** of view duration.
-- Traffic was **effectively 0% Browse / Search / External** — the algorithm was not distributing at all.
+_Exact figures live in the private analytics notes, not in this public repo. The finding:_
+
+- **The large majority of viewers left in the first ~30 seconds.**
+- A 15-minute video averaged well under a minute of view duration.
+- Traffic was effectively **effectively 0% Browse / Search / External** — no algorithmic distribution.
 
 **The channel is retention-gated, not quality-gated.** The product was never the problem; the first
 thirty seconds and the runtime were. Everything below follows from that one finding.
