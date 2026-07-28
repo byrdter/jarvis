@@ -80,6 +80,14 @@ count. Explicitly assign some scenes to non-HyperFrames registers, and plan **at
 assets from the asset library by querying its metadata (see `references/ASSET-CONTRACT.md` +
 `knowledge/VISUAL-SOURCING.md` "How the asset database drives this").
 
+**Then run the CONCRETENESS PASS — `references/CONCRETENESS-CHECKLIST.md` (mandatory).** Our craft
+already beats the faceless competitors; the measured gap is concreteness/variety — we default to
+beautiful ABSTRACTIONS where a REAL image (the actual person's face, the real headline, the product/UI,
+a source-card quote, an interview clip) would land harder. For every scene ask "is there a REAL image
+of the actual thing — and a HUMAN in this beat?" before reaching for an atmospheric abstraction; no
+more than ~2–3 consecutive pure-abstraction scenes; missing real assets → the GAP LIST. Guardrail:
+REAL, never fabricated documents/quotes.
+
 ## Step 4 — Author scenes (HyperFrames)
 Build each `index.html`. ALL motion on the registered `tl` (never free gsap). Add the ambient glow
 layer. Anchor every reveal to its VO word. Kicker labels ≥26px/700. No text-on-text / boxes-on-boxes.
