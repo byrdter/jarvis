@@ -6,7 +6,8 @@ scene markers**, and the operator produces a complete first-cut master, running 
 
 > Read first: this file, then `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`,
 > `references/PRESENTATION-VARIETY.md`, `references/ANTI-PATTERNS.md`, `references/QC-PASS.md`.
-> Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`, `make-dispatch-endcard.py`). The legacy
+> Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`, `make-dispatch-endcard.py`,
+> `make-quote-card.py`). The legacy
 > `scripts/build-master.sh` / `validate-scenes.sh` are superseded — see LEGACY note at bottom.
 
 ## Cadence and turnaround (write this down — it drives ideation)
@@ -86,7 +87,10 @@ beautiful ABSTRACTIONS where a REAL image (the actual person's face, the real he
 a source-card quote, an interview clip) would land harder. For every scene ask "is there a REAL image
 of the actual thing — and a HUMAN in this beat?" before reaching for an atmospheric abstraction; no
 more than ~2–3 consecutive pure-abstraction scenes; missing real assets → the GAP LIST. Guardrail:
-REAL, never fabricated documents/quotes.
+REAL, never fabricated documents/quotes. **To add a HUMAN voice, use `tools/make-quote-card.py`**
+(source-card quote, photo optional) — the fastest way to put a person in a faceless build. Real
+people (quotes, press/public-domain photos, short real interview clips) are cleared per
+`references/USING-REAL-PEOPLE.md`; AI-generated/faked people are banned.
 
 ## Step 4 — Author scenes (HyperFrames)
 Build each `index.html`. ALL motion on the registered `tl` (never free gsap). Add the ambient glow
