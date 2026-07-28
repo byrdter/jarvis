@@ -9,6 +9,29 @@ scene markers**, and the operator produces a complete first-cut master, running 
 > Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`, `make-dispatch-endcard.py`). The legacy
 > `scripts/build-master.sh` / `validate-scenes.sh` are superseded — see LEGACY note at bottom.
 
+## Cadence and turnaround (write this down — it drives ideation)
+**An 8–10 minute video with full conduit visuals builds in ONE DAY.** The cadence is **UP TO 3
+videos a day** — a ceiling, not a quota. Ramp deliberately: 1/day → 2/day → 3/day, and drop back to
+2 or 1 if the retention data says to. **Do not assume a 3-video set.** The Step 6d dispatch end-card
+and `references/DISPATCH-ENDCARD.md` apply only when a day actually ships a set of 3; a 1- or
+2-video day skips it (or names only the videos that exist).
+
+**Before scripting anything, probe the title for demand:**
+```bash
+python3 <skill>/tools/demand-probe.py "the title you would actually publish"
+```
+PROVEN/MIXED = someone our size already got reach with this shape. DEAD = low competition
+because nobody watches it (the §8 trap). **INCONCLUSIVE means UNMEASURED, never "dead."**
+Probe the DISTINCTIVE words, not the entity — a query built on a common name drifts into
+that name's tutorial lane. Read the rows; the median is directional only.
+
+Consequence for §8 ideation: **a news peg costs nothing.** Topic selection is not constrained by
+build time, so there is no reason to restrict pegs to slow-moving stories, and no need for a second
+"fast lane" pipeline — this IS the fast lane. See the round-4 outlier scan
+(`${JARVIS_PRIVATE}/reports/outlier-scan-ai-infrastructure-lane-2026-07-27.md`): the peg buys
+discovery, but it is the **position** that buys the watch, and throughput only compounds if every
+video in the set carries one.
+
 ## Inputs the operator needs
 - `heygen.mp4` — the recorded take (one continuous VO performance).
 - The VO script broken into N scenes/segments, with per-scene "avatar visible vs graphics" intent

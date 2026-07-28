@@ -149,6 +149,7 @@ class YouTubeMonitor:
                     'title': video['snippet']['title'],
                     'description': video['snippet']['description'],
                     'channel_title': video['snippet']['channelTitle'],
+                    'channel_id': video['snippet']['channelId'],
                     'published_at': video['snippet']['publishedAt'],
                     'thumbnail': video['snippet']['thumbnails']['high']['url'],
                     'duration': duration,
@@ -164,6 +165,29 @@ class YouTubeMonitor:
         except HttpError as e:
             print(f"Error fetching video details batch: {e}")
             return []
+
+    def get_subscriber_counts(self, channel_ids):
+        """channel_id -> subscriber count. 1 quota unit per 50 channels.
+
+        Raw view counts say nothing on their own: 18,856 views is a hit for a 5K
+        channel and a flop for a 680K one. The outlier score (views / the POSTING
+        channel's subs) is the only comparable number, and it needs this.
+        Channels that hide their sub count are omitted (score is undefined, not zero).
+        """
+        subs = {}
+        ids = sorted(set(channel_ids))
+        for i in range(0, len(ids), 50):
+            try:
+                response = self.youtube.channels().list(
+                    part='statistics', id=','.join(ids[i:i + 50]), maxResults=50,
+                ).execute()
+                for c in response.get('items', []):
+                    st = c.get('statistics', {})
+                    if not st.get('hiddenSubscriberCount'):
+                        subs[c['id']] = int(st.get('subscriberCount', 0) or 0)
+            except HttpError as e:
+                print(f"Error fetching subscriber counts: {e}")
+        return subs
 
     def get_video_details(self, video_id):
         """Get detailed information about a video."""
@@ -286,6 +310,22 @@ class YouTubeMonitor:
                 all_videos.extend(videos)
                 print(f"{len(videos)} videos")
 
+        # Enrich with subscriber counts -> outlier score (views / posting channel's subs).
+        # This is what makes the corpus usable as DEMAND evidence rather than just a
+        # list of what got published: it says whether a video actually travelled.
+        # Cost: 2 quota units/day for ~77 channels.
+        if all_videos:
+            subs = self.get_subscriber_counts(v['channel_id'] for v in all_videos
+                                              if v.get('channel_id'))
+            scored = 0
+            for v in all_videos:
+                s = subs.get(v.get('channel_id'))
+                v['subscriber_count'] = s
+                v['outlier'] = round(v['views'] / s, 3) if s else None
+                scored += 1 if s else 0
+            print(f"\n📊 Outlier scores: {scored}/{len(all_videos)} videos "
+                  f"({len(subs)} channels resolved)")
+
         # Sort by engagement score
         all_videos.sort(key=lambda v: v['engagement_score'], reverse=True)
 
@@ -379,7 +419,22 @@ class YouTubeMonitor:
         entry += f"⏱️ {self.format_duration(video['duration'])} | "
         entry += f"👁️ {video['views']:,} views | "
         entry += f"👍 {video['likes']:,} likes | "
-        entry += f"💬 {video['comments']:,} comments\n\n"
+        entry += f"💬 {video['comments']:,} comments"
+        # Outlier = views / the posting channel's subs. >=1.5x is a candidate worth
+        # studying; most videos land well under 1x, including on big channels.
+        o = video.get('outlier')
+        if o is not None:
+            subs = video.get('subscriber_count') or 0
+            # Most videos in this feed sit far below 0.01x, where 2dp renders a
+            # meaningless "0.00x" — scale the precision to the magnitude instead.
+            if o >= 0.1:
+                shown = f"{o:.2f}x"
+            elif o >= 0.001:
+                shown = f"{o:.3f}x"
+            else:
+                shown = "<0.001x"
+            entry += f" | 📈 **{shown}**{' 🔥' if o >= 1.5 else ''} ({subs:,} subs)"
+        entry += "\n\n"
 
         if self.report_prefs.get('include_description', True):
             limit = self.report_prefs.get('description_chars', 350)

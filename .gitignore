@@ -330,3 +330,9 @@ asset-library/*
 # Playwright MCP browser-capture exhaust (a11y trees + console logs from page reads).
 # Not assets — the real citation captures live in each video project under cards/originals/.
 .playwright-mcp/
+
+# Video-production research tooling: generated caches and result dumps.
+# raw/ and raw-probe/ are YouTube API/yt-dlp response caches (regenerate with
+# --refresh); the .csv files are per-run outputs, not source.
+.agents/skills/jarvis-video-production/tools/raw-probe/
+.agents/skills/jarvis-video-production/tools/demand-probe.csv
