@@ -270,6 +270,14 @@ def generate_markdown_digest(papers, output_path):
         cat_name = cat_names.get(category, category)
         md += f"- **{cat_name}:** {len(category_papers)} papers\n"
 
+    # On-demand full-text note (Option C: abstracts here; full text on request)
+    md += ("\n---\n\n"
+           "**Want the FULL text of any paper?** These are abstracts. To pull a whole paper into the "
+           "searchable knowledge base, run:\n\n"
+           "```\njarvis-arxiv-fulltext <arxiv-id | url | \"paper title\">\n```\n\n"
+           "e.g. `jarvis-arxiv-fulltext 2508.10925` — downloads the full text, adds it to the KB, and "
+           "reindexes so you can search it immediately.\n")
+
     # Write to file
     output_path.write_text(md)
     print(f"\n✓ Digest saved to: {output_path}")
