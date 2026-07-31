@@ -6,6 +6,10 @@ data-dense argument video should USE it. This is the menu. Before building any s
 technique that MATCHES the beat's job (show a proportion? plot a place? walk a timeline? weigh A vs B?)
 instead of defaulting to a text card.
 
+> **Companion doc:** `TEXT-CONTAINER-PALETTE.md` answers the question that comes right after this one —
+> *what artifact holds the words?* (paper/record · screen/UI · broadcast furniture · data surface ·
+> kinetic · composited). This doc = the beat's JOB; that doc = the beat's CONTAINER. Tag both.
+
 > Everything here still lives inside the citation-card house rules (`CITATION-CARD-FORMAT.md`):
 > dark register, cream cards for verified quotes, hard-cut concat assembly, dead-space QC gate,
 > VO-anchored timing, ≤5s on anything without a change. These techniques are how you FILL those

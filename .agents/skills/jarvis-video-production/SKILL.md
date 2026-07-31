@@ -103,6 +103,14 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   power-ladder, flowchart, **maps** via `us-map`/`us-map-bubble`), kinetic type (typewriter/terminal,
   ticker-takeover, overwhelm-surround, keyword-glow), and generative/canvas/3D + the `hyperframes add`
   registry. Pick the technique that matches the beat's JOB; a plain text card is only for a true title.
+- **Text container palette — WHAT OBJECT HOLDS THE WORDS: [knowledge/TEXT-CONTAINER-PALETTE.md](knowledge/TEXT-CONTAINER-PALETTE.md)**
+  — the companion to the technique palette. Paper/record artifacts (citation card, filing, docket,
+  paper page, redaction, personnel record), screen artifacts (12 terminal profiles, 12 VS Code themes,
+  9 code-motion behaviors, browser/search chrome, x-post/reddit-post, 3D device with live HTML in the
+  screen), broadcast furniture (11 lower-thirds, ticker, camcorder HUD, annotation HUD), data surfaces,
+  kinetic type, and composited text — plus the 12 containers we should BUILD. **The container is a
+  rhetorical act:** a terminal says "happening now," a filing says "on the record," a redaction says
+  "someone hid this." Every beat gets a CONTAINER tag alongside its JOB tag at Step 3.
 - **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (avatar-mode QC gate) and
   **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
   these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
