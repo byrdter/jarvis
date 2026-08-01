@@ -283,6 +283,49 @@ alarm, not a schedule.**
 in response to disappointing numbers is the documented 2026-07-31 failure mode and produced four
 wrong conclusions in a day.
 
+## 4b. LOCKED VARIABLES — one change at a time
+
+**Voice and presentation are FROZEN for the 10-video run: synthetic VO (ElevenLabs / Cartesia),
+faceless, no on-camera.** Terry's call, 2026-08-01, and it is the methodologically correct one.
+
+The register change is the variable under test. Adding real VO and on-camera would make it three
+variables at once, and video 10 would not tell us which moved — the exact confound §4's falsifier
+exists to prevent. A recommendation to add them was made and **withdrawn on this reasoning**.
+
+Also on the record so it is not re-argued from a false premise:
+- **Credentials are not the constraint.** PhD, 30 years teaching AI at Auburn and Florida State,
+  100+ scholarly publications. Deliberately played down — it reads as egg-head and YouTube rewards
+  performance, not titles. A line in the channel description is the whole of it.
+- **The synthetic voices are not the "robotic" problem the standard's §2 worried about.** Cloned
+  voice, and creators switch between real and ElevenLabs mid-channel without viewers noticing.
+- **The faceless test in `video-production-standard.md` §2 is VOID, not pending.** It was run on the
+  conduit-essay register, which this record abandons. Its result cannot transfer. Do not wait on it.
+
+**Revisit at video 10, and only then** — real VO vs synthetic becomes the *next* single variable if
+the numbers are short.
+
+## 4c. The weekly practice — study, not just ship
+
+`teardown.py` was the most underused tool in the repo, and every real finding on 2026-07-31/08-01
+came out of it. **One teardown a week, alongside the week's build. Ten weeks, ten teardowns.**
+
+Automated: **`com.jarvis.weekly-teardown`** (Sundays 08:00, `~/bin/jarvis-weekly-teardown.sh`) runs
+`tools/pick-teardown.py --dry` and logs a ranked shortlist to
+`~/.local/share/jarvis/weekly-teardown/logs/`.
+
+**It deliberately does NOT auto-tear-down.** The ratchet watchlist was grown for the abandoned
+AI-commentary lane, so the top row is frequently off-register — the first run picked
+*"How a 9 to 5 job takes over your life"* at 232×, a genuine outlier in a lane we are not in. The
+picker excludes `shape=clip` (podcast clips win on borrowed authority, which is uncopyable) and
+**warns when the top pick's shape is outside verdict / explainer / framework / comparison.**
+Choosing is judgment; the script says so rather than pretending otherwise.
+
+Then: `python3 pick-teardown.py --url <chosen>` → fill in the ANALYSIS section by hand. The
+mechanical half is scripted; the half that teaches cannot be.
+
+**Follow-up worth doing:** re-aim `outlier-ratchet.py --discover` at the build lane. Until then the
+shortlist drifts and you must read it rather than trust it.
+
 ## 5. Multi-platform repurposing
 
 Supported. One caution, precisely scoped:
