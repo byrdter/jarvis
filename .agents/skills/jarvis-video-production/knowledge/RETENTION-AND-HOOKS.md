@@ -38,18 +38,29 @@ What we also found by watching our own videos:
 
 ---
 
-## 1. The runtime rule: ~8 minutes
+## 1. The runtime rule: retention-gated, start ~10 min
 
-**Target every video at ~8 minutes** (acceptable 7:30–9:00). Reasons:
-1. **Strangers give an unknown channel ≤8 minutes, not 15.** Long-form is a *trust-gated privilege* —
-   people reserve 15–20 min for creators they already know. At low subs, a 14-min video fights the
-   retention math on hard mode.
-2. **% viewed is what YouTube rewards**, and % viewed is structurally higher on a tight 8-min cut than
-   a 15-min one carrying the same argument.
-3. **8:00 also clears the mid-roll-ad threshold** (nice for later monetization; not the point now).
+> **Revised 2026-07-29** (supersedes the flat "~8 minutes" that stood here). 8 min was a *training
+> wheel* imposed while retention was unproven — not an optimum. The competitor teardowns (Big Data
+> Factor 5:45, Explainer Chris 19, High Yield 30, Fractal Philosophy 45) proved long-form wins **iff
+> the video carries a whole-runtime withheld payoff + a persistent progress spine.** The old 12–15 min
+> videos failed for *lacking that spine*, not for their length. So the rule is now a mechanic.
 
-Recut existing 13–15 min videos to ~8 by trimming — keep every *verified fact*, cut redundancy,
-example-parades, and throat-clearing. (V6 went 15:29→8:32; V5 went 13:00→8:30.)
+**Runtime = the longest you can sustain a withheld payoff at high retention — no longer.** YouTube
+rewards *total watch time* (runtime × % viewed); longer wins only when the curve holds.
+
+1. **Start a rebuilding batch at ~10 minutes**, then let the retention graph vote: holds past ~40% at
+   the 10-min mark → next video 12–13; sheds after the reversal → tighten. **Never blind-ship 12–15
+   again — that shape is what failed; earn it with the curve first.**
+2. **Precondition for any runtime over ~8 min — all three or trim to 8:** (a) a payoff withheld across
+   the *whole* runtime (mystery/punchline, not just a 0:20 hook); (b) a persistent on-screen spine
+   (scale ladder / component checklist / numbered framework / section badge); (c) a reversal at ~40–55%.
+3. **% viewed is still what YouTube rewards** — a tight 10-min cut with a real loop beats a baggy 15.
+   The highest-outlier *reachable* winner (Big Data Factor) is 5:45; length is a privilege retention
+   earns, not a default. 8:00+ also clears the mid-roll-ad threshold (later monetization; not the point now).
+
+Recut baggy videos by trimming redundancy, example-parades, and throat-clearing while keeping every
+*verified fact* and installing the missing spine. (V6 went 15:29→8:32; V5 went 13:00→8:30.)
 
 ---
 
@@ -352,9 +363,10 @@ way §3 demands — the viewer cannot resolve it alone. Fusions (§7.2) should a
 
 **Caveats, stated honestly:** Edan Meyer's 12.25× is **n=1** in the recent window (he posts rarely),
 so treat it as a strong signal about the *shape* rather than a reliable channel-level benchmark. And
-these outliers run 15–27 min against our 8-min standard (§1) — that is **not** a reason to abandon
-§1, because those are 30K–900K-sub channels spending trust we don't have yet. §1's reasoning
-(long-form is a trust-gated privilege) still holds at our size.
+these outliers run 15–27 min against our retention-gated runtime rule (§1, revised 2026-07-29) — that
+is **not** a licence to blind-ship long, because those are 30K–900K-sub channels spending trust we
+don't have yet. §1 now permits >8 min *only* behind the whole-runtime-loop + spine precondition;
+start ~10 and let the retention curve, not their sub count, earn the extra minutes.
 
 ### 7.5 Provenance and confidence — read this before trusting §7
 

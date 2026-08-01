@@ -384,6 +384,32 @@ and their reason, and known/open items. This is what lets a future session conti
 re-deriving (the scene code records the *what*; DECISIONS.md records the *why*). See video-01's
 `DECISIONS.md` for the format. Keep it current — it is a required deliverable, not optional.
 
+## Step 8b — Packaging: THUMBNAILS CARRY TERRY'S FACE
+
+**FACELESS applies to the VIDEO, not the thumbnail.** No avatar anywhere in the cut — but the
+thumbnail is the channel face, and it uses a REAL photo of Terry reacting to the message. This was
+undocumented until 2026-07-29 and was gotten wrong twice in one batch precisely because the faceless
+rule is loud and this exception was written down nowhere.
+
+**Method — IMAGE-EDIT, not scene generation.** Feed the avatar as the source image; change the
+background, the clothing and the expression around the kept likeness.
+
+- **SOURCE:** `${JARVIS_PRIVATE}/TerryAvatars/terrybyrd3.png` (also TerryRed / TerryBlue / TerryBlack
+  / TerryByrd1 / terrybyrd2 — same person, different treatments).
+- **KEEP:** face, likeness, silver hair, lighting direction. **Never generate a new likeness.**
+- **CHANGE:** background → the video's scene · clothing → per prompt · **expression → the reaction**.
+- **Name the expression.** The source asset smiles and the model swaps it reliably when told to
+  (proven in Terry's workflow) — but the reaction is the thumbnail's emotional cue, so choose it
+  deliberately rather than leaving it to default.
+- **COMPOSITION:** Terry ~40% of frame on ONE side, head and shoulders readable at 168px wide; the
+  opposite side stays clean and dark for the text overlay. Never centre him — the text needs a home.
+- **TEXT IS AN OVERLAY, never in the prompt.** One number and one noun. Generators mangle typography.
+- Standing negatives: `no text, no logos, no other people, no altered facial features, do not change
+  his face or age, not a stock-photo look`.
+
+Worked examples: `${JARVIS_PRIVATE}/AIFinance/video-productions/job-dissolving/ASSET-GENERATION.md`
+(§Thumbnail candidates) and `.../ai-power-tax/PUBLISHING.md` (§4).
+
 ## Step 9 — Close out (Maintenance Rule)
 - Confirm `DECISIONS.md` is complete for this video.
 - Fold any NEW *general* lesson into `knowledge/` or the matching `references/` doc (video-specific

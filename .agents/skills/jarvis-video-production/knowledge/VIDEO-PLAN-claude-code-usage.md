@@ -1,0 +1,157 @@
+# VIDEO PLAN — "11 Billion Tokens" (build register, video #4)
+
+Probe basis: `claude code cost too much` — **PROVEN**, n=21, drift 3, median **1.24×**, max 14.11×,
+**10 hits**, every winner a channel under 30k subs. See `TEN-TITLES-PROBE-2026-08-01.md`.
+Craft basis: `teardowns/Tlqe0A8ED8o.md` (our 8.00×) + `WfjGZCuxl-U.md` (73.03×) + `u_5erLilDXY.md` (69.61×).
+
+---
+
+## 0. The subscription problem, and why it makes the video BETTER
+
+Terry is on a flat subscription — there is no dollar bill. That is not a weakness, because
+**three of the four proven rows are about LIMITS, not dollars**:
+
+- 14.11× · *How to Optimize Token Usage in Claude Code* (5,450 subs)
+- 10.90× · *How to Optimize Token Usage in Claude Code* (5,500 subs)
+- 10.50× · *Stop Hitting Claude Code Rate Limits! (3 pro tips)* (1,180 subs)
+- 8.33× · *I Stopped Hitting Claude Code Usage Limits (Here's How)* (15,800 subs)
+
+**The audience is subscription users hitting caps.** We are exactly them. The $ figure is the
+attention-getter; the limit is the utility.
+
+## 1. The data — measured 2026-08-01, all first-party
+
+Source: `~/.claude/projects/**/*.jsonl`, 473 sessions with usage records, 32,373 assistant messages.
+
+| Metric | Value |
+|---|---|
+| Total tokens | **11,017,948,194** |
+| API-equivalent list cost | **$28,173** |
+| cache_read | 10.23 B — 92.9% of tokens, **52.6% of cost** |
+| cache_creation | 733.9 M — 6.7% of tokens, **36.5% of cost** |
+| output | 46.7 M — 0.4% of tokens, 10.7% of cost |
+| input | 3.9 M — 0.03% of tokens, 0.2% of cost |
+| Median session | **$0.76** |
+| Mean session | **$59.56** (78× the median) |
+| Most expensive session | **$3,104 · 1.38 B tokens · 3.2 M output** |
+| **Top 10% of sessions** | **96.2% of all cost** |
+| **Top 1% of sessions** | **28.5% of all cost** |
+| July 2026 alone | 9.73 B tokens |
+| Model split | opus-tier 96.0% · sonnet-tier 4.0% |
+| Cache efficiency (read÷write), all | 13.9× |
+| Cache efficiency, 10 costliest sessions | **13.7×–31.8× (at or ABOVE average)** |
+
+## 2. Title
+
+**Primary — recommended:**
+> **I Measured 11 Billion Tokens in Claude Code. 10% of Sessions Burned 96%.**
+
+Named system + three numbers + a reveal. Sits inside the proven family while carrying the formula
+that won on our own channel (`Inside Anthropic's Agent Harness: 200+ Features…`, 4.44% CTR).
+
+**Alternates:**
+- *Why You Hit Claude Code Limits: I Measured 11 Billion Tokens* — closest to the proven phrasing,
+  weaker reveal.
+- *My Claude Code Usage Would Cost $28,173. I Pay a Flat Fee.* — strongest number, but the $ figure
+  invites "that's not real money" pushback in comments. Keep $28,173 for the cold open, not the title.
+
+**Thumbnail:** the real terminal/table with `11,017,948,194` legible and `96%` as the second element.
+Numbers must be readable at mobile size. No face.
+
+## 3. Runtime — 18–22 minutes
+
+**Long is correct for this lane** (probe winners: 46.2m, 41.4m, 37.6m, 29.9m, 27.4m, 23.8m, 21.4m;
+our own *Agent Harness* 19:26). The 8:12-wins finding came from the **essay** lane and does not
+transfer — see `TEN-TITLES-PROBE-2026-08-01.md` §3.
+
+## 4. Cold open — 0:00–0:45, information-first
+
+Target: **≥8 concrete data points in 45 seconds** (Mackard's density, 73.03×). Frame one is the real
+aggregation output on screen, not a title card.
+
+Beat content (write to VO, do not read as a list):
+1. `11,017,948,194` tokens through Claude Code — on screen, counting up from the raw file scan.
+2. 473 sessions · 32,373 messages · one machine · eight months.
+3. At list API prices that is **$28,173**.
+4. **"I paid a flat subscription fee. So this number is not a bill — it's a measurement."**
+5. The median session cost **76 cents**.
+6. The mean was **$59.56**.
+7. One session was **$3,104**.
+8. **Named question, carried:** *"Those three numbers cannot all be true of the same workload —
+   unless something very specific is going on. So which sessions are actually eating the limit?"*
+
+**Do NOT** reveal the 96% concentration here. That is the payoff.
+**Do NOT** open with "in this video" or reference another video — that exemption in the Agent Harness
+teardown applies to reference/implementation videos, and this is an investigation.
+
+## 5. Beat map — the spine is a NARROWING
+
+Persistent on-screen spine (§1 requirement): a **funnel** that narrows each act —
+`11B tokens → 473 sessions → 47 sessions → 1 decision`. It stays on screen and updates.
+
+| Time | % | Beat | Artifact on screen |
+|---|---|---|---|
+| 0:00–0:45 | 0–4% | Cold open, numbers, named question | live aggregation output |
+| 0:45–3:30 | 4–17% | Where the data comes from — the JSONL usage record, field by field | real `usage` JSON, highlighted |
+| 3:30–6:30 | 17–31% | **Suspect 1: the model.** opus 96% / sonnet 4% | model table |
+| 6:30–9:00 | 31–43% | **Suspect 2: output tokens.** The intuitive answer — and it's 0.4% of tokens, 10.7% of cost | component bar |
+| **9:00–11:30** | **43–55%** | **⭐ THE REVERSAL** (below) | distribution chart |
+| 11:30–15:00 | 55–72% | Anatomy of the $3,104 session — 1.38 B tokens, 3.2 M output | session drill-down |
+| 15:00–18:00 | 72–86% | **The second reversal** (below) | cache-ratio comparison |
+| 18:00–20:00 | 86–100% | What to actually do; the honest unknown; land | checklist card |
+
+### ⭐ The reversal at ~43–55%
+Everything so far frames this as an efficiency question — better model, shorter prompts, less output.
+Then the distribution lands:
+
+> **Median session: $0.76. Mean: $59.56. Top 10% of sessions: 96.2% of everything.**
+
+There is no general cost problem. There are ~47 sessions. Every habit-level optimisation — model
+choice, prompt length, trimming output — is aimed at the 4% that doesn't matter.
+
+### The second reversal at ~72–86% — the one that makes it worth watching
+The obvious conclusion is "those sessions were wasteful." **Measured, they are not:**
+
+> Overall cache-read÷write = **13.9×**. The ten costliest sessions run **13.7× to 31.8×** —
+> at or **above** average cache efficiency.
+
+The expensive sessions are the *best-cached* sessions. They are expensive because they are **long**.
+**You cannot prompt your way out of this.** The only lever is **where you cut the session** — and
+that reframes the whole problem from optimisation to scoping.
+
+## 6. Craft floor — the numbers this video must hit
+
+Our 8.00× *Agent Harness* had none of these. The 69–82× videos all did.
+
+| Device | Agent Harness (ours) | **Target here** |
+|---|---|---|
+| Authored reversal at 40–55% | ✖ none | ✅ **two** (43–55%, 72–86%) |
+| Negation density | 1.3/min | **≥3.0/min** |
+| Loop named early and carried | 0.4/min, all answered on the spot | 1 carried loop + ≤1.5/min |
+| wpm | 125 | 135–150 |
+
+**Negation is the build instruction, not a metric to check afterwards.** Write each act as *what it
+isn't*: not the model · not the output tokens · not inefficiency · not prompt length · not a bill.
+
+## 7. GROUNDING — must be verified before a word is recorded
+
+1. **Pricing is an assumption.** $28,173 uses published list rates (opus-tier in $15 / out $75 /
+   cache-write 1.25× / cache-read 0.10×) mapped by model-name tier. **State the rates on screen** and
+   call it an estimate. Re-check current pricing at record time.
+2. **⚠️ THE HONEST UNKNOWN — say it out loud in the video.** We do **not** know how Anthropic's
+   subscription limits weight cache reads against fresh input. The mapping from "these tokens" to
+   "this is why you hit your cap" is an **inference, not a measurement**. Saying so is on-brand and
+   is the thing that separates this from the guess-work videos in the same lane.
+3. **491 files scanned, 473 had usage records.** Say the sample is what it is; do not imply totality.
+4. Re-run `usage.py` / `cost.py` on the record date so every figure is current.
+5. Model IDs shown are internal identifiers as recorded — do not map them to marketing names on
+   screen without checking.
+
+## 8. Do NOT
+
+- **No shorts.** 73 of them bought 4 subscribers and 8 watch-hours (`BYRDDYNASTY-CHANNEL-AUDIT.md`).
+- **No conduit-essay register.** This is practitioner utility — the probe shows utility WINS in this
+  lane and loses in the general lane.
+- **No series reference, no "in this video."**
+- **Do not lead the title with $28,173.** It reads as clickbait to a subscription audience and
+  invites the "that's not real money" derail. Earn it in the open instead.

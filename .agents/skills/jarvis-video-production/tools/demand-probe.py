@@ -27,8 +27,31 @@ READ BEFORE TRUSTING A NUMBER
     reason; recent breakouts score LOW because the subs they just earned are
     already in the denominator. The --since cutoff drops the first artifact; the
     second means high recent scores are conservative, not inflated.
-  * A verdict is about the SHAPE of the phrasing, not the topic. Probe the title
-    you would actually publish, not the subject in the abstract.
+  * A verdict is about the SHAPE of the phrasing, not the topic. Probe the SHAPE
+    FAMILY, not the exact string you would publish.
+    CORRECTED 2026-07-29. This line used to read "probe the title you would
+    actually publish." That instruction is wrong and it burned four queries in one
+    run. A real publishable title is specific enough that YouTube has no near
+    neighbour, so the probe returns INCONCLUSIVE with n=0 every time -- it cannot
+    adjudicate between two candidate titles. Measured that day: "openai studied
+    800000 work chats 43 percent wasn't your job" -> n=0. "the study that shows your
+    job description is already wrong" -> n=0. "your job description is already
+    wrong" -> n=0. "why ai hasn't taken your job it just changed it" -> n=0.
+    Every round-2 success was instead a short, high-frequency phrasing ("why ai can
+    never be conscious", "how big is a single ai data center").
+    USE IT FOR: is this LANE watched, and which NOUN wins inside it (the
+    conscious/reason split, 95.6x vs 0.04x, is a real and repeatable finding).
+    DO NOT USE IT FOR: picking between two drafted titles. It will answer
+    INCONCLUSIVE and you will read that as information. It is not.
+
+  * The relevance gate cannot see topic, only word overlap -- so a query whose words
+    are common outside your subject returns a CONFIDENT FALSE POSITIVE. Three
+    measured on 2026-07-29: "why your job title no longer describes your job" scored
+    PROVEN 31.16x on resume/interview-coaching videos; "the work you actually do
+    isn't your job anymore" scored PROVEN 41.29x on anti-work/corporate-burnout
+    videos with zero AI content; "openai study on how people use chatgpt at work"
+    scored its only hit on a ChatGPT tutorial. ALWAYS READ THE ROWS. A verdict line
+    with an unread row list is not evidence.
 
 Quota: search.list costs 100 units/query against a 10,000/day default. Results are
 cached in raw-probe/ keyed by query+params; delete a file to re-probe just that one.
@@ -45,12 +68,25 @@ MIN_SUBS = 1_000         # below this, outlier score is noise
 MIN_SECONDS = 90         # exclude shorts -- different algorithm, different game
 BAND_SUBS = 300_000      # "reachable band" -- what a small channel can realistically hit
 CANDIDATE = 1.5          # calibrated in outlier-scan.py; NOT 5x
-# >=50% of results discarded as off-topic -> demote a positive verdict.
-# Calibrated on only four cases (gmail 0.08 keep / resume 0.43 keep / claude-artifacts
-# 0.53 demote / deepseek-template 0.83 demote) -- a rough dial, not a law. The
-# per-video rows remain the real evidence; this only stops a heavily-drifted bucket
-# from being reported as hard proof.
-DRIFT_LIMIT = 0.5
+# >=65% of results discarded as off-topic -> demote a positive verdict.
+#
+# HISTORY. Set to 0.5 on 2026-07-28 from four cases, then raised to 0.65 the same day
+# after it produced three FALSE NEGATIVES on lanes that were genuinely strong:
+#   replaced-then-rehired (0.67) - both hits were squarely on-thesis
+#   ai careers/jobs       (0.57) - all surviving rows on topic, 12.72x on a 6,990-sub channel
+#   openai jobs research  (0.61) - real lane, suppressed
+# Suppressing real signal is the worse error here: a demoted verdict reads as "no
+# evidence" and the idea never gets made.
+#
+# WHAT THIS THRESHOLD CANNOT DO. It counts word overlap, so it cannot tell
+# ON-ENTITY-BUT-OFF-TOPIC from genuinely on-topic. "claude shared chats indexed by
+# google" keeps Claude Code tutorials (they really do contain claude/artifacts/google)
+# and scores them as demand for a privacy incident they have nothing to do with.
+# A "never demote when >=2 rows clear 1.5x" rule was considered and REJECTED: the good
+# case (careers, 2 hits) and the bad case (claude-artifacts, 3 hits) both satisfy it,
+# so it does not discriminate. No threshold on this signal will.
+# THE ROW READ IS NOT OPTIONAL. That is why report() prints them.
+DRIFT_LIMIT = 0.65
 
 
 def api_key():

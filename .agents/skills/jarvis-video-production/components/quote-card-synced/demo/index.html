@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>Word-synced citation card — DEMO (highlight tracks the VO word-by-word)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<!-- DEMO of the reusable word-synced citation card (rule 10.2). Word timings here are
+FABRICATED for the demo; a real scene pulls them from cue.py against the VO transcript.
+Duration 13s. Bed drifts so no frame is static. All motion on the registered tl. -->
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:#0A0E14;
+    font-family:'EB Garamond',Georgia,serif}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#0A0E14}
+  .bgwrap{position:absolute;inset:0;z-index:1;overflow:hidden}
+  .bgwrap img{width:100%;height:100%;object-fit:cover;will-change:transform}
+  .bgscrim{position:absolute;inset:0;z-index:2;
+    background:radial-gradient(ellipse at 50% 46%,rgba(8,11,16,.52),rgba(5,8,12,.82))}
+
+  /* cream evidence register — matches make-pullquote-card.py (#F4F1EA / Georgia ink) */
+  #qc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:12;
+      width:1180px;opacity:0;will-change:opacity,transform}
+  #qc .qc-card{position:relative;background:#F4F1EA;border-radius:6px;
+      padding:64px 76px 58px;box-shadow:0 40px 120px rgba(0,0,0,.62);
+      border:1px solid #E4DDCB}
+  #qc .qc-kick{font-family:'JetBrains Mono',monospace;font-size:26px;letter-spacing:.34em;
+      text-transform:uppercase;color:#8A7B57;font-weight:700}
+  #qc .qc-rule{height:2px;background:#16181C;opacity:.16;margin:22px 0 34px;
+      transform-origin:0 50%}
+  /* the quote — words are spans; pending dim, read full-ink */
+  #qc .qc-quote{font-family:'EB Garamond',Georgia,serif;font-size:60px;line-height:1.30;
+      color:#16181C;font-weight:700}
+  #qc .qc-w{opacity:.24;transition:none;white-space:pre}       /* pending ink */
+  #qc .qc-w.lit{opacity:1}                                     /* set by tween, not CSS */
+  /* the read-progress underline sweeping beneath the text */
+  #qc .qc-underwrap{position:relative;height:0}
+  #qc .qc-attr{margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:24px;
+      letter-spacing:.06em;color:#6B5F45;font-weight:600}
+  #qc .qc-seal{position:absolute;right:60px;bottom:52px;width:70px;height:70px;
+      border:2px solid #C9B27A;border-radius:50%;opacity:.55;
+      display:flex;align-items:center;justify-content:center}
+  #qc .qc-seal:after{content:"";width:34px;height:34px;border:1px solid #C9B27A;
+      border-radius:50%}
+
+</style></head>
+<body>
+<div id="root" class="clip" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="13">
+  <div class="bgwrap"><img id="bgv" src="assets/bg-open-desk.png" alt="" data-layout-allow-overflow /></div>
+  <div class="bgscrim"></div>
+<div id="qc">
+  <div class="qc-card">
+    <div class="qc-kick" id="qc-kick"></div>
+    <div class="qc-rule" id="qc-rule"></div>
+    <div class="qc-quote" id="qc-quote"></div>
+    <div class="qc-attr" id="qc-attr"></div>
+    <div class="qc-seal"></div>
+  </div>
+</div>
+</div>
+<script>
+function mountQuoteCard(tl, o){
+  var box = document.getElementById('qc-quote');
+  var words = o.words || [];
+  document.getElementById('qc-kick').textContent = o.kicker || '';
+  document.getElementById('qc-attr').textContent = o.attribution || '';
+
+  // build one span per word (punctuation rides with its word; a trailing space span
+  // keeps natural wrapping without the space itself lighting up)
+  box.innerHTML = '';
+  var spans = [];
+  words.forEach(function(item, i){
+    var s = document.createElement('span');
+    s.className = 'qc-w'; s.id = 'qc-w-' + i; s.textContent = item.w;
+    box.appendChild(s); spans.push(s);
+    if (i < words.length - 1) box.appendChild(document.createTextNode(' '));
+  });
+
+  var cardIn = (o.cardIn != null) ? o.cardIn : 0.4;
+
+  // card in — fast, then it stays put (one tween, one property window)
+  tl.fromTo('#qc', {opacity:0, y:24}, {opacity:1, y:0, duration:.5, ease:'power3.out'}, cardIn);
+  tl.fromTo('#qc-rule', {scaleX:0}, {scaleX:1, duration:.6, ease:'power3.inOut'}, cardIn + .15);
+
+  // per-word highlight: ONE independent opacity tween each, at its VO word-start.
+  // dim -> full. No overlap between words (each targets a different element).
+  words.forEach(function(item, i){
+    var t = Math.max(item.t, cardIn + .5);   // never light a word before the card is in
+    tl.to('#qc-w-' + i, {opacity:1, duration:.18, ease:'power1.out'}, t);
+  });
+
+  // optional: fade the whole card out at holdOut
+  if (o.holdOut != null){
+    tl.to('#qc', {opacity:0, y:-18, duration:.45, ease:'power2.in'}, o.holdOut);
+  }
+}
+</script>
+<script>
+const tl = gsap.timeline({paused:true});
+window.__timelines = window.__timelines || {};
+window.__timelines["root"] = tl;
+tl.to("#bgv",{scale:1.08,duration:13,ease:"none"},0);
+
+mountQuoteCard(tl, {
+  kicker: "OPENAI · JULY 2026",
+  words: [{"w": "an", "t": 2.4}, {"w": "early", "t": 2.74}, {"w": "window", "t": 3.14}, {"w": "into", "t": 3.56}, {"w": "how", "t": 3.94}, {"w": "AI", "t": 4.3}, {"w": "may", "t": 4.64}, {"w": "be", "t": 5.0}, {"w": "reshaping", "t": 5.34}, {"w": "the", "t": 5.82}, {"w": "task", "t": 6.18}, {"w": "content", "t": 6.56}, {"w": "of", "t": 7.0}, {"w": "jobs", "t": 7.34}, {"w": "before", "t": 7.72}, {"w": "those", "t": 8.14}, {"w": "changes", "t": 8.54}, {"w": "appear", "t": 8.98}, {"w": "in", "t": 9.4}, {"w": "job", "t": 9.74}, {"w": "descriptions", "t": 10.1}, {"w": "or", "t": 10.64}, {"w": "titles", "t": 10.98}],
+  attribution: "“How AI is expanding what people do at work,” 2026",
+  cardIn: 1.0
+});
+</script>
+</body></html>
