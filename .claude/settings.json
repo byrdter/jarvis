@@ -56,40 +56,6 @@
       }
     ]
   },
-  "mcpServers": {
-    "gmail": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-gmail"
-      ],
-      "command": "npx",
-      "env": {}
-    },
-    "google-calendar": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-google-calendar"
-      ],
-      "command": "npx",
-      "env": {}
-    },
-    "slack": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-slack"
-      ],
-      "command": "npx",
-      "env": {}
-    },
-    "youtube": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-youtube"
-      ],
-      "command": "npx",
-      "env": {}
-    }
-  },
   "model": "claude-sonnet-4-5-20250929",
   "outputStyle": ".claude/output-style.md"
 }
