@@ -84,10 +84,27 @@ Beat content (write to VO, do not read as a list):
 **Do NOT** open with "in this video" or reference another video — that exemption in the Agent Harness
 teardown applies to reference/implementation videos, and this is an investigation.
 
-## 5. Beat map — the spine is a NARROWING
+## 5. Beat map — the spine is an ELIMINATION LIST
 
-Persistent on-screen spine (§1 requirement): a **funnel** that narrows each act —
-`11B tokens → 473 sessions → 47 sessions → 1 decision`. It stays on screen and updates.
+> **CORRECTED 2026-08-01.** This section originally specified a funnel
+> `11B tokens → 473 sessions → 47 sessions → 1 decision`. Measured against
+> `DECISION-RECORD-2026-08-01.md` §3.2 property 3, that is **four states across ~20 minutes — one
+> change every five minutes.** A static graphic, not a spine. Keep the funnel as a **one-shot cold-open
+> graphic** (good hook), and run this as the spine instead:
+
+```
+   WHAT IS BURNING THE LIMIT?
+   ▸ the model            ███ ruled out   (opus 96% — cost shape identical on sonnet)
+   ▸ output tokens        ███ ruled out   (0.4% of all tokens)
+   ▸ inefficiency         ███ ruled out   (13.7–31.8× cache ratio — ABOVE average)
+   ▸ ▓▓▓▓▓▓▓▓▓▓▓          ghosted
+   ▸ ▓▓▓▓▓▓▓▓▓▓▓          ghosted
+```
+
+Monotonic (fewer suspects survive) · ghosted rather than listed, so it shows how much is left without
+revealing what · updates at **every** beat · and the last surviving row **is** the verdict —
+session length, which no amount of prompting fixes. Uses the existing ghosted-slot-grid component;
+content must resolve within ~1.2s per `CONDUIT-VISUAL-SYSTEM.md`.
 
 | Time | % | Beat | Artifact on screen |
 |---|---|---|---|

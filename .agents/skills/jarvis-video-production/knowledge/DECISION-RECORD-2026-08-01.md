@@ -139,6 +139,94 @@ as *the* retention device above 8 minutes.
 **Not text-detectable** — it lives in the render. The checker reports it as MANUAL. Per the
 2026-07-26 note, gate and human each catch what the other misses; this is the human's.
 
+### 3.2 The persistent spine — the one item only your eyes can check
+
+`prepublish-check.py` reports this MANUAL and always will: it lives in the render, not the words.
+So it needs a real spec, not one line.
+
+#### What a spine is
+
+**A visual element that persists across the whole video and does two jobs at once:**
+1. **Position** — where are we, how much is left.
+2. **Anticipation** — the unrevealed parts are *visible* but not yet readable.
+
+Job 2 is the one people skip, and it is the one that holds. A progress bar reading "3 of 8" does
+job 1 only; it is decoration. `CONDUIT-VISUAL-SYSTEM.md`'s **ghosted-placeholder** device does both,
+and we already own the component.
+
+#### The evidenced distinction: a spine that REVEALS beats one that ANNOUNCES
+
+| Video | Spine | Score |
+|---|---|---|
+| **Universal Resilience** | 8 chapters, each a **new and worse limit**, revealed as it goes — *"Even That Hack Has a Hidden Limit"* | **69.61×** |
+| **Fractal Philosophy** | announces at [0:25] *"a framework of **three different things**"* — the whole structure, up front | **6.06×** |
+| Mackard | 8 chapters ≈60s each, **narrowing** general claim → juniors → salaries | 73.03× |
+| **Ours (Agent Harness)** | **no chapters declared, no spine at all** | **8.00×** |
+
+*Caveat: n=2 on the reveal-vs-announce comparison, confounded by topic, runtime and channel size.
+Treat as a strong steer, not proof.*
+
+**The rule this implies is just §3's curiosity gap applied to structure: the spine should show how
+much is LEFT without revealing WHAT is left.** Ghosted slots, not a table of contents.
+
+#### Four properties a spine must have
+
+1. **MONOTONIC** — each step moves one dimension the viewer cares about, always the same direction:
+   worse · bigger · narrower · closer · fewer suspects left. Universal Resilience's every rung is
+   *"and it's worse than that."* An unordered list of topics is not a spine.
+2. **GHOSTED, NOT LISTED** — unrevealed slots visible, contents not readable. Per
+   `CONDUIT-VISUAL-SYSTEM.md`, content must resolve within **~1.2s** of a panel appearing or it reads
+   as a dead frame.
+3. **UPDATES AT EVERY BEAT** — if it changes four times in twenty minutes it is a static graphic.
+   Each update is also a change-event feeding the 45–60/min density target.
+4. **RESOLVES AT THE VERDICT** — the last state *is* the answer. If the spine is still ambiguous at
+   the end, it was ornament.
+
+#### Four checks you can actually run on the render
+
+- **The screenshot test.** Grab frames at 25%, 50% and 75%. **Can you tell which is which from the
+  spine alone?** If not, it isn't carrying position.
+- **The 90-second test.** Is the spine on screen inside the first 90 seconds? Introduced at minute
+  eight, it is a chapter card, not a spine.
+- **The update count.** Count spine state-changes; it should be within ±2 of your beat count.
+  Fewer means static.
+- **The mute test.** With sound off, can a stranger tell the argument is *going somewhere*? That is
+  the whole function.
+
+#### Spine types, ranked by fit for the build register
+
+1. **ELIMINATION LIST** *(best fit — use this)* — named suspects, ghosted, struck through one at a
+   time. Monotonic (fewer remain), reveals rather than announces, updates every beat, resolves on the
+   survivor.
+2. **ESCALATING LADDER** — Universal Resilience's shape. Each rung worse than the last. Best when the
+   payoff is cumulative dread rather than a single answer.
+3. **NARROWING FUNNEL** — Mackard's shape. Good for scope, **but it usually has too few states** (see
+   the video-1 correction below).
+4. **COMPONENT CHECKLIST** — parts of a system ticked off as explained. Weakest: it tells position
+   but creates little anticipation, because the viewer can guess what's coming.
+5. **SECTION BADGE ALONE** — not a spine. Do not count it as one.
+
+#### ⚠️ Correction to the video-1 plan
+
+`VIDEO-PLAN-claude-code-usage.md` proposes the funnel `11B tokens → 473 sessions → 47 sessions →
+1 decision`. Measured against property 3 that is **four states across ~20 minutes — one change every
+five minutes.** That is a static graphic, not a spine.
+
+**Replace it with an ELIMINATION LIST**, which the plan's own beat map already implies:
+
+```
+   WHAT IS BURNING THE LIMIT?
+   ▸ the model            ███ ruled out  (opus 96% — but sonnet sessions cost the same shape)
+   ▸ output tokens        ███ ruled out  (0.4% of tokens)
+   ▸ inefficiency         ███ ruled out  (13.7–31.8× cache ratio, ABOVE average)
+   ▸ ▓▓▓▓▓▓▓▓▓▓           ghosted
+   ▸ ▓▓▓▓▓▓▓▓▓▓           ghosted
+```
+
+Monotonic, ghosted, updates at every beat, and the last surviving row *is* the verdict — session
+length, which you cannot prompt your way out of. Keep the funnel as a **one-shot graphic** in the
+cold open; it is a good hook and a bad spine.
+
 **Cadence flexes; the floor does not.** Nine videos in ten weeks that all clear the floor beats ten
 where three are filler. A video that isn't ready slips a week.
 
