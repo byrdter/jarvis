@@ -1,0 +1,216 @@
+[VO SCRIPT — VIDEO 1 — "I Measured 11 Billion Tokens in Claude Code. 10% of Sessions Burned 96%."]
+[MEASURED 16:50 — 2,441 words @ 145 wpm. Timings below computed from word position, not estimated.
+[and the TTS pass needs a pronunciation sweep before recording.]
+[SPINE: elimination list, ghosted rows. Struck through on the cues marked >>> SPINE.]
+[RE-RUN usage.py AND cost.py ON RECORD DAY — the dataset grows as you work. Figures below are
+[the 2026-08-01 snapshot.]
+
+[ACT 0 — COLD OPEN — 0:00–0:38 (0–3.9%)]
+[VISUAL: live terminal, the aggregation scrolling, the total landing hard.]
+
+11,017,948,194.
+
+That is how many tokens went through Claude Code on this machine in eight months. 473 sessions. 32,373 messages.
+
+At list API prices that workload prices out at $28,173. I never paid it. I'm on a flat subscription — no bill, no per-token charge, nothing itemised, nothing to look at.
+
+Which is exactly why I could not tell you how a single dollar of it was spent.
+
+The median session here cost 76 cents. The mean cost $59.56. One session cost $3,104.
+
+Three numbers that cannot all be true of the same workload.
+
+[ACT 1 — WHERE THE NUMBER COMES FROM — 0:38–4:06 (3.9–24.4%)]
+[VISUAL: the raw usage JSON, fields highlighted one at a time.]
+
+Nobody publishes this. There is no dashboard, no export, no monthly statement. On a subscription the meter is deliberately invisible, and that is not an accident — you are not being billed, so there is nothing to itemise.
+
+But the meter is not actually missing. It is sitting on your disk.
+
+Every message Claude Code sends writes a record to a JSONL file under your projects directory, and every one of those records carries a usage block. Not a summary. The actual counts, per message, going back to the day you installed it.
+
+Four numbers matter in it, and they are not interchangeable.
+
+Input tokens: what you typed, plus anything not already cached. Output tokens: what the model wrote back. Cache creation: the cost of putting context into the cache in the first place. And cache read: the cost of pulling that context back out on every subsequent turn.
+
+That last one is the one nobody thinks about, and it is about to matter more than everything else combined.
+
+There is a fifth field that almost nobody looks at, and it explains the shape of everything that follows. Cache creation is split by lifetime — five-minute blocks and one-hour blocks. On this machine, across eight months, the five-minute number is zero. Every single cached block was written with the one-hour lifetime. 735 million tokens of it.
+
+That is not a setting I chose. It is what long sessions produce, and it is the first hint that session length is doing something the rest of the numbers are hiding.
+
+Here is what eight months looks like when you add it up.
+
+Input: 3.9 million tokens. Output: 46.7 million. Cache creation: 733.9 million. Cache read: 10.23 billion.
+
+Cache reads are 92.9% of every token that moved.
+
+Now, that is a volume number, and volume is not cost. Cache reads are cheap — roughly a tenth of the input price. Cache writes are expensive — about a quarter more than input. Output is the most expensive thing on the list by a wide margin.
+
+So the volume ranking and the cost ranking are not the same ranking, and the difference is the whole problem.
+
+Priced out: cache reads are 52.6% of the cost. Cache writes, at less than 7% of the tokens, are 36.5% of the cost. Output — the thing that feels expensive, the thing you can actually watch being generated — is 10.7%.
+
+One caveat before any of this means anything. Those dollar figures are not a bill, and they are not published rates from my account. They are list API prices applied to measured token counts. I will put the rates on screen. Treat the shape as solid and the absolute number as an estimate.
+
+And the sample is what it is: 492 session files, 483 of which carry usage records. The rest are older or truncated. I am not claiming totality — I am claiming what is on the disk.
+
+None of which, so far, tells you what to change.
+
+[ACT 2 — SUSPECT ONE: THE MODEL — 4:06–5:41 (24.4–33.8%)]
+[>>> SPINE appears here, all rows ghosted.]
+[VISUAL: model table, the five tiers.]
+
+Let's do this properly. Something in here is burning the limit, and there are only so many candidates.
+
+Start with the obvious one. The model.
+
+96% of that spend is Opus-tier. 4% is Sonnet. Broken out further, it is not even one model — 7.6 billion tokens through one Opus generation, 1.6 billion through the next, 675 million through a fast variant, 669 million through Sonnet, 425 million through an older Opus.
+
+And the received wisdom is simple: stop using the expensive model for cheap work, and your problem goes away.
+
+Except it doesn't.
+
+Look at the Sonnet sessions on their own. Same shape. Same cache-read dominance, same distribution, same concentration in a handful of sessions. They are cheaper per token, and they fail in exactly the same pattern. Switching tiers moves the absolute number and changes nothing about where the number comes from.
+
+There is a harder version of this objection too. The work that produced those 11 billion tokens is not work Sonnet was doing. Long agentic runs, deep refactors, multi-file reasoning across a codebase — you don't downgrade those and get the same output for less. You downgrade them and get different output, and then you do the work twice.
+
+So the model is not the answer. Not because model choice is free — it isn't — but because it does not explain the distribution. Rule it out.
+
+[>>> SPINE: strike "the model".]
+
+[ACT 3 — SUSPECT TWO: OUTPUT TOKENS — 5:41–6:49 (33.8–40.5%)]
+[VISUAL: component bar, output shrinking to a sliver.]
+
+Second candidate, and this is the one almost everybody reaches for. Output tokens. Make the model write less. Stop it rambling. Ask for terse answers. Turn off the explanations.
+
+Output tokens are 0.4% of every token that moved through this machine.
+
+Not 4%. Zero point four.
+
+They cost more per unit than anything else on the list, so they punch well above their weight — they end up at 10.7% of the bill. But you could cut every output token in half, across eight months, across all 473 sessions, and you would move the total by about 5%.
+
+You would also have a worse assistant, and you would spend the difference asking follow-up questions, which are not free either.
+
+This is the trap in the whole genre of advice about this. The visible thing is not the expensive thing. Output is what you watch appear on screen, so it feels like the meter. It isn't the meter. It never was.
+
+Rule it out.
+
+[>>> SPINE: strike "output tokens".]
+
+[ACT 4 — THE REVERSAL — 6:49–8:45 (40.5–52.0%)  ** opens EXACTLY on the 40-55% window **]
+[VISUAL: the distribution. Median line. Then the long tail arriving and dwarfing it.]
+
+At this point I was still asking the wrong question.
+
+Every candidate so far — the model, the output length, the prompt style — is a question about efficiency. How do I make each turn cost less. And efficiency questions carry an assumption underneath them that nobody states out loud: that the cost is spread across the work.
+
+It isn't. It isn't spread at all.
+
+The median session on this machine cost 76 cents.
+
+The mean cost $59.56.
+
+When the mean is 78 times the median, you are not looking at a distribution. You are looking at two different populations wearing the same name.
+
+Here is the actual shape. The top 10% of sessions — about 47 of them — account for 96.2% of everything. The top 1%, five sessions, account for 28.5%.
+
+Five sessions. More than a quarter of eight months.
+
+Which means there is no general cost problem here. There never was. 426 of my sessions cost, collectively, almost nothing — a rounding error against the total. Every habit I could change, every prompt I could tighten, every model I could downgrade, applies overwhelmingly to sessions that were never the problem in the first place.
+
+The monthly numbers say the same thing louder. June: 1.2 billion tokens. July: 9.7 billion. Nothing changed about how I prompt between those two months. Nothing changed about the model. What changed is that July had long sessions in it and June did not.
+
+You cannot optimise a distribution like this by getting better on average. Average is not where the cost lives.
+
+So the question was never how do I make my sessions cheaper. It is: what actually happens inside those 47.
+
+[ACT 5 — ANATOMY OF THE $3,104 SESSION — 8:45–12:13 (52.0–72.6%)]
+[VISUAL: single-session drill-down. Token counters climbing, turn by turn.]
+
+The most expensive session on this machine ran to 1.38 billion tokens.
+
+One session. 1.38 billion. That is more than an eighth of my entire eight-month total, in a single sitting.
+
+3.2 million output tokens. And the API-equivalent price on that one session, alone, is $3,104.
+
+The next four are not close, but they are not small either — $1,936, $1,612, $1,373, $1,275.
+
+They are also not spread across my work. 94% of everything measured here came out of a single project directory. This is not a portfolio of expensive habits. It is one line of work, in a handful of sittings.
+
+So what were those sessions? They were not runaway loops. Nothing crashed, nothing retried forever, nothing got stuck in a cycle. I went back and read them. They are ordinary long sessions — the kind where you start with a question and end nine hours later with a working system, and the context has been accumulating the entire time.
+
+And that is the mechanism, and it is worth being precise about it, because it is not intuitive and nobody explains it.
+
+A long session does not cost more because it does more work. It costs more because every single turn re-reads everything that came before it. The context does not sit still and wait for you. It is paid for again on every message.
+
+Turn 200 in a session is not the same price as turn 2. It cannot be. Turn 2 reads a small context. Turn 200 reads a very large one — and then turn 201 reads it again, slightly larger.
+
+The growth is not linear either. Each turn adds to the context that every subsequent turn must re-read, so the cost of a session grows faster than the length of it. Doubling the number of turns does considerably more than double the tokens.
+
+That is not a bug, and there is nothing to file. It is simply what a conversation with memory costs.
+
+And there is a second edge to it that almost nobody knows about, which is where that one-hour cache lifetime comes back.
+
+The cache does not live forever. Every block written on this machine carries a one-hour lifetime — I never wrote a single five-minute block, and neither, most likely, did you. So if you step away from a long session for more than an hour, the cache behind it expires. Nothing warns you. Nothing looks different when you come back. It does not fail loudly, because it has not failed at all. But the next thing you type does not read from cache, because there is no longer a cache to read. It rebuilds the whole context from scratch, at cache-write prices, which are not a tenth of input — they are a quarter more than input.
+
+A lunch break in the middle of a nine-hour session is not free. It is one of the most expensive things you can do, and you cannot see it happening, and no counter anywhere will ever mention it.
+
+[ACT 6 — THE SECOND REVERSAL — 12:13–14:02 (72.6–83.4%)  ** plan called for 72–86%: HIT **]
+[VISUAL: cache-efficiency comparison. The expensive sessions sitting ABOVE the average line.]
+[This is the beat the whole video exists for. Do not rush it.]
+
+Which brings me to the thing I got wrong.
+
+I assumed those sessions were wasteful. That is the natural conclusion — they are enormous, they cost a fortune, so obviously something in them was sloppy. Bad prompting. Bloated context. Poor hygiene. Files read that never needed reading.
+
+So I measured it. Cache reads divided by cache writes — how many times each cached block gets reused. High is good. High means the cache is doing its job and you are not paying to rebuild context you already have.
+
+Across all 473 sessions, the ratio is 13.9.
+
+The ten most expensive sessions run between 13.7 and 31.8.
+
+They are not below average. Most of them are well above it. The most expensive sessions on this machine are among the best-cached sessions on this machine.
+
+They were not wasteful. They were efficient, and enormous, and those two things are not in tension — they were efficient because they were enormous. A long session reuses its cache more, not less. The very thing that makes it expensive is the thing that makes it efficient.
+
+So there is nothing to clean up. There is no bad habit hiding in there. Every lever I had been reaching for — better prompts, tighter context, cheaper models, less output — is aimed at inefficiency, and inefficiency is not what is happening.
+
+The cost is not a symptom of doing it badly. It is structural to doing it at length.
+
+Which leaves exactly one variable that actually moves: not how you work inside a session, but where you decide to end one.
+
+[>>> SPINE: strike "inefficiency". One row remains: SESSION LENGTH.]
+
+[ACT 7 — WHAT THIS ACTUALLY MEANS — 14:02–16:50 (83.4–100%)]
+[VISUAL: the surviving spine row. Then the honest-unknown card. Then land.]
+
+So the practical version, and it is shorter than you would like.
+
+You cannot prompt your way out of this. Nothing you type at turn 200 makes turn 200 cheap. The only decision with real leverage is scoping — whether a piece of work is one nine-hour session or three ninety-minute ones with a written handoff between them.
+
+Three shorter sessions doing identical work cost dramatically less than one long one, and not by a little, because you never pay to re-read the first two hours for the fifth time.
+
+And the handoff is not complicated, which is the part that annoyed me most. Before you end a session, have it write down what it just did and what comes next — the decisions, the files touched, the things that failed and why. Then start clean and read that back in. You are trading a few thousand tokens of summary for hundreds of millions of tokens of re-read. That is not a marginal saving. It is not the same order of magnitude.
+
+I did not invent that pattern. It is the same thing every long-running agent harness does, for the same reason — none of them can hold context forever either. I had been reading about it for months and never once noticed it applied to me, sitting at a keyboard, doing it wrong.
+
+That is an unsatisfying answer. It is also the only one the data supports.
+
+Now the part I cannot tell you, and I am not going to pretend otherwise.
+
+Everything here is measured. The tokens are measured, the distribution is measured, the cache ratios are measured. But I do not know how Anthropic's subscription limits weight cache reads against fresh input. That mapping isn't published, and I could not find it anywhere.
+
+So when I say these sessions are what eats your limit — that step is an inference. It is not a measurement. The token accounting is solid. The translation from tokens to your particular cap is not, and anyone telling you otherwise on a subscription plan is guessing too. They are just not saying so.
+
+What I can tell you is what is actually on your disk. 11,017,948,194 tokens. 473 sessions. 96.2% of it inside 47 of them.
+
+Not the model. Not the output. Not sloppiness.
+
+Just length — and length is the one thing nobody optimises, because it never looks like a cost until you count it.
+
+[END. Do not add an outro CTA — it spends the landing.]
+[GATE: prepublish-check.py --wpm 145 -> 0 FAIL. negation 3.21/min (26% hedge) · 9 data points in
+[first 45s · loop carried at [0:22] · no forbidden phrases · 16:50.
+[STILL YOURS TO CONFIRM: (1) the reversal at 6:49 is a real turn, not just dense negation;
+[(2) the [0:22] loop reads as a named question; (3) the spine — §3.2 screenshot/90s/update/mute tests.

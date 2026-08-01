@@ -150,7 +150,7 @@ def check(path, wpm_arg, runtime_arg, reference):
     npm = len(nh) / mins if mins else 0
     ok = npm >= NEG_PER_MIN
     add("PASS" if ok else "FAIL", f"1 negation >={NEG_PER_MIN}/min",
-        f"{npm:.1f}/min ({len(nh)} hits)   [ours 1.3 | UR 3.1 | Mackard 4.0]")
+        f"{npm:.2f}/min ({len(nh)} hits)   [ours 1.3 | UR 3.1 | Mackard 4.0]")
     if nh:
         hedge = sum(1 for _, term, _ in nh if term in HEDGE) / len(nh)
         ok = hedge <= HEDGE_MAX
@@ -198,7 +198,7 @@ def check(path, wpm_arg, runtime_arg, reference):
     wmin = (hi - lo) / 60.0
     dens = len(win) / wmin if wmin else 0
     add("REVIEW", "7 reversal at 40-55%",
-        f"{T.hms(lo)}-{T.hms(hi)}: negation {dens:.1f}/min vs {npm:.1f}/min overall. "
+        f"{T.hms(lo)}-{T.hms(hi)}: negation {dens:.2f}/min vs {npm:.2f}/min overall. "
         "DENSITY IS NOT A RELIABLE SIGNAL HERE -- validated 2026-08-01 against two known-good "
         "reversals (Mackard 4.1 vs 4.0, UR 2.3 vs 3.1) and it missed both. READ THE CLAUSES:")
     for l in T.context(words, win[:3], cap=3, span=9):
