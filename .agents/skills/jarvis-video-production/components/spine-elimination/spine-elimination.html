@@ -1,0 +1,209 @@
+<!-- ============================================================================
+     ELIMINATION-LIST SPINE — the persistent progress rail.
+     Spec: knowledge/DECISION-RECORD-2026-08-01.md §3.2 (the four properties).
+
+     A dark-navy left rail that persists across the whole video. Candidates start as
+     GHOSTED blocks — visible, unreadable — resolve to a name when the VO first names
+     them, light while under examination, and get struck when ruled out. The last row
+     resolves LAST and its resolution IS the verdict.
+
+     Satisfies §3.2:
+       1 MONOTONIC        — the remaining-counter only ever ticks down
+       2 GHOSTED NOT LISTED — slots visible from the start, names withheld; each resolves
+                            in 0.45s, inside the ~1.2s ghost limit (CONDUIT §5)
+       3 UPDATES EVERY BEAT — 3 events per row (resolve / light / strike) + counter ticks
+       4 RESOLVES AT VERDICT — the surviving row lights gold and holds
+
+     ---- WHY THIS IS SAFE UNDER THE RENDERER --------------------------------------
+     The bug that bit the earlier spine was an ambient LOOP sharing a property with a
+     discrete tween on the same element (breath vs resolve) — the loop overwrote the
+     resolve and the row rendered frozen. Here:
+       * ghost block and label are SEPARATE ELEMENTS. The ghost fades out, the label
+         fades in. Neither is ever tweened twice in overlapping windows.
+       * the strike bar is its own element (scaleX 0->1, once).
+       * the dim-after-strike tweens the LABEL's own opacity in a window that cannot
+         overlap its resolve tween. An overlay veil was tried first and rejected —
+         `hyperframes check` reports covering type as text_occluded, correctly.
+       * NOTHING here loops. If you add ambient motion later, put it on a dedicated
+         element that no discrete tween touches.
+     All motion on the registered tl; a bare gsap.to renders FROZEN.
+
+     ---- TIMINGS ------------------------------------------------------------------
+     Seconds, absolute on the master timeline. The values in the demo are derived from
+     VO-video1-claude-code-usage.txt's MEASURED act boundaries — but they are estimates
+     WITHIN each act. Before the real build, pin every `resolve` and `strike` to the
+     actual VO word-start:
+        python3 tools/cue.py <scene-transcript.json> "the model"
+     A spine that drifts off the sentence naming its own row is worse than no spine.
+
+     ---- USAGE --------------------------------------------------------------------
+       BLOCK A -> scene <style>;  BLOCK B -> a child of #root;  BLOCK C -> after the
+       scene's own tl calls. Then once:
+
+         mountSpine(tl, {
+           header: "WHAT IS BURNING THE LIMIT?",
+           spineIn: 246,
+           rows: [
+             {label:"THE MODEL",            resolve:252, strike:336},
+             {label:"OUTPUT TOKENS",        resolve:345, strike:404},
+             {label:"YOUR AVERAGE SESSION", resolve:415, strike:516},
+             {label:"A RUNAWAY LOOP",       resolve:585, strike:612},
+             {label:"INEFFICIENCY",         resolve:740, strike:818},
+             {label:"SESSION LENGTH",       resolve:832, verdict:845}
+           ]
+         });
+
+     Exactly one row carries `verdict` instead of `strike` — that is the survivor.
+     The renderer maps 'JetBrains Mono' to a bundled font.
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  /* dark navy ANALYSIS register (CONDUIT §2) — gold primary, one accent per scene */
+  #sp{position:absolute;left:64px;top:50%;transform:translateY(-50%);z-index:14;
+      width:352px;opacity:0;will-change:opacity}
+  #sp .sp-panel{background:rgba(14,18,25,.94);border:1px solid rgba(201,178,122,.22);
+      border-radius:5px;padding:30px 28px 24px;
+      box-shadow:0 30px 90px rgba(0,0,0,.55)}
+  #sp .sp-head{font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:.20em;
+      text-transform:uppercase;color:#C9B27A;font-weight:700;line-height:1.45}
+  #sp .sp-headrule{height:1px;background:#C9B27A;opacity:.30;margin:16px 0 20px;
+      transform-origin:0 50%}
+
+  /* one row = ghost + label + strike + veil, four independent elements */
+  #sp .sp-row{position:relative;padding:11px 0 11px 20px;min-height:26px}
+  #sp .sp-bullet{position:absolute;left:0;top:15px;width:7px;height:7px;
+      background:#C9B27A;opacity:.34;border-radius:1px}
+  #sp .sp-live{position:absolute;left:-28px;top:8px;width:3px;height:26px;
+      background:#C9B27A;opacity:0;border-radius:2px}      /* under-examination marker */
+  #sp .sp-ghost{position:absolute;left:20px;top:14px;height:11px;border-radius:2px;
+      background:repeating-linear-gradient(90deg,
+        rgba(201,178,122,.30) 0 9px, rgba(201,178,122,.09) 9px 15px)}
+  #sp .sp-label{position:relative;z-index:2;                 /* ABOVE the strike bar */
+      font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.055em;
+      color:#EBE4D2;font-weight:600;opacity:0;line-height:1.25}
+  /* the bar sits BEHIND the glyphs (z-index 1 vs the label's 2). Drawn on top it is
+     text_occluded and `hyperframes check` fails it — correctly. Behind, it still reads
+     as a strikethrough because it shows through the letter gaps, and the type stays
+     fully legible. */
+  #sp .sp-strike{position:absolute;left:18px;top:21px;height:2px;background:#C9B27A;
+      z-index:1;transform:scaleX(0);transform-origin:0 50%}
+
+  /* the survivor */
+  #sp .sp-row.sp-final .sp-label{color:#F2D89A}
+
+  /* monotonic counter — one element per value, shown in its own window */
+  #sp .sp-count{position:relative;height:40px;margin-top:22px;
+      border-top:1px solid rgba(201,178,122,.16);padding-top:16px}
+  #sp .sp-n{position:absolute;left:0;top:16px;font-family:'JetBrains Mono',monospace;
+      font-size:16px;letter-spacing:.16em;color:#8FA0B4;font-weight:600;opacity:0}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- child of #root. Rows and counter are injected by mountSpine. -->
+<div id="sp">
+  <div class="sp-panel">
+    <div class="sp-head" id="sp-head"></div>
+    <div class="sp-headrule" id="sp-headrule"></div>
+    <div id="sp-rows"></div>
+    <div class="sp-count" id="sp-count"></div>
+  </div>
+</div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+function mountSpine(tl, o){
+  var rows = o.rows || [];
+  var host = document.getElementById('sp-rows');
+  var cnt  = document.getElementById('sp-count');
+  document.getElementById('sp-head').textContent = o.header || '';
+  var spineIn = (o.spineIn != null) ? o.spineIn : 0;
+  var GHOST_W = [188, 214, 166, 232, 196, 178];   // varied so slots read as content, not a bar chart
+
+  // ---- build DOM: every animated thing gets its OWN element -------------------
+  host.innerHTML = '';
+  rows.forEach(function(r, i){
+    var row = document.createElement('div');
+    row.className = 'sp-row' + (r.verdict != null ? ' sp-final' : '');
+    row.id = 'sp-row-' + i;
+    row.innerHTML =
+      '<div class="sp-bullet" id="sp-bullet-' + i + '"></div>' +
+      '<div class="sp-live" id="sp-live-' + i + '"></div>' +
+      '<div class="sp-ghost" id="sp-ghost-' + i + '" style="width:' +
+        GHOST_W[i % GHOST_W.length] + 'px"></div>' +
+      '<div class="sp-label" id="sp-label-' + i + '">' + r.label + '</div>' +
+      '<div class="sp-strike" id="sp-strike-' + i + '"></div>';
+    host.appendChild(row);
+  });
+
+  // strike bar width must cover the label — measured after layout, not guessed
+  rows.forEach(function(r, i){
+    var lab = document.getElementById('sp-label-' + i);
+    var bar = document.getElementById('sp-strike-' + i);
+    bar.style.width = Math.round(lab.getBoundingClientRect().width + 8) + 'px';
+  });
+
+  // counter: one element per value. N counts DOWN only (§3.2 property 1).
+  var strikes = rows.filter(function(r){ return r.strike != null; })
+                    .map(function(r){ return r.strike; })
+                    .sort(function(a,b){ return a-b; });
+  cnt.innerHTML = '';
+  var total = rows.length;
+  for (var k = 0; k <= strikes.length; k++){
+    var n = total - k;
+    var el = document.createElement('div');
+    el.className = 'sp-n'; el.id = 'sp-n-' + k;
+    el.textContent = n + (n === 1 ? ' REMAINING' : ' REMAINING');
+    cnt.appendChild(el);
+  }
+
+  // ---- timeline: one tween per element per property, no overlapping windows ----
+  tl.fromTo('#sp', {opacity:0, x:-18}, {opacity:1, x:0, duration:.55, ease:'power3.out'}, spineIn);
+  tl.fromTo('#sp-headrule', {scaleX:0}, {scaleX:1, duration:.5, ease:'power3.inOut'}, spineIn + .2);
+
+  rows.forEach(function(r, i){
+    var t = r.resolve;
+
+    // ghost -> label. TWO ELEMENTS, one tween each. This is the pair that the old
+    // spine collapsed into one element, which is how the overwrite bug got in.
+    tl.to('#sp-ghost-' + i, {opacity:0, duration:.30, ease:'power2.in'}, t);
+    tl.fromTo('#sp-label-' + i, {opacity:0, x:-6},
+              {opacity:1, x:0, duration:.45, ease:'power3.out'}, t + .10);
+
+    // under-examination marker: in at resolve, out when this row is settled
+    var settled = (r.strike != null) ? r.strike : r.verdict;
+    tl.to('#sp-live-' + i, {opacity:1, duration:.25, ease:'power2.out'}, t + .10);
+    if (r.strike != null){
+      tl.to('#sp-live-' + i, {opacity:0, duration:.25, ease:'power2.in'}, settled);
+    }
+
+    if (r.strike != null){
+      // ruled out: strike bar draws, then the LABEL ITSELF dims.
+      // Do NOT overlay a veil on the text — hyperframes check reports that as
+      // text_occluded, and it is right to: covering type is not the same as dimming it.
+      // This is the label's SECOND opacity tween, in a window that cannot overlap the
+      // resolve tween — the same in/out pattern quote-card-synced uses safely.
+      tl.fromTo('#sp-strike-' + i, {scaleX:0},
+                {scaleX:1, duration:.38, ease:'power2.inOut'}, r.strike);
+      tl.to('#sp-label-' + i, {opacity:.46, duration:.40, ease:'power2.out'}, r.strike + .22);
+      tl.to('#sp-bullet-' + i, {opacity:.14, duration:.40, ease:'power2.out'}, r.strike + .22);
+    } else {
+      // the survivor: hold, then lift. Its label is already gold via .sp-final.
+      tl.to('#sp-row-' + i, {scale:1.045, duration:.5, ease:'power3.out'}, r.verdict);
+    }
+  });
+
+  // counter windows — each element visible only between consecutive strikes
+  for (var k = 0; k <= strikes.length; k++){
+    var start = (k === 0) ? spineIn + .5 : strikes[k-1] + .30;
+    tl.fromTo('#sp-n-' + k, {opacity:0}, {opacity:1, duration:.28, ease:'power2.out'}, start);
+    if (k < strikes.length){
+      tl.to('#sp-n-' + k, {opacity:0, duration:.20, ease:'power2.in'}, strikes[k] + .10);
+    }
+  }
+
+  if (o.holdOut != null){
+    tl.to('#sp', {opacity:0, x:-14, duration:.5, ease:'power2.in'}, o.holdOut);
+  }
+}
+</script>
