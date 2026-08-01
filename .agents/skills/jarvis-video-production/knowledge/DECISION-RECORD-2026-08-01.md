@@ -56,14 +56,88 @@ one.** That is why the swinging cost more than either register did.
 
 Set against our own 8.00× *Agent Harness*, which had none of these. The 69–82× teardowns all did.
 
-| Device | Agent Harness | **Floor** |
-|---|---|---|
-| Authored reversal at 40–55% | ✖ | ✅ required |
-| Negation density | 1.3/min | **≥3.0/min** |
-| One loop named early and carried | ✖ | ✅ required |
-| wpm | 125 | 135–150 |
-| Concrete data points in first 45s | — | **≥8** |
-| Persistent on-screen spine | ✖ | ✅ required |
+| # | Device | Agent Harness | **Floor** | Evidence |
+|---|---|---|---|---|
+| 1 | Negation density | 1.3/min | **≥3.0/min** | strong |
+| 2 | wpm | 125 | 135–150 | **weak — advisory** |
+| 3 | Concrete data points, first 45s | — | **≥8** | strong |
+| 4 | Forbidden phrases | 2 violations | **0** (1 documented exception) | strong |
+| 5 | Runtime | 19:26 | **15–25 min** | strong, this lane only |
+| 6 | One loop named early and **carried** | ✖ 0 carried | **≥1 carried** | strong |
+| 7 | Authored reversal at 40–55% | ✖ none | ✅ required | strongest |
+| 8 | Persistent on-screen spine | ✖ | ✅ required | strong, not text-detectable |
+
+**Enforced by `tools/prepublish-check.py`** — run on the VO script *before* render, the cheapest
+point to fail. It imports its term lists from `teardown.py` so the pre-publish ruler is byte-identical
+to the one that scored the reference videos. A different ruler would make the floor meaningless.
+
+### 3.1 Definitions — the authoritative spec
+
+**1. NEGATION DENSITY ≥3.0/min.** How often the narration marks a limit, contradiction or
+correction. Terms come from `teardown.py:NEGATION` (*can't · cannot · doesn't · isn't · never ·
+nobody · fails · failure · wrong · myth · limit · ceiling · wall · impossible · breaks · debunk ·
+actually · turns out · but · however · except · unless*).
+Measured: Mackard 4.0 (73.03×) · Universal Resilience 3.1 (69.61×) · **ours 1.3 (8.00×)**.
+*Why:* an argument built from contradiction creates tension; a description does not. Ours is a
+description.
+**Anti-gaming sub-check:** hedge terms (`but · however · actually · don't · doesn't`) must be
+**≤50%** of all negation hits. Noema scored 3.4/min but ran `but(104) don't(53)` — conversational
+hedging, not authored negation. Universal Resilience skewed to `limits(9) impossible(6) cannot(5)`.
+
+**2. WPM 135–150 — ADVISORY, DO NOT BLOCK ON IT.** Narration words per minute.
+Measured: Noema 168 (81.81×) · Mackard 151 · Universal Resilience 136 · **ours 125** · Fractal 183
+(6.06×). n=5 and the top scorer sat at 168 — the real signal is "not 125, not 183." Warn only.
+
+**3. ≥8 CONCRETE DATA POINTS IN THE FIRST 45s.** A number, date, proper noun (company / person /
+named system), named document, or quoted figure — anything the viewer can verify or picture.
+Measured: Mackard's 44s open = **8** (`2023 · up to 80% of software developers · by 2025 · 152,000
+laid off · Q1 2025 · Intel · Amazon · 30,000 roles`). Universal Resilience = 8
+(`1936 · Alan Turing · father of modern computing · progress bars · "2 minutes" · "17 minutes" ·
+"4 minutes"`). **Noema = 0 before 0:26** and is the counter-example.
+*Why:* this makes §2's information-first rule countable — the difference between a first frame that
+carries information and one that carries mood.
+
+**4. FORBIDDEN PHRASES = 0.** Grep for the §2 DELETE FOREVER register: *welcome back · today we're
+going to · in this video · on this channel · before we dive in*, the bio opener, and cross-references
+to other videos.
+**The one documented exception:** *Agent Harness* opened with *"This is part two of our three-part
+series"* **and** *"Before we dive into how it works"* — and pulled 16,561 impressions. For a
+**reference/implementation** video the viewer wants the agenda; they are confirming they are in the
+right place before committing 20 minutes. **For an investigation these stay forbidden.** The checker
+flags them and allows an explicit override with a stated reason.
+
+**5. RUNTIME 15–25 MIN.** Probe winners in this lane: 46.2 · 41.4 · 37.6 · 29.9 · 27.4 · 23.8 · 21.4
+· 16.3 · 15.0 min. Our *Agent Harness* 19:26. **This is NOT the 8:12-wins finding** — that came from
+the essay lane (Mackard / Universal Resilience / Fractal) and does not transfer. 15–25 is a
+deliberately conservative band inside the proven range while the craft floor is new.
+
+**6. ONE LOOP NAMED EARLY AND CARRIED.** A *loop* is a phrasing that names a question without
+answering it (`teardown.py:LOOP` — *why · how · what if · what happens · who decides · nobody knows ·
+the question · the catch · the twist · which raises · no one can*).
+**Carried vs spent is the whole point.** A loop answered within 30s is **spent** — the tension is
+cashed immediately. **Carried** = named, then left open until the payoff.
+Measured: Universal Resilience **[0:19]** *"But any algorithm, no matter how powerful"* — carried into
+the body. **Ours: 0.4 loops/min and every one answered on the spot. Zero carried.**
+**The metric is NOT density.** One carried loop beats eight spent ones; a high density of answered
+questions is *worse* than a single held one.
+
+**7. AUTHORED REVERSAL AT 40–55%.** A moment where the argument turns against itself. Two working
+shapes:
+- *Concede then escalate* — Universal Resilience **[9:37] = 42%**: "this doesn't mean we can never
+  verify an AI's correctness… just not in all scenarios" → into Rice's Theorem and intractability.
+- *Escalate the stake* — Mackard **[4:12] = 51%**: "But the most damaging effect isn't the code.
+  **It's the people.**" Technical complaint → the junior death spiral.
+**Ours: none** — the 40–55% window is the middle of an eight-step procedure.
+*Why:* it is what makes minute 12 feel different from minute 4. Its absence is the most likely
+single cause of the 0.87 watch-hours/video collapse.
+*Why that window:* §1 specified it, and both winners landed inside it independently (42%, 51%).
+
+**8. PERSISTENT ON-SCREEN SPINE.** A visual element that persists and shows progress: Universal
+Resilience's **escalating-limits ladder** (each rung "and it's worse than that"), Mackard's 8 chapters
+at ~60s, video 1's planned funnel `11B tokens → 473 sessions → 47 sessions → 1 decision`. §1 names it
+as *the* retention device above 8 minutes.
+**Not text-detectable** — it lives in the render. The checker reports it as MANUAL. Per the
+2026-07-26 note, gate and human each catch what the other misses; this is the human's.
 
 **Cadence flexes; the floor does not.** Nine videos in ten weeks that all clear the floor beats ten
 where three are filler. A video that isn't ready slips a week.
