@@ -246,7 +246,11 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global 0.7.72) — never bare `npx hyperframes`.
+Use the PINNED CLI (`hyperframes`, global **0.7.87** — verified 2026-08-01) — never bare
+`npx hyperframes`. **The global binary SELF-UPDATES**: it moved 0.7.84 → 0.7.87 inside a single
+session on 2026-08-01, so this number records what the current batch was rendered against, it does
+not lock anything. Run `hyperframes --version` at batch start and re-render the whole batch if it
+has moved (PIPELINE.md Step 5).
 
 **When the user asks for:** long-form videos, producing a video from a HeyGen recording, scene/visual
 work, revisions, QC, or packaging → load `jarvis-video-production` and follow `PIPELINE.md` (9 steps).

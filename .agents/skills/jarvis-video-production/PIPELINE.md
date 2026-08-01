@@ -162,8 +162,24 @@ HyperFrames render failures — a render can report success while producing noth
 > **Use the PINNED global CLI, never bare `npx hyperframes`.** `npx` grabs whatever version is in its
 > cache (this machine had 0.6.7 → 0.7.42 side by side); a scene that needs a registry block or adapter
 > from a newer version then renders wrong or fails silently. The pinned binary is installed globally
-> (`hyperframes --version` → **0.7.72**, at `/opt/homebrew/bin/hyperframes`). Re-pin with
-> `npm install -g hyperframes@<ver>` and bump this line when you deliberately upgrade.
+> (`hyperframes --version` → **0.7.87**, verified 2026-08-01, at `/opt/homebrew/bin/hyperframes`).
+> Re-pin with `npm install -g hyperframes@<ver>` and bump this line when you deliberately upgrade.
+>
+> **⚠️ THE GLOBAL BINARY SELF-UPDATES — the pin is a RECORD, not a lock.** On 2026-08-01 it reported
+> 0.7.84 at the start of a build and 0.7.87 an hour later, unprompted, with `npm ls -g` confirming
+> 0.7.87. A number written in prose here cannot hold it still. So: **capture `hyperframes --version`
+> at batch start, and assert it again before the master is assembled.** If it moved mid-batch you have
+> mixed-version scenes and must re-render — which is exactly the failure below, now able to happen
+> without anyone choosing to upgrade.
+>
+> **This is now a runnable gate, not a note — `tools/check-cli-pin.py`:**
+> ```
+> python3 tools/check-cli-pin.py --stamp <batch-dir>    # at batch start, before render 1
+> python3 tools/check-cli-pin.py --verify <batch-dir>   # before assemble-master.py
+> ```
+> It reads the pin from CLAUDE.md (one source of truth, not three), compares it to
+> `hyperframes --version`, and exits non-zero on mismatch or on mid-batch drift. Verified
+> 2026-08-01 against all three cases including a simulated mid-batch move.
 >
 > **Verify the pin before a batch, not after.** Bumped 0.7.42 → 0.7.72 on 2026-07-26 after the
 > messi-ai-investor build found the doc and the binary disagreed — scene 06 had been re-rendered on

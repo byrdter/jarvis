@@ -61,7 +61,10 @@ Act boundaries are measured in `VO-video1-claude-code-usage.txt`; the within-act
 component header are estimates until `cue.py` pins them.
 
 ## Known environment drift
-Built against **hyperframes 0.7.84** (`snapshot` reports 0.7.87). `CLAUDE.md` pins **0.7.72**. Per
-the standard's §6.5, when the pin moves the whole batch re-renders — nothing else is built against
-0.7.72 yet, so there is no mixed-version master, but **the pin in `CLAUDE.md` is stale and should be
-reconciled before the batch starts.**
+Built against **hyperframes 0.7.87** (`npm ls -g` authoritative, 2026-08-01).
+
+The binary reported 0.7.84 at the start of this build and 0.7.87 by the end — **it self-updated
+mid-build, unprompted.** The demo's clean `check` and its three snapshots are therefore 0.7.87
+output. The stale 0.7.72 pin has been reconciled across `CLAUDE.md`, `PIPELINE.md` and
+`HYPERFRAMES-TECHNIQUE-PALETTE.md`; all three now say the pin is a **record, not a lock**, and to
+assert the version at batch start AND before master assembly.

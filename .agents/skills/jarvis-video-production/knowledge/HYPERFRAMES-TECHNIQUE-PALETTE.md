@@ -146,7 +146,9 @@ Cloned 2026-07-08 (public `heygen-com` repos), stored on the **ORICO drive** to 
 - **`hyperframes/`** — the product monorepo: `registry/` (the SOURCE for all 142 `add` blocks +
   `registry/examples/`), `examples/`, `docs/`, and `skills/` (same skill docs as the plugin, at HEAD).
 - **`hyperframes-launch-video/`** — the flagship launch film (heavy: renders + assets).
-- **CLI is pinned:** run `hyperframes` (global, 0.7.72) — NEVER bare `npx hyperframes` (version roulette).
-  Pin bumped 0.7.42 → 0.7.72 on 2026-07-26; see PIPELINE.md Step 5 — when the pin moves, re-render the
+- **CLI is pinned:** run `hyperframes` (global, **0.7.87**, verified 2026-08-01) — NEVER bare
+  `npx hyperframes` (version roulette). The global binary **self-updates**; check it at batch start.
+  Pin bumped 0.7.42 → 0.7.72 (2026-07-26) → 0.7.87 (2026-08-01, self-updated); see PIPELINE.md
+  Step 5 — when the pin moves, re-render the
   whole batch so one master never mixes versions.
 - Re-pull with `git -C <repo> pull`. These are read-only reference; do not build inside them.
