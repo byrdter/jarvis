@@ -126,10 +126,19 @@ jarvis/                          # Public GitHub repository
 - [x] **Obsidian Integration** - Multi-domain second brain (7 domains)
 - [x] **Alpaca API Integration** - 200 SMA capable, 256+ days data
 - [x] **$100K Portfolio Allocation** - QQQ $25K, USO $10K conditional, BIL $65K
-- [x] **Heartbeat System** - Fully autonomous proactive execution (all 3 phases complete)
+- [~] ~~**Heartbeat System** - Fully autonomous proactive execution~~ **DELETED 2026-08-02.**
+  The python scaffold (`scripts/heartbeat/`) and its four launchd jobs were removed. They
+  never executed successfully — 129 TCC failures, 0 successes, 0-byte stdout logs — and could
+  not have worked regardless: `run_skill()` invoked `skills/<name>/run.py` but only 3 of 21
+  skills have one, and 4 of the 10 skills it called never existed. Its working functions are
+  covered elsewhere (news/YouTube/arXiv via `~/bin` daily jobs; morning briefing + memory
+  consolidation via the agent-sdk daily reflection). **Not covered by anything today: ETF
+  stage scan, stop-loss guard, monthly performance tracking.** Recover with
+  `git show d1e29a1:scripts/heartbeat/executor.py`.
 
-**Key Achievement:** Complete Asset Revesting workflow automated + expert validation + **Autonomous 24/7 execution**
-**Documentation:** See `HEARTBEAT-COMPLETE.md` and `context/memory/work-status.md` for details
+**Key Achievement:** Complete Asset Revesting workflow automated + expert validation
+**Documentation:** `../jarvis-private/context/memory/work-status.md`; audit + rationale in
+`reports/JARVIS-SYSTEM-AUDIT-2026-08-01.md`
 
 #### Phase 1 Extended: Content Creation Domain ✅ COMPLETE (Feb 22, 2026)
 - [x] **10-Day Promotional Blitz Content Library** - 18,000+ lines of pre-written content
