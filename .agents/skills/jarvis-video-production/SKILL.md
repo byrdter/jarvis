@@ -95,6 +95,13 @@ cadence, Shorts policy, and measurement baselines without duplicating this workf
   Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:
   `tools/outlier-scan.py` (which competitor ideas out-travelled their distribution) and
   `tools/teardown.py` (why — pull a proven video apart into a reusable structural spec).
+- **NARRATIVE STRUCTURE — the MIDDLE of the video (READ WITH the hooks doc when scripting):
+  [knowledge/NARRATIVE-STRUCTURE.md](knowledge/NARRATIVE-STRUCTURE.md)** — RETENTION-AND-HOOKS owns the
+  first 30 seconds; this owns the other fourteen minutes. The essay-vs-story finding (our *AI Doesn't
+  Hallucinate* master gave its payoff away at **5.6% of runtime** and abandoned its spine for **58%**
+  of it — while beating a 73× outlier on negation and loop density), the four-position spine
+  (question → escalation → reversal → verdict), the withholding ledger, and CTA placement.
+  Runnable gate: `tools/narrative-measure.py` — run it on the VO DRAFT, before recording.
 - **END-TO-END RUN (raw HeyGen take → finished master): [PIPELINE.md](PIPELINE.md)** — the canonical
   9-step runbook. Start here when producing a full video from a HeyGen recording.
 - **SCRIPTING (topic → VO script, PIPELINE Step 0): [SCRIPTING.md](SCRIPTING.md)** — research the

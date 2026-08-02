@@ -57,7 +57,12 @@ now a mechanic, not a number:
   blind-ship 12–15 again — that shape is what failed; only ship it once the curve has earned it.**
 - **Precondition for ANY runtime over ~8 min — all three, or trim to 8:**
   1. a payoff **withheld across the whole runtime** (a mystery or punchline, not just a 0:20 hook —
-     this is what holds the 19/30/45-min proven builds; see the 2026-07-29 teardowns),
+     this is what holds the 19/30/45-min proven builds; see the 2026-07-29 teardowns). **This is now
+     a measured gate, not a wish:** `jarvis-video-production/knowledge/NARRATIVE-STRUCTURE.md` +
+     `tools/narrative-measure.py` — first payoff ≥40% of runtime, spine silent-gap ≤90s, CTA after
+     the verdict. Our *AI Doesn't Hallucinate* master failed the first two at **5.6%** and **539s
+     (58% of runtime)** while beating a 73× outlier on negation and loop density — which is how we
+     know the device checklist alone is not sufficient. **Run it on the VO draft, before recording.**
   2. a **persistent on-screen progress spine** (scale ladder / component checklist / numbered
      framework / section badge — the real retention device),
   3. a **reversal at ~40–55%**.

@@ -116,6 +116,19 @@ That is a large enough sample to act on. But state the failure precisely: **the 
 attention badly, not that the subjects are wrong.** A conduit essay with a real spine and a reversal
 is untested — every one built so far lacks both.
 
+> ### ⚠️ CORRECTED 2026-08-02 — the last sentence is wrong for *AI Doesn't Hallucinate*
+>
+> Measured from that master's own word-level transcript (`tools/narrative-measure.py`), it **has an
+> authored reversal at 7:19 = 47.0% of runtime** — inside the §1 window — and scores **4.2
+> negations/min and 1.03 loop-openers/min**, beating the 73.03× Mackard outlier on both. The devices
+> were present. It still didn't hold.
+>
+> What it actually did: **stated its own verdict at 0:51 (5.6% of runtime)** and **named its spine
+> ("we're putting one word on trial") once at 1:21, then went silent on it for 539 seconds — 58% of
+> the runtime.** Full teardown and the model derived from it:
+> **`NARRATIVE-STRUCTURE.md`**. Do not repeat "conduit essays lack a reversal" — that claim was
+> asserted from the beat maps, not measured from the master, and this is §6.1 biting again.
+
 ## 6. Revised plan
 
 1. **Return to the Feb–April register** — named real system + number + verdict, built on work
