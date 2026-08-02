@@ -1,11 +1,15 @@
 ---
 name: jarvis-video-production
-description: Use when planning, producing, revising, QAing, or packaging Jarvis/Byrddynasty faceless YouTube videos or future channel videos. This is the canonical repo-visible video workflow for Codex and Claude Code: research intake, visual-first scripting, visual treatment boards, HyperFrames scene production, screenshots/web rolls/B-roll/code/terminal/diagram variety, asset-manifest usage, beads tracking, scene QC, concat/master render, thumbnail/title packaging, and episode command-center handoff. Use this instead of legacy HeyGen/avatar or still-image-only video skills unless the user explicitly asks for those older workflows.
+description: Use when planning, producing, revising, QAing, or packaging Jarvis, Byrddynasty, KeyAdvances, or future-channel YouTube videos. This is the canonical repo-visible video workflow for Codex and Claude Code: demand validation, pre-script packaging, research intake, visual-first scripting, visual treatment boards, HyperFrames scene production, asset-manifest usage, beads tracking, scene QC, master render, unlisted upload QA, reviewed localization, measurement, and handoff. Use this instead of legacy HeyGen/avatar or still-image-only video skills unless the user explicitly asks for those older workflows.
 ---
 
 # Jarvis Video Production
 
-This is the canonical production operator for Jarvis/Byrddynasty video work. It packages the current faceless-channel workflow so Codex and Claude Code use the same standards.
+This is the canonical production operator for Jarvis video work across channels. It packages one
+shared development and production core so Codex and Claude Code use the same standards. **Always load
+the active channel profile:** the profile changes editorial scope, audience promise, packaging assets,
+cadence, Shorts policy, and measurement baselines without duplicating this workflow. KeyAdvances uses
+**[references/channel-profiles/KEYADVANCES.md](references/channel-profiles/KEYADVANCES.md)**.
 
 ## Default Position
 
@@ -38,7 +42,7 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
   DELETE the "38-years bio + on-this-channel-we-keep-asking + welcome-back + today-we'll-explore"
   boilerplate. Hooks **reveal facts, withhold meaning** (prefer a paradox; reveal up to the QUESTION,
   stop before the ANSWER). End every scene on a pull; plant a mid-video reversal.
-  **Every 8-min video also gets 2 shorts** (~60s 9:16, recut from the main visuals — see §5 of that doc).
+  Shorts follow the active channel profile; never generate them automatically from every long-form video.
 - **FACELESS MODE (current, from 2026-07-26 — ~1-month test).** No avatar anywhere: no cold-open
   avatar, no avatar close, no avatar self-ID line. Every competitor in our set is faceless or genuinely
   on-screen; none uses an avatar. Faceless is also far cheaper to produce automatically. See
@@ -76,9 +80,17 @@ This is the canonical production operator for Jarvis/Byrddynasty video work. It 
 
 ## First Read
 
+- **SHARED DEVELOPMENT CORE: [references/WORKFLOW.md](references/WORKFLOW.md)** — demand evidence,
+  pre-script title/thumbnail approval, research, originality firewall, visual-first scripting,
+  rendered QC, unlisted upload QA, reviewed localization, and measurement. Load the active channel
+  profile before applying it.
+- **KEYADVANCES PROFILE: [references/channel-profiles/KEYADVANCES.md](references/channel-profiles/KEYADVANCES.md)** —
+  near-future human-usefulness scope, packaging identity, no-routine-Shorts rule, revival baseline,
+  upload/dubbing policy, scorecard, and operating rhythm. Required for every KeyAdvances task.
 - **RETENTION & HOOKS — the channel standard (READ FIRST when scripting): [knowledge/RETENTION-AND-HOOKS.md](knowledge/RETENTION-AND-HOOKS.md)** —
   the ~8-min rule, the information-first cold-open template, the curiosity-gap "reveal facts / withhold
-  meaning / reveal-up-to-the-question" hook rule, mid-video reversals, and the 2-shorts-per-video rule.
+  meaning / reveal-up-to-the-question" hook rule, and mid-video reversals. Shorts policy comes from the
+  active channel profile.
   Derived from the channel's real Studio retention data; governs every video and short.
   Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:
   `tools/outlier-scan.py` (which competitor ideas out-travelled their distribution) and
@@ -137,16 +149,19 @@ Then read only what the task needs:
 ## Required Workflow
 
 1. Create or claim a beads issue before implementation work.
-2. Build or update the episode command center: script, visual board, assets, scene status, approvals, blockers. For a new episode, run:
+2. Load the active channel profile, then follow [references/WORKFLOW.md](references/WORKFLOW.md).
+   **Demand evidence and the pre-script title/thumbnail package must pass before full research,
+   final VO, asset generation, or scene production.**
+3. Build or update the episode command center: script, visual board, assets, scene status, approvals, blockers. For a new episode, run:
 
 ```bash
 .agents/skills/jarvis-video-production/scripts/scaffold-command-center.sh video-XX-name
 ```
 
-3. Produce a visual treatment board before final VO or scene builds.
-4. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
-5. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.
-6. Run scene QC on rendered MP4s, not only previews. **TWO gates — both mandatory, fix every ERROR before Terry reviews:**
+4. Produce a visual treatment board before final VO or scene builds.
+5. Use `asset-library/MANIFEST.json` semantic keys for reusable assets. Copy assets into scene folders; do not symlink.
+6. Build scenes in HyperFrames by default. Use real screenshots/web artifacts for proof and B-roll/cinematic clips for pacing.
+7. Run scene QC on rendered MP4s, not only previews. **TWO gates — both mandatory, fix every ERROR before Terry reviews:**
    (a) Determinism/static-hold/white-frame:
    `python3 .agents/skills/jarvis-video-production/tools/scene-validator.py <project>/hyperframes-v3 --frames`
    (b) **Text-over-text / occlusion (scene-validator does NOT catch this):**
@@ -155,12 +170,15 @@ Then read only what the task needs:
    with time+selector+fixHint. Never trust a scene-build agent's "no-overlap" self-report — run this gate.
    (Genuinely-intentional layering can be marked `data-layout-allow-overlap` / `data-layout-allow-occlusion`
    on the element, per the tool's own fixHint.)
-7. Assemble the master with `tools/assemble-master.py` (varied xfade transitions + HeyGen avatar
+8. Assemble the master with `tools/assemble-master.py` (varied xfade transitions + HeyGen avatar
    white-frame handling). See [PIPELINE.md](PIPELINE.md) Step 7 + [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md).
    (The legacy `scripts/build-master.sh` plain-concat path is superseded — do not use it for avatar videos.)
 
-8. Package title, thumbnail brief, description, chapters, sources, and handoff notes.
-9. Close beads issues and follow the project session-close protocol, including push.
+9. Verify the pre-approved title/thumbnail against the final cut; prepare description, chapters,
+   sources, and handoff notes. A fundamental promise change returns to the pre-script gate.
+10. Upload unlisted for processing and operational QA. Review optional automatic dubs before
+    publication. Then publish/schedule and record the channel-profile scorecard checkpoints.
+11. Close beads issues and follow the project session-close protocol, including push.
 
 ## Current Supporting Libraries
 
