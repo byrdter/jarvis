@@ -213,6 +213,45 @@ announced both at 0:51.
 
 ## 7. Where the CTA goes
 
+### 7.1 The catalogue sweep — this is not a V2 problem, it is a template
+
+Measured 2026-08-02 across **every build on disk** (`tools/cta-sweep.py`, 36 builds — the
+hallucinations series and its 8-min recuts, VideoJuly1Production, AthleteAI, AIFinance, video-projects):
+
+> **36 of 36 place the CTA between 75.5% and 89.6% of runtime. Median 84.0%. There is no
+> counter-example in the entire catalogue.**
+
+| | |
+|---|---|
+| Builds with a dedicated `NN-cta` scene | **30 / 36** |
+| CTA position | min 79.6% · **median 84.0%** · mean 84.5% · max 89.6% |
+| CTA scene length | 14s – 76s (**median 45s**; the 15-min builds run 53–76s) |
+| Exactly ONE scene after the CTA | **28 / 30** |
+| The other 6 (no CTA scene) | ask is inline, 75.5%–87.1% |
+
+**And the scene that follows it is the payoff.** Reading the final scene of all 30: they open
+*"So why does AI get anything right—"*, *"So how does saying yes to easy money end with you paying
+more—"*, *"Here's where we land—"*, *"So does AI lie? Not exactly—"*, *"So here's where we'll leave
+you—"*. These are verdict scenes, not sign-offs. (16 of 30 match a strict verdict-opener regex; the
+remaining 14 are verdict scenes too, by reading — that part is judgment, the positions are not.)
+
+So the shape is identical every time: **argument → 45-second advertisement → the answer.** The one
+moment the viewer has been waiting for is the one moment preceded by a pitch. The V2 case is only
+the most visible because it says the quiet part out loud — *"Hold on. Before the verdict…"* — but
+the interrupt phrasing is incidental. **The placement is the defect.**
+
+*One partial exception, stated so the claim stays honest:* `01-pope-encyclical` puts its ask at 87.1%
+but **inside** the final scene (`09-human-close`) rather than in a scene of its own, so it may land
+after that video's payoff rather than before it. Its *position* matches the other 35; only its
+ordering-within-the-scene is unverified. Every other build has the CTA in its own slot ahead of the
+closing scene.
+
+Nothing chose this. It is the scaffold template propagating: `NN-cta` was authored as the
+second-to-last scene once, and every build since has inherited the slot. Zero variance across 36
+builds is the signature of a decision nobody made.
+
+### 7.2 The rule
+
 **After the verdict.** Never between the escalation and the payoff, and never in a scene that opens
 with the words "before the verdict."
 
@@ -252,13 +291,15 @@ It reads an optional `narrative.json` beside the transcript:
 away, the script isn't finished. Run it on the VO draft, not just the master — it works on any
 word-level transcript, so the defect is catchable before anything is rendered.
 
+Catalogue-wide CTA placement is a separate sweep: `python3 tools/cta-sweep.py` (§7.1).
+
 **Thresholds** (report-only; the script never fails a build):
 
 | Metric | Target | Hallucinations V2 |
 |---|---|---|
 | First payoff | **≥ 40% of runtime** | 5.6% ✖ |
 | Spine longest silent gap | **≤ 90s** | 539s ✖ |
-| CTA start | **after the verdict** | 84%, verdict at 90.4% ✖ |
+| CTA start | **after the verdict** | 84%, verdict at 90.4% ✖ (and 36/36 builds — §7.1) |
 | Reversal | 40–55% | 47.0% ✅ |
 | Negation | ≥ 3.0/min | 4.2 ✅ |
 | Loop-openers | ≥ 0.6/min | 1.03 ✅ |
