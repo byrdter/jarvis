@@ -24,16 +24,36 @@
 set -o pipefail
 
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"
-SESSION_ID="${CLAUDE_SESSION_ID:-unknown}"
 HOOKS_DIR="${PROJECT_DIR}/.claude/hooks"
 SESSIONS_DIR="${PROJECT_DIR}/.claude/sessions"
 LOG_FILE="${SESSIONS_DIR}/smart-recall.log"
-MARKER="${SESSIONS_DIR}/${SESSION_ID}.smart-recall.done"
 
 mkdir -p "$SESSIONS_DIR"
 
 # ---- read hook payload from stdin --------------------------------------------
+# Must happen BEFORE the marker gate: the session id lives in this payload.
 PAYLOAD="$(cat || true)"
+
+# ---- session id --------------------------------------------------------------
+# FIXED 2026-08-02. This previously read only $CLAUDE_SESSION_ID, which the hook
+# environment does not set — so SESSION_ID fell back to the literal "unknown",
+# and the very first such run wrote `unknown.smart-recall.done`. That one file
+# then matched the gate for EVERY later session, and the hook exited at line 1
+# without logging. It had been silently dead since 2026-05-29 (65 days).
+#
+# Claude Code passes session_id inside the stdin JSON, so read it from there
+# first. If it still can't be determined, scope the marker to the current
+# timestamp so a missing id can never permanently wedge the hook again.
+SESSION_ID="$(printf '%s' "$PAYLOAD" | python3 -c 'import json,sys
+try:
+  d = json.load(sys.stdin)
+  print(d.get("session_id") or d.get("sessionId") or "")
+except Exception:
+  pass' 2>/dev/null)"
+[ -z "$SESSION_ID" ] && SESSION_ID="${CLAUDE_SESSION_ID:-}"
+[ -z "$SESSION_ID" ] && SESSION_ID="noid-$(date +%Y%m%dT%H%M%S)-$$"
+
+MARKER="${SESSIONS_DIR}/${SESSION_ID}.smart-recall.done"
 
 # Gate: only run on the first prompt of this session.
 if [ -f "$MARKER" ]; then

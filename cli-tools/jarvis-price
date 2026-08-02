@@ -2,7 +2,18 @@
 # JARVIS Market Data CLI Wrapper
 # Activates venv and runs jarvis-price command
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve symlinks so this works when invoked via ~/bin/jarvis-price.
+# (Before 2026-08-02 this used dirname "$BASH_SOURCE" directly, which resolved to
+#  the symlink's directory and looked for the venv under ~/bin/market-data.)
+SELF="${BASH_SOURCE[0]}"
+while [ -L "$SELF" ]; do
+    LINK="$(readlink "$SELF")"
+    case "$LINK" in
+        /*) SELF="$LINK" ;;
+        *)  SELF="$(dirname "$SELF")/$LINK" ;;
+    esac
+done
+SCRIPT_DIR="$(cd "$(dirname "$SELF")" && pwd)"
 VENV_DIR="$SCRIPT_DIR/market-data/.venv"
 
 if [ ! -d "$VENV_DIR" ]; then

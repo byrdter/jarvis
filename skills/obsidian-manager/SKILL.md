@@ -38,7 +38,30 @@ metadata:
 
 **When to Use:** For vault organization, searching previous work, creating notes, or managing domain folders
 
-**Vault Location:** `/Volumes/ORICO/jarvis/obsidian-vault/`
+## ⚠️ Vault locations — read this before running any command below
+
+**LIVE vault (use this): `~/Obsidian/JARVIS/`** — 2,065 notes, written daily by the aggregator
+jobs. Five date-partitioned folders:
+
+| Folder | Notes | Written by |
+|---|---|---|
+| `News/YYYY-MM-DD/` | ~1,625 | `skills/news-aggregator/aggregate.py` (daily 07:00) |
+| `YouTube/YYYY-MM-DD/` | ~194 | `skills/youtube-*/fetch_transcripts.py` (daily 07:20) |
+| `Papers/YYYY-MM-DD/` | ~150 | `skills/arxiv-research-aggregator/aggregate-arxiv.py` |
+| `Reports/` | ~95 | digest + report jobs |
+| `arXiv-FullText/` | ~1 | `arxiv-fulltext.py` |
+
+**ARCHIVED vault (do NOT use): `/Volumes/ORICO/jarvis/obsidian-vault/`** — last written
+**2026-01-26**. This is the original 7-domain scheme (`content-creation`, `daily-notes`,
+`documentation`, `investments`, `presentations`, `productivity`, `research`, `templates`,
+`video-production`). It is a different vault with a different structure, not an older copy of
+the live one.
+
+**Corrected 2026-08-02.** This skill previously named only the ORICO path, so every command
+below searched a vault that had been dead for six months. The sections that follow still
+describe the 7-domain scheme — they apply to the **archived** vault. Nothing writes that
+structure any more; treat those sections as historical until the domain model is rebuilt
+against the live vault.
 
 ---
 
