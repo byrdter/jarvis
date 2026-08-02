@@ -14,9 +14,11 @@ Do not revive it as a general AI-news channel, a generic futurism channel, or an
 
 The recommended first revival video is:
 
-> **Don't Give an AI Agent Your Passwords Yet**
+> **Who Pays for the AI Data Center Next Door?**
 
-It combines three proven signals: the channel's own browser-agent interest, a current practical problem, and the contrarian/limit framing that outperforms ordinary AI news among comparable explainer channels.
+It combines a strong current YouTube demand lane, an immediate household consequence, contradictory evidence worth resolving, and the verdict-led framing that outperforms ordinary technology news among comparable explainer channels.
+
+> **Probe update, 2026-08-02:** A 27-query live YouTube demand probe was completed after this initial strategy was written. It materially changed the release order. The external evidence supports AI power costs, human rejuvenation trials, solid-state batteries, practical quantum advantage, and general AI-agent security. It does **not** yet support the specific agent-password framing, humanoid teleoperation framing, or an AI-scientist-limits episode strongly enough to lead the revival. Full row audit: [KEYADVANCES-YOUTUBE-DEMAND-PROBE-2026-08-02.md](KEYADVANCES-YOUTUBE-DEMAND-PROBE-2026-08-02.md).
 
 ## What the existing channel says
 
