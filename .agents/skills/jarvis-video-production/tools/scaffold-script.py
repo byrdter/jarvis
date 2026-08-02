@@ -5,9 +5,13 @@ Generates the script artifacts pre-filled with the topic, chosen lenses, and an 
 skeleton (with first-line ANCHOR placeholders that split-heygen.py will consume). You then
 fill in the researched, voiced script. See SCRIPTING.md.
 
+Structure it emits: cold-open (the QUESTION) · body beats (ESCALATION) · closing (the VERDICT)
+· CTA last. FACELESS by default. Both of those are load-bearing, not cosmetic — see
+knowledge/NARRATIVE-STRUCTURE.md §3 and §7.1.
+
 Usage:
   python3 scaffold-script.py --project <video-dir> --topic "..." \
-    --lenses "power-control,economic-futures" --scenes 8 [--title "Episode Title"]
+    --lenses "power-control,economic-futures" --scenes 8 [--title "Episode Title"] [--avatar]
 """
 import argparse, json, pathlib, datetime
 
@@ -20,6 +24,9 @@ def main():
     ap.add_argument("--title", default="")
     ap.add_argument("--lenses", default="power-control,economic-futures")
     ap.add_argument("--scenes", type=int, default=8)
+    ap.add_argument("--avatar", action="store_true",
+                    help="face-first mode (avatar on cold open + closing + CTA). Default is "
+                         "FACELESS — see RETENTION-AND-HOOKS.md §2 for the stop condition.")
     args = ap.parse_args()
 
     proj = pathlib.Path(args.project); sd = proj/"01-script"; sd.mkdir(parents=True, exist_ok=True)
@@ -36,12 +43,26 @@ def main():
     # knowledge/NARRATIVE-STRUCTURE.md §7: the ask goes AFTER the payoff, never between the
     # argument and the answer.
     body_n = max(1, n - 3)
-    roles = ["introduction"] + [f"beat-{i}" for i in range(1, body_n+1)] + ["closing", "cta"]
-    avatar = {0: True, len(roles)-2: True, len(roles)-1: True}
+    roles = ["cold-open"] + [f"beat-{i}" for i in range(1, body_n+1)] + ["closing", "cta"]
+    # FACELESS is the current mode (since 2026-07-26; see RETENTION-AND-HOOKS.md §2). No avatar
+    # anywhere unless --avatar is passed, which exists only for the documented stop condition:
+    # if first-30s retention drops against the face-first videos, face-first returns.
+    avatar = {0: True, len(roles)-2: True, len(roles)-1: True} if args.avatar else {}
 
-    INTRO_VO = (f"I'm an avatar for Dr. Terry Byrd, and today I'll be telling you about "
-                f"{args.topic}. <<Hook: a stop-you-in-your-tracks opening — you can lead with the hook "
-                f"and weave the self-intro in, as long as the recorded first line matches the anchor.>>")
+    # INFORMATION-FIRST cold open (video-production-standard.md §2). The first frame carries
+    # something concrete the viewer can READ, and the VO is about that thing. No self-ID, no
+    # "today we'll explore", no bio — those are the DELETE FOREVER register, and this stub used
+    # to pre-write them into every script. First-person PLURAL throughout.
+    INTRO_VO = (f"<<0:00 — THE CONCRETE THING. Name the document / filing / number / headline "
+                f"that is on screen right now, and say the sentence that makes it strange. "
+                f"Topic: {args.topic}.>>\n"
+                f"<<0:00–0:20 — THE HOOK. The most provocative concrete stake, as a PARADOX where "
+                f"possible: two facts that cannot both be true. Reveal FACTS freely; withhold "
+                f"MEANING. Consider the negation ladder: 'Not because X. Not because Y. Because—'>>\n"
+                f"<<0:20–0:35 — RE-OPEN THE LOOP. End on a NAMED QUESTION the viewer cannot answer "
+                f"alone — not the thesis, and not an agenda. This question must survive the whole "
+                f"runtime (NARRATIVE-STRUCTURE.md §3①); its answer belongs in the closing scene, "
+                f"NOT here.>>")
     # NOTE: this runs AFTER the verdict has landed. It must never defer the payoff — the old
     # stub opened "Before we land the final thought", which is the interrupt this channel was
     # measured doing in every build (NARRATIVE-STRUCTURE.md §7.1). Keep it short; the ask is
@@ -50,13 +71,20 @@ def main():
               "name.'>> If you want more of this — one hard question taken apart carefully, with "
               "no side to sell you — subscribe. If this one earned it, hit like; that's the signal "
               "that shows it to the next person asking the same question.")
-    DEF_ANCHOR = {"introduction": "I'm an avatar for Dr. Terry Byrd",
+    CLOSE_VO = ("<<THE VERDICT — the answer to the cold-open question, stated once, plainly, "
+                "unhedged. This is the payoff the whole runtime withheld; nothing may preview it "
+                "earlier (NARRATIVE-STRUCTURE.md §3④). Then the consequence, then out.>>")
+    DEF_ANCHOR = {"cold-open": "<<first ~6 words of the cold open, verbatim>>",
                   "cta": "<<first ~6 words of the CTA, verbatim>>",
                   "closing": "<<first ~6 words of the closing, verbatim>>"}
-    DEF_VO = {"introduction": INTRO_VO, "cta": CTA_VO}
-    DEF_TREAT = {"introduction": "avatar + hyperframes beside (lower-third; seed a recurring motif)",
-                 "cta": "AVATAR + CTA hyperframes: SUBSCRIBE · LIKE · RING THE BELL",
-                 "closing": "avatar + hyperframes; the closing question/idea on screen"}
+    DEF_VO = {"cold-open": INTRO_VO, "closing": CLOSE_VO, "cta": CTA_VO}
+    DEF_TREAT = {"cold-open": "CONCRETE ARTIFACT IN FRAME ONE — a named document / filing / real "
+                              "number / labelled chart, over the darkened moving bed. Never a "
+                              "gradient, particle field or kicker label alone: mood is not "
+                              "information. Seed the spine motif here.",
+                 "cta": "the spine device in its resolved/final state; no naked text",
+                 "closing": "the verdict landing inside an artifact — the spine completing, the "
+                            "row resolving, the ledger closing"}
 
     # SCRIPT-STRUCTURE.md
     struct = [f"# Script Structure — {title}\n",
@@ -82,8 +110,11 @@ def main():
     # COMPLETE-SCRIPT.md (script + scene markers + visual notes)
     comp = [f"# {title} — Complete Script\n",
             f"<!-- topic: {args.topic} · lenses: {', '.join(lenses)} · drafted: {today} -->",
-            "<!-- Voice: Dr. Terry Byrd, explorer's tone. Explore, don't predict. Thesis: "
-            "Technology is neutral. Choices aren't. (see SHOW-BIBLE.md) -->\n"]
+            "<!-- Voice: first-person PLURAL throughout, no singular exception (FACELESS mode). "
+            "Explore, don't predict. Thesis: Technology is neutral. Choices aren't. (SHOW-BIBLE.md) -->",
+            "<!-- STRUCTURE: cold open = the QUESTION · beats = ESCALATION (each must raise the cost "
+            "of not knowing, not just add support) · REVERSAL at 40-55% · closing = the VERDICT · "
+            "CTA last. The answer may not appear before the closing. NARRATIVE-STRUCTURE.md -->\n"]
     for i, role in enumerate(roles):
         lens = "—" if role == "cta" else lenses[i%len(lenses)]
         comp += [f"## [SCENE {i+1:02d}] {role}  ({'AVATAR' if avatar.get(i) else 'graphics'} · lens: {lens})",
@@ -92,7 +123,7 @@ def main():
     (sd/"COMPLETE-SCRIPT.md").write_text("\n".join(comp)+"\n")
 
     # VO-ONLY.md (what gets recorded in HeyGen)
-    vo = [f"# {title} — VO Only (record this in HeyGen)\n",
+    vo = [f"# {title} — VO Only (the recorded/synthesised script)\n",
           "<!-- Spoken words only. Each scene begins with its verbatim anchor (see SCRIPT-STRUCTURE.md). "
           "Keep a beat of silence between scenes where natural. -->\n"]
     for i, role in enumerate(roles):
@@ -112,9 +143,12 @@ def main():
     print(f"✓ scaffolded {sd}")
     for f in ["COMPLETE-SCRIPT.md","VO-ONLY.md","SCRIPT-STRUCTURE.md","claim-source-map.md","scenes.json"]:
         print(f"   - {f}")
-    print(f"\n{len(roles)} scenes: avatar intro · {body_n} body · CTA (pre-filled) · avatar close. "
-          f"Next: research (research-topic.py) + write, "
-          f"then fill anchors, record VO-ONLY.md, then split-heygen.py --spec 01-script/scenes.json")
+    mode = "FACE-FIRST (avatar)" if args.avatar else "FACELESS"
+    print(f"\n{len(roles)} scenes · {mode}: cold-open · {body_n} body · closing (THE VERDICT) · CTA last.")
+    print("   Next: research-topic.py + write · fill anchors · record VO-ONLY.md")
+    print("   THEN, before recording: python3 tools/narrative-measure.py on the draft transcript —")
+    print("   first payoff >=40% of runtime, spine silent-gap <=90s (NARRATIVE-STRUCTURE.md §8).")
+    print("   Then: split-heygen.py --spec 01-script/scenes.json")
 
 if __name__ == "__main__":
     main()
