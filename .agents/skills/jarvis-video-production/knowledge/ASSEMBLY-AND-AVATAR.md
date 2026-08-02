@@ -1,5 +1,11 @@
 # Master Assembly + HeyGen Avatar Handling
 
+> **LEGACY — MECHANICS ONLY (2026-08-02).** The Byrddynasty avatar is retired permanently. This doc
+> is NOT a production mode to choose and nothing here authorises putting an avatar in a new video.
+> Keep it for two things: the **xfade/audio-crossfade assembly mechanics**, and the **HeyGen
+> white-frame handling** you still need when reworking a pre-2026-08 project whose take has an
+> avatar in it. For new work: faceless, hard cuts, `knowledge/CITATION-CARD-FORMAT.md`.
+
 How to stitch per-scene renders into a master without the artifacts we hit. The proven tool is
 `tools/assemble-master.py` (xfade video + matched audio crossfade + white-frame handling). The
 legacy `scripts/build-master.sh` does plain concat with hard cuts — **do not use it** for avatar

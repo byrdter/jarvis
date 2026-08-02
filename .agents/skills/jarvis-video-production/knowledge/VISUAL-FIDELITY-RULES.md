@@ -74,7 +74,8 @@ If deleting the clips leaves an empty frame, the scene is under-built.
 ## RULE 4 — Animation density floor.
 
 **Minimum 45 timeline animations (`tl.to` + `tl.fromTo`) per content scene; target 70+.**
-Avatar/CTA scenes may run lower (≥35). Below the floor, the scene is under-built by
+CTA scenes may run lower (≥35). (The old "avatar scenes" exemption is void — no avatar since
+2026-08-02.) Below the floor, the scene is under-built by
 definition — go back and build the teaching graphic the map asked for.
 
 Reference: ponzi shipped 46–123/scene. The rejected athlete build ran 16–47.
@@ -122,8 +123,8 @@ bare gradient/ambient backdrop read as empty and fail review ("there is no backg
 - **Brighten it enough to be a real backdrop** (filter `brightness(~1.4–1.6)`, light scrim). A too-dark
   bg contributes almost no pixel variance and the near-empty gate still trips. Verify with the
   `scene-validator --frames` sweep.
-- Avatar scenes: the face is the primary layer; put the bg behind the **content column** (a right-side
-  `#bgPanel`) instead of full-frame behind the face.
+- ~~Avatar scenes: the face is the primary layer…~~ **VOID — no avatar scenes** (2026-08-02). The
+  right-side `#bgPanel` pattern is still useful whenever a scene has a dominant foreground column.
 
 ## RULE 8 — Build facsimiles, not text-and-boxes. Reach into the whole HyperFrames palette.
 

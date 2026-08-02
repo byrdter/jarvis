@@ -68,3 +68,15 @@ mid-build, unprompted.** The demo's clean `check` and its three snapshots are th
 output. The stale 0.7.72 pin has been reconciled across `CLAUDE.md`, `PIPELINE.md` and
 `HYPERFRAMES-TECHNIQUE-PALETTE.md`; all three now say the pin is a **record, not a lock**, and to
 assert the version at batch start AND before master assembly.
+
+> ### ⚠️ THIS COMPONENT NOW LAGS THE PIN — 2026-08-02
+> The pin moved to **0.7.88** (self-updated again, mid-session, unprompted). **0.7.87 above is left
+> as-written on purpose: it is a true record of what produced this demo and these snapshots, and
+> rewriting it would turn a verified fact into an unverified claim.**
+>
+> What that means in practice: this component's clean `check` and its snapshots have **not** been
+> re-verified against 0.7.88. Before it goes into a 0.7.88 batch, re-run `hyperframes check` in
+> `demo/`, re-snapshot, and then update this section with the new result. Until someone does that,
+> treat "passes check" here as a 0.7.87 claim only.
+>
+> The sibling `bed-drift` component was built and verified against 0.7.88 and does not carry this gap.

@@ -17,8 +17,10 @@ This includes:
 
 ## Legacy Video Skills
 
-- `skills/video-production/SKILL.md`: legacy HeyGen/avatar/Remotion workflow. Use only when the task intentionally involves talking-head/avatar production or old Remotion maintenance.
-- `skills/video-image-creation/SKILL.md`: legacy still-image workflow. Use only for thumbnails, concept frames, or standalone generated still assets.
+- ~~`skills/video-production/SKILL.md`~~ — **DELETED 2026-06-29** (HeyGen/avatar/Remotion). Do not
+  route here; the avatar is retired permanently (2026-08-02). Git-recoverable if ever needed.
+- ~~`skills/video-image-creation/SKILL.md`~~ — **DELETED 2026-06-29.** Use `image-generation` +
+  `cli-tools/make-text-card.py` for thumbnails/stills.
 - `.agents/skills/remotion-video-qa/`: use only for Remotion/talking-head projects or when explicitly QAing Remotion output.
 
 ## Supporting Current Skills

@@ -2,14 +2,15 @@
 
 **This is the current standard for evidence/argument-driven explainers** (proven on the
 "Strategic Pivot" set: V1 *The Choice* 16 min, V2 *Death of the Junior Engineer* 19 min, June 2026).
-It is a distinct PRODUCTION MODE from the avatar/HeyGen-xfade pipeline in `ASSEMBLY-AND-AVATAR.md`.
-Pick the mode by the content:
+> **THERE IS NO LONGER A MODE CHOICE (2026-08-02).** This doc used to open by asking you to pick
+> between citation-card mode and "avatar/xfade mode." The avatar is gone permanently, so
+> citation-card mode is simply **the** format. `ASSEMBLY-AND-AVATAR.md` survives for its
+> xfade/white-frame *mechanics* when working an old project — it is not a mode to select, and every
+> "avatar only for intro/CTA/closing" instruction anywhere in this file is void.
 
-- **Citation-card mode (this doc):** research/argument videos where verified quotes & documents ARE
-  the proof. Dark editorial register + **cream paper citation cards** that land full-frame on each
-  verified quote. Hard cuts. Avatar only for intro/CTA/closing.
-- **Avatar/xfade mode (`ASSEMBLY-AND-AVATAR.md`):** talking-head-led episodes; xfade transitions +
-  HeyGen white-frame handling via the xfade `tools/assemble-master.py`.
+**Citation-card format:** research/argument videos where verified quotes & documents ARE the proof.
+Dark editorial register + **cream paper citation cards** that land full-frame on each verified
+quote. Hard cuts. Graphics throughout — no avatar, in any scene.
 
 ---
 
@@ -41,7 +42,7 @@ Each content scene is ONE HyperFrames composition (`hyperframes-v3/scenes/<name>
   there with a small ~0.3s lead. Whisper renders numbers as digits ("62%") and mis-hears names
   (Kuyda→"Kaida", Skip→"Skimp") — match the transcribed tokens, not the script spelling.
 
-## Evidence-first timing + avatar side-text (V5 review — hard rules)
+## Evidence-first timing (V5 review — hard rules)
 Every recurring note on V5 reduced to these. Apply by default:
 1. **Evidence lands ON the VO stat, THEN elaborate.** When the VO says a number, the highlighted
    article card lands *at that word* (evidence + VO together) and holds until the sentence finishes —
@@ -56,9 +57,9 @@ Every recurring note on V5 reduced to these. Apply by default:
    lifts base luminance past the dead-space floor. Reserve full-frame text beats for titles/landings.
 4. **Name it, THEN show it.** If a clip is ambiguous (a brain scan, a lab bench), reveal the
    identifying text FIRST ("IBM Watson × MD Anderson · cancer care") and play the clip behind/after it.
-5. **Avatar text goes to the SIDE, never over the face.** In avatar scenes (intro/CTA), put brand/
-   landing text in a left- (or right-) gradient **side-panel** with the avatar visible and lit — not a
-   full-frame scrim + centred text over the face. (See `ASSEMBLY-AND-AVATAR.md`.)
+5. ~~**Avatar text goes to the SIDE, never over the face.**~~ **VOID — no avatar scenes exist**
+   (2026-08-02). The surviving general rule: never stack text over text, and give a landing line its
+   own clean layer rather than scrimming something else to make room for it.
 6. **Don't reuse one "hero" clip for two different named examples** (same radiology clip for both the
    IBM cancer beat and the Siemens imaging beat) — the audience notices. Give each a distinct shot; and
    when the VO names a specific example, the visual must be THAT example (not a high-breadth car under a
@@ -269,8 +270,8 @@ inserting cream citation cards — not rebuilding from scratch. Check for an exi
 Locked while reviewing the first "beyond text+boxes" flagships. Apply to EVERY scene:
 - **NO four-corner chrome text.** Drop the top-right channel mark and both bottom footer captions/rule —
   Terry cut them ("not needed"). Keep the frame clean; the content carries it.
-- **Never text OVER the avatar, never text OVER other text.** In avatar scenes (intro/CTA/close) text
-  goes to a side panel, never across the face (see `ASSEMBLY-AND-AVATAR.md`). In graphic scenes,
+- **Never text OVER other text.** (The old "never over the avatar" half is void — no avatar since
+  2026-08-02.) In graphic scenes,
   stacked labels must **FLOW** (block children with margins), never be absolutely positioned at the same
   coordinates — the V04 bug was a big number's multi-line caption colliding with a note pinned beneath it.
 - **Faded background as needed.** A bare gradient reads as "no background." Put the scene's `bg-*` still
@@ -293,7 +294,8 @@ Locked while reviewing the first "beyond text+boxes" flagships. Apply to EVERY s
 
 ## Full-batch fan-out production lessons (V03/V04/V05 build, 2026-07-09)
 Building 3 whole videos (32 scenes) via parallel subagents + operator render/QC. Hard-won:
-- **Avatar-scene layering:** the avatar `<video>` fills the frame at a positive z-index; a positive
+- **Avatar-scene layering (LEGACY — no avatar scenes since 2026-08-02; the z-index lesson still
+  applies to any full-frame `<video>`):** the avatar `<video>` fills the frame at a positive z-index; a positive
   z-index PAINTS OVER auto/`z:0` children, so side-panel text put at auto z is INVISIBLE in the render
   (validate still "sees" it → looks fine, renders blank). Put the avatar `.av` at z1, the gradient
   side-panel at z3, and ALL text at **z≥6** (matches the working b-roll layering). Verify with a rendered

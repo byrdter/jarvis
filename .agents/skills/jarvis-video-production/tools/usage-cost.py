@@ -1,10 +1,25 @@
 import json,os,glob,collections,statistics
 ROOT=os.path.expanduser("~/.claude/projects")
-# public API list prices $/Mtok. OPUS tier vs SONNET tier. cache_read=0.1x in, cache_write=1.25x in
-P={"opus":{"in":15.0,"out":75.0},"sonnet":{"in":3.0,"out":15.0},"haiku":{"in":1.0,"out":5.0}}
+# Published API list prices, $/Mtok. VERIFIED 2026-08-02 against a 4K capture of
+# platform.claude.com/docs/en/about-claude/pricing (capture C5, in the project assets).
+# Multipliers read off that page and confirmed: 5m cache write = 1.25x base input,
+# 1h cache write = 2.00x, "Cache Hits & Refreshes" (read) = 0.10x. The two write TTLs are
+# priced separately below from usage.cache_creation, which carries both counts on every record.
+#
+# WAS WRONG until 2026-08-02: this table carried opus 15/75 — that is Opus 4 / 4.1 pricing
+# (deprecated and retired respectively), not the current Opus tier — plus a flat 1.25x write.
+# Together those inflated the total ~2.1x. Do not "restore" those numbers.
+P={"opus":   {"in": 5.0,"out":25.0},  # Opus 5 / 4.8 / 4.7 / 4.6 / 4.5
+   "fable":  {"in":10.0,"out":50.0},  # Fable 5 / Mythos 5
+   "sonnet5":{"in": 2.0,"out":10.0},  # INTRODUCTORY, through 2026-08-31; $3/$15 from 2026-09-01
+   "sonnet": {"in": 3.0,"out":15.0},  # Sonnet 4.6 / 4.5 / 4
+   "haiku":  {"in": 1.0,"out": 5.0}}
+CW_1H, CW_5M = 2.00, 1.25
 def tier(m):
     m=m.lower()
-    if "opus" in m or "fable" in m: return "opus"
+    if "fable" in m or "mythos" in m: return "fable"
+    if "opus" in m: return "opus"
+    if "sonnet-5" in m: return "sonnet5"   # must precede the general sonnet test
     if "sonnet" in m: return "sonnet"
     if "haiku" in m: return "haiku"
     return "opus"
@@ -20,13 +35,24 @@ for f in glob.glob(os.path.join(ROOT,"*","*.jsonl")):
         t=tier(m.get("model") or ""); p=P[t]
         i=u.get("input_tokens") or 0; o=u.get("output_tokens") or 0
         cw=u.get("cache_creation_input_tokens") or 0; cr=u.get("cache_read_input_tokens") or 0
-        c=(i*p["in"] + o*p["out"] + cw*p["in"]*1.25 + cr*p["in"]*0.10)/1e6
+        # split the cache write by TTL — 1h writes cost 2.00x input, 5m writes 1.25x
+        cc=u.get("cache_creation")
+        if isinstance(cc,dict):
+            w1=cc.get("ephemeral_1h_input_tokens") or 0; w5=cc.get("ephemeral_5m_input_tokens") or 0
+        else:
+            w1,w5=0,cw            # no breakdown on this record: assume 5m (the cheaper rate)
+        cwcost=(w1*CW_1H + w5*CW_5M)*p["in"]/1e6
+        c=(i*p["in"] + o*p["out"] + cr*p["in"]*0.10)/1e6 + cwcost
         cost[t]+=c; comp["input"]+=i*p["in"]/1e6; comp["output"]+=o*p["out"]/1e6
-        comp["cache_write"]+=cw*p["in"]*1.25/1e6; comp["cache_read"]+=cr*p["in"]*0.10/1e6
+        comp["cache_write"]+=cwcost; comp["cache_read"]+=cr*p["in"]*0.10/1e6
         s["tok"]+=i+o+cw+cr; s["cost"]+=c; s["cr"]+=cr; s["cw"]+=cw; s["out"]+=o
     if s["tok"]: persess[f]=s
 T=sum(cost.values())
 print(f"=== API-EQUIVALENT COST (list price) — you paid a flat subscription ===")
+print(f"  ESTIMATE, not a bill. Published list rates $/Mtok, applied to measured counts:")
+print(f"    opus  in $5  / out $25    sonnet 4.6 in $3 / out $15    haiku in $1 / out $5")
+print(f"    fable in $10 / out $50    sonnet 5   in $2 / out $10 (intro, thru 2026-08-31)")
+print(f"    cache read 0.10x input    cache write 1.25x (5m TTL) / 2.00x (1h TTL)")
 print(f"  TOTAL  ${T:,.0f}   across {len(persess)} sessions\n")
 print("  by model tier:")
 for k,v in cost.most_common(): print(f"    {k:<8} ${v:>11,.0f}  {100*v/T:>5.1f}%")

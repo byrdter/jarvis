@@ -26,8 +26,11 @@ Use it for:
 
 ## Legacy / Special Case
 
-- `skills/video-production/SKILL.md`: legacy HeyGen + Remotion + avatar pipeline. Use only for intentional talking-head/avatar work.
-- `skills/video-image-creation/SKILL.md`: legacy still-image prompt workflow. Use only for thumbnails, concept frames, or one-off generated still assets.
+- ~~`skills/video-production/SKILL.md`~~ — **DELETED 2026-06-29** (HeyGen + Remotion + avatar
+  pipeline). Do not route here; it does not exist, and the avatar it served is retired permanently
+  (2026-08-02). Git-recoverable if ever needed.
+- ~~`skills/video-image-creation/SKILL.md`~~ — **DELETED 2026-06-29.** For one-off thumbnails/stills
+  use the `image-generation` skill + `cli-tools/make-text-card.py`.
 - `~/.claude/skills/byrddynasty-video-v14`: first proven faceless implementation. It should delegate to this repo skill; do not use it as source of truth.
 - `~/.claude/skills/byrddynasty-video-production`: older Claude-local vocabulary library. Its reusable content is mirrored under `references/channel-library/`.
 
@@ -38,4 +41,4 @@ Use it for:
 
 ## Rule
 
-When a task says "video production," "new episode," "future channel," "faceless channel," "HyperFrames video," or "Video 14 style," start here unless the user explicitly asks for a legacy avatar/still-image workflow.
+When a task says "video production," "new episode," "future channel," "faceless channel," "HyperFrames video," or "Video 14 style," start here. There is no legacy avatar workflow to fall back to — both legacy skills were deleted and the avatar is retired.

@@ -31,11 +31,11 @@ Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
   across every video. Every claim serves the thesis.
 - **Voice:** Dr. Terry Byrd — measured, explorer's tone. **Explore, don't predict.** Pose the
   trade-off; show the evidence; let the viewer weigh it. No hype, no doom.
-  - **First-person PLURAL — always.** The narrator speaks as **"we / us / our,"** never "I / me / my."
-    The ONE exception is the avatar's self-identification — "I am an avatar for Dr. Terry Byrd" (and
-    its close variant "I'm the avatar for Dr. Terry Byrd") stays singular. Everything else ("we went
-    looking," "we'd be suspicious," "we'll leave you," "we'll see you next time") is plural — the
-    collective-builder voice.
+  - **First-person PLURAL — always. NO EXCEPTIONS.** The narrator speaks as **"we / us / our,"**
+    never "I / me / my." There used to be one exception — the avatar's self-identification ("I am an
+    avatar for Dr. Terry Byrd") — and it is **gone with the avatar** (2026-08-02). Never write a
+    self-ID line, singular or otherwise. "We went looking," "we'd be suspicious," "we'll leave you,"
+    "we'll see you next time" — the collective-builder voice, start to finish.
   - **No "series" framing — each video STANDS ALONE.** Never say "the series," "this series," "the
     rest of the series," or imply the viewer must watch in any order. Videos relate to one another
     **only through the Show Bible** (shared thesis, lenses, recurring questions) — viewers search and
@@ -51,20 +51,23 @@ Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
 - **Length:** 10–15 min ≈ **1,500–2,200 spoken words** (~140 wpm). Don't pad; add evidence/examples.
 - **Arc:** hook (a stop-you-in-your-tracks open) → body via the chosen lens framework → close that
   lands the choice back on the viewer.
-- **Standard structure (Byrddynasty):** **avatar intro → body beats → CTA scene → avatar close.**
-  The **CTA is its OWN scene** (subscribe · like · ring the bell), placed just before the close, and
-  is **AVATARLESS by default** — the copy renders as graphics over the register, no avatar shown
-  (avatar on the CTA only if Terry explicitly asks for it on a specific video). The **intro and close**
-  are the avatar-visible scenes. The avatar still *voices* the CTA (VO only) — it just isn't *shown*.
-  `scaffold-script.py` pre-fills the intro opener ("I am an avatar for Dr. Terry Byrd…") and the full
-  CTA copy — keep the CTA as a separate scene, never tacked onto the close. Total ≈ 9–11 scenes (6–7
-  body beats + a separate CTA scene + the close).
+- **Standard structure (Byrddynasty) — FACELESS, and the CTA goes LAST:**
+  **cold-open → body beats → closing (THE VERDICT) → CTA.**
+  Every scene is graphics; there is no avatar anywhere. The four load-bearing positions are in
+  `knowledge/NARRATIVE-STRUCTURE.md` §3: the cold open poses the QUESTION, the body beats ESCALATE
+  (each must raise the cost of not knowing, not merely add support), a REVERSAL lands at 40–55%, and
+  the **closing is the VERDICT — the answer, which may not appear anywhere earlier.**
+  The **CTA is its OWN scene** (subscribe · like) and it comes **AFTER the closing**, never between
+  the argument and the payoff. *This changed 2026-08-02:* the CTA used to sit just before the close,
+  and measured across all 36 builds on disk (`tools/cta-sweep.py`) every single one put it at
+  75.5–89.6% of runtime — i.e. immediately ahead of the verdict. `scaffold-script.py` now emits the
+  corrected order. Total ≈ 9–11 scenes (6–7 body beats + the closing + the CTA).
 - For EACH scene, write a **distinctive first line** — the *anchor* `split-heygen.py` locates in the
   recorded take to split it. Unique and verbatim-stable; **don't reword after recording** (verify the
   anchors against the recorded VO, then split).
-- The **close** is avatar; the **CTA is avatarless graphics** (unless Terry asks otherwise); body
-  beats are usually graphics (but can use any register — see VISUAL-SOURCING). Mark `avatar` in
-  `scenes.json` accordingly — the CTA scene is **NOT** `avatar` by default.
+- **Every scene is graphics.** The `avatar` key in `scenes.json` is legacy — it exists so old
+  projects still parse and is never set on new work. Scene registers come from VISUAL-SOURCING /
+  CONDUIT-VISUAL-SYSTEM, not from who is on camera.
 
 ## Step 0d — Fact-check + claim-source map
 Every meaningful on-screen/spoken claim needs a source (or be framed as interpretation). Fill

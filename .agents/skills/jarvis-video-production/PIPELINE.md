@@ -4,8 +4,10 @@ The end-to-end runbook. Goal: Terry hands over **(1) the raw HeyGen mp4 and (2) 
 scene markers**, and the operator produces a complete first-cut master, running every QC gate, with
 **Terry's only required input at the final review**. This is the path; follow it in order.
 
-> Read first: this file, then `knowledge/HYPERFRAMES-LESSONS.md`, `knowledge/ASSEMBLY-AND-AVATAR.md`,
+> Read first: this file, then `knowledge/NARRATIVE-STRUCTURE.md`, `knowledge/HYPERFRAMES-LESSONS.md`,
 > `references/PRESENTATION-VARIETY.md`, `references/ANTI-PATTERNS.md`, `references/QC-PASS.md`.
+> (`knowledge/ASSEMBLY-AND-AVATAR.md` is LEGACY — xfade/white-frame mechanics for pre-2026-08
+> projects only. The channel is faceless; the avatar is retired.)
 > Tools live in `tools/` (`scene-validator.py`, `assemble-master.py`, `make-dispatch-endcard.py`,
 > `make-quote-card.py`). The legacy
 > `scripts/build-master.sh` / `validate-scenes.sh` are superseded — see LEGACY note at bottom.
@@ -35,8 +37,8 @@ video in the set carries one.
 
 ## Inputs the operator needs
 - `heygen.mp4` — the recorded take (one continuous VO performance).
-- The VO script broken into N scenes/segments, with per-scene "avatar visible vs graphics" intent
-  and any visibility notes.
+- The VO script broken into N scenes/segments. (Every scene is graphics — the channel is faceless
+  and the old per-scene "avatar visible vs graphics" decision no longer exists.)
 - Project dir: `${JARVIS_PRIVATE}/video-projects/<video-name>/` with a
   `hyperframes-v3/scenes/NN-name/` per scene (each: `index.html`, `hyperframes.json` with top-level
   `duration`, `assets/`, `renders/`).
@@ -95,7 +97,8 @@ people (quotes, press/public-domain photos, short real interview clips) are clea
 ## Step 4 — Author scenes (HyperFrames)
 Build each `index.html`. ALL motion on the registered `tl` (never free gsap). Add the ambient glow
 layer. Anchor every reveal to its VO word. Kicker labels ≥26px/700. No text-on-text / boxes-on-boxes.
-For avatar-visible scenes, pass the avatar through (light chrome only).
+(No avatar scenes — the channel is faceless. Old projects carrying an `avatar` scene key are the
+only place that path still runs.)
 
 **Before authoring each scene, pick its technique from `knowledge/HYPERFRAMES-TECHNIQUE-PALETTE.md`**
 (match the beat's JOB — proportion/place/timeline/relationship/comparison — never default to a text
@@ -161,15 +164,20 @@ HyperFrames render failures — a render can report success while producing noth
 
 > **Use the PINNED global CLI, never bare `npx hyperframes`.** `npx` grabs whatever version is in its
 > cache (this machine had 0.6.7 → 0.7.42 side by side); a scene that needs a registry block or adapter
-> from a newer version then renders wrong or fails silently. The pinned binary is installed globally
-> (`hyperframes --version` → **0.7.87**, verified 2026-08-01, at `/opt/homebrew/bin/hyperframes`).
-> Re-pin with `npm install -g hyperframes@<ver>` and bump this line when you deliberately upgrade.
+> from a newer version then renders wrong or fails silently. The binary lives at
+> `/opt/homebrew/bin/hyperframes`; re-pin with `npm install -g hyperframes@<ver>`.
 >
-> **⚠️ THE GLOBAL BINARY SELF-UPDATES — the pin is a RECORD, not a lock.** On 2026-08-01 it reported
-> 0.7.84 at the start of a build and 0.7.87 an hour later, unprompted, with `npm ls -g` confirming
-> 0.7.87. A number written in prose here cannot hold it still. So: **capture `hyperframes --version`
-> at batch start, and assert it again before the master is assembled.** If it moved mid-batch you have
-> mixed-version scenes and must re-render — which is exactly the failure below, now able to happen
+> **The version number is NOT repeated here — it lives in `CLAUDE.md` and nowhere else.**
+> `tools/check-cli-pin.py` parses it out of that one line. This doc used to restate it, and the
+> restatement went stale: the pin read 0.7.72 in three files for a week while 0.7.84+ was installed,
+> which produced one mixed-version master (messi-ai-investor). Do not reintroduce the number here —
+> run the gate instead.
+>
+> **⚠️ THE GLOBAL BINARY SELF-UPDATES — the pin is a RECORD, not a lock.** 0.7.84 → 0.7.87 inside one
+> session on 2026-08-01; 0.7.87 → 0.7.88 inside one session on 2026-08-02. Both unprompted, neither
+> chosen, neither noticed by eye. A number written in prose cannot hold it still. So: **capture the
+> version at batch start and assert it again before the master is assembled.** If it moved mid-batch
+> you have mixed-version scenes and must re-render — exactly the failure below, now able to happen
 > without anyone choosing to upgrade.
 >
 > **This is now a runnable gate, not a note — `tools/check-cli-pin.py`:**
@@ -383,13 +391,13 @@ part of a set) skips this step.
 
 ## Step 7 — Assemble the master
 Order scenes ascending by name, so the `99-dispatch-endcard` (Step 6c) lands LAST in the concat.
-Handle HeyGen avatar white frames (trim tail / freeze-fill head) per `knowledge/ASSEMBLY-AND-AVATAR.md`,
-then:
+(Legacy projects only: handle HeyGen avatar white frames — trim tail / freeze-fill head — per
+`knowledge/ASSEMBLY-AND-AVATAR.md`. Faceless builds have no avatar and no white frames.) Then:
 ```bash
 python3 <skill>/tools/assemble-master.py master.mp4
 ```
 (varied xfade transitions + matched audio crossfades; pad any scene whose VO runs to its last frame.)
-Run the FINAL master gate (freeze + white). Spot-check avatar boundaries and rebuilt beats by frame.
+Run the FINAL master gate (freeze + white). Spot-check scene boundaries and rebuilt beats by frame.
 
 ## Step 8 — Human review (the one checkpoint)
 Surface the finished master to Terry with: what changed, the gate results, and any flags. Iterate on
@@ -407,8 +415,12 @@ thumbnail is the channel face, and it uses a REAL photo of Terry reacting to the
 undocumented until 2026-07-29 and was gotten wrong twice in one batch precisely because the faceless
 rule is loud and this exception was written down nowhere.
 
-**Method — IMAGE-EDIT, not scene generation.** Feed the avatar as the source image; change the
-background, the clothing and the expression around the kept likeness.
+**Method — IMAGE-EDIT, not scene generation.** Feed a `TerryAvatars/` source PORTRAIT as the image;
+change the background, the clothing and the expression around the kept likeness.
+
+> These are still PHOTOS of Terry used for thumbnail art. They are **not** the retired video avatar
+> and this section is not a route back to it — the thumbnail face is a deliberate, documented
+> exception (2026-07-29) to the faceless rule, and it applies to the thumbnail ONLY.
 
 - **SOURCE:** `${JARVIS_PRIVATE}/TerryAvatars/terrybyrd3.png` (also TerryRed / TerryBlue / TerryBlack
   / TerryByrd1 / terrybyrd2 — same person, different treatments).

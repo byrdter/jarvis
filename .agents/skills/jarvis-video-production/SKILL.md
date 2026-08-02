@@ -132,8 +132,9 @@ cadence, Shorts policy, and measurement baselines without duplicating this workf
   kinetic type, and composited text — plus the 12 containers we should BUILD. **The container is a
   rhetorical act:** a terminal says "happening now," a filing says "on the record," a redaction says
   "someone hid this." Every beat gets a CONTAINER tag alongside its JOB tag at Step 3.
-- **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (avatar-mode QC gate) and
-  **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame master assembly) —
+- **Tools: [tools/scene-validator.py](tools/scene-validator.py)** (the pre-render determinism/QC
+  gate) and **[tools/assemble-master.py](tools/assemble-master.py)** (xfade + white-frame assembly —
+  the LEGACY avatar path; new faceless work uses `assemble-master-concat.py`, hard cuts) —
   these supersede the legacy `scripts/build-master.sh` / `scripts/validate-scenes.sh`.
 - **Citation-card-mode tools:** **[tools/cue.py](tools/cue.py)** (exact Whisper word-start for any cue
   phrase — VO-anchoring) and **[tools/assemble-master-concat.py](tools/assemble-master-concat.py)**
@@ -179,9 +180,11 @@ Then read only what the task needs:
    with time+selector+fixHint. Never trust a scene-build agent's "no-overlap" self-report — run this gate.
    (Genuinely-intentional layering can be marked `data-layout-allow-overlap` / `data-layout-allow-occlusion`
    on the element, per the tool's own fixHint.)
-8. Assemble the master with `tools/assemble-master.py` (varied xfade transitions + HeyGen avatar
-   white-frame handling). See [PIPELINE.md](PIPELINE.md) Step 7 + [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md).
-   (The legacy `scripts/build-master.sh` plain-concat path is superseded — do not use it for avatar videos.)
+8. Assemble the master with **`tools/assemble-master-concat.py`** (hard-cut concat-filter — the
+   faceless/citation-card standard). `tools/assemble-master.py` (xfade + HeyGen white-frame handling)
+   and [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md) are the LEGACY avatar path
+   — needed only when reworking a pre-2026-08 project. See [PIPELINE.md](PIPELINE.md) Step 7.
+   (The legacy `scripts/build-master.sh` plain-concat path is superseded — do not use it.)
 
 9. Verify the pre-approved title/thumbnail against the final cut; prepare description, chapters,
    sources, and handoff notes. A fundamental promise change returns to the pre-script gate.

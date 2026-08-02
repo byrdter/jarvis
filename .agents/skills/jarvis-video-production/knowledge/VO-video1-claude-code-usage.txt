@@ -8,15 +8,15 @@
 [ACT 0 — COLD OPEN — 0:00–0:38 (0–3.9%)]
 [VISUAL: live terminal, the aggregation scrolling, the total landing hard.]
 
-11,017,948,194.
+11,277,811,806.
 
-That is how many tokens went through Claude Code on this machine in eight months. 473 sessions. 32,373 messages.
+That is how many tokens went through Claude Code on this machine in eight months. 505 sessions. 33,166 messages.
 
-At list API prices that workload prices out at $28,173. I never paid it. I'm on a flat subscription — no bill, no per-token charge, nothing itemised, nothing to look at.
+At list API prices that workload prices out at $28,877. I never paid it. I'm on a flat subscription — no bill, no per-token charge, nothing itemised, nothing to look at.
 
 Which is exactly why I could not tell you how a single dollar of it was spent.
 
-The median session here cost 76 cents. The mean cost $59.56. One session cost $3,104.
+The median session here cost 76 cents. The mean cost $59.30. One session cost $3,104.
 
 Three numbers that cannot all be true of the same workload.
 
@@ -35,13 +35,13 @@ Input tokens: what you typed, plus anything not already cached. Output tokens: w
 
 That last one is the one nobody thinks about, and it is about to matter more than everything else combined.
 
-There is a fifth field that almost nobody looks at, and it explains the shape of everything that follows. Cache creation is split by lifetime — five-minute blocks and one-hour blocks. On this machine, across eight months, the five-minute number is zero. Every single cached block was written with the one-hour lifetime. 735 million tokens of it.
+There is a fifth field that almost nobody looks at, and it explains the shape of everything that follows. Cache creation is split by lifetime — five-minute blocks and one-hour blocks. On this machine, across eight months, the five-minute number is zero. Every single cached block was written with the one-hour lifetime. 751 million tokens of it.
 
 That is not a setting I chose. It is what long sessions produce, and it is the first hint that session length is doing something the rest of the numbers are hiding.
 
 Here is what eight months looks like when you add it up.
 
-Input: 3.9 million tokens. Output: 46.7 million. Cache creation: 733.9 million. Cache read: 10.23 billion.
+Input: 3.9 million tokens. Output: 47.8 million. Cache creation: 749.7 million. Cache read: 10.48 billion.
 
 Cache reads are 92.9% of every token that moved.
 
@@ -49,11 +49,11 @@ Now, that is a volume number, and volume is not cost. Cache reads are cheap — 
 
 So the volume ranking and the cost ranking are not the same ranking, and the difference is the whole problem.
 
-Priced out: cache reads are 52.6% of the cost. Cache writes, at less than 7% of the tokens, are 36.5% of the cost. Output — the thing that feels expensive, the thing you can actually watch being generated — is 10.7%.
+Priced out: cache reads are 52.6% of the cost. Cache writes, at less than 7% of the tokens, are 36.5% of the cost. Output — the thing that feels expensive, the thing you can actually watch being generated — is 10.6%.
 
 One caveat before any of this means anything. Those dollar figures are not a bill, and they are not published rates from my account. They are list API prices applied to measured token counts. I will put the rates on screen. Treat the shape as solid and the absolute number as an estimate.
 
-And the sample is what it is: 492 session files, 483 of which carry usage records. The rest are older or truncated. I am not claiming totality — I am claiming what is on the disk.
+And the sample is what it is: 505 session files, 487 of which carry usage records. The rest are older or truncated. I am not claiming totality — I am claiming what is on the disk.
 
 None of which, so far, tells you what to change.
 
@@ -65,7 +65,7 @@ Let's do this properly. Something in here is burning the limit, and there are on
 
 Start with the obvious one. The model.
 
-96% of that spend is Opus-tier. 4% is Sonnet. Broken out further, it is not even one model — 7.6 billion tokens through one Opus generation, 1.6 billion through the next, 675 million through a fast variant, 669 million through Sonnet, 425 million through an older Opus.
+96% of that spend is Opus-tier. 4% is Sonnet. Broken out further, it is not even one model — 7.6 billion tokens through one Opus generation, 1.8 billion through the next, 688 million through Sonnet, 675 million through a fast variant, 425 million through an older Opus.
 
 And the received wisdom is simple: stop using the expensive model for cheap work, and your problem goes away.
 
@@ -88,7 +88,7 @@ Output tokens are 0.4% of every token that moved through this machine.
 
 Not 4%. Zero point four.
 
-They cost more per unit than anything else on the list, so they punch well above their weight — they end up at 10.7% of the bill. But you could cut every output token in half, across eight months, across all 473 sessions, and you would move the total by about 5%.
+They cost more per unit than anything else on the list, so they punch well above their weight — they end up at 10.6% of the bill. But you could cut every output token in half, across eight months, across all 487 sessions, and you would move the total by about 5%.
 
 You would also have a worse assistant, and you would spend the difference asking follow-up questions, which are not free either.
 
@@ -109,15 +109,15 @@ It isn't. It isn't spread at all.
 
 The median session on this machine cost 76 cents.
 
-The mean cost $59.56.
+The mean cost $59.30.
 
 When the mean is 78 times the median, you are not looking at a distribution. You are looking at two different populations wearing the same name.
 
-Here is the actual shape. The top 10% of sessions — about 47 of them — account for 96.2% of everything. The top 1%, five sessions, account for 28.5%.
+Here is the actual shape. The top 10% of sessions — about 49 of them — account for 96.2% of everything. The top 1%, five sessions, account for 27.8%.
 
 Five sessions. More than a quarter of eight months.
 
-Which means there is no general cost problem here. There never was. 426 of my sessions cost, collectively, almost nothing — a rounding error against the total. Every habit I could change, every prompt I could tighten, every model I could downgrade, applies overwhelmingly to sessions that were never the problem in the first place.
+Which means there is no general cost problem here. There never was. 438 of my sessions cost, collectively, almost nothing — a rounding error against the total. Every habit I could change, every prompt I could tighten, every model I could downgrade, applies overwhelmingly to sessions that were never the problem in the first place.
 
 The monthly numbers say the same thing louder. June: 1.2 billion tokens. July: 9.7 billion. Nothing changed about how I prompt between those two months. Nothing changed about the model. What changed is that July had long sessions in it and June did not.
 
@@ -166,7 +166,7 @@ I assumed those sessions were wasteful. That is the natural conclusion — they 
 
 So I measured it. Cache reads divided by cache writes — how many times each cached block gets reused. High is good. High means the cache is doing its job and you are not paying to rebuild context you already have.
 
-Across all 473 sessions, the ratio is 13.9.
+Across all 487 sessions, the ratio is 14.0.
 
 The ten most expensive sessions run between 13.7 and 31.8.
 
@@ -203,7 +203,7 @@ Everything here is measured. The tokens are measured, the distribution is measur
 
 So when I say these sessions are what eats your limit — that step is an inference. It is not a measurement. The token accounting is solid. The translation from tokens to your particular cap is not, and anyone telling you otherwise on a subscription plan is guessing too. They are just not saying so.
 
-What I can tell you is what is actually on your disk. 11,017,948,194 tokens. 473 sessions. 96.2% of it inside 47 of them.
+What I can tell you is what is actually on your disk. 11,277,811,806 tokens. 505 sessions. 96.2% of it inside 49 of them.
 
 Not the model. Not the output. Not sloppiness.
 

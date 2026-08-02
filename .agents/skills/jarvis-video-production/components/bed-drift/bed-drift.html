@@ -1,0 +1,100 @@
+<!-- ============================================================================
+     BED DRIFT — the always-moving photographic bed, as a tl transform.
+     Spec: CONDUIT-VISUAL-SYSTEM.md ("darkened, defocused photographic bed with
+     continuous ambient motion") + the 5-second anti-staleness floor.
+
+     Replaces a GENERATED bed clip with one continuous transform on the still.
+     Why this beats generating the bed as video:
+       * a 5s clip under a 2:47 scene loops ~16 times; this never loops at all
+       * one move spans the WHOLE scene, however long it is — change one number
+       * deterministic: re-renders identically, unlike a re-generated clip
+       * costs nothing
+
+     ---- WHY THIS IS SAFE UNDER THE RENDERER --------------------------------------
+     HyperFrames renders by SEEKING: for frame N it sets the timeline to N/fps and
+     screenshots. Anything animating outside the registered tl has no defined state
+     at an arbitrary time and RENDERS FROZEN — silently, with no error. So:
+       * the single tween below is on the registered tl. Always.
+       * ONE tween, on ONE element, for the whole scene. It never loops, and no
+         other tween ever touches #bed's transform — that is exactly the failure
+         that froze the earlier spine (an ambient loop sharing a property with a
+         discrete tween). Do not add a second transform tween to #bed.
+       * if you need a separate ambient flourish, put it on its own element.
+
+     ---- OVERSCAN: WHY START AT 1.06, NOT 1.00 ------------------------------------
+     A pure zoom from scale 1.00 is edge-safe. A zoom PLUS a translate is not — at
+     scale 1.00 any x/y move drags the image edge into frame as a black band.
+     So the bed sits at BASE_SCALE 1.06 (3% overscan each side) and grows from
+     there; translations are capped below that margin. Never lower BASE_SCALE
+     without also capping the translate.
+
+     ---- USAGE -------------------------------------------------------------------
+     1. paste the <style> block
+     2. paste the markup block (must be the FIRST children of #root, z-index 1-2)
+     3. paste the <script> block
+     4. call once, after the tl is registered:
+
+          mountBed(tl, {
+            src: 'assets/bg-03_workspace.png',
+            duration: 100.1,        // the SCENE's full length in seconds
+            move: 'drift-left'      // push | drift-left | drift-right | rise | sink
+          });
+
+     Optional: scale (default .08 total travel), scrim (default true).
+     ============================================================================ -->
+
+<!-- ---------- 1. STYLE ---------- -->
+<style>
+  .bedwrap{position:absolute;inset:0;z-index:1;overflow:hidden}
+  .bedwrap img{width:100%;height:100%;object-fit:cover;will-change:transform;
+    transform-origin:50% 50%}
+  /* CONDUIT §2: the bed is always darkened + defocused so type sits over it legibly.
+     Scrim is a SEPARATE element — never tweened, never shares a property with #bed. */
+  .bedscrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse at 32% 50%,rgba(8,11,16,.66),rgba(5,8,12,.88))}
+</style>
+
+<!-- ---------- 2. MARKUP (first children of #root) ---------- -->
+<!-- data-layout-allow-overflow is REQUIRED: the overscan deliberately pushes the image
+     outside .bedwrap so translation never drags an edge into frame. Without it,
+     `hyperframes check` reports container_overflow at every sampled time. -->
+<div class="bedwrap"><img id="bed" alt="" data-layout-allow-overflow /></div>
+<div class="bedscrim" id="bedscrim"></div>
+
+<!-- ---------- 3. SCRIPT ---------- -->
+<script>
+/* mountBed(tl, opts)
+   tl       registered GSAP timeline (window.__timelines["root"])
+   opts.src        image path
+   opts.duration   scene length in seconds — the move spans exactly this
+   opts.move       push | drift-left | drift-right | rise | sink   (default 'push')
+   opts.scale      total scale travel, default .08 (8% across the whole scene)
+   opts.scrim      false to drop the scrim (default true)
+*/
+function mountBed(tl, opts){
+  const BASE = 1.06;                    // overscan — see header
+  const MAX_SHIFT = 2;                  // percent; must stay under (BASE-1)/2*100 = 3
+  const o = Object.assign({move:'push', scale:.08, scrim:true}, opts);
+
+  const bed = document.getElementById('bed');
+  bed.src = o.src;
+
+  if (!o.scrim){ const s = document.getElementById('bedscrim'); if (s) s.style.display='none'; }
+
+  // start state — set, not tweened, so seeking to t=0 is exact
+  gsap.set(bed, {scale:BASE, xPercent:0, yPercent:0});
+
+  const end = {scale: BASE + o.scale, duration: o.duration, ease:'none'};
+  switch(o.move){
+    case 'drift-left':  end.xPercent = -MAX_SHIFT; break;
+    case 'drift-right': end.xPercent =  MAX_SHIFT; break;
+    case 'rise':        end.yPercent = -MAX_SHIFT; break;
+    case 'sink':        end.yPercent =  MAX_SHIFT; break;
+    case 'push':        break;                       // scale only
+    default: console.warn('mountBed: unknown move', o.move);
+  }
+
+  // THE one tween. Linear, whole-scene, never loops, nothing else touches #bed.
+  tl.to(bed, end, 0);
+}
+</script>

@@ -134,9 +134,10 @@ No module ships on first render. The keyframe-extraction-and-read pass IS the cr
 ## Voice
 
 ### A16 — First-person singular in collective-voice videos
-Per the Jarvis memory `for-jarvis-dr-terry-byrd-youtube-video-dialogue`: collective voice (we/our/ours) by default. The only first-person-singular exception is the opening avatar self-intro ("I am the avatar for Dr. Terry Byrd...").
+Collective voice (we/our/ours) — **always, with no exception.** The old carve-out for the opening avatar self-intro ("I am the avatar for Dr. Terry Byrd…") is void: the avatar is gone (2026-08-02) and so is the self-ID line. Never write first-person singular.
 
-**Discipline:** Read VO drafts with this lens. Replace "I" → "we" except in the explicit avatar intro slot.
+**Discipline:** Read VO drafts with this lens. Replace "I" → "we" **everywhere** — there is no
+exception slot any more (the avatar intro that used to hold it is retired, 2026-08-02).
 
 ---
 

@@ -412,7 +412,9 @@ See `TONE-MATRIX.md` for full definitions and channel mappings.
 - **Side-by-side matrix** (Part 3 of master arc — comparison table). I have an idea but no reference example yet.
 - **Decision tree / flowchart** (Part 3 — the "if X, use Y" rule). Will need to design from scratch.
 - **Timeline scroll** (history beats, before/after sequences).
-- **Talking head + overlays** (avatar full-screen with active graphics around it).
+- ~~**Talking head + overlays**~~ — **NOT AVAILABLE to Byrddynasty** (the avatar is retired,
+  2026-08-02). Listed only because competitors use it. Our equivalent is real human footage under
+  graphics (see the HUMAN PRESENCE rules).
 - **Veo cinematic** (photographic establishing shot — reserved for openings and transitions).
 
 When a future module needs one of the above and we design it, **document it here first** before building.

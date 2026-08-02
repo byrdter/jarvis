@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>Bed drift — DEMO (one continuous transform, whole scene, never loops)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:#0A0E14;
+    font-family:'JetBrains Mono',monospace}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#0A0E14}
+
+  /* ---------- bed-drift component style ---------- */
+  .bedwrap{position:absolute;inset:0;z-index:1;overflow:hidden}
+  .bedwrap img{width:100%;height:100%;object-fit:cover;will-change:transform;
+    transform-origin:50% 50%}
+  .bedscrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse at 32% 50%,rgba(8,11,16,.66),rgba(5,8,12,.88))}
+
+  /* demo-only: a static reference marker so drift is provable frame-to-frame.
+     It does NOT move — if the bed shifts relative to it, the transform ran. */
+  .ref{position:absolute;z-index:9;background:rgba(201,178,122,.85)}
+  .ref.v{left:960px;top:0;width:2px;height:1080px}
+  .ref.h{left:0;top:540px;width:1920px;height:2px}
+  .cap{position:absolute;left:520px;bottom:64px;z-index:10;
+    color:#93A3BC;font-size:19px;letter-spacing:.22em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div id="root" class="clip" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="20">
+
+  <!-- ---------- bed-drift markup ---------- -->
+  <!-- data-layout-allow-overflow: the overscan is INTENTIONAL (see component header) -->
+  <div class="bedwrap"><img id="bed" alt="" data-layout-allow-overflow /></div>
+  <div class="bedscrim" id="bedscrim"></div>
+
+  <!-- demo-only static reference cross -->
+  <div class="ref v"></div>
+  <div class="ref h"></div>
+  <div class="cap">bed drift · drift-left · 20s · one tween, no loop</div>
+</div>
+
+<!-- ---------- bed-drift script ---------- -->
+<script>
+function mountBed(tl, opts){
+  const BASE = 1.06;                    // overscan — a translate at 1.00 drags the edge in
+  const MAX_SHIFT = 2;                  // percent; must stay under (BASE-1)/2*100 = 3
+  const o = Object.assign({move:'push', scale:.08, scrim:true}, opts);
+
+  const bed = document.getElementById('bed');
+  bed.src = o.src;
+
+  if (!o.scrim){ const s = document.getElementById('bedscrim'); if (s) s.style.display='none'; }
+
+  gsap.set(bed, {scale:BASE, xPercent:0, yPercent:0});
+
+  const end = {scale: BASE + o.scale, duration: o.duration, ease:'none'};
+  switch(o.move){
+    case 'drift-left':  end.xPercent = -MAX_SHIFT; break;
+    case 'drift-right': end.xPercent =  MAX_SHIFT; break;
+    case 'rise':        end.yPercent = -MAX_SHIFT; break;
+    case 'sink':        end.yPercent =  MAX_SHIFT; break;
+    case 'push':        break;
+    default: console.warn('mountBed: unknown move', o.move);
+  }
+  tl.to(bed, end, 0);
+}
+</script>
+
+<script>
+const tl = gsap.timeline({paused:true});
+window.__timelines = window.__timelines || {};
+window.__timelines["root"] = tl;
+
+mountBed(tl, {
+  src: 'assets/bg-03_workspace.png',
+  duration: 20,
+  move: 'drift-left'
+});
+</script>
+</body></html>
