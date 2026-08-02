@@ -76,8 +76,9 @@ now a mechanic, not a number:
 
 ## 2. The cold open — INFORMATION FIRST
 
-> **This section changed 2026-07-26.** It previously mandated FACE FIRST (avatar on camera from frame
-> one). The channel is running a **faceless test**, so the avatar requirement is removed. The
+> **This section changed 2026-07-26; settled 2026-08-02.** It previously mandated FACE FIRST (avatar
+> on camera from frame one). **The channel is faceless and the avatar is gone permanently** — not a
+> test, no stop condition, no reversion path, no opt-in. The avatar requirement is removed; the
 > *mechanism* behind the old rule is kept, restated below.
 
 §0 found the dying videos opened on **dark abstract graphics** with a disembodied voice for ~20s —
@@ -102,11 +103,11 @@ PLAY TIME — stamped REGISTERED, inside two seconds. Dark register, but concret
 The "38 years" bio, "on this channel we keep asking one question," "Welcome back to Understanding AI,"
 "today we're going to explore…" — every line that says the video hasn't started. Be started.
 
-### Known open risk in the faceless test
-The avatar joke ("he writes every word, I just say them") disarmed the AI-voice objection. Going
-faceless removes the avatar but **not** the synthetic voice, so the objection survives with nothing
-disarming it. **Stop condition:** if first-30s retention drops against the face-first videos, the test
-has answered and face-first returns.
+### Known open risk — not solved by bringing the avatar back
+The avatar joke ("he writes every word, I just say them") disarmed the AI-voice objection. Faceless
+removes the avatar but **not** the synthetic voice, so the objection survives with nothing disarming
+it. **That risk is accepted** — the avatar is not returning. If the objection ever needs answering, it
+gets answered faceless, through what is on screen and what the writing earns.
 
 ### Three devices that sharpen the open
 1. **Adversary in sentence one.** Open on a conflict with sides, not a topic. If sentence one is a

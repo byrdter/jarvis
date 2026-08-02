@@ -66,11 +66,11 @@ Recut baggy videos by trimming redundancy, example-parades, and throat-clearing 
 
 ## 2. The cold-open template (INFORMATION FIRST) — every video, no exceptions
 
-> **CHANGED 2026-07-26.** This section previously mandated FACE FIRST (avatar on camera from frame
-> one). **The channel is now faceless** — a ~1-month test, decided 2026-07-26. Every competitor in our
-> set is either faceless or genuinely on-screen; none uses an avatar. Faceless is also far cheaper to
-> produce automatically, which buys time for the lessons themselves. The avatar requirement is removed;
-> the *mechanism* it served is preserved below.
+> **CHANGED 2026-07-26, SETTLED 2026-08-02.** This section previously mandated FACE FIRST (avatar on
+> camera from frame one). **The channel is faceless and the avatar is gone permanently** — not a test,
+> no stop condition, no reversion path. Every competitor in our set is either faceless or genuinely
+> on-screen; none uses an avatar, and faceless is far cheaper to produce automatically. The avatar
+> requirement is removed; the *mechanism* it served is preserved below.
 
 The opening exists to give the viewer **a reason to keep watching** by creating tension they can't
 resolve alone.
@@ -95,13 +95,14 @@ PLAY TIME — stamped REGISTERED, inside two seconds. Dark register, concrete fr
    possible (see §3). A number, a story, a contradiction.
 3. **~0:20–0:35 — RE-OPEN THE LOOP.** End the intro on a **named question**, not the thesis.
 
-### Known open risk in the faceless test
+### Known open risk — and it is NOT solved by bringing the avatar back
 The old step 3 was **the avatar joke** — *"he writes every word, I just say them"* — which disarmed the
-AI-voice objection with personality. Going faceless removes the avatar but **not** the synthetic voice,
-so the objection survives with nothing disarming it.
+AI-voice objection with personality. Faceless removes the avatar but **not** the synthetic voice, so
+the objection survives with nothing disarming it.
 
-**Stop condition:** if first-30s retention drops against the face-first videos over the test month,
-the test has answered and face-first returns. Re-read §0 before deciding — that data is the referee.
+**That risk is accepted.** The avatar is not coming back (settled 2026-08-02), so the objection has to
+be answered some other way — through what is on screen and what the writing earns, not through a
+narrator persona. If it ever needs solving, solve it faceless.
 
 > **DELETE FOREVER from openings:** the "38 years" bio paragraph, "on this channel we keep asking one
 > question," "Welcome back to Understanding AI," "today we're going to explore / talk about…" — every

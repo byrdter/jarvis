@@ -14,10 +14,10 @@ cadence, Shorts policy, and measurement baselines without duplicating this workf
 ## Default Position
 
 - **Faceless video is the default.** Use HyperFrames, real screenshots, web artifacts, B-roll, code/terminal simulations, diagrams, data visualization, and cinematic clips.
-- **Two production formats — pick by content:** (a) **Citation-card / evidence mode** for research & argument explainers — dark register + cream paper citation cards that land on verified quotes, hard cuts, avatar only for intro/CTA/closing. **This is the current standard for evidence-driven videos** (proven on *The Choice* & *Death of the Junior Engineer*). See **[knowledge/CITATION-CARD-FORMAT.md](knowledge/CITATION-CARD-FORMAT.md)**. (b) **Avatar / xfade mode** for talking-head-led episodes — see [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md). Shorts (9:16 promo cuts) are covered in the citation-card doc.
+- **Citation-card / evidence mode is THE production format** — dark register + cream paper citation cards that land on verified quotes, hard cuts, graphics throughout. See **[knowledge/CITATION-CARD-FORMAT.md](knowledge/CITATION-CARD-FORMAT.md)**; shorts (9:16 promo cuts) are covered there too. The old **avatar / xfade mode** is RETIRED along with the avatar itself (2026-08-02) — [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md) is kept for its xfade/assembly mechanics only, not as a production mode to choose.
 - **Cinematic WebGL / layered depth is the default visual language.** Treat screenshots, web-rolls, Sites, code, diagrams, data cards, and B-roll as layered objects in a spatial composition with depth, parallax, camera motion, light sweeps, scroll-chapter reveals, and foreground/background contrast. Do not reduce this to generic floating cards.
 - **Sites are supporting surfaces.** Use Codex Sites for dashboards, simulators, review boards, command centers, or companion resources; capture them into HyperFrames for final video composition.
-- **Talking heads are special appearances.** Use avatars, HeyGen, or Remotion talking-head pipelines only when the user intentionally asks for a guest/talking-head moment.
+- **Human presence comes from REAL people, never from an avatar** — library human clips, created two-person debates, brief attributed press photos or third-party clips of the person being discussed (see the HUMAN PRESENCE rules in `.claude/rules/video-production-standard.md` §10 and `references/USING-REAL-PEOPLE.md`). The Byrddynasty avatar is retired; do not reintroduce it as a "special appearance".
 - **Visual-first beats script-first.** Decide what the viewer sees before locking final VO.
 - **Target runtime is ~8 minutes** (7:30–9:00) — RETENTION-FIRST (supersedes the old "10–15 min"
   guidance). A small channel's viewers give an unknown creator ≤8 min, and % viewed (what YouTube
@@ -43,11 +43,13 @@ cadence, Shorts policy, and measurement baselines without duplicating this workf
   boilerplate. Hooks **reveal facts, withhold meaning** (prefer a paradox; reveal up to the QUESTION,
   stop before the ANSWER). End every scene on a pull; plant a mid-video reversal.
   Shorts follow the active channel profile; never generate them automatically from every long-form video.
-- **FACELESS MODE (current, from 2026-07-26 — ~1-month test).** No avatar anywhere: no cold-open
-  avatar, no avatar close, no avatar self-ID line. Every competitor in our set is faceless or genuinely
-  on-screen; none uses an avatar. Faceless is also far cheaper to produce automatically. See
-  RETENTION-AND-HOOKS.md §2 for the stop condition — if first-30s retention drops against the
-  face-first videos, face-first returns.
+- **THE CHANNEL IS FACELESS — the avatar is gone, permanently.** No cold-open avatar, no avatar
+  close, no avatar self-ID line, no avatar take anywhere in the pipeline. Every competitor in our set
+  is faceless or genuinely on-screen; none uses an avatar, and faceless is far cheaper to produce
+  automatically. **This is settled, not under test.** Earlier docs framed it as a ~1-month trial with
+  a stop condition — that framing is stale, corrected 2026-08-02 by Terry. There is no reversion path
+  and no opt-in flag; `tools/scaffold-script.py` emits faceless scenes only. The `avatar` key survives
+  in the `scenes.json` schema for backward compatibility with old projects and is never set.
 - **Voice = first-person PLURAL** ("we/us/our") throughout. In faceless mode there is no avatar self-ID,
   so there is no singular exception. Never "I/me/my."
 - **The CTA (subscribe/like/bell) is its OWN scene**, graphics only.

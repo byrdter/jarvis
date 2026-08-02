@@ -255,11 +255,14 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global **0.7.87** — verified 2026-08-01) — never bare
-`npx hyperframes`. **The global binary SELF-UPDATES**: it moved 0.7.84 → 0.7.87 inside a single
-session on 2026-08-01, so this number records what the current batch was rendered against, it does
-not lock anything. Run `hyperframes --version` at batch start and re-render the whole batch if it
-has moved (PIPELINE.md Step 5).
+Use the PINNED CLI (`hyperframes`, global **0.7.88** — verified 2026-08-02) — never bare
+`npx hyperframes`. **This line is the ONE source of truth**: `tools/check-cli-pin.py` parses the
+version out of it. Do not restate the number in other docs; point at this line instead.
+**The global binary SELF-UPDATES**: 0.7.84 → 0.7.87 inside one session on 2026-08-01, then
+0.7.87 → 0.7.88 inside one session on 2026-08-02. Neither upgrade was chosen and neither would have
+been noticed without the gate. So this number records what the current batch was rendered against,
+it does not lock anything. Run `python3 tools/check-cli-pin.py --stamp <batch>` at batch start and
+`--verify <batch>` before assembly; re-render the whole batch if it moved (PIPELINE.md Step 5).
 
 **When the user asks for:** long-form videos, producing a video from a HeyGen recording, scene/visual
 work, revisions, QC, or packaging → load `jarvis-video-production` and follow `PIPELINE.md` (9 steps).
@@ -274,10 +277,12 @@ State which skill you're using before acting, then run it; surface to the user a
   38-yr-bio/on-this-channel/today-we'll-explore boilerplate), the curiosity-gap hook rule (reveal
   FACTS, withhold MEANING; prefer a paradox; reveal up to the QUESTION, stop before the ANSWER), and
   the 2-shorts-per-video rule.** Proven on the V6 & V5 8-min recuts.
-- **FACELESS MODE is current (from 2026-07-26, ~1-month test).** No avatar anywhere — no cold-open
-  avatar, no avatar close, no avatar self-ID line. First-person PLURAL throughout, no singular
-  exception. Stop condition in RETENTION-AND-HOOKS.md §2: if first-30s retention drops against the
-  face-first videos, face-first returns.
+- **THE CHANNEL IS FACELESS. The avatar is gone — permanently.** Not a test, not a mode, no
+  reversion path, no flag. No cold-open avatar, no avatar close, no avatar self-ID line, no HeyGen
+  avatar take anywhere in the pipeline. First-person PLURAL throughout, no singular exception.
+  Anything in an older doc describing this as a "~1-month test" with a "stop condition" is STALE —
+  corrected 2026-08-02 by Terry. Do not reintroduce the avatar, do not add an opt-in for it, and do
+  not propose reverting to face-first.
 - **`knowledge/CONDUIT-VISUAL-SYSTEM.md` — what a finished video LOOKS like.** Two registers (cream
   evidence card / dark navy analysis panel) over a scrimmed, always-moving bed; a named component
   library (document card, dossier row, one-row-lit table, ghosted-slot grid, stat hero, browser chrome,
@@ -303,7 +308,8 @@ State which skill you're using before acting, then run it; surface to the user a
 - **`knowledge/CITATION-CARD-FORMAT.md` — the CURRENT STANDARD for evidence/argument explainers**
   (dark register + cream citation cards, hard-cut concat-FILTER assembly, dead-space QC gate,
   VO-anchored via `tools/cue.py`, and the 9:16 shorts system). Proven on *The Choice* (V1) &
-  *Death of the Junior Engineer* (V2). Use this mode for research videos; avatar/xfade mode is for talking-head episodes.
+  *Death of the Junior Engineer* (V2). **This is the only production mode** — the old avatar/xfade
+  talking-head mode is retired with the avatar (2026-08-02).
 - Asset library: canonical `asset-library/assets.db` (query by meaning via `search-assets-db.py`;
   see `references/ASSET-CONTRACT.md`). 196 assets tagged with `symbolizes`/`usable_as`.
 

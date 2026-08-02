@@ -6,12 +6,13 @@ skeleton (with first-line ANCHOR placeholders that split-heygen.py will consume)
 fill in the researched, voiced script. See SCRIPTING.md.
 
 Structure it emits: cold-open (the QUESTION) · body beats (ESCALATION) · closing (the VERDICT)
-· CTA last. FACELESS by default. Both of those are load-bearing, not cosmetic — see
+· CTA last. Faceless — there is no avatar, and no flag to bring one back. Both of those are
+load-bearing, not cosmetic — see
 knowledge/NARRATIVE-STRUCTURE.md §3 and §7.1.
 
 Usage:
   python3 scaffold-script.py --project <video-dir> --topic "..." \
-    --lenses "power-control,economic-futures" --scenes 8 [--title "Episode Title"] [--avatar]
+    --lenses "power-control,economic-futures" --scenes 8 [--title "Episode Title"]
 """
 import argparse, json, pathlib, datetime
 
@@ -24,9 +25,6 @@ def main():
     ap.add_argument("--title", default="")
     ap.add_argument("--lenses", default="power-control,economic-futures")
     ap.add_argument("--scenes", type=int, default=8)
-    ap.add_argument("--avatar", action="store_true",
-                    help="face-first mode (avatar on cold open + closing + CTA). Default is "
-                         "FACELESS — see RETENTION-AND-HOOKS.md §2 for the stop condition.")
     args = ap.parse_args()
 
     proj = pathlib.Path(args.project); sd = proj/"01-script"; sd.mkdir(parents=True, exist_ok=True)
@@ -44,10 +42,10 @@ def main():
     # argument and the answer.
     body_n = max(1, n - 3)
     roles = ["cold-open"] + [f"beat-{i}" for i in range(1, body_n+1)] + ["closing", "cta"]
-    # FACELESS is the current mode (since 2026-07-26; see RETENTION-AND-HOOKS.md §2). No avatar
-    # anywhere unless --avatar is passed, which exists only for the documented stop condition:
-    # if first-30s retention drops against the face-first videos, face-first returns.
-    avatar = {0: True, len(roles)-2: True, len(roles)-1: True} if args.avatar else {}
+    # The channel is FACELESS. The avatar is gone — not a test, not a mode, no reversion path.
+    # This dict stays only because the scenes.json schema and split-heygen.py still carry an
+    # `avatar` key; it is always empty. Do not add a flag to repopulate it.
+    avatar = {}
 
     # INFORMATION-FIRST cold open (video-production-standard.md §2). The first frame carries
     # something concrete the viewer can READ, and the VO is about that thing. No self-ID, no
@@ -143,8 +141,7 @@ def main():
     print(f"✓ scaffolded {sd}")
     for f in ["COMPLETE-SCRIPT.md","VO-ONLY.md","SCRIPT-STRUCTURE.md","claim-source-map.md","scenes.json"]:
         print(f"   - {f}")
-    mode = "FACE-FIRST (avatar)" if args.avatar else "FACELESS"
-    print(f"\n{len(roles)} scenes · {mode}: cold-open · {body_n} body · closing (THE VERDICT) · CTA last.")
+    print(f"\n{len(roles)} scenes · FACELESS: cold-open · {body_n} body · closing (THE VERDICT) · CTA last.")
     print("   Next: research-topic.py + write · fill anchors · record VO-ONLY.md")
     print("   THEN, before recording: python3 tools/narrative-measure.py on the draft transcript —")
     print("   first payoff >=40% of runtime, spine silent-gap <=90s (NARRATIVE-STRUCTURE.md §8).")
