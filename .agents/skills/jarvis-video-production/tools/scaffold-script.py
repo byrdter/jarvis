@@ -28,23 +28,30 @@ def main():
     n = args.scenes
     today = datetime.date.today().isoformat()
 
-    # Standard Byrddynasty structure: avatar intro · body · CTA (penultimate) · avatar close.
-    # (intro, CTA, and close are all spoken/recorded by the avatar.)
+    # Standard Byrddynasty structure: intro · body · closing (the VERDICT) · CTA last.
+    #
+    # The CTA used to be generated PENULTIMATE. Measured 2026-08-02 across all 36 builds on
+    # disk (`cta-sweep.py`): every one placed the CTA at 75.5–89.6% of runtime, and 28 of 30
+    # had exactly one scene after it — the verdict. This line is why. See
+    # knowledge/NARRATIVE-STRUCTURE.md §7: the ask goes AFTER the payoff, never between the
+    # argument and the answer.
     body_n = max(1, n - 3)
-    roles = ["introduction"] + [f"beat-{i}" for i in range(1, body_n+1)] + ["cta", "closing"]
+    roles = ["introduction"] + [f"beat-{i}" for i in range(1, body_n+1)] + ["closing", "cta"]
     avatar = {0: True, len(roles)-2: True, len(roles)-1: True}
 
     INTRO_VO = (f"I'm an avatar for Dr. Terry Byrd, and today I'll be telling you about "
                 f"{args.topic}. <<Hook: a stop-you-in-your-tracks opening — you can lead with the hook "
                 f"and weave the self-intro in, as long as the recorded first line matches the anchor.>>")
-    CTA_VO = ("Before we land the final thought, a quick favor — and on a channel like this one it "
-              "genuinely matters. If you've enjoyed exploring this with me and you'd like to see more "
-              "videos that take AI seriously without the hype, subscribe to the channel. If this video "
-              "was worth your time, give it a like — that tells YouTube to show it to other people who "
-              "care about these questions. And ring the notification bell, so you'll know the moment the "
-              "next video is published. Three small actions, one big help. Thank you.")
+    # NOTE: this runs AFTER the verdict has landed. It must never defer the payoff — the old
+    # stub opened "Before we land the final thought", which is the interrupt this channel was
+    # measured doing in every build (NARRATIVE-STRUCTURE.md §7.1). Keep it short; the ask is
+    # strongest when it names what the viewer just got.
+    CTA_VO = ("<<One line naming what they just watched — e.g. 'You can't fix what you can't "
+              "name.'>> If you want more of this — one hard question taken apart carefully, with "
+              "no side to sell you — subscribe. If this one earned it, hit like; that's the signal "
+              "that shows it to the next person asking the same question.")
     DEF_ANCHOR = {"introduction": "I'm an avatar for Dr. Terry Byrd",
-                  "cta": "Before we land the final thought",
+                  "cta": "<<first ~6 words of the CTA, verbatim>>",
                   "closing": "<<first ~6 words of the closing, verbatim>>"}
     DEF_VO = {"introduction": INTRO_VO, "cta": CTA_VO}
     DEF_TREAT = {"introduction": "avatar + hyperframes beside (lower-third; seed a recurring motif)",
