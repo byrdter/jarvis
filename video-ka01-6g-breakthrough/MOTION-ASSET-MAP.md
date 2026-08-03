@@ -31,6 +31,14 @@ The three clips are a floor, not a command to cut every five seconds. They can e
 - Outside assets are single-use across this episode. Only assets created specifically for this episode may recur where the visual spine requires continuity.
 - Represent different races, genders, and ages across human shots.
 
+## Still-to-Video Handoff
+
+- Codex creates all missing still images and shows them for approval.
+- When a still needs motion, Codex supplies Terry with the approved still and the complete entry from `I2V-PROMPT-PACK.md`.
+- Terry generates the video clip and returns it. Codex performs visual QC, integrates approved takes, and records provenance.
+- Do not send generic “animate this” instructions. Every prompt must specify a bounded subject action, camera behavior, duration, final state, elements that must remain unchanged, scene-specific negatives, output filename, scene/cue, and acceptance test.
+- Request edit handles when helpful, but normally place only 3–5 seconds of a generated clip in the final episode.
+
 ## Scene Motion and Asset Plan
 
 Names marked **LIBRARY** are current database candidates, not locked selections. **NEW** means the database does not yet contain a sufficiently specific asset and a gap remains after final query/review.

@@ -40,8 +40,13 @@ This is the pre-production requirement list. No asset should be generated before
 
 | Clip | Tool | Prompt / Brief Location | Duration | Audio | Status |
 |---|---|---|---:|---|---|
-| Person inside radio-derived spatial map | Higgsfield only if still+HyperFrames depth treatment is inadequate | VISUAL-TREATMENT-BOARD S06 | 6–8s | silent | optional |
-| Ordinary room, subtle radio mesh movement | Higgsfield only if live bed adds value | VISUAL-TREATMENT-BOARD S09 | 5–7s | silent | optional |
+| Person inside radio-derived spatial map | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S06-BR02 | 6–8s generated; 3–5s used | silent | still needed |
+| Ordinary room, subtle radio mesh movement | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S09-BR02 | 5–7s generated; 3–5s used | silent | still needed |
+| Photonic light-path macro | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S02-BR03 | 6–8s generated; 3–5s used | silent | still needed |
+| Chip-to-optical-bench reversal | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR01 | 8–10s generated; ≤5s segment used | silent | still needed |
+| Horn-antenna short laboratory link | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR03 | 6–8s generated; 3–5s used | silent | still needed |
+
+**Production division:** Codex creates and freezes the source stills and writes complete I2V prompt packets. Terry generates the clips. Codex reviews and integrates the returned clips. Statuses: needed, still-created, still-approved, prompt-ready, Terry-generating, delivered, reviewed, locked.
 
 ## Site Prototypes / Captures
 
