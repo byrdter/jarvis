@@ -39,6 +39,8 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 - External clip tools: Higgsfield only if a specific spatial-computing or machine-coordination shot cannot be sourced or built credibly
 - TTS/VO tool: decide after final VO approval
 - Evidence language: Every future-facing application receives an on-screen state—DEMONSTRATED, STANDARD TARGET, PLAUSIBLE, or SPECULATIVE
+- Motion contract: Meaningful visual change every 2–4 seconds; no unchanged state reaches five seconds; every scene and master must pass `freezedetect`
+- Asset floor: One unique real background and at least three single-use clips per scene, sourced from `asset-library/assets.db` before generation
 
 ## Required Decisions
 

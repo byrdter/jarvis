@@ -5,6 +5,8 @@
 **Locked thumbnail:** Person inside a network-generated spatial map; **IT CAN SEE**
 **Target:** 9:35, faceless, visual-first. This document defines narrative function and screen action, not final VO.
 
+**Motion companion:** `MOTION-ASSET-MAP.md` defines a meaningful screen change every 2–4 seconds, a hard five-second static ceiling, unique real backgrounds, three single-use clips per scene, database-first sourcing, and scene/master render gates.
+
 ## The Story Engine
 
 ### Whole-runtime question
@@ -169,3 +171,5 @@ Do not state before Scene 10 that 6G's most important shift is the network becom
 - Honest misdirections: `206.25` number, tiny-chip scale, speed-as-answer, sensing-as-pure-convenience. Each is corrected with primary evidence.
 - No scene merely adds support: every row pays a fact and makes the unresolved question harder or more consequential.
 - Atmosphere budget: approximately 10 seconds total, under 2% of runtime.
+- No static interval reaches five seconds; plan to 2–4-second meaningful events and verify the rendered scenes plus assembled master.
+- Every scene carries a unique real background and at least three single-use clips, with the detailed sequence in `MOTION-ASSET-MAP.md`.

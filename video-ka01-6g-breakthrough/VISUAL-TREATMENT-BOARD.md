@@ -9,6 +9,8 @@ The viewer should follow the argument muted. Final VO will be written to these a
 - **Analysis register:** Dark navy maps, schematics, comparisons, and forecasts. Gold marks demonstrated facts; teal marks systems; red appears only for a limit or risk.
 - **Maturity layer:** DEMONSTRATED / STANDARD TARGET / PLAUSIBLE / SPECULATIVE badge on every future-facing application.
 - **Density:** 45–60 change events per minute, driven primarily by within-beat motion rather than cuts.
+- **Five-second ceiling:** No visual state remains unchanged for five seconds. Author a meaningful change every 2–4 seconds and verify every scene plus the assembled master with `freezedetect`.
+- **Per-scene asset floor:** A different real background plus at least three single-use clips in every scene. See `MOTION-ASSET-MAP.md` for the concrete sequence and sourcing plan.
 - **Denotative budget:** At least 90%. The present plan is approximately 98% DEN.
 
 ## Scene Skeleton and Board
@@ -32,18 +34,18 @@ The viewer should follow the argument muted. Final VO will be written to these a
 
 | Scene | Required visual changes | DEN / ATM | Muted comprehension test |
 |---|---:|---|---|
-| S00 | ≥24 | DEN | Three facts conflict; a five-part investigation begins |
-| S01 | ≥32 | ~40s DEN / 5s ATM | Headline speed and lived impact are not the same |
-| S02 | ≥38 | DEN | The chip is broad-band and fast under laboratory conditions |
-| S03 | ≥36 | DEN | High bands need hybrid fallback; reach is a system problem |
-| S04 | ≥48 | DEN | Compute can move among device, edge, and cloud, but dependencies remain |
-| S05 | ≥34 | DEN | The tiny chip is one part of a much larger lab system |
-| S06 | ≥42 | DEN | Radio can infer space; it is not literal camera vision |
-| S07 | ≥44 | DEN | Shared sensing can coordinate multiple machines/environments |
-| S08 | ≥35 | DEN | Value and work stack upward from hardware to governance |
-| S09 | ≥28 | ~45s DEN / 5s ATM | The same sensing mechanism produces benefit and surveillance risk |
-| S10 | ≥35 | DEN | Impact likely arrives in a specific order; speed enables rather than defines it |
-| S11 | ≥6 | DEN | The investigation has ended; channel identity and end screen remain |
+| S00 | ≥24; max unchanged interval 4s | DEN | Three facts conflict; a five-part investigation begins |
+| S01 | ≥32; max unchanged interval 4s | ~40s DEN / 5s ATM | Headline speed and lived impact are not the same |
+| S02 | ≥38; max unchanged interval 4s | DEN | The chip is broad-band and fast under laboratory conditions |
+| S03 | ≥36; max unchanged interval 4s | DEN | High bands need hybrid fallback; reach is a system problem |
+| S04 | ≥48; max unchanged interval 4s | DEN | Compute can move among device, edge, and cloud, but dependencies remain |
+| S05 | ≥34; max unchanged interval 4s | DEN | The tiny chip is one part of a much larger lab system |
+| S06 | ≥42; max unchanged interval 4s | DEN | Radio can infer space; it is not literal camera vision |
+| S07 | ≥44; max unchanged interval 4s | DEN | Shared sensing can coordinate multiple machines/environments |
+| S08 | ≥35; max unchanged interval 4s | DEN | Value and work stack upward from hardware to governance |
+| S09 | ≥28; max unchanged interval 4s | ~45s DEN / 5s ATM | The same sensing mechanism produces benefit and surveillance risk |
+| S10 | ≥35; max unchanged interval 4s | DEN | Impact likely arrives in a specific order; speed enables rather than defines it |
+| S11 | ≥6; max unchanged interval 3.3s | DEN | The investigation has ended; channel identity and end screen remain |
 
 ## Variety Audit
 

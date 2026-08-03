@@ -2,6 +2,14 @@
 
 This is the pre-production requirement list. No asset should be generated before visual-treatment approval.
 
+## Library Audit
+
+- Canonical source: `asset-library/assets.db`
+- Checked 2026-08-03: **883 indexed assets—530 images and 353 videos**.
+- Existing relevant categories include semiconductor fabrication, circuit/data flow, rural infrastructure, autonomous vehicles, hospitals, factories, warehouse robots, offices, phones, diverse workers, and network imagery.
+- Selection is database-first by meaning, `symbolizes`, and `usable_as`. Folder browsing is not the sourcing method.
+- Full per-scene three-clip floor, single-use assignments, unique backgrounds, and current gap list: `MOTION-ASSET-MAP.md`.
+
 ## Required Assets
 
 | Asset | Semantic Key | Source Path / URL | Scene(s) | Local Scene Copy | Status | Notes |
@@ -50,3 +58,5 @@ This is the pre-production requirement list. No asset should be generated before
 - Paper figures may be too dense for mobile. Recompose only the relevant measurement while showing an authentic cream source crop alongside it.
 - Search the asset database before commissioning generic locations; do not duplicate existing beds.
 - Freeze final downloaded/generated media locally and record provenance before scene construction.
+- Each scene must have a different real background and at least three scene-local, single-use clips; an asset does not count until it has been copied into that scene's `assets/` directory.
+- A still requires an authored Ken Burns/parallax/annotation action. No visual state may remain unchanged for five seconds.

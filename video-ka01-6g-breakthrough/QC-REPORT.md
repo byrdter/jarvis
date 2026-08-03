@@ -28,6 +28,8 @@
 - [x] Source proof reserved for load-bearing facts
 - [x] Denotative visual budget at least 90%
 - [x] Every scene specifies what appears and what changes
+- [x] Every scene has a planned meaningful change every 2–4 seconds, never reaching a five-second static hold
+- [x] Every scene has a unique real-background brief and at least three single-use clip roles
 - [ ] Source crops captured and checked at mobile size
 - [ ] Asset provenance frozen
 - [ ] Visual treatment approved by Terry
@@ -35,6 +37,9 @@
 ## Future Render Gates
 
 - [ ] `scene-validator.py`: 0 errors
+- [ ] Scene-level `freezedetect=n=-50dB:d=5`: no `freeze_duration` output
+- [ ] Assembled-master `freezedetect=n=-50dB:d=5`: no `freeze_duration` output
+- [ ] `deadspace-scan.py`: 45–60 change events/min target; no scene under ~30/min
 - [ ] `deadspace-scan.py`: pass per scene and master
 - [ ] `beatmap.py ghosts`: every ghost resolves within ~1.2s from opacity ≥0.40
 - [ ] `beatmap.py check`: map matches build
