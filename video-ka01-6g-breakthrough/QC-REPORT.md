@@ -2,9 +2,9 @@
 
 ## Current Gate
 
-- Artifact under review: cited VO draft, scene anchors, source stills, and I2V handoff pack
+- Artifact under review: cited VO draft, scene anchors, source cards, and returned I2V clips
 - Render QC status: not started
-- Reason: no recorded VO, generated clips, scenes, or master exist yet
+- Reason: no approved recorded VO, rendered scenes, or master exists yet
 
 ## Script Gate — 2026-08-04
 
@@ -46,8 +46,20 @@
 - [x] Library clip provenance frozen into scene-local folders
 - [x] Visual treatment approved by Terry
 - [x] Five original source stills created and frozen locally
-- [ ] Original stills approved by Terry
-- [ ] Returned I2V clips reviewed and frozen
+- [x] Original stills approved through Terry's generation handoff
+- [x] Returned I2V clips reviewed and frozen
+
+## Returned I2V Review — 2026-08-04
+
+| Clip | Result | Locked interval | Notes |
+|---|---|---:|---|
+| Photonic light path | PASS | 0:00–0:07 | Stable chip and connectors; moving optical energy reads clearly |
+| Laboratory pullback | PASS | 0:00–0:12 | Strong chip-to-system reveal; stable equipment and continuous camera motion |
+| Horn short link | CONDITIONAL PASS | 0:00–0:04 | Signal is subtle and source is nearly static; use only below five seconds with the animated `1.3 m` ruler |
+| Network sensing hero | PASS | 0:00–0:10 | Clean room reconstruction and natural head turn; anatomy remains stable |
+| Ordinary sensing room | PARTIAL PASS | 0:00–0:06.5 | Opening is clean; later frames contain a ghosted double lamp/cane and are excluded |
+
+All approved intervals were re-encoded without audio and frozen under `02-assets/approved-clips/`, then copied into the corresponding scene-local asset folders.
 
 ## Future Render Gates
 
@@ -68,4 +80,4 @@
 
 - Visual treatment approved by: Terry
 - Date: 2026-08-04
-- Remaining risk: VO wording and source stills still require Terry's review; real source crops and returned I2V motion remain outstanding.
+- Remaining risk: VO wording and narration voice still require Terry's decision; ITU/NICT/CityUHK/NIST proof cards remain outstanding. Returned I2V motion is now reviewed and locked.

@@ -1,0 +1,26 @@
+{
+  "id": "nature-2025-photonic-6g-p5",
+  "pdf": "video-ka01-6g-breakthrough/02-assets/source-proofs/originals/nature-2025-photonic-6g.pdf",
+  "source_url": "https://www.nature.com/articles/s41586-025-09451-8",
+  "capture_date": "2026-08-04",
+  "page": 5,
+  "quote": "The absence of the 50\u201375 GHz band is due to its limited use, as atmospheric absorption is substantial within this range.",
+  "page_only": false,
+  "attribution": "Tao et al. \u00b7 Nature 645 \u00b7 2025",
+  "out": "video-ka01-6g-breakthrough/02-assets/source-proofs/cards/nature-atmospheric-absorption.png",
+  "matched": true,
+  "rects_canvas": [
+    [
+      442,
+      491,
+      1397,
+      539
+    ],
+    [
+      239,
+      540,
+      1230,
+      588
+    ]
+  ]
+}

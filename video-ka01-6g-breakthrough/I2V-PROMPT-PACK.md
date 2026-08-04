@@ -49,12 +49,12 @@ These are identified needs, not permission to generate before the corresponding 
 
 | Clip ID | Scene | Purpose | Still Status | Prompt Status | Owner | Notes |
 |---|---|---|---|---|---|---|
-| S02-BR03 | S02 | Photonic light travels through the integrated chip | still-created | draft complete; awaiting still approval | Codex → Terry | Literal technical motion; equipment geometry must remain credible |
-| S05-BR01 | S05 | Camera pulls back from tiny chip to the external optical bench | still-created | draft complete; awaiting still approval | Codex → Terry | Load-bearing reversal shot |
-| S05-BR03 | S05 | Directional horn antennas establish the short laboratory link | still-created | draft complete; awaiting still approval | Codex → Terry | Preserve exactly two antennas and short visual scale |
-| S06-BR02 | S06 | Person inside a radio-derived spatial mesh | still-created | draft complete; awaiting still approval | Codex → Terry | Thumbnail-adjacent hero; radio “inference,” not literal camera vision |
+| S02-BR03 | S02 | Photonic light travels through the integrated chip | delivered | reviewed and locked | Codex | Approved interval 0:00–0:07; geometry stable |
+| S05-BR01 | S05 | Camera pulls back from tiny chip to the external optical bench | delivered | reviewed and locked | Codex | Approved interval 0:00–0:12; strong continuous reversal |
+| S05-BR03 | S05 | Directional horn antennas establish the short laboratory link | delivered | reviewed and locked | Codex | Approved interval 0:00–0:04; clip is otherwise nearly static, so ruler animation is mandatory |
+| S06-BR02 | S06 | Person inside a radio-derived spatial mesh | delivered | reviewed and locked | Codex | Approved interval 0:00–0:10; person and room remain stable |
 | S07-BR04 | S07 | Port or hospital machines coordinate from shared sensing | needed | blocked on library search/still | Codex → Terry | Generate only if the final database search fails |
-| S09-BR02 | S09 | Ordinary room is sensed without a visible camera | still-created | draft complete; awaiting still approval | Codex → Terry | Quiet, plausible, non-dystopian visual |
+| S09-BR02 | S09 | Ordinary room is sensed without a visible camera | delivered | reviewed and locked | Codex | Approved interval 0:00–0:06.5; reject later ghosted lamp/cane frames |
 | ALT-BR | various | Alternate vehicle, team, or field-worker clips needed to preserve single use | conditional | blocked on library search | Codex → Terry | Search the 883-asset database before creating stills |
 
 ## Prompt Entry Template

@@ -1,0 +1,32 @@
+{
+  "id": "nature-2025-photonic-6g-p9",
+  "pdf": "video-ka01-6g-breakthrough/02-assets/source-proofs/originals/nature-2025-photonic-6g.pdf",
+  "source_url": "https://www.nature.com/articles/s41586-025-09451-8",
+  "capture_date": "2026-08-04",
+  "page": 9,
+  "quote": "After 1.3 m of wireless propagation, the waveform is received at the Rx end by the second antenna.",
+  "page_only": false,
+  "attribution": "Tao et al. \u00b7 Nature 645 \u00b7 Methods \u00b7 2025",
+  "out": "video-ka01-6g-breakthrough/02-assets/source-proofs/cards/nature-1_3m.png",
+  "matched": true,
+  "rects_canvas": [
+    [
+      1464,
+      394,
+      1701,
+      440
+    ],
+    [
+      528,
+      444,
+      1701,
+      490
+    ],
+    [
+      528,
+      492,
+      813,
+      540
+    ]
+  ]
+}

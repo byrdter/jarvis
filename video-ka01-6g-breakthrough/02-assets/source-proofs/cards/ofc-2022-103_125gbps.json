@@ -1,0 +1,23 @@
+{
+  "id": "ofc-2022-103_125gbps",
+  "typographic": true,
+  "renderer": "jarvis-video-production/tools/make-pullquote-card.py --size 88",
+  "quote": "We demonstrate 6G-oriented 100 GbE real-time streaming service applications in fiber-THz-fiber seamless transmission with a record net data rate of 103.125 Gbps at 370 GHz enabled by photonic up-/down-conversion and digital coherent modules.",
+  "verbatim": true,
+  "abridged": false,
+  "attribution": "Zhang et al. · Optical Fiber Communication Conference · 2022",
+  "source_url": "https://opg.optica.org/abstract.cfm?uri=OFC-2022-M3Z.9",
+  "capture_date": "2026-08-04",
+  "capture_note": "Optica abstract page; direct page capture is cluttered by account chrome, so the verified abstract is rendered as a typographic evidence card.",
+  "scene": "S05",
+  "render": {
+    "size_pt": 88,
+    "lines": 9,
+    "block_px": 1019,
+    "canvas": [
+      1920,
+      1080
+    ],
+    "ground": "#F4F1EA"
+  }
+}

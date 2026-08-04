@@ -15,9 +15,9 @@ This is the pre-production requirement list. No asset should be generated before
 
 | Asset | Semantic Key | Source Path / URL | Scene(s) | Local Scene Copy | Status | Notes |
 |---|---|---|---|---|---|---|
-| Nature paper chip figure/crop | proposed `proof-6g-photonic-chip-nature-2025` | https://www.nature.com/articles/s41586-025-09451-8 | S00, S02, S05 | pending | needed | Crop only the exact figure/text used; capture source/date |
-| Nature apparatus/method crop | proposed `proof-6g-lab-apparatus-nature-2025` | same | S05 | pending | needed | Must substantiate external components and 1.3m path |
-| OFC 2022 abstract crop | proposed `proof-370ghz-ofc-2022` | https://opg.optica.org/abstract.cfm?uri=OFC-2022-M3Z.9 | S00, S05 | pending | needed | Show 103.125-Gbps net result and date |
+| Nature paper result cards | proposed `proof-6g-photonic-chip-nature-2025` | https://www.nature.com/articles/s41586-025-09451-8 | S02, S03, S05 | cards frozen; scene copies staged | ready | Five focused mobile-readable cards cover 0.5–115 GHz, 100 Gbps, atmospheric absorption, chip area, and the 1.3 m path |
+| Nature apparatus/method proof | proposed `proof-6g-lab-apparatus-nature-2025` | same | S05 | `02-assets/source-proofs/cards/nature-1_3m.png` | ready | Substantiates the short path while the approved pullback clip reveals the external bench |
+| OFC 2022 abstract proof | proposed `proof-370ghz-ofc-2022` | https://opg.optica.org/abstract.cfm?uri=OFC-2022-M3Z.9 | S05 | `02-assets/source-proofs/cards/ofc-2022-103_125gbps.png` | ready | Exact 103.125-Gbps abstract sentence, source, and date preserved |
 | ITU capabilities/requirements crop | proposed `proof-imt2030-requirements-2026` | ITU links in claim map | S03, S04, S06, S10 | pending | needed | Prefer multiple focused crops over one unreadable page |
 | NICT 60/300-GHz demo crop | proposed `proof-nict-dual-band-2026` | https://www.nict.go.jp/press/2026/05/27-1.html | S03 | pending | needed | Translate labels if necessary; preserve provenance |
 | CityUHK ISAC mechanism crop | proposed `proof-cityuhk-isac-2025` | claim map URL | S06 | pending | needed | Source proof for sensing mechanism |
@@ -26,9 +26,9 @@ This is the pre-production requirement list. No asset should be generated before
 | Photonic light-path macro | `generated-photonic-light-path` | `02-assets/generated-stills/ka01-photonic-light-path-v1.png` | S02 | staged in S02 | still-created | Illustration; pair with real Nature proof |
 | Optical-bench reversal | `generated-optical-bench-reversal` | `02-assets/generated-stills/ka01-optical-bench-reversal-v1.png` | S05 | staged in S05 | still-created | Load-bearing pullback still; awaiting approval |
 | Horn short-link close shot | `generated-horn-short-link` | `02-assets/generated-stills/ka01-horn-short-link-v1.png` | S05 | staged in S05 | still-created | Exactly two horns; ruler added in HyperFrames |
-| City/rural/disaster environments | search existing asset library first | asset-library | S03 | pending | needed | Three locations, consistent grade |
-| Road/warehouse/port/hospital vignettes | search library, generate only gaps | asset-library / original | S07 | pending | needed | No borrowed competitor footage |
-| 4G/5G lived-use montage | search existing library first | asset-library | S01 | pending | needed | Maps/video/ride commerce plus fixed wireless/private network |
+| City/rural/disaster environments | search existing asset library first | asset-library | S03 | staged scene-local | ready | Three unique location/mobility clips selected from the library |
+| Road/warehouse/port/hospital vignettes | search library, generate only gaps | asset-library / original | S07 | staged scene-local | ready | Three unique machine-coordination clips; no competitor footage |
+| 4G/5G lived-use montage | search existing library first | asset-library | S01 | staged scene-local | ready | Three unique phone/business clips selected from the library |
 
 ## New Assets To Add To Manifest
 
@@ -36,19 +36,19 @@ This is the pre-production requirement list. No asset should be generated before
 |---|---|---|---|---|
 | Human spatial sensing hero | `generated-human-radio-spatial-map` | `human-radio-spatial-map.png` | brain / generated image | prompt, generation date, channel, symbolizes, usable_as |
 | Ordinary sensing room | `generated-room-rf-sensing` | `room-rf-sensing.mp4` | generated clip | prompt/model, duration, audio=no, evidence state=illustration |
-| Nature chip proof | `proof-6g-photonic-chip-nature-2025` | `nature-chip-proof.png` | web-proof | URL, capture date, paper date, exact claim |
-| Nature apparatus proof | `proof-6g-lab-apparatus-nature-2025` | `nature-apparatus-proof.png` | web-proof | URL, capture date, method/figure reference |
-| OFC proof | `proof-370ghz-ofc-2022` | `ofc-2022-proof.png` | web-proof | URL, capture date, exact quoted figure |
+| Nature result proofs | `proof-6g-photonic-chip-nature-2025` | `nature-*.png` | web-proof | Complete in each JSON sidecar: URL, capture date, paper date, exact highlighted claim |
+| Nature apparatus proof | `proof-6g-lab-apparatus-nature-2025` | `nature-1_3m.png` | web-proof | Complete in JSON sidecar: URL, capture date, method reference |
+| OFC proof | `proof-370ghz-ofc-2022` | `ofc-2022-103_125gbps.png` | web-proof | Complete in JSON sidecar: URL, capture date, exact quoted result |
 
 ## External Clips
 
 | Clip | Tool | Prompt / Brief Location | Duration | Audio | Status |
 |---|---|---|---:|---|---|
-| Person inside radio-derived spatial map | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S06-BR02 | 8s generated; 4–5s used | silent | still created; approval pending |
-| Ordinary room, subtle radio mesh movement | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S09-BR02 | 7s generated; 4–5s used | silent | still created; approval pending |
-| Photonic light-path macro | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S02-BR03 | 7s generated; 3–5s used | silent | still created; approval pending |
-| Chip-to-optical-bench reversal | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR01 | 9s generated; two ≤5s segments used | silent | still created; approval pending |
-| Horn-antenna short laboratory link | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR03 | 7s generated; 3–4s used | silent | still created; approval pending |
+| Person inside radio-derived spatial map | Terry's selected I2V tool | `02-assets/approved-clips/s06-person-radio-spatial-map.mp4` | 10s approved; 4–5s used | silent | reviewed and locked |
+| Ordinary room, subtle radio mesh movement | Terry's selected I2V tool | `02-assets/approved-clips/s09-ordinary-room-radio-sensing.mp4` | 6.5s approved; 4–5s used | silent | reviewed and locked; generated tail rejected |
+| Photonic light-path macro | Terry's selected I2V tool | `02-assets/approved-clips/s02-photonic-light-path.mp4` | 7s approved; 3–5s used | silent | reviewed and locked |
+| Chip-to-optical-bench reversal | Terry's selected I2V tool | `02-assets/approved-clips/s05-chip-to-optical-bench-pullback.mp4` | 12s approved; annotations change every 2–4s | silent | reviewed and locked |
+| Horn-antenna short laboratory link | Terry's selected I2V tool | `02-assets/approved-clips/s05-horn-antenna-short-link.mp4` | 4s approved | silent | reviewed and locked; animated ruler mandatory |
 
 **Production division:** Codex creates and freezes the source stills and writes complete I2V prompt packets. Terry generates the clips. Codex reviews and integrates the returned clips. Statuses: needed, still-created, still-approved, prompt-ready, Terry-generating, delivered, reviewed, locked.
 
@@ -56,10 +56,12 @@ This is the pre-production requirement list. No asset should be generated before
 
 | Site | Role | URL / Location | Scene(s) | Capture Plan | Access / Privacy | Status |
 |---|---|---|---|---|---|---|
-| Nature | on-screen visual source | claim map URL | S00, S02, S05 | focused screenshots / PDF crops | public article / archived research copy | planned |
+| Nature | on-screen visual source | claim map URL | S02, S03, S05 | six focused evidence cards from the paper text | public article / archived research copy | captured and staged |
 | ITU IMT-2030 | on-screen visual source | claim map URLs | S03, S04, S06, S10 | focused screenshots | public | planned |
 | NICT | on-screen visual source | claim map URL | S03 | focused screenshot + translated annotation | public | planned |
 | CityUHK | on-screen visual source | claim map URL | S06 | focused screenshot | public | planned |
+
+The Nature and OFC proof cards are frozen under `02-assets/source-proofs/cards/` with JSON provenance sidecars. ITU, NICT, CityUHK, and NIST proof cards remain to be created before their scenes can render.
 
 ## Asset Risks
 

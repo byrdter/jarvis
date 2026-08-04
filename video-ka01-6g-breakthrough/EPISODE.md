@@ -8,7 +8,7 @@
 - Episode folder: `video-ka01-6g-breakthrough`
 - Owner: Terry Byrd
 - Beads issue: `jarvis-2q9k`
-- Status: scripted
+- Status: assets prepared; awaiting VO approval and narration
 
 ## Thesis
 
@@ -36,7 +36,7 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 - Primary visual system: HyperFrames with real paper/source captures and restrained documentary or generated B-roll
 - Codex Sites planned: no
 - Site role: none
-- External clip tools: Higgsfield only if a specific spatial-computing or machine-coordination shot cannot be sourced or built credibly
+- External clip tools: Terry's I2V renders are returned; five clean intervals are reviewed and locked under `02-assets/approved-clips/`
 - Still-image owner: Codex creates and locally freezes every required original still
 - I2V owner: Terry generates requested clips from Codex-supplied approved stills and complete prompt packets
 - I2V handoff: `I2V-PROMPT-PACK.md`; prompts include subject motion, camera, duration, end state, negatives, filename, cue, and acceptance test
@@ -67,8 +67,9 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 |---|---|---|---|
 | Final spoken timing unavailable until VO is recorded | Production | Scene build | Derive every duration from audio with `ffprobe`; never trust transcript tail timestamps |
 | Ordinary-life applications vary in maturity | Script / Visuals | Scene build | Preserve DEMONSTRATED / STANDARD TARGET / PLAUSIBLE / SPECULATIVE badges |
-| Thumbnail and hero still not yet approved | Production | Asset handoff | Generate from the locked person-in-spatial-map direction |
+| Narration provider/voice is not selected | Terry | Audio production | Approve the script and choose the established HeyGen voice or provide a recorded narration; do not silently change the channel voice |
+| Remaining institutional proof cards | Production | Scene build | Create focused ITU, NICT, CityUHK, and NIST cards at mobile-readable size |
 
 ## Current Next Action
 
-- Complete script QC, produce the thumbnail/hero still, then create the remaining original stills and complete I2V packets.
+- Obtain Terry's final VO approval and narration choice. Generate or ingest the real narration, derive scene durations from the audio files with `ffprobe`, create word-level timestamps, and then build the scenes around those timings.

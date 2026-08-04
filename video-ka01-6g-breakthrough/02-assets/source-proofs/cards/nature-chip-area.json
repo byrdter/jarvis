@@ -1,0 +1,20 @@
+{
+  "id": "nature-2025-photonic-6g-p3",
+  "pdf": "video-ka01-6g-breakthrough/02-assets/source-proofs/originals/nature-2025-photonic-6g.pdf",
+  "source_url": "https://www.nature.com/articles/s41586-025-09451-8",
+  "capture_date": "2026-08-04",
+  "page": 3,
+  "quote": "The functional area of the photonic chip is 11 mm \u00d7 1.7 mm",
+  "page_only": false,
+  "attribution": "Tao et al. \u00b7 Nature 645 \u00b7 2025",
+  "out": "video-ka01-6g-breakthrough/02-assets/source-proofs/cards/nature-chip-area.png",
+  "matched": true,
+  "rects_canvas": [
+    [
+      432,
+      514,
+      1452,
+      564
+    ]
+  ]
+}

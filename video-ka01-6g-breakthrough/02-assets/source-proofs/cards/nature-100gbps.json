@@ -1,0 +1,32 @@
+{
+  "id": "nature-2025-photonic-6g-p5",
+  "pdf": "video-ka01-6g-breakthrough/02-assets/source-proofs/originals/nature-2025-photonic-6g.pdf",
+  "source_url": "https://www.nature.com/articles/s41586-025-09451-8",
+  "capture_date": "2026-08-04",
+  "page": 5,
+  "quote": "Up to 100 Gbps single-lane transmission is achieved at both 35 GHz and 95 GHz centre frequencies",
+  "page_only": false,
+  "attribution": "Tao et al. \u00b7 Nature 645 \u00b7 2025",
+  "out": "video-ka01-6g-breakthrough/02-assets/source-proofs/cards/nature-100gbps.png",
+  "matched": true,
+  "rects_canvas": [
+    [
+      1134,
+      468,
+      1397,
+      514
+    ],
+    [
+      239,
+      517,
+      1396,
+      563
+    ],
+    [
+      239,
+      566,
+      447,
+      612
+    ]
+  ]
+}
