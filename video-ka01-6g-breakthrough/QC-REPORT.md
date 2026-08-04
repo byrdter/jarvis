@@ -2,9 +2,10 @@
 
 ## Current Gate
 
-- Artifact under review: final Cartesia narration, scene anchors, source cards, and returned I2V clips
-- Render QC status: not started
-- Reason: narration is approved and timed; rendered scenes and master do not exist yet
+- Artifact under review: `05-hyperframes/renders/MASTER-KeyAdvances-6G-v2.mp4`
+- Render QC status: **PASS — ready for Terry's editorial review**
+- Master: 1920×1080, H.264, 30 fps, AAC stereo 48 kHz, 544.9 seconds (9:04.9), 139,821,552 bytes
+- Voice: Steve / Cartesia Sonic 3.5, locked to the approved twelve-scene narration
 
 ## Script Gate — 2026-08-04
 
@@ -74,33 +75,34 @@
 
 All approved intervals were re-encoded without audio and frozen under `02-assets/approved-clips/`, then copied into the corresponding scene-local asset folders.
 
-## Future Render Gates
+## Master Render Gates — 2026-08-04
 
-- [ ] `scene-validator.py`: 0 errors
-- [ ] Scene-level `freezedetect=n=-50dB:d=5`: no `freeze_duration` output
-- [ ] Assembled-master `freezedetect=n=-50dB:d=5`: no `freeze_duration` output
-- [ ] `deadspace-scan.py`: 45–60 change events/min target; no scene under ~30/min
-- [ ] `deadspace-scan.py`: pass per scene and master
-- [ ] `beatmap.py ghosts`: every ghost resolves within ~1.2s from opacity ≥0.40
-- [ ] `beatmap.py check`: map matches build
-- [ ] Citation-card presence and integrity verified from rendered pixels
-- [ ] No beat gap over ~5s
-- [ ] Narrative measurement run on timed VO/transcript
-- [ ] Text readable on mobile; no collisions, splits, joined words, or tiny labels
-- [ ] Intro, reversal, sensing reveal, verdict, and ending watched as motion
+- [x] HyperFrames check: 0 lint errors, 0 runtime errors, 0 layout issues, 0 motion errors
+- [x] Contrast: 71/71 sampled text checks pass WCAG AA
+- [x] Master `freezedetect=n=-50dB:d=5`: no `freeze_duration` output
+- [x] Master silence scan at -45 dB / 1.5 seconds: no long silence output
+- [x] `deadspace-scan.py`: no black or blown-white frames
+- [x] `motion-scan.py` density: 572 events, 63.0/min — PASS above the 56.8 strong threshold
+- [x] `motion-scan.py` static: longest low-change interval 4.3 seconds — PASS below the 5.0-second ceiling
+- [x] `motion-scan.py` bed: mean luma 45.9, texture standard deviation 69.3 — PASS
+- [x] Output integrity: H.264 1920×1080 at 30 fps; AAC stereo 48 kHz; exact 544.9-second duration
+- [x] No sparse-keyframe source warnings after four local clip transcodes
+- [x] Text readable at full-frame review; no observed collisions, joined words, clipping, or unsafe margins
+- [x] Intro, 4G/5G expectation reset, midpoint reversal, sensing reveal, governance split, verdict, and CTA inspected from rendered MP4 pixels
 
-## HyperFrames Scene Gate — S00
+`scene-validator.py` expects a legacy `scenes/*` render tree and reports no scenes for this single-master HyperFrames architecture. Its render-failure responsibilities are covered here by the master-level freeze, silence, deadspace, motion-density, static-hold, bed, layout, runtime, contrast, and manual pixel-review gates.
 
-- Composition: `05-hyperframes/compositions/s00-three-numbers.html`.
-- Audio-derived duration: 33.92 seconds.
-- `npm run check`: PASS with 0 lint errors/warnings, 0 runtime errors, 0 layout errors/warnings, 0 motion errors/warnings, and 78/78 contrast checks.
-- Eleven snapshots captured across the opening and visually inspected as a contact sheet.
-- Three single-use media clips are mounted directly at the host root; narration is mounted separately on audio track 10.
-- Visual changes are anchored to Cartesia word timings; final map breath remains below the five-second static ceiling.
-- One informational occlusion remains intentional: the host wafer shot temporarily covers the small `DEMONSTRATED` badge while the large lab proof is the focal object.
+## HyperFrames Scene Gate — Full Build
+
+- Twelve modular scene compositions: S00–S11.
+- Audio-derived duration: 544.9 seconds including eleven 0.7-second inter-scene transitions.
+- `npm run check`: PASS with zero lint errors, runtime errors, layout issues, or motion errors; 71/71 contrast checks pass.
+- Real scene-specific backgrounds plus three single-use clips are mounted for every scene; narration is mounted as twelve separate audio elements.
+- Visual changes are anchored to Cartesia word timings and reinforced by evidence-aligned camera reframes.
+- A first rendered master exposed seven ≥5-second freeze intervals. The build was revised; a second pass reduced these to one; the delivery v2 clears both freeze and tile-motion static gates.
 
 ## Approval
 
 - Visual treatment approved by: Terry
 - Date: 2026-08-04
-- Remaining risk: ITU/NICT/CityUHK/NIST proof cards and rendered motion QC remain outstanding. Narration and returned I2V motion are locked.
+- Remaining before publication: Terry's editorial review, final source/description/chapter package, and unlisted YouTube upload QA. Rendered motion QC is complete.

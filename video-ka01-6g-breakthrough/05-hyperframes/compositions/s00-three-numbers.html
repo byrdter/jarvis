@@ -52,6 +52,10 @@
         .map-title { position: absolute; left: 175px; bottom: 0; font: 700 24px/1 "IBM Plex Mono", monospace; color: #d6a84b; letter-spacing: .08em; }
         .state-badge { position: absolute; right: 112px; top: 148px; padding: 12px 18px; border: 3px solid #d6a84b; border-radius: 999px; color: #d6a84b; font: 700 20px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; }
         .registration { position: absolute; right: 88px; bottom: 70px; width: 42px; height: 42px; border-right: 4px solid #9baeb8; border-bottom: 4px solid #9baeb8; }
+        .closing-card { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; justify-content: center; padding: 120px; background: #07131f; border: 18px solid #d6a84b; }
+        .closing-card small { color: #42b8ad; font: 700 25px/1 "IBM Plex Mono", monospace; letter-spacing: .16em; }
+        .closing-card strong { margin-top: 26px; max-width: 1500px; font-size: 104px; line-height: .9; letter-spacing: -.055em; }
+        .closing-card span { margin-top: 34px; color: #9baeb8; font: 700 27px/1.25 "IBM Plex Mono", monospace; }
       </style>
 
       <div id="root" data-composition-id="ka01-s00" data-width="1920" data-height="1080" data-duration="33.92">
@@ -88,6 +92,7 @@
         </div>
         <div id="s00-badge" class="state-badge">DEMONSTRATED</div>
         <div class="registration" data-layout-ignore></div>
+        <div id="s00-closing" class="closing-card"><small>THE 6G IMPACT MAP</small><strong>FASTER PHONES ARE THE LEAST OF IT</strong><span>SPEED · REACH · INTELLIGENCE · SENSING · COORDINATION</span></div>
       </div>
 
       <script>
@@ -109,12 +114,18 @@
         tl.fromTo("#s00-map", { x: 160, scale: .76, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: .72, ease: "expo.out" }, 20.55);
         tl.fromTo("#s00-orbit", { rotation: -24, scale: .82 }, { rotation: 0, scale: 1, duration: 1.2, ease: "power3.out" }, 20.55);
         tl.fromTo("#s00-node-speed", { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: .42, ease: "power3.out" }, 23.75);
+        tl.to("#s00-map", { x: -24, scale: 1.025, duration: .5, ease: "power2.inOut" }, 23.75);
         tl.fromTo("#s00-node-reach", { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: .42, ease: "power3.out" }, 24.55);
+        tl.to("#s00-map", { x: 6, scale: 1.045, duration: .48, ease: "power2.inOut" }, 24.55);
         tl.fromTo("#s00-node-intelligence", { x: 55, y: 35, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .46, ease: "back.out(1.25)" }, 25.28);
+        tl.to("#s00-map", { x: -16, y: -8, scale: 1.055, duration: .48, ease: "power2.inOut" }, 25.28);
         tl.fromTo("#s00-node-sensing", { x: -45, y: 35, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .46, ease: "back.out(1.25)" }, 26.25);
+        tl.to("#s00-map", { x: 4, y: 4, scale: 1.07, duration: .48, ease: "power2.inOut" }, 26.25);
         tl.fromTo("#s00-node-coordination", { x: -65, opacity: 0 }, { x: 0, opacity: 1, duration: .46, ease: "power3.out" }, 27.16);
+        tl.to("#s00-map", { x: -10, y: 0, scale: 1.08, duration: .48, ease: "power2.inOut" }, 27.16);
         tl.to("#s00-question", { scale: .96, opacity: .25, duration: .35, ease: "power2.in" }, 28.48);
         tl.fromTo("#s00-map", { scale: 1 }, { scale: 1.08, duration: 4.9, ease: "sine.inOut" }, 28.5);
+        tl.fromTo("#s00-closing", { y: 1080, opacity: 0 }, { y: 0, opacity: 1, duration: .52, ease: "expo.out" }, 30.0);
         tl.fromTo("#s00-glow", { x: -40, y: -20, scale: .92 }, { x: 160, y: 70, scale: 1.12, duration: 33.7, ease: "sine.inOut" }, 0);
         window.__timelines["ka01-s00"] = tl;
       </script>
