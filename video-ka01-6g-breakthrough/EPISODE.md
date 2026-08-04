@@ -7,8 +7,8 @@
 - Channel profile: `.agents/skills/jarvis-video-production/references/channel-profiles/KEYADVANCES.md`
 - Episode folder: `video-ka01-6g-breakthrough`
 - Owner: Terry Byrd
-- Beads issue: `jarvis-mp8e`
-- Status: visual-board
+- Beads issue: `jarvis-2q9k`
+- Status: scripted
 
 ## Thesis
 
@@ -53,8 +53,8 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 | Pre-script title/thumbnail package approved | Terry | approved | Locked title and `IT CAN SEE` thumbnail direction |
 | Thesis locked | Terry / Codex | approved | Human-consequence thesis; speed is the initial suspect, not the verdict |
 | Runtime target locked | Terry / Codex | approved | 9:20–9:45; long enough for a reversal and human consequence, short enough to avoid an essay-shaped middle |
-| Visual treatment approved | Terry | pending | This beat map is the approval artifact |
-| VO approved | Terry | pending | No final VO drafted at this gate |
+| Visual treatment approved | Terry | approved | Terry approved the visual-first narrative and asked production to start |
+| VO approved | Terry | pending | Complete cited draft exists in `01-script/VO-SCRIPT.md`; awaiting Terry's content review |
 | Scene renders locked | Terry | pending | |
 | Master render approved | Terry | pending | |
 | Final package verified against finished video | Terry / Codex | pending | Promise changes return to pre-script gate |
@@ -65,10 +65,10 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 
 | Blocker | Owner | Needed By | Resolution |
 |---|---|---|---|
-| Exact 5G comparison statistics not yet selected | Research | VO draft | Use dated, sourced measures; do not claim 5G changed everyone or failed universally |
-| Ordinary-life sensing examples vary in maturity | Research / Script | VO draft | Preserve the evidence-state badges and distinguish demonstrated capability from forecast use |
-| Thumbnail art not yet produced | Production | Packaging | Generate only after visual board approval |
+| Final spoken timing unavailable until VO is recorded | Production | Scene build | Derive every duration from audio with `ffprobe`; never trust transcript tail timestamps |
+| Ordinary-life applications vary in maturity | Script / Visuals | Scene build | Preserve DEMONSTRATED / STANDARD TARGET / PLAUSIBLE / SPECULATIVE badges |
+| Thumbnail and hero still not yet approved | Production | Asset handoff | Generate from the locked person-in-spatial-map direction |
 
 ## Current Next Action
 
-- Terry reviews `NARRATIVE-BEAT-MAP.md` and `VISUAL-TREATMENT-BOARD.md`; after approval, write the VO to the visual actions and populate exact cue timing.
+- Complete script QC, produce the thumbnail/hero still, then create the remaining original stills and complete I2V packets.

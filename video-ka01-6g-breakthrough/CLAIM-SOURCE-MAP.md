@@ -6,7 +6,7 @@ Every future-facing claim must carry an evidence-state badge. “Could” does n
 |---|---|---|---|---|---|
 | 00 | The breakthrough is real, but headline figures from separate experiments are commonly collapsed into one story | Nature 2025; OFC 2022; supplied video cross-check | papers + transcript analysis | high | yes |
 | 00 | The 2025 device's functional chip area was 11 mm × 1.7 mm | Nature 2025 | paper | high | yes |
-| 01 | A network generation's social effect cannot be inferred from its peak-speed headline alone | 5G measures to be selected; editorial inference | data + inference | medium pending exact data | yes |
+| 01 | A network generation's social effect cannot be inferred from its peak-speed headline alone; 5G reached scale and produced FWA/private-network value without one defining consumer behavior | Ericsson Mobility Report 2025 + editorial inference | industry data + inference | medium/high | yes |
 | 02 | The integrated photonic processor generated signals across 0.5–115 GHz and nine consecutive bands | Nature 2025 | paper | high | yes |
 | 02 | Up to 100 Gbps per lane and 120-Gbps 16-QAM at 97.5 GHz were demonstrated under laboratory conditions | Nature 2025 | paper | high | yes |
 | 03 | IMT-2030 requirements include 50–200-Gbps peak and 300–500-Mbps experienced data-rate targets | ITU 2026 | standards requirement | high | yes |
@@ -19,10 +19,10 @@ Every future-facing claim must carry an evidence-state badge. “Could” does n
 | 05 | The chip addresses broad-band signal generation/processing; it does not by itself solve high-frequency propagation | Nature + NICT | paper + demonstration | high | yes |
 | 06 | Integrated sensing and communications lets radio infrastructure derive information about objects or motion while communicating | ITU + CityUHK ISAC | standards + research | high | yes |
 | 06 | IMT-2030 positioning targets include approximately 1–10 cm depending on scenario | ITU | standards requirement | high | yes |
-| 06 | Camera-free fall or movement detection is plausible, but the specific product case needs a direct source | mechanism inference; source pending | inference | medium/low | yes—PLAUSIBLE badge |
+| 06 | Fall detection, gesture/posture recognition, object detection and environmental monitoring are explicitly named sensing applications | ITU-R M.2160 | standards framework | high as direction, not product availability | yes—STANDARD TARGET badge |
 | 07 | Shared sensing and low-latency coordination could support robots, vehicles, ports, factories, farms, and hospitals | ITU use cases + application research to be selected | standards + inference | medium | yes—do not label demonstrated as a whole system |
-| 08 | Work may grow around RF/photonics integration, edge AI, spatial data, robotics integration, and privacy/compliance | labor/investment sources pending | inference | medium/low | yes—PLAUSIBLE badge |
-| 09 | Ambient sensing creates privacy, governance, security, access, and ownership questions even when no camera image is produced | ISAC mechanism + privacy sources pending | research + inference | medium | yes |
+| 08 | NIST currently names RF/wireless modelling, ISAC, mmWave OTA measurement, on-wafer standards and metrology; adjacent integration businesses are our inference | NIST research opportunities + roadmap | government research + inference | medium/high for fields; medium for business adjacency | yes—PLAUSIBLE badge |
+| 09 | Ambient sensing creates privacy, governance, security, access, and ownership questions even when no camera image is produced | NIST roadmap + ITU M.2160 + ISAC mechanism | roadmap + standards + inference | medium/high | yes |
 | 10 | Likely deployment sequence: infrastructure reliability first; controlled industrial sensing/coordination next; broad ambient consumer experiences later | synthesis of ITU, 3GPP, NICT, Nature | inference | medium | yes—clearly label as our forecast |
 
 ## Source Notes
@@ -36,6 +36,10 @@ Every future-facing claim must carry an evidence-state badge. “Could” does n
 - NIST roadmap: https://www.nist.gov/publications/communications-technology-laboratorys-6g-communications-roadmap
 - NICT hybrid-band demonstration: https://www.nict.go.jp/press/2026/05/27-1.html
 - CityUHK ISAC: https://www.cityu.edu.hk/research/stories/2025/01/27/cityuhk-scientists-pioneer-next-generation-radar-6g-networks
+- ITU-R M.2160: https://www.itu.int/rec/R-REC-M.2160
+- NIST, Shaping the 6G Era: https://www.nist.gov/communications-technology-laboratory/shaping-6g-era
+- NIST research opportunities: https://www.nist.gov/communications-technology-laboratory/6g-research-opportunities
+- Ericsson Mobility Report, November 2025: https://www.ericsson.com/en/reports-and-papers/mobility-report/reports/november-2025
 - Supplied video: https://www.youtube.com/watch?v=3jWkE0Rkup4
 
 ## Claims To Reword

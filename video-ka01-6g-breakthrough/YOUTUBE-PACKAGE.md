@@ -47,6 +47,9 @@ The probe evaluates framing families, not exact publishable titles. The chosen p
 - Source assets: Original/generated human and environment; no borrowed competitor frames.
 - Prompt / design notes: 16:9 cinematic editorial image; waist-up person, slightly off-center; network-generated depth map wrapping around body and nearby objects; visible ranging rays and point cloud; strong silhouette at mobile size; leave clean negative space for three-word text; no phone hero, no robot face, no generic globe, no tiny UI copy.
 - How it complements rather than repeats the title: The title says speed is not the point; the thumbnail reveals the more provocative capability—ambient perception.
+- Final candidate: `02-assets/thumbnail/ka01-thumbnail-it-can-see-v1.png` (1280×720)
+- Clean generation master: `02-assets/generated-stills/ka01-network-sensing-hero-v1.png`
+- Reproducible compositor: `02-assets/thumbnail/compose-thumbnail.mjs`
 
 ## Description
 
@@ -68,7 +71,7 @@ Deferred until the verdict and audience question are final.
 
 - [x] Pre-script title/thumbnail gate was approved before full production
 - [ ] Final title still accurately describes the finished video
-- [ ] Thumbnail created and checked at small size
+- [x] Thumbnail created at 1280×720 and visually checked for composition and legibility
 - [ ] Description ready
 - [ ] Chapters ready
 - [ ] Sources included

@@ -2,9 +2,21 @@
 
 ## Current Gate
 
-- Artifact under review: visual-first narrative beat map
+- Artifact under review: cited VO draft, scene anchors, source stills, and I2V handoff pack
 - Render QC status: not started
-- Reason: no VO, scenes, or master exist yet
+- Reason: no recorded VO, generated clips, scenes, or master exist yet
+
+## Script Gate — 2026-08-04
+
+- Spoken words: 1,375 by `prepublish-check.py`; estimated 9:35 at 143 wpm.
+- Negation/reversal density: PASS, 3.65/min; hedge share PASS, 49%.
+- Opening evidence density: PASS, 11 detected concrete points.
+- Forbidden phrases: PASS, none.
+- Carried loop: manual PASS; opens at approximately 0:38 and is not resolved within 30 seconds.
+- Reversal: manual PASS; Scene 06 occupies the 40–55% window and changes the controlling question.
+- Persistent spine: manual PASS at plan level; Impact Map changes in every scene. Render verification remains required.
+- Runtime: the shared tool reports FAIL because its current floor is hard-coded to 15–25 minutes. This is an intentional channel-profile exception: KeyAdvances approved 8–10 minutes and this episode is locked at 9:20–9:45. Padding to satisfy a Byrddynasty runtime constant would violate the KeyAdvances profile.
+- `narrative-measure.py`: deferred until word-level timestamps exist; `01-script/narrative.json` is ready.
 
 ## Pre-Production Narrative Gate
 
@@ -31,8 +43,11 @@
 - [x] Every scene has a planned meaningful change every 2–4 seconds, never reaching a five-second static hold
 - [x] Every scene has a unique real-background brief and at least three single-use clip roles
 - [ ] Source crops captured and checked at mobile size
-- [ ] Asset provenance frozen
-- [ ] Visual treatment approved by Terry
+- [x] Library clip provenance frozen into scene-local folders
+- [x] Visual treatment approved by Terry
+- [x] Five original source stills created and frozen locally
+- [ ] Original stills approved by Terry
+- [ ] Returned I2V clips reviewed and frozen
 
 ## Future Render Gates
 
@@ -51,6 +66,6 @@
 
 ## Approval
 
-- Approved by: pending Terry review
-- Date: pending
-- Remaining risk: Several application, labor, privacy, and 5G-comparison claims require exact sources before final VO.
+- Visual treatment approved by: Terry
+- Date: 2026-08-04
+- Remaining risk: VO wording and source stills still require Terry's review; real source crops and returned I2V motion remain outstanding.

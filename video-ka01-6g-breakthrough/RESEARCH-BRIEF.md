@@ -7,7 +7,7 @@ What did China's photonic 6G experiment actually prove, which 6G capabilities co
 ## Research Base
 
 - NotebookLM: [KeyAdvances — What China's 6G Breakthrough Really Proves](https://notebooklm.google.com/notebook/07a28e4c-67bb-41ba-8130-3a80ec234773)
-- Corpus state at research close: 11 queryable sources, including the full Nature paper PDF.
+- Corpus state at script lock: core sources queryable, including the full Nature paper, ITU-R M.2160 framework, NIST research material, and Ericsson's 5G/FWA outlook.
 - Research issue: `jarvis-rit1` (closed)
 
 ## Source Inventory
@@ -24,6 +24,10 @@ What did China's photonic 6G experiment actually prove, which 6G capabilities co
 | NICT dual-band beamforming demonstration | government research | https://www.nict.go.jp/press/2026/05/27-1.html | Evidence for hybrid high/low-band operation to manage propagation limits | ready |
 | City University of Hong Kong ISAC work | university research | https://www.cityu.edu.hk/research/stories/2025/01/27/cityuhk-scientists-pioneer-next-generation-radar-6g-networks | Concrete integrated sensing-and-communications mechanism | ready |
 | Supplied Pulseforge video | competitor/lead | https://www.youtube.com/watch?v=3jWkE0Rkup4 | Demand evidence and claims to independently verify; not an authority | reviewed |
+| ITU-R M.2160 IMT-2030 framework | standards body | https://www.itu.int/rec/R-REC-M.2160 | Direct basis for AI/communication, sensing, fall/gesture detection, digital twins and coordination scenarios | ready |
+| NIST, “Shaping the 6G Era” | government research | https://www.nist.gov/communications-technology-laboratory/shaping-6g-era | Plain-language primary framing for networks detecting objects, tracking motion and positioning while communicating | ready |
+| NIST 6G research opportunities | government research | https://www.nist.gov/communications-technology-laboratory/6g-research-opportunities | Current, directly named technical fields supporting the work/opportunity section | ready |
+| Ericsson Mobility Report, November 2025 | industry measurement | https://www.ericsson.com/en/reports-and-papers/mobility-report/reports/november-2025 | Dated 5G adoption and FWA context without declaring 5G a failure | ready |
 
 ## Angle Options
 
@@ -62,9 +66,8 @@ The photonic chip matters because it can flexibly generate and process signals a
 | PLAUSIBLE | The application follows from demonstrated components and active industry work, but no mass product exists |
 | SPECULATIVE | A possible end state without enough evidence to use as a promised payoff |
 
-## Unresolved Questions
+## Residual Uncertainty Carried Into the Script
 
-- Which two or three 5G adoption measures best show the gap between headline speed and lived impact without falsely declaring 5G a failure?
-- Which non-camera movement or fall-sensing demonstration is robust enough for a human-health example?
-- Is there publishable cost or energy evidence strong enough to rank the first commercial 6G environments?
-- Which job examples have direct current hiring or investment evidence, rather than merely logical adjacency?
+- Commercial cost and energy evidence is not strong enough to predict exact winners; the final deployment order is explicitly labeled our evidence-based forecast.
+- Practical business examples remain mechanism-grounded adjacencies, not guaranteed jobs or investment recommendations.
+- Fall detection is directly named in ITU-R M.2160, but the episode does not imply a finished mass-market 6G fall-monitoring product.

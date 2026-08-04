@@ -9,6 +9,7 @@ This is the pre-production requirement list. No asset should be generated before
 - Existing relevant categories include semiconductor fabrication, circuit/data flow, rural infrastructure, autonomous vehicles, hospitals, factories, warehouse robots, offices, phones, diverse workers, and network imagery.
 - Selection is database-first by meaning, `symbolizes`, and `usable_as`. Folder browsing is not the sourcing method.
 - Full per-scene three-clip floor, single-use assignments, unique backgrounds, and current gap list: `MOTION-ASSET-MAP.md`.
+- Staged 2026-08-04: 31 unique library clips plus five generated source stills across `03-scenes/s00`–`s11`. Every scene now contains three local media assets; the five stills become the remaining clip-floor items after Terry returns approved I2V renders.
 
 ## Required Assets
 
@@ -20,8 +21,11 @@ This is the pre-production requirement list. No asset should be generated before
 | ITU capabilities/requirements crop | proposed `proof-imt2030-requirements-2026` | ITU links in claim map | S03, S04, S06, S10 | pending | needed | Prefer multiple focused crops over one unreadable page |
 | NICT 60/300-GHz demo crop | proposed `proof-nict-dual-band-2026` | https://www.nict.go.jp/press/2026/05/27-1.html | S03 | pending | needed | Translate labels if necessary; preserve provenance |
 | CityUHK ISAC mechanism crop | proposed `proof-cityuhk-isac-2025` | claim map URL | S06 | pending | needed | Source proof for sensing mechanism |
-| Human-in-spatial-map hero | proposed `generated-human-radio-spatial-map` | original generation | thumbnail, S06, S10 | pending | needed | Thumbnail and episode can share concept but not necessarily exact crop |
-| Ordinary-room sensing bed | proposed `generated-room-rf-sensing` | original generation/clip | S06, S09 | pending | needed | Avoid futuristic lab; ordinary home or care setting |
+| Human-in-spatial-map hero | `generated-human-radio-spatial-map` | `02-assets/generated-stills/ka01-network-sensing-hero-v1.png` | thumbnail, S06 | staged in S06 | still-created | Awaiting Terry approval; thumbnail typography will be composited separately |
+| Ordinary-room sensing bed | `generated-room-rf-sensing` | `02-assets/generated-stills/ka01-ordinary-room-rf-sensing-v1.png` | S09 | staged in S09 | still-created | Normal apartment, cane, no visible camera; awaiting approval |
+| Photonic light-path macro | `generated-photonic-light-path` | `02-assets/generated-stills/ka01-photonic-light-path-v1.png` | S02 | staged in S02 | still-created | Illustration; pair with real Nature proof |
+| Optical-bench reversal | `generated-optical-bench-reversal` | `02-assets/generated-stills/ka01-optical-bench-reversal-v1.png` | S05 | staged in S05 | still-created | Load-bearing pullback still; awaiting approval |
+| Horn short-link close shot | `generated-horn-short-link` | `02-assets/generated-stills/ka01-horn-short-link-v1.png` | S05 | staged in S05 | still-created | Exactly two horns; ruler added in HyperFrames |
 | City/rural/disaster environments | search existing asset library first | asset-library | S03 | pending | needed | Three locations, consistent grade |
 | Road/warehouse/port/hospital vignettes | search library, generate only gaps | asset-library / original | S07 | pending | needed | No borrowed competitor footage |
 | 4G/5G lived-use montage | search existing library first | asset-library | S01 | pending | needed | Maps/video/ride commerce plus fixed wireless/private network |
@@ -40,11 +44,11 @@ This is the pre-production requirement list. No asset should be generated before
 
 | Clip | Tool | Prompt / Brief Location | Duration | Audio | Status |
 |---|---|---|---:|---|---|
-| Person inside radio-derived spatial map | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S06-BR02 | 6–8s generated; 3–5s used | silent | still needed |
-| Ordinary room, subtle radio mesh movement | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S09-BR02 | 5–7s generated; 3–5s used | silent | still needed |
-| Photonic light-path macro | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S02-BR03 | 6–8s generated; 3–5s used | silent | still needed |
-| Chip-to-optical-bench reversal | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR01 | 8–10s generated; ≤5s segment used | silent | still needed |
-| Horn-antenna short laboratory link | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR03 | 6–8s generated; 3–5s used | silent | still needed |
+| Person inside radio-derived spatial map | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S06-BR02 | 8s generated; 4–5s used | silent | still created; approval pending |
+| Ordinary room, subtle radio mesh movement | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S09-BR02 | 7s generated; 4–5s used | silent | still created; approval pending |
+| Photonic light-path macro | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S02-BR03 | 7s generated; 3–5s used | silent | still created; approval pending |
+| Chip-to-optical-bench reversal | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR01 | 9s generated; two ≤5s segments used | silent | still created; approval pending |
+| Horn-antenna short laboratory link | Terry's selected I2V tool | `I2V-PROMPT-PACK.md` S05-BR03 | 7s generated; 3–4s used | silent | still created; approval pending |
 
 **Production division:** Codex creates and freezes the source stills and writes complete I2V prompt packets. Terry generates the clips. Codex reviews and integrates the returned clips. Statuses: needed, still-created, still-approved, prompt-ready, Terry-generating, delivered, reviewed, locked.
 
