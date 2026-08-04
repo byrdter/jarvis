@@ -43,7 +43,7 @@
     .human{position:relative;width:92px;height:212px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}.human:before{content:"";position:absolute;top:0;width:64px;height:64px;border-radius:50%;background:var(--cream)}.human:after{content:"";position:absolute;top:77px;width:8px;height:116px;background:var(--cream);box-shadow:-34px 50px 0 -1px var(--cream),34px 50px 0 -1px var(--cream)}
     .node{position:absolute;padding:13px 20px;border:3px solid var(--teal);border-radius:999px;background:var(--navy);font:700 24px/1 IBM Plex Mono,monospace}.n-speed{top:20px}.n-reach{right:60px;top:210px}.n-intel{right:60px;bottom:180px}.n-sense{left:55px;bottom:180px}.n-coord{left:55px;top:210px}.map-caption{position:absolute;left:110px;top:165px}.map-caption .headline{font-size:76px;max-width:560px}.map-caption .sub{max-width:540px}.map-update{position:absolute;left:0;top:430px;width:580px;padding:22px 26px;border-left:7px solid var(--gold);background:rgba(7,19,31,.94);color:var(--cream);font:900 43px/.98 Montserrat,sans-serif;opacity:0}
     #bridge-dot{position:absolute;left:942px;top:522px;width:36px;height:36px;border-radius:50%;background:var(--gold);box-shadow:0 0 36px var(--gold);z-index:45;opacity:0}
-    .s01-title{position:absolute;left:106px;top:170px;z-index:9}.s01-title .headline{font-size:88px;max-width:970px}.s01-title .kicker{color:var(--teal)}
+    .lived-still{position:absolute;inset:0;width:1920px;height:1080px;object-fit:cover;opacity:0;z-index:6;filter:saturate(.88) contrast(1.06) brightness(.78);transform-origin:50% 50%}#s01-lived{z-index:7}.s01-title{position:absolute;left:106px;top:170px;z-index:9}.s01-title .headline{font-size:88px;max-width:970px}.s01-title .kicker{color:var(--teal)}
     .use-icons{position:absolute;left:106px;right:106px;bottom:98px;display:flex;justify-content:space-between;gap:20px;z-index:9}.use{flex:1;padding:22px 24px;background:rgba(7,19,31,.84);border:3px solid rgba(244,241,232,.7);font:700 25px/1 IBM Plex Mono,monospace}.use b{display:block;font:900 56px/1 Montserrat,sans-serif;color:var(--gold);margin-bottom:10px}
     .speedtest{position:absolute;inset:160px 180px 100px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.dial{width:560px;height:560px;border:16px solid rgba(66,184,173,.30);border-top-color:var(--gold);border-radius:50%;display:grid;place-items:center;position:relative}.dial-needle{position:absolute;width:230px;height:12px;background:var(--risk);left:280px;top:274px;transform-origin:left;transform:rotate(-42deg);box-shadow:0 0 22px rgba(214,92,89,.72)}.dial strong{font-size:145px}.quiet{font-size:76px;font-weight:900;line-height:.96}.quiet span{display:block;font:700 28px/1.2 IBM Plex Mono,monospace;color:var(--muted);margin-top:30px}.speed-flash{position:absolute;left:995px;bottom:92px;padding:18px 28px;background:var(--gold);color:var(--navy);font:900 36px/1 Montserrat,sans-serif;opacity:0}
     .people-grid{position:absolute;inset:340px 104px 110px;display:grid;grid-template-columns:repeat(20,1fr);gap:15px}.person-dot{height:42px;border-radius:22px 22px 10px 10px;background:var(--teal);opacity:.16}.people-stat{position:absolute;left:106px;right:106px;top:178px;display:flex;align-items:baseline;gap:28px;font-size:62px;line-height:1;font-weight:900;white-space:nowrap}.people-stat strong{color:var(--gold);font-size:108px;line-height:1}.factory-label{position:absolute;left:106px;bottom:100px;padding:30px 38px;background:rgba(7,19,31,.90);border-left:8px solid var(--gold);font-size:66px;font-weight:900;z-index:9}.factory-label span{display:block;color:var(--muted);font:700 27px/1.2 IBM Plex Mono,monospace;margin-top:14px}
@@ -71,6 +71,10 @@
   <div id="bridge-dot"></div>
 
   <video id="s01-phone" class="clip media s01-layer" src="assets/video/four-g-phone.mp4" data-start="49.68" data-duration="5.04" data-track-index="10" muted playsinline></video>
+  <img id="s01-ride" class="lived-still s01-layer" src="assets/images/4g-ride-hailing.png" alt="Ride-hailing pickup">
+  <img id="s01-stream" class="lived-still s01-layer" src="assets/images/4g-streaming-bus.png" alt="Streaming on a bus">
+  <img id="s01-shop" class="lived-still s01-layer" src="assets/images/4g-mobile-shopping.png" alt="Mobile shopping">
+  <img id="s01-maps" class="lived-still s01-layer" src="assets/images/4g-live-maps.png" alt="Live turn-by-turn maps">
   <div id="s01-lived" class="layer beat s01-layer" data-layout-allow-occlusion data-layout-allow-overlap><div class="scrim"></div><div class="s01-title"><div class="kicker">WHEN 4G ARRIVED</div><div class="headline">DAILY LIFE VISIBLY CHANGED.</div></div><div class="use-icons"><div class="use"><b>01</b>RIDE-HAILING</div><div class="use"><b>02</b>STREAMING</div><div class="use"><b>03</b>MOBILE SHOPPING</div><div class="use"><b>04</b>LIVE MAPS</div></div></div>
   <div id="s01-speedtest" class="layer beat s01-layer"><div class="speedtest"><div class="dial"><strong>5G</strong><div class="dial-needle"></div></div><div class="quiet">IMPRESSIVE SPEED TESTS.<span>But daily life often looked much the same.</span></div></div><div class="speed-flash">FAST ≠ FELT</div></div>
   <div id="s01-people" class="layer beat s01-layer"><div class="people-stat"><strong>3 BILLION</strong> PEOPLE EXPECTED ON 5G</div><div class="people-grid"></div></div>
@@ -107,7 +111,20 @@ tl.set('.s00-layer:not(.clip)',{opacity:0},49.68);
 tl.set('#bridge-dot',{opacity:0},49.68);
 tl.fromTo('#s01-lived',{opacity:1,scale:1.09},{opacity:1,scale:1,duration:.28,ease:'expo.out'},T);
 tl.fromTo('#s01-lived .use',{y:80,opacity:0},{y:0,opacity:1,duration:.34,stagger:.18,ease:'power3.out'},51.4);
-document.querySelectorAll('#s01-lived .use').forEach((card,i)=>{const at=54.45+i*2.12;tl.to(card,{scale:1.07,y:-16,borderColor:'#d6a84b',backgroundColor:'rgba(20,38,50,.96)',duration:.22,ease:'power2.out'},at);tl.to(card,{scale:1,y:0,borderColor:'rgba(244,241,232,.7)',backgroundColor:'rgba(7,19,31,.84)',duration:.24,ease:'power2.in'},at+1.45)});
+const livedShots=[
+  {image:'#s01-ride',card:0,start:54.72,end:55.78},
+  {image:'#s01-stream',card:1,start:55.76,end:57.14},
+  {image:'#s01-shop',card:2,start:57.12,end:58.38},
+  {image:'#s01-maps',card:3,start:58.36,end:63.30}
+];
+livedShots.forEach(({image,card,start,end})=>{
+  tl.fromTo(image,{opacity:0},{opacity:1,duration:.14,ease:'power2.out'},start);
+  tl.fromTo(image,{scale:1.075},{scale:1,duration:Math.max(.3,end-start),ease:'sine.out'},start);
+  tl.to(image,{opacity:0,duration:.12,ease:'power2.in'},end-.12);
+  const label=document.querySelectorAll('#s01-lived .use')[card];
+  tl.to(label,{scale:1.07,y:-16,borderColor:'#d6a84b',backgroundColor:'rgba(20,38,50,.96)',duration:.12,ease:'power2.out'},start);
+  tl.to(label,{scale:1,y:0,borderColor:'rgba(244,241,232,.7)',backgroundColor:'rgba(7,19,31,.84)',duration:.12,ease:'power2.in'},Math.min(end-.12,63.12));
+});
 hide('#s01-lived',63.3,.16);show('#s01-speedtest',63.38,.18);tl.fromTo('#s01-speedtest .dial',{rotation:-85,scale:.7,opacity:0},{rotation:0,scale:1,opacity:1,duration:.65,ease:'back.out(1.2)'},63.5);tl.fromTo('#s01-speedtest .dial-needle',{rotation:-42},{rotation:74,duration:4.55,ease:'power1.inOut'},64.05);tl.to('#s01-speedtest .speed-flash',{opacity:1,y:-14,duration:.22,ease:'back.out(1.4)'},66.05);
 hide('#s01-speedtest',68.85,.16);show('#s01-people',68.92,.18);tl.fromTo('#s01-people .person-dot',{scale:.3,opacity:.05},{scale:1,opacity:.86,duration:.26,stagger:.018,ease:'power2.out'},69.1);tl.to('#s01-people .person-dot',{y:-12,backgroundColor:'#d6a84b',duration:.18,stagger:{each:.022,from:'start'},repeat:2,yoyo:true,ease:'power1.inOut'},70.85);hide('#s01-people',77.02,.14);
 show('#s01-outofview',77.18,.14);tl.fromTo('#s01-industry',{scale:1.08},{scale:1,duration:4.8,ease:'sine.out'},77.16);tl.fromTo('#s01-factory',{scale:1.08},{scale:1,duration:4.8,ease:'sine.out'},82.16);hide('#s01-outofview',87.02,.14);
