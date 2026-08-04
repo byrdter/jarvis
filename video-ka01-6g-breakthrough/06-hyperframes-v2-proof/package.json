@@ -1,0 +1,9 @@
+{
+  "name": "keyadvances-6g-v2-proof",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.7.90 check",
+    "render": "npx --yes hyperframes@0.7.90 render"
+  }
+}
