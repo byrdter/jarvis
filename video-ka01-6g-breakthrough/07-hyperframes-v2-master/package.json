@@ -1,0 +1,9 @@
+{
+  "name": "keyadvances-6g-v2-master",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "hyperframes check",
+    "render": "hyperframes render"
+  }
+}
