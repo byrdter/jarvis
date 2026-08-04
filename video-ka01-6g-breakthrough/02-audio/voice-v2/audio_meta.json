@@ -1,0 +1,120 @@
+{
+  "tts_provider": "cartesia",
+  "voice_id": "9fb269e7-70fe-4cbe-aa3f-28bdb67e3e84",
+  "model_id": "sonic-3.5",
+  "speed": 1.0,
+  "sample_rate": 44100,
+  "channels": 1,
+  "source_script": "video-ka01-6g-breakthrough/01-script/6G-VO-Script-Everyday-English.md",
+  "voices": [
+    {
+      "id": "s00",
+      "title": "THE THREE NUMBERS",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s00-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s00-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s00-spoken.txt",
+      "duration_s": 49.6,
+      "word_count": 172
+    },
+    {
+      "id": "s01",
+      "title": "WHAT THE LAST TWO UPGRADES TAUGHT US",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s01-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s01-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s01-spoken.txt",
+      "duration_s": 43.28,
+      "word_count": 131
+    },
+    {
+      "id": "s02",
+      "title": "SO WHAT DID CHINA ACTUALLY BUILD?",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s02-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s02-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s02-spoken.txt",
+      "duration_s": 58.4,
+      "word_count": 189
+    },
+    {
+      "id": "s03",
+      "title": "THE SIGNAL PROBLEM: WHY 6G NEEDS MORE THAN SPEED",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s03-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s03-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s03-spoken.txt",
+      "duration_s": 67.76,
+      "word_count": 201
+    },
+    {
+      "id": "s04",
+      "title": "YOUR DEVICES ARE ABOUT TO GET A LOT SMARTER (AND LIGHTER)",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s04-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s04-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s04-spoken.txt",
+      "duration_s": 69.92,
+      "word_count": 212
+    },
+    {
+      "id": "s05",
+      "title": "THE HONEST PART: WHAT THE HEADLINES GOT WRONG",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s05-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s05-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s05-spoken.txt",
+      "duration_s": 72.08,
+      "word_count": 213
+    },
+    {
+      "id": "s06",
+      "title": "THE NETWORK THAT CAN FEEL THE ROOM",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s06-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s06-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s06-spoken.txt",
+      "duration_s": 93.44,
+      "word_count": 277
+    },
+    {
+      "id": "s07",
+      "title": "WHEN MACHINES START SHARING ONE PICTURE OF THE WORLD",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s07-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s07-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s07-spoken.txt",
+      "duration_s": 68.08,
+      "word_count": 210
+    },
+    {
+      "id": "s08",
+      "title": "WHERE THE JOBS AND BUSINESSES COME FROM",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s08-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s08-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s08-spoken.txt",
+      "duration_s": 70.4,
+      "word_count": 192
+    },
+    {
+      "id": "s09",
+      "title": "THE PRICE: A NETWORK THAT NOTICES YOU",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s09-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s09-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s09-spoken.txt",
+      "duration_s": 61.04,
+      "word_count": 212
+    },
+    {
+      "id": "s10",
+      "title": "SO WHAT ACTUALLY CHANGES, AND WHEN?",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s10-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s10-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s10-spoken.txt",
+      "duration_s": 87.84,
+      "word_count": 246
+    },
+    {
+      "id": "s11",
+      "title": "CTA",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s11-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s11-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice-v2/s11-spoken.txt",
+      "duration_s": 27.68,
+      "word_count": 85
+    }
+  ],
+  "total_duration_s": 769.52
+}

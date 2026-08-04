@@ -1,0 +1,11 @@
+Time for the catch — and the moment our Impact Map changes direction.
+
+Hold the tiny chip up close, and it looks like an entire cell tower shrunk onto a fingernail. Pull the camera back, and the lab around it appears: external lasers, amplifiers, detectors, racks of commercial equipment, and big horn antennas. And the wireless signal crossed the room — about one point three metres.
+
+That famous two-hundred-gigabit number? It comes from an earlier, separate experiment — and the peer-reviewed paper for that one reports about half that figure. The doubled number isn't in the abstract, and it's not what the new chip achieved on its own.
+
+So no — China did not shrink a network onto a chip. What they did is still impressive: one tiny chip that generates and handles a remarkably wide range of signals. That's a genuine step toward flexible, reliable networks. It's just not magic.
+
+That correction pushes SPEED away from the center. It doesn't eliminate it; it changes what the achievement means. The breakthrough is flexibility, not one impossible number — and flexibility becomes much more important when communication, computing, positioning, and measurement start working together.
+
+And once we drop the magic, we can see the changes that are actually coming — starting with one that sounds like science fiction but isn't.

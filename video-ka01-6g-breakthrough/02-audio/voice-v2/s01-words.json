@@ -1,0 +1,788 @@
+[
+  {
+    "id": "w0",
+    "text": "Here's",
+    "start": 0.1515,
+    "end": 0.52
+  },
+  {
+    "id": "w1",
+    "text": "a",
+    "start": 0.6,
+    "end": 0.6
+  },
+  {
+    "id": "w2",
+    "text": "pattern",
+    "start": 0.6005,
+    "end": 0.92
+  },
+  {
+    "id": "w3",
+    "text": "worth",
+    "start": 1.0003,
+    "end": 1.16
+  },
+  {
+    "id": "w4",
+    "text": "remembering.",
+    "start": 1.2409,
+    "end": 1.64
+  },
+  {
+    "id": "w5",
+    "text": "When",
+    "start": 1.8455,
+    "end": 2.04
+  },
+  {
+    "id": "w6",
+    "text": "four",
+    "start": 2.1207,
+    "end": 2.36
+  },
+  {
+    "id": "w7",
+    "text": "G",
+    "start": 2.3602,
+    "end": 2.52
+  },
+  {
+    "id": "w8",
+    "text": "arrived,",
+    "start": 2.6009,
+    "end": 3.08
+  },
+  {
+    "id": "w9",
+    "text": "daily",
+    "start": 3.242,
+    "end": 3.64
+  },
+  {
+    "id": "w10",
+    "text": "life",
+    "start": 3.7204,
+    "end": 3.96
+  },
+  {
+    "id": "w11",
+    "text": "visibly",
+    "start": 3.9619,
+    "end": 4.36
+  },
+  {
+    "id": "w12",
+    "text": "changed:",
+    "start": 4.3637,
+    "end": 5.0
+  },
+  {
+    "id": "w13",
+    "text": "ride-hailing,",
+    "start": 5.2157,
+    "end": 6.12
+  },
+  {
+    "id": "w14",
+    "text": "streaming",
+    "start": 6.2617,
+    "end": 6.76
+  },
+  {
+    "id": "w15",
+    "text": "on",
+    "start": 6.84,
+    "end": 6.84
+  },
+  {
+    "id": "w16",
+    "text": "the",
+    "start": 6.92,
+    "end": 7.0
+  },
+  {
+    "id": "w17",
+    "text": "bus,",
+    "start": 7.0008,
+    "end": 7.4
+  },
+  {
+    "id": "w18",
+    "text": "mobile",
+    "start": 7.622,
+    "end": 7.96
+  },
+  {
+    "id": "w19",
+    "text": "shopping,",
+    "start": 7.9616,
+    "end": 8.52
+  },
+  {
+    "id": "w20",
+    "text": "maps",
+    "start": 8.804,
+    "end": 9.08
+  },
+  {
+    "id": "w21",
+    "text": "that",
+    "start": 9.1601,
+    "end": 9.24
+  },
+  {
+    "id": "w22",
+    "text": "follow",
+    "start": 9.2404,
+    "end": 9.56
+  },
+  {
+    "id": "w23",
+    "text": "you",
+    "start": 9.6401,
+    "end": 9.72
+  },
+  {
+    "id": "w24",
+    "text": "everywhere.",
+    "start": 9.7226,
+    "end": 10.28
+  },
+  {
+    "id": "w25",
+    "text": "You",
+    "start": 10.6219,
+    "end": 10.76
+  },
+  {
+    "id": "w26",
+    "text": "could",
+    "start": 10.7601,
+    "end": 10.92
+  },
+  {
+    "id": "w27",
+    "text": "point",
+    "start": 11.0001,
+    "end": 11.08
+  },
+  {
+    "id": "w28",
+    "text": "at",
+    "start": 11.1599,
+    "end": 11.16
+  },
+  {
+    "id": "w29",
+    "text": "your",
+    "start": 11.24,
+    "end": 11.32
+  },
+  {
+    "id": "w30",
+    "text": "phone",
+    "start": 11.4001,
+    "end": 11.56
+  },
+  {
+    "id": "w31",
+    "text": "and",
+    "start": 11.64,
+    "end": 11.64
+  },
+  {
+    "id": "w32",
+    "text": "say,",
+    "start": 11.6405,
+    "end": 12.04
+  },
+  {
+    "id": "w33",
+    "text": "\"this",
+    "start": 12.2513,
+    "end": 12.52
+  },
+  {
+    "id": "w34",
+    "text": "is",
+    "start": 12.6002,
+    "end": 12.76
+  },
+  {
+    "id": "w35",
+    "text": "new.\"",
+    "start": 12.7608,
+    "end": 13.24
+  },
+  {
+    "id": "w36",
+    "text": "When",
+    "start": 13.5318,
+    "end": 13.72
+  },
+  {
+    "id": "w37",
+    "text": "five",
+    "start": 13.7205,
+    "end": 14.04
+  },
+  {
+    "id": "w38",
+    "text": "G",
+    "start": 14.1204,
+    "end": 14.2
+  },
+  {
+    "id": "w39",
+    "text": "arrived,",
+    "start": 14.2011,
+    "end": 14.84
+  },
+  {
+    "id": "w40",
+    "text": "we",
+    "start": 15.0017,
+    "end": 15.16
+  },
+  {
+    "id": "w41",
+    "text": "mostly",
+    "start": 15.1604,
+    "end": 15.48
+  },
+  {
+    "id": "w42",
+    "text": "got...",
+    "start": 15.5609,
+    "end": 15.88
+  },
+  {
+    "id": "w43",
+    "text": "impressive",
+    "start": 16.0749,
+    "end": 16.68
+  },
+  {
+    "id": "w44",
+    "text": "speed",
+    "start": 16.7603,
+    "end": 16.92
+  },
+  {
+    "id": "w45",
+    "text": "tests.",
+    "start": 16.9245,
+    "end": 17.48
+  },
+  {
+    "id": "w46",
+    "text": "By",
+    "start": 17.5565,
+    "end": 17.64
+  },
+  {
+    "id": "w47",
+    "text": "the",
+    "start": 17.72,
+    "end": 17.8
+  },
+  {
+    "id": "w48",
+    "text": "end",
+    "start": 17.8802,
+    "end": 17.96
+  },
+  {
+    "id": "w49",
+    "text": "of",
+    "start": 18.04,
+    "end": 18.04
+  },
+  {
+    "id": "w50",
+    "text": "twenty",
+    "start": 18.1206,
+    "end": 18.28
+  },
+  {
+    "id": "w51",
+    "text": "twenty-five,",
+    "start": 18.2827,
+    "end": 19.0
+  },
+  {
+    "id": "w52",
+    "text": "nearly",
+    "start": 19.1556,
+    "end": 19.48
+  },
+  {
+    "id": "w53",
+    "text": "three",
+    "start": 19.567,
+    "end": 19.88
+  },
+  {
+    "id": "w54",
+    "text": "billion",
+    "start": 19.8823,
+    "end": 20.28
+  },
+  {
+    "id": "w55",
+    "text": "people",
+    "start": 20.3604,
+    "end": 20.6
+  },
+  {
+    "id": "w56",
+    "text": "were",
+    "start": 20.68,
+    "end": 20.68
+  },
+  {
+    "id": "w57",
+    "text": "expected",
+    "start": 20.6807,
+    "end": 21.08
+  },
+  {
+    "id": "w58",
+    "text": "to",
+    "start": 21.16,
+    "end": 21.16
+  },
+  {
+    "id": "w59",
+    "text": "be",
+    "start": 21.2401,
+    "end": 21.32
+  },
+  {
+    "id": "w60",
+    "text": "on",
+    "start": 21.32,
+    "end": 21.4
+  },
+  {
+    "id": "w61",
+    "text": "five",
+    "start": 21.4814,
+    "end": 21.72
+  },
+  {
+    "id": "w62",
+    "text": "G.",
+    "start": 21.7242,
+    "end": 22.2
+  },
+  {
+    "id": "w63",
+    "text": "but",
+    "start": 22.4911,
+    "end": 22.6
+  },
+  {
+    "id": "w64",
+    "text": "for",
+    "start": 22.6001,
+    "end": 22.76
+  },
+  {
+    "id": "w65",
+    "text": "most",
+    "start": 22.8404,
+    "end": 23.08
+  },
+  {
+    "id": "w66",
+    "text": "of",
+    "start": 23.16,
+    "end": 23.16
+  },
+  {
+    "id": "w67",
+    "text": "us,",
+    "start": 23.1605,
+    "end": 23.48
+  },
+  {
+    "id": "w68",
+    "text": "daily",
+    "start": 23.7315,
+    "end": 24.04
+  },
+  {
+    "id": "w69",
+    "text": "life",
+    "start": 24.0406,
+    "end": 24.36
+  },
+  {
+    "id": "w70",
+    "text": "didn't",
+    "start": 24.3607,
+    "end": 24.6
+  },
+  {
+    "id": "w71",
+    "text": "feel",
+    "start": 24.68,
+    "end": 24.76
+  },
+  {
+    "id": "w72",
+    "text": "different.",
+    "start": 24.762,
+    "end": 25.24
+  },
+  {
+    "id": "w73",
+    "text": "The",
+    "start": 25.5362,
+    "end": 25.64
+  },
+  {
+    "id": "w74",
+    "text": "real",
+    "start": 25.7203,
+    "end": 25.88
+  },
+  {
+    "id": "w75",
+    "text": "changes",
+    "start": 25.8812,
+    "end": 26.28
+  },
+  {
+    "id": "w76",
+    "text": "happened",
+    "start": 26.3604,
+    "end": 26.6
+  },
+  {
+    "id": "w77",
+    "text": "out",
+    "start": 26.68,
+    "end": 26.68
+  },
+  {
+    "id": "w78",
+    "text": "of",
+    "start": 26.76,
+    "end": 26.76
+  },
+  {
+    "id": "w79",
+    "text": "sight,",
+    "start": 26.761,
+    "end": 27.24
+  },
+  {
+    "id": "w80",
+    "text": "in",
+    "start": 27.4335,
+    "end": 27.48
+  },
+  {
+    "id": "w81",
+    "text": "factories",
+    "start": 27.4837,
+    "end": 28.12
+  },
+  {
+    "id": "w82",
+    "text": "and",
+    "start": 28.1999,
+    "end": 28.28
+  },
+  {
+    "id": "w83",
+    "text": "businesses.",
+    "start": 28.2822,
+    "end": 28.92
+  },
+  {
+    "id": "w84",
+    "text": "The",
+    "start": 29.2458,
+    "end": 29.48
+  },
+  {
+    "id": "w85",
+    "text": "lesson:",
+    "start": 29.4803,
+    "end": 29.96
+  },
+  {
+    "id": "w86",
+    "text": "the",
+    "start": 30.2408,
+    "end": 30.36
+  },
+  {
+    "id": "w87",
+    "text": "headline",
+    "start": 30.4429,
+    "end": 30.84
+  },
+  {
+    "id": "w88",
+    "text": "number",
+    "start": 30.8402,
+    "end": 31.08
+  },
+  {
+    "id": "w89",
+    "text": "is",
+    "start": 31.1602,
+    "end": 31.24
+  },
+  {
+    "id": "w90",
+    "text": "never",
+    "start": 31.3203,
+    "end": 31.56
+  },
+  {
+    "id": "w91",
+    "text": "the",
+    "start": 31.64,
+    "end": 31.64
+  },
+  {
+    "id": "w92",
+    "text": "real",
+    "start": 31.6402,
+    "end": 31.88
+  },
+  {
+    "id": "w93",
+    "text": "story.",
+    "start": 31.9606,
+    "end": 32.44
+  },
+  {
+    "id": "w94",
+    "text": "SPEED",
+    "start": 32.6812,
+    "end": 33.16
+  },
+  {
+    "id": "w95",
+    "text": "becomes",
+    "start": 33.1604,
+    "end": 33.48
+  },
+  {
+    "id": "w96",
+    "text": "the",
+    "start": 33.56,
+    "end": 33.56
+  },
+  {
+    "id": "w97",
+    "text": "first",
+    "start": 33.642,
+    "end": 33.96
+  },
+  {
+    "id": "w98",
+    "text": "candidate",
+    "start": 33.9608,
+    "end": 34.36
+  },
+  {
+    "id": "w99",
+    "text": "on",
+    "start": 34.4399,
+    "end": 34.44
+  },
+  {
+    "id": "w100",
+    "text": "our",
+    "start": 34.5201,
+    "end": 34.6
+  },
+  {
+    "id": "w101",
+    "text": "Impact",
+    "start": 34.6806,
+    "end": 35.0
+  },
+  {
+    "id": "w102",
+    "text": "Map.",
+    "start": 35.0003,
+    "end": 35.32
+  },
+  {
+    "id": "w103",
+    "text": "It",
+    "start": 35.5446,
+    "end": 35.64
+  },
+  {
+    "id": "w104",
+    "text": "matters.",
+    "start": 35.641,
+    "end": 36.28
+  },
+  {
+    "id": "w105",
+    "text": "but",
+    "start": 36.4917,
+    "end": 36.68
+  },
+  {
+    "id": "w106",
+    "text": "after",
+    "start": 36.7602,
+    "end": 36.92
+  },
+  {
+    "id": "w107",
+    "text": "what",
+    "start": 37.0005,
+    "end": 37.16
+  },
+  {
+    "id": "w108",
+    "text": "five",
+    "start": 37.2406,
+    "end": 37.48
+  },
+  {
+    "id": "w109",
+    "text": "G",
+    "start": 37.4801,
+    "end": 37.64
+  },
+  {
+    "id": "w110",
+    "text": "taught",
+    "start": 37.7208,
+    "end": 37.96
+  },
+  {
+    "id": "w111",
+    "text": "us,",
+    "start": 38.0402,
+    "end": 38.2
+  },
+  {
+    "id": "w112",
+    "text": "it",
+    "start": 38.3226,
+    "end": 38.44
+  },
+  {
+    "id": "w113",
+    "text": "starts",
+    "start": 38.5206,
+    "end": 38.76
+  },
+  {
+    "id": "w114",
+    "text": "near",
+    "start": 38.8402,
+    "end": 38.92
+  },
+  {
+    "id": "w115",
+    "text": "the",
+    "start": 38.92,
+    "end": 39.0
+  },
+  {
+    "id": "w116",
+    "text": "outside.",
+    "start": 39.0819,
+    "end": 39.56
+  },
+  {
+    "id": "w117",
+    "text": "It",
+    "start": 39.8772,
+    "end": 40.12
+  },
+  {
+    "id": "w118",
+    "text": "won't",
+    "start": 40.2003,
+    "end": 40.36
+  },
+  {
+    "id": "w119",
+    "text": "be",
+    "start": 40.44,
+    "end": 40.44
+  },
+  {
+    "id": "w120",
+    "text": "allowed",
+    "start": 40.4403,
+    "end": 40.76
+  },
+  {
+    "id": "w121",
+    "text": "into",
+    "start": 40.8399,
+    "end": 40.92
+  },
+  {
+    "id": "w122",
+    "text": "the",
+    "start": 40.9999,
+    "end": 41.0
+  },
+  {
+    "id": "w123",
+    "text": "center",
+    "start": 41.0808,
+    "end": 41.4
+  },
+  {
+    "id": "w124",
+    "text": "just",
+    "start": 41.4011,
+    "end": 41.64
+  },
+  {
+    "id": "w125",
+    "text": "because",
+    "start": 41.7201,
+    "end": 41.88
+  },
+  {
+    "id": "w126",
+    "text": "it",
+    "start": 41.96,
+    "end": 41.96
+  },
+  {
+    "id": "w127",
+    "text": "wins",
+    "start": 41.9603,
+    "end": 42.2
+  },
+  {
+    "id": "w128",
+    "text": "a",
+    "start": 42.28,
+    "end": 42.28
+  },
+  {
+    "id": "w129",
+    "text": "laboratory",
+    "start": 42.3606,
+    "end": 42.76
+  },
+  {
+    "id": "w130",
+    "text": "race.",
+    "start": 42.7633,
+    "end": 43.24
+  }
+]

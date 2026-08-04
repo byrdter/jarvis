@@ -19,7 +19,12 @@ from pathlib import Path
 from cartesia import Cartesia
 
 
-SCENE_RE = re.compile(r"^==== SCENE (\d+) — (.+?) ====$", re.MULTILINE)
+SCENE_RE = re.compile(
+    r"^(?:====\s*|##\s*)SCENE\s+(\d+)\s+—\s+(.+?)(?:\s*====)?$",
+    re.MULTILINE,
+)
+CITATION_RE = re.compile(r"\s*\[CITE-[^\]]+\]")
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -41,6 +46,9 @@ def parse_scenes(path: Path) -> list[dict[str, str]]:
         start = match.end()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
         transcript = text[start:end].strip()
+        transcript = HTML_COMMENT_RE.sub("", transcript)
+        transcript = CITATION_RE.sub("", transcript)
+        transcript = re.sub(r"\n{3,}", "\n\n", transcript).strip()
         if not transcript:
             raise ValueError(f"Scene {match.group(1)} has no spoken text")
         scenes.append(

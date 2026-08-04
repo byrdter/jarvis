@@ -1,0 +1,9 @@
+The second candidate is REACH — and it begins with a problem for SPEED.
+
+Super-fast radio signals have a weakness: they're fragile. Walls block them. Rain weakens them. Distance kills them. That's just physics, and no "6G" label changes it. The Chinese team even skipped one chunk of frequencies in their tests because the air itself absorbs too much of the signal there.
+
+So real 6G won't be one magic beam. In twenty twenty-six, Japan's NICT showed the actual approach: fast-but-fragile signals and slower-but-sturdy signals working as a team, with the network automatically falling back to the sturdy one when the fast path fails.
+
+Here's what that means for everyday life: coverage that reaches places today's networks forgot. Remote villages. Farms. Fishing boats. Areas hit by disasters, where the official 6G framework explicitly aims to keep people connected. The first change most of us will notice isn't speed — it's that "no signal" becomes rare.
+
+REACH now moves inside SPEED on our map, because a slower connection that survives is more useful than a record-breaking connection that disappears. But a network that chooses among signals also needs to decide where the work gets done. That brings in our third candidate.

@@ -1,0 +1,9 @@
+Here's the breakthrough in plain terms. Today's phones and cell towers need different chips for different radio frequencies — one chip for this band, another chip for that band. The Chinese team built a single chip, eleven millimetres long, that can handle nearly the whole radio spectrum at once.
+
+Think of it like a car that can instantly jump between nine lanes of traffic — and it can switch lanes in one hundred eighty microseconds, far faster than you can blink, whenever one lane gets crowded or blocked.
+
+Why should you care? Because a network built on chips like this doesn't slow down when everyone's using it, and doesn't drop out when conditions change. The promise isn't a faster phone. It's a connection you stop thinking about — the way you don't think about electricity.
+
+That is SPEED's best argument. On our Impact Map, it moves inward: not because a movie downloads faster, but because a flexible network could keep working when traffic and conditions change.
+
+But SPEED has not earned the center yet. There's a catch the headlines skipped — and when we come back to it, this whole map will change.

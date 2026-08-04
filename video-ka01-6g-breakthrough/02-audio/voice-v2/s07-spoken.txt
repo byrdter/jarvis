@@ -1,0 +1,9 @@
+The fifth candidate is COORDINATION. SENSING gets truly powerful when everything shares what it sees.
+
+Right now, every machine is on its own. Your car only knows what its own sensors can reach. One truck on a blind corner can't warn the car behind it. A warehouse robot can't see the worker about to cross its path.
+
+6G is being designed so machines share one live map of the world around them: a connected road warns every car about a hazard none of them can see yet. A warehouse reroutes its robots around people in real time. A port coordinates trucks and cranes against a single changing picture. A hospital knows where its equipment, its staff, and its patients are.
+
+The standard doesn't promise finished systems. But it changes what a network is for: not just delivering messages to your device, but keeping many machines on the same page about the physical world.
+
+COORDINATION moves beside SENSING. Now all five candidates are visible. SPEED and REACH improve the connection. INTELLIGENCE moves computing into the network. SENSING gives the network information about physical space. COORDINATION lets machines act on that shared picture. The contest is no longer about the phone. It's about who builds and operates the world around it.

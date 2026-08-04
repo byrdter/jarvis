@@ -1,0 +1,7 @@
+The third candidate is INTELLIGENCE. The international body setting 6G's goals — the ITU — doesn't treat AI as an app that runs on top of the network. It's building AI into the network itself.
+
+Plain version: today, a smart device has to carry its own brain — its own processor, its own battery. That's why smart glasses are bulky and die by lunchtime. With 6G, a lightweight device could hand its hardest thinking to powerful computers nearby, instantly, over the network. Your glasses just send the question out and get the answer back.
+
+What that could look like: smart glasses light enough to wear all day. Hearing aids that translate speech in real time. A small workshop that rents serious computing power for the ten minutes a machine needs it — instead of buying equipment it can't afford. These aren't promised products. But this is the direction the standard is pointing.
+
+INTELLIGENCE moves beside REACH. Our map now has three serious candidates: a network that is faster, a network that reaches farther, and a network that lends its brain to the devices around it. They all improve what networks already do. None of them explains why the official 6G goals also talk about posture, movement, position, and objects that aren't even connected.

@@ -1,0 +1,7 @@
+Our Impact Map shows capabilities. It also shows where the work will appear. If you're wondering where the opportunity is, the honest answer is: the work arrives before the magic.
+
+NIST's current research agenda names the fields that need people: wireless measurement, sensing, security, spectrum management, and AI built into networks. Around those sit very practical businesses: installing sensors and connecting them to AI systems, teaching factory robots to use shared maps, testing equipment, keeping spatial data accurate, and certifying that all of it is safe.
+
+These aren't guaranteed job forecasts — nobody can tell you which company wins. But the pattern from every past network generation is the same: the money isn't in "building something with 6G." It's in solving one expensive real-world problem — a port that wastes hours, a highway with too many accidents, a hospital that loses equipment — once connectivity, sensing, and computing finally work together.
+
+That is where our five candidates stop being separate circles. The opportunity lives where REACH, INTELLIGENCE, SENSING, and COORDINATION overlap around a real problem. SPEED supports all of them — but it still doesn't control the map. Something else does: ownership of the measurements.

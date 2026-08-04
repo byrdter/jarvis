@@ -1,0 +1,11 @@
+Our fourth candidate is SENSING, and it immediately challenges everything already on the map. This is the biggest new thing in 6G, and almost nobody is talking about it clearly: the network won't just carry data — it will sense the physical world.
+
+Here's the simple idea. Radio waves bounce off things — people, walls, cars, even rain. Today those reflections are just noise. 6G networks are being designed to read them. Same antennas, same signal — but now the network can tell that something moved, where it is, and how fast it's going. NIST — the US standards institute — describes exactly this: networks that detect objects and track motion while they communicate.
+
+The ITU's official framework lists the uses directly: recognizing gestures, detecting when an elderly person falls, spotting cars and pedestrians, monitoring the environment. The positioning target is accuracy within a few centimetres — a goal, not a guarantee for your living room.
+
+Picture the everyday version: an aging parent lives alone. No cameras watching them — but if they fall, the house itself notices and calls for help. Your car knows a pedestrian is about to step out from behind a truck, even though neither you nor the car's cameras can see them yet.
+
+That's the daily-life headline hiding inside 6G. SENSING moves closest to the person at the center of our map, because it changes the network from something we use into something that can notice the space around us.
+
+And it leads to one very important question: if the room can be measured through the network, who gets to see the measurements? Hold that thought. First, SENSING has to meet the fifth and final candidate.

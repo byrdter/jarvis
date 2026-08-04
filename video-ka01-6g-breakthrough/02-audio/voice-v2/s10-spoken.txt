@@ -1,0 +1,13 @@
+Here's where the 6G Impact Map finally lands — not as a ranking of laboratory records, but as the order ordinary people are most likely to experience the change.
+
+China's breakthrough is real — one tiny chip handling a huge range of radio signals makes flexible, dependable networks more plausible. But faster phones are the least interesting part.
+
+What changes first: REACH, supported by SPEED. Fewer dead zones, fewer drops, coverage that reaches rural and remote places — and most of us won't even care whether it's called 5G or 6G.
+
+What changes next: SENSING and COORDINATION, in controlled places where the value is obvious — factories, ports, highways, campuses, hospitals. Fall detection. Collision warnings. Robots that work safely around people.
+
+What changes last: the consumer face of INTELLIGENCE — lightweight all-day smart glasses, devices that borrow computing power from the air around them. Those come only when cost, battery, standards, and consent all line up.
+
+So SPEED never wins the center. The deepest change is this: the network stops being just a pipe for information and becomes something that perceives and coordinates the world around us. That won't happen everywhere at once. It isn't automatically good. And it isn't inevitable because one chip worked in a lab.
+
+So when the next 6G headline arrives, ask four questions: was it demonstrated, is it a standards target, is it plausible, or is it just imagined? Those four words separate what changes next from what's only being sold now.
