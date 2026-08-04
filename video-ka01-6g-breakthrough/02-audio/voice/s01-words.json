@@ -1,0 +1,620 @@
+[
+  {
+    "id": "w0",
+    "text": "The",
+    "start": 0.04,
+    "end": 0.12
+  },
+  {
+    "id": "w1",
+    "text": "last",
+    "start": 0.1204,
+    "end": 0.44
+  },
+  {
+    "id": "w2",
+    "text": "network",
+    "start": 0.5214,
+    "end": 0.76
+  },
+  {
+    "id": "w3",
+    "text": "generation",
+    "start": 0.7624,
+    "end": 1.32
+  },
+  {
+    "id": "w4",
+    "text": "left",
+    "start": 1.4004,
+    "end": 1.56
+  },
+  {
+    "id": "w5",
+    "text": "us",
+    "start": 1.5601,
+    "end": 1.72
+  },
+  {
+    "id": "w6",
+    "text": "a",
+    "start": 1.8,
+    "end": 1.8
+  },
+  {
+    "id": "w7",
+    "text": "warning.",
+    "start": 1.8806,
+    "end": 2.2
+  },
+  {
+    "id": "w8",
+    "text": "Fourth-generation",
+    "start": 2.4846,
+    "end": 3.24
+  },
+  {
+    "id": "w9",
+    "text": "networks",
+    "start": 3.321,
+    "end": 3.64
+  },
+  {
+    "id": "w10",
+    "text": "arrived",
+    "start": 3.6408,
+    "end": 4.04
+  },
+  {
+    "id": "w11",
+    "text": "alongside",
+    "start": 4.1245,
+    "end": 4.6
+  },
+  {
+    "id": "w12",
+    "text": "changes",
+    "start": 4.6016,
+    "end": 5.0
+  },
+  {
+    "id": "w13",
+    "text": "people",
+    "start": 5.0005,
+    "end": 5.32
+  },
+  {
+    "id": "w14",
+    "text": "could",
+    "start": 5.4,
+    "end": 5.4
+  },
+  {
+    "id": "w15",
+    "text": "name:",
+    "start": 5.4009,
+    "end": 5.8
+  },
+  {
+    "id": "w16",
+    "text": "app",
+    "start": 6.0286,
+    "end": 6.2
+  },
+  {
+    "id": "w17",
+    "text": "stores,",
+    "start": 6.2021,
+    "end": 6.84
+  },
+  {
+    "id": "w18",
+    "text": "streaming",
+    "start": 6.9351,
+    "end": 7.4
+  },
+  {
+    "id": "w19",
+    "text": "video,",
+    "start": 7.4816,
+    "end": 8.04
+  },
+  {
+    "id": "w20",
+    "text": "ride",
+    "start": 8.1556,
+    "end": 8.52
+  },
+  {
+    "id": "w21",
+    "text": "services,",
+    "start": 8.5249,
+    "end": 9.24
+  },
+  {
+    "id": "w22",
+    "text": "mobile",
+    "start": 9.4203,
+    "end": 9.8
+  },
+  {
+    "id": "w23",
+    "text": "commerce,",
+    "start": 9.8825,
+    "end": 10.44
+  },
+  {
+    "id": "w24",
+    "text": "maps",
+    "start": 10.6149,
+    "end": 11.08
+  },
+  {
+    "id": "w25",
+    "text": "that",
+    "start": 11.1601,
+    "end": 11.24
+  },
+  {
+    "id": "w26",
+    "text": "followed",
+    "start": 11.2406,
+    "end": 11.64
+  },
+  {
+    "id": "w27",
+    "text": "us",
+    "start": 11.72,
+    "end": 11.72
+  },
+  {
+    "id": "w28",
+    "text": "everywhere.",
+    "start": 11.732,
+    "end": 12.36
+  },
+  {
+    "id": "w29",
+    "text": "Fifth-generation",
+    "start": 12.6972,
+    "end": 13.56
+  },
+  {
+    "id": "w30",
+    "text": "networks",
+    "start": 13.6409,
+    "end": 13.96
+  },
+  {
+    "id": "w31",
+    "text": "brought",
+    "start": 13.9605,
+    "end": 14.2
+  },
+  {
+    "id": "w32",
+    "text": "spectacular",
+    "start": 14.2042,
+    "end": 14.92
+  },
+  {
+    "id": "w33",
+    "text": "speed",
+    "start": 14.9205,
+    "end": 15.24
+  },
+  {
+    "id": "w34",
+    "text": "tests,",
+    "start": 15.321,
+    "end": 15.72
+  },
+  {
+    "id": "w35",
+    "text": "but",
+    "start": 15.8737,
+    "end": 16.04
+  },
+  {
+    "id": "w36",
+    "text": "no",
+    "start": 16.1203,
+    "end": 16.28
+  },
+  {
+    "id": "w37",
+    "text": "single",
+    "start": 16.2816,
+    "end": 16.68
+  },
+  {
+    "id": "w38",
+    "text": "consumer",
+    "start": 16.6807,
+    "end": 17.08
+  },
+  {
+    "id": "w39",
+    "text": "behaviour",
+    "start": 17.1607,
+    "end": 17.48
+  },
+  {
+    "id": "w40",
+    "text": "that",
+    "start": 17.4804,
+    "end": 17.72
+  },
+  {
+    "id": "w41",
+    "text": "obvious.",
+    "start": 17.8009,
+    "end": 18.28
+  },
+  {
+    "id": "w42",
+    "text": "That",
+    "start": 18.5018,
+    "end": 18.76
+  },
+  {
+    "id": "w43",
+    "text": "isn't",
+    "start": 18.8427,
+    "end": 19.08
+  },
+  {
+    "id": "w44",
+    "text": "failure.",
+    "start": 19.0808,
+    "end": 19.56
+  },
+  {
+    "id": "w45",
+    "text": "By",
+    "start": 19.6369,
+    "end": 19.72
+  },
+  {
+    "id": "w46",
+    "text": "the",
+    "start": 19.8,
+    "end": 19.88
+  },
+  {
+    "id": "w47",
+    "text": "end",
+    "start": 19.9601,
+    "end": 20.04
+  },
+  {
+    "id": "w48",
+    "text": "of",
+    "start": 20.12,
+    "end": 20.12
+  },
+  {
+    "id": "w49",
+    "text": "twenty",
+    "start": 20.2003,
+    "end": 20.36
+  },
+  {
+    "id": "w50",
+    "text": "twenty-five,",
+    "start": 20.3636,
+    "end": 21.08
+  },
+  {
+    "id": "w51",
+    "text": "five",
+    "start": 21.3649,
+    "end": 21.8
+  },
+  {
+    "id": "w52",
+    "text": "G",
+    "start": 21.8067,
+    "end": 22.04
+  },
+  {
+    "id": "w53",
+    "text": "subscriptions",
+    "start": 22.0425,
+    "end": 22.68
+  },
+  {
+    "id": "w54",
+    "text": "were",
+    "start": 22.76,
+    "end": 22.76
+  },
+  {
+    "id": "w55",
+    "text": "expected",
+    "start": 22.7615,
+    "end": 23.24
+  },
+  {
+    "id": "w56",
+    "text": "to",
+    "start": 23.32,
+    "end": 23.32
+  },
+  {
+    "id": "w57",
+    "text": "approach",
+    "start": 23.3209,
+    "end": 23.72
+  },
+  {
+    "id": "w58",
+    "text": "two",
+    "start": 23.807,
+    "end": 24.04
+  },
+  {
+    "id": "w59",
+    "text": "point",
+    "start": 24.0401,
+    "end": 24.2
+  },
+  {
+    "id": "w60",
+    "text": "nine",
+    "start": 24.2854,
+    "end": 24.6
+  },
+  {
+    "id": "w61",
+    "text": "billion.",
+    "start": 24.6016,
+    "end": 25.08
+  },
+  {
+    "id": "w62",
+    "text": "Fixed",
+    "start": 25.5461,
+    "end": 25.96
+  },
+  {
+    "id": "w63",
+    "text": "wireless",
+    "start": 25.9615,
+    "end": 26.44
+  },
+  {
+    "id": "w64",
+    "text": "became",
+    "start": 26.521,
+    "end": 26.76
+  },
+  {
+    "id": "w65",
+    "text": "a",
+    "start": 26.84,
+    "end": 26.84
+  },
+  {
+    "id": "w66",
+    "text": "serious",
+    "start": 26.8431,
+    "end": 27.32
+  },
+  {
+    "id": "w67",
+    "text": "broadband",
+    "start": 27.3219,
+    "end": 27.88
+  },
+  {
+    "id": "w68",
+    "text": "alternative",
+    "start": 27.9622,
+    "end": 28.44
+  },
+  {
+    "id": "w69",
+    "text": "while",
+    "start": 28.4401,
+    "end": 28.6
+  },
+  {
+    "id": "w70",
+    "text": "private",
+    "start": 28.6808,
+    "end": 29.0
+  },
+  {
+    "id": "w71",
+    "text": "networks",
+    "start": 29.0003,
+    "end": 29.32
+  },
+  {
+    "id": "w72",
+    "text": "changed",
+    "start": 29.4044,
+    "end": 29.88
+  },
+  {
+    "id": "w73",
+    "text": "businesses",
+    "start": 29.8809,
+    "end": 30.28
+  },
+  {
+    "id": "w74",
+    "text": "away",
+    "start": 30.3603,
+    "end": 30.52
+  },
+  {
+    "id": "w75",
+    "text": "from",
+    "start": 30.5208,
+    "end": 30.76
+  },
+  {
+    "id": "w76",
+    "text": "public",
+    "start": 30.8404,
+    "end": 31.08
+  },
+  {
+    "id": "w77",
+    "text": "view.",
+    "start": 31.0802,
+    "end": 31.48
+  },
+  {
+    "id": "w78",
+    "text": "The",
+    "start": 31.9157,
+    "end": 32.04
+  },
+  {
+    "id": "w79",
+    "text": "lesson",
+    "start": 32.0403,
+    "end": 32.36
+  },
+  {
+    "id": "w80",
+    "text": "is",
+    "start": 32.4401,
+    "end": 32.52
+  },
+  {
+    "id": "w81",
+    "text": "narrower:",
+    "start": 32.5213,
+    "end": 33.16
+  },
+  {
+    "id": "w82",
+    "text": "a",
+    "start": 33.5321,
+    "end": 33.56
+  },
+  {
+    "id": "w83",
+    "text": "headline",
+    "start": 33.5616,
+    "end": 33.96
+  },
+  {
+    "id": "w84",
+    "text": "capability",
+    "start": 33.9628,
+    "end": 34.52
+  },
+  {
+    "id": "w85",
+    "text": "doesn't",
+    "start": 34.6007,
+    "end": 34.84
+  },
+  {
+    "id": "w86",
+    "text": "tell",
+    "start": 34.9201,
+    "end": 35.0
+  },
+  {
+    "id": "w87",
+    "text": "us",
+    "start": 35.0801,
+    "end": 35.16
+  },
+  {
+    "id": "w88",
+    "text": "when",
+    "start": 35.1601,
+    "end": 35.32
+  },
+  {
+    "id": "w89",
+    "text": "society",
+    "start": 35.4009,
+    "end": 35.72
+  },
+  {
+    "id": "w90",
+    "text": "discovers",
+    "start": 35.7214,
+    "end": 36.2
+  },
+  {
+    "id": "w91",
+    "text": "its",
+    "start": 36.2802,
+    "end": 36.36
+  },
+  {
+    "id": "w92",
+    "text": "defining",
+    "start": 36.361,
+    "end": 36.76
+  },
+  {
+    "id": "w93",
+    "text": "use.",
+    "start": 36.7613,
+    "end": 37.24
+  },
+  {
+    "id": "w94",
+    "text": "SPEED",
+    "start": 37.6162,
+    "end": 38.12
+  },
+  {
+    "id": "w95",
+    "text": "enters",
+    "start": 38.2117,
+    "end": 38.44
+  },
+  {
+    "id": "w96",
+    "text": "our",
+    "start": 38.4401,
+    "end": 38.6
+  },
+  {
+    "id": "w97",
+    "text": "map.",
+    "start": 38.6804,
+    "end": 39.0
+  },
+  {
+    "id": "w98",
+    "text": "but",
+    "start": 39.1584,
+    "end": 39.4
+  },
+  {
+    "id": "w99",
+    "text": "cannot",
+    "start": 39.4814,
+    "end": 39.8
+  },
+  {
+    "id": "w100",
+    "text": "claim",
+    "start": 39.8003,
+    "end": 40.04
+  },
+  {
+    "id": "w101",
+    "text": "the",
+    "start": 40.12,
+    "end": 40.12
+  },
+  {
+    "id": "w102",
+    "text": "centre.",
+    "start": 40.2004,
+    "end": 40.52
+  }
+]

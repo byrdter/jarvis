@@ -1,0 +1,7 @@
+The same radio reflection can support a fall alert or an invisible occupancy log. The same positioning can guide rescuers or track workers more closely than they agreed to. The same shared map can coordinate public infrastructure or become a private tollbooth around physical space.
+
+This objection isn't separate from the engineering. The roadmaps already place security, resilience, privacy, access, and connecting the unconnected beside the technical capabilities.
+
+The choices will be built in before most people arrive: what gets sensed, whose consent counts, how long measurements survive, who can buy access, and whether an unconnected person can opt out.
+
+Our five candidates are visible. We can finally put them in order.

@@ -1,0 +1,674 @@
+[
+  {
+    "id": "w0",
+    "text": "The",
+    "start": 0.04,
+    "end": 0.12
+  },
+  {
+    "id": "w1",
+    "text": "same",
+    "start": 0.1203,
+    "end": 0.36
+  },
+  {
+    "id": "w2",
+    "text": "radio",
+    "start": 0.4404,
+    "end": 0.68
+  },
+  {
+    "id": "w3",
+    "text": "reflection",
+    "start": 0.6814,
+    "end": 1.24
+  },
+  {
+    "id": "w4",
+    "text": "can",
+    "start": 1.32,
+    "end": 1.32
+  },
+  {
+    "id": "w5",
+    "text": "support",
+    "start": 1.4006,
+    "end": 1.64
+  },
+  {
+    "id": "w6",
+    "text": "a",
+    "start": 1.64,
+    "end": 1.72
+  },
+  {
+    "id": "w7",
+    "text": "fall",
+    "start": 1.8002,
+    "end": 1.96
+  },
+  {
+    "id": "w8",
+    "text": "alert",
+    "start": 2.0403,
+    "end": 2.28
+  },
+  {
+    "id": "w9",
+    "text": "or",
+    "start": 2.3147,
+    "end": 2.52
+  },
+  {
+    "id": "w10",
+    "text": "an",
+    "start": 2.6,
+    "end": 2.6
+  },
+  {
+    "id": "w11",
+    "text": "invisible",
+    "start": 2.6811,
+    "end": 3.0
+  },
+  {
+    "id": "w12",
+    "text": "occupancy",
+    "start": 3.0059,
+    "end": 3.56
+  },
+  {
+    "id": "w13",
+    "text": "log.",
+    "start": 3.6404,
+    "end": 3.96
+  },
+  {
+    "id": "w14",
+    "text": "The",
+    "start": 4.253,
+    "end": 4.44
+  },
+  {
+    "id": "w15",
+    "text": "same",
+    "start": 4.5202,
+    "end": 4.68
+  },
+  {
+    "id": "w16",
+    "text": "positioning",
+    "start": 4.6807,
+    "end": 5.16
+  },
+  {
+    "id": "w17",
+    "text": "can",
+    "start": 5.2408,
+    "end": 5.4
+  },
+  {
+    "id": "w18",
+    "text": "guide",
+    "start": 5.4802,
+    "end": 5.64
+  },
+  {
+    "id": "w19",
+    "text": "rescuers",
+    "start": 5.6434,
+    "end": 6.28
+  },
+  {
+    "id": "w20",
+    "text": "or",
+    "start": 6.3635,
+    "end": 6.44
+  },
+  {
+    "id": "w21",
+    "text": "track",
+    "start": 6.4403,
+    "end": 6.76
+  },
+  {
+    "id": "w22",
+    "text": "workers",
+    "start": 6.8405,
+    "end": 7.08
+  },
+  {
+    "id": "w23",
+    "text": "more",
+    "start": 7.16,
+    "end": 7.24
+  },
+  {
+    "id": "w24",
+    "text": "closely",
+    "start": 7.2421,
+    "end": 7.72
+  },
+  {
+    "id": "w25",
+    "text": "than",
+    "start": 7.8001,
+    "end": 7.88
+  },
+  {
+    "id": "w26",
+    "text": "they",
+    "start": 7.88,
+    "end": 7.96
+  },
+  {
+    "id": "w27",
+    "text": "agreed",
+    "start": 8.0411,
+    "end": 8.36
+  },
+  {
+    "id": "w28",
+    "text": "to.",
+    "start": 8.3603,
+    "end": 8.6
+  },
+  {
+    "id": "w29",
+    "text": "The",
+    "start": 9.1734,
+    "end": 9.24
+  },
+  {
+    "id": "w30",
+    "text": "same",
+    "start": 9.2406,
+    "end": 9.56
+  },
+  {
+    "id": "w31",
+    "text": "shared",
+    "start": 9.6415,
+    "end": 9.88
+  },
+  {
+    "id": "w32",
+    "text": "map",
+    "start": 9.8804,
+    "end": 10.2
+  },
+  {
+    "id": "w33",
+    "text": "can",
+    "start": 10.2802,
+    "end": 10.36
+  },
+  {
+    "id": "w34",
+    "text": "coordinate",
+    "start": 10.4424,
+    "end": 10.84
+  },
+  {
+    "id": "w35",
+    "text": "public",
+    "start": 10.8405,
+    "end": 11.16
+  },
+  {
+    "id": "w36",
+    "text": "infrastructure",
+    "start": 11.1633,
+    "end": 11.8
+  },
+  {
+    "id": "w37",
+    "text": "or",
+    "start": 11.8827,
+    "end": 11.96
+  },
+  {
+    "id": "w38",
+    "text": "become",
+    "start": 12.0402,
+    "end": 12.2
+  },
+  {
+    "id": "w39",
+    "text": "a",
+    "start": 12.2,
+    "end": 12.28
+  },
+  {
+    "id": "w40",
+    "text": "private",
+    "start": 12.3605,
+    "end": 12.68
+  },
+  {
+    "id": "w41",
+    "text": "tollbooth",
+    "start": 12.6814,
+    "end": 13.16
+  },
+  {
+    "id": "w42",
+    "text": "around",
+    "start": 13.2413,
+    "end": 13.48
+  },
+  {
+    "id": "w43",
+    "text": "physical",
+    "start": 13.4804,
+    "end": 13.8
+  },
+  {
+    "id": "w44",
+    "text": "space.",
+    "start": 13.8811,
+    "end": 14.36
+  },
+  {
+    "id": "w45",
+    "text": "This",
+    "start": 14.725,
+    "end": 15.0
+  },
+  {
+    "id": "w46",
+    "text": "objection",
+    "start": 15.0005,
+    "end": 15.48
+  },
+  {
+    "id": "w47",
+    "text": "isn't",
+    "start": 15.5733,
+    "end": 15.8
+  },
+  {
+    "id": "w48",
+    "text": "separate",
+    "start": 15.8007,
+    "end": 16.2
+  },
+  {
+    "id": "w49",
+    "text": "from",
+    "start": 16.28,
+    "end": 16.28
+  },
+  {
+    "id": "w50",
+    "text": "the",
+    "start": 16.3599,
+    "end": 16.36
+  },
+  {
+    "id": "w51",
+    "text": "engineering.",
+    "start": 16.3614,
+    "end": 16.92
+  },
+  {
+    "id": "w52",
+    "text": "The",
+    "start": 17.081,
+    "end": 17.24
+  },
+  {
+    "id": "w53",
+    "text": "roadmaps",
+    "start": 17.3216,
+    "end": 17.72
+  },
+  {
+    "id": "w54",
+    "text": "already",
+    "start": 17.7359,
+    "end": 18.12
+  },
+  {
+    "id": "w55",
+    "text": "place",
+    "start": 18.201,
+    "end": 18.44
+  },
+  {
+    "id": "w56",
+    "text": "security,",
+    "start": 18.4421,
+    "end": 19.16
+  },
+  {
+    "id": "w57",
+    "text": "resilience,",
+    "start": 19.34,
+    "end": 20.2
+  },
+  {
+    "id": "w58",
+    "text": "privacy,",
+    "start": 20.374,
+    "end": 21.16
+  },
+  {
+    "id": "w59",
+    "text": "access,",
+    "start": 21.3288,
+    "end": 22.04
+  },
+  {
+    "id": "w60",
+    "text": "and",
+    "start": 22.195,
+    "end": 22.36
+  },
+  {
+    "id": "w61",
+    "text": "connecting",
+    "start": 22.4412,
+    "end": 22.84
+  },
+  {
+    "id": "w62",
+    "text": "the",
+    "start": 22.9201,
+    "end": 23.0
+  },
+  {
+    "id": "w63",
+    "text": "unconnected",
+    "start": 23.004,
+    "end": 23.64
+  },
+  {
+    "id": "w64",
+    "text": "beside",
+    "start": 23.641,
+    "end": 24.04
+  },
+  {
+    "id": "w65",
+    "text": "the",
+    "start": 24.12,
+    "end": 24.12
+  },
+  {
+    "id": "w66",
+    "text": "technical",
+    "start": 24.2007,
+    "end": 24.52
+  },
+  {
+    "id": "w67",
+    "text": "capabilities.",
+    "start": 24.5244,
+    "end": 25.4
+  },
+  {
+    "id": "w68",
+    "text": "The",
+    "start": 25.7426,
+    "end": 25.8
+  },
+  {
+    "id": "w69",
+    "text": "choices",
+    "start": 25.8016,
+    "end": 26.2
+  },
+  {
+    "id": "w70",
+    "text": "will",
+    "start": 26.28,
+    "end": 26.36
+  },
+  {
+    "id": "w71",
+    "text": "be",
+    "start": 26.4401,
+    "end": 26.52
+  },
+  {
+    "id": "w72",
+    "text": "built",
+    "start": 26.5203,
+    "end": 26.76
+  },
+  {
+    "id": "w73",
+    "text": "in",
+    "start": 26.7601,
+    "end": 26.92
+  },
+  {
+    "id": "w74",
+    "text": "before",
+    "start": 27.0006,
+    "end": 27.32
+  },
+  {
+    "id": "w75",
+    "text": "most",
+    "start": 27.4006,
+    "end": 27.64
+  },
+  {
+    "id": "w76",
+    "text": "people",
+    "start": 27.6402,
+    "end": 27.88
+  },
+  {
+    "id": "w77",
+    "text": "arrive:",
+    "start": 27.9614,
+    "end": 28.44
+  },
+  {
+    "id": "w78",
+    "text": "what",
+    "start": 28.5362,
+    "end": 28.84
+  },
+  {
+    "id": "w79",
+    "text": "gets",
+    "start": 28.9202,
+    "end": 29.08
+  },
+  {
+    "id": "w80",
+    "text": "sensed,",
+    "start": 29.0806,
+    "end": 29.64
+  },
+  {
+    "id": "w81",
+    "text": "whose",
+    "start": 29.8264,
+    "end": 30.04
+  },
+  {
+    "id": "w82",
+    "text": "consent",
+    "start": 30.0405,
+    "end": 30.44
+  },
+  {
+    "id": "w83",
+    "text": "counts,",
+    "start": 30.4422,
+    "end": 31.0
+  },
+  {
+    "id": "w84",
+    "text": "how",
+    "start": 31.132,
+    "end": 31.32
+  },
+  {
+    "id": "w85",
+    "text": "long",
+    "start": 31.4001,
+    "end": 31.56
+  },
+  {
+    "id": "w86",
+    "text": "measurements",
+    "start": 31.5608,
+    "end": 32.04
+  },
+  {
+    "id": "w87",
+    "text": "survive,",
+    "start": 32.121,
+    "end": 32.6
+  },
+  {
+    "id": "w88",
+    "text": "who",
+    "start": 32.7004,
+    "end": 32.84
+  },
+  {
+    "id": "w89",
+    "text": "can",
+    "start": 32.92,
+    "end": 33.0
+  },
+  {
+    "id": "w90",
+    "text": "buy",
+    "start": 33.0806,
+    "end": 33.24
+  },
+  {
+    "id": "w91",
+    "text": "access,",
+    "start": 33.2478,
+    "end": 33.96
+  },
+  {
+    "id": "w92",
+    "text": "and",
+    "start": 34.1963,
+    "end": 34.28
+  },
+  {
+    "id": "w93",
+    "text": "whether",
+    "start": 34.2802,
+    "end": 34.52
+  },
+  {
+    "id": "w94",
+    "text": "an",
+    "start": 34.6001,
+    "end": 34.68
+  },
+  {
+    "id": "w95",
+    "text": "unconnected",
+    "start": 34.6827,
+    "end": 35.24
+  },
+  {
+    "id": "w96",
+    "text": "person",
+    "start": 35.3209,
+    "end": 35.56
+  },
+  {
+    "id": "w97",
+    "text": "can",
+    "start": 35.6401,
+    "end": 35.72
+  },
+  {
+    "id": "w98",
+    "text": "opt",
+    "start": 35.8014,
+    "end": 35.96
+  },
+  {
+    "id": "w99",
+    "text": "out.",
+    "start": 35.961,
+    "end": 36.36
+  },
+  {
+    "id": "w100",
+    "text": "Our",
+    "start": 36.6275,
+    "end": 36.84
+  },
+  {
+    "id": "w101",
+    "text": "five",
+    "start": 36.8404,
+    "end": 37.16
+  },
+  {
+    "id": "w102",
+    "text": "candidates",
+    "start": 37.1624,
+    "end": 37.64
+  },
+  {
+    "id": "w103",
+    "text": "are",
+    "start": 37.7322,
+    "end": 37.8
+  },
+  {
+    "id": "w104",
+    "text": "visible.",
+    "start": 37.8022,
+    "end": 38.36
+  },
+  {
+    "id": "w105",
+    "text": "We",
+    "start": 38.5946,
+    "end": 38.68
+  },
+  {
+    "id": "w106",
+    "text": "can",
+    "start": 38.76,
+    "end": 38.84
+  },
+  {
+    "id": "w107",
+    "text": "finally",
+    "start": 38.8423,
+    "end": 39.32
+  },
+  {
+    "id": "w108",
+    "text": "put",
+    "start": 39.4001,
+    "end": 39.48
+  },
+  {
+    "id": "w109",
+    "text": "them",
+    "start": 39.5601,
+    "end": 39.64
+  },
+  {
+    "id": "w110",
+    "text": "in",
+    "start": 39.72,
+    "end": 39.72
+  },
+  {
+    "id": "w111",
+    "text": "order.",
+    "start": 39.721,
+    "end": 40.12
+  }
+]

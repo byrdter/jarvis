@@ -1,0 +1,734 @@
+[
+  {
+    "id": "w0",
+    "text": "The",
+    "start": 0.0466,
+    "end": 0.2
+  },
+  {
+    "id": "w1",
+    "text": "answer",
+    "start": 0.2803,
+    "end": 0.44
+  },
+  {
+    "id": "w2",
+    "text": "opens",
+    "start": 0.5216,
+    "end": 0.76
+  },
+  {
+    "id": "w3",
+    "text": "the",
+    "start": 0.7607,
+    "end": 0.92
+  },
+  {
+    "id": "w4",
+    "text": "second",
+    "start": 1.0005,
+    "end": 1.24
+  },
+  {
+    "id": "w5",
+    "text": "candidate:",
+    "start": 1.2417,
+    "end": 1.8
+  },
+  {
+    "id": "w6",
+    "text": "REACH.",
+    "start": 2.0387,
+    "end": 2.6
+  },
+  {
+    "id": "w7",
+    "text": "Very-high-frequency",
+    "start": 3.0028,
+    "end": 3.96
+  },
+  {
+    "id": "w8",
+    "text": "signals",
+    "start": 4.0409,
+    "end": 4.44
+  },
+  {
+    "id": "w9",
+    "text": "can",
+    "start": 4.5201,
+    "end": 4.6
+  },
+  {
+    "id": "w10",
+    "text": "carry",
+    "start": 4.6009,
+    "end": 4.92
+  },
+  {
+    "id": "w11",
+    "text": "enormous",
+    "start": 4.9288,
+    "end": 5.56
+  },
+  {
+    "id": "w12",
+    "text": "information,",
+    "start": 5.561,
+    "end": 6.2
+  },
+  {
+    "id": "w13",
+    "text": "but",
+    "start": 6.3546,
+    "end": 6.52
+  },
+  {
+    "id": "w14",
+    "text": "walls,",
+    "start": 6.604,
+    "end": 7.24
+  },
+  {
+    "id": "w15",
+    "text": "rain,",
+    "start": 7.3827,
+    "end": 8.04
+  },
+  {
+    "id": "w16",
+    "text": "distance,",
+    "start": 8.2419,
+    "end": 9.0
+  },
+  {
+    "id": "w17",
+    "text": "atmospheric",
+    "start": 9.1812,
+    "end": 9.8
+  },
+  {
+    "id": "w18",
+    "text": "absorption,",
+    "start": 9.8813,
+    "end": 10.44
+  },
+  {
+    "id": "w19",
+    "text": "and",
+    "start": 10.604,
+    "end": 10.84
+  },
+  {
+    "id": "w20",
+    "text": "imperfect",
+    "start": 10.8479,
+    "end": 11.4
+  },
+  {
+    "id": "w21",
+    "text": "equipment",
+    "start": 11.4015,
+    "end": 11.8
+  },
+  {
+    "id": "w22",
+    "text": "remain.",
+    "start": 11.8804,
+    "end": 12.2
+  },
+  {
+    "id": "w23",
+    "text": "A",
+    "start": 12.4884,
+    "end": 12.6
+  },
+  {
+    "id": "w24",
+    "text": "six",
+    "start": 12.6805,
+    "end": 12.92
+  },
+  {
+    "id": "w25",
+    "text": "G",
+    "start": 13.0001,
+    "end": 13.08
+  },
+  {
+    "id": "w26",
+    "text": "label",
+    "start": 13.0802,
+    "end": 13.4
+  },
+  {
+    "id": "w27",
+    "text": "doesn't",
+    "start": 13.4834,
+    "end": 13.72
+  },
+  {
+    "id": "w28",
+    "text": "remove",
+    "start": 13.7203,
+    "end": 14.04
+  },
+  {
+    "id": "w29",
+    "text": "those",
+    "start": 14.12,
+    "end": 14.2
+  },
+  {
+    "id": "w30",
+    "text": "barriers.",
+    "start": 14.202,
+    "end": 14.84
+  },
+  {
+    "id": "w31",
+    "text": "The",
+    "start": 15.1361,
+    "end": 15.24
+  },
+  {
+    "id": "w32",
+    "text": "Nature",
+    "start": 15.2404,
+    "end": 15.56
+  },
+  {
+    "id": "w33",
+    "text": "team",
+    "start": 15.6403,
+    "end": 15.8
+  },
+  {
+    "id": "w34",
+    "text": "omitted",
+    "start": 15.8804,
+    "end": 16.12
+  },
+  {
+    "id": "w35",
+    "text": "fifty",
+    "start": 16.1237,
+    "end": 16.6
+  },
+  {
+    "id": "w36",
+    "text": "to",
+    "start": 16.68,
+    "end": 16.68
+  },
+  {
+    "id": "w37",
+    "text": "seventy-five",
+    "start": 16.6812,
+    "end": 17.24
+  },
+  {
+    "id": "w38",
+    "text": "gigahertz",
+    "start": 17.3267,
+    "end": 17.72
+  },
+  {
+    "id": "w39",
+    "text": "from",
+    "start": 17.7202,
+    "end": 17.88
+  },
+  {
+    "id": "w40",
+    "text": "its",
+    "start": 17.9602,
+    "end": 18.04
+  },
+  {
+    "id": "w41",
+    "text": "wireless",
+    "start": 18.121,
+    "end": 18.52
+  },
+  {
+    "id": "w42",
+    "text": "tests",
+    "start": 18.5207,
+    "end": 18.92
+  },
+  {
+    "id": "w43",
+    "text": "partly",
+    "start": 18.9336,
+    "end": 19.32
+  },
+  {
+    "id": "w44",
+    "text": "because",
+    "start": 19.4001,
+    "end": 19.56
+  },
+  {
+    "id": "w45",
+    "text": "atmospheric",
+    "start": 19.5695,
+    "end": 20.12
+  },
+  {
+    "id": "w46",
+    "text": "absorption",
+    "start": 20.2013,
+    "end": 20.68
+  },
+  {
+    "id": "w47",
+    "text": "is",
+    "start": 20.68,
+    "end": 20.76
+  },
+  {
+    "id": "w48",
+    "text": "substantial",
+    "start": 20.8417,
+    "end": 21.32
+  },
+  {
+    "id": "w49",
+    "text": "there.",
+    "start": 21.3202,
+    "end": 21.56
+  },
+  {
+    "id": "w50",
+    "text": "A",
+    "start": 21.8359,
+    "end": 21.96
+  },
+  {
+    "id": "w51",
+    "text": "practical",
+    "start": 21.962,
+    "end": 22.44
+  },
+  {
+    "id": "w52",
+    "text": "network",
+    "start": 22.521,
+    "end": 22.84
+  },
+  {
+    "id": "w53",
+    "text": "cannot",
+    "start": 22.8428,
+    "end": 23.24
+  },
+  {
+    "id": "w54",
+    "text": "bet",
+    "start": 23.3201,
+    "end": 23.4
+  },
+  {
+    "id": "w55",
+    "text": "everything",
+    "start": 23.4106,
+    "end": 23.88
+  },
+  {
+    "id": "w56",
+    "text": "on",
+    "start": 23.96,
+    "end": 24.04
+  },
+  {
+    "id": "w57",
+    "text": "one",
+    "start": 24.1203,
+    "end": 24.28
+  },
+  {
+    "id": "w58",
+    "text": "terahertz",
+    "start": 24.2857,
+    "end": 24.84
+  },
+  {
+    "id": "w59",
+    "text": "beam.",
+    "start": 24.9203,
+    "end": 25.16
+  },
+  {
+    "id": "w60",
+    "text": "In",
+    "start": 25.3538,
+    "end": 25.56
+  },
+  {
+    "id": "w61",
+    "text": "twenty",
+    "start": 25.6406,
+    "end": 25.8
+  },
+  {
+    "id": "w62",
+    "text": "twenty-six,",
+    "start": 25.8066,
+    "end": 26.52
+  },
+  {
+    "id": "w63",
+    "text": "Japan's",
+    "start": 26.8177,
+    "end": 27.32
+  },
+  {
+    "id": "w64",
+    "text": "NICT",
+    "start": 27.3278,
+    "end": 27.8
+  },
+  {
+    "id": "w65",
+    "text": "demonstrated",
+    "start": 27.8518,
+    "end": 28.44
+  },
+  {
+    "id": "w66",
+    "text": "sixty",
+    "start": 28.5233,
+    "end": 29.0
+  },
+  {
+    "id": "w67",
+    "text": "and",
+    "start": 29.0801,
+    "end": 29.16
+  },
+  {
+    "id": "w68",
+    "text": "three",
+    "start": 29.1619,
+    "end": 29.48
+  },
+  {
+    "id": "w69",
+    "text": "hundred",
+    "start": 29.5605,
+    "end": 29.8
+  },
+  {
+    "id": "w70",
+    "text": "gigahertz",
+    "start": 29.8019,
+    "end": 30.28
+  },
+  {
+    "id": "w71",
+    "text": "working",
+    "start": 30.3604,
+    "end": 30.6
+  },
+  {
+    "id": "w72",
+    "text": "together,",
+    "start": 30.6008,
+    "end": 31.16
+  },
+  {
+    "id": "w73",
+    "text": "with",
+    "start": 31.2443,
+    "end": 31.56
+  },
+  {
+    "id": "w74",
+    "text": "beam",
+    "start": 31.6404,
+    "end": 31.8
+  },
+  {
+    "id": "w75",
+    "text": "control",
+    "start": 31.8026,
+    "end": 32.36
+  },
+  {
+    "id": "w76",
+    "text": "and",
+    "start": 32.44,
+    "end": 32.44
+  },
+  {
+    "id": "w77",
+    "text": "lower-band",
+    "start": 32.4427,
+    "end": 33.0
+  },
+  {
+    "id": "w78",
+    "text": "fallback",
+    "start": 33.0014,
+    "end": 33.48
+  },
+  {
+    "id": "w79",
+    "text": "when",
+    "start": 33.5602,
+    "end": 33.64
+  },
+  {
+    "id": "w80",
+    "text": "the",
+    "start": 33.72,
+    "end": 33.72
+  },
+  {
+    "id": "w81",
+    "text": "fragile",
+    "start": 33.7214,
+    "end": 34.2
+  },
+  {
+    "id": "w82",
+    "text": "path",
+    "start": 34.2808,
+    "end": 34.52
+  },
+  {
+    "id": "w83",
+    "text": "degraded.",
+    "start": 34.5215,
+    "end": 35.16
+  },
+  {
+    "id": "w84",
+    "text": "That",
+    "start": 35.469,
+    "end": 35.64
+  },
+  {
+    "id": "w85",
+    "text": "helps",
+    "start": 35.6403,
+    "end": 35.88
+  },
+  {
+    "id": "w86",
+    "text": "explain",
+    "start": 35.9618,
+    "end": 36.44
+  },
+  {
+    "id": "w87",
+    "text": "why",
+    "start": 36.44,
+    "end": 36.52
+  },
+  {
+    "id": "w88",
+    "text": "the",
+    "start": 36.6001,
+    "end": 36.68
+  },
+  {
+    "id": "w89",
+    "text": "official",
+    "start": 36.681,
+    "end": 37.08
+  },
+  {
+    "id": "w90",
+    "text": "six",
+    "start": 37.1606,
+    "end": 37.4
+  },
+  {
+    "id": "w91",
+    "text": "G",
+    "start": 37.4001,
+    "end": 37.56
+  },
+  {
+    "id": "w92",
+    "text": "framework",
+    "start": 37.6407,
+    "end": 38.04
+  },
+  {
+    "id": "w93",
+    "text": "includes",
+    "start": 38.0404,
+    "end": 38.36
+  },
+  {
+    "id": "w94",
+    "text": "ubiquitous",
+    "start": 38.362,
+    "end": 38.92
+  },
+  {
+    "id": "w95",
+    "text": "connectivity,",
+    "start": 38.9262,
+    "end": 39.64
+  },
+  {
+    "id": "w96",
+    "text": "remote",
+    "start": 39.9363,
+    "end": 40.28
+  },
+  {
+    "id": "w97",
+    "text": "communities,",
+    "start": 40.2812,
+    "end": 40.92
+  },
+  {
+    "id": "w98",
+    "text": "satellites,",
+    "start": 41.084,
+    "end": 41.88
+  },
+  {
+    "id": "w99",
+    "text": "agriculture,",
+    "start": 42.0696,
+    "end": 42.92
+  },
+  {
+    "id": "w100",
+    "text": "and",
+    "start": 43.0398,
+    "end": 43.24
+  },
+  {
+    "id": "w101",
+    "text": "disaster",
+    "start": 43.2407,
+    "end": 43.72
+  },
+  {
+    "id": "w102",
+    "text": "response.",
+    "start": 43.8018,
+    "end": 44.2
+  },
+  {
+    "id": "w103",
+    "text": "REACH",
+    "start": 44.3779,
+    "end": 44.6
+  },
+  {
+    "id": "w104",
+    "text": "joins",
+    "start": 44.6866,
+    "end": 45.0
+  },
+  {
+    "id": "w105",
+    "text": "the",
+    "start": 45.0,
+    "end": 45.08
+  },
+  {
+    "id": "w106",
+    "text": "map.",
+    "start": 45.1606,
+    "end": 45.48
+  },
+  {
+    "id": "w107",
+    "text": "But",
+    "start": 45.6914,
+    "end": 45.72
+  },
+  {
+    "id": "w108",
+    "text": "why",
+    "start": 45.7204,
+    "end": 45.88
+  },
+  {
+    "id": "w109",
+    "text": "does",
+    "start": 45.9603,
+    "end": 46.04
+  },
+  {
+    "id": "w110",
+    "text": "that",
+    "start": 46.1204,
+    "end": 46.28
+  },
+  {
+    "id": "w111",
+    "text": "framework",
+    "start": 46.2807,
+    "end": 46.68
+  },
+  {
+    "id": "w112",
+    "text": "also",
+    "start": 46.7781,
+    "end": 47.16
+  },
+  {
+    "id": "w113",
+    "text": "ask",
+    "start": 47.1603,
+    "end": 47.4
+  },
+  {
+    "id": "w114",
+    "text": "a",
+    "start": 47.4799,
+    "end": 47.48
+  },
+  {
+    "id": "w115",
+    "text": "communications",
+    "start": 47.4829,
+    "end": 48.2
+  },
+  {
+    "id": "w116",
+    "text": "network",
+    "start": 48.2806,
+    "end": 48.52
+  },
+  {
+    "id": "w117",
+    "text": "to",
+    "start": 48.6003,
+    "end": 48.68
+  },
+  {
+    "id": "w118",
+    "text": "locate",
+    "start": 48.6808,
+    "end": 49.08
+  },
+  {
+    "id": "w119",
+    "text": "objects",
+    "start": 49.1633,
+    "end": 49.56
+  },
+  {
+    "id": "w120",
+    "text": "within",
+    "start": 49.5603,
+    "end": 49.8
+  },
+  {
+    "id": "w121",
+    "text": "centimetres?",
+    "start": 49.8033,
+    "end": 50.52
+  }
+]

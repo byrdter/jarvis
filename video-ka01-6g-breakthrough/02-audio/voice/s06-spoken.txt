@@ -1,0 +1,7 @@
+This is where SENSING enters—and where the thumbnail needs one correction. A radio network doesn't see like a camera. It can infer.
+
+Radio waves change when they strike bodies, walls, vehicles, rain, and moving objects. Integrated sensing and communication uses those changes while the same infrastructure carries data. NIST describes networks detecting objects, tracking motion, and estimating position while communicating.
+
+The ITU framework explicitly lists gesture recognition, fall detection, vehicle and pedestrian detection, environmental monitoring, imaging, mapping, and information about unconnected objects. Its current positioning target is roughly one to ten centimetres. That is a standards target, not guaranteed performance in your home.
+
+SENSING moves beside the person on our map. But if a room can be measured through the network, who decides when measurement becomes data about us?

@@ -2,9 +2,9 @@
 
 ## Current Gate
 
-- Artifact under review: cited VO draft, scene anchors, source cards, and returned I2V clips
+- Artifact under review: final Cartesia narration, scene anchors, source cards, and returned I2V clips
 - Render QC status: not started
-- Reason: no approved recorded VO, rendered scenes, or master exists yet
+- Reason: narration is approved and timed; rendered scenes and master do not exist yet
 
 ## Script Gate — 2026-08-04
 
@@ -16,7 +16,20 @@
 - Reversal: manual PASS; Scene 06 occupies the 40–55% window and changes the controlling question.
 - Persistent spine: manual PASS at plan level; Impact Map changes in every scene. Render verification remains required.
 - Runtime: the shared tool reports FAIL because its current floor is hard-coded to 15–25 minutes. This is an intentional channel-profile exception: KeyAdvances approved 8–10 minutes and this episode is locked at 9:20–9:45. Padding to satisfy a Byrddynasty runtime constant would violate the KeyAdvances profile.
-- `narrative-measure.py`: deferred until word-level timestamps exist; `01-script/narrative.json` is ready.
+- `narrative-measure.py`: PASS on the global Cartesia transcript. First payoff 88.3%; longest spine gap 70s; reversal occupies the required 40–55% window; CTA follows the payoff.
+
+## Narration Gate — 2026-08-04
+
+- Provider/model: Cartesia Sonic 3.5.
+- Voice: Steve; explicit voice ID frozen in `02-audio/voice/audio_meta.json` to prevent `.env` duplicate-key drift.
+- Delivery speed: 0.86.
+- Twelve scene-local mono PCM WAV files at 44.1 kHz; all durations measured with `ffprobe`.
+- Spoken duration: 537.2 seconds. Timed structure with 0.7-second scene transitions: 544.9 seconds (9:04.9).
+- Word timestamps: present and monotonic for all twelve scenes.
+- Long internal silence scan: PASS; no silence interval at or above 1.5 seconds detected at -45 dB.
+- Reversal: begins 39.84% and ends 50.81% of the timed structure.
+- Verdict: begins 86.47%; CTA follows at 98.55%.
+- Earlier Terry-voice and faster Steve tests are isolated under clearly labeled `02-audio/rejected-*` folders and are not build inputs.
 
 ## Pre-Production Narrative Gate
 
@@ -76,8 +89,18 @@ All approved intervals were re-encoded without audio and frozen under `02-assets
 - [ ] Text readable on mobile; no collisions, splits, joined words, or tiny labels
 - [ ] Intro, reversal, sensing reveal, verdict, and ending watched as motion
 
+## HyperFrames Scene Gate — S00
+
+- Composition: `05-hyperframes/compositions/s00-three-numbers.html`.
+- Audio-derived duration: 33.92 seconds.
+- `npm run check`: PASS with 0 lint errors/warnings, 0 runtime errors, 0 layout errors/warnings, 0 motion errors/warnings, and 78/78 contrast checks.
+- Eleven snapshots captured across the opening and visually inspected as a contact sheet.
+- Three single-use media clips are mounted directly at the host root; narration is mounted separately on audio track 10.
+- Visual changes are anchored to Cartesia word timings; final map breath remains below the five-second static ceiling.
+- One informational occlusion remains intentional: the host wafer shot temporarily covers the small `DEMONSTRATED` badge while the large lab proof is the focal object.
+
 ## Approval
 
 - Visual treatment approved by: Terry
 - Date: 2026-08-04
-- Remaining risk: VO wording and narration voice still require Terry's decision; ITU/NICT/CityUHK/NIST proof cards remain outstanding. Returned I2V motion is now reviewed and locked.
+- Remaining risk: ITU/NICT/CityUHK/NIST proof cards and rendered motion QC remain outstanding. Narration and returned I2V motion are locked.

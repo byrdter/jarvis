@@ -1,0 +1,782 @@
+[
+  {
+    "id": "w0",
+    "text": "This",
+    "start": 0.079,
+    "end": 0.28
+  },
+  {
+    "id": "w1",
+    "text": "is",
+    "start": 0.3601,
+    "end": 0.44
+  },
+  {
+    "id": "w2",
+    "text": "where",
+    "start": 0.5201,
+    "end": 0.6
+  },
+  {
+    "id": "w3",
+    "text": "SENSING",
+    "start": 0.6018,
+    "end": 1.0
+  },
+  {
+    "id": "w4",
+    "text": "enters.",
+    "start": 1.0046,
+    "end": 1.48
+  },
+  {
+    "id": "w5",
+    "text": "and",
+    "start": 1.8552,
+    "end": 1.96
+  },
+  {
+    "id": "w6",
+    "text": "where",
+    "start": 2.04,
+    "end": 2.04
+  },
+  {
+    "id": "w7",
+    "text": "the",
+    "start": 2.0401,
+    "end": 2.2
+  },
+  {
+    "id": "w8",
+    "text": "thumbnail",
+    "start": 2.2818,
+    "end": 2.68
+  },
+  {
+    "id": "w9",
+    "text": "needs",
+    "start": 2.7603,
+    "end": 2.92
+  },
+  {
+    "id": "w10",
+    "text": "one",
+    "start": 2.9213,
+    "end": 3.24
+  },
+  {
+    "id": "w11",
+    "text": "correction.",
+    "start": 3.3207,
+    "end": 3.72
+  },
+  {
+    "id": "w12",
+    "text": "A",
+    "start": 4.0702,
+    "end": 4.2
+  },
+  {
+    "id": "w13",
+    "text": "radio",
+    "start": 4.2007,
+    "end": 4.6
+  },
+  {
+    "id": "w14",
+    "text": "network",
+    "start": 4.6805,
+    "end": 4.92
+  },
+  {
+    "id": "w15",
+    "text": "doesn't",
+    "start": 5.0072,
+    "end": 5.32
+  },
+  {
+    "id": "w16",
+    "text": "see",
+    "start": 5.3201,
+    "end": 5.48
+  },
+  {
+    "id": "w17",
+    "text": "like",
+    "start": 5.5601,
+    "end": 5.64
+  },
+  {
+    "id": "w18",
+    "text": "a",
+    "start": 5.72,
+    "end": 5.72
+  },
+  {
+    "id": "w19",
+    "text": "camera.",
+    "start": 5.7215,
+    "end": 6.28
+  },
+  {
+    "id": "w20",
+    "text": "It",
+    "start": 6.5414,
+    "end": 6.68
+  },
+  {
+    "id": "w21",
+    "text": "can",
+    "start": 6.76,
+    "end": 6.84
+  },
+  {
+    "id": "w22",
+    "text": "infer.",
+    "start": 6.8422,
+    "end": 7.48
+  },
+  {
+    "id": "w23",
+    "text": "Radio",
+    "start": 7.6936,
+    "end": 8.12
+  },
+  {
+    "id": "w24",
+    "text": "waves",
+    "start": 8.2005,
+    "end": 8.44
+  },
+  {
+    "id": "w25",
+    "text": "change",
+    "start": 8.4413,
+    "end": 8.84
+  },
+  {
+    "id": "w26",
+    "text": "when",
+    "start": 8.92,
+    "end": 8.92
+  },
+  {
+    "id": "w27",
+    "text": "they",
+    "start": 9.0001,
+    "end": 9.08
+  },
+  {
+    "id": "w28",
+    "text": "strike",
+    "start": 9.0805,
+    "end": 9.4
+  },
+  {
+    "id": "w29",
+    "text": "bodies,",
+    "start": 9.4821,
+    "end": 10.04
+  },
+  {
+    "id": "w30",
+    "text": "walls,",
+    "start": 10.2023,
+    "end": 10.92
+  },
+  {
+    "id": "w31",
+    "text": "vehicles,",
+    "start": 11.0991,
+    "end": 11.88
+  },
+  {
+    "id": "w32",
+    "text": "rain,",
+    "start": 12.053,
+    "end": 12.68
+  },
+  {
+    "id": "w33",
+    "text": "and",
+    "start": 12.8914,
+    "end": 13.0
+  },
+  {
+    "id": "w34",
+    "text": "moving",
+    "start": 13.0803,
+    "end": 13.24
+  },
+  {
+    "id": "w35",
+    "text": "objects.",
+    "start": 13.266,
+    "end": 13.96
+  },
+  {
+    "id": "w36",
+    "text": "Integrated",
+    "start": 14.2112,
+    "end": 14.76
+  },
+  {
+    "id": "w37",
+    "text": "sensing",
+    "start": 14.7607,
+    "end": 15.24
+  },
+  {
+    "id": "w38",
+    "text": "and",
+    "start": 15.32,
+    "end": 15.32
+  },
+  {
+    "id": "w39",
+    "text": "communication",
+    "start": 15.3265,
+    "end": 16.12
+  },
+  {
+    "id": "w40",
+    "text": "uses",
+    "start": 16.2003,
+    "end": 16.36
+  },
+  {
+    "id": "w41",
+    "text": "those",
+    "start": 16.3605,
+    "end": 16.6
+  },
+  {
+    "id": "w42",
+    "text": "changes",
+    "start": 16.681,
+    "end": 17.0
+  },
+  {
+    "id": "w43",
+    "text": "while",
+    "start": 17.0004,
+    "end": 17.16
+  },
+  {
+    "id": "w44",
+    "text": "the",
+    "start": 17.24,
+    "end": 17.24
+  },
+  {
+    "id": "w45",
+    "text": "same",
+    "start": 17.3208,
+    "end": 17.56
+  },
+  {
+    "id": "w46",
+    "text": "infrastructure",
+    "start": 17.5708,
+    "end": 18.2
+  },
+  {
+    "id": "w47",
+    "text": "carries",
+    "start": 18.2804,
+    "end": 18.52
+  },
+  {
+    "id": "w48",
+    "text": "data.",
+    "start": 18.5221,
+    "end": 18.92
+  },
+  {
+    "id": "w49",
+    "text": "NIST",
+    "start": 19.0265,
+    "end": 19.4
+  },
+  {
+    "id": "w50",
+    "text": "describes",
+    "start": 19.407,
+    "end": 19.8
+  },
+  {
+    "id": "w51",
+    "text": "networks",
+    "start": 19.8025,
+    "end": 20.28
+  },
+  {
+    "id": "w52",
+    "text": "detecting",
+    "start": 20.282,
+    "end": 20.76
+  },
+  {
+    "id": "w53",
+    "text": "objects,",
+    "start": 20.7654,
+    "end": 21.48
+  },
+  {
+    "id": "w54",
+    "text": "tracking",
+    "start": 21.5913,
+    "end": 22.04
+  },
+  {
+    "id": "w55",
+    "text": "motion,",
+    "start": 22.1209,
+    "end": 22.6
+  },
+  {
+    "id": "w56",
+    "text": "and",
+    "start": 22.7736,
+    "end": 23.0
+  },
+  {
+    "id": "w57",
+    "text": "estimating",
+    "start": 23.0097,
+    "end": 23.56
+  },
+  {
+    "id": "w58",
+    "text": "position",
+    "start": 23.6405,
+    "end": 23.96
+  },
+  {
+    "id": "w59",
+    "text": "while",
+    "start": 24.04,
+    "end": 24.12
+  },
+  {
+    "id": "w60",
+    "text": "communicating.",
+    "start": 24.1233,
+    "end": 24.84
+  },
+  {
+    "id": "w61",
+    "text": "The",
+    "start": 25.1542,
+    "end": 25.32
+  },
+  {
+    "id": "w62",
+    "text": "ITU",
+    "start": 25.3219,
+    "end": 25.72
+  },
+  {
+    "id": "w63",
+    "text": "framework",
+    "start": 25.8008,
+    "end": 26.12
+  },
+  {
+    "id": "w64",
+    "text": "explicitly",
+    "start": 26.1372,
+    "end": 26.92
+  },
+  {
+    "id": "w65",
+    "text": "lists",
+    "start": 26.9202,
+    "end": 27.16
+  },
+  {
+    "id": "w66",
+    "text": "gesture",
+    "start": 27.245,
+    "end": 27.64
+  },
+  {
+    "id": "w67",
+    "text": "recognition,",
+    "start": 27.6429,
+    "end": 28.44
+  },
+  {
+    "id": "w68",
+    "text": "fall",
+    "start": 28.5986,
+    "end": 29.0
+  },
+  {
+    "id": "w69",
+    "text": "detection,",
+    "start": 29.0009,
+    "end": 29.64
+  },
+  {
+    "id": "w70",
+    "text": "vehicle",
+    "start": 29.8318,
+    "end": 30.36
+  },
+  {
+    "id": "w71",
+    "text": "and",
+    "start": 30.4401,
+    "end": 30.52
+  },
+  {
+    "id": "w72",
+    "text": "pedestrian",
+    "start": 30.5217,
+    "end": 31.08
+  },
+  {
+    "id": "w73",
+    "text": "detection,",
+    "start": 31.0815,
+    "end": 31.72
+  },
+  {
+    "id": "w74",
+    "text": "environmental",
+    "start": 31.8888,
+    "end": 32.52
+  },
+  {
+    "id": "w75",
+    "text": "monitoring,",
+    "start": 32.5211,
+    "end": 33.16
+  },
+  {
+    "id": "w76",
+    "text": "imaging,",
+    "start": 33.3651,
+    "end": 33.96
+  },
+  {
+    "id": "w77",
+    "text": "mapping,",
+    "start": 34.1648,
+    "end": 34.84
+  },
+  {
+    "id": "w78",
+    "text": "and",
+    "start": 35.0713,
+    "end": 35.16
+  },
+  {
+    "id": "w79",
+    "text": "information",
+    "start": 35.168,
+    "end": 35.72
+  },
+  {
+    "id": "w80",
+    "text": "about",
+    "start": 35.8001,
+    "end": 35.96
+  },
+  {
+    "id": "w81",
+    "text": "unconnected",
+    "start": 35.9831,
+    "end": 36.6
+  },
+  {
+    "id": "w82",
+    "text": "objects.",
+    "start": 36.6025,
+    "end": 37.24
+  },
+  {
+    "id": "w83",
+    "text": "Its",
+    "start": 37.5199,
+    "end": 37.64
+  },
+  {
+    "id": "w84",
+    "text": "current",
+    "start": 37.7203,
+    "end": 37.88
+  },
+  {
+    "id": "w85",
+    "text": "positioning",
+    "start": 37.8812,
+    "end": 38.36
+  },
+  {
+    "id": "w86",
+    "text": "target",
+    "start": 38.4407,
+    "end": 38.68
+  },
+  {
+    "id": "w87",
+    "text": "is",
+    "start": 38.7607,
+    "end": 38.84
+  },
+  {
+    "id": "w88",
+    "text": "roughly",
+    "start": 38.8412,
+    "end": 39.24
+  },
+  {
+    "id": "w89",
+    "text": "one",
+    "start": 39.241,
+    "end": 39.56
+  },
+  {
+    "id": "w90",
+    "text": "to",
+    "start": 39.64,
+    "end": 39.64
+  },
+  {
+    "id": "w91",
+    "text": "ten",
+    "start": 39.6404,
+    "end": 39.88
+  },
+  {
+    "id": "w92",
+    "text": "centimetres.",
+    "start": 39.8829,
+    "end": 40.6
+  },
+  {
+    "id": "w93",
+    "text": "That",
+    "start": 40.7849,
+    "end": 41.08
+  },
+  {
+    "id": "w94",
+    "text": "is",
+    "start": 41.16,
+    "end": 41.16
+  },
+  {
+    "id": "w95",
+    "text": "a",
+    "start": 41.24,
+    "end": 41.24
+  },
+  {
+    "id": "w96",
+    "text": "standards",
+    "start": 41.2414,
+    "end": 41.72
+  },
+  {
+    "id": "w97",
+    "text": "target,",
+    "start": 41.7205,
+    "end": 42.12
+  },
+  {
+    "id": "w98",
+    "text": "not",
+    "start": 42.346,
+    "end": 42.6
+  },
+  {
+    "id": "w99",
+    "text": "guaranteed",
+    "start": 42.6034,
+    "end": 43.16
+  },
+  {
+    "id": "w100",
+    "text": "performance",
+    "start": 43.161,
+    "end": 43.64
+  },
+  {
+    "id": "w101",
+    "text": "in",
+    "start": 43.64,
+    "end": 43.72
+  },
+  {
+    "id": "w102",
+    "text": "your",
+    "start": 43.8,
+    "end": 43.88
+  },
+  {
+    "id": "w103",
+    "text": "home.",
+    "start": 43.9602,
+    "end": 44.2
+  },
+  {
+    "id": "w104",
+    "text": "SENSING",
+    "start": 44.5732,
+    "end": 45.16
+  },
+  {
+    "id": "w105",
+    "text": "moves",
+    "start": 45.2403,
+    "end": 45.4
+  },
+  {
+    "id": "w106",
+    "text": "beside",
+    "start": 45.4011,
+    "end": 45.8
+  },
+  {
+    "id": "w107",
+    "text": "the",
+    "start": 45.88,
+    "end": 45.88
+  },
+  {
+    "id": "w108",
+    "text": "person",
+    "start": 45.9609,
+    "end": 46.28
+  },
+  {
+    "id": "w109",
+    "text": "on",
+    "start": 46.36,
+    "end": 46.36
+  },
+  {
+    "id": "w110",
+    "text": "our",
+    "start": 46.36,
+    "end": 46.44
+  },
+  {
+    "id": "w111",
+    "text": "map.",
+    "start": 46.5208,
+    "end": 46.92
+  },
+  {
+    "id": "w112",
+    "text": "But",
+    "start": 47.1724,
+    "end": 47.4
+  },
+  {
+    "id": "w113",
+    "text": "if",
+    "start": 47.48,
+    "end": 47.48
+  },
+  {
+    "id": "w114",
+    "text": "a",
+    "start": 47.56,
+    "end": 47.56
+  },
+  {
+    "id": "w115",
+    "text": "room",
+    "start": 47.5604,
+    "end": 47.8
+  },
+  {
+    "id": "w116",
+    "text": "can",
+    "start": 47.8801,
+    "end": 47.96
+  },
+  {
+    "id": "w117",
+    "text": "be",
+    "start": 48.04,
+    "end": 48.12
+  },
+  {
+    "id": "w118",
+    "text": "measured",
+    "start": 48.1202,
+    "end": 48.44
+  },
+  {
+    "id": "w119",
+    "text": "through",
+    "start": 48.5201,
+    "end": 48.6
+  },
+  {
+    "id": "w120",
+    "text": "the",
+    "start": 48.6,
+    "end": 48.68
+  },
+  {
+    "id": "w121",
+    "text": "network,",
+    "start": 48.7607,
+    "end": 49.16
+  },
+  {
+    "id": "w122",
+    "text": "who",
+    "start": 49.3138,
+    "end": 49.56
+  },
+  {
+    "id": "w123",
+    "text": "decides",
+    "start": 49.6419,
+    "end": 50.04
+  },
+  {
+    "id": "w124",
+    "text": "when",
+    "start": 50.0402,
+    "end": 50.28
+  },
+  {
+    "id": "w125",
+    "text": "measurement",
+    "start": 50.3608,
+    "end": 50.68
+  },
+  {
+    "id": "w126",
+    "text": "becomes",
+    "start": 50.6803,
+    "end": 51.0
+  },
+  {
+    "id": "w127",
+    "text": "data",
+    "start": 51.0803,
+    "end": 51.24
+  },
+  {
+    "id": "w128",
+    "text": "about",
+    "start": 51.3204,
+    "end": 51.56
+  },
+  {
+    "id": "w129",
+    "text": "us?",
+    "start": 51.5604,
+    "end": 51.8
+  }
+]

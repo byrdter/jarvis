@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #07131f; }
+      body { font-family: "Montserrat", sans-serif; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #07131f; }
+      #root > div[data-composition-src] { position: absolute; inset: 0; }
+      .host-media {
+        position: absolute;
+        object-fit: cover;
+        overflow: hidden;
+        filter: saturate(0.78) contrast(1.12) brightness(0.72);
+      }
+      #s00-data-flow { inset: 0; width: 1920px; height: 1080px; opacity: 0.5; }
+      #s00-network { left: 1090px; top: 168px; width: 690px; height: 500px; border-radius: 12px; opacity: 0.56; }
+      #s00-wafer { left: 1032px; top: 154px; width: 746px; height: 560px; border-radius: 12px; opacity: 0.62; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="33.92">
+      <div
+        id="el-s00"
+        class="clip"
+        data-composition-id="ka01-s00"
+        data-composition-src="compositions/s00-three-numbers.html"
+        data-start="0"
+        data-duration="33.92"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <video id="s00-data-flow" class="clip host-media" src="assets/video/s00-data-flow.mp4" data-start="0" data-duration="5.04" data-track-index="2" muted playsinline></video>
+      <video id="s00-network" class="clip host-media" src="assets/video/s00-network.mp4" data-start="10.8" data-duration="5.04" data-track-index="3" muted playsinline></video>
+      <video id="s00-wafer" class="clip host-media" src="assets/video/s00-wafer-fab.mp4" data-start="15.7" data-duration="5.0" data-track-index="4" muted playsinline></video>
+      <audio id="s00-voice" class="clip" src="assets/audio/s00-narration.wav" data-start="0" data-duration="33.92" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s00-data-flow", { scale: 1.16, opacity: 0.18 }, { scale: 1.0, opacity: 0.5, duration: 4.8, ease: "power2.out" }, 0);
+      tl.fromTo("#s00-network", { x: 130, scale: 1.12, opacity: 0 }, { x: 0, scale: 1, opacity: 0.56, duration: 0.55, ease: "power3.out" }, 10.8);
+      tl.fromTo("#s00-wafer", { x: 150, scale: 1.18, opacity: 0 }, { x: 0, scale: 1, opacity: 0.62, duration: 0.65, ease: "expo.out" }, 15.7);
+      tl.to("#s00-wafer", { scale: 1.06, duration: 4.2, ease: "sine.inOut" }, 16.35);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

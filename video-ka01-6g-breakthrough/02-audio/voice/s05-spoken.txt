@@ -1,0 +1,9 @@
+Here is where the picture changes.
+
+Hold the tiny chip alone and it looks like a base station collapsing onto a fingernail. Pull back, and the experiment includes external lasers, optical and electrical amplifiers, photodetectors, commercial modulation equipment, filters, and directional horn antennas. The wireless path was about one point three metres.
+
+The famous two-hundred-six-point-two-five-gigabit figure belongs to an earlier terahertz story. Its peer-reviewed twenty twenty-two abstract reports one hundred three point one two five gigabits per second net at three hundred seventy gigahertz. The doubled number isn't stated in that abstract, and it isn't the twenty twenty-five chip's single-lane result.
+
+That doesn't debunk the chip. It corrects the mistaken picture and relocates the achievement: broad, adaptable signal generation and processing—not an entire network inside nineteen square millimetres.
+
+So our question changes. Not “How fast can one link go?” What can a network become when communication, computing, positioning, and radio measurement work together?

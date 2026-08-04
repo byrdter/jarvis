@@ -1,0 +1,7 @@
+The first opportunities will look less glamorous than a 6G app store.
+
+NIST's current work names the underlying fields: wireless modelling, integrated sensing and communications, millimetre-wave measurement, on-wafer standards, microwave metrology, AI-native architecture, security, spectrum management, and propagation modelling.
+
+Around them sit practical businesses: connecting sensors to edge AI, adapting robots to shared maps, testing equipment, managing spatial data, and proving systems safe and compliant. These are evidence-based adjacencies, not guaranteed job forecasts. They cannot tell us which company wins.
+
+The opportunity isn't “build something with 6G.” It is solve one expensive physical-world problem when connectivity, sensing, and compute converge. But value will follow whoever controls the measurements.

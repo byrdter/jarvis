@@ -8,7 +8,7 @@
 - Episode folder: `video-ka01-6g-breakthrough`
 - Owner: Terry Byrd
 - Beads issue: `jarvis-2q9k`
-- Status: assets prepared; awaiting VO approval and narration
+- Status: narration locked; S00 HyperFrames build passes; S01–S11 construction next
 
 ## Thesis
 
@@ -27,7 +27,7 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 - Whole-runtime carried payoff: If speed is not the life-changing part of 6G, what is—and where will a normal person encounter it first?
 - Persistent spine: The five-node **6G Impact Map**—SPEED, REACH, INTELLIGENCE, SENSING, COORDINATION—orbiting a human silhouette. One node activates per act; the order reorganizes at the reversal.
 - Planned reversal position: 4:10–4:50, approximately 45–50% of runtime
-- Current estimated runtime: 9:35 including a 10-second post-verdict CTA
+- Current audio-derived runtime: 9:04.9 including 0.7-second scene transitions; inside the KeyAdvances 8–10 minute profile
 
 ## Production Strategy
 
@@ -40,7 +40,7 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 - Still-image owner: Codex creates and locally freezes every required original still
 - I2V owner: Terry generates requested clips from Codex-supplied approved stills and complete prompt packets
 - I2V handoff: `I2V-PROMPT-PACK.md`; prompts include subject motion, camera, duration, end state, negatives, filename, cue, and acceptance test
-- TTS/VO tool: decide after final VO approval
+- TTS/VO tool: Cartesia Sonic 3.5, Steve voice, explicit voice ID frozen in `02-audio/voice/audio_meta.json`; speed 0.86
 - Evidence language: Every future-facing application receives an on-screen state—DEMONSTRATED, STANDARD TARGET, PLAUSIBLE, or SPECULATIVE
 - Motion contract: Meaningful visual change every 2–4 seconds; no unchanged state reaches five seconds; every scene and master must pass `freezedetect`
 - Asset floor: One unique real background and at least three single-use clips per scene, sourced from `asset-library/assets.db` before generation
@@ -54,7 +54,7 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 | Thesis locked | Terry / Codex | approved | Human-consequence thesis; speed is the initial suspect, not the verdict |
 | Runtime target locked | Terry / Codex | approved | 9:20–9:45; long enough for a reversal and human consequence, short enough to avoid an essay-shaped middle |
 | Visual treatment approved | Terry | approved | Terry approved the visual-first narrative and asked production to start |
-| VO approved | Terry | pending | Complete cited draft exists in `01-script/VO-SCRIPT.md`; awaiting Terry's content review |
+| VO approved | Terry | approved by production continuation | Cartesia narration generated directly from `01-script/VO-CLEAN.md` using Steve's selected voice |
 | Scene renders locked | Terry | pending | |
 | Master render approved | Terry | pending | |
 | Final package verified against finished video | Terry / Codex | pending | Promise changes return to pre-script gate |
@@ -65,11 +65,9 @@ China's photonic 6G experiment is a real and important laboratory advance, but i
 
 | Blocker | Owner | Needed By | Resolution |
 |---|---|---|---|
-| Final spoken timing unavailable until VO is recorded | Production | Scene build | Derive every duration from audio with `ffprobe`; never trust transcript tail timestamps |
 | Ordinary-life applications vary in maturity | Script / Visuals | Scene build | Preserve DEMONSTRATED / STANDARD TARGET / PLAUSIBLE / SPECULATIVE badges |
-| Narration provider/voice is not selected | Terry | Audio production | Approve the script and choose the established HeyGen voice or provide a recorded narration; do not silently change the channel voice |
 | Remaining institutional proof cards | Production | Scene build | Create focused ITU, NICT, CityUHK, and NIST cards at mobile-readable size |
 
 ## Current Next Action
 
-- Obtain Terry's final VO approval and narration choice. Generate or ingest the real narration, derive scene durations from the audio files with `ffprobe`, create word-level timestamps, and then build the scenes around those timings.
+- Continue S01–S11 HyperFrames construction from `.hyperframes/expanded-prompt.md`, using `02-audio/scene-timings.json` and the per-scene Cartesia word timestamps; complete remaining institutional proof cards before their evidence scenes render.

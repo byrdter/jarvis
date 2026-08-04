@@ -1,0 +1,89 @@
+{
+  "source": "video-ka01-6g-breakthrough/02-audio/voice/audio_meta.json",
+  "duration_authority": "ffprobe",
+  "inter_scene_gap_s": 0.7,
+  "master_duration_s": 544.9,
+  "master_duration_display": "09:04.900",
+  "scenes": [
+    {
+      "id": "s00",
+      "start_s": 0.0,
+      "end_s": 33.92,
+      "duration_s": 33.92
+    },
+    {
+      "id": "s01",
+      "start_s": 34.62,
+      "end_s": 75.26,
+      "duration_s": 40.64
+    },
+    {
+      "id": "s02",
+      "start_s": 75.96,
+      "end_s": 117.96,
+      "duration_s": 42.0
+    },
+    {
+      "id": "s03",
+      "start_s": 118.66,
+      "end_s": 169.22,
+      "duration_s": 50.56
+    },
+    {
+      "id": "s04",
+      "start_s": 169.92,
+      "end_s": 216.4,
+      "duration_s": 46.48
+    },
+    {
+      "id": "s05",
+      "start_s": 217.1,
+      "end_s": 276.86,
+      "duration_s": 59.76
+    },
+    {
+      "id": "s06",
+      "start_s": 277.56,
+      "end_s": 329.48,
+      "duration_s": 51.92
+    },
+    {
+      "id": "s07",
+      "start_s": 330.18,
+      "end_s": 378.82,
+      "duration_s": 48.64
+    },
+    {
+      "id": "s08",
+      "start_s": 379.52,
+      "end_s": 429.52,
+      "duration_s": 50.0
+    },
+    {
+      "id": "s09",
+      "start_s": 430.22,
+      "end_s": 470.46,
+      "duration_s": 40.24
+    },
+    {
+      "id": "s10",
+      "start_s": 471.16,
+      "end_s": 536.28,
+      "duration_s": 65.12
+    },
+    {
+      "id": "s11",
+      "start_s": 536.98,
+      "end_s": 544.9,
+      "duration_s": 7.92
+    }
+  ],
+  "structural_positions": {
+    "reversal_scene": "s05",
+    "reversal_start_pct": 39.84,
+    "reversal_end_pct": 50.81,
+    "verdict_scene": "s10",
+    "verdict_start_pct": 86.47,
+    "cta_scene": "s11"
+  }
+}

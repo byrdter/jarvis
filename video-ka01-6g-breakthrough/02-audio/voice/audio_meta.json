@@ -1,0 +1,120 @@
+{
+  "tts_provider": "cartesia",
+  "voice_id": "9fb269e7-70fe-4cbe-aa3f-28bdb67e3e84",
+  "model_id": "sonic-3.5",
+  "speed": 0.86,
+  "sample_rate": 44100,
+  "channels": 1,
+  "source_script": "video-ka01-6g-breakthrough/01-script/VO-CLEAN.md",
+  "voices": [
+    {
+      "id": "s00",
+      "title": "THE THREE NUMBERS",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s00-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s00-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s00-spoken.txt",
+      "duration_s": 33.92,
+      "word_count": 99
+    },
+    {
+      "id": "s01",
+      "title": "THE LESSON FROM 5G",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s01-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s01-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s01-spoken.txt",
+      "duration_s": 40.64,
+      "word_count": 103
+    },
+    {
+      "id": "s02",
+      "title": "SPEED MAKES ITS CASE",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s02-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s02-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s02-spoken.txt",
+      "duration_s": 42.0,
+      "word_count": 118
+    },
+    {
+      "id": "s03",
+      "title": "REACH IS A SYSTEM, NOT A FREQUENCY",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s03-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s03-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s03-spoken.txt",
+      "duration_s": 50.56,
+      "word_count": 122
+    },
+    {
+      "id": "s04",
+      "title": "WHEN THE NETWORK GETS INTELLIGENCE",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s04-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s04-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s04-spoken.txt",
+      "duration_s": 46.48,
+      "word_count": 120
+    },
+    {
+      "id": "s05",
+      "title": "THE LABORATORY PULLBACK",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s05-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s05-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s05-spoken.txt",
+      "duration_s": 59.76,
+      "word_count": 154
+    },
+    {
+      "id": "s06",
+      "title": "IT CAN SEE, BUT NOT LIKE A CAMERA",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s06-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s06-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s06-spoken.txt",
+      "duration_s": 51.92,
+      "word_count": 130
+    },
+    {
+      "id": "s07",
+      "title": "WHEN MACHINES SHARE A WORLD MODEL",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s07-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s07-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s07-spoken.txt",
+      "duration_s": 48.64,
+      "word_count": 127
+    },
+    {
+      "id": "s08",
+      "title": "THE WORK ARRIVES BEFORE THE MAGIC",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s08-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s08-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s08-spoken.txt",
+      "duration_s": 50.0,
+      "word_count": 110
+    },
+    {
+      "id": "s09",
+      "title": "THE PRICE OF AN AWARE NETWORK",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s09-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s09-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s09-spoken.txt",
+      "duration_s": 40.24,
+      "word_count": 112
+    },
+    {
+      "id": "s10",
+      "title": "THE ORDER OF ARRIVAL",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s10-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s10-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s10-spoken.txt",
+      "duration_s": 65.12,
+      "word_count": 150
+    },
+    {
+      "id": "s11",
+      "title": "CTA",
+      "path": "video-ka01-6g-breakthrough/02-audio/voice/s11-narration.wav",
+      "words_path": "video-ka01-6g-breakthrough/02-audio/voice/s11-words.json",
+      "text_path": "video-ka01-6g-breakthrough/02-audio/voice/s11-spoken.txt",
+      "duration_s": 7.92,
+      "word_count": 19
+    }
+  ],
+  "total_duration_s": 537.2
+}

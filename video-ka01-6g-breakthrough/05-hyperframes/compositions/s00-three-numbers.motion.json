@@ -1,0 +1,12 @@
+{
+  "duration": 33.92,
+  "maxStaticSec": 4.0,
+  "assertions": [
+    {"kind":"appearsBy","selector":"#s00-hook","bySec":0.8},
+    {"kind":"before","a":"#s00-stat-speed","b":"#s00-stat-chip"},
+    {"kind":"before","a":"#s00-stat-chip","b":"#s00-stat-link"},
+    {"kind":"before","a":"#s00-question","b":"#s00-map"},
+    {"kind":"staysInFrame","selector":"#s00-map"},
+    {"kind":"keepsMoving","withinSelector":"#root"}
+  ]
+}

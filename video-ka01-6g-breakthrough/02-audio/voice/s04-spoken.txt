@@ -1,0 +1,7 @@
+The third candidate is INTELLIGENCE, and it changes where computing happens.
+
+The International Telecommunication Union doesn't describe artificial intelligence as an app riding on 6G. It defines AI and communication as a usage scenario, including distributed inference, model sharing, data processing across devices and networks, and computing-resource orchestration.
+
+That could let field glasses send a difficult visual task to a nearby edge system instead of carrying all the compute and battery on a person's face. A small company could rent intense local inference only when a machine needs it. But those are plausible applications, not products promised for twenty thirty.
+
+SPEED, REACH, and INTELLIGENCE improve what networks already do. None explains why the standard names posture, movement, and position.

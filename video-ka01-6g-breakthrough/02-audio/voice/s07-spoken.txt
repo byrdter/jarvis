@@ -1,0 +1,9 @@
+Sensing becomes consequential when it feeds COORDINATION.
+
+One vehicle sees only what its own sensors can reach. A connected road could share a hidden hazard. A warehouse could reroute robots around a worker. A port could coordinate vehicles and cranes against one changing map. A hospital could combine equipment location, room activity, and assistance devices.
+
+The framework doesn't promise those finished systems. It does name automated driving, autonomous collaboration between devices for medical assistance, industrial automation, digital twins, and distributed inference.
+
+The pieces aren't yet a universal shared nervous system. But COORDINATION changes the unit of value: from one device receiving information to many machines acting on a common model of physical space.
+
+Now the question is who builds, operates, and governs the spaces around the phone.

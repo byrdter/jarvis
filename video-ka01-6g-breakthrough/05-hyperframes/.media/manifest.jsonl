@@ -1,0 +1,3 @@
+{"id":"video_001","type":"video","path":"assets/video/s00-data-flow.mp4","source":"existing","description":"s00 data flow","duration":5,"width":1280,"height":720,"provenance":{"provider":"local","adopted":true}}
+{"id":"video_002","type":"video","path":"assets/video/s00-network.mp4","source":"existing","description":"s00 network","duration":5,"width":1280,"height":720,"provenance":{"provider":"local","adopted":true}}
+{"id":"video_003","type":"video","path":"assets/video/s00-wafer-fab.mp4","source":"existing","description":"s00 wafer fab","duration":10.1,"width":1920,"height":1080,"provenance":{"provider":"local","adopted":true}}

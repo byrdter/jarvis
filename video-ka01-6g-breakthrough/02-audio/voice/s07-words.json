@@ -1,0 +1,764 @@
+[
+  {
+    "id": "w0",
+    "text": "Sensing",
+    "start": 0.067,
+    "end": 0.44
+  },
+  {
+    "id": "w1",
+    "text": "becomes",
+    "start": 0.5209,
+    "end": 0.84
+  },
+  {
+    "id": "w2",
+    "text": "consequential",
+    "start": 0.8465,
+    "end": 1.64
+  },
+  {
+    "id": "w3",
+    "text": "when",
+    "start": 1.6403,
+    "end": 1.8
+  },
+  {
+    "id": "w4",
+    "text": "it",
+    "start": 1.88,
+    "end": 1.88
+  },
+  {
+    "id": "w5",
+    "text": "feeds",
+    "start": 1.9607,
+    "end": 2.2
+  },
+  {
+    "id": "w6",
+    "text": "COORDINATION.",
+    "start": 2.2063,
+    "end": 2.92
+  },
+  {
+    "id": "w7",
+    "text": "One",
+    "start": 3.0839,
+    "end": 3.4
+  },
+  {
+    "id": "w8",
+    "text": "vehicle",
+    "start": 3.4807,
+    "end": 3.8
+  },
+  {
+    "id": "w9",
+    "text": "sees",
+    "start": 3.8803,
+    "end": 4.04
+  },
+  {
+    "id": "w10",
+    "text": "only",
+    "start": 4.0607,
+    "end": 4.44
+  },
+  {
+    "id": "w11",
+    "text": "what",
+    "start": 4.52,
+    "end": 4.6
+  },
+  {
+    "id": "w12",
+    "text": "its",
+    "start": 4.68,
+    "end": 4.68
+  },
+  {
+    "id": "w13",
+    "text": "own",
+    "start": 4.6923,
+    "end": 5.0
+  },
+  {
+    "id": "w14",
+    "text": "sensors",
+    "start": 5.0805,
+    "end": 5.4
+  },
+  {
+    "id": "w15",
+    "text": "can",
+    "start": 5.4801,
+    "end": 5.56
+  },
+  {
+    "id": "w16",
+    "text": "reach.",
+    "start": 5.5608,
+    "end": 5.96
+  },
+  {
+    "id": "w17",
+    "text": "A",
+    "start": 6.1816,
+    "end": 6.2
+  },
+  {
+    "id": "w18",
+    "text": "connected",
+    "start": 6.2011,
+    "end": 6.76
+  },
+  {
+    "id": "w19",
+    "text": "road",
+    "start": 6.7603,
+    "end": 7.08
+  },
+  {
+    "id": "w20",
+    "text": "could",
+    "start": 7.16,
+    "end": 7.16
+  },
+  {
+    "id": "w21",
+    "text": "share",
+    "start": 7.2419,
+    "end": 7.48
+  },
+  {
+    "id": "w22",
+    "text": "a",
+    "start": 7.56,
+    "end": 7.56
+  },
+  {
+    "id": "w23",
+    "text": "hidden",
+    "start": 7.5612,
+    "end": 7.88
+  },
+  {
+    "id": "w24",
+    "text": "hazard.",
+    "start": 7.9608,
+    "end": 8.36
+  },
+  {
+    "id": "w25",
+    "text": "A",
+    "start": 8.6968,
+    "end": 8.84
+  },
+  {
+    "id": "w26",
+    "text": "warehouse",
+    "start": 8.8428,
+    "end": 9.4
+  },
+  {
+    "id": "w27",
+    "text": "could",
+    "start": 9.4802,
+    "end": 9.56
+  },
+  {
+    "id": "w28",
+    "text": "reroute",
+    "start": 9.6411,
+    "end": 9.96
+  },
+  {
+    "id": "w29",
+    "text": "robots",
+    "start": 9.9607,
+    "end": 10.36
+  },
+  {
+    "id": "w30",
+    "text": "around",
+    "start": 10.4402,
+    "end": 10.6
+  },
+  {
+    "id": "w31",
+    "text": "a",
+    "start": 10.68,
+    "end": 10.68
+  },
+  {
+    "id": "w32",
+    "text": "worker.",
+    "start": 10.6807,
+    "end": 11.16
+  },
+  {
+    "id": "w33",
+    "text": "A",
+    "start": 11.4323,
+    "end": 11.56
+  },
+  {
+    "id": "w34",
+    "text": "port",
+    "start": 11.6417,
+    "end": 11.96
+  },
+  {
+    "id": "w35",
+    "text": "could",
+    "start": 12.0401,
+    "end": 12.12
+  },
+  {
+    "id": "w36",
+    "text": "coordinate",
+    "start": 12.1217,
+    "end": 12.6
+  },
+  {
+    "id": "w37",
+    "text": "vehicles",
+    "start": 12.6008,
+    "end": 13.08
+  },
+  {
+    "id": "w38",
+    "text": "and",
+    "start": 13.16,
+    "end": 13.16
+  },
+  {
+    "id": "w39",
+    "text": "cranes",
+    "start": 13.1635,
+    "end": 13.64
+  },
+  {
+    "id": "w40",
+    "text": "against",
+    "start": 13.7202,
+    "end": 13.96
+  },
+  {
+    "id": "w41",
+    "text": "one",
+    "start": 13.9603,
+    "end": 14.2
+  },
+  {
+    "id": "w42",
+    "text": "changing",
+    "start": 14.2824,
+    "end": 14.6
+  },
+  {
+    "id": "w43",
+    "text": "map.",
+    "start": 14.601,
+    "end": 15.08
+  },
+  {
+    "id": "w44",
+    "text": "A",
+    "start": 15.384,
+    "end": 15.4
+  },
+  {
+    "id": "w45",
+    "text": "hospital",
+    "start": 15.4011,
+    "end": 15.88
+  },
+  {
+    "id": "w46",
+    "text": "could",
+    "start": 15.9601,
+    "end": 16.04
+  },
+  {
+    "id": "w47",
+    "text": "combine",
+    "start": 16.1205,
+    "end": 16.36
+  },
+  {
+    "id": "w48",
+    "text": "equipment",
+    "start": 16.3617,
+    "end": 16.76
+  },
+  {
+    "id": "w49",
+    "text": "location,",
+    "start": 16.8413,
+    "end": 17.32
+  },
+  {
+    "id": "w50",
+    "text": "room",
+    "start": 17.4808,
+    "end": 17.8
+  },
+  {
+    "id": "w51",
+    "text": "activity,",
+    "start": 17.8816,
+    "end": 18.44
+  },
+  {
+    "id": "w52",
+    "text": "and",
+    "start": 18.5961,
+    "end": 18.76
+  },
+  {
+    "id": "w53",
+    "text": "assistance",
+    "start": 18.842,
+    "end": 19.24
+  },
+  {
+    "id": "w54",
+    "text": "devices.",
+    "start": 19.2414,
+    "end": 19.8
+  },
+  {
+    "id": "w55",
+    "text": "The",
+    "start": 19.8806,
+    "end": 20.04
+  },
+  {
+    "id": "w56",
+    "text": "framework",
+    "start": 20.121,
+    "end": 20.44
+  },
+  {
+    "id": "w57",
+    "text": "doesn't",
+    "start": 20.4405,
+    "end": 20.68
+  },
+  {
+    "id": "w58",
+    "text": "promise",
+    "start": 20.6812,
+    "end": 21.08
+  },
+  {
+    "id": "w59",
+    "text": "those",
+    "start": 21.1607,
+    "end": 21.32
+  },
+  {
+    "id": "w60",
+    "text": "finished",
+    "start": 21.3208,
+    "end": 21.64
+  },
+  {
+    "id": "w61",
+    "text": "systems.",
+    "start": 21.7214,
+    "end": 22.28
+  },
+  {
+    "id": "w62",
+    "text": "It",
+    "start": 22.5502,
+    "end": 22.76
+  },
+  {
+    "id": "w63",
+    "text": "does",
+    "start": 22.8406,
+    "end": 23.0
+  },
+  {
+    "id": "w64",
+    "text": "name",
+    "start": 23.0008,
+    "end": 23.32
+  },
+  {
+    "id": "w65",
+    "text": "automated",
+    "start": 23.4429,
+    "end": 23.88
+  },
+  {
+    "id": "w66",
+    "text": "driving,",
+    "start": 23.8812,
+    "end": 24.44
+  },
+  {
+    "id": "w67",
+    "text": "autonomous",
+    "start": 24.6887,
+    "end": 25.32
+  },
+  {
+    "id": "w68",
+    "text": "collaboration",
+    "start": 25.3236,
+    "end": 26.04
+  },
+  {
+    "id": "w69",
+    "text": "between",
+    "start": 26.1221,
+    "end": 26.36
+  },
+  {
+    "id": "w70",
+    "text": "devices",
+    "start": 26.3642,
+    "end": 26.92
+  },
+  {
+    "id": "w71",
+    "text": "for",
+    "start": 27.0,
+    "end": 27.08
+  },
+  {
+    "id": "w72",
+    "text": "medical",
+    "start": 27.0803,
+    "end": 27.4
+  },
+  {
+    "id": "w73",
+    "text": "assistance,",
+    "start": 27.4015,
+    "end": 28.04
+  },
+  {
+    "id": "w74",
+    "text": "industrial",
+    "start": 28.3029,
+    "end": 28.92
+  },
+  {
+    "id": "w75",
+    "text": "automation,",
+    "start": 29.0009,
+    "end": 29.56
+  },
+  {
+    "id": "w76",
+    "text": "digital",
+    "start": 29.8736,
+    "end": 30.28
+  },
+  {
+    "id": "w77",
+    "text": "twins,",
+    "start": 30.283,
+    "end": 30.84
+  },
+  {
+    "id": "w78",
+    "text": "and",
+    "start": 31.1223,
+    "end": 31.32
+  },
+  {
+    "id": "w79",
+    "text": "distributed",
+    "start": 31.3223,
+    "end": 31.88
+  },
+  {
+    "id": "w80",
+    "text": "inference.",
+    "start": 31.9615,
+    "end": 32.52
+  },
+  {
+    "id": "w81",
+    "text": "The",
+    "start": 32.9122,
+    "end": 33.08
+  },
+  {
+    "id": "w82",
+    "text": "pieces",
+    "start": 33.0816,
+    "end": 33.48
+  },
+  {
+    "id": "w83",
+    "text": "aren't",
+    "start": 33.563,
+    "end": 33.72
+  },
+  {
+    "id": "w84",
+    "text": "yet",
+    "start": 33.8001,
+    "end": 33.88
+  },
+  {
+    "id": "w85",
+    "text": "a",
+    "start": 33.88,
+    "end": 33.96
+  },
+  {
+    "id": "w86",
+    "text": "universal",
+    "start": 34.0413,
+    "end": 34.52
+  },
+  {
+    "id": "w87",
+    "text": "shared",
+    "start": 34.5203,
+    "end": 34.76
+  },
+  {
+    "id": "w88",
+    "text": "nervous",
+    "start": 34.8406,
+    "end": 35.08
+  },
+  {
+    "id": "w89",
+    "text": "system.",
+    "start": 35.0805,
+    "end": 35.56
+  },
+  {
+    "id": "w90",
+    "text": "But",
+    "start": 36.0236,
+    "end": 36.28
+  },
+  {
+    "id": "w91",
+    "text": "COORDINATION",
+    "start": 36.3684,
+    "end": 36.84
+  },
+  {
+    "id": "w92",
+    "text": "changes",
+    "start": 36.8465,
+    "end": 37.24
+  },
+  {
+    "id": "w93",
+    "text": "the",
+    "start": 37.3201,
+    "end": 37.4
+  },
+  {
+    "id": "w94",
+    "text": "unit",
+    "start": 37.4002,
+    "end": 37.64
+  },
+  {
+    "id": "w95",
+    "text": "of",
+    "start": 37.72,
+    "end": 37.72
+  },
+  {
+    "id": "w96",
+    "text": "value:",
+    "start": 37.7207,
+    "end": 38.2
+  },
+  {
+    "id": "w97",
+    "text": "from",
+    "start": 38.3659,
+    "end": 38.6
+  },
+  {
+    "id": "w98",
+    "text": "one",
+    "start": 38.6801,
+    "end": 38.76
+  },
+  {
+    "id": "w99",
+    "text": "device",
+    "start": 38.7612,
+    "end": 39.16
+  },
+  {
+    "id": "w100",
+    "text": "receiving",
+    "start": 39.2409,
+    "end": 39.56
+  },
+  {
+    "id": "w101",
+    "text": "information",
+    "start": 39.5656,
+    "end": 40.2
+  },
+  {
+    "id": "w102",
+    "text": "to",
+    "start": 40.28,
+    "end": 40.28
+  },
+  {
+    "id": "w103",
+    "text": "many",
+    "start": 40.3606,
+    "end": 40.6
+  },
+  {
+    "id": "w104",
+    "text": "machines",
+    "start": 40.601,
+    "end": 41.08
+  },
+  {
+    "id": "w105",
+    "text": "acting",
+    "start": 41.0868,
+    "end": 41.48
+  },
+  {
+    "id": "w106",
+    "text": "on",
+    "start": 41.56,
+    "end": 41.56
+  },
+  {
+    "id": "w107",
+    "text": "a",
+    "start": 41.6398,
+    "end": 41.64
+  },
+  {
+    "id": "w108",
+    "text": "common",
+    "start": 41.7228,
+    "end": 42.12
+  },
+  {
+    "id": "w109",
+    "text": "model",
+    "start": 42.1202,
+    "end": 42.36
+  },
+  {
+    "id": "w110",
+    "text": "of",
+    "start": 42.44,
+    "end": 42.44
+  },
+  {
+    "id": "w111",
+    "text": "physical",
+    "start": 42.5208,
+    "end": 42.84
+  },
+  {
+    "id": "w112",
+    "text": "space.",
+    "start": 42.8422,
+    "end": 43.48
+  },
+  {
+    "id": "w113",
+    "text": "Now",
+    "start": 43.8105,
+    "end": 44.12
+  },
+  {
+    "id": "w114",
+    "text": "the",
+    "start": 44.2,
+    "end": 44.2
+  },
+  {
+    "id": "w115",
+    "text": "question",
+    "start": 44.2017,
+    "end": 44.68
+  },
+  {
+    "id": "w116",
+    "text": "is",
+    "start": 44.7608,
+    "end": 44.92
+  },
+  {
+    "id": "w117",
+    "text": "who",
+    "start": 45.0104,
+    "end": 45.16
+  },
+  {
+    "id": "w118",
+    "text": "builds,",
+    "start": 45.1608,
+    "end": 45.72
+  },
+  {
+    "id": "w119",
+    "text": "operates,",
+    "start": 45.8401,
+    "end": 46.52
+  },
+  {
+    "id": "w120",
+    "text": "and",
+    "start": 46.6841,
+    "end": 46.92
+  },
+  {
+    "id": "w121",
+    "text": "governs",
+    "start": 47.0019,
+    "end": 47.32
+  },
+  {
+    "id": "w122",
+    "text": "the",
+    "start": 47.4003,
+    "end": 47.48
+  },
+  {
+    "id": "w123",
+    "text": "spaces",
+    "start": 47.4808,
+    "end": 47.88
+  },
+  {
+    "id": "w124",
+    "text": "around",
+    "start": 47.9601,
+    "end": 48.12
+  },
+  {
+    "id": "w125",
+    "text": "the",
+    "start": 48.2,
+    "end": 48.2
+  },
+  {
+    "id": "w126",
+    "text": "phone.",
+    "start": 48.2002,
+    "end": 48.52
+  }
+]

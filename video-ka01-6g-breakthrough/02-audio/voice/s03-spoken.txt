@@ -1,0 +1,7 @@
+The answer opens the second candidate: REACH.
+
+Very-high-frequency signals can carry enormous information, but walls, rain, distance, atmospheric absorption, and imperfect equipment remain. A 6G label doesn't remove those barriers. The Nature team omitted fifty to seventy-five gigahertz from its wireless tests partly because atmospheric absorption is substantial there.
+
+A practical network cannot bet everything on one terahertz beam. In twenty twenty-six, Japan's NICT demonstrated sixty and three hundred gigahertz working together, with beam control and lower-band fallback when the fragile path degraded.
+
+That helps explain why the official 6G framework includes ubiquitous connectivity, remote communities, satellites, agriculture, and disaster response. REACH joins the map. But why does that framework also ask a communications network to locate objects within centimetres?
