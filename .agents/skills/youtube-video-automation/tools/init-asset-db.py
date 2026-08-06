@@ -14,6 +14,7 @@ from pathlib import Path
 def create_schema(db_path):
     """Create complete asset database schema"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     # Main assets table

@@ -65,6 +65,7 @@ def main():
     client = anthropic.Anthropic(api_key=key)
 
     con = sqlite3.connect(args.db); con.row_factory = sqlite3.Row
+    con.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     where = "" if args.all else "WHERE symbolizes IS NULL OR TRIM(symbolizes)=''"
     rows = con.execute(f"SELECT id,file_name,type,duration,description,mood,setting,people FROM assets {where} ORDER BY id").fetchall()
     if args.limit: rows = rows[:args.limit]

@@ -40,6 +40,7 @@ def search_assets(db_path, query, asset_type=None, min_duration=None, top_n=10):
     Hybrid search: semantic similarity (70%) + keyword matching (30%)
     """
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     # Generate query embedding

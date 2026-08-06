@@ -166,6 +166,7 @@ def generate_embedding(text, api_key=None):
 def store_asset_metadata(db_path, file_path, metadata, embedding, asset_type, duration=None, resolution=None):
     """Store analyzed asset in database"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     now = datetime.now().isoformat()
@@ -403,6 +404,7 @@ def main():
         # Check if already processed
         if args.skip_existing:
             conn = sqlite3.connect(db_path)
+            conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
             cursor = conn.cursor()
             cursor.execute("SELECT id FROM assets WHERE file_path = ?", (str(asset),))
             if cursor.fetchone():

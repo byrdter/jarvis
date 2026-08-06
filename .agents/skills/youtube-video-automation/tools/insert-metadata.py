@@ -10,6 +10,7 @@ from datetime import datetime
 def insert_asset(db_path, file_path, metadata):
     """Insert asset metadata into database"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     now = datetime.now().isoformat()

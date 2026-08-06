@@ -37,6 +37,7 @@ def generate_embedding(text, api_key=None):
 def get_assets_without_embeddings(db_path, force=False):
     """Get all assets that need embeddings"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     if force:
@@ -59,6 +60,7 @@ def get_assets_without_embeddings(db_path, force=False):
 def get_asset_keywords(db_path, asset_id):
     """Get all keywords for an asset"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     cursor.execute("SELECT keyword FROM keywords WHERE asset_id = ?", (asset_id,))
@@ -70,6 +72,7 @@ def get_asset_keywords(db_path, asset_id):
 def store_embedding(db_path, asset_id, embedding):
     """Store embedding in database"""
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")  # cascades are inert without this
     cursor = conn.cursor()
 
     cursor.execute("""
