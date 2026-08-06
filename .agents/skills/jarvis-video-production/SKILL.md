@@ -11,10 +11,24 @@ the active channel profile:** the profile changes editorial scope, audience prom
 cadence, Shorts policy, and measurement baselines without duplicating this workflow. KeyAdvances uses
 **[references/channel-profiles/KEYADVANCES.md](references/channel-profiles/KEYADVANCES.md)**.
 
+## Federation — this skill is also a studio asset lane
+
+Decided 2026-08-06. This skill is registered as a **module of the AI Filmmaking Studio**
+(`~/Library/CloudStorage/Dropbox/ai-film-studio`), providing the **procedural** and **performed**
+asset lanes plus the `educational-explainer` recipe. Contract:
+[`ai-film-studio/docs/FEDERATION.md`](../../../../ai-film-studio/docs/FEDERATION.md).
+
+**Nothing about this skill changes.** Dependencies point one way — the studio calls in here; this
+skill never calls out to the studio and never requires it to exist. It remains fully standalone and
+is the canonical workflow for Byrddynasty and KeyAdvances exactly as written below.
+
+The only scheduled change: the 11 QC gates in `tools/` lift into shared `ai-film-studio/tools/qc/`
+in Phase 3 so other formats can use them. Until then the studio calls them here, in place.
+
 ## Default Position
 
 - **Faceless video is the default.** Use HyperFrames, real screenshots, web artifacts, B-roll, code/terminal simulations, diagrams, data visualization, and cinematic clips.
-- **Citation-card / evidence mode is THE production format** — dark register + cream paper citation cards that land on verified quotes, hard cuts, graphics throughout. See **[knowledge/CITATION-CARD-FORMAT.md](knowledge/CITATION-CARD-FORMAT.md)**; shorts (9:16 promo cuts) are covered there too. The old **avatar / xfade mode** is RETIRED along with the avatar itself (2026-08-02) — [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md) is kept for its xfade/assembly mechanics only, not as a production mode to choose.
+- **Citation-card / evidence mode is THE production format** — dark register + cream paper citation cards that land on verified quotes, hard cuts, graphics throughout. See **[knowledge/CITATION-CARD-FORMAT.md](knowledge/CITATION-CARD-FORMAT.md)**; shorts (9:16 promo cuts) are covered there too. The old **avatar / xfade mode** is RETIRED **for Byrddynasty and KeyAdvances** (2026-08-02) — do not choose it for those channels. **Scope clarified 2026-08-06:** that retirement is a channel policy, not a deleted capability. The tooling is intact and live (`tools/split-heygen.py` still slices `avatar.mp4`; `scenes.json` still carries the `avatar:` key), and this module owns it as the studio's **`performed` asset lane** for other formats — see `ai-film-studio` Phase 2b. [knowledge/ASSEMBLY-AND-AVATAR.md](knowledge/ASSEMBLY-AND-AVATAR.md) holds the xfade/white-frame mechanics.
 - **Cinematic WebGL / layered depth is the default visual language.** Treat screenshots, web-rolls, Sites, code, diagrams, data cards, and B-roll as layered objects in a spatial composition with depth, parallax, camera motion, light sweeps, scroll-chapter reveals, and foreground/background contrast. Do not reduce this to generic floating cards.
 - **Sites are supporting surfaces.** Use Codex Sites for dashboards, simulators, review boards, command centers, or companion resources; capture them into HyperFrames for final video composition.
 - **Human presence comes from REAL people, never from an avatar** — library human clips, created two-person debates, brief attributed press photos or third-party clips of the person being discussed (see the HUMAN PRESENCE rules in `.claude/rules/video-production-standard.md` §10 and `references/USING-REAL-PEOPLE.md`). The Byrddynasty avatar is retired; do not reintroduce it as a "special appearance".
