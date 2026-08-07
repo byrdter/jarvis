@@ -115,7 +115,7 @@ jarvis/                          # Public GitHub repository
 - [x] **Level 1 patterns documented** (ready for extraction)
 
 **Key Achievement:** JARVIS detected first real market signal (MACD divergence)
-**Documentation:** See `OPTIONS-A-B-C-D-SUMMARY.md` for complete journey
+**Documentation:** See `../jarvis-private/research/OPTIONS-A-B-C-D-SUMMARY.md` for complete journey
 
 ### Phase 1: Investment Domain Complete ✅ COMPLETE (Feb 13, 2026)
 - [x] **ETF Screener skill** - Screen 14 ETFs, rank Stage 2 opportunities
@@ -160,7 +160,7 @@ jarvis/                          # Public GitHub repository
 - [x] **Phase 2D:** 24/7 heartbeat + specialized subagents
 
 **Key Achievement:** Zero-cost autonomous agent with intelligent memory search and direct API integrations
-**Documentation:** See `PHASE-2-COMPLETE.md` and `agent-sdk/` directory
+**Documentation:** See `../jarvis-private/research/PHASE-2-COMPLETE.md` and `agent-sdk/` (its own repo: github.com/byrdter/jarvis_phase2)
 
 **Capabilities Added:**
 - Semantic vector search (70% vector + 30% keyword, ~60-200ms, $0 cost)
@@ -179,7 +179,7 @@ jarvis/                          # Public GitHub repository
 - [x] **$0/month cost** - OAuth token (no API charges)
 
 **Key Achievement:** True persistent autonomous agent using CLI subprocesses instead of expensive API calls  
-**Documentation:** See `PHASE-3A-COMPLETE.md` and `PHASE-3-CLI-SUBPROCESS-APPROACH.md`
+**Documentation:** See `../jarvis-private/docs/phases/PHASE-3A-COMPLETE.md` and `../jarvis-private/docs/phases/PHASE-3-CLI-SUBPROCESS-APPROACH.md`
 
 #### Phase 3B: Daily Reflection ✅ COMPLETE (Apr 4, 2026)
 - [x] **8 AM automatic reflection** - Reviews yesterday's logs
@@ -189,7 +189,7 @@ jarvis/                          # Public GitHub repository
 - [x] **Zero manual intervention** - Self-improving AI that learns from every execution
 
 **Key Achievement:** JARVIS manages its own memory and delivers actionable morning intelligence daily  
-**Documentation:** See `PHASE-3B-COMPLETE.md`
+**Documentation:** See `../jarvis-private/docs/phases/PHASE-3B-COMPLETE.md`
 
 **Capabilities Added:**
 - CLI subprocess execution (full JARVIS context, $0 cost)
@@ -255,11 +255,12 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global **0.7.88** — verified 2026-08-02) — never bare
+Use the PINNED CLI (`hyperframes`, global **0.7.90** — verified 2026-08-04) — never bare
 `npx hyperframes`. **This line is the ONE source of truth**: `tools/check-cli-pin.py` parses the
 version out of it. Do not restate the number in other docs; point at this line instead.
 **The global binary SELF-UPDATES**: 0.7.84 → 0.7.87 inside one session on 2026-08-01, then
-0.7.87 → 0.7.88 inside one session on 2026-08-02. Neither upgrade was chosen and neither would have
+0.7.87 → 0.7.88 on 2026-08-02, then 0.7.88 → 0.7.90 on 2026-08-04. **Three unchosen upgrades in four
+days** — no upgrade was chosen and none would have
 been noticed without the gate. So this number records what the current batch was rendered against,
 it does not lock anything. Run `python3 tools/check-cli-pin.py --stamp <batch>` at batch start and
 `--verify <batch>` before assembly; re-render the whole batch if it moved (PIPELINE.md Step 5).
@@ -326,14 +327,14 @@ skill is now a redirect to it. For one-off thumbnails/stills use `image-generati
 
 ### For Understanding the System
 - **`README.md`** - Overview, architecture, getting started
-- **`LEVEL-1-PATTERNS.md`** - Domain-agnostic patterns (for extraction)
-- **`NINE-SKILLS-MAPPING.md`** - Connection to Nine Essential Skills framework
-- **`OPTIONS-A-B-C-D-SUMMARY.md`** - Complete Phase 0 development journey
+- **`../jarvis-private/research/LEVEL-1-PATTERNS.md`** - Domain-agnostic patterns (for extraction)
+- **`../jarvis-private/MiscGuides/NINE-SKILLS-MAPPING.md`** - Connection to Nine Essential Skills framework
+- **`../jarvis-private/research/OPTIONS-A-B-C-D-SUMMARY.md`** - Complete Phase 0 development journey
 
 ### For Context Recovery (If Session Lost)
 - `../jarvis-private/context/memory/work-status.md` - What was completed, what's next
 - `../jarvis-private/context/memory/learnings.md` - All accumulated knowledge
-- `SESSION-ACCOMPLISHMENTS.md` - Latest session achievements
+- `../jarvis-private/research/SESSION-ACCOMPLISHMENTS.md` - Latest session achievements
 
 ## Current Capabilities
 
@@ -387,7 +388,26 @@ bd close <id>         # Complete work
 
 - Use `bd` for ALL task tracking — do NOT use TodoWrite, TaskCreate, or markdown TODO lists
 - Run `bd prime` for detailed command reference and session close protocol
-- Use `bd remember` for persistent knowledge — do NOT use MEMORY.md files
+
+## Memory doctrine — the ONE rule (settled 2026-08-07)
+
+**This section supersedes every other statement about where knowledge goes.** Two stores, split by
+role. They are not competitors and neither is being retired.
+
+| Store | Holds | Write when |
+|---|---|---|
+| **`MEMORY.md` + its topic files**<br>`~/.claude/projects/…/memory/` → `jarvis-private/claude-memory/jarvis/memory/` | **Durable facts.** Who Terry is, standing preferences, project state, channel/production standards, pointers to external resources. The things worth re-reading at the *start* of a session. | A fact will still matter in a month, and a future session should load it without being asked. Keep `MEMORY.md` as a one-line-per-entry index, under 200 lines. |
+| **`bd remember`**<br>(searchable via `bd memories <keyword>`) | **Build-time insights.** Gotchas, trap notes, "this API does X not Y", things discovered while doing a specific piece of work — tied to the work, not to Terry. | You learn something mid-task that would save time next time, but isn't a standing fact about the project. |
+
+**Prior guidance said "use `bd remember` — do NOT use MEMORY.md files." That line was beads-plugin
+boilerplate, not a considered choice here, and it contradicted `.claude/rules/session-continuity.md`,
+which auto-loads alongside it.** Both files load every session, so the conflict was unresolvable at
+read time. Measured before deciding: 41 curated MEMORY.md files (newest 2026-08-06) and 107 `bd`
+memories — **both actively used**, for exactly the two different purposes above. Terry settled it
+2026-08-07: keep both, split by role.
+
+Rule of thumb: *would I want this loaded before I know what today's task is?* → `MEMORY.md`.
+*Would I only want this once I'm already doing that kind of work?* → `bd remember`.
 
 ## Session Completion
 
