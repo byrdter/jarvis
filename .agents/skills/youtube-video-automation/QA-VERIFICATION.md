@@ -13,16 +13,16 @@ The QA system runs in multiple stages:
 
 ## Tools
 
-### 1. `tools/scene-validator.py`
+### 1. `tools/hyperframes-scene-qa.py`
 
 Validates HyperFrames scenes for structural and timing issues.
 
 **Usage:**
 ```bash
-python3 tools/scene-validator.py <project-dir>                 # Lint + structure checks
-python3 tools/scene-validator.py <project-dir> --frames        # Add frame analysis
-python3 tools/scene-validator.py <project-dir> --fix           # Auto-fix safe issues
-python3 tools/scene-validator.py <project-dir> --json          # Machine-readable output
+python3 tools/hyperframes-scene-qa.py <project-dir>                 # Lint + structure checks
+python3 tools/hyperframes-scene-qa.py <project-dir> --frames        # Add frame analysis
+python3 tools/hyperframes-scene-qa.py <project-dir> --fix           # Auto-fix safe issues
+python3 tools/hyperframes-scene-qa.py <project-dir> --json          # Machine-readable output
 ```
 
 **What it checks:**
@@ -161,7 +161,7 @@ python3 tools/master-qa.py master.mp4 --sample-interval 30 --output qa-report.js
 - Not excessively long (>1800s / 30 min)
 
 #### C. Blank Screen Scan
-Same algorithm as scene-validator, but samples entire master at intervals.
+Same algorithm as hyperframes-scene-qa, but samples entire master at intervals.
 
 #### D. Transition Check
 Sample frames around concat points (between scenes) to detect:
@@ -443,7 +443,7 @@ npx hyperframes lint
 npx hyperframes render
 
 # 4. Run scene validator
-python3 tools/scene-validator.py . --frames
+python3 tools/hyperframes-scene-qa.py . --frames
 
 # 5. Fix any issues
 # 6. Re-render if needed
@@ -454,7 +454,7 @@ python3 tools/scene-validator.py . --frames
 
 ```bash
 # 1. Validate all scenes
-python3 tools/scene-validator.py . --frames
+python3 tools/hyperframes-scene-qa.py . --frames
 
 # 2. Must pass with 0 critical issues
 # 3. Then run concat

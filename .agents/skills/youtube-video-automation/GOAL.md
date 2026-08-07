@@ -38,7 +38,7 @@ Create a comprehensive `/youtube-video` skill that automates the complete produc
 ### 3. Existing Skills
 - `.agents/skills/byrddynasty-video-production/SKILL.md` — Read entire skill
 - `.agents/skills/byrddynasty-video-v14/` — If exists, study thoroughly
-- `.agents/skills/hyperframes/` — All HyperFrames capabilities
+- `/hyperframes` — All HyperFrames capabilities (official plugin; no longer vendored in this repo)
 - `.agents/skills/gsap/` — Animation patterns
 - Any other video-related skills
 

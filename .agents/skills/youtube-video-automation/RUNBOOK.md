@@ -25,7 +25,7 @@ python3 scripts/generate-scene-plan.py --transcript assets/transcript.json --bri
 python3 scripts/resolve-assets.py --treatment visual-treatment-board.md --manifest ../asset-library/MANIFEST.json --output asset-resolution-report.md
 python3 scripts/build-hyperframes-scenes.py --treatment visual-treatment-board.md --transcript assets/transcript.json --design DESIGN.md --output-dir scenes/
 # → Render all scenes
-python3 tools/scene-validator.py . --frames
+python3 tools/hyperframes-scene-qa.py . --frames
 .agents/skills/jarvis-video-production/scripts/build-master.sh .
 python3 tools/master-qa.py master.mp4
 ```
@@ -509,7 +509,7 @@ done
 ### Step 7.1: Run Scene Validator
 
 ```bash
-python3 .agents/skills/youtube-video-automation/tools/scene-validator.py .
+python3 .agents/skills/youtube-video-automation/tools/hyperframes-scene-qa.py .
 ```
 
 **What this checks:**
@@ -534,7 +534,7 @@ python3 .agents/skills/youtube-video-automation/tools/scene-validator.py .
 ### Step 7.2: Run Frame Analysis
 
 ```bash
-python3 .agents/skills/youtube-video-automation/tools/scene-validator.py . --frames
+python3 .agents/skills/youtube-video-automation/tools/hyperframes-scene-qa.py . --frames
 ```
 
 **What this checks:**
@@ -852,7 +852,7 @@ HyperFrames file server doesn't follow symlinks → broken renders.
 ### ❌ Not running QA before concat
 Concatenating scenes with blank screens or timing issues → entire master needs rework.
 
-**Fix:** Always run `scene-validator.py --frames` before build-master.sh.
+**Fix:** Always run `hyperframes-scene-qa.py --frames` before build-master.sh.
 
 ---
 

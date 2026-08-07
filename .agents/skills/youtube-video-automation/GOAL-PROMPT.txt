@@ -4,7 +4,7 @@ RESEARCH REQUIRED (investigate ALL before writing skill):
 
 1. **Jarvis repositories**: Read entire `jarvis/` and `jarvis-private/` directories for all video production patterns, rules, anti-patterns, and proven workflows
 
-2. **Existing skills**: Study `.agents/skills/byrddynasty-video-production/`, `.agents/skills/hyperframes/`, `.agents/skills/gsap/`, and any other video-related skills
+2. **Existing skills**: Study `.agents/skills/byrddynasty-video-production/`, `/hyperframes` (official plugin), `.agents/skills/gsap/`, and any other video-related skills
 
 3. **Memory files**: Read all auto-memory files in `~/.claude/projects/.../memory/` related to video production (project_video_workflow_v14.md, feedback_vo_anchored_timing.md, reference_brain_color_palettes.md, etc.)
 

@@ -42,7 +42,7 @@ python3 scripts/generate-scene-plan.py --transcript assets/transcript.json --bri
 python3 scripts/resolve-assets.py --treatment visual-treatment-board.md --manifest ../asset-library/MANIFEST.json --output asset-resolution-report.md
 python3 scripts/build-hyperframes-scenes.py --treatment visual-treatment-board.md --transcript assets/transcript.json --design DESIGN.md --output-dir scenes/
 # Render scenes
-python3 tools/scene-validator.py . --frames
+python3 tools/hyperframes-scene-qa.py . --frames
 .agents/skills/jarvis-video-production/scripts/build-master.sh .
 python3 tools/master-qa.py master.mp4
 ```
@@ -80,7 +80,7 @@ youtube-video-automation/
     build-hyperframes-scenes.py # Generate HyperFrames HTML compositions
   
   tools/                        # Validation tools
-    scene-validator.py          # Validate scenes (lint, duration, frames)
+    hyperframes-scene-qa.py          # Validate scenes (lint, duration, frames)
     master-qa.py                # Final QA on master.mp4
 ```
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-scene-validator.py — Validate HyperFrames scenes for QA issues
+hyperframes-scene-qa.py — Validate HyperFrames scenes for QA issues
 
 Usage:
-    python3 scene-validator.py <project-dir>                # Lint + structure
-    python3 scene-validator.py <project-dir> --frames       # Add frame analysis
-    python3 scene-validator.py <project-dir> --fix          # Auto-fix safe issues
-    python3 scene-validator.py <project-dir> --json         # Machine-readable output
+    python3 hyperframes-scene-qa.py <project-dir>                # Lint + structure
+    python3 hyperframes-scene-qa.py <project-dir> --frames       # Add frame analysis
+    python3 hyperframes-scene-qa.py <project-dir> --fix          # Auto-fix safe issues
+    python3 hyperframes-scene-qa.py <project-dir> --json         # Machine-readable output
 """
 
 import subprocess

@@ -318,8 +318,8 @@ done
 
 Run validation on each scene:
 ```bash
-python3 tools/scene-validator.py <project-dir>
-python3 tools/scene-validator.py <project-dir> --frames
+python3 tools/hyperframes-scene-qa.py <project-dir>
+python3 tools/hyperframes-scene-qa.py <project-dir> --frames
 ```
 
 **Validation checks:**
@@ -688,13 +688,13 @@ python3 scripts/build-hyperframes-scenes.py \
   --output-dir scenes/
 ```
 
-### 5. `tools/scene-validator.py`
+### 5. `tools/hyperframes-scene-qa.py`
 Validates rendered scenes for QA issues.
 
 ```bash
-python3 tools/scene-validator.py <project-dir>
-python3 tools/scene-validator.py <project-dir> --frames
-python3 tools/scene-validator.py <project-dir> --fix  # auto-fix safe issues
+python3 tools/hyperframes-scene-qa.py <project-dir>
+python3 tools/hyperframes-scene-qa.py <project-dir> --frames
+python3 tools/hyperframes-scene-qa.py <project-dir> --fix  # auto-fix safe issues
 ```
 
 ### 6. `tools/master-qa.py`
@@ -746,8 +746,8 @@ for scene in scenes/*; do
 done
 
 # 8. Run scene QA
-python3 tools/scene-validator.py .
-python3 tools/scene-validator.py . --frames
+python3 tools/hyperframes-scene-qa.py .
+python3 tools/hyperframes-scene-qa.py . --frames
 
 # 9. Fix any issues (if validator found problems)
 # (Manual step or auto-fix with --fix flag)
