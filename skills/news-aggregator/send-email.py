@@ -44,6 +44,7 @@ def read_digest(file_path: str) -> tuple[str, str, int]:
         r'(\d+)\s+new papers',
         r'(\d+)\s+articles ingested',
         r'(\d+)\s+video-worthy ideas',
+        r'^(\d+)\s+candidates',   # outlier-ratchet digest
     ):
         m = re.search(pat, content, re.MULTILINE)
         if m:

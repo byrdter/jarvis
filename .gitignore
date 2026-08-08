@@ -274,6 +274,28 @@ video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/renders/
 video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/qc-frames/
 video-25-2027-ai-builder-roadmap/hyperframes-v2-proof/qc-contact-sheet.jpg
 
+# Video KA01 (6G) generated output — renders, per-scene build assets, QC frames,
+# snapshots. Same convention as video-25 above: source (scripts, composition
+# HTML, plans) is tracked; regenerable build artifacts are not. Added 2026-08-08
+# after `git add -A` would have put 1.15 GB of it into a public repo.
+video-ka01-6g-breakthrough/05-hyperframes/renders/
+video-ka01-6g-breakthrough/05-hyperframes/snapshots/
+video-ka01-6g-breakthrough/06-hyperframes-v2-proof/renders/
+video-ka01-6g-breakthrough/06-hyperframes-v2-proof/snapshots/
+video-ka01-6g-breakthrough/06-hyperframes-v2-proof/qc-final/
+video-ka01-6g-breakthrough/06-hyperframes-v2-proof/qc-rendered/
+video-ka01-6g-breakthrough/06-hyperframes-v2-proof/qc-v2/
+video-ka01-6g-breakthrough/07-hyperframes-v2-master/renders/
+video-ka01-6g-breakthrough/07-hyperframes-v2-master/snapshots/
+video-ka01-6g-breakthrough/07-hyperframes-v2-master/qc-final/
+video-ka01-6g-breakthrough/03-scenes/*/assets/
+video-ka01-6g-breakthrough/03-scenes/*/renders/
+video-ka01-6g-breakthrough/02-assets/source-proofs/originals/
+
+# HyperFrames component demo renders (regenerable from the demo html)
+.agents/skills/**/components/*/demo/renders/
+.agents/skills/**/components/*/demo/snapshots/
+
 # ============================================================================
 # DOCUMENTATION STAGING
 # ============================================================================

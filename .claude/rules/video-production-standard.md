@@ -47,6 +47,23 @@ thirty seconds and the runtime were. Everything below follows from that one find
 > — they failed because they had no whole-runtime loop and shed viewers past 0:30, so length
 > multiplied the leak. Runtime was never the disease; retention was.
 
+> ### ⛔ HARD FLOOR: 8:00 — MONETIZATION. Set by Terry 2026-08-02, channel-wide.
+> Under eight minutes YouTube blocks mid-roll ads. This is a business constraint, not a craft
+> preference, and nothing below overrides it. **There is no upper bound** — length is set by the
+> material. Everything in this section is about shape *above* that floor.
+>
+> **Verify the floor against RENDERED AUDIO, never a word count.** Measured 2026-08-02: a word-count
+> estimate ran **82 seconds long** on a 17-minute script, because the model counts
+> `11,346,275,422.` as one word when it is **6.2 seconds** of speech. Measured rates on our own
+> Cartesia voice ranged **119 wpm** (number-dense) to **175 wpm** (prose) *in the same script*. A
+> script that estimates 9:00 can render under the floor and lose monetization silently.
+>
+> Note `tools/prepublish-check.py` still enforces a **15-minute** floor and will FAIL anything
+> shorter. That threshold was calibrated for the conduit-essay format, which is 0-for-22 on this
+> channel. When the target lane's winners run shorter — the Claude-pricing lane's measured winners
+> run **6.7–9.9 min** — that FAIL is expected and must **not** be cleared by padding. Record the
+> exception in the script header and ship. Every other check still has to pass.
+
 **Runtime = the longest you can sustain a withheld payoff at high retention — no longer.** YouTube
 rewards *total watch time* (runtime × retention), so longer wins **iff** the curve holds. The rule is
 now a mechanic, not a number:

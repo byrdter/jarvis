@@ -83,6 +83,14 @@ Instead:
 ✅ **Do** update memory after completing tasks  
 ✅ **Do** maintain continuity across sessions  
 
+## Memory doctrine
+
+**`CLAUDE.md` § "Memory doctrine" is the single source of truth.** Short version: `MEMORY.md`
+holds durable facts you want loaded *before* you know today's task; `bd remember` holds build-time
+insights you only want once you're already doing that kind of work. Both stores are live — the
+old "do NOT use MEMORY.md" line in CLAUDE.md was plugin boilerplate and contradicted this file.
+Settled 2026-08-07.
+
 ## Memory Update Protocol
 
 **After completing significant work:**

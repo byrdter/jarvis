@@ -1,0 +1,344 @@
+<!-- ============================================================================
+     OPEN-QUESTION LEDGER SPINE — the persistent progress rail for an ARGUMENT.
+     Spec: knowledge/DECISION-RECORD-2026-08-01.md §3.2 (the four properties).
+
+     A fork of `spine-elimination`. That component strikes SUSPECTS; this one tracks
+     ANSWERS to one question. Use it when the video argues rather than eliminates.
+
+       PAID        $1,000        <- fixed ledger head. Lands early, never changes.
+       USED       $13,753           It is the stake, on screen the whole runtime.
+       GAP        $12,753
+       ---------------------
+       OPEN  4                   <- monotonic counter
+       > ▓▓▓▓▓▓▓▓▓▓▓             <- ghosted question slots
+       > ▓▓▓▓▓▓▓▓▓▓▓
+       > ▓▓▓▓▓▓▓▓▓▓▓
+       > ▓▓▓▓▓▓▓▓▓▓▓
+
+     Each row has THREE states, not two:
+       ghosted  -> OPEN (the question resolves, live marker on, answer slot still ghosted)
+                -> ANSWERED (the answer lands, live marker off, counter ticks)
+
+     ---- THE ONE NOVEL STATE: `provisional` -------------------------------------
+     A row may carry TWO answers. The first is written in AMBER and tagged PROVISIONAL;
+     it does NOT tick the counter. Later it is STRUCK and the real answer lands beneath it.
+
+     That is the whole reason this component exists. It stages a reversal ON THE SPINE —
+     the viewer watches an answer get written and then crossed out — while the counter
+     stays monotonic (§3.2 property 1), because a provisional answer never closed anything.
+
+     STRIKE MEANS EXACTLY ONE THING HERE: *we wrote this and it was wrong.* Do not use it
+     for a question that closed without a result — that is `tone:'closed'`, rendered muted.
+     Diluting the strike costs you the reversal.
+
+     ---- WHY THIS IS SAFE UNDER THE RENDERER --------------------------------------
+     Inherited from spine-elimination, and the reason it renders at all:
+       * every animated thing is its OWN element. Ghost, question, each answer, each
+         strike bar, each tag, each counter value.
+       * NOTHING loops. The bug that froze the original spine was an ambient loop sharing
+         a property with a discrete tween on one element.
+       * a strike bar sits at z-index:1 BEHIND its answer's z-index:2. Drawn on top it is
+         `text_occluded` and `hyperframes check` fails it, correctly.
+       * no element is tweened twice on one property in OVERLAPPING windows.
+       * NO opacity-dimming of muted text. spine-elimination could dim #EBE4D2 to .46 and
+         still clear AA; the blue-grey here cannot, so state is carried by the live marker,
+         the bullet and the answer's presence instead. Do not "fix" this by adding a dim.
+       * full DOM is built up front at opacity 0, so NOTHING ever reflows. Heights are
+         final from frame one. Never animate this panel's height.
+     All motion on the registered tl; a bare gsap.to renders FROZEN.
+
+     ---- ABSOLUTE TIMES, ALWAYS ---------------------------------------------------
+     Scenes render separately and concatenate, so this component takes MASTER-ABSOLUTE
+     seconds and subtracts `sceneStart` itself. Copy the numbers straight out of
+     01-script/scenes-v2-build.json — do no arithmetic by hand, that is where drift enters.
+
+     Anything scheduled BEFORE this scene starts is `set()` at t=0 in its finished state,
+     so a mid-video scene opens with the correct history already on screen. Anything after
+     the scene ends simply never fires. Mount it identically in every scene.
+
+     Pin every `at` to a real VO word-start:
+        python3 tools/cue.py 02-vo/v2-transcripts/<act>.json "so the honest shape"
+     A ledger that drifts off the sentence answering its own row is worse than no ledger.
+
+     ---- USAGE --------------------------------------------------------------------
+       BLOCK A -> scene <style>;  BLOCK B -> a child of #root;  BLOCK C -> after the
+       scene's own tl calls. Then once, IDENTICAL IN EVERY SCENE except sceneStart:
+
+         mountLedger(tl, {
+           sceneStart: 428.9,                 // this scene's abs_start; all else absolute
+           ledger: [
+             {label:'PAID', value:'$1,000',  at:0.12},
+             {label:'USED', value:'$13,753', at:6.15},
+             {label:'GAP',  value:'$12,753', at:35.52, emphasis:true}
+           ],
+           ghostsIn: 12.0,
+           rows: [
+             {q:'WHERE DOES IT GO?',     open:162.3,
+              answers:[{text:'LONG SESSIONS · 10% = 90%', at:224.1}]},
+             {q:'WHO ABSORBS IT?',       open:262.1,
+              answers:[{text:'UNVERIFIABLE FROM OUTSIDE', at:282.0, tone:'closed'}]},
+             {q:'DOES IT CLOSE ITSELF?', open:306.8,
+              answers:[{text:'YES — PRICE FELL 3x',   at:327.8, tone:'provisional'},
+                       {text:'NO — THE FALL STOPPED', at:409.0}]},
+             {q:'WHAT MOVES FIRST?',     open:476.8,
+              answers:[{text:'THE LONG SESSIONS FIRST', at:574.7, verdict:true}]}
+           ]
+         });
+
+     The counter closes on each row's LAST answer only. A provisional never closes a row,
+     so the count is derived, not declared — it cannot disagree with the rows.
+
+     Answers must fit ONE line (~26 chars at 17px in the 384px panel). The script warns to
+     the console on overflow rather than wrapping silently under a strike bar that would
+     then cover only the first line.
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  /* dark navy ANALYSIS register (CONDUIT §2) — gold primary, amber ONLY for provisional */
+  #lg{position:absolute;left:64px;top:50%;transform:translateY(-50%);z-index:14;
+      width:384px;opacity:0;will-change:opacity}
+  #lg .lg-panel{background:rgba(14,18,25,.94);border:1px solid rgba(201,178,122,.22);
+      border-radius:5px;padding:28px 28px 22px;
+      box-shadow:0 30px 90px rgba(0,0,0,.55)}
+
+  /* ---- ledger head: the stake, fixed for the whole runtime ---- */
+  #lg .lg-led{position:relative;display:flex;justify-content:space-between;
+      align-items:baseline;padding:5px 0}
+  #lg .lg-led-k{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.22em;
+      text-transform:uppercase;color:#93A3BC;font-weight:600;opacity:0}
+  #lg .lg-led-v{font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.02em;
+      color:#EBE4D2;font-weight:700;font-variant-numeric:tabular-nums;opacity:0}
+  #lg .lg-led.is-emph .lg-led-v{color:#C9B27A;font-size:23px}
+  #lg .lg-led.is-emph .lg-led-k{color:#C9B27A}
+  #lg .lg-ledrule{height:1px;background:#C9B27A;opacity:.28;margin:16px 0 4px;
+      transform-origin:0 50%}
+
+  /* ---- monotonic counter — one element per value, each shown in its own window ---- */
+  #lg .lg-count{position:relative;height:26px;margin:14px 0 6px}
+  #lg .lg-n{position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;
+      font-size:15px;letter-spacing:.18em;color:#93A3BC;font-weight:700;opacity:0}
+  #lg .lg-n b{color:#C9B27A;font-weight:700}
+
+  /* ---- question rows ---- */
+  #lg .lg-row{position:relative;padding:12px 0 12px 20px}
+  #lg .lg-bullet{position:absolute;left:0;top:17px;width:7px;height:7px;
+      background:#C9B27A;opacity:.20;border-radius:1px}
+  #lg .lg-live{position:absolute;left:-28px;top:12px;width:3px;height:30px;
+      background:#C9B27A;opacity:0;border-radius:2px}   /* under-examination marker */
+
+  #lg .lg-q{position:relative;font-family:'JetBrains Mono',monospace;font-size:14px;
+      letter-spacing:.15em;text-transform:uppercase;color:#93A3BC;font-weight:600;
+      line-height:1.3;opacity:0;white-space:nowrap}
+  /* ghosts: one over the question line, one over the FIRST answer slot only. A second
+     ghost on a provisional row would reveal that a correction is coming — never do it. */
+  #lg .lg-ghost{position:absolute;left:20px;height:10px;border-radius:2px;
+      background:repeating-linear-gradient(90deg,
+        rgba(201,178,122,.30) 0 9px, rgba(201,178,122,.09) 9px 15px)}
+  #lg .lg-gq{top:15px}
+  #lg .lg-ga{top:44px}
+
+  #lg .lg-slot{position:relative;height:27px;margin-top:6px}
+  #lg .lg-a{position:absolute;left:0;top:0;z-index:2;    /* ABOVE its strike bar */
+      font-family:'JetBrains Mono',monospace;font-size:17px;letter-spacing:.05em;
+      color:#EBE4D2;font-weight:700;line-height:1.35;opacity:0;white-space:nowrap}
+  #lg .lg-a.is-closed{color:#93A3BC;font-weight:600}     /* closed, gave nothing */
+  #lg .lg-a.is-prov{color:#E8A55E}                       /* PROVISIONAL — amber */
+  #lg .lg-a.is-verdict{color:#F2D89A}                    /* the last row, the answer */
+  /* bar BEHIND the glyphs. On top it is text_occluded and the checker fails it, rightly.
+     Behind, it still reads as a strikethrough through the letter gaps. */
+  #lg .lg-strike{position:absolute;left:-2px;top:11px;height:2px;background:#E8A55E;
+      z-index:1;transform:scaleX(0);transform-origin:0 50%}
+  #lg .lg-tag{position:absolute;right:0;top:4px;font-family:'JetBrains Mono',monospace;
+      font-size:10px;letter-spacing:.20em;color:#E8A55E;font-weight:700;opacity:0}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- child of #root. Everything inside is injected by mountLedger. -->
+<div id="lg">
+  <div class="lg-panel">
+    <div id="lg-ledger"></div>
+    <div class="lg-ledrule" id="lg-ledrule"></div>
+    <div class="lg-count" id="lg-count"></div>
+    <div id="lg-rows"></div>
+  </div>
+</div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+function mountLedger(tl, o){
+  var S       = o.sceneStart || 0;           // all input times are MASTER-ABSOLUTE
+  var rows    = o.rows || [];
+  var ledger  = o.ledger || [];
+  var GHOST_W = [196, 168, 214, 182];        // varied so slots read as content, not a bar chart
+
+  // Absolute -> scene-local. Anything already past is `set` at 0 in its finished state,
+  // so a mid-video scene opens with the correct history on screen.
+  function L(t){ return t - S; }
+  function past(t){ return L(t) < 0; }
+
+  // Already happened before this scene? Apply the END STATE IMMEDIATELY, not on the tl.
+  //
+  // This MUST be a bare gsap.set at mount time, NOT tl.set(..., 0). A zero-duration tween
+  // parked at position 0 does not render when the playhead is already at 0 — the time never
+  // changes, so GSAP never ticks it. Verified in the browser 2026-08-04: with tl.set every
+  // scene after S01 opened with a completely blank panel, and `hyperframes check` cannot
+  // catch it because the demo starts at sceneStart:0 where nothing is in the past.
+  //
+  // This does not violate "all motion on the registered tl" — a scene's static opening
+  // state is not motion. Everything that MOVES is still a tl tween below.
+  function endState(to){
+    var e = {}; for (var k in to) if (k !== 'duration' && k !== 'ease') e[k] = to[k];
+    return e;
+  }
+  function at(sel, from, to, t, extra){
+    if (past(t)){ gsap.set(sel, endState(to)); return; }
+    tl.fromTo(sel, from, to, L(t) + (extra || 0));
+  }
+  function to_(sel, to, t, extra){
+    if (past(t)){ gsap.set(sel, endState(to)); return; }
+    tl.to(sel, to, L(t) + (extra || 0));
+  }
+
+  // ---- build the FULL DOM up front, everything at opacity 0. Nothing ever reflows. ----
+  var lhost = document.getElementById('lg-ledger');
+  lhost.innerHTML = '';
+  ledger.forEach(function(d, i){
+    var el = document.createElement('div');
+    el.className = 'lg-led' + (d.emphasis ? ' is-emph' : '');
+    el.innerHTML = '<div class="lg-led-k" id="lg-lk-' + i + '">' + d.label + '</div>' +
+                   '<div class="lg-led-v" id="lg-lv-' + i + '">' + d.value + '</div>';
+    lhost.appendChild(el);
+  });
+
+  var host = document.getElementById('lg-rows');
+  host.innerHTML = '';
+  rows.forEach(function(r, i){
+    var slots = '';
+    (r.answers || []).forEach(function(a, j){
+      var cls = 'lg-a' + (a.tone === 'closed'      ? ' is-closed'  : '')
+                       + (a.tone === 'provisional' ? ' is-prov'    : '')
+                       + (a.verdict                ? ' is-verdict' : '');
+      slots += '<div class="lg-slot">' +
+                 '<div class="lg-strike" id="lg-st-' + i + '-' + j + '"></div>' +
+                 '<div class="' + cls + '" id="lg-a-' + i + '-' + j + '">' + a.text + '</div>' +
+                 (a.tone === 'provisional'
+                   ? '<div class="lg-tag" id="lg-tg-' + i + '-' + j + '">PROVISIONAL</div>' : '') +
+               '</div>';
+    });
+    var row = document.createElement('div');
+    row.className = 'lg-row'; row.id = 'lg-row-' + i;
+    row.innerHTML =
+      '<div class="lg-bullet" id="lg-bu-' + i + '"></div>' +
+      '<div class="lg-live"   id="lg-lv2-' + i + '"></div>' +
+      '<div class="lg-q"      id="lg-q-'  + i + '">' + r.q + '</div>' +
+      slots +
+      '<div class="lg-ghost lg-gq" id="lg-gq-' + i + '" style="width:' +
+        GHOST_W[i % GHOST_W.length] + 'px"></div>' +
+      '<div class="lg-ghost lg-ga" id="lg-ga-' + i + '" style="width:' +
+        Math.round(GHOST_W[(i + 2) % GHOST_W.length] * .82) + 'px"></div>';
+    host.appendChild(row);
+  });
+
+  // strike bars are sized to their answer AFTER layout, never guessed.
+  // Overflow fails loudly: a wrapped answer would leave the bar covering line one only.
+  var inner = document.querySelector('#lg .lg-panel').clientWidth - 56 - 20;
+  rows.forEach(function(r, i){
+    (r.answers || []).forEach(function(a, j){
+      var el = document.getElementById('lg-a-' + i + '-' + j);
+      var w  = el.getBoundingClientRect().width;
+      if (w > inner) console.warn('[spine-ledger] answer overflows one line (' +
+        Math.round(w) + 'px > ' + inner + 'px): "' + a.text + '"');
+      document.getElementById('lg-st-' + i + '-' + j).style.width = Math.round(w + 6) + 'px';
+    });
+  });
+
+  // ---- counter. DERIVED from the rows, so it cannot disagree with them. -------------
+  // A row closes on its LAST answer. A provisional answer closes nothing (property 1).
+  var closes = rows.map(function(r){
+                 var a = r.answers || []; return a.length ? a[a.length - 1].at : null; })
+                 .filter(function(t){ return t != null; })
+                 .sort(function(a, b){ return a - b; });
+  var cnt = document.getElementById('lg-count');
+  cnt.innerHTML = '';
+  for (var k = 0; k <= closes.length; k++){
+    var el = document.createElement('div');
+    el.className = 'lg-n'; el.id = 'lg-n-' + k;
+    el.innerHTML = 'OPEN <b>' + (rows.length - k) + '</b>';
+    cnt.appendChild(el);
+  }
+
+  // ---- timeline ---------------------------------------------------------------------
+  var panelIn = (o.ledgerIn != null) ? o.ledgerIn
+              : (ledger.length ? ledger[0].at : (o.ghostsIn || 0));
+  at('#lg', {opacity:0, x:-18}, {opacity:1, x:0, duration:.55, ease:'power3.out'}, panelIn);
+
+  ledger.forEach(function(d, i){
+    at('#lg-lk-' + i, {opacity:0},        {opacity:1, duration:.35, ease:'power2.out'}, d.at);
+    at('#lg-lv-' + i, {opacity:0, x:-8},  {opacity:1, x:0, duration:.45, ease:'power3.out'},
+       d.at, .08);
+  });
+  at('#lg-ledrule', {scaleX:0}, {scaleX:1, duration:.5, ease:'power3.inOut'},
+     (o.ghostsIn != null ? o.ghostsIn : panelIn) - .2);
+
+  // ghosts land together — this is the "how much is still coming" moment
+  var gIn = (o.ghostsIn != null) ? o.ghostsIn : panelIn;
+  rows.forEach(function(r, i){
+    at('#lg-gq-' + i, {opacity:0}, {opacity:1, duration:.40, ease:'power2.out'}, gIn, i * .09);
+    at('#lg-ga-' + i, {opacity:0}, {opacity:.62, duration:.40, ease:'power2.out'}, gIn, i * .09 + .05);
+  });
+
+  rows.forEach(function(r, i){
+    var answers = r.answers || [];
+    var lastAt  = answers.length ? answers[answers.length - 1].at : null;
+
+    // OPEN: question ghost -> question. Two elements, one tween each — never one element.
+    to_('#lg-gq-' + i, {opacity:0, duration:.28, ease:'power2.in'}, r.open);
+    at('#lg-q-' + i, {opacity:0, x:-6}, {opacity:1, x:0, duration:.42, ease:'power3.out'},
+       r.open, .10);
+    to_('#lg-lv2-' + i, {opacity:1, duration:.25, ease:'power2.out'}, r.open, .10);
+    to_('#lg-bu-' + i, {opacity:.55, duration:.30, ease:'power2.out'}, r.open, .10);
+
+    answers.forEach(function(a, j){
+      // the FIRST answer clears the answer-ghost; later ones arrive into empty reserved space
+      if (j === 0) to_('#lg-ga-' + i, {opacity:0, duration:.26, ease:'power2.in'}, a.at);
+
+      at('#lg-a-' + i + '-' + j, {opacity:0, y:6},
+         {opacity:1, y:0, duration:.45, ease:'power3.out'}, a.at, .08);
+
+      if (a.tone === 'provisional'){
+        at('#lg-tg-' + i + '-' + j, {opacity:0}, {opacity:1, duration:.30, ease:'power2.out'},
+           a.at, .30);
+        // …and it gets crossed out when the NEXT answer lands. The reversal, on the spine.
+        var nxt = answers[j + 1];
+        if (nxt){
+          at('#lg-st-' + i + '-' + j, {scaleX:0},
+             {scaleX:1, duration:.40, ease:'power2.inOut'}, nxt.at);
+          // second opacity tween on this element, in a window that CANNOT overlap the first
+          to_('#lg-a-' + i + '-' + j,  {opacity:.50, duration:.40, ease:'power2.out'}, nxt.at, .24);
+          to_('#lg-tg-' + i + '-' + j, {opacity:0,   duration:.30, ease:'power2.in'},  nxt.at, .10);
+        }
+      }
+    });
+
+    // settled: examination marker off, bullet solid. A provisional does NOT settle a row.
+    if (lastAt != null){
+      to_('#lg-lv2-' + i, {opacity:0, duration:.25, ease:'power2.in'}, lastAt, .30);
+      to_('#lg-bu-' + i,  {opacity:1, duration:.30, ease:'power2.out'}, lastAt, .30);
+      if (answers[answers.length - 1].verdict){
+        to_('#lg-row-' + i, {scale:1.04, duration:.55, ease:'power3.out'}, lastAt, .40);
+      }
+    }
+  });
+
+  // counter windows — each value visible only between consecutive closes
+  for (var k = 0; k <= closes.length; k++){
+    var start = (k === 0) ? gIn + .35 : closes[k - 1] + .34;
+    at('#lg-n-' + k, {opacity:0}, {opacity:1, duration:.28, ease:'power2.out'}, start);
+    if (k < closes.length) to_('#lg-n-' + k, {opacity:0, duration:.20, ease:'power2.in'},
+                               closes[k], .12);
+  }
+
+  if (o.holdOut != null) to_('#lg', {opacity:0, x:-14, duration:.5, ease:'power2.in'}, o.holdOut);
+}
+</script>

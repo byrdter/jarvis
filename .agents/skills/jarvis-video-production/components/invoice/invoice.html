@@ -1,0 +1,120 @@
+<!-- ============================================================================
+     INVOICE — an itemized bill/statement that ASSEMBLES on screen, line by line.
+
+     Built after Terry's 2026-08-04 note: "a bill with eight months worth of charges would be
+     better... I DON'T WANT TEXT ON THE SCREEN BY ITSELF." Information lives INSIDE a real
+     artifact, big and central, and it MOVES — rows stamp in, the total spins up, a stamp slams.
+     Two of these side by side (what you paid vs what it cost) IS the cold-open hook.
+
+     Cream document register (CONDUIT §2). Seek-safe: every reveal is a tl tween or pre-baked
+     tl.set; the total uses stepped tl.set count-up (no onUpdate). Nothing loops.
+
+     USAGE (after tl registered; needs a #overlay or pass host):
+       mountInvoice(tl, {
+         id:'billPaid', at:0.4, x:150, y:150, w:720,
+         brand:'CLAUDE CODE', plan:'MAX PLAN',
+         meta:[{k:'PERIOD',v:'8 MONTHS'},{k:'BILLING',v:'FLAT MONTHLY'}],
+         items:[{desc:'Month 01',amt:'$125.00'}, ... x8 ],
+         itemsAt:1.2, itemStep:0.28,           // when rows start, spacing
+         total:{label:'TOTAL PAID', to:1000, at:4.0, fmt:money},
+         stamp:{text:'PAID', at:5.2, tone:'ok'},   // tone: ok(green) | alarm(red)
+         out:33
+       });
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  .inv{position:absolute;z-index:13;background:#F4EFE2;border-radius:5px;opacity:0;
+       box-shadow:0 50px 130px rgba(0,0,0,.72);padding:34px 40px 30px;
+       background-image:linear-gradient(180deg,#F7F2E6,#EDE6D5)}
+  .inv-brandrow{display:flex;justify-content:space-between;align-items:baseline}
+  .inv-brand{font-family:'Playfair Display','EB Garamond',serif;font-size:34px;color:#231F17;
+       font-weight:700;letter-spacing:.01em}
+  .inv-plan{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.22em;
+       text-transform:uppercase;color:#8A5A2B;font-weight:700}
+  .inv-metarow{display:flex;gap:34px;margin-top:12px}
+  .inv-meta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+       text-transform:uppercase;color:#6B5F45;font-weight:700}
+  .inv-meta b{color:#231F17}
+  .inv-rule{height:2px;background:#231F17;opacity:.85;margin:20px 0 6px;transform-origin:0 50%}
+  .inv-item{display:flex;justify-content:space-between;align-items:baseline;
+       padding:9px 0;border-bottom:1px solid rgba(35,31,23,.13);opacity:0}
+  .inv-desc{font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.04em;
+       color:#3A3225;font-weight:600}
+  .inv-amt{font-family:'JetBrains Mono',monospace;font-size:20px;color:#231F17;font-weight:700;
+       font-variant-numeric:tabular-nums}
+  .inv-totrow{display:flex;justify-content:space-between;align-items:baseline;
+       margin-top:16px;padding-top:16px;border-top:3px double #231F17}
+  .inv-totlab{font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:.16em;
+       text-transform:uppercase;color:#231F17;font-weight:700}
+  .inv-tot{font-family:'JetBrains Mono',monospace;font-size:46px;color:#231F17;font-weight:700;
+       font-variant-numeric:tabular-nums;line-height:1}
+  .inv-stamp{position:absolute;right:56px;top:46%;border:3px solid #2E7D46;color:#2E7D46;
+       border-radius:5px;padding:9px 20px;font-family:'JetBrains Mono',monospace;font-size:24px;
+       letter-spacing:.22em;font-weight:700;transform:rotate(-9deg);opacity:0;
+       text-shadow:0 1px 0 rgba(255,255,255,.4)}
+  .inv-stamp.alarm{border-color:#B23A2E;color:#B23A2E}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- invoices inject themselves into #inv-host (or #overlay). Nothing static here. -->
+<div id="inv-host"></div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+function mountInvoice(tl, o){
+  var host = document.getElementById('inv-host') || document.getElementById('overlay')
+             || document.getElementById('root');
+  var id = o.id, items = o.items || [];
+  var el = document.createElement('div'); el.className = 'inv'; el.id = id;
+  el.style.left = o.x + 'px'; el.style.top = o.y + 'px'; el.style.width = (o.w||720) + 'px';
+  el.innerHTML =
+    '<div class="inv-brandrow"><div class="inv-brand" id="'+id+'-brand">'+(o.brand||'')+
+      '</div><div class="inv-plan">'+(o.plan||'')+'</div></div>'+
+    '<div class="inv-metarow">'+ (o.meta||[]).map(function(m){
+      return '<div class="inv-meta">'+m.k+' <b>'+m.v+'</b></div>'; }).join('') +'</div>'+
+    '<div class="inv-rule" id="'+id+'-rule"></div>'+
+    items.map(function(it,i){ return '<div class="inv-item" id="'+id+'-it-'+i+'">'+
+      '<span class="inv-desc">'+it.desc+'</span><span class="inv-amt">'+it.amt+'</span></div>';
+    }).join('')+
+    '<div class="inv-totrow"><div class="inv-totlab">'+((o.total&&o.total.label)||'TOTAL')+
+      '</div><div class="inv-tot" id="'+id+'-tot">'+((o.total&&(o.total.fmt||money)(o.total.from||0))||'')+
+      '</div></div>'+
+    (o.stamp?'<div class="inv-stamp'+(o.stamp.tone==='alarm'?' alarm':'')+'" id="'+id+
+      '-stamp">'+o.stamp.text+'</div>':'');
+  host.appendChild(el);
+
+  // paper in
+  tl.fromTo('#'+id, {opacity:0, y:30, scale:.985}, {opacity:1, y:0, scale:1, duration:.6,
+    ease:'power3.out'}, o.at);
+  tl.fromTo('#'+id+'-rule', {scaleX:0}, {scaleX:1, duration:.5, ease:'power3.inOut'}, o.at+.25);
+
+  // rows stamp in one at a time — each amount gets a tiny scale "ka-chunk"
+  var iAt = (o.itemsAt!=null?o.itemsAt:o.at+0.9), step = o.itemStep!=null?o.itemStep:0.26;
+  items.forEach(function(it,i){
+    var t = iAt + i*step;
+    tl.fromTo('#'+id+'-it-'+i, {opacity:0, x:-14}, {opacity:1, x:0, duration:.32,
+      ease:'power3.out'}, t);
+    tl.fromTo('#'+id+'-it-'+i+' .inv-amt', {scale:1.5}, {scale:1, duration:.26,
+      ease:'back.out(3)'}, t+.02);
+  });
+
+  // total spins up
+  if (o.total){
+    var tt = o.total.at!=null ? o.total.at : (iAt + items.length*step + .3);
+    var fmt = o.total.fmt || money, STEPS = 24;
+    for (var s=0;s<=STEPS;s++){
+      var e = Math.pow(s/STEPS,1.1), v = (o.total.from||0) + (o.total.to-(o.total.from||0))*e;
+      (function(t,val){ tl.set('#'+id+'-tot', {textContent: fmt(val)}, t); })(tt + 1.4*(s/STEPS), val=v);
+    }
+    tl.fromTo('#'+id+'-tot', {scale:1.12}, {scale:1, duration:.4, ease:'power2.out'}, tt);
+  }
+
+  // stamp slam
+  if (o.stamp){
+    tl.fromTo('#'+id+'-stamp', {opacity:0, scale:2.2, rotation:-30},
+      {opacity:1, scale:1, rotation:-9, duration:.4, ease:'back.out(2.2)'}, o.stamp.at);
+  }
+  if (o.out!=null) tl.to('#'+id, {opacity:0, y:-20, duration:.5, ease:'power2.in'}, o.out);
+}
+</script>

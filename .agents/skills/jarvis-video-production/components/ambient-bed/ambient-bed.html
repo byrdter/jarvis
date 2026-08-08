@@ -1,0 +1,134 @@
+<!-- ============================================================================
+     AMBIENT BED — the permanent living backdrop under every scene.
+
+     This is the thing the shipped masters have in EVERY scene and my 2026-08-04 build did
+     not: blurred drifting color glows + seeded rising embers + film grain + vignette, all
+     animating continuously on the registered timeline. It is why those videos never hold
+     static (ambient baseline ~2.6) and why mine read as dead frames (baseline ~0.2). It
+     REPLACES the bottom "ticker" hack — motion belongs in the world, not a progress bar.
+
+     Sits at the very back (z 1-4), under the footage/graphics. Pair with real b-roll on top.
+
+     ---- SEEK-SAFE, DETERMINISTIC ---------------------------------------------------
+     No Date/Math.random/rAF/setTimeout. Ember positions come from a seeded mulberry32 so a
+     given scene renders identically every time. All motion is on the registered tl (glows
+     drift on long yoyo tweens, embers rise on staggered loops) — a bare gsap.to renders
+     FROZEN. Loops are safe here because each element loops ALONE and no discrete tween ever
+     touches it (the documented-safe loop pattern from bed-drift / spine-ledger).
+
+     ---- USAGE ---------------------------------------------------------------------
+       BLOCK A -> scene <style>;  BLOCK B -> FIRST children of #root (z 1-4, under everything);
+       BLOCK C -> after the tl is registered. Then once:
+
+         mountAmbient(tl, {
+           duration: 68.1,               // the scene's full length
+           plate: 'assets/bg-01.png',    // optional still photographic plate (low-opacity)
+           move: 'push',                 // push | drift-left | drift-right | rise | sink
+           tint: 'gold',                 // gold (default) | teal | mixed
+           embers: 26                    // seeded motes; 0 to disable
+         });
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  #amb{position:absolute;inset:0;z-index:1;overflow:hidden;
+       background:radial-gradient(ellipse 120% 90% at 50% 42%,#0f1622 0%,#0a0e14 60%,#070a10 100%)}
+  #amb .amb-plate{position:absolute;inset:-6%;z-index:1;background-size:cover;
+       background-position:center;opacity:0;will-change:transform,opacity;filter:saturate(.9)}
+  #amb .amb-glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;
+       will-change:transform;mix-blend-mode:screen}
+  #amb .amb-g1{width:900px;height:900px;left:-8%;top:-14%;
+       background:radial-gradient(circle,rgba(201,178,122,.55),transparent 62%)}
+  #amb .amb-g2{width:780px;height:780px;right:-10%;bottom:-16%;
+       background:radial-gradient(circle,rgba(79,163,196,.42),transparent 62%)}
+  #amb .amb-g3{width:620px;height:620px;left:38%;top:44%;
+       background:radial-gradient(circle,rgba(201,178,122,.30),transparent 64%)}
+  #amb.is-teal  .amb-g1{background:radial-gradient(circle,rgba(79,163,196,.50),transparent 62%)}
+  #amb.is-teal  .amb-g3{background:radial-gradient(circle,rgba(79,163,196,.28),transparent 64%)}
+  #amb .amb-embers{position:absolute;inset:0;z-index:3;pointer-events:none}
+  #amb .amb-ember{position:absolute;width:3px;height:3px;border-radius:50%;
+       background:rgba(226,214,180,.9);box-shadow:0 0 8px rgba(201,178,122,.8);
+       opacity:0;will-change:transform,opacity}
+  /* grain — a tiny inline SVG turbulence, tiled, at low opacity. Static texture; the drift
+     of the glows/embers underneath supplies the motion. */
+  #amb .amb-grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.05;
+       background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+       background-size:200px 200px;mix-blend-mode:overlay}
+  #amb .amb-vig{position:absolute;inset:0;z-index:4;pointer-events:none;
+       background:radial-gradient(ellipse 78% 70% at 50% 46%,transparent 52%,rgba(4,6,10,.72) 100%)}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- FIRST children of #root — everything else sits on top. -->
+<div id="amb">
+  <div class="amb-plate" id="amb-plate"></div>
+  <div class="amb-glow amb-g1" id="amb-g1"></div>
+  <div class="amb-glow amb-g2" id="amb-g2"></div>
+  <div class="amb-glow amb-g3" id="amb-g3"></div>
+  <div class="amb-embers" id="amb-embers"></div>
+  <div class="amb-grain"></div>
+  <div class="amb-vig"></div>
+</div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+function mountAmbient(tl, o){
+  o = o || {};
+  var D = o.duration || 30, amb = document.getElementById('amb');
+  if (o.tint === 'teal') amb.classList.add('is-teal');
+
+  // seeded RNG — deterministic embers (mulberry32)
+  var seed = 0x9e3779b9;
+  function rnd(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+
+  // ---- plate: a real photographic still, low opacity, continuous Ken-Burns -------------
+  if (o.plate){
+    var p = document.getElementById('amb-plate');
+    p.style.backgroundImage = 'url(' + o.plate + ')';
+    var BASE = 1.06, TRAVEL = 0.12, end = {scale:BASE + TRAVEL, duration:D, ease:'none'};
+    switch (o.move){
+      case 'drift-left':  end.xPercent = -2; break;
+      case 'drift-right': end.xPercent =  2; break;
+      case 'rise':        end.yPercent = -2; break;
+      case 'sink':        end.yPercent =  2; break;
+    }
+    gsap.set(p, {scale:BASE, xPercent:0, yPercent:0, opacity:0});
+    tl.to(p, {opacity: o.plateOpacity != null ? o.plateOpacity : 0.34, duration:1.2}, 0);
+    tl.to(p, end, 0);
+  }
+
+  // ---- glows: each drifts on its OWN long yoyo tween (loops alone, nothing else touches) -
+  function drift(sel, dx, dy, dur, s){
+    gsap.set(sel, {x:0, y:0});
+    tl.to(sel, {x:dx, y:dy, duration:dur, ease:'sine.inOut',
+                repeat:Math.ceil(D/dur)+1, yoyo:true}, s);
+  }
+  drift('#amb-g1',  70,  40, 13, 0);
+  drift('#amb-g2', -60,  50, 17, 0);
+  drift('#amb-g3',  40, -55, 11, 0);
+  // a slow brightness breathe on g3 so the centre is never fixed
+  tl.to('#amb-g3', {opacity:.5, duration:6, ease:'sine.inOut',
+                    repeat:Math.ceil(D/6)+1, yoyo:true}, 0);
+
+  // ---- embers: seeded motes rising and fading on staggered loops ------------------------
+  var host = document.getElementById('amb-embers');
+  var N = (o.embers != null) ? o.embers : 24;
+  host.innerHTML = '';
+  for (var i = 0; i < N; i++){
+    var e = document.createElement('div'); e.className = 'amb-ember'; e.id = 'amb-e-' + i;
+    e.style.left = (rnd() * 100) + '%';
+    e.style.top  = (60 + rnd() * 40) + '%';
+    var sc = 0.6 + rnd() * 1.8; e.style.transform = 'scale(' + sc.toFixed(2) + ')';
+    host.appendChild(e);
+    var rise = 120 + rnd() * 200, dur = 6 + rnd() * 7, delay = rnd() * dur, drift = (rnd()-0.5)*80;
+    // one loop per ember, its own element — safe
+    tl.fromTo('#amb-e-' + i, {opacity:0, y:0},
+      {opacity: 0.5 + rnd()*0.4, y:-rise*0.4, duration:dur*0.4, ease:'sine.out',
+       repeat:Math.ceil(D/dur)+1, repeatDelay:0}, delay);
+    tl.to('#amb-e-' + i, {opacity:0, y:-rise, x:drift, duration:dur*0.6, ease:'sine.in',
+       repeat:Math.ceil(D/dur)+1, repeatDelay:0}, delay + dur*0.4);
+  }
+}
+</script>

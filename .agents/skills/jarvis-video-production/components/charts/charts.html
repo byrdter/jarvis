@@ -1,0 +1,347 @@
+<!-- ============================================================================
+     CHARTS — the three data-viz primitives this channel actually needs.
+
+       mountInversion(tl, o)  four bars that RESIZE AND REORDER between two measures.
+                              For "volume is not cost" — the shape where the big bar
+                              becomes the small one. The reorder IS the argument.
+       mountDotGrid(tl, o)    N dots, a subset lit, a sub-subset flared.
+                              For concentration — "49 of these carry 90% of it".
+       mountRatio(tl, o)      two bars + a multiple. For "20x what the read would cost".
+
+     All three take MASTER-ABSOLUTE seconds and subtract `sceneStart`, like every other
+     component here. Anything already past is applied as an immediate end-state via a bare
+     gsap.set — a zero-duration tween parked at position 0 never ticks when the playhead is
+     already at 0 (see spine-ledger's README).
+
+     ---- KEEP CLEAR OF THE SPINE ---------------------------------------------------
+     The ledger rail owns x 64-448. Default viewport starts at x=500, same as annotation-hud.
+
+     ---- NUMBERS ------------------------------------------------------------------
+     Every value is passed in. Nothing is computed from a percentage, and no percentage is
+     recomputed from a value — the two are given together and must already agree, because
+     the VO says both aloud. Source them from the project's claim-source-map.md and nowhere
+     else. A chart that derives its own label is a chart that can silently disagree with the
+     voice.
+
+     ---- COUNTERS ARE SEEK-SAFE -----------------------------------------------------
+     Counters tween a proxy object and write textContent in onUpdate. That renders on SEEK
+     as well as on play, which is what the deterministic renderer does — it seeks every
+     frame. Do not "optimise" this into a setInterval or a rAF loop; both render FROZEN.
+
+     ---- USAGE --------------------------------------------------------------------
+       BLOCK A -> scene <style>;  BLOCK B -> a child of #root;  BLOCK C -> after the
+       scene's own tl calls.
+
+         mountInversion(tl, {
+           sceneStart: 162.3,
+           viewport: {x:500, y:150, w:1340, h:760},
+           title: 'WHERE THE TOKENS GO',
+           measures: [
+             {key:'volume', label:'SHARE OF TOKENS', at:170.1},
+             {key:'cost',   label:'SHARE OF THE MONEY', at:203.3}   // the flip
+           ],
+           bars: [
+             {name:'CACHE READ',   volume:92.9, cost:39.9},
+             {name:'CACHE WRITE',  volume:6.7,  cost:51.3},
+             {name:'OUTPUT',       volume:0.4,  cost:8.6},
+             {name:'INPUT',        volume:0.03, cost:0.2}
+           ]
+         });
+
+         mountDotGrid(tl, {
+           sceneStart: 162.3, viewport:{...},
+           total:490, cols:35,
+           title:'490 SESSIONS',
+           steps:[
+             {at:224.1, lit:49, label:'49 SESSIONS · 89.8% OF THE BILL'},
+             {at:232.9, flare:4, label:'4 SESSIONS · 25.7%'}
+           ]
+         });
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  /* dark navy ANALYSIS register (CONDUIT §2) — gold primary, one accent per scene */
+  .cv{position:absolute;z-index:10;opacity:0;
+      background:radial-gradient(ellipse 78% 88% at 42% 50%,
+        rgba(8,11,16,.62) 0%, rgba(8,11,16,.42) 55%, rgba(8,11,16,0) 80%)}
+  .cv-title{position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;
+      font-size:16px;letter-spacing:.24em;color:#C9B27A;font-weight:700;opacity:0;
+      white-space:nowrap}
+  .cv-measure{position:absolute;right:0;top:0;font-family:'JetBrains Mono',monospace;
+      font-size:16px;letter-spacing:.20em;color:#93A3BC;font-weight:700;opacity:0;
+      white-space:nowrap}
+
+  /* --- inversion bars --- */
+  .cvb{position:absolute;left:0;height:74px;will-change:transform}
+  .cvb-name{position:absolute;left:0;top:24px;width:280px;
+      font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:.10em;
+      color:#EBE4D2;font-weight:700;opacity:0;white-space:nowrap}
+  .cvb-track{position:absolute;left:300px;top:22px;height:30px;
+      background:rgba(147,163,180,.13);border-radius:2px}
+  /* width:100% is load-bearing. An absolutely-positioned element with no width is 0px wide,
+     and scaleX on 0px is still 0px — the fill renders invisible while the tween runs fine. */
+  .cvb-fill{position:absolute;left:0;top:0;width:100%;height:100%;background:#C9B27A;
+      border-radius:2px;transform:scaleX(0);transform-origin:0 50%}
+  .cvb.is-hero .cvb-fill{background:#F2D89A}
+  .cvb-val{position:absolute;top:24px;font-family:'JetBrains Mono',monospace;font-size:19px;
+      letter-spacing:.04em;color:#C9B27A;font-weight:700;opacity:0;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+  .cvb.is-hero .cvb-val{color:#F2D89A}
+
+  /* --- dot grid --- */
+  .cvd{position:absolute;left:0;top:0}
+  .cvd-dot{position:absolute;border-radius:2px;background:#93A3BC;opacity:.16}
+  .cvd-lit{position:absolute;border-radius:2px;background:#C9B27A;opacity:0}
+  .cvd-flare{position:absolute;border-radius:2px;background:#F2D89A;opacity:0;
+      box-shadow:0 0 14px rgba(242,216,154,.75)}
+  .cvd-cap{position:absolute;left:0;font-family:'JetBrains Mono',monospace;font-size:22px;
+      letter-spacing:.07em;color:#EBE4D2;font-weight:700;opacity:0;white-space:nowrap}
+  .cvd-cap.is-hero{color:#F2D89A}
+  .cvd-cap b{color:#C9B27A}
+
+  /* --- ratio --- */
+  .cvr{position:absolute;left:0}
+  .cvr-name{position:absolute;left:0;font-family:'JetBrains Mono',monospace;font-size:18px;
+      letter-spacing:.14em;color:#93A3BC;font-weight:700;opacity:0;white-space:nowrap}
+  .cvr-track{position:absolute;left:320px;height:44px;background:rgba(147,163,180,.13);
+      border-radius:2px}
+  .cvr-fill{position:absolute;left:0;top:0;width:100%;height:100%;background:#93A3BC;
+      border-radius:2px;transform:scaleX(0);transform-origin:0 50%}
+  .cvr.is-hero .cvr-fill{background:#D9705A}
+  .cvr-val{position:absolute;font-family:'JetBrains Mono',monospace;font-size:22px;
+      letter-spacing:.03em;color:#EBE4D2;font-weight:700;opacity:0;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+  .cvr.is-hero .cvr-val{color:#F3C9BE}
+  .cvr-mult{position:absolute;font-family:'JetBrains Mono',monospace;font-size:60px;
+      letter-spacing:.02em;color:#D9705A;font-weight:700;opacity:0;white-space:nowrap}
+  .cvr-mult small{display:block;font-size:15px;letter-spacing:.22em;color:#93A3BC;
+      margin-top:8px}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- children of #root. Contents injected by the mount functions. -->
+<div class="cv" id="cv-inv"></div>
+<div class="cv" id="cv-dots"></div>
+<div class="cv" id="cv-ratio"></div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+(function(){
+  // ---- shared helpers ----------------------------------------------------------------
+  function mk(S, tl){
+    function L(t){ return t - S; }
+    function past(t){ return L(t) < 0; }
+    function end(to){ var e={}; for (var k in to) if (k!=='duration'&&k!=='ease') e[k]=to[k];
+                      return e; }
+    function has(sel){ return !!sel && !!document.querySelector(sel); }
+    return {
+      at: function(sel, from, to, t, x){
+        if (!has(sel)) return;
+        if (past(t)){ gsap.set(sel, end(to)); return; }
+        tl.fromTo(sel, from, to, L(t) + (x||0));
+      },
+      to: function(sel, to, t, x){
+        if (!has(sel)) return;
+        if (past(t)){ gsap.set(sel, end(to)); return; }
+        tl.to(sel, to, L(t) + (x||0));
+      },
+      // Seek-safe counter: tween a proxy, write textContent in onUpdate. Renders on SEEK,
+      // which is what the deterministic renderer does for every frame.
+      count: function(sel, from, toV, t, dur, fmt){
+        if (!has(sel)) return;
+        var el = document.querySelector(sel), p = {v:from};
+        var write = function(){ el.textContent = fmt(p.v); };
+        if (past(t)){ p.v = toV; write(); return; }
+        write();
+        tl.to(p, {v:toV, duration:dur||.9, ease:'power2.out', onUpdate:write}, L(t));
+      },
+      box: function(id, vp){
+        var b = document.getElementById(id);
+        b.style.left = vp.x+'px'; b.style.top = vp.y+'px';
+        b.style.width= vp.w+'px'; b.style.height = vp.h+'px';
+        return b;
+      },
+      // vp.h is a MINIMUM, not the truth. Each chart knows how tall it actually is once its
+      // rows/dots/captions are laid out; a caller-supplied height that is too short makes
+      // every element below the fold report escaped_container. Call this after innerHTML.
+      fit: function(id, vp, contentH){
+        document.getElementById(id).style.height = Math.max(vp.h, Math.ceil(contentH)) + 'px';
+      }
+    };
+  }
+  function pct(v){ return (v < 1 ? v.toFixed(2) : v.toFixed(1)) + '%'; }
+
+  // ======================= INVERSION ==================================================
+  window.mountInversion = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl), vp = o.viewport||{x:500,y:150,w:1340,h:760};
+    var box = h.box('cv-inv', vp), bars = o.bars||[], M = o.measures||[];
+    var m0 = M[0].key, m1 = M[1] ? M[1].key : null;
+
+    // Slot order per measure: biggest first. Computed from the DATA, so the reorder can
+    // never disagree with the bars it is reordering.
+    function order(key){
+      return bars.map(function(b,i){ return {i:i, v:b[key]}; })
+                 .sort(function(a,b2){ return b2.v - a.v; }).map(function(r){ return r.i; });
+    }
+    var ord0 = order(m0), ord1 = m1 ? order(m1) : ord0;
+    function slotY(ord, i){ return 74 + ord.indexOf(i) * 92; }
+
+    var maxTrack = vp.w - 300 - 150;
+    box.innerHTML = '<div class="cv-title" id="cv-inv-t">' + (o.title||'') + '</div>' +
+      M.map(function(m,k){ return '<div class="cv-measure" id="cv-inv-m'+k+'">'+m.label+'</div>'; }).join('') +
+      bars.map(function(b,i){
+        return '<div class="cvb" id="cvb-'+i+'" style="top:'+slotY(ord0,i)+'px;width:'+
+                 (vp.w)+'px">' +
+               '<div class="cvb-name" id="cvb-n-'+i+'">'+b.name+'</div>' +
+               '<div class="cvb-track" id="cvb-tr-'+i+'" style="width:'+maxTrack+'px">' +
+                 '<div class="cvb-fill" id="cvb-f-'+i+'"></div></div>' +
+               '<div class="cvb-val" id="cvb-v-'+i+'" style="left:'+(300+maxTrack+22)+'px"></div>' +
+               '</div>';
+      }).join('');
+    h.fit('cv-inv', vp, 74 + bars.length * 92);
+
+    h.at('#cv-inv', {opacity:0}, {opacity:1, duration:.5, ease:'power2.out'},
+         o.boxIn != null ? o.boxIn : M[0].at - .5);
+    h.at('#cv-inv-t', {opacity:0, x:-10}, {opacity:1, x:0, duration:.45, ease:'power3.out'},
+         o.boxIn != null ? o.boxIn : M[0].at - .5);
+
+    M.forEach(function(m, k){
+      var key = m.key, prev = k ? M[k-1] : null;
+      // The outgoing label must be GONE before the incoming one lands — they share a
+      // position, and a crossfade there reads as two overlapping strings (content_overlap).
+      if (prev) h.to('#cv-inv-m'+(k-1), {opacity:0, duration:.26, ease:'power2.in'}, m.at, -.30);
+      h.at('#cv-inv-m'+k, {opacity:0, y:-6}, {opacity:1, y:0, duration:.4, ease:'power3.out'}, m.at);
+
+      bars.forEach(function(b, i){
+        var frac = b[key] / 100;
+        if (k === 0){
+          h.at('#cvb-n-'+i, {opacity:0, x:-8}, {opacity:1, x:0, duration:.40, ease:'power3.out'},
+               m.at, i*.10);
+          h.at('#cvb-f-'+i, {scaleX:0}, {scaleX:frac, duration:.85, ease:'power3.out'},
+               m.at, i*.10);
+          h.at('#cvb-v-'+i, {opacity:0}, {opacity:1, duration:.35, ease:'power2.out'},
+               m.at, i*.10 + .25);
+          h.count('#cvb-v-'+i, 0, b[key], m.at + i*.10, .85, pct);
+        } else {
+          // THE FLIP: width and slot move together. This is the beat, not a transition.
+          h.to('#cvb-f-'+i, {scaleX:frac, duration:1.05, ease:'power3.inOut'}, m.at);
+          h.to('#cvb-'+i,   {y:slotY(ord1,i) - slotY(ord0,i), duration:1.05,
+                             ease:'power3.inOut'}, m.at);
+          h.count('#cvb-v-'+i, b[m0], b[key], m.at, 1.05, pct);
+        }
+      });
+    });
+    // A bar can be marked hero in the DATA (`hero:true`) — a class, set once at build time.
+    // Do NOT tween className: it would schedule at a negative time on any scene that opens
+    // mid-chart, and a class swap is not motion.
+    bars.forEach(function(b, i){
+      if (b.hero) document.getElementById('cvb-' + i).className = 'cvb is-hero';
+    });
+    if (o.holdOut != null) h.to('#cv-inv', {opacity:0, duration:.5, ease:'power2.in'}, o.holdOut);
+  };
+
+  // ======================= DOT GRID ===================================================
+  window.mountDotGrid = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl), vp = o.viewport||{x:500,y:150,w:1340,h:760};
+    var box = h.box('cv-dots', vp);
+    var N = o.total||100, cols = o.cols||Math.ceil(Math.sqrt(N));
+    var rows = Math.ceil(N / cols), steps = o.steps || [];
+    var gap = o.gap != null ? o.gap : 6;
+    var d = Math.floor((vp.w - (cols-1)*gap) / cols);
+    var gridTop = 66;
+
+    // The lit subset is the FIRST k in reading order, so it reads as one block rather than
+    // scatter. Concentration is the claim; scattered dots would say the opposite.
+    var maxLit = steps.reduce(function(a,s){ return Math.max(a, s.lit||0, s.flare||0); }, 0);
+    var html = '<div class="cv-title" id="cv-dots-t">' + (o.title||'') + '</div><div class="cvd">';
+    for (var i = 0; i < N; i++){
+      var x = (i % cols) * (d + gap), y = gridTop + Math.floor(i / cols) * (d + gap);
+      var st = 'left:'+x+'px;top:'+y+'px;width:'+d+'px;height:'+d+'px';
+      html += '<div class="cvd-dot" style="'+st+'"></div>';
+      if (i < maxLit) html += '<div class="cvd-lit" id="cvd-l-'+i+'" style="'+st+'"></div>';
+    }
+    html += '</div>';
+    var capY = gridTop + rows * (d + gap) + 34;
+    steps.forEach(function(s, k){
+      html += '<div class="cvd-cap' + (s.flare ? ' is-hero' : '') + '" id="cvd-c-'+k+
+              '" style="top:'+(capY + k*44)+'px">'+(s.label||'')+'</div>';
+    });
+    box.innerHTML = html;
+    h.fit('cv-dots', vp, capY + steps.length * 44 + 12);
+
+    var first = steps.length ? steps[0].at : 0;
+    h.at('#cv-dots', {opacity:0}, {opacity:1, duration:.5, ease:'power2.out'},
+         o.boxIn != null ? o.boxIn : first - .6);
+    h.at('#cv-dots-t', {opacity:0, x:-10}, {opacity:1, x:0, duration:.45, ease:'power3.out'},
+         o.boxIn != null ? o.boxIn : first - .6);
+
+    steps.forEach(function(s, k){
+      if (s.lit){
+        // ONE tween, many targets, staggered — 49 separate tweens would be 49x the work
+        var sel = [];
+        for (var i = 0; i < s.lit; i++) sel.push('#cvd-l-'+i);
+        h.at(sel.join(','), {opacity:0, scale:.6},
+             {opacity:1, scale:1, duration:.34, ease:'power3.out',
+              stagger:{each:.014, from:'start'}}, s.at);
+      }
+      if (s.flare){
+        for (var j = 0; j < s.flare; j++){
+          var el = document.getElementById('cvd-l-'+j);
+          if (el) el.className = 'cvd-flare';
+        }
+        var fsel = [];
+        for (var j2 = 0; j2 < s.flare; j2++) fsel.push('#cvd-l-'+j2);
+        h.at(fsel.join(','), {opacity:0, scale:.7},
+             {opacity:1, scale:1.35, duration:.5, ease:'back.out(2.4)',
+              stagger:{each:.08}}, s.at);
+      }
+      h.at('#cvd-c-'+k, {opacity:0, y:8}, {opacity:1, y:0, duration:.45, ease:'power3.out'},
+           s.at, .30);
+    });
+    if (o.holdOut != null) h.to('#cv-dots', {opacity:0, duration:.5, ease:'power2.in'}, o.holdOut);
+  };
+
+  // ======================= RATIO ======================================================
+  window.mountRatio = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl), vp = o.viewport||{x:500,y:250,w:1340,h:420};
+    var box = h.box('cv-ratio', vp), rows = o.rows||[];
+    var max = rows.reduce(function(a,r){ return Math.max(a, r.value); }, 0);
+    var track = vp.w - 320 - 300;
+
+    box.innerHTML = '<div class="cv-title" id="cv-r-t">' + (o.title||'') + '</div>' +
+      rows.map(function(r,i){
+        var top = 78 + i*104;
+        return '<div class="cvr' + (r.hero ? ' is-hero' : '') + '" id="cvr-'+i+
+                 '" style="top:'+top+'px;width:'+vp.w+'px;height:44px">' +
+               '<div class="cvr-name" id="cvr-n-'+i+'" style="top:12px">'+r.name+'</div>' +
+               '<div class="cvr-track" id="cvr-tr-'+i+'" style="top:0;width:'+track+'px">' +
+                 '<div class="cvr-fill" id="cvr-f-'+i+'"></div></div>' +
+               '<div class="cvr-val" id="cvr-v-'+i+'" style="left:'+(320+track+24)+
+                 'px;top:9px"></div></div>';
+      }).join('') +
+      (o.multiple ? '<div class="cvr-mult" id="cvr-m" style="left:'+(320+track+24)+
+        'px;top:'+(78 + rows.length*104 + 24)+'px">' + o.multiple.text +
+        '<small>'+(o.multiple.sub||'')+'</small></div>' : '');
+    h.fit('cv-ratio', vp, 78 + rows.length*104 + (o.multiple ? 24 + 108 : 0));
+
+    var first = rows.length ? rows[0].at : 0;
+    h.at('#cv-ratio', {opacity:0}, {opacity:1, duration:.5, ease:'power2.out'},
+         o.boxIn != null ? o.boxIn : first - .5);
+    h.at('#cv-r-t', {opacity:0, x:-10}, {opacity:1, x:0, duration:.45, ease:'power3.out'},
+         o.boxIn != null ? o.boxIn : first - .5);
+
+    rows.forEach(function(r, i){
+      h.at('#cvr-n-'+i, {opacity:0, x:-8}, {opacity:1, x:0, duration:.40, ease:'power3.out'}, r.at);
+      h.at('#cvr-f-'+i, {scaleX:0}, {scaleX:r.value/max, duration:.85, ease:'power3.out'},
+           r.at, .06);
+      h.at('#cvr-v-'+i, {opacity:0}, {opacity:1, duration:.35, ease:'power2.out'}, r.at, .30);
+      h.count('#cvr-v-'+i, 0, r.value, r.at + .06, .85,
+              o.format || function(v){ return '$' + v.toFixed(2); });
+    });
+    if (o.multiple) h.at('#cvr-m', {opacity:0, scale:.86},
+      {opacity:1, scale:1, duration:.55, ease:'back.out(1.7)'}, o.multiple.at);
+    if (o.holdOut != null) h.to('#cv-ratio', {opacity:0, duration:.5, ease:'power2.in'}, o.holdOut);
+  };
+})();
+</script>

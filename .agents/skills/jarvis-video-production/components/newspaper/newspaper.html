@@ -1,0 +1,97 @@
+<!-- ============================================================================
+     NEWSPAPER — a front-page headline as a REAL artifact (never a plain text box).
+
+     Built after Terry's 2026-08-04 note: a framed lozenge of text is still a box, and "text in
+     plain boxes is a no-no." A question or argument line lives INSIDE a recognizable artifact —
+     a front page: masthead, dateline, kicker, a big multi-column headline, a subhead, greeked
+     body columns for texture, newsprint grain, a red editor's circle scribbled round the load-
+     bearing phrase. It slams in on a slight tilt and settles.
+
+     Masthead is a FICTIONAL / channel-owned outlet ("THE DISPATCH"), never a real newspaper —
+     impersonating a real outlet is out (safety + channel rules).
+
+     Seek-safe: reveals are tl tweens; the circle draws via stroke-dashoffset; nothing loops.
+
+     USAGE (after tl registered; injects into #np-host or #overlay):
+       mountNewspaper(tl, {
+         id:'q', at:53.4, x:360, y:150, w:1200, rot:-1.2,
+         masthead:'THE DISPATCH', dateline:'VOL. I  ·  NO. 8  ·  LATE EDITION',
+         kicker:'THE QUESTION WE COULD NOT PUT DOWN',
+         headline:'Who Is Absorbing <mark>This</mark>?',   // <mark> = circled phrase
+         subhead:'And how long can they keep doing it?',
+         out:60.7
+       });
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  .np{position:absolute;z-index:13;background:#E9E2CF;border-radius:2px;opacity:0;
+      padding:30px 42px 38px;box-shadow:0 60px 150px rgba(0,0,0,.75);
+      background-image:
+        linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.08)),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='80' height='80' filter='url(%23n)' opacity='0.06'/></svg>");
+      border:1px solid rgba(35,31,23,.25)}
+  .np-mast{font-family:'Playfair Display','EB Garamond',serif;font-weight:800;
+      font-size:58px;letter-spacing:.02em;color:#1A160F;text-align:center;line-height:1;
+      text-transform:uppercase}
+  .np-rule{height:3px;background:#1A160F;margin:12px 0 8px}
+  .np-rule.thin{height:1px;margin:8px 0 20px}
+  .np-date{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;
+      font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#4A4131;font-weight:700}
+  .np-kick{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.24em;
+      text-transform:uppercase;color:#8A2B22;font-weight:700;text-align:center;margin:8px 0 10px}
+  .np-head{position:relative;font-family:'Playfair Display','EB Garamond',serif;font-weight:800;
+      font-size:96px;line-height:.98;color:#141009;text-align:center;letter-spacing:-.01em}
+  .np-head mark{background:transparent;color:#141009;position:relative;white-space:nowrap}
+  .np-circle{position:absolute;left:-4%;top:-16%;width:108%;height:150%;pointer-events:none}
+  .np-circle path{fill:none;stroke:#B23A2E;stroke-width:5;stroke-linecap:round}
+  .np-sub{font-family:'Playfair Display','EB Garamond',serif;font-style:italic;font-size:34px;
+      color:#3A3225;text-align:center;margin-top:18px}
+  .np-cols{display:flex;gap:34px;margin-top:24px;opacity:.5}
+  .np-col{flex:1}
+  .np-line{height:7px;background:#3A3225;opacity:.5;border-radius:2px;margin-bottom:9px}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<div id="np-host"></div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+function mountNewspaper(tl, o){
+  var host=document.getElementById('np-host')||document.getElementById('overlay')||document.getElementById('root');
+  var id=o.id, el=document.createElement('div'); el.className='np'; el.id=id;
+  el.style.left=o.x+'px'; el.style.top=o.y+'px'; el.style.width=(o.w||1200)+'px';
+  // greeked columns for texture
+  function col(){ var s=''; for(var i=0;i<6;i++){ s+='<div class="np-line" style="width:'+
+    (72+Math.round((i*37)%26))+'%"></div>'; } return '<div class="np-col">'+s+'</div>'; }
+  el.innerHTML=
+    '<div class="np-mast">'+(o.masthead||'THE DISPATCH')+'</div>'+
+    '<div class="np-rule"></div>'+
+    '<div class="np-date"><span>'+(o.dateline||'')+'</span><span>'+(o.price||'PRICELESS')+'</span></div>'+
+    '<div class="np-rule thin"></div>'+
+    (o.kicker?'<div class="np-kick">'+o.kicker+'</div>':'')+
+    '<div class="np-head" id="'+id+'-head">'+
+      (o.headline||'').replace('<mark>','<mark><svg class="np-circle" id="'+id+
+      '-circ" viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M12,60 C12,18 288,14 288,58 C288,104 20,110 8,62"/></svg>')+
+    '</div>'+
+    (o.subhead?'<div class="np-sub" id="'+id+'-sub">'+o.subhead+'</div>':'')+
+    '<div class="np-cols">'+col()+col()+col()+'</div>';
+  host.appendChild(el);
+
+  // slam in on a slight tilt, settle
+  gsap.set('#'+id,{rotation:(o.rot!=null?o.rot:-1.4)});
+  tl.fromTo('#'+id,{opacity:0,y:-50,scale:1.06},{opacity:1,y:0,scale:1,duration:.55,
+    ease:'back.out(1.5)'},o.at);
+  tl.to('#'+id,{rotation:(o.rot!=null?o.rot*0.4:-0.5),duration:5,ease:'sine.inOut'},o.at+.6);
+  tl.fromTo('#'+id,{scale:1},{scale:1.035,duration:8,ease:'sine.inOut'},o.at+.6);
+  // headline rises
+  tl.fromTo('#'+id+'-head',{opacity:0,y:22},{opacity:1,y:0,duration:.5,ease:'power3.out'},o.at+.3);
+  if(o.subhead) tl.fromTo('#'+id+'-sub',{opacity:0},{opacity:1,duration:.5},o.at+.9);
+  // red editor's circle draws around the <mark> phrase
+  var circ=document.getElementById(id+'-circ');
+  if(circ){ var path=circ.querySelector('path'), len=path.getTotalLength();
+    gsap.set(path,{strokeDasharray:len,strokeDashoffset:len});
+    tl.to(path,{strokeDashoffset:0,duration:.7,ease:'power2.inOut'},o.at+1.1); }
+  if(o.out!=null) tl.to('#'+id,{opacity:0,y:-24,duration:.5,ease:'power2.in'},o.out);
+}
+</script>

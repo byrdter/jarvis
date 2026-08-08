@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>Annotation HUD — DEMO (kicker / push / acquire / bracket / flatline / step)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:#0A0E14;
+    font-family:'JetBrains Mono',monospace}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#0A0E14}
+  .bgwrap{position:absolute;inset:0;z-index:1;overflow:hidden}
+  .bgwrap img{width:100%;height:100%;object-fit:cover;will-change:transform}
+  .bgscrim{position:absolute;inset:0;z-index:2;
+    background:radial-gradient(ellipse at 30% 50%,rgba(8,11,16,.72),rgba(5,8,12,.92))}
+  .spineghost{position:absolute;left:64px;top:50%;transform:translateY(-50%);z-index:9;
+    width:384px;height:700px;border:1px dashed rgba(201,178,122,.30);border-radius:5px;
+    background:rgba(14,18,25,.55);color:#93A3BC;font-size:14px;letter-spacing:.22em;
+    text-transform:uppercase;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:20px;line-height:1.9}
+
+  #hud{position:absolute;z-index:10;overflow:hidden;opacity:0;
+       border:1px solid rgba(201,178,122,.20);border-radius:4px;
+       box-shadow:0 34px 100px rgba(0,0,0,.62)}
+  #hud .hud-cap{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+  #hud .hud-cap img{display:block}
+  /* annotations live ABOVE the capture, inside the same clipped box */
+  #hud-ann{position:absolute;inset:0;z-index:3}
+
+  /* --- acquire: corner brackets + a tint band locked to one row --- */
+  #hud .hq{position:absolute;opacity:0}
+  #hud .hq-tint{position:absolute;inset:0;background:rgba(201,178,122,.16);
+      border-top:1px solid rgba(201,178,122,.55);border-bottom:1px solid rgba(201,178,122,.55);
+      transform:scaleX(0);transform-origin:0 50%}
+  #hud .hq-c{position:absolute;width:16px;height:16px;border:2px solid #C9B27A}
+  #hud .hq-tl{left:-1px;top:-1px;border-right:0;border-bottom:0}
+  #hud .hq-tr{right:-1px;top:-1px;border-left:0;border-bottom:0}
+  #hud .hq-bl{left:-1px;bottom:-1px;border-right:0;border-top:0}
+  #hud .hq-br{right:-1px;bottom:-1px;border-left:0;border-top:0}
+  #hud .hq.is-rise .hq-tint{background:rgba(217,112,90,.16);
+      border-top-color:rgba(217,112,90,.62);border-bottom-color:rgba(217,112,90,.62)}
+  #hud .hq.is-rise .hq-c{border-color:#D9705A}
+
+  /* --- chips: every label sits in a dark chip OUTSIDE the table body --- */
+  #hud .hchip{position:absolute;opacity:0;background:rgba(12,16,22,.95);
+      border-left:3px solid #C9B27A;padding:7px 13px 7px 11px;border-radius:3px;
+      font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:.06em;
+      color:#EBE4D2;font-weight:700;white-space:nowrap;
+      box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  #hud .hchip.is-rise{border-left-color:#D9705A;color:#F3C9BE}
+  #hud .hchip.is-sm{font-size:15px;letter-spacing:.16em;color:#C9B27A;font-weight:700;
+      padding:6px 12px}
+  #hud .hlead{position:absolute;height:1px;background:#C9B27A;opacity:.75;
+      transform:scaleX(0);transform-origin:0 50%}
+  #hud .hlead.is-rise{background:#D9705A}
+
+  /* --- bracket: a vertical brace spanning two rows --- */
+  #hud .hbr{position:absolute;opacity:0}
+  #hud .hbr-spine{position:absolute;left:0;top:0;width:2px;height:100%;background:#C9B27A;
+      transform:scaleY(0);transform-origin:50% 0}
+  #hud .hbr-t,#hud .hbr-b{position:absolute;left:0;width:20px;height:2px;background:#C9B27A}
+  #hud .hbr-t{top:0} #hud .hbr-b{bottom:0}
+
+  /* --- flatline: a rule drawn across a run of rows --- */
+  #hud .hfl{position:absolute;height:2px;background:#C9B27A;opacity:.9;
+      transform:scaleX(0);transform-origin:0 50%}
+
+  /* --- step: an arrow FROM one row TO another. The head marks the `to` row — the arrow
+         must point at the row being moved TO, not merely "upward". Colour + the delta
+         label carry the direction of the change; the arrow carries WHICH ROW. --- */
+  #hud .hst{position:absolute;width:2px;background:#D9705A;opacity:0;
+      transform:scaleY(0);transform-origin:50% 100%}
+  #hud .hst.is-down{transform-origin:50% 0}
+  #hud .hst-head{position:absolute;left:-5px;top:-2px;width:0;height:0;
+      border-left:6px solid transparent;border-right:6px solid transparent;
+      border-bottom:9px solid #D9705A}
+  #hud .hst.is-down .hst-head{top:auto;bottom:-2px;border-bottom:0;
+      border-top:9px solid #D9705A}
+
+  /* --- kicker: the source label. OUTSIDE the clipped box, sitting above it.
+         Inside, it covers the capture's first table row — which is content the viewer is
+         supposed to be reading. Never put chrome on top of the evidence. --- */
+  #hud-kick{position:absolute;z-index:11;opacity:0;
+      font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:.24em;
+      color:#C9B27A;font-weight:700;white-space:nowrap}
+</style></head>
+<body>
+<div id="root" class="clip" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="44">
+  <div class="bgwrap"><img id="bgv" src="assets/bg-open-desk.png" alt="" data-layout-allow-overflow /></div>
+  <div class="bgscrim"></div>
+  <div class="spineghost">spine-ledger<br>sits here<br>—<br>the HUD viewport must never<br>cross x=448</div>
+<!-- child of #root. Capture + annotation layer are injected by mountHUD. -->
+<div id="hud">
+  <div class="hud-cap" id="hud-cap"></div>
+  <div id="hud-ann"></div>
+</div>
+<div id="hud-kick"></div>
+</div>
+<script>const C5_GEO = {"source": "assets/C5-pricing-still.png", "size": [3840, 2160], "x0": 1049, "x1": 2692, "rows": [{"i": 0, "y0": 1055, "y1": 1081, "mid": 1068, "h": 26}, {"i": 1, "y0": 1128, "y1": 1156, "mid": 1142, "h": 28}, {"i": 2, "y0": 1201, "y1": 1227, "mid": 1214, "h": 26}, {"i": 3, "y0": 1274, "y1": 1300, "mid": 1287, "h": 26}, {"i": 4, "y0": 1347, "y1": 1373, "mid": 1360, "h": 26}, {"i": 5, "y0": 1420, "y1": 1446, "mid": 1433, "h": 26}, {"i": 6, "y0": 1493, "y1": 1519, "mid": 1506, "h": 26}, {"i": 7, "y0": 1566, "y1": 1595, "mid": 1580, "h": 29}, {"i": 8, "y0": 1641, "y1": 1701, "mid": 1671, "h": 60}, {"i": 9, "y0": 1754, "y1": 1821, "mid": 1787, "h": 67}, {"i": 10, "y0": 1867, "y1": 1934, "mid": 1900, "h": 67}, {"i": 11, "y0": 1978, "y1": 1999, "mid": 1988, "h": 21}], "cols": [{"i": 0, "x0": 1049, "x1": 1073}, {"i": 1, "x0": 1075, "x1": 1440}, {"i": 2, "x0": 1498, "x1": 1533}, {"i": 3, "x0": 1670, "x1": 1699}, {"i": 4, "x0": 1702, "x1": 1787}, {"i": 5, "x0": 1886, "x1": 2042}, {"i": 6, "x0": 2092, "x1": 2122}, {"i": 7, "x0": 2125, "x1": 2215}, {"i": 8, "x0": 2306, "x1": 2344}, {"i": 9, "x0": 2346, "x1": 2436}, {"i": 10, "x0": 2569, "x1": 2598}, {"i": 11, "x0": 2618, "x1": 2691}]};
+const C5_ROWS = {"fable-5": 0, "mythos-5": 1, "opus-5": 2, "opus-4.8": 3, "opus-4.7": 4, "opus-4.6": 5, "opus-4.5": 6, "opus-4.1": 7, "opus-4": 8, "sonnet-aug": 9, "sonnet-sep": 10};</script>
+<script>
+function mountHUD(tl, o){
+  var S   = o.sceneStart || 0;
+  var vp  = o.viewport || {x:500, y:90, w:1380, h:900};
+  var geo = o.geometry, rowmap = o.rows || {}, cues = o.cues || [];
+  var FR  = o.framings || {};
+
+  function L(t){ return t - S; }
+  function past(t){ return L(t) < 0; }
+  function endState(to){ var e={}; for (var k in to) if (k!=='duration'&&k!=='ease') e[k]=to[k];
+                         return e; }
+  // Skip missing targets silently. Not every cue type builds every part — a `bracket` has
+  // no leader line, a `release` has no element of its own — and GSAP logs a console warning
+  // per missing target, which `hyperframes check` (correctly) surfaces as a runtime warning.
+  function has(sel){ return !!sel && !!document.querySelector(sel); }
+  function at(sel, from, to, t, x){
+    if (!has(sel)) return;
+    if (past(t)){ gsap.set(sel, endState(to)); return; }
+    tl.fromTo(sel, from, to, L(t) + (x||0));
+  }
+  function to_(sel, to, t, x){
+    if (!has(sel)) return;
+    if (past(t)){ gsap.set(sel, endState(to)); return; }
+    tl.to(sel, to, L(t) + (x||0));
+  }
+
+  // ---- the capture box ---------------------------------------------------------------
+  var box = document.getElementById('hud');
+  box.style.left = vp.x + 'px'; box.style.top    = vp.y + 'px';
+  box.style.width= vp.w + 'px'; box.style.height = vp.h + 'px';
+  var capEl = document.getElementById('hud-cap');
+  // A 4K capture inside a 1380px clipped box overflows by design — that IS the framing.
+  // Declare it, or the layout checker flags container_overflow/escaped_container on every
+  // sample. The declaration belongs on the WRAPPER, not just the img.
+  capEl.setAttribute('data-layout-allow-overflow', '');
+  capEl.innerHTML =
+    '<img src="' + o.capture + '" width="' + geo.size[0] + '" height="' + geo.size[1] +
+    '" alt="" data-layout-allow-overflow />';
+
+  // A framing is a SOURCE RECT. Scale/translate are derived — author in capture space.
+  function frame(f){
+    var s = vp.w / f.sw;
+    return { scale:s, x: -f.sx * s, y: -f.sy * s };
+  }
+  var cur = frame(FR[o.start] || FR[Object.keys(FR)[0]]);
+
+  // capture-space -> viewport-space, under a given framing
+  function px(f, sxv, syv){ return { x: sxv * f.scale + f.x, y: syv * f.scale + f.y }; }
+
+  // Annotations are pinned under the framing that is active WHEN THEY FIRE. Resolve each
+  // cue's framing by walking the moves that complete before it.
+  function framingAt(t){
+    var f = FR[o.start] || FR[Object.keys(FR)[0]];
+    (o.moves || []).forEach(function(m){ if (m.at + (m.dur || 0) <= t + 0.001) f = FR[m.to]; });
+    return frame(f);
+  }
+
+  function rowRect(f, name){
+    var idx = rowmap[name];
+    if (idx == null || !geo.rows[idx]) { console.warn('[hud] unknown row "' + name + '"'); return null; }
+    var r  = geo.rows[idx];
+    var a  = px(f, geo.x0, r.y0 - 8), b = px(f, geo.x1, r.y1 + 8);
+    return { x:a.x, y:a.y, w:b.x - a.x, h:b.y - a.y, cy:(a.y + b.y)/2 };
+  }
+
+  // ---- build every annotation up front at opacity 0; nothing reflows -------------------
+  var ann = document.getElementById('hud-ann');
+  ann.innerHTML = '';
+  var made = [];
+  cues.forEach(function(c, i){
+    var f = framingAt(c.at), id = 'hud-c' + i, el, rise = (c.tone === 'rise');
+
+    if (c.t === 'kicker'){
+      // lives outside the clipped box (see the CSS note) — set it, don't append it
+      var kick = document.getElementById('hud-kick');
+      kick.textContent = c.text;
+      kick.style.left = vp.x + 'px';
+      kick.style.top  = (vp.y - 34) + 'px';
+      return;
+
+    } else if (c.t === 'acquire'){
+      var r = rowRect(f, c.row); if (!r) return;
+      el = document.createElement('div');
+      el.className = 'hq' + (rise ? ' is-rise' : ''); el.id = id;
+      el.style.cssText += 'left:' + r.x + 'px;top:' + r.y + 'px;width:' + r.w +
+                          'px;height:' + r.h + 'px';
+      el.innerHTML = '<div class="hq-tint" id="' + id + '-t"></div>' +
+        '<div class="hq-c hq-tl"></div><div class="hq-c hq-tr"></div>' +
+        '<div class="hq-c hq-bl"></div><div class="hq-c hq-br"></div>';
+      if (c.label) made.push(chip(id + '-L', c.label, r.x + r.w + 26, r.cy, rise, r.x + r.w, r.cy));
+
+    } else if (c.t === 'bracket'){
+      var a1 = rowRect(f, c.from), b1 = rowRect(f, c.to); if (!a1 || !b1) return;
+      var top = Math.min(a1.y, b1.y), bot = Math.max(a1.y + a1.h, b1.y + b1.h);
+      el = document.createElement('div'); el.className = 'hbr'; el.id = id;
+      el.style.cssText += 'left:' + (a1.x + a1.w + 12) + 'px;top:' + top +
+                          'px;height:' + (bot - top) + 'px;width:20px';
+      el.innerHTML = '<div class="hbr-spine" id="' + id + '-s"></div>' +
+                     '<div class="hbr-t"></div><div class="hbr-b"></div>';
+      if (c.label) made.push(chip(id + '-L', c.label, a1.x + a1.w + 46, (top + bot) / 2,
+                                  rise, null, null));
+
+    } else if (c.t === 'flatline'){
+      var a2 = rowRect(f, c.from), b2 = rowRect(f, c.to); if (!a2 || !b2) return;
+      var cy = (Math.min(a2.cy, b2.cy) + Math.max(a2.cy, b2.cy)) / 2;
+      el = document.createElement('div'); el.className = 'hfl'; el.id = id;
+      el.style.cssText += 'left:' + a2.x + 'px;top:' + cy + 'px;width:' + a2.w + 'px';
+      if (c.label) made.push(chip(id + '-L', c.label, a2.x + a2.w + 26, cy, rise, null, null));
+
+    } else if (c.t === 'step'){
+      var a3 = rowRect(f, c.from), b3 = rowRect(f, c.to); if (!a3 || !b3) return;
+      // grows FROM a3 TOWARD b3, head landing on b3 — direction follows the rows, not the
+      // screen. `to` below `from` points down; `to` above points up.
+      var down = b3.cy > a3.cy;
+      var y1 = Math.min(a3.cy, b3.cy), y0 = Math.max(a3.cy, b3.cy);
+      el = document.createElement('div');
+      el.className = 'hst' + (down ? ' is-down' : ''); el.id = id;
+      el.style.cssText += 'left:' + (a3.x + a3.w + 20) + 'px;top:' + y1 + 'px;height:' +
+                          (y0 - y1) + 'px';
+      el.innerHTML = '<div class="hst-head"></div>';
+      if (c.label) made.push(chip(id + '-L', c.label, a3.x + a3.w + 44, (y0 + y1) / 2,
+                                  true, null, null));
+    }
+    if (el) ann.appendChild(el);
+  });
+  made.forEach(function(m){ ann.appendChild(m.chip); if (m.lead) ann.appendChild(m.lead); });
+  auditChips();   // measured after layout, never guessed
+
+  function chip(cid, text, x, cy, rise, leadX, leadY){
+    var d = document.createElement('div');
+    d.className = 'hchip' + (rise ? ' is-rise' : ''); d.id = cid; d.textContent = text;
+    d.style.cssText += 'left:' + x + 'px;top:' + cy + 'px;transform:translateY(-50%)';
+    var lead = null;
+    if (leadX != null){
+      lead = document.createElement('div');
+      lead.className = 'hlead' + (rise ? ' is-rise' : ''); lead.id = cid + '-lead';
+      lead.style.cssText += 'left:' + leadX + 'px;top:' + leadY + 'px;width:' + (x - leadX) + 'px';
+    }
+    return { chip:d, lead:lead };
+  }
+
+  // Chips live in the gutter between the table's right edge and the box edge. Frame the
+  // capture WIDER than the table (include the page's right margin) to create that gutter —
+  // see the demo's `table` framing. A chip that runs past the box would also run past the
+  // 1920 canvas, which the layout checker flags as canvas_overflow.
+  //
+  // If this fires, SHORTEN THE LABEL — do not widen the gutter by shrinking the capture.
+  // Labels are semantic ("A YEAR AGO", "NO CHANGE", "+50%"), never a re-typing of the rate:
+  // the numbers are the capture's own pixels and that is the whole point of the component.
+  function auditChips(){
+    var over = [];
+    document.querySelectorAll('#hud .hchip').forEach(function(d){
+      var right = parseFloat(d.style.left) + d.getBoundingClientRect().width;
+      if (right > vp.w - 8) over.push(d.textContent + ' (+' + Math.round(right - vp.w) + 'px)');
+    });
+    if (over.length) console.warn('[hud] chip overflows the capture box — shorten it: ' +
+                                  over.join(' · '));
+  }
+
+  // ---- timeline ------------------------------------------------------------------------
+  var boxIn = (o.boxIn != null) ? o.boxIn : (cues.length ? cues[0].at - 0.4 : S);
+  at('#hud', {opacity:0, scale:1.012}, {opacity:1, scale:1, duration:.6, ease:'power3.out'}, boxIn);
+  gsap.set('#hud-cap', {scale:cur.scale, x:cur.x, y:cur.y});
+
+  (o.moves || []).forEach(function(m){
+    var f = frame(FR[m.to]);
+    to_('#hud-cap', {scale:f.scale, x:f.x, y:f.y, duration:(m.dur || 1.6),
+                     ease:m.ease || 'power2.inOut'}, m.at);
+  });
+
+  cues.forEach(function(c, i){
+    var id = '#hud-c' + i, t = c.at;
+    if (c.t === 'kicker'){
+      at('#hud-kick', {opacity:0, x:-8}, {opacity:1, x:0, duration:.45, ease:'power3.out'}, t);
+
+    } else if (c.t === 'acquire'){
+      at(id, {opacity:0}, {opacity:1, duration:.01, ease:'none'}, t);
+      at(id + '-t', {scaleX:0}, {scaleX:1, duration:.52, ease:'power3.out'}, t);
+      at(id + ' .hq-tl', {opacity:0, x:9,  y:9},  {opacity:1, x:0, y:0, duration:.34, ease:'power3.out'}, t, .06);
+      at(id + ' .hq-tr', {opacity:0, x:-9, y:9},  {opacity:1, x:0, y:0, duration:.34, ease:'power3.out'}, t, .10);
+      at(id + ' .hq-bl', {opacity:0, x:9,  y:-9}, {opacity:1, x:0, y:0, duration:.34, ease:'power3.out'}, t, .14);
+      at(id + ' .hq-br', {opacity:0, x:-9, y:-9}, {opacity:1, x:0, y:0, duration:.34, ease:'power3.out'}, t, .18);
+
+    } else if (c.t === 'bracket'){
+      at(id, {opacity:0}, {opacity:1, duration:.01, ease:'none'}, t);
+      at(id + '-s', {scaleY:0}, {scaleY:1, duration:.55, ease:'power3.inOut'}, t);
+
+    } else if (c.t === 'flatline'){
+      at(id, {scaleX:0}, {scaleX:1, duration:.75, ease:'power2.inOut'}, t);
+
+    } else if (c.t === 'step'){
+      at(id, {opacity:0}, {opacity:1, duration:.01, ease:'none'}, t);
+      at(id, {scaleY:0}, {scaleY:1, duration:.50, ease:'power3.out'}, t, .02);
+
+    } else if (c.t === 'release'){
+      // Fade ONLY what has already fired. Targeting every child would blank annotations
+      // that have not appeared yet — and several reveals (flatline, tint, leader) animate
+      // scale, not opacity, so they would never come back.
+      cues.forEach(function(p, j){
+        if (j >= i || p.t === 'release' || p.at > t) return;
+        var pid = '#hud-c' + j;
+        to_(pid, {opacity:0, duration:.45, ease:'power2.in'}, t);
+        if (p.label){
+          to_(pid + '-L',      {opacity:0, duration:.45, ease:'power2.in'}, t);
+          to_(pid + '-L-lead', {opacity:0, duration:.45, ease:'power2.in'}, t);
+        }
+      });
+      return;
+    }
+    if (c.label){
+      at(id + '-L-lead', {scaleX:0}, {scaleX:1, duration:.30, ease:'power2.out'}, t, .26);
+      at(id + '-L', {opacity:0, x:-10}, {opacity:1, x:0, duration:.40, ease:'power3.out'}, t, .34);
+    }
+  });
+
+  if (o.holdOut != null) to_('#hud', {opacity:0, duration:.5, ease:'power2.in'}, o.holdOut);
+}
+</script>
+<script>
+const tl = gsap.timeline({paused:true});
+window.__timelines = window.__timelines || {};
+window.__timelines["root"] = tl;
+tl.to("#bgv",{scale:1.08,duration:44,ease:"none"},0);
+
+// COMPRESSED demo timings — 44s to exercise EVERY primitive on the REAL capture and the
+// REAL rows. The video splits these across S05 (abs 306.8) and S06 (abs 358.6); the real
+// builds pass MASTER-ABSOLUTE seconds from 01-script/scenes-v2-build.json with that
+// scene's sceneStart. sceneStart:0 here so demo numbers read as-is.
+//
+// NOTE: sceneStart:0 means nothing is in the past, so this does NOT exercise the mid-video
+// mount path. Use probe-midscene.js for that — see the README.
+mountHUD(tl, {
+  sceneStart: 0,
+  capture:  'assets/C5-pricing-still.png',
+  geometry: C5_GEO,
+  rows:     C5_ROWS,
+  viewport: {x:500, y:126, w:1380, h:820},
+  framings: {
+    wide:  {sx:680,  sy:40,   sw:2380},   // browser chrome + page head — it is a REAL page
+    // sw is WIDER than the table's 1643px on purpose: the extra ~340px of the page's own
+    // right margin becomes the chip gutter. Framed tight to the table, every chip lands
+    // past x=1920 and the layout checker flags canvas_overflow. 0.70x — still a downscale.
+    //
+    // sy=925 starts ABOVE the column header band (944-1004) so "Base Input Tokens" and
+    // "Output Tokens" are readable — the viewer needs them to parse the rows. Paired with
+    // h:820 the bottom lands in the gap after Sonnet 4.5, so no row is sliced in half.
+    // Both edges were chosen from the MEASURED bands, not by eye.
+    table: {sx:1049, sy:925, sw:1980}
+  },
+  start: 'wide',
+  boxIn: 0.3,
+  moves: [{to:'table', at:3.0, dur:1.9}],
+  cues: [
+    {t:'kicker',   at:0.9,  text:'ANTHROPIC \u00B7 PUBLISHED RATES'},
+
+    // Labels are SEMANTIC, never a re-typing of the rate. The numbers are the capture's
+    // own pixels — repeating them in a chip is both redundant and the thing the component
+    // header forbids. It is also what made every chip overflow the canvas.
+
+    // --- S05, the reversal: it has not been climbing -------------------------------
+    {t:'acquire',  at:6.0,  row:'opus-4',    label:'A YEAR AGO'},
+    {t:'acquire',  at:9.4,  row:'opus-5',    label:'TODAY'},
+    {t:'bracket',  at:12.8, from:'opus-5', to:'opus-4', label:'3\u00D7 CHEAPER'},
+    {t:'release',  at:17.4},
+
+    // --- S06, the second reversal: the fall stopped --------------------------------
+    {t:'flatline', at:19.6, from:'opus-5', to:'opus-4.5', label:'NO CHANGE'},
+    {t:'release',  at:24.4},
+    {t:'acquire',  at:26.4, row:'sonnet-aug', label:'UNTIL AUG 31'},
+    {t:'acquire',  at:30.0, row:'sonnet-sep', label:'FROM SEP 1', tone:'rise'},
+    {t:'step',     at:33.4, from:'sonnet-aug', to:'sonnet-sep', label:'+50%', tone:'rise'},
+    {t:'release',  at:37.0},
+    {t:'acquire',  at:38.8, row:'fable-5', label:'NEW TIER', tone:'rise'}
+  ]
+});
+</script>
+</body></html>

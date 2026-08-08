@@ -79,7 +79,29 @@ function mountBed(tl, opts){
   const bed = document.getElementById('bed');
   bed.src = o.src;
 
-  if (!o.scrim){ const s = document.getElementById('bedscrim'); if (s) s.style.display='none'; }
+  // BRIGHTNESS. Measured 2026-08-04: in a panel-heavy scene the bed is only visible at the
+  // MARGINS, and every bed in this project's set except bg-08 reads 8-15 luma there — they
+  // were generated bright-in-the-centre, exactly where a panel covers them. A scrim change
+  // cannot fix that (removing the scrim entirely still left bg-04 at 13.1). Lift the image.
+  // Calibrate against tools/motion-scan.py, whose bed floor is set from SHIPPED masters.
+  if (o.brightness && o.brightness !== 1){
+    bed.style.filter = 'brightness(' + o.brightness + ')' +
+                       (o.saturate ? ' saturate(' + o.saturate + ')' : '');
+  }
+
+  // SCRIM STRENGTH. The default gradient is .66 inner / .88 outer, centred at 32% 50%.
+  // On a panel-heavy scene that is backwards: the bed is only VISIBLE at the margins, which
+  // is exactly where the scrim is darkest, so the bed renders as flat black while being
+  // perfectly present in the DOM. (S05, 2026-08-04 — mean luma 8.2, and it shipped.)
+  // Pass scrim:<0..1> to scale both stops. Rule of thumb: the more of the frame your panels
+  // cover, the lighter this must be. Verify with tools/motion-scan.py, never by eye.
+  const sc = document.getElementById('bedscrim');
+  if (o.scrim === false){ if (sc) sc.style.display='none'; }
+  else if (typeof o.scrim === 'number' && sc){
+    const k = o.scrim;
+    sc.style.background = 'radial-gradient(ellipse at ' + (o.scrimAt || '32% 50%') + ',' +
+      'rgba(8,11,16,' + (.66*k).toFixed(3) + '),rgba(5,8,12,' + (.88*k).toFixed(3) + '))';
+  }
 
   // start state — set, not tweened, so seeking to t=0 is exact
   gsap.set(bed, {scale:BASE, xPercent:0, yPercent:0});

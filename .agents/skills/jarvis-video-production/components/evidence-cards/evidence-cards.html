@@ -1,0 +1,235 @@
+<!-- ============================================================================
+     EVIDENCE CARDS — the cream document register (CONDUIT §2) plus its two companions.
+
+       mountDocCard(tl, o)   a cream document card: mono kicker, serif head, hairline rules,
+                             label/value rows that fill in sequence, optional seal/stamp.
+                             The EVIDENCE register — "this is on the record."
+       mountStatHero(tl, o)  one number is the point. Count-up, kicker above, aside below.
+       mountLanding(tl, o)   full-frame text. Permitted ONLY as a title or a landing.
+
+     Two doc cards side by side make the comparison split ("paid" vs "consumed"); the stat
+     hero underneath resolves the subtraction. That trio is the cold open.
+
+     All take MASTER-ABSOLUTE seconds and subtract `sceneStart`. Anything already past is
+     applied as an immediate end-state via a bare gsap.set — a zero-duration tween parked at
+     position 0 never ticks when the playhead is already at 0 (see spine-ledger's README).
+
+     ---- KEEP CLEAR OF THE SPINE ---------------------------------------------------
+     The ledger rail owns x 64-448. Default viewport starts at x=500.
+
+     ---- A CARD IS NOT A TEXT SLIDE ------------------------------------------------
+     CONDUIT §4: "a plain full-frame text card is permitted only as a title or a landing."
+     `mountLanding` IS that exception and must not be used for anything else. Every other
+     beat gets a card with STRUCTURE — kicker, head, rules, label/value rows — because the
+     structure is what makes it read as a document rather than a caption.
+
+     Rows resolve within ~1.2s of the card appearing (CONDUIT §5). Held ghosted longer, it
+     reads as a dead frame.
+
+     ---- USAGE --------------------------------------------------------------------
+       BLOCK A -> scene <style>;  BLOCK B -> a child of #root;  BLOCK C -> after the
+       scene's own tl calls.
+
+         mountDocCard(tl, {
+           sceneStart: 0, id: 'paid',                 // unique per card — see BLOCK B
+           viewport: {x:500, y:150, w:640, h:560},
+           kicker: 'SUBSCRIPTION', head: 'What was paid',
+           at: 0.12,
+           rows: [ {k:'PLAN', v:'Claude Max'}, {k:'MONTHS', v:'8'} ],
+           total: {k:'TOTAL PAID', v:'$1,000', at: 3.4},
+           stamp: {text:'FLAT RATE', at: 4.2}
+         });
+============================================================================ -->
+
+<!-- ============================ BLOCK A — style ============================ -->
+<style>
+  /* ---------- cream DOCUMENT register — evidence (CONDUIT §2) ---------- */
+  .ec{position:absolute;z-index:11;opacity:0;background:#F2EDE0;border-radius:3px;
+      box-shadow:0 30px 90px rgba(0,0,0,.62);overflow:hidden}
+  .ec-inner{position:absolute;inset:0;padding:34px 38px}
+  .ec-kick{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.28em;
+      text-transform:uppercase;color:#6B5E40;font-weight:700;opacity:0}
+  .ec-head{font-family:'Playfair Display','EB Garamond',serif;font-size:44px;line-height:1.12;
+      color:#231F17;font-weight:600;margin-top:14px;opacity:0}
+  .ec-rule{height:1px;background:#231F17;opacity:.22;margin:22px 0 6px;
+      transform:scaleX(0);transform-origin:0 50%}
+  .ec-row{position:relative;display:flex;justify-content:space-between;align-items:baseline;
+      padding:11px 0;border-bottom:1px solid rgba(35,31,23,.11)}
+  .ec-k{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.20em;
+      text-transform:uppercase;color:#6B5F45;font-weight:700;opacity:0}
+  .ec-v{font-family:'JetBrains Mono',monospace;font-size:21px;color:#231F17;font-weight:700;
+      font-variant-numeric:tabular-nums;opacity:0}
+  .ec-total{position:relative;display:flex;justify-content:space-between;align-items:baseline;
+      margin-top:20px;padding-top:18px;border-top:2px solid #231F17}
+  .ec-total .ec-k{font-size:15px;color:#231F17}
+  .ec-total .ec-v{font-size:34px}
+  /* stamp — rotated, never over a value */
+  /* TOP-right, not bottom-right: the total VALUE is right-aligned at the bottom of the
+     card, so a bottom-right stamp collides with it on any card short enough that the total
+     reaches the floor (S01/S02/S10, 2026-08-04). Top-right shares a row only with the
+     small left-aligned kicker, which it clears. */
+  .ec-stamp{position:absolute;right:32px;top:20px;opacity:0;
+      border:2px solid #A8442E;color:#A8442E;border-radius:3px;padding:8px 16px;
+      font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:.24em;
+      font-weight:700;transform:rotate(-7deg);white-space:nowrap}
+
+  /* ---------- stat hero — one number is the point ---------- */
+  .eh{position:absolute;z-index:12;opacity:0;text-align:center}
+  .eh-kick{font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:.30em;
+      line-height:1.4;text-transform:uppercase;color:#C9B27A;font-weight:700;opacity:0}
+  /* line-height 1 on a 132px face lets glyphs ride up into the kicker's box and the layout
+     checker reports content_overlap. Give the number its own zone. */
+  .eh-num{font-family:'JetBrains Mono',monospace;font-size:132px;line-height:1.16;
+      color:#F2D89A;font-weight:700;font-variant-numeric:tabular-nums;margin-top:26px;
+      opacity:0;white-space:nowrap}
+  .eh-aside{font-family:'Playfair Display','EB Garamond',serif;font-style:italic;font-size:26px;
+      color:#B9C4D2;margin-top:20px;opacity:0}
+
+  /* ---------- landing — full-frame text, titles and landings ONLY ---------- */
+  .el{position:absolute;z-index:13;opacity:0;text-align:center}
+  .el-line{font-family:'Playfair Display','EB Garamond',serif;font-size:56px;line-height:1.28;
+      color:#EBE4D2;font-weight:600;opacity:0}
+  .el-line.is-accent{color:#F2D89A}
+</style>
+
+<!-- =========================== BLOCK B — markup =========================== -->
+<!-- child of #root. Every card creates its OWN container inside this host.
+     Fixed slots were tried first and are a trap: mounting a second card into a slot wipes
+     the first one's innerHTML while its tweens keep targeting the same ids, so the earlier
+     card silently renders the later card's text. Give every card an `id`. -->
+<div id="ec-host"></div>
+
+<!-- =========================== BLOCK C — script =========================== -->
+<script>
+(function(){
+  function mk(S, tl){
+    function L(t){ return t - S; }
+    function past(t){ return L(t) < 0; }
+    function end(to){ var e={}; for (var k in to) if (k!=='duration'&&k!=='ease') e[k]=to[k];
+                      return e; }
+    function has(sel){ return !!sel && !!document.querySelector(sel); }
+    return {
+      at: function(sel, from, to, t, x){
+        if (!has(sel)) return;
+        if (past(t)){ gsap.set(sel, end(to)); return; }
+        tl.fromTo(sel, from, to, L(t) + (x||0));
+      },
+      to: function(sel, to, t, x){
+        if (!has(sel)) return;
+        if (past(t)){ gsap.set(sel, end(to)); return; }
+        tl.to(sel, to, L(t) + (x||0));
+      },
+      // seek-safe counter — tween a proxy, write in onUpdate. Renders on SEEK, which is
+      // what the deterministic renderer does every frame. Never setInterval/rAF.
+      count: function(sel, from, toV, t, dur, fmt){
+        if (!has(sel)) return;
+        var el = document.querySelector(sel), p = {v:from};
+        var w = function(){ el.textContent = fmt(p.v); };
+        if (past(t)){ p.v = toV; w(); return; }
+        w();
+        tl.to(p, {v:toV, duration:dur||1.1, ease:'power2.out', onUpdate:w}, L(t));
+      },
+      box: function(id, cls, vp){
+        var b = document.getElementById(id);
+        if (!b){
+          b = document.createElement('div'); b.id = id; b.className = cls;
+          document.getElementById('ec-host').appendChild(b);
+        }
+        b.style.left = vp.x+'px'; b.style.top = vp.y+'px';
+        b.style.width= vp.w+'px'; if (vp.h) b.style.height = vp.h+'px';
+        return b;
+      }
+    };
+  }
+
+  // ======================= DOC CARD ===================================================
+  window.mountDocCard = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl);
+    var id = 'ec-' + (o.id || (window.__ecN = (window.__ecN||0) + 1)), sel = '#' + id;
+    var vp = o.viewport, box = h.box(id, 'ec', vp), rows = o.rows || [];
+
+    box.innerHTML = '<div class="ec-inner">' +
+      '<div class="ec-kick" id="'+id+'-k">' + (o.kicker||'') + '</div>' +
+      '<div class="ec-head" id="'+id+'-h">' + (o.head||'') + '</div>' +
+      '<div class="ec-rule" id="'+id+'-r"></div>' +
+      rows.map(function(r,i){
+        return '<div class="ec-row">' +
+               '<div class="ec-k" id="'+id+'-rk-'+i+'">'+r.k+'</div>' +
+               '<div class="ec-v" id="'+id+'-rv-'+i+'">'+r.v+'</div></div>';
+      }).join('') +
+      (o.total ? '<div class="ec-total">' +
+        '<div class="ec-k" id="'+id+'-tk">'+o.total.k+'</div>' +
+        '<div class="ec-v" id="'+id+'-tv">'+(o.total.count ? '' : o.total.v)+'</div></div>' : '') +
+      '</div>' +
+      (o.stamp ? '<div class="ec-stamp" id="'+id+'-st">'+o.stamp.text+'</div>' : '');
+
+    var t0 = o.at;
+    // card in, then kicker/head/rule. Rows resolve inside ~1.2s of the card appearing.
+    h.at(sel, {opacity:0, y:26, scale:.985}, {opacity:1, y:0, scale:1, duration:.62,
+        ease:'power3.out'}, t0);
+    h.at(sel+'-k', {opacity:0, x:-8}, {opacity:1, x:0, duration:.40, ease:'power3.out'}, t0, .16);
+    h.at(sel+'-h', {opacity:0, y:10}, {opacity:1, y:0, duration:.50, ease:'power3.out'}, t0, .26);
+    h.at(sel+'-r', {scaleX:0}, {scaleX:1, duration:.55, ease:'power3.inOut'}, t0, .40);
+
+    rows.forEach(function(r, i){
+      var rt = (r.at != null) ? r.at : t0 + .58 + i * .13;
+      h.at(sel+'-rk-'+i, {opacity:0, x:-6}, {opacity:1, x:0, duration:.34,
+           ease:'power3.out'}, rt);
+      h.at(sel+'-rv-'+i, {opacity:0, x:8},  {opacity:1, x:0, duration:.38,
+           ease:'power3.out'}, rt, .05);
+    });
+
+    if (o.total){
+      var tt = (o.total.at != null) ? o.total.at : t0 + .58 + rows.length * .13 + .25;
+      h.at(sel+'-tk', {opacity:0}, {opacity:1, duration:.34, ease:'power2.out'}, tt);
+      h.at(sel+'-tv', {opacity:0, y:8}, {opacity:1, y:0, duration:.45, ease:'power3.out'}, tt, .06);
+      if (o.total.count) h.count(sel+'-tv', o.total.count.from, o.total.count.to, tt + .06,
+                                 o.total.count.dur || 1.0, o.total.count.fmt || String);
+    }
+    if (o.stamp) h.at(sel+'-st', {opacity:0, scale:1.5, rotate:-22},
+      {opacity:1, scale:1, rotate:-7, duration:.42, ease:'back.out(2.2)'}, o.stamp.at);
+    if (o.holdOut != null) h.to(sel, {opacity:0, y:-14, duration:.5, ease:'power2.in'}, o.holdOut);
+  };
+
+  // ======================= STAT HERO ==================================================
+  window.mountStatHero = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl), vp = o.viewport;
+    var id = 'eh-' + (o.id || (window.__ehN = (window.__ehN||0) + 1)), sel = '#' + id;
+    var box = h.box(id, 'eh', vp);
+    box.innerHTML =
+      '<div class="eh-kick" id="'+id+'-k">' + (o.kicker||'') + '</div>' +
+      '<div class="eh-num"  id="'+id+'-n"></div>' +
+      (o.aside ? '<div class="eh-aside" id="'+id+'-a">'+o.aside+'</div>' : '');
+
+    var t0 = o.at;
+    h.at(sel, {opacity:0}, {opacity:1, duration:.4, ease:'power2.out'}, t0);
+    h.at(sel+'-k', {opacity:0, y:-8}, {opacity:1, y:0, duration:.40, ease:'power3.out'}, t0);
+    h.at(sel+'-n', {opacity:0, scale:.90}, {opacity:1, scale:1, duration:.60,
+         ease:'back.out(1.5)'}, t0, .14);
+    h.count(sel+'-n', (o.count && o.count.from) || 0, (o.count && o.count.to) || 0, t0 + .14,
+            (o.count && o.count.dur) || 1.2, (o.count && o.count.fmt) || String);
+    if (o.aside) h.at(sel+'-a', {opacity:0, y:10}, {opacity:1, y:0, duration:.5,
+                      ease:'power3.out'}, o.asideAt != null ? o.asideAt : t0 + 1.1);
+    if (o.holdOut != null) h.to(sel, {opacity:0, duration:.5, ease:'power2.in'}, o.holdOut);
+  };
+
+  // ======================= LANDING ====================================================
+  window.mountLanding = function(tl, o){
+    var S = o.sceneStart||0, h = mk(S, tl), vp = o.viewport, lines = o.lines || [];
+    var id = 'el-' + (o.id || (window.__elN = (window.__elN||0) + 1)), sel = '#' + id;
+    var box = h.box(id, 'el', vp);
+    box.innerHTML = lines.map(function(l, i){
+      return '<div class="el-line' + (l.accent ? ' is-accent' : '') + '" id="'+id+'-l-'+i+
+             '" style="margin-top:' + (i ? 26 : 0) + 'px">' + l.text + '</div>';
+    }).join('');
+
+    h.at(sel, {opacity:0}, {opacity:1, duration:.4, ease:'power2.out'},
+         lines.length ? lines[0].at : 0);
+    lines.forEach(function(l, i){
+      h.at(sel+'-l-'+i, {opacity:0, y:16}, {opacity:1, y:0, duration:.70,
+           ease:'power3.out'}, l.at);
+    });
+    if (o.holdOut != null) h.to(sel, {opacity:0, duration:.6, ease:'power2.in'}, o.holdOut);
+  };
+})();
+</script>

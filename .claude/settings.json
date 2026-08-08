@@ -56,6 +56,5 @@
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
   "outputStyle": ".claude/output-style.md"
 }
