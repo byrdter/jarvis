@@ -13,6 +13,20 @@ WHY THIS EXISTS
     This script is the other half: it asks "which niches are winning at a size we can
     reach, in a production mode we can actually execute" -- with no subject filter at all.
 
+    NICHES ARE AN OUTPUT OF THIS SYSTEM, NOT AN INPUT TO IT. Find where the people are,
+    then decide what to make -- never the reverse. That inversion is the governing rule
+    of the studio's demand layer; see ai-film-studio/docs/STUDIO-ROADMAP.md "SCOPE".
+
+MARKET AXES (P1a, added 2026-08-08)
+    The columns above answer "what will get watched". The _implied_rpm / _tier1_geo /
+    _runtime_min columns answer the DIFFERENT and UPSTREAM question "which market should
+    the studio serve at all". Category is deliberately not one of them: the 2026-08-07
+    survey found niche a weak predictor because these axes cut ACROSS categories.
+    Validated on the 647-channel 2026-08-08 survey, costing zero extra credits:
+        tier-1 geo   -> implied RPM  $1.19 median vs $0.14 rest   (8.5x, n=51/136)
+        by country   -> US $1.26 vs India $0.04                   (31x, n=30 each)
+        runtime >=10m -> $21 median per video vs $6-8 under 10m   (~3.5x, n=104/242)
+
     Measured 2026-08-08, first run: personal finance was independently confirmed by two
     instruments that share no code (our adjacent lane had it at 38.3x / 43.9x; vidIQ's
     index surfaced 72x-1068x in the same territory). That corroboration is the pattern
@@ -63,6 +77,12 @@ MIN_EARNINGS  = 300        # est. monthly USD; the axis that separates a busines
 MIN_AGE_MONTHS = 6         # younger than this and there is no trajectory to read
 MAX_UPLOADS_MO = 15        # above this it is aggregation/reposting, not production
 
+# Tier-1 ad markets: where advertisers actually bid. Used only as an EXPLANATORY flag --
+# the continuous money signal is _implied_rpm. Kept deliberately short; adding marginal
+# markets here would blur the one axis it exists to make legible.
+TIER1_COUNTRIES = {"US", "CA", "GB", "AU", "NZ", "IE", "DE", "AT", "CH",
+                   "NL", "SE", "NO", "DK", "FI", "BE", "FR", "JP", "SG"}
+
 # Subscriber strata. One call per band beats the hard limit=50 cap and, more importantly,
 # stops the biggest channels from crowding out the small reachable ones we actually want.
 BANDS = [(1_000, 5_000), (5_000, 20_000), (20_000, 80_000), (80_000, 300_000)]
@@ -74,12 +94,12 @@ BANDS = [(1_000, 5_000), (5_000, 20_000), (20_000, 80_000), (80_000, 300_000)]
 # mean anything. Built 2026-08-08 after the narrow sweep produced categories at n=4.
 WIDE_BANDS = [(1_000, 3_000), (3_000, 6_000), (6_000, 12_000), (12_000, 25_000),
               (25_000, 50_000), (50_000, 100_000), (100_000, 180_000), (180_000, 300_000)]
-# Measured 2026-08-08 on a full 8-band run: subsGrowth30d and subscriberCount each yield
-# ~50 NEW channels per call (they barely overlap), while viewsGrowth30d yielded only
-# 19-37 -- it re-surfaces channels the other two already found. Dropped: it costs 40
-# credits to gain ~180 mostly-duplicate rows. Re-add it only if coverage matters more
-# than credits.
-WIDE_SORTS = ["subsGrowth30d", "subscriberCount"]
+# viewsGrowth30d is the least efficient sort (19-37 new channels per call, vs ~50 for the
+# other two, measured 2026-08-08). It was briefly dropped to "save credits" -- a mistake:
+# credits cost $0.00475 each, so those 8 calls are 19 CENTS and they buy ~180 channels.
+# The binding constraint is the 400-calls/month pool and the ~20-rapid-call rate limit,
+# NOT money. Optimise for coverage; only drop a sort if the monthly pool is actually tight.
+WIDE_SORTS = ["subsGrowth30d", "subscriberCount", "viewsGrowth30d"]
 
 URL      = "https://mcp.vidiq.com/mcp"
 ENV_PATH = os.path.expanduser("~/Library/CloudStorage/Dropbox/jarvis/.env")
@@ -179,9 +199,53 @@ def enrich(c):
             age_days = (dt.datetime.now(dt.timezone.utc) - born).days
         except ValueError:
             pass
-    c["_age_days"]   = age_days
-    # Durability proxy: sustained output over a real lifespan, NOT a growth percentage.
-    c["_vids_per_mo"] = (c.get("videoCount") or 0) / max(age_days / 30.0, 1.0) if age_days else None
+    c["_age_days"] = age_days
+    # CADENCE. Use the ACTUAL trailing-30-day upload counts, never videoCount/age.
+    # videoCount/age is a LIFETIME AVERAGE and it is wrong the moment a channel changes
+    # pace -- which is 63% of the 2026-08-08 survey (361 of 574 differ by >3x). It made
+    # Moe Phone Case DIY read as 1.1 uploads/month when it actually posts ~39, inflating
+    # its $/video by 35x AND hiding it from the CHURN slop filter (which triggers at >12).
+    # Caveat: vidIQ's 30d counts lag the index too (13 vs a true 39 for that channel), so
+    # treat cadence as a lower bound. It is still far closer than the lifetime average.
+    d30 = (c.get("longVideoCount30d") or 0) + (c.get("shortVideoCount30d") or 0)
+    c["_vids_per_mo"] = float(d30) if d30 else (
+        (c.get("videoCount") or 0) / max(age_days / 30.0, 1.0) if age_days else None)
+    c["_cadence_src"] = "30d" if d30 else "lifetime-avg"
+    # REVENUE PER UNIT OF PRODUCTION EFFORT -- the metric a studio actually optimises, and
+    # the one that survived the 2026-08-08 survey. Total earnings favours big channels;
+    # outlier score favours clip farms earning $0; category medians barely move. This is
+    # the only measure where a 5,570-sub comedy channel and a 54k-sub history channel are
+    # directly comparable ($2,165 vs $2,825 per video).
+    vpm = c["_vids_per_mo"]
+    c["_usd_per_video"] = ((c.get("estimatedEarnings") or 0) / max(vpm, 0.5)) if vpm else None
+
+    # ---- MARKET AXES (P1a). Added 2026-08-08. -------------------------------------
+    # These answer "which market should the studio serve", which is a DIFFERENT question
+    # from "what will get watched" and is upstream of it. See ai-film-studio/docs/
+    # STUDIO-ROADMAP.md "P1a - Market selection". All three are pure arithmetic on fields
+    # already in the payload -- they cost ZERO extra credits.
+    #
+    # IMPLIED RPM is the load-bearing one: it collapses audience affluence, geography and
+    # advertiser-category adjacency into one number. Verified on the 2026-08-08 survey it
+    # separates 31x by country (US median $1.26 vs India $0.04, n=30 each).
+    #   TREAT AS AN ORDERING, NEVER A FORECAST. Absolute values run far below real-world
+    #   RPMs because vidIQ's earnings model is conservative, and it is computable for only
+    #   ~29% of rows (187/647) -- the rest lack 30d view counts. A null here means MISSING,
+    #   not zero; never coalesce it to 0.0 or the poor-data channels rank as poor markets.
+    m_views = (c.get("longViewCount30d") or 0) + (c.get("shortViewCount30d") or 0)
+    earn = c.get("estimatedEarnings") or 0
+    # 10k floor: below it the ratio is dominated by rounding in vidIQ's earnings estimate.
+    c["_implied_rpm"] = (earn / (m_views / 1000.0)) if (earn and m_views > 10_000) else None
+
+    # GEOGRAPHY. Tier-1 = the ad markets that actually bid. This is a coarse flag on
+    # purpose; the continuous signal is _implied_rpm, and this exists to explain it.
+    c["_tier1_geo"] = (c.get("country") or "").upper() in TIER1_COUNTRIES
+
+    # RUNTIME TOLERANCE. Does this audience sit still? Measured 2026-08-08: 15-30 min
+    # videos earn ~4x more per video than sub-3-min. Length only pays where the audience
+    # tolerates it, so this is an audience property, not a production choice.
+    secs = c.get("longAvgDuration30d") or c.get("longAvgDuration1y")
+    c["_runtime_min"] = (secs / 60.0) if secs else None
     return c
 
 
@@ -314,12 +378,66 @@ def main():
               f"{st.median([c.get('subscriberCount') or 0 for c in v]):>9,.0f} "
               f"{(st.median(paid) if paid else 0):>13,.0f}")
 
+    # ---- P1a MARKET ROLL-UP ------------------------------------------------------
+    # Rolled up on COUNTRY, not category. The whole point of the market layer is that the
+    # axes cut ACROSS categories -- a history channel and a comedy channel can sit in the
+    # same market bracket. Rolling this on category would re-import the exact assumption
+    # the 2026-08-07 finding refuted ("niche is a weak predictor").
+    rpm_rows = [c for c in chans if c["_implied_rpm"] is not None]
+    print(f"\n=== MARKET AXES (P1a) — implied RPM computable for {len(rpm_rows)}/{len(chans)} "
+          f"({100*len(rpm_rows)//max(len(chans),1)}%; the rest lack 30d view counts) ===")
+    if not rpm_rows:
+        print("  no channel had both earnings and 30d view counts -- market axes unavailable")
+    else:
+        print("  ORDERING ONLY -- vidIQ's earnings model is conservative; these are not real RPMs.")
+        geo = defaultdict(list)
+        for c in rpm_rows:
+            geo[(c.get("country") or "?").upper()].append(c)
+        print(f"\n{'country':>8} {'t1':>3} {'n':>4} {'med RPM':>9} {'med run':>9} {'med /sub':>9} {'med $/vid':>10}")
+        print("-" * 60)
+        for k, v in sorted(geo.items(), key=lambda kv: -st.median([c["_implied_rpm"] for c in kv[1]])):
+            if len(v) < 5:
+                continue
+            runs = [c["_runtime_min"] for c in v if c["_runtime_min"]]
+            uvs  = [c["_usd_per_video"] for c in v if c["_usd_per_video"]]
+            print(f"{k:>8} {'Y' if k in TIER1_COUNTRIES else '·':>3} {len(v):>4} "
+                  f"${st.median([c['_implied_rpm'] for c in v]):>8.2f} "
+                  f"{(st.median(runs) if runs else 0):>8.1f}m "
+                  f"{st.median([c['_per_video'] for c in v]):>8.1f}x "
+                  f"{(st.median(uvs) if uvs else 0):>10,.0f}")
+
+        # The studio's actual target: high monetization density AND a reachable size AND a
+        # runtime the audience tolerates. Not "the best niche" -- the best MARKET BRACKET.
+        top = sorted(rpm_rows, key=lambda c: -c["_implied_rpm"])[:15]
+        print(f"\n--- highest monetization density (reachable, <= {BAND_SUBS:,} subs) ---")
+        print(f"{'channel':26} {'category':20} {'country':>7} {'RPM':>7} {'run':>6} {'subs':>8}")
+        print("-" * 80)
+        for c in top:
+            print(f"{str(c.get('channelTitle'))[:26]:26} {str(c.get('mainCategory'))[:20]:20} "
+                  f"{str(c.get('country') or '?'):>7} ${c['_implied_rpm']:>6.2f} "
+                  f"{(c['_runtime_min'] or 0):>5.1f}m {c.get('subscriberCount',0):>8,}")
+
     os.makedirs(OUT_DIR, exist_ok=True)
-    path = os.path.join(OUT_DIR, f"scout-{dt.date.today().isoformat()}.csv")
-    cols = ["channelTitle", "handle", "niche", "mainCategory", "subscriberCount", "avgViews",
-            "viewCount", "videoCount", "estimatedEarnings", "country", "isFaceless",
-            "channelType", "publishedAt", "lastVideoPublished", "channelId",
-            "_per_video", "_lifetime", "_age_days", "_vids_per_mo"]
+    # Mode belongs in the filename: a --production any run and a faceless run are different
+    # populations, and writing both to scout-<date>.csv silently overwrote the first.
+    tag = f"{a.production}{'-wide' if a.wide else ''}"
+    path = os.path.join(OUT_DIR, f"scout-{dt.date.today().isoformat()}-{tag}.csv")
+    # Duration + per-format counts are load-bearing for PRODUCIBILITY: a channel earning
+    # $2,800/video on 20-minute documentaries is a different business from one earning it
+    # on 3-minute cutdowns. The 2026-08-08 survey omitted them and could not tell the two
+    # apart -- which is exactly the axis a studio needs. Never drop these again.
+    cols = ["channelTitle", "handle", "niche", "subNiches", "mainCategory", "nicheConfidence",
+            "subscriberCount", "avgViews", "viewCount", "videoCount", "estimatedEarnings",
+            "country", "languages", "isFaceless", "channelType", "breakoutChannel",
+            "publishedAt", "lastVideoPublished", "channelId",
+            "longAvgDuration30d", "longAvgDuration1y", "shortAvgDuration30d",
+            "longVideoCount30d", "shortVideoCount30d",
+            "longViewCount30d", "shortViewCount30d",
+            "subsGrowth30d", "viewsGrowth30d",
+            "_per_video", "_lifetime", "_age_days", "_vids_per_mo", "_cadence_src", "_usd_per_video",
+            # P1a market axes. _implied_rpm is blank when uncomputable -- that is MISSING
+            # data, not a zero. Do not fill it in downstream.
+            "_implied_rpm", "_tier1_geo", "_runtime_min"]
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
