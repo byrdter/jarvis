@@ -225,9 +225,19 @@ def main():
     print(f"  {sheet}")
     if mb > 100:
         print("  WARNING: LinkedIn's document limit is 100 MB.")
-    if len(pages) > 20:
-        print(f"  NOTE: {len(pages)} pages. LinkedIn allows up to 300, but completion drops "
-              f"past ~15 — consider a tighter cut.")
+    # Count PAGES, not content slides. The reader swipes the cover and the outro too, and an
+    # earlier deck was labelled "tight" at 13 slides while actually being 15 pages — right at
+    # the cliff. Published 2026 benchmarks: 8-12 pages is the engagement/dwell/save sweet
+    # spot, high performers run 3-10, and completion drops sharply past ~15.
+    n = len(pages)
+    if n > 15:
+        print(f"  WARNING: {n} pages. Completion drops sharply past ~15. Cut it.")
+    elif n > 12:
+        print(f"  NOTE: {n} pages — above the 8-12 sweet spot. Justify every page or trim.")
+    elif n < 5:
+        print(f"  NOTE: {n} pages — thin for a document post; a single image may do better.")
+    else:
+        print(f"  {n} pages — inside the 8-12 sweet spot.")
 
 
 if __name__ == "__main__":
