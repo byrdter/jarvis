@@ -70,6 +70,9 @@ MIN_USD_PER_VID  = 150.0    # slice median. Pop p75 148.6
 MAX_MEDIAN_SUBS  = 300_000  # BAND_SUBS in scout-niches.py — "reachable from cold"
 MAX_UPLOADS_MO   = 15       # above this it is an aggregation farm, not a studio
 MIN_RUNTIME_MIN  = 3.0      # below this the lane is shorts; $/video collapses (measured 3.5x)
+SLICE_SPREAD_MAX = 20.0     # $/video p75/p25 across a slice. Population-wide it is 25x
+                            # (p25 $5.9 / p75 $148.6); a single market should be tighter,
+                            # and above this its median is carried by a handful of channels.
 
 # Recorded-judgement vocabularies. Anything outside these is unrecognised, hence BLOCK.
 CRAFT   = {"weak": SAFE, "mixed": REVIEW, "strong": BLOCK}
@@ -264,6 +267,33 @@ def evaluate(rows, key, decision) -> list[dict]:
     else:
         out.append(check("producibility", BLOCK,
                          f"median ${upv:,.0f} per video (floor ${MIN_USD_PER_VID:,.0f})"))
+
+    # 5b. IS THAT PRODUCIBILITY MEDIAN REPRESENTATIVE? A slice median hides how unevenly
+    #     the money is spread across the channels in it. $/video is monthly earnings over
+    #     cadence, so it also hides per-video variance INSIDE each channel: a lane full of
+    #     three-hits-and-eleven-flops channels medians perfectly well and is not a
+    #     repeatable business. Found 2026-08-09 — SaintBryce showed $1,007/video on 14
+    #     videos whose typical view count was a fiftieth of its best.
+    #
+    #     HONEST LIMIT: this measures CROSS-CHANNEL dispersion, which is all a CSV can
+    #     support. Per-video consistency needs video-level data and lives in
+    #     channel-outliers.py --verify. This flags when that follow-up is required.
+    upvs = sorted(v for v in (fnum(r, "_usd_per_video") for r in rows) if v and v > 0)
+    if len(upvs) >= 6:
+        qq = st.quantiles(upvs, n=4)
+        sp = qq[2] / max(qq[0], 0.01)
+        if sp >= SLICE_SPREAD_MAX:
+            out.append(check("representativeness", REVIEW,
+                             f"$/video p75/p25 = {sp:.0f}x across {len(upvs)} channels — the "
+                             f"median is carried by a few. Verify per-video consistency: "
+                             f"channel-outliers.py --verify"))
+        else:
+            out.append(check("representativeness", SAFE,
+                             f"$/video p75/p25 = {sp:.0f}x — evenly spread across {len(upvs)}"))
+    else:
+        out.append(check("representativeness", REVIEW,
+                         f"only {len(upvs)} channels priced — cannot say whether the "
+                         f"producibility median is representative"))
 
     # 6. SHAPE — runtime tolerance and cadence. Together these say what KIND of operation
     #    the lane rewards; a studio cannot win a lane that pays only at farm cadence.

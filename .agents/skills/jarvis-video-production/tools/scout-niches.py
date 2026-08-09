@@ -69,6 +69,12 @@ from collections import defaultdict
 PACE_SECONDS = 1.5         # gap between calls; vidIQ 429s a tight 24-call loop
 
 # --- doctrine constants: kept identical to outlier-ratchet.py so the two agree -------
+#
+# CANONICAL HOME. market-gate.py and channel-outliers.py both IMPORT these rather than
+# restating them. They diverged once already: channel-outliers used a cadence ceiling of
+# 12 while market-gate and this file used 15, so a channel uploading 13 times a month was
+# an aggregation farm to one tool and legitimate production to the other. Two copies of a
+# threshold is how doctrine and build drift apart -- change a number here, nowhere else.
 MIN_SUBS      = 1_000      # below this, any ratio is noise
 BAND_SUBS     = 300_000    # "reachable" ceiling for a channel starting from cold
 MIN_AVG_VIEWS = 20_000     # per-video reach floor; kills the 500%-growth artifact

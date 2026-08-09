@@ -161,15 +161,41 @@ def verify_channel(handle, sample=40):
 TOOLS   = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR = os.path.join(TOOLS, "ratchet")
 
+
+def _load_sibling(filename):
+    """Import a hyphenated sibling module. Same trick market-gate.py uses to reach
+    scout-niches.py -- 'scout-niches' is not a legal identifier, so importlib it is.
+    Both siblings guard their entry points with __main__, so importing runs nothing."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        filename.replace("-", "_").removesuffix(".py"), os.path.join(TOOLS, filename))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
 # Peer cells. Same bands used for the size-controlled runtime replication, which held
 # in both strata -- these are the sizes at which channels genuinely compete.
 SUB_BANDS = [(1_000, 10_000, "1k-10k"), (10_000, 30_000, "10k-30k"),
              (30_000, 80_000, "30k-80k"), (80_000, 300_000, "80k-300k")]
 
 MIN_CELL_N        = 5     # below this a (category x band) median is noise -> fall back
-MIN_USD_PER_VIDEO = 150   # absolute floor; a big multiple on a tiny base is not a business
 MIN_MULTIPLE      = 2.0   # must beat its own peer group by this much
-MAX_CADENCE       = 12    # above this it is an aggregation operation, not production
+
+# SHARED THRESHOLDS ARE IMPORTED, NEVER RESTATED. MAX_CADENCE was locally 12 here while
+# scout-niches.py and market-gate.py both used 15 -- a channel at 13 uploads/month was a
+# farm to this tool and production to the other two. Reconciled 2026-08-09 by importing.
+_scout = _load_sibling("scout-niches.py")
+_gate  = _load_sibling("market-gate.py")
+MAX_CADENCE       = _scout.MAX_UPLOADS_MO      # 15/mo -- aggregation, not production
+BAND_SUBS         = _scout.BAND_SUBS           # 300k -- "reachable from cold"
+MIN_USD_PER_VIDEO = _gate.MIN_USD_PER_VID      # 150 -- calibrated to population p75 (148.6)
+
+# MONETIZATION FLOOR. $/video says nothing about whether the AUDIENCE is worth serving:
+# market-gate's --list shows US Entertainment at $4.19 implied RPM against IN Entertainment
+# at $0.01 -- same category, ~400x apart. Ranking on $/video alone will happily top-rank a
+# channel whose viewers monetize at a cent per thousand. Implied RPM is computable for only
+# ~29% of rows, so a MISSING value is never a rejection -- it is flagged as unknown.
+MIN_IMPLIED_RPM   = _gate.MIN_IMPLIED_RPM      # 1.00 -- population p75, ~the tier-1 boundary
 
 # RPM REALITY GATE. earnings / (channel views accrued in the trailing 30 days) must land
 # in a real YouTube RPM band. Catches earnings estimates that have drifted from reality.
@@ -218,18 +244,28 @@ def prepare(rows):
     before the 2026-08-08 cadence fix carry the broken lifetime-average values, and a
     tool that silently trusts a stale derived column is how the 35x error survived.
     """
+    RAW = ("subscriberCount", "avgViews", "viewCount", "videoCount", "estimatedEarnings",
+           "longAvgDuration30d", "longAvgDuration1y", "shortAvgDuration30d",
+           "longVideoCount30d", "shortVideoCount30d", "longViewCount30d", "shortViewCount30d")
     for r in rows:
+        # Always recompute from RAW via scout.enrich() -- the one implementation of these
+        # formulas. Sweeps written before the 2026-08-08 cadence fix carry a broken
+        # lifetime-average _vids_per_mo, so the CSV's own derived columns are not trusted;
+        # but the fix belongs in enrich(), not in a second copy of the arithmetic here.
+        typed = dict(r)
+        for k in RAW:
+            typed[k] = num(r, k)
+        typed["country"] = r.get("country") or ""
+        e = _scout.enrich(typed)
         subs = num(r, "subscriberCount")
-        d30 = num(r, "longVideoCount30d") + num(r, "shortVideoCount30d")
-        r["_cad"] = d30 if d30 > 0 else num(r, "_vids_per_mo")
-        r["_cad_src"] = "30d" if d30 > 0 else "lifetime?"
-        r["_usd_video"] = (num(r, "estimatedEarnings") / r["_cad"]) if r["_cad"] > 0 else 0.0
-        r["_dur"] = num(r, "longAvgDuration30d") or num(r, "longAvgDuration1y")
-        v30 = num(r, "longViewCount30d") + num(r, "shortViewCount30d")
-        r["_views30"] = v30
-        r["_rpm"] = (num(r, "estimatedEarnings") / (v30 / 1000.0)) if v30 > 0 else None
-        r["_band"] = band_of(subs)
-        r["_per_sub"] = (num(r, "avgViews") / subs) if subs else 0.0
+        r["_cad"]       = e["_vids_per_mo"] or 0.0
+        r["_cad_src"]   = e["_cadence_src"]
+        r["_usd_video"] = e["_usd_per_video"] or 0.0
+        r["_dur"]       = (e["_runtime_min"] or 0.0) * 60.0      # enrich returns minutes
+        r["_rpm"]       = e["_implied_rpm"]                       # None when uncomputable
+        r["_tier1"]     = e["_tier1_geo"]
+        r["_per_sub"]   = e["_per_video"]
+        r["_band"]      = band_of(subs)
         text = f"{r.get('niche') or ''} {r.get('channelTitle') or ''}"
         flags = []
         if any(w in text.lower() for w in DERIV):
@@ -292,6 +328,11 @@ def confidence(r, cell_n):
         data.append(f"RPM-IMPLAUSIBLE({r['_rpm']:.0f})")   # earnings almost certainly stale
     elif r["_rpm"] < RPM_MIN:
         data.append(f"rpm-low({r['_rpm']:.2f})")
+    elif r["_rpm"] < MIN_IMPLIED_RPM:
+        # Not a data problem -- a MARKET problem. The numbers are fine; the audience is
+        # cheap. Kept separate from the data warnings so it never hides a good channel,
+        # and never lets a $0.01-RPM market top the ranking unremarked.
+        data.append(f"low-value-audience(${r['_rpm']:.2f}rpm)")
     if cell_n < MIN_CELL_N:
         peer.append("thin-peer-group")
     return data, peer
