@@ -2789,6 +2789,14 @@
      "hunting crystals in the swiss alps dw news",
      "10 min delivery explained @mohak_mangal"
     ]
+   },
+   "trend_stage": {
+    "stage": "SPARSE",
+    "measured": "2026-08-10",
+    "months": 24,
+    "buckets": 9,
+    "median_per_bucket": 3,
+    "total_channels": 26
    }
   }
  },
