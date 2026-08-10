@@ -34,7 +34,8 @@
    "provenance": "corpus:yvjNmAJIDjM",
    "notes": "The source's own worked bend map. Most-cited format in the corpus; also the most likely to be saturated BY that citation -- 59k viewers saw it.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "explained-with-object": {
    "format_id": "explained-with-object",
@@ -68,7 +69,8 @@
    "provenance": "corpus:15E2KHXNotQ",
    "notes": "Source claims the grid is mostly empty here -- the stated free_ratio trigger. Verify with bend-map before believing it.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "anatomical-3d-breakdown": {
    "format_id": "anatomical-3d-breakdown",
@@ -101,7 +103,8 @@
    "provenance": "corpus:yvjNmAJIDjM",
    "notes": "Top-tier: money AND skill barrier. Corpus's single most-cited earner.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "low-poly-3d-shorts": {
    "format_id": "low-poly-3d-shorts",
@@ -132,7 +135,8 @@
    "provenance": "corpus:15E2KHXNotQ",
    "notes": "PURELY VISUAL -- no title signature, so --discover can never find it. Shorts economics; see the corpus's ~30-day shorts decay claim.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "curator"
   },
   "ai-influencer-sticker": {
    "format_id": "ai-influencer-sticker",
@@ -164,7 +168,8 @@
    "provenance": "corpus:yvjNmAJIDjM",
    "notes": "Cheap, hence crowded, hence exposed to the inauthentic-content sweep.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "split-figure-debate": {
    "format_id": "split-figure-debate",
@@ -196,7 +201,8 @@
    "provenance": "corpus:15E2KHXNotQ",
    "notes": "Cited as a SCRIPT bend (one video), not a channel. Format may not sustain a library -- check upload counts on any incumbent before committing.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "pov-tier-ranking": {
    "format_id": "pov-tier-ranking",
@@ -886,7 +892,8 @@
    },
    "added": "2026-08-10",
    "grid_measured": "2026-08-10",
-   "grid_region": "US"
+   "grid_region": "US",
+   "authority": "curator"
   },
   "ai-moral-dilemma": {
    "format_id": "ai-moral-dilemma",
@@ -918,7 +925,8 @@
    "provenance": "corpus:15E2KHXNotQ",
    "notes": "Corpus notes this channel was later REMOVED for inauthentic content -- repetitive script structure. Cautionary, not aspirational.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "cohort-trivia-sweep": {
    "format_id": "cohort-trivia-sweep",
@@ -949,7 +957,8 @@
    "provenance": "corpus:yvjNmAJIDjM",
    "notes": "Closed cohort = bounded, enumerable content supply. Presidents -> monarchs was the cited bend. CEOs / Fortune 500 founders is the obvious money cell.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "witness"
   },
   "secretly-reveals": {
    "format_id": "secretly-reveals",
@@ -980,7 +989,8 @@
    "provenance": "corpus:iDyJgUEQq4c",
    "notes": "Named ON AIR to 26k viewers with the finance bend spelled out. Treat that specific cell as burned; the frame may still travel elsewhere.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "missed-the-lesson": {
    "format_id": "missed-the-lesson",
@@ -1012,7 +1022,8 @@
    "provenance": "corpus:iDyJgUEQq4c",
    "notes": "Borrowed authority via a title everyone recognises. Strong fit for a business-strategy operator: films are a free, evergreen case library.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "analyst"
   },
   "exhaustive-analysis-flex": {
    "format_id": "exhaustive-analysis-flex",
@@ -1681,7 +1692,8 @@
    },
    "added": "2026-08-10",
    "grid_measured": "2026-08-10",
-   "grid_region": "US"
+   "grid_region": "US",
+   "authority": "analyst"
   },
   "rapid-news-3d": {
    "format_id": "rapid-news-3d",
@@ -1708,7 +1720,8 @@
    "provenance": "corpus:bgvQ01qhSRA",
    "notes": "SPEED barrier -- the corpus's top-of-pyramid exemplar. Date-anchored, so the library depreciates; violates our evergreen preference. Team of ~8.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "witness"
   },
   "sleep-length-narration": {
    "format_id": "sleep-length-narration",
@@ -1740,7 +1753,8 @@
    "provenance": "vidiq:FltNsyPXNdo",
    "notes": "Monetization cheat: 4,000 watch-hours needs ~2,000 views at 2h vs ~24,000 at 10min. Lean-back / TV surface. Cheapest known path to the MPP bar.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "curator"
   },
   "ai-avatar-documentary": {
    "format_id": "ai-avatar-documentary",
@@ -1771,7 +1785,8 @@
    "provenance": "corpus:hSaa2vby2og",
    "notes": "Corpus: weeks per video, which IS the barrier. 10M views on 6 videos.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "witness"
   },
   "named-system-verdict": {
    "format_id": "named-system-verdict",
@@ -1807,13 +1822,14 @@
    "provenance": "first-party:BYRDDYNASTY-CHANNEL-AUDIT.md",
    "notes": "THE ONLY ROW WITH FIRST-PARTY EVIDENCE. Our own audit: 3 videos -> 65 of 109 long-form subs; 11 of top 12 by CTR (4.4-9.5%). Independently, the two channels beating the agent-engineering lane on avgViews/subs (1.66x, 1.11x vs lane median 0.22x) both run this shape. Note the lane, not the format, is what failed there -- see the 2026-08-10 sweep.",
    "markets_occupied": {},
-   "added": "2026-08-10"
+   "added": "2026-08-10",
+   "authority": "operator"
   },
   "economics-of-owning-a": {
    "format_id": "economics-of-owning-a",
    "name": "the economics of owning a",
    "anchor": "concrete",
-   "refill_slots": 4,
+   "refill_slots": 39,
    "visual": null,
    "title_template": "the economics of owning a",
    "title_regex": "\\bthe\\s+economics\\s+of\\s+owning\\s+a\\b",
@@ -2614,9 +2630,57 @@
     ]
    },
    "added": "2026-08-10",
-   "notes": "Measured on ONE channel (UC6RcE6Vif-2ZDo0XvufHVSQ): 4 filled slots at 22.16x its own rest. Portability across channels is UNTESTED \u2014 that is format-index.py's >=3-channel rule, then bend-map.py.",
+   "notes": "DECLINED BY TERRY 2026-08-10 on the authority axis: the format's voice claims to have OWNED the business, and he judges that research cannot close that gap credibly. Kept in the catalogue as a measured, proven format (102/115 enumeration, 26 occupied markets) and as the worked example of why `authority` exists.",
    "grid_measured": "2026-08-10",
-   "grid_region": "US"
+   "grid_region": "US",
+   "authority": "operator",
+   "slot_inventory": {
+    "filled": 39,
+    "contested_share": 0.07692307692307693,
+    "decay": 1.37,
+    "measured": "2026-08-10",
+    "anchors": [
+     "ship",
+     "casino",
+     "nightclub",
+     "hotel",
+     "gym",
+     "gas station",
+     "mcdonald s franchise",
+     "movie theater",
+     "ranch",
+     "construction company",
+     "shopping mall",
+     "cafe",
+     "private military company",
+     "medieval castle",
+     "car dealership",
+     "bank",
+     "medieval tavern",
+     "roman legion",
+     "mansion",
+     "business as a developer",
+     "soccer team",
+     "plane",
+     "rental property empire",
+     "cinema",
+     "trucking fleet",
+     "five star hotel",
+     "super market",
+     "yacht",
+     "private island",
+     "coffee shop",
+     "school",
+     "cemetery",
+     "restaurant",
+     "hospital",
+     "storage unit facility",
+     "medieval blacksmith shop",
+     "private jet",
+     "restaurant fhs grace",
+     "understanding superbike misconceptions expensive bikes career viral"
+    ]
+   }
   }
  },
  "seeded": "2026-08-10",

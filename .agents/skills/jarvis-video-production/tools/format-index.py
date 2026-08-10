@@ -158,6 +158,27 @@ MAX_FRAME_TOKENS   = 6      # longer than this and it is one channel's exact tit
 MIN_CONTENT_WORDS  = 2      # non-{N} tokens required; kills numeric artifacts like '{N} {N}'
 NEW_FORMAT_DAYS    = 120    # earliest seed channel younger than this => flag as NEW
 
+# --- authority position ---------------------------------------------------------------
+# WHICH CLAIM DOES THE FORMAT MAKE ABOUT THE NARRATOR? Added 2026-08-10 after Terry read the
+# first real lead ("The Economics of Owning a Gas Station") and declined it: "to be credible
+# you have to own the business... things like that have to be experienced to get to the
+# nitty-gritty." He is describing an axis nothing in this system modelled.
+#
+# It is NOT the same as `competence` (does he know the market) or `tier` (can competitors copy
+# the production). It asks what STANDING the format's voice implicitly claims, and whether we
+# can occupy it without the audience calling it. The corpus has the failure mode on record: an
+# operator niche-bent into history, sourced facts from ChatGPT, and was dismantled in his own
+# comments. Our own research says the same thing from the other side -- evidence quality pays
+# off in RETENTION, which is precisely where a hollow authority claim collapses.
+#
+#   operator  the voice claims to have DONE it ("owning a gas station"). Needs lived
+#             experience; research cannot close the gap and the comments will find it.
+#   analyst   the voice claims to have STUDIED it. Credential + rigor are sufficient, and
+#             this is Terry's natural position: PhD, 30+ years teaching MBAs and execs.
+#   witness   the voice reports what OTHERS did. Needs sourcing, not standing.
+#   curator   the voice ranks or compiles. Needs taste and completeness only.
+AUTHORITY = {"operator", "analyst", "witness", "curator"}
+
 # --- production tiers ----------------------------------------------------------------
 # The longevity model from the corpus, restated as a catalogue field. RED dies in 4-6 months
 # because anyone can copy it; GREEN survives for years because something in it cannot be
@@ -272,6 +293,7 @@ MARKETS = {
 SEED = [
     {
         "format_id": "every-x-explained-whiteboard",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "Every X explained in N minutes (whiteboard)",
         "visual": "whiteboard / marker 2D over flat colour; multi-way split thumbnail",
@@ -288,6 +310,7 @@ SEED = [
     },
     {
         "format_id": "explained-with-object",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "Complex topic explained with an absurd object/mascot",
         "visual": "2D character (apes + bananas being the seed instance) over simple sets",
@@ -303,6 +326,7 @@ SEED = [
     },
     {
         "format_id": "anatomical-3d-breakdown",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "3D anatomical / physical breakdown of what happens to a body or object",
         "visual": "3D animation, cutaway anatomy, slow push-ins",
@@ -317,6 +341,7 @@ SEED = [
     },
     {
         "format_id": "low-poly-3d-shorts",
+        "authority": "curator",
         "anchor": "concrete", "refill_slots": None,
         "name": "Low-poly 3D explainer shorts",
         "visual": "low-poly 3D, flat lighting, 30-60s vertical",
@@ -331,6 +356,7 @@ SEED = [
     },
     {
         "format_id": "ai-influencer-sticker",
+        "authority": "analyst",
         "anchor": "abstract", "refill_slots": None,
         "name": "AI presenter, sticker/cutout 2D, explaining a complex money topic",
         "visual": "AI-generated presenter cutout over bold flat 2D with kinetic text",
@@ -345,6 +371,7 @@ SEED = [
     },
     {
         "format_id": "split-figure-debate",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "Modern figure vs historical thinker, two-way split",
         "visual": "two-way split thumbnail, portrait vs portrait, high contrast",
@@ -360,6 +387,7 @@ SEED = [
     },
     {
         "format_id": "pov-tier-ranking",
+        "authority": "curator",
         "anchor": "concrete", "refill_slots": None,
         "name": "Ranking a life/career/wealth ladder, tier by tier",
         "visual": "tier ladder graphic, progressive reveal, POV framing",
@@ -375,6 +403,7 @@ SEED = [
     },
     {
         "format_id": "ai-moral-dilemma",
+        "authority": "analyst",
         "anchor": "abstract", "refill_slots": None,
         "name": "Pose a dilemma to AI models and stage their answers",
         "visual": "clean 2D, model avatars, verdict cards",
@@ -390,6 +419,7 @@ SEED = [
     },
     {
         "format_id": "cohort-trivia-sweep",
+        "authority": "witness",
         "anchor": "concrete", "refill_slots": None,
         "name": "One trivia axis swept across a famous closed cohort",
         "visual": "portrait grid, progressive reveal, archival stills",
@@ -405,6 +435,7 @@ SEED = [
     },
     {
         "format_id": "secretly-reveals",
+        "authority": "analyst",
         "anchor": "abstract", "refill_slots": None,
         "name": "A trait secretly reveals something about you",
         "visual": "three-way split thumbnail, comparison cards",
@@ -420,6 +451,7 @@ SEED = [
     },
     {
         "format_id": "missed-the-lesson",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "You watched X but missed the lesson inside it",
         "visual": "film stills + annotation HUD, pull-quote cards",
@@ -435,6 +467,7 @@ SEED = [
     },
     {
         "format_id": "exhaustive-analysis-flex",
+        "authority": "analyst",
         "anchor": "concrete", "refill_slots": None,
         "name": "I analyzed all N of X so you don't have to",
         "visual": "data-viz first: charts with labelled axes, tables, one lit row",
@@ -451,6 +484,7 @@ SEED = [
     },
     {
         "format_id": "rapid-news-3d",
+        "authority": "witness",
         "anchor": "concrete", "refill_slots": None,
         "name": "3D-animated breakdown of a world event, shipped within ~24h",
         "visual": "full 3D scene reconstruction, map inserts, lower-third HUD",
@@ -466,6 +500,7 @@ SEED = [
     },
     {
         "format_id": "sleep-length-narration",
+        "authority": "curator",
         "anchor": "abstract", "refill_slots": None,
         "name": "Multi-hour soft-spoken narration built for background/sleep",
         "visual": "slow ambient bed, minimal cuts, no kinetic text",
@@ -480,6 +515,7 @@ SEED = [
     },
     {
         "format_id": "ai-avatar-documentary",
+        "authority": "witness",
         "anchor": "concrete", "refill_slots": None,
         "name": "AI-avatar presenter fronting a documentary-grade script",
         "visual": "AI avatar, cinematic grade, archival inserts",
@@ -493,6 +529,7 @@ SEED = [
     },
     {
         "format_id": "named-system-verdict",
+        "authority": "operator",
         "anchor": "concrete", "refill_slots": None,
         "name": "A named real system, a number, and a verdict",
         "visual": "cream evidence card / dark analysis panel over a moving bed (our own)",
