@@ -364,3 +364,6 @@ asset-library/*
 # hook rewrites the file constantly, so tracking it re-leaks silently.
 # The beads guidance it carries is generic and lives in CLAUDE.md / `bd prime`.
 AGENTS.md
+
+# format-index discovery pool: regenerable from vidIQ, grows unbounded
+.agents/skills/jarvis-video-production/tools/raw/

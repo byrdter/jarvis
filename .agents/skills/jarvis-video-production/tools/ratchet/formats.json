@@ -1,0 +1,824 @@
+{
+ "formats": {
+  "every-x-explained-whiteboard": {
+   "format_id": "every-x-explained-whiteboard",
+   "name": "Every X explained in N minutes (whiteboard)",
+   "visual": "whiteboard / marker 2D over flat colour; multi-way split thumbnail",
+   "title_template": "every {X} explained in {N} minutes",
+   "title_regex": "\\bevery\\b.+\\bexplained\\b.+\\b\\d+\\s*minutes?\\b",
+   "runtime_min": [
+    10,
+    20
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    40,
+    120
+   ],
+   "seed_channel": "Paint Explainer",
+   "corpus_occupied": [
+    "gaming",
+    "self-improvement",
+    "science",
+    "fitness & exercise",
+    "true crime",
+    "fashion & beauty",
+    "personal finance"
+   ],
+   "corpus_free": [
+    "home & DIY",
+    "consumer tech"
+   ],
+   "provenance": "corpus:yvjNmAJIDjM",
+   "notes": "The source's own worked bend map. Most-cited format in the corpus; also the most likely to be saturated BY that citation -- 59k viewers saw it.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "explained-with-object": {
+   "format_id": "explained-with-object",
+   "name": "Complex topic explained with an absurd object/mascot",
+   "visual": "2D character (apes + bananas being the seed instance) over simple sets",
+   "title_template": "how {X} works explained with {OBJECT}",
+   "title_regex": "\\bexplained (with|by)\\b",
+   "runtime_min": [
+    6,
+    15
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    50,
+    150
+   ],
+   "seed_channel": "Primate Economics",
+   "corpus_occupied": [
+    "economics",
+    "fitness & exercise",
+    "science"
+   ],
+   "corpus_free": [
+    "true crime",
+    "gaming",
+    "real estate",
+    "self-improvement"
+   ],
+   "provenance": "corpus:15E2KHXNotQ",
+   "notes": "Source claims the grid is mostly empty here -- the stated free_ratio trigger. Verify with bend-map before believing it.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "anatomical-3d-breakdown": {
+   "format_id": "anatomical-3d-breakdown",
+   "name": "3D anatomical / physical breakdown of what happens to a body or object",
+   "visual": "3D animation, cutaway anatomy, slow push-ins",
+   "title_template": "what happens to your {X} when {Y}",
+   "title_regex": "what happens (to|when|if)\\b",
+   "runtime_min": [
+    1,
+    10
+   ],
+   "tier": "green",
+   "cost_usd": [
+    120,
+    400
+   ],
+   "seed_channel": "Art of War / Zack D Films lineage",
+   "corpus_occupied": [
+    "military history",
+    "fitness & exercise",
+    "medicine"
+   ],
+   "corpus_free": [
+    "aviation",
+    "maritime",
+    "disasters"
+   ],
+   "provenance": "corpus:yvjNmAJIDjM",
+   "notes": "Top-tier: money AND skill barrier. Corpus's single most-cited earner.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "low-poly-3d-shorts": {
+   "format_id": "low-poly-3d-shorts",
+   "name": "Low-poly 3D explainer shorts",
+   "visual": "low-poly 3D, flat lighting, 30-60s vertical",
+   "title_template": null,
+   "title_regex": null,
+   "runtime_min": [
+    0.5,
+    1.5
+   ],
+   "tier": "green",
+   "cost_usd": [
+    80,
+    300
+   ],
+   "seed_channel": "Low Poly / Loaded Dice",
+   "corpus_occupied": [
+    "gaming"
+   ],
+   "corpus_free": [
+    "personal finance",
+    "sports",
+    "science"
+   ],
+   "provenance": "corpus:15E2KHXNotQ",
+   "notes": "PURELY VISUAL -- no title signature, so --discover can never find it. Shorts economics; see the corpus's ~30-day shorts decay claim.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "ai-influencer-sticker": {
+   "format_id": "ai-influencer-sticker",
+   "name": "AI presenter, sticker/cutout 2D, explaining a complex money topic",
+   "visual": "AI-generated presenter cutout over bold flat 2D with kinetic text",
+   "title_template": "why {X} is {ADJECTIVE}",
+   "title_regex": null,
+   "runtime_min": [
+    1,
+    8
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    30,
+    100
+   ],
+   "seed_channel": "Nick Invests / Fasted Fred",
+   "corpus_occupied": [
+    "personal finance",
+    "fitness & exercise"
+   ],
+   "corpus_free": [
+    "real estate",
+    "insurance",
+    "careers & jobs"
+   ],
+   "provenance": "corpus:yvjNmAJIDjM",
+   "notes": "Cheap, hence crowded, hence exposed to the inauthentic-content sweep.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "split-figure-debate": {
+   "format_id": "split-figure-debate",
+   "name": "Modern figure vs historical thinker, two-way split",
+   "visual": "two-way split thumbnail, portrait vs portrait, high contrast",
+   "title_template": "{PERSON} is what {THINKER} warned us about",
+   "title_regex": "\\bwarned us about\\b|\\bvs\\.?\\b.+\\b(aurelius|plato|marx|orwell)\\b",
+   "runtime_min": [
+    8,
+    20
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    60,
+    200
+   ],
+   "seed_channel": "(unnamed, 4.1M-view seed video)",
+   "corpus_occupied": [
+    "philosophy",
+    "celebrity"
+   ],
+   "corpus_free": [
+    "business strategy",
+    "AI & machine learning",
+    "economics"
+   ],
+   "provenance": "corpus:15E2KHXNotQ",
+   "notes": "Cited as a SCRIPT bend (one video), not a channel. Format may not sustain a library -- check upload counts on any incumbent before committing.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "pov-tier-ranking": {
+   "format_id": "pov-tier-ranking",
+   "name": "Ranking a life/career/wealth ladder, tier by tier",
+   "visual": "tier ladder graphic, progressive reveal, POV framing",
+   "title_template": "ranking every level of {X}",
+   "title_regex": "\\bevery level of\\b|\\branking every\\b",
+   "runtime_min": [
+    10,
+    25
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    40,
+    150
+   ],
+   "seed_channel": "Dark Ledger / Master POV / Chill POV Guy",
+   "corpus_occupied": [
+    "personal finance",
+    "careers & jobs"
+   ],
+   "corpus_free": [
+    "real estate",
+    "higher education",
+    "insurance",
+    "sports"
+   ],
+   "provenance": "vidiq:FltNsyPXNdo",
+   "notes": "The vidIQ teardown's clearest clone chain: wealth -> jobs -> emergency services, each a separate channel at $2k-$15k/mo. Ladder = progress spine.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "ai-moral-dilemma": {
+   "format_id": "ai-moral-dilemma",
+   "name": "Pose a dilemma to AI models and stage their answers",
+   "visual": "clean 2D, model avatars, verdict cards",
+   "title_template": "we asked AI {DILEMMA}",
+   "title_regex": "\\bwe asked (ai|chatgpt|claude)\\b|\\bwould ai\\b",
+   "runtime_min": [
+    5,
+    15
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    30,
+    120
+   ],
+   "seed_channel": "Polymatter (as named in corpus)",
+   "corpus_occupied": [
+    "AI & machine learning",
+    "sports"
+   ],
+   "corpus_free": [
+    "parenting",
+    "personal finance",
+    "medicine"
+   ],
+   "provenance": "corpus:15E2KHXNotQ",
+   "notes": "Corpus notes this channel was later REMOVED for inauthentic content -- repetitive script structure. Cautionary, not aspirational.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "cohort-trivia-sweep": {
+   "format_id": "cohort-trivia-sweep",
+   "name": "One trivia axis swept across a famous closed cohort",
+   "visual": "portrait grid, progressive reveal, archival stills",
+   "title_template": "how every {COHORT} {VERB}",
+   "title_regex": "\\bhow every\\b|\\bevery (president|king|ceo|champion)\\b",
+   "runtime_min": [
+    8,
+    20
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    40,
+    150
+   ],
+   "seed_channel": "Agent Floppy",
+   "corpus_occupied": [
+    "history"
+   ],
+   "corpus_free": [
+    "business strategy",
+    "sports",
+    "economics"
+   ],
+   "provenance": "corpus:yvjNmAJIDjM",
+   "notes": "Closed cohort = bounded, enumerable content supply. Presidents -> monarchs was the cited bend. CEOs / Fortune 500 founders is the obvious money cell.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "secretly-reveals": {
+   "format_id": "secretly-reveals",
+   "name": "A trait secretly reveals something about you",
+   "visual": "three-way split thumbnail, comparison cards",
+   "title_template": "what your {TRAIT} secretly reveals about your {QUALITY}",
+   "title_regex": "\\bsecretly reveals\\b|\\bwhat your .+ says about\\b",
+   "runtime_min": [
+    5,
+    12
+   ],
+   "tier": "red",
+   "cost_usd": [
+    20,
+    80
+   ],
+   "seed_channel": "(unnamed, cited from a report)",
+   "corpus_occupied": [
+    "sports"
+   ],
+   "corpus_free": [
+    "personal finance",
+    "careers & jobs",
+    "psychology"
+   ],
+   "provenance": "corpus:iDyJgUEQq4c",
+   "notes": "Named ON AIR to 26k viewers with the finance bend spelled out. Treat that specific cell as burned; the frame may still travel elsewhere.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "missed-the-lesson": {
+   "format_id": "missed-the-lesson",
+   "name": "You watched X but missed the lesson inside it",
+   "visual": "film stills + annotation HUD, pull-quote cards",
+   "title_template": "you watched {X} but missed the {DOMAIN} lesson",
+   "title_regex": "\\bbut missed the\\b|\\bwhat .+ gets? (right|wrong) about\\b",
+   "runtime_min": [
+    8,
+    18
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    50,
+    180
+   ],
+   "seed_channel": "(unnamed, cited at 800k views)",
+   "corpus_occupied": [
+    "movies & TV",
+    "personal finance"
+   ],
+   "corpus_free": [
+    "business strategy",
+    "real estate",
+    "management & leadership"
+   ],
+   "provenance": "corpus:iDyJgUEQq4c",
+   "notes": "Borrowed authority via a title everyone recognises. Strong fit for a business-strategy operator: films are a free, evergreen case library.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "exhaustive-analysis-flex": {
+   "format_id": "exhaustive-analysis-flex",
+   "name": "I analysed all N of X so you don't have to",
+   "visual": "data-viz first: charts with labelled axes, tables, one lit row",
+   "title_template": "I analysed all {N} {X} so you don't have to",
+   "title_regex": "\\bi (analy[sz]ed|studied|read|watched) (all|every)\\b",
+   "runtime_min": [
+    8,
+    25
+   ],
+   "tier": "green",
+   "cost_usd": [
+    60,
+    250
+   ],
+   "seed_channel": "(math/battleship channel cited in corpus)",
+   "corpus_occupied": [
+    "science",
+    "gaming"
+   ],
+   "corpus_free": [
+    "investing & stock market",
+    "real estate",
+    "insurance",
+    "business strategy",
+    "careers & jobs"
+   ],
+   "provenance": "corpus:bgvQ01qhSRA",
+   "notes": "SKILL-BARRIER format: the work is the moat and cannot be faked. Highest prima facie fit with a research-led operator and with our own data layer.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "rapid-news-3d": {
+   "format_id": "rapid-news-3d",
+   "name": "3D-animated breakdown of a world event, shipped within ~24h",
+   "visual": "full 3D scene reconstruction, map inserts, lower-third HUD",
+   "title_template": null,
+   "title_regex": null,
+   "runtime_min": [
+    8,
+    19
+   ],
+   "tier": "green",
+   "cost_usd": [
+    200,
+    800
+   ],
+   "seed_channel": "Aitelly",
+   "corpus_occupied": [
+    "military history"
+   ],
+   "corpus_free": [],
+   "provenance": "corpus:bgvQ01qhSRA",
+   "notes": "SPEED barrier -- the corpus's top-of-pyramid exemplar. Date-anchored, so the library depreciates; violates our evergreen preference. Team of ~8.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "sleep-length-narration": {
+   "format_id": "sleep-length-narration",
+   "name": "Multi-hour soft-spoken narration built for background/sleep",
+   "visual": "slow ambient bed, minimal cuts, no kinetic text",
+   "title_template": null,
+   "title_regex": null,
+   "runtime_min": [
+    90,
+    180
+   ],
+   "tier": "yellow",
+   "cost_usd": [
+    40,
+    200
+   ],
+   "seed_channel": "The Sleepless Historian",
+   "corpus_occupied": [
+    "history",
+    "gaming"
+   ],
+   "corpus_free": [
+    "economics",
+    "business strategy",
+    "science"
+   ],
+   "provenance": "vidiq:FltNsyPXNdo",
+   "notes": "Monetization cheat: 4,000 watch-hours needs ~2,000 views at 2h vs ~24,000 at 10min. Lean-back / TV surface. Cheapest known path to the MPP bar.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "ai-avatar-documentary": {
+   "format_id": "ai-avatar-documentary",
+   "name": "AI-avatar presenter fronting a documentary-grade script",
+   "visual": "AI avatar, cinematic grade, archival inserts",
+   "title_template": null,
+   "title_regex": null,
+   "runtime_min": [
+    8,
+    25
+   ],
+   "tier": "green",
+   "cost_usd": [
+    150,
+    600
+   ],
+   "seed_channel": "Chloe vs History",
+   "corpus_occupied": [
+    "history"
+   ],
+   "corpus_free": [
+    "economics",
+    "business strategy",
+    "insurance"
+   ],
+   "provenance": "corpus:hSaa2vby2og",
+   "notes": "Corpus: weeks per video, which IS the barrier. 10M views on 6 videos.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  },
+  "named-system-verdict": {
+   "format_id": "named-system-verdict",
+   "name": "A named real system, a number, and a verdict",
+   "visual": "cream evidence card / dark analysis panel over a moving bed (our own)",
+   "title_template": "{SYSTEM}: {NUMBER} {UNIT} \u2014 {VERDICT}",
+   "title_regex": null,
+   "runtime_min": [
+    8,
+    20
+   ],
+   "tier": "green",
+   "cost_usd": [
+    0,
+    60
+   ],
+   "seed_channel": "Byrddynasty (first-party) / Tristen O'Brien / Owain Lewis",
+   "corpus_occupied": [
+    "AI & machine learning",
+    "software engineering"
+   ],
+   "corpus_free": [
+    "investing & stock market",
+    "insurance",
+    "real estate",
+    "B2B & SaaS",
+    "business strategy",
+    "nutrition",
+    "fitness & exercise"
+   ],
+   "provenance": "first-party:BYRDDYNASTY-CHANNEL-AUDIT.md",
+   "notes": "THE ONLY ROW WITH FIRST-PARTY EVIDENCE. Our own audit: 3 videos -> 65 of 109 long-form subs; 11 of top 12 by CTR (4.4-9.5%). Independently, the two channels beating the agent-engineering lane on avgViews/subs (1.66x, 1.11x vs lane median 0.22x) both run this shape. Note the lane, not the format, is what failed there -- see the 2026-08-10 sweep.",
+   "markets_occupied": {},
+   "added": "2026-08-10"
+  }
+ },
+ "seeded": "2026-08-10",
+ "discovered": [
+  {
+   "run": "2026-08-10",
+   "keyword": "real estate housing market property",
+   "within": "threeMonths",
+   "n_videos": 199,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "business strategy management leadership",
+   "within": "threeMonths",
+   "n_videos": 298,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "insurance life insurance health insurance",
+   "within": "threeMonths",
+   "n_videos": 396,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "economy recession inflation economics",
+   "within": "threeMonths",
+   "n_videos": 492,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "stock market stocks trading portfolio",
+   "within": "threeMonths",
+   "n_videos": 588,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "nutrition diet healthy eating",
+   "within": "threeMonths",
+   "n_videos": 687,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "small business entrepreneur startup",
+   "within": "threeMonths",
+   "n_videos": 780,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "budgeting saving debt payoff",
+   "within": "threeMonths",
+   "n_videos": 875,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "taxes tax planning IRS",
+   "within": "threeMonths",
+   "n_videos": 974,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "career job salary interview",
+   "within": "threeMonths",
+   "n_videos": 1071,
+   "frames": []
+  },
+  {
+   "run": "2026-08-10",
+   "keyword": "retirement income social security",
+   "within": "threeMonths",
+   "n_videos": 1160,
+   "frames": [
+    {
+     "frame": "is about to",
+     "n_videos": 8,
+     "n_channels": 8,
+     "median_views": 81446,
+     "per_video": 1.17,
+     "median_runtime_min": 19.8,
+     "categories": [
+      "Society",
+      "Knowledge",
+      "Politics"
+     ],
+     "channels": [
+      "Buying Southern Oregon",
+      "LIVING IN BREMERTON\u2120 - OFFICIAL",
+      "MarketBeat Clips",
+      "Michelle Eames - Helpbox UK",
+      "Miles Franklin Media",
+      "Outback Crisis"
+     ],
+     "template": "is about to",
+     "examples": [
+      "Bremerton's Housing Market Is About To Change Forever!",
+      "Southern Oregon's Housing Market Is About To Change FOREVER!",
+      "\u2018Buckle Your Seatbelt\u2019: Inflation Is About to Get Much Worse | Lawrence Lepard & Michelle Makori"
+     ]
+    },
+    {
+     "frame": "worse than a",
+     "n_videos": 7,
+     "n_channels": 7,
+     "median_views": 49329,
+     "per_video": 4.61,
+     "median_runtime_min": 18.1,
+     "categories": [
+      "Knowledge",
+      "Hobby",
+      "Society"
+     ],
+     "channels": [
+      "Buying Bend w/ Luke Callahan",
+      "LifeWorthLiving",
+      "Market Disruptors Podcast",
+      "Miami Living with Milton",
+      "Prof Jiang Explains",
+      "The Silver Market"
+     ],
+     "template": "this will be worse than a {X} in",
+     "examples": [
+      "This Will Be WORSE Than A Housing Market Crash In San Jose!",
+      "This Will Be Worse Than A Housing Market Crash In Miami!",
+      "This Will Be Worse Than A Housing Market Crash In Bend OR"
+     ]
+    },
+    {
+     "frame": "how to start",
+     "n_videos": 6,
+     "n_channels": 6,
+     "median_views": 73197,
+     "per_video": 2.98,
+     "median_runtime_min": 18.6,
+     "categories": [
+      "Knowledge",
+      "Lifestyle (sociology)"
+     ],
+     "channels": [
+      "Geoff Cole",
+      "KaashSeAkash",
+      "Kimberly Mitchell",
+      "Mind & Markets",
+      "Relentless",
+      "The Aesthetic Dollar"
+     ],
+     "template": "how to start {X} in {N} {X} vs {X} vs {X} vs",
+     "examples": [
+      "How to Start Investing in 2026 | Mutual Funds vs Stocks vs Gold vs Crypto ft @InvestYadnya",
+      "Sam Altman - How to Start a Startup",
+      "How to Start a Small Cargo Van Business for $500"
+     ]
+    },
+    {
+     "frame": "is worse than",
+     "n_videos": 7,
+     "n_channels": 5,
+     "median_views": 49329,
+     "per_video": 1.86,
+     "median_runtime_min": 12.2,
+     "categories": [
+      "Knowledge",
+      "Society",
+      "Politics"
+     ],
+     "channels": [
+      "LifeWorthLiving",
+      "Market Disruptors Podcast",
+      "Prof Jiang Explains",
+      "Richard Vague",
+      "The Silver Market"
+     ],
+     "template": "is worse than a",
+     "examples": [
+      "What's Coming is Worse Than A Recession | Ed Dowd",
+      "\"What's Coming Is WORSE Than A Recession...\" - Peter Schiff",
+      "\"What's Coming Is WORSE Than A Recession...\" | Prof. Jiang Xueqin"
+     ]
+    },
+    {
+     "frame": "to start a",
+     "n_videos": 5,
+     "n_channels": 5,
+     "median_views": 78361,
+     "per_video": 1.72,
+     "median_runtime_min": 12.6,
+     "categories": [
+      "Knowledge",
+      "Lifestyle (sociology)"
+     ],
+     "channels": [
+      "Geoff Cole",
+      "Kimberly Mitchell",
+      "Mwalimu Arabu Adede",
+      "Relentless",
+      "The Aesthetic Dollar"
+     ],
+     "template": "how to start a",
+     "examples": [
+      "Sam Altman - How to Start a Startup",
+      "How to Start a Small Cargo Van Business for $500",
+      "How To Start a Product Business Without Knowing a Single Manufacturer (Accio Work)"
+     ]
+    },
+    {
+     "frame": "step by step",
+     "n_videos": 5,
+     "n_channels": 5,
+     "median_views": 12198,
+     "per_video": 0.35,
+     "median_runtime_min": 14.2,
+     "categories": [
+      "Lifestyle (sociology)",
+      "Entertainment",
+      "Knowledge"
+     ],
+     "channels": [
+      "Academic Gain Tutorials",
+      "Budgeting Just Because",
+      "Grow with Bhaskar",
+      "Logical Money",
+      "Shonta the Tax Strategist"
+     ],
+     "template": "the {X} from {X} to {X} step by step",
+     "examples": [
+      "The Transition from Saving to Investing \u2014 Step by Step",
+      "The Ultimate 2026 Startup Guide: Grow Your Business Step By Step @BaseshGala",
+      "How to Set Up Your Monthly Budget (Step-by-Step for Beginners) | #budgeting #savingmoney"
+     ]
+    },
+    {
+     "frame": "{N} years of",
+     "n_videos": 4,
+     "n_channels": 4,
+     "median_views": 17526,
+     "per_video": 9.38,
+     "median_runtime_min": 12.8,
+     "categories": [
+      "Knowledge",
+      "Business"
+     ],
+     "channels": [
+      "ISSA Media",
+      "Kyith Ng",
+      "Smart X Capital",
+      "Trade The Pool"
+     ],
+     "template": "my {N} {N} {X} after {N} years of {X} a",
+     "examples": [
+      "My $1.85 Million Income Portfolio, After 23 Years of Investing (A Singaporean's portfolio journey)",
+      "What 250 Years of America Can Teach Business Owners About Leadership",
+      "Why the Stock Market Refuses to Crash \u2014 Until It Doesn't (150 Years of Evidence)"
+     ]
+    },
+    {
+     "frame": "up to {N} {N}",
+     "n_videos": 5,
+     "n_channels": 4,
+     "median_views": 17763,
+     "per_video": 5.88,
+     "median_runtime_min": 13.7,
+     "categories": [
+      "Knowledge",
+      "Society",
+      "Technology"
+     ],
+     "channels": [
+      "Insights with Vansh",
+      "Kevin Explains",
+      "Peter Reynolds",
+      "Sarmit Job Alert"
+     ],
+     "template": "stop these {N} {X} before {X} {N} or the {X} takes up to {N} {N}",
+     "examples": [
+      "Stop These 3 Tax Traps Before January 2027 Or the IRS Takes Up To $63,000",
+      "Move These 7 Assets Before January 2027 Or the IRS Takes Up to $45,000",
+      "\ud83d\udd25 Vedanta Freshers Hiring 2026 | Salary Up To \u20b965,000+ | ITI, Diploma, B.Tech, Graduate | Apply Now"
+     ]
+    },
+    {
+     "frame": "is worse than a",
+     "n_videos": 4,
+     "n_channels": 4,
+     "median_views": 70515,
+     "per_video": 4.35,
+     "median_runtime_min": 21.1,
+     "categories": [
+      "Knowledge",
+      "Society"
+     ],
+     "channels": [
+      "LifeWorthLiving",
+      "Market Disruptors Podcast",
+      "Prof Jiang Explains",
+      "The Silver Market"
+     ],
+     "template": "is worse than a",
+     "examples": [
+      "What's Coming is Worse Than A Recession | Ed Dowd",
+      "\"What's Coming Is WORSE Than A Recession...\" - Peter Schiff",
+      "\"What's Coming Is WORSE Than A Recession...\" | Prof. Jiang Xueqin"
+     ]
+    },
+    {
+     "frame": "{N} year old",
+     "n_videos": 4,
+     "n_channels": 4,
+     "median_views": 67110,
+     "per_video": 4.22,
+     "median_runtime_min": 32.5,
+     "categories": [
+      "Lifestyle (sociology)",
+      "Knowledge"
+     ],
+     "channels": [
+      "Family First Life",
+      "Pagesofpandora",
+      "The Hol\u207a Show",
+      "hachisuke-daily life in Japan"
+     ],
+     "template": "the {N} {N} year old",
+     "examples": [
+      "The 2,000-Year-Old Business Strategy Outperforming Modern CEOs | Abhiraj Gupta",
+      "How a 23-Year-Old Made $900,000 in His First Year Selling Life Insurance",
+      "74-Year-Old Jane Seymour: Forget Everything You Know About Healthy Eating"
+     ]
+    }
+   ]
+  }
+ ]
+}
