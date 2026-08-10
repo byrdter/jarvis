@@ -196,6 +196,43 @@ def enumerate_slots(fmt, a):
     return phrase, pool
 
 
+ISO_DUR = re.compile(r"P(?:\d+D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?")
+
+
+def duration_min(iso):
+    m = ISO_DUR.match(iso or "")
+    if not m:
+        return 0
+    h, mi, sec = (int(x) if x else 0 for x in m.groups())
+    return h * 60 + mi + sec / 60
+
+
+def coherent(fmt, matches):
+    r"""Is this regex matching a FORMAT, or ordinary English?
+
+    PORTED FROM bend-map.py 2026-08-10 after this tool shipped without it and immediately
+    produced a 97-slot "inventory" for `\bbusiness\s+of\b` containing Diwali Shorts, Hindi
+    serials and an Apple TV trailer. bend-map had the gate; this did not; the same two-token
+    generic phrase sailed through. Any tool that matches titles by regex needs this check --
+    it is not a bend-map feature, it is a property of regex-matching titles.
+    """
+    if not matches:
+        return True
+    durs = [duration_min(v.get("duration")) for v in matches]
+    shorts = sum(1 for d in durs if d < 1.5) / len(durs)
+    band = fmt.get("runtime_min") or [0, 0]
+    in_band = sum(1 for d in durs if band[0] * 0.5 <= d <= max(band[1] * 2, 3)) / len(durs)
+    if shorts > 0.30 or in_band < 0.40:
+        print(f"\n⚠ INCOHERENT FRAME — {shorts:.0%} of matches are Shorts, {in_band:.0%} sit "
+              f"near the declared {band[0]}-{band[1]}m runtime.")
+        print("  This regex is matching ORDINARY ENGLISH. An inventory built on it is noise;\n"
+              "  tighten title_regex until the matches are one recognisable shape.")
+        for v in matches[:5]:
+            print(f"    · {duration_min(v.get('duration')):>5.1f}m  {(v.get('title') or '')[:62]}")
+        return False
+    return True
+
+
 def build(fmt, pool):
     matches = [v for v in pool if re.search(fmt["title_regex"], v.get("title") or "", re.I)]
     slots = defaultdict(list)
@@ -332,6 +369,8 @@ def main():
 
     phrase, pool = enumerate_slots(fmt, a)
     matches, rows = build(fmt, pool)
+    if not coherent(fmt, matches):
+        return
     report(fmt, matches, rows, a)
     if not rows:
         return
