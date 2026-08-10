@@ -22,7 +22,8 @@ Use it for:
 - `hyperframes`: composition authoring.
 - `hyperframes-cli`: lint, preview, render, transcribe, and CLI operations.
 - `gsap`: animation implementation patterns.
-- `remotion-video-qa`: only when a Remotion/talking-head project is active.
+- ~~`remotion-video-qa`~~ — **DELETED 2026-08-10.** Remotion is not in the stack; QA lives in
+  `jarvis-video-production/tools/`.
 
 ## Legacy / Special Case
 

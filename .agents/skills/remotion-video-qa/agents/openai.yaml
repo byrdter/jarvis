@@ -1,4 +1,0 @@
-interface:
-  display_name: "Remotion Video QA"
-  short_description: "QA Jarvis Remotion video renders."
-  default_prompt: "Use the Remotion video QA workflow to inspect and validate this video project before final render."

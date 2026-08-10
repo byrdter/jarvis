@@ -21,7 +21,10 @@ This includes:
   route here; the avatar is retired permanently (2026-08-02). Git-recoverable if ever needed.
 - ~~`skills/video-image-creation/SKILL.md`~~ — **DELETED 2026-06-29.** Use `image-generation` +
   `cli-tools/make-text-card.py` for thumbnails/stills.
-- `.agents/skills/remotion-video-qa/`: use only for Remotion/talking-head projects or when explicitly QAing Remotion output.
+- ~~`.agents/skills/remotion-video-qa/`~~ — **DELETED 2026-08-10.** Orphaned when the Remotion
+  skill went on 2026-06-29; Remotion is not installed and is not in the stack. QA for the current
+  pipeline is `jarvis-video-production/tools/` (`scene-validator.py`, `deadspace-scan.py`,
+  `motion-scan.py`, `check-cli-pin.py`). Git-recoverable if ever needed.
 
 ## Supporting Current Skills
 

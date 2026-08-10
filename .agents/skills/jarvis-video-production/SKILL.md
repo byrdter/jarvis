@@ -209,7 +209,6 @@ Then read only what the task needs:
 ## Current Supporting Libraries
 
 - `.agents/skills/hyperframes-video-director/` carries HyperFrames visual direction.
-- `.agents/skills/remotion-video-qa/` is for legacy/special Remotion or talking-head QA.
 - `references/channel-library/` carries the mirrored channel-level shape catalog, recipes, identity, and interaction vocabulary.
 - `references/v14/` carries the mirrored Video 14-proven palette, shot vocabulary, tooling, Runway prompts, and anti-patterns.
 - `byrddynasty-blocks/` — production block library of 19 parameterized sub-compositions covering 8 capability categories we previously underused (code editor / terminal / UI mockup / 3D / character SVG / shader BG / callout / audio-reactive). Drop these into any video project to escape the "box + arrow + headline" default.
