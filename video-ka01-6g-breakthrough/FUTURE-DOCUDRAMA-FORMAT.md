@@ -11,7 +11,7 @@ The idea is viable and differentiated, but the recommended form is not a pure sh
 - a visible truth state distinguishes demonstrated facts, standards targets, plausible extrapolation, and story exaggeration;
 - the final verdict returns to what is likely to arrive first, what is still conditional, and what choices matter now.
 
-The first pilot should target roughly 10–12 minutes, not 18–25. Story should replace exposition rather than be added on top of the existing 12:50 script.
+After reviewing the 2026-08-09 duration/revenue study, the first pilot should target **15–18 minutes**, with 15–18 treated as a retention-gated design band rather than a padding target. Story should replace exposition rather than be added on top of the existing 12:50 script. Do not exceed 18 minutes for the pilot.
 
 ## What YouTube shows
 
@@ -80,19 +80,18 @@ The viewer's question changes from “Which capability saved her?” to “Who g
 - **Intelligence** is conditional on latency, energy, cost, and standards.
 - **Speed** matters, but is the least transformative part for most people.
 
-## Recommended 10–12 minute architecture
+## Recommended 15–18 minute architecture
 
 | Position | Story / evidence function |
 |---|---|
-| 0:00–0:25 | Cold open inside the fall response. `2034 · DRAMATIZED FUTURE` is visible immediately. Concrete paradox: no camera, no phone call, yet help is coming. |
-| 0:25–0:55 | State that the incident has not happened; every link is extrapolated from a demonstrated result or an official 6G target. Name the carried question. |
-| 0:55–3:30 | Story escalation. The connection must survive, interpret, and coordinate. Candidates appear as actions, not definitions. |
-| 3:30–4:30 | First evidence window: real chip, frequency coverage, standards targets. Return quickly to the unresolved emergency. |
-| 4:30–6:00 | Apparent rescue and emotional high point. Speed looks impressive; sensing and coordination do the real work. |
-| 6:00–7:15 | Midpoint reversal: privacy/control consequence plus the laboratory pullback and four-foot link. |
-| 7:15–9:15 | Finish the human story under the new question. Show consent, access, and ownership decisions as lived friction rather than policy boxes. |
-| 9:15–10:45 | Rank the five candidates and label demonstrated / targeted / plausible / dramatized claims. |
-| 10:45–11:30 | Consequence: what people, businesses, and workers can prepare for first. Verdict, then brief CTA. |
+| 0:00–1:20 | Cold open from the fall through help already moving. `2034 · DRAMATIZED FUTURE` is visible immediately. Concrete paradox: no camera, wearable, or phone call, yet an ambulance is already en route. |
+| 1:20–3:00 | State that the incident has not happened; connect the scenario to present work and establish the five candidates without awarding credit. |
+| 3:00–6:00 | Story escalation. The connection must survive, interpret, and coordinate. Each candidate earns or loses apparent credit approximately every two minutes. |
+| 6:00–8:00 | Apparent solution and emotional high point. Speed looks impressive; the viewer still cannot tell which capability made the response possible. |
+| 8:00–9:15 | Midpoint reversal: the system recognized the fall because it already knew private behavioral patterns; pair this with the laboratory pullback and four-foot-link limitation. |
+| 9:15–12:30 | Finish the human incident under the new question. Show consent, access, ownership, work, and business consequences as lived choices. |
+| 12:30–15:00 | Present-day reality gap and ranking of the five candidates using demonstrated / targeted / plausible / dramatized truth states. |
+| 15:00–17:00 | Verdict: what probably arrives first, what people can prepare for, and what must be decided. CTA follows the verdict. |
 
 ## Truth and disclosure system
 
@@ -125,7 +124,7 @@ Expected pilot asset load: roughly 35–50 cinematic shot setups, with internal 
 
 1. Re-run Gate 1 on the **format/package**, not only the 6G topic. The examples above establish creative precedent, but exact demand still needs a probe.
 2. Revisit the package because the fundamental promise has changed. The existing title may survive; the thumbnail may become story-led (`THE ROOM KNEW`) rather than technology-led (`IT CAN SEE`).
-3. Write only a 60–90 second cold-open treatment and produce 8–12 keyframes plus a short animatic.
+3. Write only a 60–90 second cold-open treatment and produce 8–12 keyframes plus a short animatic. The working package now lives in `09-future-docudrama-opening/`.
 4. Judge clarity, emotional pull, truth-state legibility, and character consistency before rewriting the full VO.
 5. If approved, replace the current script with the future-docudrama structure. Reuse the current 6G research, evidence assets, Steve voice choice, and selected visual instruments—not the current explanatory order.
 
@@ -134,6 +133,6 @@ Expected pilot asset load: roughly 35–50 cinematic shot setups, with internal 
 - **Five disconnected vignettes:** feels like a capability list in costume. Use one incident.
 - **Too much movie, too little KeyAdvances:** viewers enjoy fiction but learn nothing checkable. Interrupt with evidence at turns.
 - **Too much evidence, too little story:** destroys immersion. Evidence should complicate the story, not pause it for a lecture.
-- **Overlong pilot:** production cost rises before retention is proven. Hold to 10–12 minutes first.
+- **Overlong pilot:** production cost rises before retention is proven. Design for 15–18 minutes only when every 90–120 seconds turns the story, changes a candidate's apparent role, complicates the evidence, or adds a human consequence; otherwise cut.
 - **Implied certainty:** the story can be vivid without claiming it is forecast. Truth-state labels and careful VO are mandatory.
 - **Character inconsistency:** limit cast, locations, dialogue, and wardrobe; approve the character bible first.
