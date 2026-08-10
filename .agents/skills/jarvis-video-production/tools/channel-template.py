@@ -39,6 +39,15 @@ THE HEADLINE METRIC -- LIFT
   slots is an ASSET -- "a template used once is just a title." Both numbers are reported and
   neither is sufficient alone.
 
+  LOW LIFT IS NOT A VERDICT ON THE TEMPLATE. Measured across 14 channels 2026-08-10: Company
+  Man's "The Decline of {X}" scores lift 1.35x while medianing 504,000 views over 114 slots,
+  and Modern MBA's "The Business of {X}" scores 1.86x at a 1,083,000 median. Lift near 1 on a
+  large channel means the WHOLE CATALOGUE performs -- there is no weak remainder to beat -- not
+  that the shape is inert. Read lift together with the absolute median and the slot count:
+      high lift + high median   the template is the lever          (ExtraMint 12.2x / 463k)
+      low  lift + high median   the channel is uniformly strong    (Company Man 1.4x / 504k)
+      high lift + low  median   arithmetic on a small base         (Who Gets Paid 22x / 3.9k)
+
 METRIC DISCIPLINE (§2 of the same research -- all seven traps were measured, these three bind)
   MEDIAN, NEVER MEAN. avgViews is a mean and one hit destroys it: a channel showing 54,892 had
       a true median of 2,024, a 27x gap.
@@ -87,6 +96,7 @@ MAX_NGRAM           = 8
 DF_FLOOR_ABS        = 3     # a token in fewer than this many of the channel's titles is topic
 DF_FLOOR_REL        = 0.08  # ...or fewer than this share of them
 RECENT_DEFAULT      = 24    # position window; see the CONFOUNDS note on why it is not months
+MAX_SHARE_FOR_LIFT  = 0.60  # above this the template IS the channel and lift is noise
 MIN_BASE_VIEWS      = 5_000 # below this median, LIFT IS SCALE-BLIND. 22x from 176 -> 3,900
                             # views is arithmetic; 12x from 38,000 -> 463,000 is a business.
                             # A ratio cannot tell them apart, so the absolute base is printed
@@ -250,17 +260,22 @@ def main():
               "discovery source.")
         return
 
-    print(f"{'lift':>7} {'slots':>5} {'recent':>6} {'med views':>10} {'p75/p25':>8} {'run':>5}  template")
+    print(f"{'lift':>7} {'slots':>5} {'share':>6} {'med views':>10} {'p75/p25':>8} {'run':>5}  template")
     print("-" * 104)
     for r in rows[: a.top]:
         sp = f"{r['spread']}x" if r["spread"] else "—"
-        print(f"{r['lift']:>6.2f}x {r['slots']:>5} {r['recent_hits']:>6} "
+        print(f"{r['lift']:>6.2f}x {r['slots']:>5} {r['share']:>5.0%} "
               f"{r['median_views']:>10,} {sp:>8} {r['median_runtime_min']:>4.0f}m  {r['template']}")
         print(f"{'':41}rest of channel: {r['median_rest']:,} · positions {r['positions']}")
         print(f"{'':41}slots: {' · '.join(x for x in r['anchors'][:6] if x)[:70]}")
         print(f"{'':41}best:  {r['best']['title'][:64]} ({r['best']['views']:,})")
 
     top = rows[0]
+    if top["share"] > MAX_SHARE_FOR_LIFT:
+        print(f"\n⚠ LIFT NOT MEANINGFUL — the template covers {top['share']:.0%} of the "
+              f"catalogue.\n  Lift divides template videos by 'the rest', and when the rest is "
+              f"a tiny remainder that\n  denominator is noise, not a control. Judge it on "
+              f"ABSOLUTE median and slot count; ignore the ratio.")
     if top["median_views"] < MIN_BASE_VIEWS:
         print(f"\n⚠ SMALL BASE — the top template medians {top['median_views']:,} views. Lift is a "
               f"RATIO and\n  says nothing about scale: this channel could double every number "
