@@ -2,6 +2,8 @@
  "formats": {
   "every-x-explained-whiteboard": {
    "format_id": "every-x-explained-whiteboard",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "Every X explained in N minutes (whiteboard)",
    "visual": "whiteboard / marker 2D over flat colour; multi-way split thumbnail",
    "title_template": "every {X} explained in {N} minutes",
@@ -36,6 +38,8 @@
   },
   "explained-with-object": {
    "format_id": "explained-with-object",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "Complex topic explained with an absurd object/mascot",
    "visual": "2D character (apes + bananas being the seed instance) over simple sets",
    "title_template": "how {X} works explained with {OBJECT}",
@@ -68,6 +72,8 @@
   },
   "anatomical-3d-breakdown": {
    "format_id": "anatomical-3d-breakdown",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "3D anatomical / physical breakdown of what happens to a body or object",
    "visual": "3D animation, cutaway anatomy, slow push-ins",
    "title_template": "what happens to your {X} when {Y}",
@@ -99,6 +105,8 @@
   },
   "low-poly-3d-shorts": {
    "format_id": "low-poly-3d-shorts",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "Low-poly 3D explainer shorts",
    "visual": "low-poly 3D, flat lighting, 30-60s vertical",
    "title_template": null,
@@ -128,6 +136,8 @@
   },
   "ai-influencer-sticker": {
    "format_id": "ai-influencer-sticker",
+   "anchor": "abstract",
+   "refill_slots": null,
    "name": "AI presenter, sticker/cutout 2D, explaining a complex money topic",
    "visual": "AI-generated presenter cutout over bold flat 2D with kinetic text",
    "title_template": "why {X} is {ADJECTIVE}",
@@ -158,6 +168,8 @@
   },
   "split-figure-debate": {
    "format_id": "split-figure-debate",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "Modern figure vs historical thinker, two-way split",
    "visual": "two-way split thumbnail, portrait vs portrait, high contrast",
    "title_template": "{PERSON} is what {THINKER} warned us about",
@@ -188,6 +200,8 @@
   },
   "pov-tier-ranking": {
    "format_id": "pov-tier-ranking",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "Ranking a life/career/wealth ladder, tier by tier",
    "visual": "tier ladder graphic, progressive reveal, POV framing",
    "title_template": "ranking every level of {X}",
@@ -219,6 +233,8 @@
   },
   "ai-moral-dilemma": {
    "format_id": "ai-moral-dilemma",
+   "anchor": "abstract",
+   "refill_slots": null,
    "name": "Pose a dilemma to AI models and stage their answers",
    "visual": "clean 2D, model avatars, verdict cards",
    "title_template": "we asked AI {DILEMMA}",
@@ -249,6 +265,8 @@
   },
   "cohort-trivia-sweep": {
    "format_id": "cohort-trivia-sweep",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "One trivia axis swept across a famous closed cohort",
    "visual": "portrait grid, progressive reveal, archival stills",
    "title_template": "how every {COHORT} {VERB}",
@@ -278,6 +296,8 @@
   },
   "secretly-reveals": {
    "format_id": "secretly-reveals",
+   "anchor": "abstract",
+   "refill_slots": null,
    "name": "A trait secretly reveals something about you",
    "visual": "three-way split thumbnail, comparison cards",
    "title_template": "what your {TRAIT} secretly reveals about your {QUALITY}",
@@ -307,6 +327,8 @@
   },
   "missed-the-lesson": {
    "format_id": "missed-the-lesson",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "You watched X but missed the lesson inside it",
    "visual": "film stills + annotation HUD, pull-quote cards",
    "title_template": "you watched {X} but missed the {DOMAIN} lesson",
@@ -337,6 +359,8 @@
   },
   "exhaustive-analysis-flex": {
    "format_id": "exhaustive-analysis-flex",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "I analysed all N of X so you don't have to",
    "visual": "data-viz first: charts with labelled axes, tables, one lit row",
    "title_template": "I analysed all {N} {X} so you don't have to",
@@ -369,6 +393,8 @@
   },
   "rapid-news-3d": {
    "format_id": "rapid-news-3d",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "3D-animated breakdown of a world event, shipped within ~24h",
    "visual": "full 3D scene reconstruction, map inserts, lower-third HUD",
    "title_template": null,
@@ -394,6 +420,8 @@
   },
   "sleep-length-narration": {
    "format_id": "sleep-length-narration",
+   "anchor": "abstract",
+   "refill_slots": null,
    "name": "Multi-hour soft-spoken narration built for background/sleep",
    "visual": "slow ambient bed, minimal cuts, no kinetic text",
    "title_template": null,
@@ -424,6 +452,8 @@
   },
   "ai-avatar-documentary": {
    "format_id": "ai-avatar-documentary",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "AI-avatar presenter fronting a documentary-grade script",
    "visual": "AI avatar, cinematic grade, archival inserts",
    "title_template": null,
@@ -453,6 +483,8 @@
   },
   "named-system-verdict": {
    "format_id": "named-system-verdict",
+   "anchor": "concrete",
+   "refill_slots": null,
    "name": "A named real system, a number, and a verdict",
    "visual": "cream evidence card / dark analysis panel over a moving bed (our own)",
    "title_template": "{SYSTEM}: {NUMBER} {UNIT} \u2014 {VERDICT}",

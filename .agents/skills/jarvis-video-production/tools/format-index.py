@@ -22,6 +22,33 @@ WHY THIS EXISTS
 
   Full derivation: jarvis-private/reports/FACELESS-NICHE-SYSTEM-2026-08-10.md
 
+MEASURED LEVERAGE ORDER — why the format axis is worth building at all
+  From our own prior investigation, jarvis-private/reports/YoutubeResearchTopics/
+  YOUTUBE-DEMAND-RESEARCH-2026-08-09.md §3. These are OUR measurements, not the corpus's:
+
+      subject choice              up to 43x   same channel, same template, six weeks apart
+      REFILLABLE TITLE TEMPLATE      ~19x     ExtraMint era-titles median 631,043 vs its own
+                                              non-era videos at 33,617
+      runtime 15-30 min              ~2.5x    on revenue/video, replicated in two strata
+      packaging (thumb/title)      NOTHING    above a floor; the relationship inverts at the top
+
+  The ~19x row IS this file's subject, independently measured before the corpus was ever read.
+  It also sharpens the definition: the asset is not the template, it is the FILLED SLOTS.
+  "A template used once is just a title" -- ExtraMint's asset is fourteen of them. So a format's
+  value has two separate components and they are not interchangeable:
+
+      n_channels    >= 3 distinct channels share the frame  -> the shape is PORTABLE
+                    (what --discover measures; the corpus's "format has 3 winners" rule)
+      refill_slots  how many times ONE channel can refill it -> the shape is an ASSET
+                    (what bend-map.py must measure; the corpus's "30+ ideas" rule)
+
+  A portable shape with four refills is a dead end for a channel builder. Both are required.
+
+  §7c, three independent confirmations: a CONCRETE ANCHOR beats an abstraction. Object-anchored
+  ExtraMint titles carry the numbers while abstract ones underperform; "dead internet theory"
+  probes 108.94x where "why does everything online look fake now" returns n=0. Hence the
+  `anchor` field. Prefer concrete rows; treat an abstract row as needing an anchor supplied.
+
 WHAT THIS TOOL DOES NOT DO -- READ BEFORE TRUSTING THE OUTPUT
   It does NOT verify that a format works. `tier`, `cost_usd` and `runtime_min` on seeded rows
   are PRACTITIONER CLAIMS lifted from the source corpus, not our measurements. Rows carry
@@ -207,6 +234,7 @@ MARKETS = {
 SEED = [
     {
         "format_id": "every-x-explained-whiteboard",
+        "anchor": "concrete", "refill_slots": None,
         "name": "Every X explained in N minutes (whiteboard)",
         "visual": "whiteboard / marker 2D over flat colour; multi-way split thumbnail",
         "title_template": "every {X} explained in {N} minutes",
@@ -222,6 +250,7 @@ SEED = [
     },
     {
         "format_id": "explained-with-object",
+        "anchor": "concrete", "refill_slots": None,
         "name": "Complex topic explained with an absurd object/mascot",
         "visual": "2D character (apes + bananas being the seed instance) over simple sets",
         "title_template": "how {X} works explained with {OBJECT}",
@@ -236,6 +265,7 @@ SEED = [
     },
     {
         "format_id": "anatomical-3d-breakdown",
+        "anchor": "concrete", "refill_slots": None,
         "name": "3D anatomical / physical breakdown of what happens to a body or object",
         "visual": "3D animation, cutaway anatomy, slow push-ins",
         "title_template": "what happens to your {X} when {Y}",
@@ -249,6 +279,7 @@ SEED = [
     },
     {
         "format_id": "low-poly-3d-shorts",
+        "anchor": "concrete", "refill_slots": None,
         "name": "Low-poly 3D explainer shorts",
         "visual": "low-poly 3D, flat lighting, 30-60s vertical",
         "title_template": None, "title_regex": None,
@@ -262,6 +293,7 @@ SEED = [
     },
     {
         "format_id": "ai-influencer-sticker",
+        "anchor": "abstract", "refill_slots": None,
         "name": "AI presenter, sticker/cutout 2D, explaining a complex money topic",
         "visual": "AI-generated presenter cutout over bold flat 2D with kinetic text",
         "title_template": "why {X} is {ADJECTIVE}",
@@ -275,6 +307,7 @@ SEED = [
     },
     {
         "format_id": "split-figure-debate",
+        "anchor": "concrete", "refill_slots": None,
         "name": "Modern figure vs historical thinker, two-way split",
         "visual": "two-way split thumbnail, portrait vs portrait, high contrast",
         "title_template": "{PERSON} is what {THINKER} warned us about",
@@ -289,6 +322,7 @@ SEED = [
     },
     {
         "format_id": "pov-tier-ranking",
+        "anchor": "concrete", "refill_slots": None,
         "name": "Ranking a life/career/wealth ladder, tier by tier",
         "visual": "tier ladder graphic, progressive reveal, POV framing",
         "title_template": "ranking every level of {X}",
@@ -303,6 +337,7 @@ SEED = [
     },
     {
         "format_id": "ai-moral-dilemma",
+        "anchor": "abstract", "refill_slots": None,
         "name": "Pose a dilemma to AI models and stage their answers",
         "visual": "clean 2D, model avatars, verdict cards",
         "title_template": "we asked AI {DILEMMA}",
@@ -317,6 +352,7 @@ SEED = [
     },
     {
         "format_id": "cohort-trivia-sweep",
+        "anchor": "concrete", "refill_slots": None,
         "name": "One trivia axis swept across a famous closed cohort",
         "visual": "portrait grid, progressive reveal, archival stills",
         "title_template": "how every {COHORT} {VERB}",
@@ -331,6 +367,7 @@ SEED = [
     },
     {
         "format_id": "secretly-reveals",
+        "anchor": "abstract", "refill_slots": None,
         "name": "A trait secretly reveals something about you",
         "visual": "three-way split thumbnail, comparison cards",
         "title_template": "what your {TRAIT} secretly reveals about your {QUALITY}",
@@ -345,6 +382,7 @@ SEED = [
     },
     {
         "format_id": "missed-the-lesson",
+        "anchor": "concrete", "refill_slots": None,
         "name": "You watched X but missed the lesson inside it",
         "visual": "film stills + annotation HUD, pull-quote cards",
         "title_template": "you watched {X} but missed the {DOMAIN} lesson",
@@ -359,6 +397,7 @@ SEED = [
     },
     {
         "format_id": "exhaustive-analysis-flex",
+        "anchor": "concrete", "refill_slots": None,
         "name": "I analysed all N of X so you don't have to",
         "visual": "data-viz first: charts with labelled axes, tables, one lit row",
         "title_template": "I analysed all {N} {X} so you don't have to",
@@ -374,6 +413,7 @@ SEED = [
     },
     {
         "format_id": "rapid-news-3d",
+        "anchor": "concrete", "refill_slots": None,
         "name": "3D-animated breakdown of a world event, shipped within ~24h",
         "visual": "full 3D scene reconstruction, map inserts, lower-third HUD",
         "title_template": None,
@@ -388,6 +428,7 @@ SEED = [
     },
     {
         "format_id": "sleep-length-narration",
+        "anchor": "abstract", "refill_slots": None,
         "name": "Multi-hour soft-spoken narration built for background/sleep",
         "visual": "slow ambient bed, minimal cuts, no kinetic text",
         "title_template": None, "title_regex": None,
@@ -401,6 +442,7 @@ SEED = [
     },
     {
         "format_id": "ai-avatar-documentary",
+        "anchor": "concrete", "refill_slots": None,
         "name": "AI-avatar presenter fronting a documentary-grade script",
         "visual": "AI avatar, cinematic grade, archival inserts",
         "title_template": None, "title_regex": None,
@@ -413,6 +455,7 @@ SEED = [
     },
     {
         "format_id": "named-system-verdict",
+        "anchor": "concrete", "refill_slots": None,
         "name": "A named real system, a number, and a verdict",
         "visual": "cream evidence card / dark analysis panel over a moving bed (our own)",
         "title_template": "{SYSTEM}: {NUMBER} {UNIT} — {VERDICT}",
@@ -729,7 +772,7 @@ def do_list(idx, a):
     if not rows:
         print("no formats match. Run --seed first?")
         return
-    print(f"{'format_id':32} {'tier':6} {'runtime':>9} {'$/video':>11}  free-cell hints")
+    print(f"{'format_id':30} {'tier':6} {'anch':5} {'slots':>5} {'runtime':>9}  free-cell hints")
     print("-" * 108)
     for r in sorted(rows, key=lambda x: (x.get("tier") or "z", x["format_id"])):
         rt = r.get("runtime_min") or [0, 0]
@@ -737,10 +780,17 @@ def do_list(idx, a):
         free = [m for m in (r.get("corpus_free") or [])
                 if competence_of(m) in ("expert", "strong")]
         hint = ", ".join(free[:3]) if free else "·"
-        print(f"{r['format_id'][:32]:32} {r.get('tier','?'):6} "
-              f"{rt[0]:>4.0f}-{rt[1]:<4.0f} ${cu[0]:>4.0f}-{cu[1]:<5.0f} {hint}")
-    print(f"\n{len(rows)} format(s). free-cell hints are CLAIMS from the corpus filtered to "
-          f"markets where Terry is expert/strong.\nMeasure them with bend-map.py before acting.")
+        band = "*" if 15 <= rt[1] and rt[0] <= 30 else " "   # 15-30min revenue band, §3a
+        slots = r.get("refill_slots")
+        print(f"{r['format_id'][:30]:30} {r.get('tier','?'):6} "
+              f"{(r.get('anchor') or '?')[:5]:5} {(slots if slots else '—'):>5} "
+              f"{rt[0]:>4.0f}-{rt[1]:<4.0f}{band} {hint}")
+    print(f"\n{len(rows)} format(s). free-cell hints are CLAIMS from the corpus, filtered to "
+          f"markets where Terry is expert/strong.\n"
+          f"  slots = refill count, the ~19x lever — UNMEASURED until bend-map.py runs.\n"
+          f"  anch  = concrete anchors beat abstractions (3 independent confirmations, §7c).\n"
+          f"  *     = runtime reaches the measured 15-30min revenue band ($289/video at 1k-50k subs).\n"
+          f"Measure the grid with bend-map.py before acting.")
 
 
 def do_show(idx, fid):
