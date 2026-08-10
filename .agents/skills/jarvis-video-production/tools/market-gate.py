@@ -61,6 +61,23 @@ DECISIONS = RATCHET / "market-decisions.json"
 
 SAFE, REVIEW, BLOCK = "SAFE", "REVIEW", "BLOCK"
 
+
+def _load_markets():
+    """format-index.py owns the competence map. Import rather than duplicate — two copies of
+    Terry's competence would drift, and it is authored once, from him, in one place."""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "format_index", Path(__file__).resolve().parent / "format-index.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.MARKETS
+    except Exception:
+        return {}
+
+
+MARKETS_BY_NAME = _load_markets()
+
 # --- thresholds: see CALIBRATION above. Population p75 unless noted. ------------------
 MIN_N            = 8        # matches scout-niches.py's --wide roll-up floor
 MIN_RPM_COVERAGE = 0.20     # share of the slice with a computable implied RPM
@@ -73,6 +90,41 @@ MIN_RUNTIME_MIN  = 3.0      # below this the lane is shorts; $/video collapses (
 SLICE_SPREAD_MAX = 20.0     # $/video p75/p25 across a slice. Population-wide it is 25x
                             # (p25 $5.9 / p75 $148.6); a single market should be tighter,
                             # and above this its median is carried by a handful of channels.
+
+# =====================================================================================
+# FORMAT AXES — added 2026-08-10, the four the roadmap specced (jarvis-oyh1)
+# =====================================================================================
+# This file gated P1a ("should the studio serve this MARKET") and had no opinion on what to
+# BUILD. The demand layer now measures four things about a FORMAT, each by its own tool, and
+# without them here nothing turned five reports into one go/no-go:
+#
+#   trend-stage.py     -> fmt["trend_stage"]      timing
+#   slot-inventory.py  -> fmt["slot_inventory"]   supply depth + crowding
+#   format-index.py    -> fmt["authority"]        can WE occupy this voice
+#   bend-map.py        -> fmt["markets_occupied"] market occupancy
+#
+# Same doctrine as every check above: MISSING EVIDENCE BLOCKS. A format nobody has measured is
+# not cleared; it is unmeasured, and those are different.
+#
+# ONE DEPARTURE FROM THE ORIGINAL SPEC, deliberately. jarvis-oyh1 said "BLOCK unless BREAKOUT".
+# trend-stage.py then measured a sixth stage the spec did not have -- STABLE, the corpus's
+# "peak stability" -- and its own advice for that stage is "safe to enter on CRAFT rather than
+# timing: no land grab is available, and none is closing either." Blocking a mature plateau
+# would reject exactly the lane a craft-led operator should want. STABLE passes.
+TREND = {"BREAKOUT": SAFE, "STABLE": SAFE,
+         "MOMENTUM": REVIEW, "VALIDATION": REVIEW, "SPARSE": REVIEW, "UNCLASSIFIED": REVIEW,
+         "SATURATING": BLOCK, "DECLINE": BLOCK}
+
+# An `operator` format claims the voice has DONE the thing. Terry declined that standing
+# 2026-08-10 ("to be credible you have to own the business"), so it BLOCKS by default and
+# --accept-operator is the explicit override rather than a silent pass.
+AUTHORITY_OK = {"analyst": SAFE, "witness": SAFE, "curator": SAFE, "operator": BLOCK}
+
+MIN_SLOTS_SAFE    = 20     # a filled inventory deep enough to run a channel on
+MIN_SLOTS_REVIEW  = 8      # below this the shape cannot carry a library
+MAX_SLOT_DECAY    = 2.0    # older slots out-medianing newer by more than this = exhausting
+MAX_CONTESTED     = 0.40   # share of anchors 2+ channels have both run
+SAFE_CONTESTED    = 0.15
 
 # Recorded-judgement vocabularies. Anything outside these is unrecognised, hence BLOCK.
 CRAFT   = {"weak": SAFE, "mixed": REVIEW, "strong": BLOCK}
@@ -181,6 +233,93 @@ def select(rows, a) -> list[dict]:
 
 def check(name, verdict, detail):
     return {"name": name, "verdict": verdict, "detail": detail}
+
+
+def evaluate_format(fmt, fid, market, a) -> list[dict]:
+    """The four format axes. Returns checks in the same shape as evaluate()."""
+    out = []
+
+    # 5. TIMING — where in its life is this format?
+    ts = (fmt.get("trend_stage") or {}).get("stage")
+    if not ts:
+        out.append(check("trend stage", BLOCK,
+                         f"unmeasured — run: trend-stage.py --format {fid}"))
+    else:
+        v = TREND.get(ts, REVIEW)
+        m = fmt["trend_stage"]
+        extra = (f"entrants {m['entrant_slope']:+.2f} / views {m['views_slope']:+.2f}"
+                 if m.get("entrant_slope") is not None else
+                 f"median {m.get('median_per_bucket', 0):.0f} vids/bucket")
+        out.append(check("trend stage", v, f"{ts} — {extra}"))
+
+    inv = fmt.get("slot_inventory") or {}
+
+    # 6. SUPPLY DEPTH — is there enough inventory to build a library, and is it drying up?
+    if not inv:
+        out.append(check("slot inventory", BLOCK,
+                         f"unmeasured — run: slot-inventory.py --format {fid}"))
+    else:
+        filled, decay = inv.get("filled", 0), inv.get("decay")
+        if decay and decay > MAX_SLOT_DECAY:
+            out.append(check("slot inventory", BLOCK,
+                             f"{filled} slots but decay {decay}x — the good slots are gone"))
+        elif filled >= MIN_SLOTS_SAFE:
+            out.append(check("slot inventory", SAFE,
+                             f"{filled} filled slots · decay {decay}x"))
+        elif filled >= MIN_SLOTS_REVIEW:
+            out.append(check("slot inventory", REVIEW,
+                             f"only {filled} filled slots — thin for a library"))
+        else:
+            out.append(check("slot inventory", BLOCK,
+                             f"{filled} filled slots (floor {MIN_SLOTS_REVIEW}) — "
+                             f"'a template used once is just a title'"))
+
+    # 7. CROWDING — how much of the inventory has someone already re-run?
+    if not inv:
+        out.append(check("crowding", BLOCK, "no slot inventory to read contest share from"))
+    else:
+        cs = inv.get("contested_share")
+        taken = sum(1 for c in (fmt.get("markets_occupied") or {}).values()
+                    if c.get("verdict") == "TAKEN")
+        note = f"{cs:.0%} anchors contested" + (f" · {taken} markets TAKEN" if taken else "")
+        if cs is None:
+            out.append(check("crowding", BLOCK, "contested share not computed"))
+        elif cs <= SAFE_CONTESTED:
+            out.append(check("crowding", SAFE, note))
+        elif cs <= MAX_CONTESTED:
+            out.append(check("crowding", REVIEW, note))
+        else:
+            out.append(check("crowding", BLOCK, note + " — the obvious anchors are worked out"))
+
+    # 8. AUTHORITY + COMPETENCE — can WE credibly hold this voice, in this market?
+    au = fmt.get("authority")
+    if not au:
+        out.append(check("authority", BLOCK,
+                         "untagged — set `authority` on the format row (operator/analyst/"
+                         "witness/curator)"))
+    elif au == "operator" and not a.accept_operator:
+        out.append(check("authority", BLOCK,
+                         "operator — the voice claims to have DONE it. Declined by Terry "
+                         "2026-08-10; --accept-operator to override"))
+    else:
+        v = AUTHORITY_OK.get(au, REVIEW)
+        detail = au + (" (operator, overridden)" if au == "operator" else "")
+        if market:
+            comp = MARKETS_BY_NAME.get(market)
+            if comp is None:
+                v, detail = BLOCK, f"{au} · unknown market '{market}' — see format-index.py --markets"
+            elif comp == "avoid":
+                v, detail = BLOCK, f"{au} · market declined by Terry"
+            elif comp in ("expert", "strong"):
+                detail = f"{au} · {comp} in {market}"
+            else:
+                v = REVIEW if v == SAFE else v
+                detail = f"{au} · only {comp} competence in {market}"
+        else:
+            v = REVIEW if v == SAFE else v
+            detail = f"{au} · competence unassessed (pass --market)"
+        out.append(check("authority", v, detail))
+    return out
 
 
 def evaluate(rows, key, decision) -> list[dict]:
@@ -397,6 +536,12 @@ def main() -> int:
     ap.add_argument("--incumbent-craft", choices=sorted(CRAFT))
     ap.add_argument("--backend-fit", choices=sorted(BACKEND))
     ap.add_argument("--slop-risk", choices=sorted(SLOP))
+    ap.add_argument("--format", dest="fmt_id",
+                    help="format_id from format-index.py — adds the four FORMAT axes")
+    ap.add_argument("--market", help="our market name (format-index.py --markets) for the "
+                                     "competence half of the authority check")
+    ap.add_argument("--accept-operator", action="store_true",
+                    help="allow an `operator` authority format (declined by default)")
     ap.add_argument("--note")
     ap.add_argument("--by")
     a = ap.parse_args()
@@ -410,12 +555,41 @@ def main() -> int:
     if a.list:
         return do_list(rows, a)
 
-    if not (a.country or a.category or a.niche):
-        sys.exit("nothing to gate — pass --country / --category / --niche, or --list")
+    if not (a.country or a.category or a.niche or a.fmt_id):
+        sys.exit("nothing to gate — pass --country / --category / --niche / --format, or --list")
 
     key = slice_key(a)
     if a.record:
         do_record(key, a)
+
+    # FORMAT-ONLY MODE. A format can be gated without a market slice: "is this shape worth
+    # building" and "is this market worth serving" are separable questions, and forcing a CSV
+    # slice on the first one would fabricate a market verdict nobody asked for.
+    fmt = None
+    if a.fmt_id:
+        idx_path = RATCHET / "formats.json"
+        if not idx_path.exists():
+            sys.exit("no ratchet/formats.json — run format-index.py --seed")
+        fmt = json.loads(idx_path.read_text())["formats"].get(a.fmt_id)
+        if not fmt:
+            sys.exit(f"unknown format '{a.fmt_id}' — format-index.py --list")
+
+    if a.fmt_id and not (a.country or a.category or a.niche):
+        print(f'FORMAT  "{a.fmt_id}"  —  {fmt.get("name")}\n')
+        checks = evaluate_format(fmt, a.fmt_id, a.market, a)
+        width = max(len(c["name"]) for c in checks)
+        for c in checks:
+            print(f"  {c['verdict']:<7} {c['name']:<{width}}  {c['detail']}")
+        blocked = [c for c in checks if c["verdict"] == BLOCK]
+        review = [c for c in checks if c["verdict"] == REVIEW]
+        print()
+        if blocked or (review and a.strict):
+            print(f"NOT CLEARED — {len(blocked + (review if a.strict else []))} check(s) failed.")
+            return 1
+        print(f"FORMAT CLEARED{' with ' + str(len(review)) + ' REVIEW' if review else ''}.")
+        print("  This says the SHAPE is worth building. Pair with a market slice "
+              "(--country/--category)\n  to gate the market too.")
+        return 0
 
     sel = select(rows, a)
     store = json.loads(DECISIONS.read_text()) if DECISIONS.exists() else {}
@@ -423,6 +597,8 @@ def main() -> int:
 
     print(f'MARKET  "{key}"  →  {len(sel)} of {len(rows)} channels\n')
     checks = evaluate(sel, key, decision)
+    if fmt is not None:
+        checks += evaluate_format(fmt, a.fmt_id, a.market, a)
     width = max(len(c["name"]) for c in checks)
     for c in checks:
         print(f"  {c['verdict']:<7} {c['name']:<{width}}  {c['detail']}")
