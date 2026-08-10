@@ -1,0 +1,64 @@
+market,competence,verdict,per_video,median_views,best_views,best_title,best_channel,best_subs,latest,n_matches,n_results,median_runtime_min,reachable_hits,region,query
+personal finance,expert,TAKEN,1.0,42711,302907,The Economics of Owning a Gas Station,Overhead,10700,2026-08-10,30,30,17.9,26,US,the economics of owning a
+investing & stock market,expert,THIN,0.15,4,4,The Economics of Owning a Parking Lot Empire,Invisible Empires,27,2026-08-10,2,2,10.350000000000001,2,US,the economics of owning a
+retirement planning,expert,TAKEN,8.73,77716,77716,The Economics of Owning a Roman Legion,Mr. Finance Chronicles,8900,2026-07-15,1,1,24.4,1,US,the economics of owning a
+insurance,expert,TAKEN,1.53,49104,89918,The Economics of Owning a Car Dealership,Mr. Finance,58900,2026-08-10,7,7,29.4,7,US,the economics of owning a
+real estate,expert,TAKEN,0.31,655,67486,The Economics of Owning a Cafe,Mr. Finance,58900,2026-08-10,8,8,24.75,6,US,the economics of owning a
+economics,expert,TAKEN,2.21,33098,65416,The Economics of Owning a Bank,Mr. Finance,58900,2026-08-10,3,3,11.8,2,US,the economics of owning a
+accounting,expert,TAKEN,28.99,63772,63772,The Economics of Owning A Soccer Team,Money Pit,2200,2026-06-24,1,1,16.5,1,US,the economics of owning a
+taxes,strong,TAKEN,3.28,37033,77716,The Economics of Owning a Roman Legion,Mr. Finance Chronicles,8900,2026-08-10,6,6,29.6,6,US,the economics of owning a
+credit & debt,strong,TAKEN,15.0,160458,160458,The Economics of Owning a Movie Theater,Overhead,10700,2026-08-10,3,3,12.3,3,US,the economics of owning a
+banking,strong,THIN,1.0,1,1,The Economics of Owning a Private Bank | How Private Banks Make Money,Capital Curious,1,2026-08-10,1,1,11.6,1,US,the economics of owning a
+crypto,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+business strategy,expert,TAKEN,0.63,36878,67486,The Economics of Owning a Cafe,Mr. Finance,58900,2026-08-10,7,7,24.4,7,US,the economics of owning a
+management & leadership,expert,TAKEN,0.6,35259,157547,The Economics of Owning a Construction Company,Mr. Finance Extra,9840,2026-08-04,4,4,25.1,4,US,the economics of owning a
+entrepreneurship,expert,TAKEN,4.08,179531,240485,The Economics of Owning a Gym,Mr. Finance,58900,2026-08-10,5,5,12.6,5,US,the economics of owning a
+marketing,expert,TAKEN,0.83,30020,67486,The Economics of Owning a Cafe,Mr. Finance,58900,2026-08-10,6,6,16.15,3,US,the economics of owning a
+B2B & SaaS,expert,TAKEN,1.45,66185,66185,The Economics Of Owning a Business as a Developer,Bgo,45700,2026-07-27,1,1,15.7,1,US,the economics of owning a
+information systems,expert,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+supply chain,strong,TAKEN,0.35,20590,586467,The Economics of Owning A Ship,Neu,35000,2026-08-10,3,3,15.2,3,US,the economics of owning a
+sales,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+careers & jobs,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+higher education,expert,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+productivity,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+nutrition,strong,TAKEN,1.24,15129,194144,The Economics of Owning a McDonald's Franchise,Millionaire Problems,27800,2026-08-10,13,13,21.4,11,US,the economics of owning a
+fitness & exercise,strong,THIN,,0,0,The Economics of Owning a Gym,Owner's Math,3,2026-08-10,1,1,13.9,1,US,the economics of owning a
+longevity,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+mental health,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+sleep,general,THIN,0.0,1,1,The Economics of Owning a Hotel,Mr. Owner,488,2026-08-10,1,1,29.3,1,US,the economics of owning a
+medicine,general,TAKEN,0.68,40140,40140,The Economics of Owning a Hospital,Mr. Finance,58900,2026-07-02,1,1,20.2,1,US,the economics of owning a
+AI & machine learning,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+software engineering,strong,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+consumer tech,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+cybersecurity,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+space,general,THIN,0.15,2,4,The Economics of Owning a Parking Lot Empire,Invisible Empires,27,2026-08-10,3,3,14.8,2,US,the economics of owning a
+history,general,THIN,0.03,4,4,The Economics of Owning a Medieval Armory,Hidden States Media,150,2026-08-10,1,1,20.1,1,US,the economics of owning a
+military history,general,TAKEN,4.18,89918,116149,The Economics of Owning a Private Military Company,Millionaire Problems,27800,2026-07-15,3,3,21.7,3,US,the economics of owning a
+science,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+psychology,general,TAKEN,0.62,36671,67486,The Economics of Owning a Cafe,Mr. Finance,58900,2026-08-04,2,2,23.25,2,US,the economics of owning a
+philosophy,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+true crime,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+geography,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+engineering & how-things-work,general,TAKEN,2.15,67486,126865,The Economics Of Owning A Shopping Mall,Mr. Finance,58900,2026-08-10,4,4,18.3,4,US,the economics of owning a
+aviation,general,TAKEN,1.65,57624,57624,The Economics of Owning A Plane,Neu,35000,2026-05-04,1,1,8.9,1,US,the economics of owning a
+maritime,general,TAKEN,16.76,586467,586467,The Economics of Owning A Ship,Neu,35000,2026-04-02,1,1,8.2,1,US,the economics of owning a
+disasters,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+parenting,general,THIN,,0,0,The Economics of Owning a Trampoline Park: Why 80% of Owners Are Out Within 3 Years, Market Mindset  ,0,2026-08-10,1,1,23.4,0,US,the economics of owning a
+relationships,general,THIN,,0,0,The Economics of Owning A Pet Store,Mr. Finance,58900,2026-08-10,1,1,21.9,1,US,the economics of owning a
+self-improvement,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+travel,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+food & cooking,general,TAKEN,1.24,15129,194144,The Economics of Owning a McDonald's Franchise,Millionaire Problems,27800,2026-08-10,13,13,21.4,11,US,the economics of owning a
+fashion & beauty,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+home & DIY,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+cars & automotive,general,TAKEN,0.94,55254,89918,The Economics of Owning a Car Dealership,Mr. Finance,58900,2026-08-10,4,4,20.4,3,US,the economics of owning a
+pets,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+gardening,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+gaming,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+sports,general,THIN,0.67,2,2,The Economics of Owning a Football Club,mr Business Economics,3,2026-08-10,1,1,14.8,1,US,the economics of owning a
+football (soccer),general,TAKEN,14.83,31887,63772,The Economics of Owning A Soccer Team,Money Pit,2200,2026-08-10,4,4,15.65,2,US,the economics of owning a
+basketball,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+movies & TV,general,TAKEN,0.92,54398,54398,The Economics of Owning a Cinema,Mr. Finance,58900,2026-07-09,1,1,36.0,1,US,the economics of owning a
+music,general,TAKEN,1.52,42283,42283,The Economics of Owning a Cemetery,Millionaire Problems,27800,2026-05-18,1,1,10.1,1,US,the economics of owning a
+anime,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+celebrity,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a
+comics & superheroes,general,FREE,,0,0,,,,,0,102,0,0,US,the economics of owning a

@@ -1808,6 +1808,815 @@
    "notes": "THE ONLY ROW WITH FIRST-PARTY EVIDENCE. Our own audit: 3 videos -> 65 of 109 long-form subs; 11 of top 12 by CTR (4.4-9.5%). Independently, the two channels beating the agent-engineering lane on avgViews/subs (1.66x, 1.11x vs lane median 0.22x) both run this shape. Note the lane, not the format, is what failed there -- see the 2026-08-10 sweep.",
    "markets_occupied": {},
    "added": "2026-08-10"
+  },
+  "economics-of-owning-a": {
+   "format_id": "economics-of-owning-a",
+   "name": "the economics of owning a",
+   "anchor": "concrete",
+   "refill_slots": 4,
+   "visual": null,
+   "title_template": "the economics of owning a",
+   "title_regex": "\\bthe\\s+economics\\s+of\\s+owning\\s+a\\b",
+   "runtime_min": [
+    18.9,
+    18.9
+   ],
+   "tier": null,
+   "cost_usd": null,
+   "seed_channel": "UC6RcE6Vif-2ZDo0XvufHVSQ",
+   "corpus_occupied": [],
+   "corpus_free": [],
+   "markets_occupied": {
+    "personal finance": {
+     "verdict": "TAKEN",
+     "per_video": 1.0,
+     "best_views": 302907,
+     "latest": "2026-08-10",
+     "n_matches": 30,
+     "n_results": 30,
+     "median_runtime_min": 17.9,
+     "slot_anchors": [
+      "THE ECONOMICS OF OWNING A BARBER SHOP",
+      "The Economics Of Owning A Shopping Mall",
+      "The Economics Of Owning a Business as a Developer",
+      "The Economics of Owning A Soccer Team",
+      "The Economics of Owning A Truck Dealer Cash Growth.",
+      "The Economics of Owning a Bank"
+     ]
+    },
+    "investing & stock market": {
+     "verdict": "THIN",
+     "per_video": 0.15,
+     "best_views": 4,
+     "latest": "2026-08-10",
+     "n_matches": 2,
+     "n_results": 2,
+     "median_runtime_min": 10.350000000000001,
+     "slot_anchors": [
+      "The Economics of Owning a Parking Lot Empire",
+      "The Economics of Owning a Vending Machine Business"
+     ]
+    },
+    "retirement planning": {
+     "verdict": "TAKEN",
+     "per_video": 8.73,
+     "best_views": 77716,
+     "latest": "2026-07-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 24.4,
+     "slot_anchors": [
+      "The Economics of Owning a Roman Legion"
+     ]
+    },
+    "insurance": {
+     "verdict": "TAKEN",
+     "per_video": 1.53,
+     "best_views": 89918,
+     "latest": "2026-08-10",
+     "n_matches": 7,
+     "n_results": 7,
+     "median_runtime_min": 29.4,
+     "slot_anchors": [
+      "The Economics of Owning a Beverly Hills Mansion",
+      "The Economics of Owning a Car Dealership",
+      "The Economics of Owning a Castle",
+      "The Economics of Owning a Mansion",
+      "The Economics of Owning a Penthouse",
+      "The Economics of Owning a Trucking Fleet"
+     ]
+    },
+    "real estate": {
+     "verdict": "TAKEN",
+     "per_video": 0.31,
+     "best_views": 67486,
+     "latest": "2026-08-10",
+     "n_matches": 8,
+     "n_results": 8,
+     "median_runtime_min": 24.75,
+     "slot_anchors": [
+      "The Economics of Owning a Bowling Alley",
+      "The Economics of Owning a Cafe",
+      "The Economics of Owning a Duplex",
+      "The Economics of Owning a Hotel",
+      "The Economics of Owning a McDonald\u2019s \u2014 How Much Do Franchise",
+      "The Economics of Owning a Parking Lot Empire"
+     ]
+    },
+    "economics": {
+     "verdict": "TAKEN",
+     "per_video": 2.21,
+     "best_views": 65416,
+     "latest": "2026-08-10",
+     "n_matches": 3,
+     "n_results": 3,
+     "median_runtime_min": 11.8,
+     "slot_anchors": [
+      "The Economics of Owning a Bank",
+      "The Economics of Owning a Laundromat",
+      "The Economics of Owning a Silk Road Caravanserai in Silk Roa"
+     ]
+    },
+    "accounting": {
+     "verdict": "TAKEN",
+     "per_video": 28.99,
+     "best_views": 63772,
+     "latest": "2026-06-24",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 16.5,
+     "slot_anchors": [
+      "The Economics of Owning A Soccer Team"
+     ]
+    },
+    "taxes": {
+     "verdict": "TAKEN",
+     "per_video": 3.28,
+     "best_views": 77716,
+     "latest": "2026-08-10",
+     "n_matches": 6,
+     "n_results": 6,
+     "median_runtime_min": 29.6,
+     "slot_anchors": [
+      "The Economics of Owning A Plane",
+      "The Economics of Owning a Beverly Hills Mansion",
+      "The Economics of Owning a Castle",
+      "The Economics of Owning a Mansion",
+      "The Economics of Owning a Penthouse",
+      "The Economics of Owning a Roman Legion"
+     ]
+    },
+    "credit & debt": {
+     "verdict": "TAKEN",
+     "per_video": 15.0,
+     "best_views": 160458,
+     "latest": "2026-08-10",
+     "n_matches": 3,
+     "n_results": 3,
+     "median_runtime_min": 12.3,
+     "slot_anchors": [
+      "The Economics of Owning a Car Dealership",
+      "The Economics of Owning a McDonald\u2019s Franchise",
+      "The Economics of Owning a Movie Theater"
+     ]
+    },
+    "banking": {
+     "verdict": "THIN",
+     "per_video": 1.0,
+     "best_views": 1,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 11.6,
+     "slot_anchors": [
+      "The Economics of Owning a Private Bank | How Private Banks M"
+     ]
+    },
+    "crypto": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "business strategy": {
+     "verdict": "TAKEN",
+     "per_video": 0.63,
+     "best_views": 67486,
+     "latest": "2026-08-10",
+     "n_matches": 7,
+     "n_results": 7,
+     "median_runtime_min": 24.4,
+     "slot_anchors": [
+      "The Economics of Owning A Plane",
+      "The Economics of Owning a Bowling Alley",
+      "The Economics of Owning a Cafe",
+      "The Economics of Owning a Construction Company",
+      "The Economics of Owning a Courier Business",
+      "The Economics of Owning a Social Media Platform"
+     ]
+    },
+    "management & leadership": {
+     "verdict": "TAKEN",
+     "per_video": 0.6,
+     "best_views": 157547,
+     "latest": "2026-08-04",
+     "n_matches": 4,
+     "n_results": 4,
+     "median_runtime_min": 25.1,
+     "slot_anchors": [
+      "The Economics of Owning a Bowling Alley",
+      "The Economics of Owning a Construction Company",
+      "The Economics of Owning a Super Market",
+      "The Economics of Owning a Thrift Store"
+     ]
+    },
+    "entrepreneurship": {
+     "verdict": "TAKEN",
+     "per_video": 4.08,
+     "best_views": 240485,
+     "latest": "2026-08-10",
+     "n_matches": 5,
+     "n_results": 5,
+     "median_runtime_min": 12.6,
+     "slot_anchors": [
+      "THE ECONOMICS OF OWNING A BARBER SHOP",
+      "The Economics Of Owning a Cafe",
+      "The Economics of Owning a Car Wash. #Business #Finance #CarW",
+      "The Economics of Owning a Gym",
+      "The Economics of Owning a Pet Grooming Business"
+     ]
+    },
+    "marketing": {
+     "verdict": "TAKEN",
+     "per_video": 0.83,
+     "best_views": 67486,
+     "latest": "2026-08-10",
+     "n_matches": 6,
+     "n_results": 6,
+     "median_runtime_min": 16.15,
+     "slot_anchors": [
+      "The Economics of Owning a Cafe",
+      "The Economics of Owning a Clothing Brand",
+      "The Economics of Owning a Food Truck",
+      "The Economics of Owning a Gym | How Gyms Really Make Money",
+      "The Economics of Owning a McDonald\u2019s Franchise",
+      "The Economics of Owning a McDonald\u2019s \u2014 How Much Do Franchise"
+     ]
+    },
+    "B2B & SaaS": {
+     "verdict": "TAKEN",
+     "per_video": 1.45,
+     "best_views": 66185,
+     "latest": "2026-07-27",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 15.7,
+     "slot_anchors": [
+      "The Economics Of Owning a Business as a Developer"
+     ]
+    },
+    "information systems": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "supply chain": {
+     "verdict": "TAKEN",
+     "per_video": 0.35,
+     "best_views": 586467,
+     "latest": "2026-08-10",
+     "n_matches": 3,
+     "n_results": 3,
+     "median_runtime_min": 15.2,
+     "slot_anchors": [
+      "The Economics of Owning A Ship",
+      "The Economics of Owning a Courier Business",
+      "The Economics of Owning a Logistics Company"
+     ]
+    },
+    "sales": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "careers & jobs": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "higher education": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "productivity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "nutrition": {
+     "verdict": "TAKEN",
+     "per_video": 1.24,
+     "best_views": 194144,
+     "latest": "2026-08-10",
+     "n_matches": 13,
+     "n_results": 13,
+     "median_runtime_min": 21.4,
+     "slot_anchors": [
+      "The Economics Of Owning A Grocery Store",
+      "The Economics of Owning A Pet Store",
+      "The Economics of Owning a Bowling Alley",
+      "The Economics of Owning a Food Truck",
+      "The Economics of Owning a McDonald's Franchise",
+      "The Economics of Owning a McDonald\u2019s Franchise"
+     ]
+    },
+    "fitness & exercise": {
+     "verdict": "THIN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 13.9,
+     "slot_anchors": [
+      "The Economics of Owning a Gym"
+     ]
+    },
+    "longevity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "mental health": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sleep": {
+     "verdict": "THIN",
+     "per_video": 0.0,
+     "best_views": 1,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 29.3,
+     "slot_anchors": [
+      "The Economics of Owning a Hotel"
+     ]
+    },
+    "medicine": {
+     "verdict": "TAKEN",
+     "per_video": 0.68,
+     "best_views": 40140,
+     "latest": "2026-07-02",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 20.2,
+     "slot_anchors": [
+      "The Economics of Owning a Hospital"
+     ]
+    },
+    "AI & machine learning": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "software engineering": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "consumer tech": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cybersecurity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "space": {
+     "verdict": "THIN",
+     "per_video": 0.15,
+     "best_views": 4,
+     "latest": "2026-08-10",
+     "n_matches": 3,
+     "n_results": 3,
+     "median_runtime_min": 14.8,
+     "slot_anchors": [
+      "THE ECONOMICS OF OWNING A BARBER SHOP",
+      "The Economics of Owning a Parking Lot Empire",
+      "What I Discovered Investigating the Economics of Owning a Sh"
+     ]
+    },
+    "history": {
+     "verdict": "THIN",
+     "per_video": 0.03,
+     "best_views": 4,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 20.1,
+     "slot_anchors": [
+      "The Economics of Owning a Medieval Armory"
+     ]
+    },
+    "military history": {
+     "verdict": "TAKEN",
+     "per_video": 4.18,
+     "best_views": 116149,
+     "latest": "2026-07-15",
+     "n_matches": 3,
+     "n_results": 3,
+     "median_runtime_min": 21.7,
+     "slot_anchors": [
+      "The Economics of Owning a Car Dealership",
+      "The Economics of Owning a Private Military Company",
+      "The Economics of Owning a Roman Legion"
+     ]
+    },
+    "science": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "psychology": {
+     "verdict": "TAKEN",
+     "per_video": 0.62,
+     "best_views": 67486,
+     "latest": "2026-08-04",
+     "n_matches": 2,
+     "n_results": 2,
+     "median_runtime_min": 23.25,
+     "slot_anchors": [
+      "The Economics of Owning a Cafe",
+      "The Economics of Owning a Thrift Store"
+     ]
+    },
+    "philosophy": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "true crime": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "geography": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "engineering & how-things-work": {
+     "verdict": "TAKEN",
+     "per_video": 2.15,
+     "best_views": 126865,
+     "latest": "2026-08-10",
+     "n_matches": 4,
+     "n_results": 4,
+     "median_runtime_min": 18.3,
+     "slot_anchors": [
+      "The Economics Of Owning A Shopping Mall",
+      "The Economics of Owning a Cafe",
+      "The Economics of Owning a Vending Machine Business",
+      "The Economics of Owning a Vending Machine Empire"
+     ]
+    },
+    "aviation": {
+     "verdict": "TAKEN",
+     "per_video": 1.65,
+     "best_views": 57624,
+     "latest": "2026-05-04",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 8.9,
+     "slot_anchors": [
+      "The Economics of Owning A Plane"
+     ]
+    },
+    "maritime": {
+     "verdict": "TAKEN",
+     "per_video": 16.76,
+     "best_views": 586467,
+     "latest": "2026-04-02",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 8.2,
+     "slot_anchors": [
+      "The Economics of Owning A Ship"
+     ]
+    },
+    "disasters": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "parenting": {
+     "verdict": "THIN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 23.4,
+     "slot_anchors": [
+      "The Economics of Owning a Trampoline Park: Why 80% of Owners"
+     ]
+    },
+    "relationships": {
+     "verdict": "THIN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 21.9,
+     "slot_anchors": [
+      "The Economics of Owning A Pet Store"
+     ]
+    },
+    "self-improvement": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "travel": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "food & cooking": {
+     "verdict": "TAKEN",
+     "per_video": 1.24,
+     "best_views": 194144,
+     "latest": "2026-08-10",
+     "n_matches": 13,
+     "n_results": 13,
+     "median_runtime_min": 21.4,
+     "slot_anchors": [
+      "The Economics Of Owning A Grocery Store",
+      "The Economics of Owning A Pet Store",
+      "The Economics of Owning a Bowling Alley",
+      "The Economics of Owning a Food Truck",
+      "The Economics of Owning a McDonald's Franchise",
+      "The Economics of Owning a McDonald\u2019s Franchise"
+     ]
+    },
+    "fashion & beauty": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "home & DIY": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cars & automotive": {
+     "verdict": "TAKEN",
+     "per_video": 0.94,
+     "best_views": 89918,
+     "latest": "2026-08-10",
+     "n_matches": 4,
+     "n_results": 4,
+     "median_runtime_min": 20.4,
+     "slot_anchors": [
+      "The Economics of Owning a Car Dealership",
+      "The Economics of Owning a Courier Business",
+      "The Economics of Owning a Football Pitch Rental Business",
+      "The Economics of Owning a Parking Lot"
+     ]
+    },
+    "pets": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gardening": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gaming": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sports": {
+     "verdict": "THIN",
+     "per_video": 0.67,
+     "best_views": 2,
+     "latest": "2026-08-10",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 14.8,
+     "slot_anchors": [
+      "The Economics of Owning a Football Club"
+     ]
+    },
+    "football (soccer)": {
+     "verdict": "TAKEN",
+     "per_video": 14.83,
+     "best_views": 63772,
+     "latest": "2026-08-10",
+     "n_matches": 4,
+     "n_results": 4,
+     "median_runtime_min": 15.65,
+     "slot_anchors": [
+      "The Economics of Owning A Soccer Team",
+      "The Economics of Owning a Football Club",
+      "The Economics of Owning a Football Club ((The Hidden Costs)",
+      "The Economics of Owning a Football Pitch Rental Business"
+     ]
+    },
+    "basketball": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "movies & TV": {
+     "verdict": "TAKEN",
+     "per_video": 0.92,
+     "best_views": 54398,
+     "latest": "2026-07-09",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 36.0,
+     "slot_anchors": [
+      "The Economics of Owning a Cinema"
+     ]
+    },
+    "music": {
+     "verdict": "TAKEN",
+     "per_video": 1.52,
+     "best_views": 42283,
+     "latest": "2026-05-18",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 10.1,
+     "slot_anchors": [
+      "The Economics of Owning a Cemetery"
+     ]
+    },
+    "anime": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "celebrity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "comics & superheroes": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 102,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    }
+   },
+   "provenance": "teardown:UC6RcE6Vif-2ZDo0XvufHVSQ:2026-08-10",
+   "measured": {
+    "lift": 22.16,
+    "slots": 4,
+    "share": 0.26666666666666666,
+    "median_views": 3900,
+    "median_rest": 176,
+    "spread": 36.82,
+    "positions": "0-8",
+    "recent_hits": 4,
+    "anchors": [
+     "Medieval Village",
+     "Pirate Port Tavern",
+     "Medieval Winery",
+     "Wild West Cattle Empire"
+    ]
+   },
+   "added": "2026-08-10",
+   "notes": "Measured on ONE channel (UC6RcE6Vif-2ZDo0XvufHVSQ): 4 filled slots at 22.16x its own rest. Portability across channels is UNTESTED \u2014 that is format-index.py's >=3-channel rule, then bend-map.py.",
+   "grid_measured": "2026-08-10",
+   "grid_region": "US"
   }
  },
  "seeded": "2026-08-10",
