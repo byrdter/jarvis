@@ -398,9 +398,9 @@ SEED = [
     {
         "format_id": "exhaustive-analysis-flex",
         "anchor": "concrete", "refill_slots": None,
-        "name": "I analysed all N of X so you don't have to",
+        "name": "I analyzed all N of X so you don't have to",
         "visual": "data-viz first: charts with labelled axes, tables, one lit row",
-        "title_template": "I analysed all {N} {X} so you don't have to",
+        "title_template": "I analyzed all {N} {X} so you don't have to",
         "title_regex": r"\bi (analy[sz]ed|studied|read|watched) (all|every)\b",
         "runtime_min": [8, 25], "tier": "green", "cost_usd": [60, 250],
         "seed_channel": "(math/battleship channel cited in corpus)",

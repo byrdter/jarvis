@@ -228,8 +228,665 @@
    ],
    "provenance": "vidiq:FltNsyPXNdo",
    "notes": "The vidIQ teardown's clearest clone chain: wealth -> jobs -> emergency services, each a separate channel at $2k-$15k/mo. Ladder = progress spine.",
-   "markets_occupied": {},
-   "added": "2026-08-10"
+   "markets_occupied": {
+    "personal finance": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "investing & stock market": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "retirement planning": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "insurance": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "real estate": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "economics": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "accounting": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "taxes": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "credit & debt": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "banking": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "crypto": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "business strategy": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "management & leadership": {
+     "verdict": "VACATED",
+     "per_video": null,
+     "best_views": 3442238,
+     "latest": "2024-05-10",
+     "n_matches": 2,
+     "n_results": 2,
+     "median_runtime_min": 20.0,
+     "slot_anchors": [
+      "Ranking EVERY Boss Fight In Super Mario Odyssey!",
+      "Ranking Every Cuphead Boss"
+     ]
+    },
+    "entrepreneurship": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "marketing": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "B2B & SaaS": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "information systems": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "supply chain": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sales": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "careers & jobs": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "higher education": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "productivity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "nutrition": {
+     "verdict": "TAKEN",
+     "per_video": null,
+     "best_views": 633389,
+     "latest": "2025-06-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 2.8,
+     "slot_anchors": [
+      "Ranking EVERY Heat Level of Daves Hot Chicken MILD to REAPER"
+     ]
+    },
+    "fitness & exercise": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "longevity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "mental health": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sleep": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "medicine": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "AI & machine learning": {
+     "verdict": "TAKEN",
+     "per_video": null,
+     "best_views": 633389,
+     "latest": "2025-06-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 2.8,
+     "slot_anchors": [
+      "Ranking EVERY Heat Level of Daves Hot Chicken MILD to REAPER"
+     ]
+    },
+    "software engineering": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "consumer tech": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cybersecurity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "space": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "history": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "military history": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "science": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "psychology": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "philosophy": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "true crime": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "geography": {
+     "verdict": "VACATED",
+     "per_video": null,
+     "best_views": 2420105,
+     "latest": "2024-03-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 0.6,
+     "slot_anchors": [
+      "Ranking Every Country"
+     ]
+    },
+    "engineering & how-things-work": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "aviation": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "maritime": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "disasters": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "parenting": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "relationships": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "self-improvement": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "travel": {
+     "verdict": "VACATED",
+     "per_video": null,
+     "best_views": 2420105,
+     "latest": "2024-03-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 0.6,
+     "slot_anchors": [
+      "Ranking Every Country"
+     ]
+    },
+    "food & cooking": {
+     "verdict": "TAKEN",
+     "per_video": null,
+     "best_views": 633389,
+     "latest": "2025-06-15",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 2.8,
+     "slot_anchors": [
+      "Ranking EVERY Heat Level of Daves Hot Chicken MILD to REAPER"
+     ]
+    },
+    "fashion & beauty": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "home & DIY": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cars & automotive": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "pets": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gardening": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gaming": {
+     "verdict": "TAKEN",
+     "per_video": 11.83,
+     "best_views": 8386093,
+     "latest": "2026-08-08",
+     "n_matches": 5,
+     "n_results": 5,
+     "median_runtime_min": 1.0,
+     "slot_anchors": [
+      "P Ranking EVERY custom level: William Tell Overheat [31]",
+      "RANKING EVERY ADVANCED TOWER #roblox #tds #gaming #towerdefe",
+      "Ranking EVERY World in Super Mario Bros",
+      "Ranking Every Legendary Trio from Worst to Best",
+      "Ranking Every Mewtwo Form from Worst to Best"
+     ]
+    },
+    "sports": {
+     "verdict": "TAKEN",
+     "per_video": null,
+     "best_views": 2408215,
+     "latest": "2025-06-26",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 31.0,
+     "slot_anchors": [
+      "Ranking Every Gymnastics Skill From WORST To BEST!"
+     ]
+    },
+    "football (soccer)": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "basketball": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "movies & TV": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "music": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "anime": {
+     "verdict": "VACATED",
+     "per_video": null,
+     "best_views": 8386093,
+     "latest": "2024-04-18",
+     "n_matches": 2,
+     "n_results": 2,
+     "median_runtime_min": 0.95,
+     "slot_anchors": [
+      "Ranking Every Legendary Trio from Worst to Best",
+      "Ranking Every Mewtwo Form from Worst to Best"
+     ]
+    },
+    "celebrity": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "comics & superheroes": {
+     "verdict": "FREE",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 73,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    }
+   },
+   "added": "2026-08-10",
+   "grid_measured": "2026-08-10",
+   "grid_region": "US"
   },
   "ai-moral-dilemma": {
    "format_id": "ai-moral-dilemma",
@@ -361,9 +1018,9 @@
    "format_id": "exhaustive-analysis-flex",
    "anchor": "concrete",
    "refill_slots": null,
-   "name": "I analysed all N of X so you don't have to",
+   "name": "I analyzed all N of X so you don't have to",
    "visual": "data-viz first: charts with labelled axes, tables, one lit row",
-   "title_template": "I analysed all {N} {X} so you don't have to",
+   "title_template": "I analyzed all {N} {X} so you don't have to",
    "title_regex": "\\bi (analy[sz]ed|studied|read|watched) (all|every)\\b",
    "runtime_min": [
     8,
@@ -388,8 +1045,643 @@
    ],
    "provenance": "corpus:bgvQ01qhSRA",
    "notes": "SKILL-BARRIER format: the work is the moat and cannot be faked. Highest prima facie fit with a research-led operator and with our own data layer.",
-   "markets_occupied": {},
-   "added": "2026-08-10"
+   "markets_occupied": {
+    "personal finance": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "investing & stock market": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "retirement planning": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "insurance": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "real estate": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "economics": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "accounting": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "taxes": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "credit & debt": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "banking": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "crypto": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "business strategy": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "management & leadership": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "entrepreneurship": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "marketing": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "B2B & SaaS": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "information systems": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "supply chain": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sales": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "careers & jobs": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "higher education": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "productivity": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "nutrition": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "fitness & exercise": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "longevity": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "mental health": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "sleep": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "medicine": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "AI & machine learning": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "software engineering": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "consumer tech": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cybersecurity": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "space": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "history": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "military history": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "science": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "psychology": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "philosophy": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "true crime": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "geography": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "engineering & how-things-work": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "aviation": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "maritime": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "disasters": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "parenting": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "relationships": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "self-improvement": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "travel": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "food & cooking": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "fashion & beauty": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "home & DIY": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "cars & automotive": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "pets": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gardening": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "gaming": {
+     "verdict": "THIN",
+     "per_video": 0.48,
+     "best_views": 303,
+     "latest": "2026-07-29",
+     "n_matches": 1,
+     "n_results": 1,
+     "median_runtime_min": 11.5,
+     "slot_anchors": [
+      "I analyzed every Iceberg video so you don't have to"
+     ]
+    },
+    "sports": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "football (soccer)": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "basketball": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "movies & TV": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "music": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "anime": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "celebrity": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    },
+    "comics & superheroes": {
+     "verdict": "UNPROVEN",
+     "per_video": null,
+     "best_views": 0,
+     "latest": null,
+     "n_matches": 0,
+     "n_results": 3,
+     "median_runtime_min": 0,
+     "slot_anchors": []
+    }
+   },
+   "added": "2026-08-10",
+   "grid_measured": "2026-08-10",
+   "grid_region": "US"
   },
   "rapid-news-3d": {
    "format_id": "rapid-news-3d",
