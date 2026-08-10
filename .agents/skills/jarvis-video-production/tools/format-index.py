@@ -60,6 +60,36 @@ WHAT THIS TOOL DOES NOT DO -- READ BEFORE TRUSTING THE OUTPUT
   It also does NOT rank formats. Ranking needs market size x RPM (scout-niches.py) and trend
   stage (trend-stage.py). A format alone is not an opportunity.
 
+⛔ --discover DOES NOT WORK AS A DISCOVERY METHOD. MEASURED AND FAILED 2026-08-10.
+  Read this before spending another credit on it. Across 2,288 pooled videos from 1,903
+  channels (~25 outlier calls), n-gram mining produced 8 frames at the 4-token floor, of which
+  SIX were ordinary English and TWO were tested end-to-end and failed:
+      "this will be worse than a"  -> 0 matches in a 168-video enumeration. Not enumerable.
+      "must do this before"        -> 4 matches, best cell "Dr Joe Dispenza: You MUST Do This
+                                      Before 10am!", a 120-minute podcast. Generic English.
+  Zero usable formats. The earlier 3-token run was worse: every promoted frame enumerated to
+  meme Shorts ("Nothing worse than a bad day gym day", "Best 6 year old Soccer player").
+
+  THE DESIGN ERROR, so nobody rebuilds this: a format's signature is ONE CHANNEL'S OWN
+  repeated template. Across unrelated channels, the only thing that recurs is English. The
+  ">=3 distinct channels" rule is Danilov's test for whether a format you ALREADY KNOW is
+  PORTABLE -- a validation rule. It was built here as a DISCOVERY rule, and it cannot be one,
+  because generic phrases clear a 3-channel bar trivially while real formats do not appear in
+  a cross-channel outlier scatter at all.
+
+  WHAT WORKS INSTEAD, already evidenced in our own research: tear down ONE high-performing
+  channel's catalogue and read its repeated template off its own uploads. That is how
+  YOUTUBE-DEMAND-RESEARCH-2026-08-09.md found ExtraMint's ~14 refillable slots and measured the
+  ~19x template lever. Discovery is a TEARDOWN problem, not a mining problem.
+  So the working pipeline is:
+      outlier channel  -> teardown.py    -> the channel's own repeated template + refill count
+      that template    -> format-index   -> catalogue row (>=3 channels = portable?)
+      that row         -> bend-map.py    -> which markets are free
+
+  --discover and --frames are kept because the pooled corpus is reusable and the miner may
+  still surface a lead worth eyeballing. Treat anything it emits as a hint, never a format,
+  and never promote from it without watching the videos.
+
 THE DISCOVERY RULE
   --discover pulls outlier video titles, reduces each to a FRAME (structural tokens kept,
   content spans replaced by {X}), and proposes a format wherever >=MIN_FRAME_CHANNELS
@@ -115,7 +145,15 @@ _SESSION = {}
 MIN_FRAME_CHANNELS = 3      # distinct channels sharing a frame before it is a candidate.
                             # Matches the practitioner rule "the format has >=3 winners":
                             # validated by repetition, not yet owned by a whole channel.
-MIN_FRAME_TOKENS   = 3      # an n-gram shorter than this ("in the") carries no shape
+MIN_FRAME_TOKENS   = 4      # RAISED from 3 on 2026-08-10 after four 3-token frames were
+                            # promoted and every one turned out to be ordinary English rather
+                            # than a format: "worse than a" enumerated to "Nothing worse than a
+                            # bad day gym day #shorts"; "{N} year old" to "Best 6 year old
+                            # Soccer player". A 3-token structural n-gram is a phrase everyone
+                            # uses, and the >=3-distinct-channel rule cannot filter it because
+                            # generic English trivially clears that bar. Distinctiveness comes
+                            # from LENGTH: "so you don't have to" (5) and "explained in {N}
+                            # minutes" (4) are signatures; "do this before" (3) is not.
 MAX_FRAME_TOKENS   = 6      # longer than this and it is one channel's exact title formula
 MIN_CONTENT_WORDS  = 2      # non-{N} tokens required; kills numeric artifacts like '{N} {N}'
 NEW_FORMAT_DAYS    = 120    # earliest seed channel younger than this => flag as NEW
@@ -833,6 +871,97 @@ def do_markets(a):
           f"axis\nbend-map.py ranks free cells on. 'avoid' markets are never surfaced.")
 
 
+def frame_to_regex(frame):
+    """Turn a mined spine into a title_regex bend-map.py can match on.
+
+    The spine is a contiguous run of structural tokens, so the regex is that run with word
+    boundaries, {N} standing for any number, and flexible whitespace. Deliberately literal:
+    a cleverer regex would match things the miner never actually saw, and the whole point of
+    a promoted frame is that it describes observed titles rather than imagined ones.
+    """
+    parts = []
+    for w in frame.split():
+        if w == "{N}":
+            parts.append(r"\d[\d,\.]*")
+        else:
+            parts.append(re.escape(w).replace(r"\'", "'"))
+    return r"\b" + r"\s+".join(parts) + r"\b"
+
+
+def do_promote(idx, a):
+    """Promote a mined frame into a catalogue row so bend-map.py can walk it.
+
+    This is the join between the two tools, and it was missing: --discover wrote candidate
+    frames to discovered[] and nothing could consume them. Promotion is deliberately a
+    SEPARATE, EXPLICIT step -- a frame is a place to look, and turning it into a format is a
+    judgement about what the videos actually are. The row lands with provenance
+    'discovered:<date>' so it never reads like a measured format.
+    """
+    frames = [f for run in idx.get("discovered", []) for f in run.get("frames", [])]
+    if not frames:
+        sys.exit("nothing discovered yet. Run --discover first.")
+    hit = next((f for f in frames if f["frame"] == a.promote), None)
+    if not hit:
+        near = [f["frame"] for f in frames if a.promote.lower() in f["frame"].lower()]
+        sys.exit(f"no discovered frame '{a.promote}'."
+                 + (f"\nDid you mean:\n  " + "\n  ".join(near[:6]) if near else ""))
+
+    fid = a.as_id or re.sub(r"[^a-z0-9]+", "-", hit["frame"].replace("{N}", "n")).strip("-")
+    if fid in idx["formats"] and not a.force:
+        sys.exit(f"'{fid}' already in the catalogue. --force to overwrite.")
+
+    idx["formats"][fid] = {
+        "format_id": fid,
+        "name": hit.get("template") or hit["frame"],
+        "anchor": a.anchor, "refill_slots": None,
+        "visual": None,                      # unknown until someone watches them
+        "title_template": hit.get("template") or hit["frame"],
+        "title_regex": frame_to_regex(hit["frame"]),
+        "runtime_min": [hit["median_runtime_min"], hit["median_runtime_min"]],
+        "tier": None, "cost_usd": None,      # claims we have not earned
+        "seed_channel": ", ".join(hit.get("channels", [])[:3]),
+        "corpus_occupied": [], "corpus_free": [],
+        "markets_occupied": {},
+        "provenance": f"discovered:{dt.date.today().isoformat()}",
+        "discovered_evidence": {k: hit.get(k) for k in
+                                ("n_channels", "n_videos", "per_video", "median_views",
+                                 "median_runtime_min", "categories", "examples")},
+        "added": dt.date.today().isoformat(),
+        "notes": "PROMOTED FROM A MINED FRAME. tier/visual/cost are unset because nobody has "
+                 "watched these videos yet. Fill them in from a teardown before treating this "
+                 "as a real catalogue row.",
+    }
+    save(idx)
+    print(f"promoted '{hit['frame']}' -> {fid}")
+    print(f"  regex     {idx['formats'][fid]['title_regex']}")
+    print(f"  evidence  {hit['n_channels']} channels · {hit['n_videos']} videos · "
+          f"per-video {hit.get('per_video')}x · {hit['median_runtime_min']}m")
+    print(f"  next      bend-map.py --format {fid}")
+
+
+def do_frames(idx, a):
+    """Re-mine the accumulated pool with no API call. Free."""
+    pool_path = TOOLS / "raw" / "formats" / "corpus.json"
+    if not pool_path.exists():
+        sys.exit("no pool yet. Run --discover.")
+    vids = list(json.loads(pool_path.read_text()).values())
+    frames = extract_frames(vids)
+    chans = len({v.get("channelId") for v in vids})
+    print(f"{len(vids)} pooled videos · {chans} channels -> {len(frames)} frames\n")
+    print(f"{'ch':>3} {'vid':>4} {'per-vid':>8} {'run':>5} {'med views':>10}  frame")
+    print("-" * 100)
+    for r in frames[: a.top or 25]:
+        pv = f"{r['per_video']:.2f}x" if r["per_video"] else "—"
+        print(f"{r['n_channels']:>3} {r['n_videos']:>4} {pv:>8} {r['median_runtime_min']:>4.0f}m "
+              f"{r['median_views']:>10,}  {r['frame']}")
+        print(f"{'':34}e.g. {str(r['examples'][0])[:64]}")
+    # persist so --promote can consume whatever --frames just showed
+    idx.setdefault("discovered", []).append({
+        "run": dt.date.today().isoformat(), "keyword": "(pool re-mine)",
+        "n_videos": len(vids), "frames": frames[: a.top or 25]})
+    save(idx)
+
+
 def do_discover(idx, a):
     args = {"limit": min(a.limit, 100), "contentType": "long",
             "publishedWithin": a.within, "sort": "score"}
@@ -913,6 +1042,13 @@ def main():
     p.add_argument("--tier", choices=sorted(TIERS), help="with --list, filter")
     p.add_argument("--market", help="with --list, only formats touching this market")
     p.add_argument("--discover", action="store_true", help="sweep outliers for new frames")
+    p.add_argument("--frames", action="store_true",
+                   help="re-mine the accumulated pool, no API call, free")
+    p.add_argument("--promote", metavar="FRAME",
+                   help="promote a mined frame into a walkable catalogue row")
+    p.add_argument("--as-id", help="with --promote, override the generated format_id")
+    p.add_argument("--anchor", choices=["concrete", "abstract"], default="concrete",
+                   help="with --promote, does the frame name a thing or a feeling")
     p.add_argument("--keyword", help="with --discover, topic filter")
     p.add_argument("--within", default="threeMonths",
                    choices=["thisWeek", "thisMonth", "threeMonths", "sixMonths", "oneYear"])
@@ -929,6 +1065,10 @@ def main():
         return do_markets(a)
     if a.show:
         return do_show(idx, a.show)
+    if a.frames:
+        return do_frames(idx, a)
+    if a.promote:
+        return do_promote(idx, a)
     if a.discover:
         return do_discover(idx, a)
     if a.list or True:

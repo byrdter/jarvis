@@ -133,6 +133,7 @@ MIN_TAKEN_VIEWS  = 25_000 # a match below this did not travel; it is THIN eviden
 MIN_RESULTS_FREE = 8      # a probe returning fewer than this says nothing -> UNPROVEN, not FREE
 REACHABLE_SUBS   = 300_000  # BAND_SUBS in scout-niches.py -- "reachable from cold"
 PROBE_LIMIT      = 50     # vidIQ hard cap. Fewer would bias toward mega-channels.
+COHERENCE_MIN    = 0.40   # share of matches that must sit near the format's declared runtime
 CREDITS_PER_CALL = 5
 
 # Audience-facing search terms per market. NOT our internal labels -- see the CONFOUNDS note.
@@ -450,6 +451,25 @@ def run_enumerate(fmt, markets, a, fi):
         print("  NO INSTANCE OF THIS FRAME FOUND ANYWHERE. That is a probe or regex problem,\n"
               "  not proof the format is unused — treat every cell as UNPROVEN.")
 
+    # COHERENCE GATE. A frame that enumerates to videos of wildly different LENGTH is not one
+    # format -- it is a phrase. Caught 2026-08-10: four promoted 3-token frames all enumerated
+    # to a mix of 20-minute finance essays and 15-second meme Shorts, and produced free_ratios
+    # of 90-100% that meant nothing. Runtime is the cheapest coherence signal available from
+    # this endpoint, and it is decisive: a format has a characteristic length.
+    if matches:
+        durs = [duration_min(v.get("duration")) for v in matches]
+        shorts = sum(1 for d in durs if d < 1.5) / len(durs)
+        band = fmt.get("runtime_min") or [0, 0]
+        in_band = sum(1 for d in durs if band[0] * 0.5 <= d <= max(band[1] * 2, 3)) / len(durs)
+        if shorts > 0.3 or in_band < COHERENCE_MIN:
+            print(f"\n  ⚠ INCOHERENT FRAME — {shorts:.0%} of matches are Shorts, "
+                  f"{in_band:.0%} fall near the declared {band[0]}-{band[1]}m runtime.")
+            print("  This regex is matching ORDINARY ENGLISH, not a format signature. Verdicts\n"
+                  "  below are meaningless; free_ratio is suppressed. Promote a LONGER frame.")
+            for v in matches[:4]:
+                print(f"    · {duration_min(v.get('duration')):>5.1f}m  {(v.get('title') or '')[:64]}")
+            fmt["_incoherent"] = True
+
     binned, unclassified = {m: [] for m in markets}, []
     for v in matches:
         hits = [m for m in assign_market(v, fi) if m in binned]
@@ -520,6 +540,9 @@ def report(fmt, rows, fi):
     # free_ratio is computed over DECIDED cells only. Counting UNPROVEN as free would inflate
     # the headline number with our own ignorance -- the exact failure the verdict split exists
     # to prevent.
+    if fmt.get("_incoherent"):
+        print("\n  free_ratio SUPPRESSED — the frame failed the coherence gate above.")
+        return
     ratio = len(free_like) / len(decided)
     print(f"  free_ratio = {len(free_like)}/{len(decided)} decided = {ratio:.0%}"
           f"   {'ABOVE' if ratio > 0.5 else 'below'} the 50% rule"

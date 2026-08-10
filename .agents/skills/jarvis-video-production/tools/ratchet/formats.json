@@ -1814,261 +1814,9 @@
  "discovered": [
   {
    "run": "2026-08-10",
-   "keyword": "real estate housing market property",
-   "within": "threeMonths",
-   "n_videos": 199,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "business strategy management leadership",
-   "within": "threeMonths",
-   "n_videos": 298,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "insurance life insurance health insurance",
-   "within": "threeMonths",
-   "n_videos": 396,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "economy recession inflation economics",
-   "within": "threeMonths",
-   "n_videos": 492,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "stock market stocks trading portfolio",
-   "within": "threeMonths",
-   "n_videos": 588,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "nutrition diet healthy eating",
-   "within": "threeMonths",
-   "n_videos": 687,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "small business entrepreneur startup",
-   "within": "threeMonths",
-   "n_videos": 780,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "budgeting saving debt payoff",
-   "within": "threeMonths",
-   "n_videos": 875,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "taxes tax planning IRS",
-   "within": "threeMonths",
-   "n_videos": 974,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "career job salary interview",
-   "within": "threeMonths",
-   "n_videos": 1071,
-   "frames": []
-  },
-  {
-   "run": "2026-08-10",
-   "keyword": "retirement income social security",
-   "within": "threeMonths",
-   "n_videos": 1160,
+   "keyword": "(pool re-mine)",
+   "n_videos": 2288,
    "frames": [
-    {
-     "frame": "is about to",
-     "n_videos": 8,
-     "n_channels": 8,
-     "median_views": 81446,
-     "per_video": 1.17,
-     "median_runtime_min": 19.8,
-     "categories": [
-      "Society",
-      "Knowledge",
-      "Politics"
-     ],
-     "channels": [
-      "Buying Southern Oregon",
-      "LIVING IN BREMERTON\u2120 - OFFICIAL",
-      "MarketBeat Clips",
-      "Michelle Eames - Helpbox UK",
-      "Miles Franklin Media",
-      "Outback Crisis"
-     ],
-     "template": "is about to",
-     "examples": [
-      "Bremerton's Housing Market Is About To Change Forever!",
-      "Southern Oregon's Housing Market Is About To Change FOREVER!",
-      "\u2018Buckle Your Seatbelt\u2019: Inflation Is About to Get Much Worse | Lawrence Lepard & Michelle Makori"
-     ]
-    },
-    {
-     "frame": "worse than a",
-     "n_videos": 7,
-     "n_channels": 7,
-     "median_views": 49329,
-     "per_video": 4.61,
-     "median_runtime_min": 18.1,
-     "categories": [
-      "Knowledge",
-      "Hobby",
-      "Society"
-     ],
-     "channels": [
-      "Buying Bend w/ Luke Callahan",
-      "LifeWorthLiving",
-      "Market Disruptors Podcast",
-      "Miami Living with Milton",
-      "Prof Jiang Explains",
-      "The Silver Market"
-     ],
-     "template": "this will be worse than a {X} in",
-     "examples": [
-      "This Will Be WORSE Than A Housing Market Crash In San Jose!",
-      "This Will Be Worse Than A Housing Market Crash In Miami!",
-      "This Will Be Worse Than A Housing Market Crash In Bend OR"
-     ]
-    },
-    {
-     "frame": "how to start",
-     "n_videos": 6,
-     "n_channels": 6,
-     "median_views": 73197,
-     "per_video": 2.98,
-     "median_runtime_min": 18.6,
-     "categories": [
-      "Knowledge",
-      "Lifestyle (sociology)"
-     ],
-     "channels": [
-      "Geoff Cole",
-      "KaashSeAkash",
-      "Kimberly Mitchell",
-      "Mind & Markets",
-      "Relentless",
-      "The Aesthetic Dollar"
-     ],
-     "template": "how to start {X} in {N} {X} vs {X} vs {X} vs",
-     "examples": [
-      "How to Start Investing in 2026 | Mutual Funds vs Stocks vs Gold vs Crypto ft @InvestYadnya",
-      "Sam Altman - How to Start a Startup",
-      "How to Start a Small Cargo Van Business for $500"
-     ]
-    },
-    {
-     "frame": "is worse than",
-     "n_videos": 7,
-     "n_channels": 5,
-     "median_views": 49329,
-     "per_video": 1.86,
-     "median_runtime_min": 12.2,
-     "categories": [
-      "Knowledge",
-      "Society",
-      "Politics"
-     ],
-     "channels": [
-      "LifeWorthLiving",
-      "Market Disruptors Podcast",
-      "Prof Jiang Explains",
-      "Richard Vague",
-      "The Silver Market"
-     ],
-     "template": "is worse than a",
-     "examples": [
-      "What's Coming is Worse Than A Recession | Ed Dowd",
-      "\"What's Coming Is WORSE Than A Recession...\" - Peter Schiff",
-      "\"What's Coming Is WORSE Than A Recession...\" | Prof. Jiang Xueqin"
-     ]
-    },
-    {
-     "frame": "to start a",
-     "n_videos": 5,
-     "n_channels": 5,
-     "median_views": 78361,
-     "per_video": 1.72,
-     "median_runtime_min": 12.6,
-     "categories": [
-      "Knowledge",
-      "Lifestyle (sociology)"
-     ],
-     "channels": [
-      "Geoff Cole",
-      "Kimberly Mitchell",
-      "Mwalimu Arabu Adede",
-      "Relentless",
-      "The Aesthetic Dollar"
-     ],
-     "template": "how to start a",
-     "examples": [
-      "Sam Altman - How to Start a Startup",
-      "How to Start a Small Cargo Van Business for $500",
-      "How To Start a Product Business Without Knowing a Single Manufacturer (Accio Work)"
-     ]
-    },
-    {
-     "frame": "step by step",
-     "n_videos": 5,
-     "n_channels": 5,
-     "median_views": 12198,
-     "per_video": 0.35,
-     "median_runtime_min": 14.2,
-     "categories": [
-      "Lifestyle (sociology)",
-      "Entertainment",
-      "Knowledge"
-     ],
-     "channels": [
-      "Academic Gain Tutorials",
-      "Budgeting Just Because",
-      "Grow with Bhaskar",
-      "Logical Money",
-      "Shonta the Tax Strategist"
-     ],
-     "template": "the {X} from {X} to {X} step by step",
-     "examples": [
-      "The Transition from Saving to Investing \u2014 Step by Step",
-      "The Ultimate 2026 Startup Guide: Grow Your Business Step By Step @BaseshGala",
-      "How to Set Up Your Monthly Budget (Step-by-Step for Beginners) | #budgeting #savingmoney"
-     ]
-    },
-    {
-     "frame": "{N} years of",
-     "n_videos": 4,
-     "n_channels": 4,
-     "median_views": 17526,
-     "per_video": 9.38,
-     "median_runtime_min": 12.8,
-     "categories": [
-      "Knowledge",
-      "Business"
-     ],
-     "channels": [
-      "ISSA Media",
-      "Kyith Ng",
-      "Smart X Capital",
-      "Trade The Pool"
-     ],
-     "template": "my {N} {N} {X} after {N} years of {X} a",
-     "examples": [
-      "My $1.85 Million Income Portfolio, After 23 Years of Investing (A Singaporean's portfolio journey)",
-      "What 250 Years of America Can Teach Business Owners About Leadership",
-      "Why the Stock Market Refuses to Crash \u2014 Until It Doesn't (150 Years of Evidence)"
-     ]
-    },
     {
      "frame": "up to {N} {N}",
      "n_videos": 5,
@@ -2119,27 +1867,143 @@
      ]
     },
     {
-     "frame": "{N} year old",
+     "frame": "how to start a",
      "n_videos": 4,
      "n_channels": 4,
-     "median_views": 67110,
-     "per_video": 4.22,
-     "median_runtime_min": 32.5,
+     "median_views": 282273,
+     "per_video": 2.98,
+     "median_runtime_min": 18.6,
+     "categories": [
+      "Knowledge",
+      "Lifestyle (sociology)"
+     ],
+     "channels": [
+      "Geoff Cole",
+      "Kimberly Mitchell",
+      "Relentless",
+      "The Aesthetic Dollar"
+     ],
+     "template": "how to start a",
+     "examples": [
+      "Sam Altman - How to Start a Startup",
+      "How to Start a Small Cargo Van Business for $500",
+      "How To Start a Product Business Without Knowing a Single Manufacturer (Accio Work)"
+     ]
+    },
+    {
+     "frame": "{N} {N} if you",
+     "n_videos": 3,
+     "n_channels": 3,
+     "median_views": 330019,
+     "per_video": 26.19,
+     "median_runtime_min": 19.6,
      "categories": [
       "Lifestyle (sociology)",
       "Knowledge"
      ],
      "channels": [
-      "Family First Life",
-      "Pagesofpandora",
-      "The Hol\u207a Show",
-      "hachisuke-daily life in Japan"
+      "Aging with Wisdom",
+      "Dr. Dani Fisher | MD Anesthesiologist | Aging Well",
+      "livewell after60"
      ],
-     "template": "the {N} {N} year old",
+     "template": "for {X} {N} {N} if you still have these {N} {X} you're beating",
      "examples": [
-      "The 2,000-Year-Old Business Strategy Outperforming Modern CEOs | Abhiraj Gupta",
-      "How a 23-Year-Old Made $900,000 in His First Year Selling Life Insurance",
-      "74-Year-Old Jane Seymour: Forget Everything You Know About Healthy Eating"
+      "For Ages 60-80: If You Still Have These 5 Abilities, You're Beating Aging",
+      "\"Ages 75\u201385: If You Can Still Do These 6 Things, You're Aging Better Than Most | Dr. Aliza Wright\"",
+      "For Ages 60-80: If You Still Have These 5 Abilities, You're Beating Aging  | Senior Health"
+     ]
+    },
+    {
+     "frame": "this will be worse than a",
+     "n_videos": 3,
+     "n_channels": 3,
+     "median_views": 18721,
+     "per_video": 24.28,
+     "median_runtime_min": 18.1,
+     "categories": [
+      "Hobby",
+      "Knowledge"
+     ],
+     "channels": [
+      "Buying Bend w/ Luke Callahan",
+      "Miami Living with Milton",
+      "Your Trusted Real Estate Guy\u2122"
+     ],
+     "template": "this will be worse than a {X} in",
+     "examples": [
+      "This Will Be WORSE Than A Housing Market Crash In San Jose!",
+      "This Will Be Worse Than A Housing Market Crash In Miami!",
+      "This Will Be Worse Than A Housing Market Crash In Bend OR"
+     ]
+    },
+    {
+     "frame": "must do this before",
+     "n_videos": 3,
+     "n_channels": 3,
+     "median_views": 66352,
+     "per_video": 11.71,
+     "median_runtime_min": 19.0,
+     "categories": [
+      "Society",
+      "Rock music"
+     ],
+     "channels": [
+      "Hank Mercer",
+      "RealValue Tax",
+      "Thomas Merritt"
+     ],
+     "template": "every {X} must do this before {X} {N} new",
+     "examples": [
+      "Every Senior Must Do This Before July 2026 \u2014 New Social Security Bank Rule",
+      "Every Senior Must Do This Before July 2026 \u2014 New Social Security Bank Rule",
+      "Every Senior Must Do This Before August 15TH \u2014 New Social Security Direct Deposit Rule"
+     ]
+    },
+    {
+     "frame": "that could cost you",
+     "n_videos": 3,
+     "n_channels": 3,
+     "median_views": 31031,
+     "per_video": 1.9,
+     "median_runtime_min": 9.6,
+     "categories": [
+      "Business",
+      "Knowledge",
+      "Society"
+     ],
+     "channels": [
+      "BA Podcast Guys",
+      "Fusco On Insurance",
+      "Retirement Renegade"
+     ],
+     "template": "that could cost you",
+     "examples": [
+      "Lockheed Martin Retirement | Hidden Risks That Could Cost You",
+      "Umbrella vs. Excess Insurance (The Difference That Could Cost You)",
+      "The Social Security Strategy That Could Cost You Thousands"
+     ]
+    },
+    {
+     "frame": "do these {N} things",
+     "n_videos": 3,
+     "n_channels": 3,
+     "median_views": 81286,
+     "per_video": 1.7,
+     "median_runtime_min": 11.6,
+     "categories": [
+      "Knowledge",
+      "Lifestyle (sociology)"
+     ],
+     "channels": [
+      "Dr. Mitch Rice",
+      "Fo Alexander | Mama & Money\u00ae",
+      "livewell after60"
+     ],
+     "template": "is {X} do these {N} things",
+     "examples": [
+      "Inflation Is Rising - Do These 5 Things Immediately",
+      "\"Ages 75\u201385: If You Can Still Do These 6 Things, You're Aging Better Than Most | Dr. Aliza Wright\"",
+      "At 70, If Your Body Can Still Do These 5 Things, You're Aging Backwards"
      ]
     }
    ]
