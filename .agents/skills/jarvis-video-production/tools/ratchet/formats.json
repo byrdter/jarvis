@@ -2798,6 +2798,92 @@
     "median_per_bucket": 3,
     "total_channels": 26
    }
+  },
+  "evil-business-of-x": {
+   "format_id": "evil-business-of-x",
+   "name": "The Evil Business of [INDUSTRY/COMPANY]",
+   "anchor": "concrete",
+   "refill_slots": 8,
+   "visual": null,
+   "title_template": "The Evil Business of {X}",
+   "title_regex": "\\bthe\\s+evil\\s+business\\s+of\\b",
+   "runtime_min": [
+    13.7,
+    13.7
+   ],
+   "tier": null,
+   "cost_usd": null,
+   "seed_channel": "UCxLYtICsUCWdr1YPrj5DtwA",
+   "corpus_occupied": [],
+   "corpus_free": [],
+   "markets_occupied": {},
+   "provenance": "teardown:UCxLYtICsUCWdr1YPrj5DtwA:2026-08-11",
+   "measured": {
+    "lift": 2.09,
+    "slots": 8,
+    "share": 0.11428571428571428,
+    "median_views": 2300000,
+    "median_rest": 1100000,
+    "spread": 3.05,
+    "positions": "23-62",
+    "recent_hits": 1,
+    "anchors": [
+     "Business of Nestl\u00e9",
+     "Business of Soda",
+     "Economics of Tinder",
+     "Business of 2021",
+     "Business of Cruise Ships",
+     "Business of Breakfast Cereal",
+     "Business of Uber",
+     "Business of China's Great Firewall"
+    ]
+   },
+   "added": "2026-08-11",
+   "notes": "A VARIANT of business-of-x carrying a moral charge. Measured higher in the same sweep: 2.3M median vs 1.7M for the plain frame. The charge supplies an ADVERSARY and a VERDICT \u2014 exactly what the retention standard asks of a cold open \u2014 which is the likeliest reason it outperforms. Best: 'The Evil Business of Nestle' 5.4M.",
+   "authority": "analyst"
+  },
+  "what-does-x-actually-do": {
+   "format_id": "what-does-x-actually-do",
+   "name": "What does [COMPANY/PROFESSION] actually do?",
+   "anchor": "concrete",
+   "refill_slots": 8,
+   "visual": null,
+   "title_template": "What does {X} actually do?",
+   "title_regex": "\\bwhat\\s+(does|do)\\b.{2,40}\\bactually\\s+do\\b",
+   "runtime_min": [
+    10.9,
+    10.9
+   ],
+   "tier": null,
+   "cost_usd": null,
+   "seed_channel": "UC_-hYjoNe4PJNFa9iZ4lraA",
+   "corpus_occupied": [],
+   "corpus_free": [],
+   "markets_occupied": {},
+   "provenance": "teardown:UC_-hYjoNe4PJNFa9iZ4lraA:2026-08-11",
+   "measured": {
+    "lift": 2.05,
+    "slots": 8,
+    "share": 0.13793103448275862,
+    "median_views": 2050000,
+    "median_rest": 1000000,
+    "spread": 2.27,
+    "positions": "4-57",
+    "recent_hits": 2,
+    "anchors": [
+     "What does Palantir",
+     "What investment bankers do",
+     "What does a consultant",
+     "What Wall Street quants do",
+     "What does Oracle",
+     "What does Meta now",
+     "What accountants do",
+     "What venture capitalists do"
+    ]
+   },
+   "added": "2026-08-11",
+   "notes": "Good Work. 8 slots at 2.05M median, 11-15m. Slots filled: Palantir, consultants, investment bankers, Oracle, Meta. Answers a question civilians genuinely cannot answer about firms they have heard of \u2014 borrowed authority via a recognised name, with the analysis as the payoff. Squarely B2B / careers / business strategy.",
+   "authority": "analyst"
   }
  },
  "seeded": "2026-08-10",
