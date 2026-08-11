@@ -60,12 +60,30 @@ def fetch(vid, refresh=False):
     info = os.path.join(d, f"{vid}.info.json")
     if refresh or not os.path.exists(info):
         print(f"  fetch   {vid} ...", flush=True)
+        # `en.*` expands to en, en-US and en-orig -- THREE subtitle downloads for one video.
+        # YouTube 429s the third, yt-dlp aborts, and the info-json is never written. The old
+        # code then reported "private, removed, or bad id" for a perfectly public video, which
+        # is how this cost an hour on 2026-08-11. One track is all parse_vtt ever reads.
         sh(["yt-dlp", "--no-update", "--skip-download", "--write-info-json",
-            "--write-auto-subs", "--write-subs", "--sub-langs", "en.*",
+            "--write-auto-subs", "--write-subs", "--sub-langs", "en-orig,en",
+            "--ignore-errors",          # a subtitle 429 must not cost us the metadata
             "--sub-format", "vtt", "-o", os.path.join(d, "%(id)s"),
             f"https://www.youtube.com/watch?v={vid}"])
     if not os.path.exists(info):
-        return None, None
+        # FALLBACK: captions may have landed while the info-json did not. Metadata is one
+        # cheap call and losing the whole teardown to a rate limit is absurd.
+        got = sorted(glob.glob(os.path.join(d, f"{vid}*.vtt")))
+        print(f"  retry   {vid} metadata only ({'captions present' if got else 'no captions'})",
+              flush=True)
+        r = sh(["yt-dlp", "--no-update", "--skip-download", "--dump-json",
+                f"https://www.youtube.com/watch?v={vid}"])
+        if r.returncode == 0 and r.stdout.strip():
+            open(info, "w", encoding="utf8").write(r.stdout)
+        else:
+            print(f"  !! {vid}: metadata fetch failed. yt-dlp said:")
+            print("     " + (r.stderr or "").strip().splitlines()[-1][:160] if r.stderr else
+                  "     (no stderr)")
+            return None, None
     vtts = sorted(glob.glob(os.path.join(d, f"{vid}*.vtt")))
     # prefer a manual track (no "-orig", shorter lang tag) over auto-generated
     vtts.sort(key=lambda p: ("auto" in p, len(p)))
@@ -171,7 +189,7 @@ def per_minute(words, dur):
 def teardown(vid, refresh=False):
     info, vtt = fetch(vid, refresh)
     if not info:
-        print(f"  !! {vid}: no metadata -- private, removed, or bad id")
+        print(f"  !! {vid}: no metadata after retry -- private, removed, or bad id")
         return None
     words = parse_vtt(vtt)
     dur = info.get("duration") or (words[-1][0] if words else 0)
