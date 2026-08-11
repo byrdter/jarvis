@@ -37,7 +37,54 @@ Searches for generic titles such as “A Day in 2035” returned many recent vid
 
 No durable YouTube channel was found whose repeated promise is exactly **named current advance → acted near-future consequence → sourced present-day verdict**. That is the opportunity and the risk. Test it as one pilot before changing the whole channel.
 
-## The 6G pilot: one story, five suspects
+## ⛔ SUPERSEDED 2026-08-11 — Terry chose the MOSAIC, not the single incident
+
+**Decision: five stories, one world, intersecting.**
+
+The section below recommends *one incident with five suspects*. That was a Codex recommendation
+that ran AGAINST what Terry originally asked for — his brief said "illustrate those different
+candidates in stories where the effects are clearly seen," i.e. five demonstrations. The
+consolidation was argued from one risk ("five vignettes feel like a capability list in costume"),
+and that risk assumed the five stories would be DISCONNECTED. They do not have to be.
+
+The chosen form is a **mosaic** — *Traffic* / *Babel* / *Short Cuts*: separate protagonists whose
+stories share a world, a timeframe, and crossings. Each candidate gets its own concrete
+demonstration with its own person at stake, so the viewer sees five distinct effects instead of one
+blurred composite; the spine is the shared day rather than an invented taxonomy.
+
+**Why the taxonomy had to go, measured not argued.** The built straightforward master
+(`07-hyperframes-v2-master/renders/MASTER-KeyAdvances-6G-v2-final.mp4`, 12:50) passes every gate in
+the channel standard — information-first cold open, working truth-state labels, persistent spine,
+reversal, CTA after the verdict — and Terry still rejects it. Watched end to end 2026-08-11, the
+reason is legible: **nobody in it wants anything.** The single most emotionally loaded image in
+12:50 is a hypothetical grandmother inside a subordinate clause at 9:57 ("the same radio reflection
+that catches a grandmother's fall can also log when you're home"). Eleven words, and the only human
+at risk in the entire runtime. The docudrama's whole opening is that clause. The five-candidate
+"impact map" is also a structure WE invented, and the prior research is explicit that audiences do
+not search taxonomies.
+
+### What survives from the section below
+The five capability ROLES, the reversal logic, the truth-state system, the production model, the
+risk list, and the 15–18 minute band. Only the single-incident architecture is replaced.
+
+### What the mosaic still needs decided
+1. **The binding device.** PROPOSAL, not a decision: *one town, one storm, one day.* The storm is
+   already in the capability table as reach's obstacle; it stresses the network, puts several people
+   in jeopardy at once, and bounds the timeframe naturally. Alternatives: a single outage, a single
+   public event.
+2. **Is Elena one of the five, or the frame?** The built 82-second opening already contains all five
+   candidates in miniature, so it works either as the whole show's single incident or as the
+   mosaic's first movement. Nothing built so far forecloses it.
+3. **Do the protagonists know each other,** or only cross unknowingly? Mosaics work either way; it
+   changes whether the ending converges or merely rhymes.
+4. **Where the reversal lands** now that there is no single incident to invert.
+5. **Cast and location count** — five protagonists breaks the "limit the cast" discipline in the
+   production model. Reconcile before generation: shared locations and crossings are how a mosaic
+   stays affordable.
+
+---
+
+## Superseded: the 6G pilot as one story, five suspects
 
 ### Carried question
 
