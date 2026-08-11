@@ -255,7 +255,8 @@ def enrich(c):
     return c
 
 
-def sweep(faceless, min_avg_views, since, limit, min_earnings, bands, sorts):
+def sweep(faceless, min_avg_views, since, limit, min_earnings, bands, sorts,
+          categories=None, country=None):
     seen, calls = {}, 0
     for lo, hi in bands:
         for sort_key in sorts:
@@ -265,6 +266,17 @@ def sweep(faceless, min_avg_views, since, limit, min_earnings, bands, sorts):
                 "lastVideoPublishedAfter": since,
                 "sort": sort_key, "limit": limit,
             }
+            # TARGETING, added 2026-08-11. This tool was built as a pure attribute survey with
+            # "no subject filter at all", which is right for establishing baselines and WRONG
+            # when a specific market needs evidence. market-gate BLOCKED on "US Business, 0 of
+            # 647 channels" — not a verdict on the market, just a sweep that never looked there.
+            # An untargeted re-run would resample the same growth-sorted population (which
+            # entertainment dominates) and very likely return zero again. Cheaper and honest to
+            # aim it.
+            if categories:
+                args["mainCategory"] = categories
+            if country:
+                args["country"] = [country]
             if min_earnings:
                 args["estimatedEarningsMin"] = min_earnings
             if faceless is not None:
@@ -309,6 +321,10 @@ def main():
                    help="reject channels younger than this; a farm spikes then dies")
     p.add_argument("--max-uploads-per-month", type=int, default=MAX_UPLOADS_MO,
                    help="above this cadence it is an aggregation operation, not a studio")
+    p.add_argument("--category", action="append",
+                   help="vidIQ mainCategory to target (repeatable). Without it this is an "
+                        "UNTARGETED baseline survey — see the note in sweep().")
+    p.add_argument("--country", help="ISO-2 country of the CHANNEL (not the audience)")
     p.add_argument("--wide", action="store_true",
                    help="SURVEY mode: 8 bands x 3 sorts, for establishing category baselines")
     a = p.parse_args()
@@ -338,7 +354,7 @@ def main():
     since = (dt.date.today() - dt.timedelta(days=a.active_within_days)).isoformat()
     faceless = True if a.production == "faceless" else None
     print(f"SCOUT sweep  production={a.production}  avgViews>={a.min_avg_views:,}  active since {since}")
-    chans, calls = sweep(faceless, a.min_avg_views, since, a.limit, a.min_earnings, bands, sorts)
+    chans, calls = sweep(faceless, a.min_avg_views, since, a.limit, a.min_earnings, bands, sorts, a.category, a.country)
     raw_n = len(chans)
     if a.min_age_months:
         chans = [c for c in chans

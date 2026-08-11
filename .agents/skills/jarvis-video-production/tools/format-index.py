@@ -44,6 +44,17 @@ MEASURED LEVERAGE ORDER — why the format axis is worth building at all
 
   A portable shape with four refills is a dead end for a channel builder. Both are required.
 
+  THE ANCHOR MUST BE CONSUMER-FELT — measured 2026-08-11, and it generalises past one format.
+  Ten B2B/professional-services anchors were written into the proven business-of-x frame and
+  searched free with yt-dlp. None of the ten frames existed, but adjacent demand split them:
+  staffing/hiring 1.66M, commercial real estate 930k, textbooks 533k and PBMs 345k PASSED;
+  enterprise software licensing (96 views), executive search (1,355), title insurance (1,679),
+  corporate training (2,403) and accreditation (3,872) FAILED. The discriminator is not B2B vs
+  consumer — it is whether the VIEWER HAS PERSONALLY EXPERIENCED the thing. An `anchor` may be
+  perfectly concrete and still fail if nobody in the audience has felt it.
+  THE TEST IS FREE AND TAKES A MINUTE: write the candidate title, ytsearch it, and read whether
+  ADJACENT videos on that subject have an audience. Do this before any paid probe.
+
   §7c, three independent confirmations: a CONCRETE ANCHOR beats an abstraction. Object-anchored
   ExtraMint titles carry the numbers while abstract ones underperform; "dead internet theory"
   probes 108.94x where "why does everything online look fake now" returns n=0. Hence the

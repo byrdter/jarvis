@@ -2724,7 +2724,7 @@
     ]
    },
    "added": "2026-08-10",
-   "notes": "Modern MBA. CORRECTED 2026-08-11 after Terry noticed the channel also runs 'The Economics of ...'. The NOUN is interchangeable \u2014 business / economics / world \u2014 and the ADJECTIVE is the real signature: Timeless, Secret, Crumbling, Territorial, Invincible, Shrinking, Evolving, Rigged, Wild, Absurd, Crooked, Hidden. Every instance delivers a one-word VERDICT in the title before the video starts, which is why it satisfies the retention standard's demand for an adversary and a verdict up front. The original regex required the literal word 'business' and therefore EXCLUDED every Economics-of instance, so the first slot count of 54 was an undercount. On Modern MBA's own catalogue: Business-of 10 videos median 1,083,000, Economics-of 5 videos median 783,000, rest of channel 63 videos median 581,000. DO NOT CONFUSE WITH economics-of-owning-a, which is a different format despite sharing a word: that one is 'The Economics of OWNING A [small business]' \u2014 operator authority, ownership-level, declined by Terry. This one is INDUSTRY-level analysis, analyst authority.",
+   "notes": "Modern MBA. CORRECTED 2026-08-11 after Terry noticed the channel also runs 'The Economics of ...'. The NOUN is interchangeable \u2014 business / economics / world \u2014 and the ADJECTIVE is the real signature: Timeless, Secret, Crumbling, Territorial, Invincible, Shrinking, Evolving, Rigged, Wild, Absurd, Crooked, Hidden. Every instance delivers a one-word VERDICT in the title before the video starts, which is why it satisfies the retention standard's demand for an adversary and a verdict up front. The original regex required the literal word 'business' and therefore EXCLUDED every Economics-of instance, so the first slot count of 54 was an undercount. On Modern MBA's own catalogue: Business-of 10 videos median 1,083,000, Economics-of 5 videos median 783,000, rest of channel 63 videos median 581,000. DO NOT CONFUSE WITH economics-of-owning-a, which is a different format despite sharing a word: that one is 'The Economics of OWNING A [small business]' \u2014 operator authority, ownership-level, declined by Terry. This one is INDUSTRY-level analysis, analyst authority.\n\nTHE CONSTRAINT, measured 2026-08-11 and the single most useful thing known about this format: EVERY filled anchor is CONSUMER-FELT. Ten B2B/professional-services candidates were written in the frame using Modern MBA's own adjectives and searched free. None of the ten frames existed \u2014 but adjacent demand split them cleanly. PASS (the audience has personally experienced it): staffing/hiring 1.66M, commercial real estate 930k, college textbooks 533k, PBMs/drug pricing 345k. FAIL (invisible to the viewer): enterprise software licensing 96 views, executive search 1,355, title insurance 1,679, corporate training 2,403, accreditation 3,872, debt collection 13,414.\nSo the rule is NOT 'B2B does not work'. It is: THE AUDIENCE MUST HAVE FELT THE THING. A B2B business whose effects reach consumers passes; one whose effects stay inside the trade does not. Third independent confirmation of the ExtraMint recognition mechanism.\nCAVEATS: 3-4 results per search and loose matching (Shawshank Redemption returned for textbooks). Directional, not a census. Textbooks initially read as DEAD on a string-matching failure and only passed on a re-query \u2014 always re-word before believing a null.",
    "authority": "analyst",
    "slot_inventory": {
     "filled": 61,
@@ -2804,7 +2804,27 @@
     "median_per_bucket": 3,
     "total_channels": 26
    },
-   "anchor_regex": "\\bthe\\s+[a-z']+\\s+(?:business|economics|world)\\s+of\\b"
+   "anchor_regex": "\\bthe\\s+[a-z']+\\s+(?:business|economics|world)\\s+of\\b",
+   "constraint": "consumer-felt",
+   "anchor_test": {
+    "measured": "2026-08-11",
+    "method": "yt-dlp ytsearch on 10 candidate titles \u2014 free, ~1 minute",
+    "result": "0 of 10 frames existed. The cell is empty. But adjacent DEMAND split the ten cleanly.",
+    "passes": {
+     "staffing & hiring": 1656717,
+     "pharmacy benefit managers": 345006,
+     "commercial real estate": 929972,
+     "college textbooks": 533292
+    },
+    "fails": {
+     "college accreditation": 3872,
+     "enterprise software licensing": 96,
+     "executive search": 1355,
+     "corporate training": 2403,
+     "title insurance": 1679,
+     "debt collection": 13414
+    }
+   }
   },
   "evil-business-of-x": {
    "format_id": "evil-business-of-x",
