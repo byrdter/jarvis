@@ -2882,8 +2882,10 @@
     ]
    },
    "added": "2026-08-11",
-   "notes": "Good Work. 8 slots at 2.05M median, 11-15m. Slots filled: Palantir, consultants, investment bankers, Oracle, Meta. Answers a question civilians genuinely cannot answer about firms they have heard of \u2014 borrowed authority via a recognised name, with the analysis as the payoff. Squarely B2B / careers / business strategy.",
-   "authority": "analyst"
+   "notes": "Good Work. 8 slots / 2.05M median ON THAT CHANNEL \u2014 but PORTABILITY FAILED when measured 2026-08-11. A 382-video, 8-time-slice enumeration found only NINE instances of the frame platform-wide in four years, and exactly ONE was a business subject: Good Work's own 'What does Meta actually do now?'. The other eight are DJs (31M, a Short), 3D artists (13M, a Short), peptides on a 90-minute podcast, Warhammer lore, data analysts, Red Bull, AWS engineers. It is a QUESTION PEOPLE ASK, not a repeatable format, and for business subjects n=1. Fails format-index's >=3-distinct-channel rule badly. THE MISTAKE THIS CAUGHT, recorded because it is the exact error the framework exists to prevent: this row was recommended as 'the format that fits enterprise subject matter' on the strength of ONE CHANNEL'S template metrics, without running the portability step. A channel-level template is not a format. channel-template.py's own docstring says so and it was skipped anyway. DO NOT promote a row past the catalogue on lift+slots alone.",
+   "authority": "analyst",
+   "anchor_regex": "\\b(?:what\\s+(?:does|do)|actually\\s+do)\\b|\\?",
+   "portability": "FAILED"
   },
   "decline-of-x": {
    "format_id": "decline-of-x",

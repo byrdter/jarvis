@@ -159,9 +159,18 @@ def frame_phrase(fmt):
 
 
 def anchor_of(title, fmt):
-    """Strip the template out of a title; what is left is the slot that was filled."""
+    """Strip the template out of a title; what is left is the slot that was filled.
+
+    WRAPPING TEMPLATES need `anchor_regex`. Every format measured before 2026-08-11 put its
+    anchor at the END ("The Business of {X}"), so stripping the match left the anchor intact.
+    "What does {X} actually do?" wraps the anchor on BOTH sides, so the match spans it and
+    stripping title_regex deletes the very thing being extracted -- every slot comes back empty
+    and the format reads as unused. When a row supplies `anchor_regex` (an alternation of the
+    fixed parts only) that is used for stripping, while title_regex stays strict for MATCHING.
+    Two different jobs, and conflating them silently returns zero.
+    """
     t = title
-    t = re.sub(fmt["title_regex"], " ", t, flags=re.I)
+    t = re.sub(fmt.get("anchor_regex") or fmt["title_regex"], " ", t, flags=re.I)
     t = re.sub(r"[|:\-–—#()\[\]\"'?!.]+", " ", t)
     t = re.sub(r"\b(19|20)\d{2}\b", " ", t)          # trailing years are not different slots
     t = re.sub(r"\s+", " ", t).strip()
@@ -173,7 +182,15 @@ def anchor_of(title, fmt):
 
 
 def enumerate_slots(fmt, a):
+    """Probe, and CACHE. trend-stage.py caches its pool; this did not, so the first coherence
+    refusal on what-does-x-actually-do discarded 40 credits of data that would have answered the
+    follow-up question for free. Retuning a heuristic against live calls is exactly the waste the
+    cache exists to prevent."""
     phrase = frame_phrase(fmt)
+    cache = TOOLS / "raw" / "slots" / f"{fmt['format_id']}-{a.slices}s.json"
+    if cache.exists() and not getattr(a, "refresh", False):
+        print(f"  using cached probe {cache.name} (--refresh to re-spend)")
+        return phrase, json.loads(cache.read_text())
     today = dt.date.today()
     span = int(SLICE_YEARS * 365 / a.slices)
     pool, seen = [], set()
@@ -193,6 +210,8 @@ def enumerate_slots(fmt, a):
                 pool.append(v)
                 new += 1
         print(f"  {lo} → {hi}   {len(got):>2} results, {new:>2} new")
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps(pool, indent=1))
     return phrase, pool
 
 
@@ -222,6 +241,17 @@ def coherent(fmt, matches):
     shorts = sum(1 for d in durs if d < 1.5) / len(durs)
     band = fmt.get("runtime_min") or [0, 0]
     in_band = sum(1 for d in durs if band[0] * 0.5 <= d <= max(band[1] * 2, 3)) / len(durs)
+    # SHORTS SHARE and BAND-FIT are different failures and the first cut treated them as one.
+    # A frame whose matches are mostly Shorts is junk. A frame whose matches span 12s to 90min
+    # is RUNTIME-AGNOSTIC, which is a property of question-forms ("what does X actually do?"
+    # is asked at every length) and not by itself evidence of noise. Band-fit alone now warns;
+    # only the Shorts share refuses.
+    if in_band < 0.40 and shorts <= 0.30:
+        print(f"\n⚠ RUNTIME-AGNOSTIC — only {in_band:.0%} of matches sit near the declared "
+              f"{band[0]}-{band[1]}m runtime.\n  The frame is used at many lengths. That is a "
+              f"question-form, not necessarily noise — but it means\n  the seed channel's "
+              f"runtime is not a property of the format. Read the anchors before trusting it.")
+        return True
     if shorts > 0.30 or in_band < 0.40:
         print(f"\n⚠ INCOHERENT FRAME — {shorts:.0%} of matches are Shorts, {in_band:.0%} sit "
               f"near the declared {band[0]}-{band[1]}m runtime.")
@@ -343,6 +373,7 @@ def main():
     p.add_argument("--slices", type=int, default=SLICES, help="time windows to probe")
     p.add_argument("--region", default="US")
     p.add_argument("--top", type=int, default=25)
+    p.add_argument("--refresh", action="store_true", help="ignore the cached probe")
     p.add_argument("--dry-run", action="store_true")
     a = p.parse_args()
 
