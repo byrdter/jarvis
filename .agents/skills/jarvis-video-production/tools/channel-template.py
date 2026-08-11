@@ -94,7 +94,21 @@ MIN_TEMPLATE_VIDEOS = 3     # a shape used twice is a coincidence; three times i
 MIN_NGRAM           = 2     # see the CONFOUNDS note -- channel context supplies specificity
 MAX_NGRAM           = 8
 DF_FLOOR_ABS        = 3     # a token in fewer than this many of the channel's titles is topic
-DF_FLOOR_REL        = 0.08  # ...or fewer than this share of them
+DF_FLOOR_REL        = 0.05  # ...or fewer than this share of them.
+                            # LOWERED from 0.08 on 2026-08-11. Terry noticed by eye that Modern
+                            # MBA also runs "The Economics of X"; the tool could not see it.
+                            # Cause: 'economics' appears in 5 of 80 titles and the floor was
+                            # max(3, 0.08*80) = 6.4 — it missed by 1.4, so the variant could
+                            # never form a template at all.
+                            # THE PRINCIPLE: a template only needs MIN_TEMPLATE_VIDEOS (3) to
+                            # exist, so a df floor far above 3 over-filters by construction, and
+                            # it gets WORSE as a catalogue grows because the floor scales with n.
+                            # MIN_TEMPLATE_VIDEOS is the real quality gate; this floor only has
+                            # to strip one-off words.
+                            # Measured across four known channels: Modern MBA 1 -> 4 templates
+                            # (surfacing 'economics of', 'really make money', "can't survive" —
+                            # all three real and all three previously invisible), Company Man
+                            # 9 -> 10, ExtraMint 12 -> 15, Wu Hoops 7 -> 7. Noise did not move.
 RECENT_DEFAULT      = 24    # position window; see the CONFOUNDS note on why it is not months
 MAX_SHARE_FOR_LIFT  = 0.60  # above this the template IS the channel and lift is noise
 MIN_BASE_VIEWS      = 5_000 # below this median, LIFT IS SCALE-BLIND. 22x from 176 -> 3,900
