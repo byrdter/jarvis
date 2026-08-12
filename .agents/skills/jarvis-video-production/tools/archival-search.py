@@ -166,8 +166,14 @@ def p_archives(q, limit, era, key=None):
     if not key:
         raise RuntimeError("no YOUTUBE_API_KEY")
     out = []
+    # era MUST reach this provider too. Without it a 2024 beat returned 2015 AP rows,
+    # which looks like coverage and is not.
+    window = {}
+    if era:
+        window = dict(publishedAfter=f"{era[0]}-01-01T00:00:00Z",
+                      publishedBefore=f"{era[1]}-12-31T23:59:59Z")
     for _, (cid, name, tier) in CHANNELS.items():
-        for it in _yt(dict(channelId=cid, q=q, maxResults=max(2, limit // 2)), key):
+        for it in _yt(dict(channelId=cid, q=q, maxResults=max(2, limit // 2), **window), key):
             sn = it["snippet"]
             note = ("licensed ~$40/sec — findable, not affordable" if tier == "RED"
                     else "reuse terms UNCONFIRMED — ask before building on it")
