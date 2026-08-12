@@ -111,6 +111,11 @@ in Phase 3 so other formats can use them. Until then the studio calls them here,
   Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:
   `tools/outlier-scan.py` (which competitor ideas out-travelled their distribution) and
   `tools/teardown.py` (why — pull a proven video apart into a reusable structural spec).
+- **FOOTAGE SOURCING — the merged map: [knowledge/FOOTAGE-SOURCING.md](knowledge/FOOTAGE-SOURCING.md).**
+  Our measured free-tier work fused with a Kimi K3 deep-research report on the commercial
+  market. GREEN/AMBER/RED tiers, price traps (TED is CC BY-NC-ND; Shutterstock caps at 500K
+  viewers), rights hygiene, and the two open questions worth money: **AP pre-1964 non-renewal**
+  and **CHM reuse terms**. Read before sourcing anything.
 - **SOURCING IS THE GATING CAPABILITY — [tools/archival-search.py](tools/archival-search.py).**
   Three full shot censuses (2026-08-12, `reports/explorist-nvidia-teardown/`) found that across a
   7.48× outlier and a below-median flop, **material mix is a constant (84-90% real material) while

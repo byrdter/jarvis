@@ -53,8 +53,17 @@ TIER_COLOUR = {"GREEN": G, "AMBER": A_, "RED": R}
 
 # YouTube channels worth scoping to, with the tier that applies to their material.
 CHANNELS = {
-    "chm":      ("UCHDr4RtxwA1KqKGwxgdK4Vg", "Computer History Museum", "AMBER"),
-    "aparchive": ("UCHTK-2W11Vh1V4uwofOfR4w", "AP Archive", "RED"),
+    "chm":       ("UCHDr4RtxwA1KqKGwxgdK4Vg", "Computer History Museum", "AMBER",
+                  "reuse terms UNCONFIRMED — ask before building on it"),
+    "aparchive": ("UCHTK-2W11Vh1V4uwofOfR4w", "AP Archive", "RED",
+                  "licensed, billed in 15-sec increments. NOTE: AP states US content "
+                  "published 1963 or earlier was never copyright-renewed — VERIFY per item"),
+    "cspan":     ("UCb--64Gl51jIEVE-GLDAVTg", "C-SPAN", "AMBER",
+                  "House/Senate FLOOR feed is public domain outright; C-SPAN's own coverage "
+                  "is free NON-commercial w/ attribution, or $100 per program per year"),
+    "nasa":      ("UCLA_DiR1FfKNvjuUpBHmylQ", "NASA", "GREEN",
+                  "US government work — no copyright. No endorsement implication; "
+                  "identifiable astronauts need care"),
 }
 # Local/broadcast news is where the winning video actually sourced its human presence:
 # residents on porches, town halls, protest signs. Searched by keyword, not by channel.
@@ -155,6 +164,67 @@ def p_edgar(q, limit, era):
     return out
 
 
+def p_nasa(q, limit, era):
+    """NASA Image and Video Library — 140,000+ assets, US gov work, no copyright.
+
+    Under-used by business/tech channels: for anything touching space, launch,
+    engineering-at-scale or big-infrastructure imagery it is 4K, free and claim-proof.
+    """
+    params = {"q": q, "media_type": "video,image", "page_size": limit}
+    if era:
+        params.update(year_start=era[0], year_end=era[1])
+    u = "https://images-api.nasa.gov/search?" + urllib.parse.urlencode(params)
+    out = []
+    for it in get(u).get("collection", {}).get("items", [])[:limit]:
+        d = (it.get("data") or [{}])[0]
+        nid = d.get("nasa_id", "")
+        out.append(row("nasa", "GREEN", d.get("date_created", ""), d.get("title", ""),
+                       f"https://images.nasa.gov/details/{urllib.parse.quote(nid)}",
+                       f"{d.get('media_type','')} · public domain, no endorsement implication"))
+    return out
+
+
+# Corporate press rooms publish broadcast-quality b-roll of their OWN products, fabs and
+# executives, free, explicitly for media use. No stock library has the inside of Tesla's
+# factory; Tesla's press site does. There is no common API — this is a curated registry
+# that hands you the right door.
+PRESSROOMS = {
+    # EVERY URL BELOW WAS FETCHED AND CONFIRMED 2026-08-12. The first draft of this
+    # registry was written from memory and SIX of fifteen were 404 — including a Tesla
+    # path that did not exist. A plausible URL is not a verified one.
+    "nvidia":    ("https://nvidianews.nvidia.com/multimedia/search", ""),
+    "apple":     ("https://www.apple.com/newsroom/", ""),
+    "intel":     ("https://newsroom.intel.com/", ""),
+    "microsoft": ("https://news.microsoft.com/", ""),
+    "google":    ("https://blog.google/press/", ""),
+    "alphabet":  ("https://blog.google/press/", ""),
+    "amazon":    ("https://press.aboutamazon.com/", ""),
+    "meta":      ("https://about.fb.com/news/", ""),
+    "ibm":       ("https://newsroom.ibm.com/", ""),
+    "samsung":   ("https://news.samsung.com/global/", ""),
+    "amd":       ("https://www.amd.com/en/newsroom.html", ""),
+    "boeing":    ("https://www.boeing.com/company/", ""),
+    "openai":    ("https://openai.com/news/", ""),
+    "tesla":     ("https://www.tesla.com/tesla-gallery",
+                  "media use only; every asset must carry 'Courtesy of Tesla, Inc.'"),
+    "tsmc":      ("https://pr.tsmc.com/english",
+                  "UNVERIFIED — Cloudflare blocks automated checks; confirm by hand"),
+}
+
+
+def p_press(q, limit, era):
+    """Match company names in the query to their press/media library."""
+    ql = q.lower()
+    out = []
+    for name, (url, extra) in PRESSROOMS.items():
+        if name in ql:
+            note = ("free, broadcast-quality, PRESS/EDITORIAL use — safe inside commentary "
+                    "about that company; never implies endorsement")
+            out.append(row("press-room", "AMBER", "", f"{name.title()} media library", url,
+                           note + ("  · " + extra if extra else "")))
+    return out
+
+
 def _yt(params, key):
     u = "https://www.googleapis.com/youtube/v3/search?" + urllib.parse.urlencode(
         dict(part="snippet", type="video", key=key, **params))
@@ -172,11 +242,9 @@ def p_archives(q, limit, era, key=None):
     if era:
         window = dict(publishedAfter=f"{era[0]}-01-01T00:00:00Z",
                       publishedBefore=f"{era[1]}-12-31T23:59:59Z")
-    for _, (cid, name, tier) in CHANNELS.items():
+    for _, (cid, name, tier, note) in CHANNELS.items():
         for it in _yt(dict(channelId=cid, q=q, maxResults=max(2, limit // 2), **window), key):
             sn = it["snippet"]
-            note = ("licensed ~$40/sec — findable, not affordable" if tier == "RED"
-                    else "reuse terms UNCONFIRMED — ask before building on it")
             out.append(row(name, tier, sn["publishedAt"], sn["title"],
                            "https://youtu.be/" + it["id"]["videoId"], note))
     return out
@@ -239,15 +307,36 @@ def p_wayback(domain, era):
     return out
 
 
-PROVIDERS = {"commons": p_commons, "ia": p_ia, "edgar": p_edgar,
-             "archives": p_archives, "localnews": p_localnews}
+PROVIDERS = {"commons": p_commons, "ia": p_ia, "edgar": p_edgar, "nasa": p_nasa,
+             "press": p_press, "archives": p_archives, "localnews": p_localnews}
+
+
+def spoken_word_handoffs(q):
+    """Deep links to the tools that search WHAT WAS SAID, not titles and metadata.
+
+    This tool matches on titles/descriptions. Finding "the moment Jensen Huang says X"
+    is a different problem, and Filmot (1.7bn transcripts across 1.5bn YouTube videos)
+    and YouGlish solve it. NEITHER EXPOSES A USABLE FREE API — every filmot.com endpoint
+    302s — so these are honest handoffs, not results. Faking rows would be worse than
+    linking out.
+    """
+    e = urllib.parse.quote(f'"{q}"')
+    return [
+        ("filmot   — exact spoken phrase across 1.5bn YouTube videos",
+         f"https://filmot.com/search/{e}/1"),
+        ("youglish — spoken phrase with in-context playback",
+         f"https://youglish.com/search/{urllib.parse.quote(q)}/all"),
+        ("yt CC    — Creative Commons filter (~4M CC-BY videos, remixable w/ attribution)",
+         "https://www.youtube.com/results?search_query="
+         + urllib.parse.quote(q) + "&sp=EgIwAQ%253D%253D"),
+    ]
 
 
 def main():
     ap = argparse.ArgumentParser(
         description="Find real material for a beat, with rights tier attached.")
     ap.add_argument("query")
-    ap.add_argument("--sources", default="commons,ia,edgar,archives,localnews",
+    ap.add_argument("--sources", default="commons,ia,edgar,nasa,press,archives,localnews",
                     help="comma list: " + ",".join(PROVIDERS))
     ap.add_argument("--limit", type=int, default=6, help="rows per provider")
     ap.add_argument("--era", help="YYYY-YYYY, filters where the provider supports it")
@@ -302,6 +391,11 @@ def main():
             print(f"        {DIM}{r['url']}{Z}")
             if r["note"]:
                 print(f"        {c}{r['note']}{Z}")
+        print(f"  {DIM}── spoken-word search (this tool matches titles; these match WORDS)"
+              f" ──{Z}")
+        for lab, url in spoken_word_handoffs(a.query):
+            print(f"  {DIM}handoff{Z} {lab}\n        {DIM}{url}{Z}")
+        print()
         n = {t: sum(1 for r in rows if r["tier"] == t) for t in order}
         print(f"\n  {G}GREEN {n['GREEN']}{Z} free to use · {A_}AMBER {n['AMBER']}{Z} "
               f"fair-use dependent · {R}RED {n['RED']}{Z} licensed")
