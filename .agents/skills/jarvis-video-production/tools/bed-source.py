@@ -46,7 +46,10 @@ RIGHTS TIERS — narrower than archival-search's, on purpose
            returns them by DEFAULT — that is the trap this tool exists to close.
 
 PROVIDERS
-  openverse  keyless, ~700M CC works, images. Rate-limited when anonymous.
+  openverse  keyless, ~700M CC works, images. RATE-LIMITED HARD when anonymous —
+             returns 401 once the quota is spent, so treat it as a bonus provider,
+             not a dependency. Commons alone covers the bed (6,312 hits for
+             "lecture hall"; ~23 of every 50 rows are CLEAR-tier).
   commons    keyless, Wikimedia. Stills-dominant (measured 702:1 stills:video).
 
   Pexels / Pixabay / Storyblocks would add MOTION cheaply but all need an API key and none
@@ -135,10 +138,14 @@ def tier(lic):
     return None
 
 
+CLEAR_ONLY = False  # set by --clear-only; drops by-sa at the REQUEST, not after
+
+
 def openverse(q, need):
+    lic = "cc0,pdm,by" if CLEAR_ONLY else "cc0,pdm,by,by-sa"
     url = ("https://api.openverse.org/v1/images/?"
            + urllib.parse.urlencode({"q": q, "page_size": min(need * 4, 40),
-                                     "license": "cc0,pdm,by,by-sa"}))
+                                     "license": lic}))
     d = get(url, "openverse")
     out = []
     for r in d.get("results", []):
@@ -158,7 +165,7 @@ def commons(q, need):
            + urllib.parse.urlencode({
                "action": "query", "format": "json", "generator": "search",
                "gsrsearch": f"filetype:bitmap {q}", "gsrnamespace": "6",
-               "gsrlimit": min(need * 3, 30), "prop": "imageinfo",
+               "gsrlimit": min(max(need * 8, 20), 50), "prop": "imageinfo",
                "iiprop": "url|extmetadata", "iiurlwidth": "1280"}))
     d = get(url, "commons")
     pages = (d.get("query") or {}).get("pages") or {}
@@ -214,10 +221,14 @@ def main():
     ap.add_argument("--out", help="JSONL manifest")
     ap.add_argument("--report", help="markdown coverage report")
     ap.add_argument("--pause", type=float, default=1.2, help="seconds between queries")
+    ap.add_argument("--clear-only", action="store_true",
+                    help="CC0/PD/BY only — exclude share-alike entirely, no counsel question")
     ap.add_argument("--strict-terms", action="store_true",
                     help="refuse to run if any query exceeds 3 words (see header rule 2)")
     a = ap.parse_args()
 
+    global CLEAR_ONLY
+    CLEAR_ONLY = a.clear_only
     provs = [p for p in a.providers.split(",") if p in PROVIDERS]
     if a.query:
         plan = [{"section": "-", "env": a.query, "need": a.need}]
@@ -248,7 +259,7 @@ def main():
         rows, errs, failed = run_query(env, need, provs)
         failures += errs
         clear = [r for r in rows if r["tier"] == "CLEAR"]
-        flagged = [r for r in rows if r["tier"] == "FLAGGED"]
+        flagged = [] if a.clear_only else [r for r in rows if r["tier"] == "FLAGGED"]
         keep = (clear + flagged)[:need]
         for r in keep:
             r["section"], r["env"] = item.get("section", "-"), env
