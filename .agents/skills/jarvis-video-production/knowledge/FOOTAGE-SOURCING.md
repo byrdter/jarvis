@@ -38,6 +38,36 @@ channel-originated graphics**. What varies monotonically is **rhythm**. Kimi's "
 more than production value" is probably right against AI slop; it does not explain the variance
 *among* real-footage channels. Sourcing enough material is what buys you the rhythm.
 
+> ### ⚠️ THE RHYTHM HALF IS LANE-LOCAL — counter-example measured 2026-08-12
+>
+> Everything above was measured on the **tech-documentary lane** (ColdFusion, Explorist). Tested in
+> the **business-of-X lane** — Modern MBA, the model for the new business channel — the rhythm
+> finding **inverts**.
+>
+> A within-channel matched pair, published **three weeks apart**, **18.3× apart** on views/day:
+>
+> | video | views/day | shots/min | mean shot | real material |
+> |---|---:|---:|---:|---:|
+> | *The Crumbling Business of Marijuana* (winner) | **3,890** | **14.0** | 4.3s | ~92% |
+> | *Inside the Cutthroat Business of Eating* (flop) | **213** | **15.1** | 4.0s | **~96%** |
+>
+> **The flop cuts faster and uses more real footage.** And Modern MBA has *slowed* 22.5 → 14.0
+> shots/min since 2023 while its views/day went 2,704 → 3,890. Two channels, opposite correlations
+> — which is what a spurious variable looks like.
+>
+> **The matched pair is also methodologically stronger than the cross-channel comparison above**,
+> because same-channel/same-style controls away the hard-cut-vs-dissolve threshold problem (§ the
+> 1.34×–3.11× bracket) that makes ColdFusion and Explorist not like-for-like.
+>
+> **Revised claim, both lanes:** real material and a working cut rhythm are **entry requirements**
+> for this format. Above that threshold, performance is set by the **anchor and the argument** —
+> which is the channel bible's §5 and §8, and the *Total Revenue* natural experiment (same format,
+> no method, 25 median views). **Sourcing breadth is QUALIFYING, not gating.** Do not let §0's
+> numbers drive budget in the business lane.
+>
+> Full test, limits, and what could not be measured (retention curves are not public for third-party
+> channels): `jarvis-private/reports/FOOTAGE-PREMISE-TEST-2026-08-12.md`.
+
 ---
 
 ## 1. GREEN — free to find AND free to use
