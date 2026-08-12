@@ -46,6 +46,10 @@ RIGHTS TIERS — narrower than archival-search's, on purpose
            returns them by DEFAULT — that is the trap this tool exists to close.
 
 PROVIDERS
+  PROVIDER ORDER IS THE --providers ORDER and it matters. For the bed, put openverse
+  FIRST: it aggregates Flickr (ordinary contemporary life). Commons is the encyclopedic
+  record and drifts badly on generic environments — measured ~25-30% usable.
+
   openverse  keyless, ~700M CC works, images. RATE-LIMITED HARD when anonymous —
              returns 401 once the quota is spent, so treat it as a bonus provider,
              not a dependency. Commons alone covers the bed (6,312 hits for
@@ -208,7 +212,13 @@ def run_query(q, need, providers):
         if k and k not in seen:
             seen.add(k)
             dedup.append(r)
-    dedup.sort(key=lambda r: 0 if r["tier"] == "CLEAR" else 1)
+    # Provider order matters for the BED specifically: Openverse/Flickr carries ordinary
+    # contemporary life, Commons carries the encyclopedic record. Measured 2026-08-13, a
+    # Commons-only bed ran ~25-30% usable against the pixels. Rank by provider first, then
+    # tier, so Commons only fills what Openverse could not.
+    rank = {p: i for i, p in enumerate(providers)}
+    dedup.sort(key=lambda r: (rank.get(r["provider"], 9),
+                              0 if r["tier"] == "CLEAR" else 1))
     return dedup, errs, failed
 
 
@@ -258,9 +268,10 @@ def main():
         env, need = item["env"], item.get("need", a.need)
         rows, errs, failed = run_query(env, need, provs)
         failures += errs
+        # rows already ranked by provider-then-tier in run_query
         clear = [r for r in rows if r["tier"] == "CLEAR"]
         flagged = [] if a.clear_only else [r for r in rows if r["tier"] == "FLAGGED"]
-        keep = (clear + flagged)[:need]
+        keep = (clear + flagged)[:need] if a.clear_only else (clear + flagged)[:need]
         for r in keep:
             r["section"], r["env"] = item.get("section", "-"), env
         manifest += keep
