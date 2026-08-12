@@ -111,6 +111,21 @@ in Phase 3 so other formats can use them. Until then the studio calls them here,
   Its §7 covers IDEATION — choosing what to make, upstream of everything else. Two tools:
   `tools/outlier-scan.py` (which competitor ideas out-travelled their distribution) and
   `tools/teardown.py` (why — pull a proven video apart into a reusable structural spec).
+- **SOURCING IS THE GATING CAPABILITY — [tools/archival-search.py](tools/archival-search.py).**
+  Three full shot censuses (2026-08-12, `reports/explorist-nvidia-teardown/`) found that across a
+  7.48× outlier and a below-median flop, **material mix is a constant (84-90% real material) while
+  CUTTING RHYTHM is the variable**: winners run **7.3-24.8 distinct shots/min**, so a 26-minute
+  video needs **~190 distinct sources**. Our own stills test scene ran **6/min**. This tool finds
+  real material across Wikimedia Commons, Internet Archive/Prelinger, SEC EDGAR, institutional
+  archives (CHM), AP Archive and **local broadcast news** — the last is where the winning video
+  actually got its human presence (residents on porches, town halls, protest signs). Every row
+  carries a RIGHTS TIER: GREEN free to use / AMBER fair-use dependent / RED licensed (~$40/sec).
+  It returns TITLES, never bare counts — Commons reports 4,072 files for "Andy Grove" and the top
+  video hit is *Sugar Grove, West Virginia*.
+- **[tools/shot-census.py](tools/shot-census.py)** — the shot-level half of a teardown
+  (`teardown.py` reads captions and never looks at a pixel). Shot count, durations, and a human
+  classification of what is on screen. **Threshold matters:** 0.28 undercounts dissolve-heavy
+  channels ~2×; bracket it before comparing two videos.
 - **NARRATIVE STRUCTURE — the MIDDLE of the video (READ WITH the hooks doc when scripting):
   [knowledge/NARRATIVE-STRUCTURE.md](knowledge/NARRATIVE-STRUCTURE.md)** — RETENTION-AND-HOOKS owns the
   first 30 seconds; this owns the other fourteen minutes. The essay-vs-story finding (our *AI Doesn't
