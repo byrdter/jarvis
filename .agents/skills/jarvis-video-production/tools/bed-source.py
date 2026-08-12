@@ -14,11 +14,27 @@ desks. Any of a hundred assets will do for each slot. Different problem, differe
   Censused 2026-08-12: Modern MBA runs 14.0 shots/min. A 27-min video wants ~380 shots,
   of which ~285 are bed. Our own stills test scene ran SIX sources/min. This is the gap.
 
-THE ONE SEARCH RULE, AND IT IS NOT OPTIONAL
-**Search SPECIFIC ENVIRONMENTS, never abstract concepts.** "university lecture hall" not
-"education". "campus bookstore shelves" not "learning". Concept keywords return the exact
-clips every other faceless channel is already using — that is how a video comes out looking
-generic even though every asset is real. (FOOTAGE-SOURCING.md §9.)
+THE TWO SEARCH RULES, NEITHER OPTIONAL
+
+1. **Search SPECIFIC ENVIRONMENTS, never abstract concepts.** "lecture hall" not "education".
+   "college bookstore" not "learning". Concept keywords return the exact clips every other
+   faceless channel is already using — that is how a video comes out looking generic even
+   though every asset is real. (FOOTAGE-SOURCING.md §9.)
+
+2. **KEEP QUERIES TO 1-3 WORDS.** Both providers AND-match every term. Measured 2026-08-13:
+
+       "college bookstore textbook shelves"  -> openverse 4     commons 0
+       "college bookstore"                   -> openverse 240   commons 5
+       "students walking across campus quad" -> openverse 0     commons 0
+       "campus quad"                         -> openverse 240   commons 5
+
+   A descriptive phrase is the right query for a fuzzy stock engine (Pexels) and the WRONG
+   query for a keyword archive. Rule 1 lives in the NOUN, not in the sentence length: "campus
+   quad" is specific; "students walking across campus quad" is just zero results.
+
+   This is the same artifact class as the recorded "0/24 beats have free video" false
+   negative (multi-word terms). It cost two full runs here before anyone tested a control.
+   `--strict-terms` refuses to run a plan containing >3-word queries; the default warns.
 
 RIGHTS TIERS — narrower than archival-search's, on purpose
   CLEAR    CC0 / public domain / CC-BY. Usable in a monetised cut; BY needs attribution.
@@ -198,6 +214,8 @@ def main():
     ap.add_argument("--out", help="JSONL manifest")
     ap.add_argument("--report", help="markdown coverage report")
     ap.add_argument("--pause", type=float, default=1.2, help="seconds between queries")
+    ap.add_argument("--strict-terms", action="store_true",
+                    help="refuse to run if any query exceeds 3 words (see header rule 2)")
     a = ap.parse_args()
 
     provs = [p for p in a.providers.split(",") if p in PROVIDERS]
@@ -207,6 +225,22 @@ def main():
         plan = json.load(open(a.plan))
     else:
         ap.error("need --plan or --query")
+
+    # Rule 2: long descriptive phrases return zero on AND-matching archives. Catch it
+    # BEFORE burning a run, not after reading 21 false EMPTYs in a report.
+    longq = [p["env"] for p in plan if len(p["env"].split()) > 3]
+    if longq:
+        print(f"{R}{len(longq)} quer{'y' if len(longq)==1 else 'ies'} exceed 3 words. "
+              f"These providers AND-match; long phrases return ZERO and read as EMPTY.{Z}",
+              file=sys.stderr)
+        for q in longq[:8]:
+            print(f"  {Y}{len(q.split())}w{Z}  {q}", file=sys.stderr)
+        if len(longq) > 8:
+            print(f"  … and {len(longq)-8} more", file=sys.stderr)
+        if a.strict_terms:
+            sys.exit("refusing to run (--strict-terms). Shorten to 1-3 word noun phrases.")
+        print(f"{Y}  continuing anyway — treat any EMPTY below as UNPROVEN.{Z}\n",
+              file=sys.stderr)
 
     manifest, cov, failures = [], [], []
     for i, item in enumerate(plan, 1):
