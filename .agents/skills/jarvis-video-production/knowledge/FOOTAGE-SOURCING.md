@@ -90,6 +90,32 @@ more than production value" is probably right against AI slop; it does not expla
 > timeline" is true for *generic* footage and false for *specific* subjects. For "Gordon Moore in
 > 1970" the free tier has a photograph, not a clip. **See §7 — that turns out not to be fatal.**
 
+> ### ⚠️ COMMONS AND OPENVERSE ARE FOR OPPOSITE LAYERS — measured 2026-08-13
+>
+> The table above reads as though Commons is the default free source. **For the SPECIFIC-REAL
+> layer it is. For the GENERIC-REAL BED it is close to useless, and the failure is not obvious
+> from result counts** — a Commons-only bed run returned 304/304 assets with zero EMPTY, and
+> reviewing the pixels put the usable rate at **~25–30%**.
+>
+> **Commons is an encyclopedia media archive.** Ask it for contemporary American campus b-roll and
+> it returns WWI stereoscopes, One-Laptop-Per-Child aid photography, Victorian portraits, museum
+> accession shots, patent diagrams and clip art. `campus quad` returned a **quad bike**;
+> `graduation ceremony` returned **beauty pageant contestants**. Nobody uploads ordinary modern
+> b-roll to Commons because it is not encyclopedic.
+>
+> **Openverse (which aggregates Flickr) is the bed provider.** Same queries: `college bookstore` →
+> *Skyline College bookstore buybacks · bookstore line · employee restocking · Agnes Scott College
+> Bookstore manager*. `campus quad` → named US university quads.
+>
+> | layer | provider | why |
+> |---|---|---|
+> | specific-real (filings, named people, events) | **Commons** + EDGAR + press rooms | the encyclopedic record |
+> | generic-real bed (environments) | **Openverse / Flickr** | ordinary contemporary life |
+>
+> Caveat: anonymous Openverse **401s once its quota is spent** — treat availability failures as
+> availability failures, not as evidence the source is wrong for the job. `bed-source.py` throttles
+> per provider (4s for Openverse) and keeps Commons as fallback.
+
 ---
 
 ## 2. AMBER — free to find, copyrighted, fair-use dependent
