@@ -274,3 +274,56 @@ formalised) — with **TED carved out entirely.**
 > **Money buys specificity and safety, not volume.** And remember Explorist ran a 7.48× outlier
 > with **zero original interviews** — all 85 talking shots came from ~26 third-party sources, at a
 > **4.0s median**. Talking footage is punctuation, not segments.
+
+---
+
+## 10. Generated imagery — the line is CLAIMS, not pixels
+
+*Added 2026-08-13, from Terry. Before this, the only written position lived in a session record and
+read as a near-blanket prohibition — which produced a real error: "shoot these three objects" was
+proposed for a binder, shrink-wrap and an access-code card, two of which are set dressing.*
+
+> **Terry's framing, and it is the correct one:** *"I don't want to pass AI generated people as real
+> … but I don't want to throw everything out when it is perfectly fine and in those situations where
+> I don't think it makes any difference. To throw the baby out with the bath water would be an error
+> also."*
+
+**The question is never "is this AI." It is "does this asset make a CLAIM?"**
+
+| | test | verdict |
+|---|---|---|
+| **PROP** | The viewer is asked to believe nothing about a specific thing in the world | **Generate freely.** A binder, shrink-wrap, a cardboard box, a desk, a corridor, a coffee cup. A stock photo of a binder is no more "real" in any load-bearing sense than a generated one. |
+| **EVIDENCE** | The viewer is asked to believe *this specific thing exists and says this* | **Must be real.** A document, a filing, a chart, a screen showing a real product, a number, a date, an identifiable person or place. |
+
+Worked example — the three assets that produced this rule, all from Act I.2 of the textbooks video:
+
+- **Loose-leaf binder** → prop. On screen ~2s. Generate.
+- **Shrink-wrapped course pack** → prop. Generate.
+- **Access-code card** → **evidence.** It carries a publisher's name and a code, and the beat's whole
+  argument is *"single-use access codes killed the resale market."* A fabricated card illustrating
+  that claim is a fake artifact on an evidence beat. **Capture the publisher's own access-code terms
+  page instead** — free, primary, unfakeable, and a better card than a photograph of plastic.
+
+### The hard limits, and they are narrow
+
+1. **Never a real, identifiable person.** Not because the tells are always visible — they often are
+   not — but because the downside is unbounded. Everything else here is recoverable if you get it
+   wrong.
+2. **Never a document, filing, chart, or screen purporting to be real.**
+3. **Never on a beat carrying a number, date, name, citation or verdict** — that is already the
+   VO-binding rule (`video-production-standard.md` §5); generation does not get an exception.
+4. **2.5D parallax on a real still is not synthetic content.** It is a camera move on a photograph.
+   Use it freely; it is the density workhorse (§7).
+
+### Why the line sits at claims and not at pixels
+
+Not detection. **Asymmetry.** This channel's proposition is *we read the filings.* One fabricated
+artifact, if ever spotted, does not cost you that shot — it retroactively taints every real document
+in the library. Below the claims line the risk is nil. Above it, it is the whole channel.
+
+### Disclosure — check, do not assume
+
+YouTube has run automatic synthetic-content detection since May 2026 and requires disclosure for
+realistic depictions of real people, events and places. **A generated prop shot is very unlikely to
+cross that threshold, but read the current policy text before relying on it** — this doc is not a
+substitute for the policy, and the quiet-use option does not exist either way.
