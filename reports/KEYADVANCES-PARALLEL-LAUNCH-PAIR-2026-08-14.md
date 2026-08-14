@@ -1,11 +1,12 @@
-# KeyAdvances parallel launch pair
+# KeyAdvances launch topic pair
 
 **Decision date:** 2026-08-14
-**Status:** selected for parallel Gate 2 packaging and Gate 3 research; titles remain working packages
+**Status:** topics selected; on 2026-08-14 Terry chose sequential production. Digital price tags are
+active; AirPods hearing aids are parked for later, with incidental material saved if encountered.
 
 ## Decision
 
-Develop these two episodes in parallel:
+Develop these two episodes in sequence:
 
 1. **Digital grocery price tags:** what the new infrastructure does now, what it makes possible, and
    whether consumer protections should arrive before the feared use does.
@@ -37,9 +38,10 @@ public place; the other concerns health, access, stigma, and a familiar personal
 
 ### Recommended working package
 
-**Title:** `Your Grocery Store Can Change Every Price in Minutes. Will It?`
+**Title:** `Your Grocery Store Can Change Prices in Minutes. What Stops It?`
 
-**Thumbnail:** one paper tag and one electronic tag; `WHO SETS IT?`
+**Thumbnail:** one electronic tag caught mid-refresh between a human approval and a data path;
+`WHO DECIDES?`
 
 **Carried question:** Are electronic shelf labels merely a better way to execute approved prices, or
 the missing infrastructure for prices that respond to demand—or eventually to the shopper?
@@ -161,24 +163,16 @@ The visual challenge is not scarcity but human specificity. The episode needs re
 real listening situations—not fifteen minutes of floating earbuds. Use graphics for sound pathways,
 the self-fitting process, eligibility boundaries, and the old-category/new-category comparison.
 
-## Parallel-development plan
+## Sequential-development plan
 
-Run the episodes as a staggered two-track pipeline, not two simultaneous final deadlines.
+Complete the digital-price-tag episode first. Do not actively source AirPods material, but preserve
+any unusually strong relevant material encountered during other work for later use.
 
-| Track | Price tags | AirPods |
+| Stage | Digital price tags | AirPods |
 |---|---|---|
-| Gate 2 | Lock truthful package and thumbnail claim | Lock access/substitution package; reject review framing |
-| Gate 3A | Gather retailer, industry, legislative, and hearing records | Gather FDA, Apple, clinical, professional, and access records |
-| Gate 3B | Source store/tag/worker/shopper material | Source device/person/listening-environment material |
-| Gate 4–5 | Move into outline and VO first | Remain one gate behind while claims are stress-tested |
-| Production | Lead episode | Follow episode using the same visual components and QC pipeline |
-
-Shared sourcing work includes consumer environments, hands using familiar objects, product closeups,
-public-source capture, before/after comparisons, institutional documents, broadcast clips, and the
-recurring `OLD NORMAL → WHAT CHANGED → THE TRADE → BETTER FOR WHOM?` visual spine.
-
-This captures the efficiency Terry expects without asking the same attention-intensive stage—final
-outline, VO, or rendered-scene QC—to happen twice at once.
+| Current | Active development | Parked |
+| Incidental finds | Keep only if useful to this episode | Save unusually strong finds without expanding the search |
+| Next transition | Complete research, outline, VO, visuals, and production | Reassess after the first episode is substantially complete |
 
 ## Release order
 

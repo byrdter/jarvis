@@ -168,15 +168,16 @@ This creates a coherent audience across a wide subject universe: not “people w
 
 The first batch should demonstrate breadth while holding format, voice, runtime, and visual system steady.
 
-**2026-08-14 selection:** the first two below are approved for staggered parallel Gate 2 packaging and
-Gate 3 research. Digital grocery price tags lead; AirPods hearing aids follow one production gate
-behind. See `reports/KEYADVANCES-PARALLEL-LAUNCH-PAIR-2026-08-14.md` for the measured comparison,
-current source anchors, and parallel-development plan.
+**2026-08-14 selection:** the first two below were selected, then moved to sequential production.
+Digital grocery price tags are active; AirPods hearing aids are parked until the first episode is
+substantially complete, with incidental material preserved if encountered. See
+`reports/KEYADVANCES-PARALLEL-LAUNCH-PAIR-2026-08-14.md` for the measured comparison and source anchors.
 
 ### 1. Shopping / money
 
-**Working title:** `Your Grocery Store Can Change Every Price in Minutes. Will It?`  
-**Thumbnail thought:** one paper label beside one electronic label; `WHO SETS IT?`  
+**Working title:** `Your Grocery Store Can Change Prices in Minutes. What Stops It?`
+**Thumbnail thought:** one electronic tag caught mid-refresh between a human approval and a data path;
+`WHO DECIDES?`
 **Question:** Are electronic shelf labels merely faster operations, or the infrastructure for a different kind of pricing?  
 **Why first:** the object is universally recognizable, the live lane produced three independent reachable outliers, and the story naturally contains business, labor, policy, technology, and consumer agency.  
 **Original contribution required:** separate verified present uses from speculative “surge pricing” rhetoric.
