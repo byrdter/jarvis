@@ -168,6 +168,11 @@ This creates a coherent audience across a wide subject universe: not “people w
 
 The first batch should demonstrate breadth while holding format, voice, runtime, and visual system steady.
 
+**2026-08-14 selection:** the first two below are approved for staggered parallel Gate 2 packaging and
+Gate 3 research. Digital grocery price tags lead; AirPods hearing aids follow one production gate
+behind. See `reports/KEYADVANCES-PARALLEL-LAUNCH-PAIR-2026-08-14.md` for the measured comparison,
+current source anchors, and parallel-development plan.
+
 ### 1. Shopping / money
 
 **Working title:** `Your Grocery Store Can Change Every Price in Minutes. Will It?`  
