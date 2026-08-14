@@ -255,15 +255,18 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global **0.7.107** — verified 2026-08-14) — never bare
+Use the PINNED CLI (`hyperframes`, global **0.7.108** — verified 2026-08-14) — never bare
 `npx hyperframes`. **This line is the ONE source of truth**: `tools/check-cli-pin.py` parses the
 version out of it. Do not restate the number in other docs; point at this line instead.
 **The global binary SELF-UPDATES**: 0.7.84 → 0.7.87 inside one session on 2026-08-01, then
 0.7.87 → 0.7.88 on 2026-08-02, then 0.7.88 → 0.7.90 on 2026-08-04, then 0.7.90 → 0.7.104 by
 2026-08-10 (**14 patch versions while nobody was rendering**), then 0.7.104 → 0.7.107 by 2026-08-14
-— caught by the gate at the start of the Ordinary Economics batch. **Nothing was ever rendered at
-0.7.104**, so re-pinning forward cost nothing; the existing stamps read 0.7.90 / 0.7.98 and are
-complete. **Five unchosen upgrades in a fortnight** — no upgrade was chosen and none would have
+— caught by the gate at the start of the Ordinary Economics batch — **then 0.7.107 → 0.7.108
+roughly twenty minutes later, INSIDE that same session, between stamping the batch and the first
+render.** Nothing had rendered at either version, so no batch was mixed and re-pinning forward cost
+nothing; the existing stamps read 0.7.90 / 0.7.98 and are complete. **Six unchosen upgrades in a
+fortnight, two of them in one afternoon.** Stamping at batch start is not ceremony: on 2026-08-14
+the drift happened *between* the stamp and the render. — no upgrade was chosen and none would have
 been noticed without the gate. So this number records what the current batch was rendered against,
 it does not lock anything. Run `python3 tools/check-cli-pin.py --stamp <batch>` at batch start and
 `--verify <batch>` before assembly; re-render the whole batch if it moved (PIPELINE.md Step 5).
