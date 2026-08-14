@@ -121,6 +121,18 @@ def check_determinism(html):
     Returns list of (kind, detail) issue tuples; kind starts with 'det_'.
     """
     issues = []
+
+    # Blank out comment BODIES before scanning. The old line-prefix filter below only skipped
+    # lines starting with '//', '*' or '<!--', so a block comment that documents the rule —
+    #     /* A bare gsap.to() or a CSS @keyframes renders FROZEN */
+    # was reported as two violations of the very rule it was warning about. (Hit for real on the
+    # Ordinary Economics end card, 2026-08-14.) Comment text is not executed, so commented-out
+    # code is correctly ignored; spaces replace the body so line numbers and offsets stay true.
+    def _blank(m):
+        return re.sub(r'[^\n]', ' ', m.group(0))
+    html = re.sub(r'<!--.*?-->', _blank, html, flags=re.S)
+    html = re.sub(r'/\*.*?\*/', _blank, html, flags=re.S)
+
     # Only inspect <script> bodies + <style> blocks; ignore prose/comments loosely.
     def _count(pattern, flags=0):
         hits = []
