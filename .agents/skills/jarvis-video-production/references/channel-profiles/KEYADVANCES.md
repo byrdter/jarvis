@@ -103,8 +103,10 @@ Voice: measured, curious, precise, and human-centered. Explore rather than proph
 boilerplate greetings, biographies, and channel exposition. Technical detail earns its place by changing
 what the viewer understands or can do.
 
-Start the revival with tightly earned **8–10 minute** videos. Extend only when a whole-runtime carried
-payoff, persistent visual spine, and authored reversal can sustain the additional time.
+Target tightly earned **12–15 minute** videos. This KeyAdvances-specific range supersedes the shared
+~8-minute default. Build each episode to satisfy the promise at roughly 12 minutes; use the remaining
+time only when the evidence, escalation, persistent visual spine, and authored reversal can sustain it.
+Never pad a subject merely to reach 15 minutes.
 
 ## Originality and Monetization Safety
 

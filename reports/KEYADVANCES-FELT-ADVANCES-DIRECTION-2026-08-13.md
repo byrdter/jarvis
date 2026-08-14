@@ -269,7 +269,8 @@ safe area.
 
 Do not judge the direction from one video. Publish the three-video batch 7–14 days apart with:
 
-- 8–10 minute target runtime;
+- 12–15 minute target runtime, with 12 minutes as the planning floor and additional time earned by
+  evidence, escalation, the persistent visual spine, and the authored reversal—not padding;
 - the same narrator and general production quality;
 - a concrete artifact on frame one;
 - the carried question named by roughly 35 seconds;
