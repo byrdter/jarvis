@@ -8,7 +8,7 @@
 - Episode folder: `video-ka02-digital-price-tags`
 - Owner: Terry Byrd
 - Beads issue: `jarvis-oekv.2`
-- Status: visual-board
+- Status: scripting
 
 ## Thesis
 
@@ -35,7 +35,7 @@ the display.
   one at a time as the episode separates current use, enabled capability, and documented abuse.
 - Planned reversal position: 5:20–6:45; the largest available in-store study found virtually no surge
   pricing before or after ESL adoption.
-- Current estimated runtime: 13:25
+- Current estimated runtime: 13:28 at 150 spoken words per minute (2,020 spoken words)
 
 ## Production Strategy
 
@@ -53,10 +53,10 @@ the display.
 |---|---|---|---|
 | Demand evidence passed | Terry/Codex | approved | Three independent, manually relevant outliers documented |
 | Pre-script title/thumbnail package approved | Terry | approved | “Move ahead” on selected Episode 1; factual wording tightened during Gate 2 |
-| Thesis locked | Terry | pending | Research recommendation is ready for review |
-| Runtime target locked | Terry | pending | 12:30–13:30 recommended |
-| Visual treatment approved | Terry | pending | First board drafted |
-| VO approved | Terry | pending | Not drafted |
+| Thesis locked | Terry | approved | “Keep the labels; govern the decisions behind them” approved 2026-08-14 |
+| Runtime target locked | Terry | approved | 12–15 minute channel range; draft targets approximately 13 minutes |
+| Visual treatment approved | Terry | approved | Story-level direction approved with thesis; scene execution still requires QA |
+| VO approved | Terry | pending | Full 12-scene draft complete; awaiting review |
 | Scene renders locked | Terry | pending | Not started |
 | Master render approved | Terry | pending | Not started |
 | Final package verified against finished video | Terry | pending | Refinement only; promise changes return to pre-script gate |
@@ -69,9 +69,7 @@ the display.
 |---|---|---|---|
 | Walmart press-media reuse terms are not yet recorded | Production | Asset resolution | Check terms before downloading; use as proof under limited quotation if necessary |
 | General human store footage is identified but not rights-cleared | Production | Asset resolution | Build a licensed/free shopper-worker bed before scene production |
-| Final policy verdict is editorial judgment | Terry | Before VO | Approve, narrow, or change the recommended guardrails |
 
 ## Current Next Action
 
-Approve the thesis, story architecture, and recommended policy verdict; then convert the visual board
-into a scene-by-scene VO draft.
+Review the scene-by-scene VO draft, then resolve any wording changes before recording or TTS.
