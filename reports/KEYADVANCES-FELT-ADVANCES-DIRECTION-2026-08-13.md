@@ -65,7 +65,7 @@ Current catalogue snapshots were taken directly from YouTube on 2026-08-13. View
 | [Undecided with Matt Ferrell](https://www.youtube.com/channel/UCjtUS7-SZTi6pXjUbzGHQCg) | Forward-facing inventions travel when translated into an object, price, or household use. | `Can a $1,500 Battery Replace a Powerwall?` 1.0M · `Why Your Water Heater Should Be a Battery` 635K · `How the Super Soaker Inventor Just Killed the Steam Engine` 573K |
 | [Planet Wild](https://www.youtube.com/channel/UC6QFT2c2MJxID-vxHDeX9XQ) | Hope and solutions can outperform doom when attached to a visible intervention rather than a general progress message. | `The Breakthrough That Could Solve Ocean Plastic` 3.7M · `The Genius Plan to Regreen the Desert` 3.4M · `We Let Beavers Transform an Old Farm` 845K |
 
-The synthesis is important: the opportunity is not another clone of any one channel. It is **Answer in Progress's recognition + Modern MBA's hidden system + Good Work's lightness + KeyAdvances' evidence-and-verdict discipline** in a faceless editorial form.
+The synthesis is important: the opportunity is not another clone of any one channel. It is **Answer in Progress's recognition + Modern MBA's causal depth + Good Work's lightness + KeyAdvances' evidence-and-verdict discipline** in a faceless editorial form.
 
 ### 3. Abstract optimism is not enough
 
@@ -107,14 +107,14 @@ Scores use five criteria: felt recognition, repeatable supply, distinctiveness, 
 The faceless niche report says a niche is a **format × market** pair. For KeyAdvances:
 
 - **Market / audience need:** intelligent adults trying to understand changes reaching their money, health, home, work, and daily routines.
-- **Format family:** a familiar thing crosses a threshold; KeyAdvances investigates the hidden system and returns a qualified verdict.
+- **Format family:** a familiar thing crosses a threshold; KeyAdvances follows the evidence and returns a human-centered verdict.
 - **Authority:** evidence-led analyst, not guru, futurist, or industry insider.
 - **Production moat:** fast primary-source research, visible receipts, archival/real-world footage, and designed explanatory graphics.
 - **Emotional register:** curiosity first; surprise and dry wit in the journey; sober judgment at the end.
 
 The one-sentence episode engine:
 
-> **One familiar thing + one checkable change + one hidden system + one useful verdict.**
+> **One familiar thing + one checkable threshold + one human consequence + one better-for-whom verdict.**
 
 This is a format **family**, not one repeated title. Rotate at least five variants:
 
@@ -250,11 +250,20 @@ Do **not** delete the old videos. Before the first new upload:
 
 Recommended About copy:
 
-> Normal life changes before most of us notice. KeyAdvances investigates the new systems, ideas, and inventions reaching the things we buy, the homes we live in, the work we do, and the bodies we live with. We follow the evidence, find the trade-offs, and ask the question that matters: is this actually better?
+> Normal life changes before most of us notice.
+>
+> KeyAdvances investigates the advances already reaching the things we buy, the homes we live in, the work we do, and the bodies we live with. Each episode begins with something familiar that has crossed a real threshold—then follows the evidence to find what changed, who benefits, what we traded away, and whether the new version is actually better.
+>
+> Forward-looking without futurism. Curious without hype. Grounded in primary sources, real-world results, and the consequences headlines leave out.
 
 Recommended banner line:
 
 > **WHAT'S CHANGING—AND WHETHER IT'S BETTER.**
+
+Three phone-safe masthead candidates now live in
+`ai-film-studio/projects/_channel-keyadvances/masthead/`. Candidate `a-threshold` is recommended; all
+three use a 2560×1440 canvas and keep every readable element inside the centered 1546×423 all-device
+safe area.
 
 ## Revival test and decision rule
 

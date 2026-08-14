@@ -7,38 +7,55 @@ an explicit per-video decision.
 
 ## Editorial Promise
 
-**KeyAdvances examines specific developments changing what people can do now and in the near future.**
-Each episode establishes what changed, what the evidence supports, what the limitations are, and what
-the development means for human choices.
+**KeyAdvances investigates the changes quietly remaking ordinary life.** Each episode begins with
+something familiar that has crossed a real, checkable threshold, then follows the evidence to establish
+what changed, who benefits, what people traded away, and whether the new version is actually better.
 
 Channel tagline:
 
-> What changes next—and what it means for you.
+> What's changing—and whether it's better.
+
+## Public Channel Description
+
+> Normal life changes before most of us notice.
+>
+> KeyAdvances investigates the advances already reaching the things we buy, the homes we live in,
+> the work we do, and the bodies we live with. Each episode begins with something familiar that has
+> crossed a real threshold—then follows the evidence to find what changed, who benefits, what we
+> traded away, and whether the new version is actually better.
+>
+> Forward-looking without futurism. Curious without hype. Grounded in primary sources, real-world
+> results, and the consequences headlines leave out.
 
 ## Topic Universe
 
-Search broadly across near-future developments, including:
+Search broadly across changes reaching familiar parts of life, including:
 
-- artificial intelligence and human-computer collaboration;
-- robotics, autonomy, and advanced manufacturing;
-- medicine, biotechnology, health, and longevity;
-- quantum technologies and next-generation computing;
-- energy, climate technology, materials, and infrastructure;
-- space systems and other consequential scientific advances.
+- the things people buy, use, and pay for;
+- homes, streets, transport, energy, and the built environment;
+- bodies, health, care, and accessibility;
+- work, learning, time, and everyday institutions;
+- tools and technologies becoming ordinary infrastructure.
 
-The topic must have a plausible present-to-near-future human consequence. Reject generic capability
-roundups, vague futurism, daily reaction news with no durable consequence, mechanism-first tutorials,
-and abstract prophecy questions.
+The topic must have a recognizable surface, a checkable change, a human consequence, real tension,
+and enough evidence to support a verdict. Reject generic capability roundups, vague futurism, daily
+reaction news with no durable consequence, mechanism-first tutorials, and abstract prophecy questions.
+
+KeyAdvances is distinct from Ordinary Economics. Ordinary Economics explains the business machine;
+KeyAdvances evaluates the change. When a subject fits both, route it by the audience payoff: business
+model, financials, systems, and politics belong to Ordinary Economics; felt consequence, trade-off, and
+the better-for-whom verdict belong to KeyAdvances.
 
 ## Topic and Demand Gate
 
 Apply shared Gate 1 using a KeyAdvances-specific competitor set. Prefer reachable channels and recent
 outliers. A candidate must answer:
 
-1. What named, checkable development occurred?
-2. What can people do, understand, avoid, or decide because of it?
-3. What evidence shows viewers care about this title/subject register?
-4. What is our distinct verdict or unresolved contradiction?
+1. What familiar thing has crossed a named, checkable threshold?
+2. What changed for a person who uses, pays for, depends on, or encounters it?
+3. Who benefits, what was traded away, and where is the real tension?
+4. What evidence shows viewers care about this title/subject register?
+5. What is our distinct better-for-whom verdict or unresolved contradiction?
 
 Probe shape families and lane demand, not exact finished titles. Read every matching row for topical
 drift. Strong current candidates still fail if the successful comparison videos concern a different
@@ -59,13 +76,17 @@ Thumbnail rules:
 - one focal idea readable at small size;
 - title and thumbnail complement rather than repeat each other;
 - use one number and one noun at most when text is necessary;
-- build a recognizable KeyAdvances identity: midnight navy/charcoal, restrained cyan technology light,
-  warm amber human consequence, premium editorial-documentary finish;
+- build a recognizable KeyAdvances identity: midnight navy/charcoal, restrained cyan for the changed
+  or newly possible, warm amber for the human or familiar, premium editorial-documentary finish;
 - no generic glowing brains, robot portraits, Matrix code, neon cyberpunk cities, red arrows, interface
   clutter, or competitor imitation;
 - a real human face is optional and must serve the idea; no Byrddynasty face/avatar rule applies.
 
 The title/thumbnail package must be approved before full research, final VO, or asset generation.
+
+Current masthead system: `ai-film-studio/projects/_channel-keyadvances/masthead/`. Candidate
+`a-threshold` is recommended. It places the full wordmark and tagline inside YouTube's centered
+1546×423 all-device safe area on a 2560×1440 canvas.
 
 ## VO and Retention Standard
 
