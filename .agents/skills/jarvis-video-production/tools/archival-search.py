@@ -71,16 +71,26 @@ NEWS_HINTS = ["news", "abc", "nbc", "cbs", "fox", "wusa", "wjla", "ktla", "wfaa"
               "eyewitness", "action news", "channel", "local", "bloomberg", "cnbc"]
 
 
-def api_key():
-    k = os.environ.get("YOUTUBE_API_KEY")
+def env_key(name):
+    """Read a key from the environment, falling back to jarvis/.env.
+
+    Takes the FIRST match, not the last. The repo .env defines CARTESIA_VOICE_ID four times
+    and a normal dotenv loader silently keeps the last one — which is the wrong voice. Same
+    trap applies to any key someone appends twice.
+    """
+    k = os.environ.get(name)
     if k:
         return k
     p = os.path.expanduser("~/Library/CloudStorage/Dropbox/jarvis/.env")
     if os.path.exists(p):
         for line in open(p):
-            if line.startswith("YOUTUBE_API_KEY"):
+            if line.startswith(name + "="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'")
     return None
+
+
+def api_key():
+    return env_key("YOUTUBE_API_KEY")
 
 
 def get(url, timeout=45):
@@ -307,8 +317,51 @@ def p_wayback(domain, era):
     return out
 
 
+def p_pexels(q, limit, era=None):     # era is ignored: stock has no meaningful period filter
+    """Pexels — free stock STILLS AND VIDEO, licensed for commercial use.
+
+    Worth a provider of its own because it fills the exact hole the CC pools leave: modern,
+    high-resolution, people-present interiors. Commons and Openverse are strong on monuments,
+    documents and historical images and weak on "someone browsing a shop", which is most of
+    what a business explainer actually needs on screen.
+
+    TIER IS GREEN, WITH TWO CONDITIONS THAT ARE NOT CC CONDITIONS. The Pexels License allows
+    free commercial use and does not require attribution — but it forbids selling unaltered
+    copies, and it forbids depicting identifiable people in a way that is offensive or that
+    implies endorsement. That second one binds us: a stock face used under a line about people
+    being cheated is an implied claim about that person. Credit the photographer anyway; it
+    costs a line and it is what the ATTRIBUTION ledger is for.
+    """
+    key = env_key("PEXELS_API_KEY")
+    if not key:
+        raise RuntimeError("PEXELS_API_KEY not set (env or jarvis/.env) — add it once; "
+                           "a duplicated line is read as the first occurrence here")
+    hdr = {"Authorization": key, "User-Agent": UA.get("User-Agent", "jarvis")}
+    out = []
+    for kind, url, pick in (
+        ("still", "https://api.pexels.com/v1/search?per_page=%d&query=%s",
+         lambda m: (m["url"], m.get("alt") or "untitled", m.get("photographer", ""))),
+        ("video", "https://api.pexels.com/videos/search?per_page=%d&query=%s",
+         lambda m: (m["url"], (m.get("alt") or "").strip() or f"video {m.get('duration','?')}s",
+                    (m.get("user") or {}).get("name", ""))),
+    ):
+        try:
+            req = urllib.request.Request(url % (limit, urllib.parse.quote(q)), headers=hdr)
+            data = json.load(urllib.request.urlopen(req, timeout=45))
+        except Exception as e:
+            print(f"  ! pexels {kind}: {e}", file=sys.stderr)
+            continue
+        for m in (data.get("photos") or data.get("videos") or []):
+            page, title, who = pick(m)
+            out.append(row("pexels/" + kind, "GREEN", "", title, page,
+                           f"Pexels License · {who} · commercial use OK, no attribution "
+                           f"required; NO unaltered resale; no endorsement implication"))
+    return out
+
+
 PROVIDERS = {"commons": p_commons, "ia": p_ia, "edgar": p_edgar, "nasa": p_nasa,
-             "press": p_press, "archives": p_archives, "localnews": p_localnews}
+             "press": p_press, "archives": p_archives, "localnews": p_localnews,
+             "pexels": p_pexels}
 
 
 def spoken_word_handoffs(q):
