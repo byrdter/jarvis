@@ -255,7 +255,7 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global **0.7.108** — verified 2026-08-14) — never bare
+Use the PINNED CLI (`hyperframes`, global **0.7.109** — verified 2026-08-15) — never bare
 `npx hyperframes`. **This line is the ONE source of truth**: `tools/check-cli-pin.py` parses the
 version out of it. Do not restate the number in other docs; point at this line instead.
 **The global binary SELF-UPDATES**: 0.7.84 → 0.7.87 inside one session on 2026-08-01, then
@@ -264,8 +264,8 @@ version out of it. Do not restate the number in other docs; point at this line i
 — caught by the gate at the start of the Ordinary Economics batch — **then 0.7.107 → 0.7.108
 roughly twenty minutes later, INSIDE that same session, between stamping the batch and the first
 render.** Nothing had rendered at either version, so no batch was mixed and re-pinning forward cost
-nothing; the existing stamps read 0.7.90 / 0.7.98 and are complete. **Six unchosen upgrades in a
-fortnight, two of them in one afternoon.** Stamping at batch start is not ceremony: on 2026-08-14
+nothing; the existing stamps read 0.7.90 / 0.7.98 and are complete. **Seven unchosen upgrades in a fortnight — THREE of them on 2026-08-15 alone**, the last
+caught mid-batch by `--verify` after the endcard had already rendered at 0.7.108. Stamping at batch start is not ceremony: on 2026-08-14
 the drift happened *between* the stamp and the render. — no upgrade was chosen and none would have
 been noticed without the gate. So this number records what the current batch was rendered against,
 it does not lock anything. Run `python3 tools/check-cli-pin.py --stamp <batch>` at batch start and
