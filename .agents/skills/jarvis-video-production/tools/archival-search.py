@@ -341,8 +341,15 @@ def p_pexels(q, limit, era=None):     # era is ignored: stock has no meaningful 
     for kind, url, pick in (
         ("still", "https://api.pexels.com/v1/search?per_page=%d&query=%s",
          lambda m: (m["url"], m.get("alt") or "untitled", m.get("photographer", ""))),
+        # Pexels VIDEO objects carry no `alt`. Falling back to "video 15s" produced rows that
+        # were unreadable as evidence — a duration is not a description, and the whole point of
+        # this tool is that a human can judge relevance from the row. The descriptive text lives
+        # in the URL slug (…/video/people-walking-in-a-library-1234/), so recover it from there.
         ("video", "https://api.pexels.com/videos/search?per_page=%d&query=%s",
-         lambda m: (m["url"], (m.get("alt") or "").strip() or f"video {m.get('duration','?')}s",
+         lambda m: (m["url"],
+                    (re.sub(r"-\d+/?$", "", (m.get("url") or "").rstrip("/").split("/")[-1])
+                     .replace("-", " ").strip() or "untitled")
+                    + f"  [{m.get('duration','?')}s]",
                     (m.get("user") or {}).get("name", ""))),
     ):
         try:
