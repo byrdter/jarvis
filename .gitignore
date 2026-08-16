@@ -367,3 +367,6 @@ AGENTS.md
 
 # format-index discovery pool: regenerable from vidIQ, grows unbounded
 .agents/skills/jarvis-video-production/tools/raw/
+raw/wsm/
+.agents/skills/jarvis-video-production/tools/census-*/video.mp4
+.agents/skills/jarvis-video-production/tools/census-*/frames/
