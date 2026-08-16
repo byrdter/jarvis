@@ -3,10 +3,15 @@
 **Measured 2026-08-16.** `@wallstreetmillennial` · 367,000 subs · 958 uploads · 92.2M lifetime views
 · created 2020-07-21 · US · faceless.
 
-Method: full catalog pull (951 uploads, `yt-dlp`), 48 sampled upload dates interpolated to date every
-video, four `teardown.py` transcript teardowns, one full `shot-census.py` (every shot classified by
-hand), age-residualised permutation tests on 407 post-pivot videos. Raw data in
-`tools/raw/wsm/`, censuses in `tools/census-Juc-IyTdSho/`, teardowns in `tools/teardowns/`.
+Method: full catalog pull (951 uploads, `yt-dlp`); **exact** upload dates, view/like/comment counts
+for the newest 453 (the entire post-pivot era, back to 2022-01); interpolated dates from 48 anchors
+for the 2020–21 pre-pivot tail only. Four `teardown.py` transcript teardowns, one full
+`shot-census.py` (every shot classified by hand), age-residualised permutation tests on 408
+post-pivot videos. Raw data in `tools/raw/wsm/`, censuses in `tools/census-Juc-IyTdSho/`, teardowns
+in `tools/teardowns/`.
+
+> Every statistical claim below (§1.2, §2.1, §2.2) was computed twice — once on interpolated dates,
+> once on exact — and agreed within rounding. Where the two differ, the **exact** figure is printed.
 
 ---
 
@@ -31,10 +36,12 @@ channel with this dispersion is not being selected on retention — it is being 
 | 2020 | 47 | 5,200 | 4:04 | 40,000 | 7.69 | 89% | 11.2 |
 | 2021 | 322 | 36,000 | 9:18 | 160,000 | 4.44 | 6% | 27.1 |
 | 2022 | 155 | 50,000 | 11:07 | 126,000 | 2.52 | 2% | 12.9 |
-| 2023 | 110 | 105,500 | 14:37 | 332,000 | 3.15 | 0% | 9.2 |
-| 2024 | 118 | 121,500 | 14:07 | 325,000 | 2.67 | 0% | 9.8 |
-| 2025 | 121 | 73,000 | 15:02 | 162,000 | 2.22 | 0% | 10.1 |
-| 2026 | 66 | 99,000 | 15:19 | 190,000 | **1.92** | 0% | 8.2 |
+| **2023** | 110 | 105,666 | 14:30 | 332,445 | 3.15 | 0% | 9.2 |
+| **2024** | 117 | 120,858 | 14:07 | 312,508 | 2.59 | 0% | 9.8 |
+| **2025** | 123 | 76,119 | 15:01 | 167,493 | 2.20 | 0% | 10.1 |
+| **2026** | 65 | 99,165 | 15:12 | 190,960 | **1.93** | 0% | 8.2 |
+
+Bold rows are exact. 2020–22 rows use interpolated dates and rounded catalog view counts.
 
 2020–21 was a *different channel*: r/wallstreetbets meme recaps, options tutorials, 3–5 minute clips,
 27 uploads a month. Those videos are the bottom of the library (298 to 1,000 views). The pivot to
@@ -53,7 +60,7 @@ Age-normalised, current output is the strongest the channel has ever been:
 
 ### 1.2 The dispersion collapse is the real story
 
-p90/median has fallen monotonically for five straight years: **3.15 → 2.67 → 2.22 → 1.92**. Within
+p90/median has fallen monotonically for four straight years: **3.15 → 2.59 → 2.20 → 1.93**. Within
 the age-controlled 2025 cohort, p90/p10 is only **4.15×** and the best-to-worst matched pair is
 **15.9×** (`The New Elizabeth Holmes` 381K vs `Why Ivy League Universities Lose Money` 24K).
 
@@ -102,11 +109,16 @@ something adverse) vs **ANALYSIS** (a neutral interrogative or mechanism explain
 | neutral | 195 | 47.0% | 94,000 | 207,000 |
 | ANALYSIS | 79 | 19.0% | 89,000 | 326,000 |
 
-Age-residualised on log(views/day), n=407, 20,000-permutation test:
+Age-residualised on log(views/day), **exact dates, n=408**, 20,000-permutation test:
 
-> **ACCUSATION frame: rho = +0.226, p = 0.0001, 1.71× median views/day (251 vs 147).**
+> **ACCUSATION frame: rho = +0.224, p < 0.0001, 1.69× median views/day (253 vs 149).**
 
 The ratio holds every year independently (2023: 1.53×, 2024: 1.82×, 2025: 1.21×).
+
+**And the lift is reach, not engagement.** On the 403 videos with full engagement data, accusation
+titles get a *slightly lower* comment rate than the rest — 0.432% vs 0.486% (**0.89×**) — against
+channel medians of 2.83% like/view and 0.463% comment/view. The frame is not winning by provoking
+the existing audience into arguing; it is winning by being clicked and served more widely.
 
 Note the ceilings: ANALYSIS p90 (326,000) is *higher* than ACCUSATION p90 (318,000). Accusation does
 not raise the ceiling — **it raises the floor.** That is exactly what a conveyor belt needs.
@@ -129,7 +141,7 @@ Every winner names a villain in the present tense. Every loser asks a neutral qu
 Same corpus, same method, same permutation test, applying the `CHANNEL-BIBLE` §5 anchor
 classifier (has the viewer personally paid for / stood inside / worked in the thing):
 
-> **CONSUMER-FELT ANCHOR: rho = +0.019, p = 0.70, 0.98× median views/day. Nothing.**
+> **CONSUMER-FELT ANCHOR: rho = +0.028, p = 0.58, 1.02× median views/day. Nothing.**
 
 The 2×2 is unambiguous — accusation works identically in both anchor columns, anchor works in
 neither accusation column:
@@ -140,6 +152,9 @@ neither accusation column:
 | **felt=1** | 136 (n=37) | 254 (n=22) |
 
 *Crocs* and *Ivy League tuition* are as consumer-felt as topics get, and both sit in the bottom 8.
+
+*(2×2 cells above are from the interpolated-date run; the exact-date run gives the same picture —
+rho +0.028, p = 0.58.)*
 
 **This qualifies our own §5 finding rather than contradicting it.** The anchor result (rho +0.51,
 p<0.0001) was measured on Modern MBA — a *systems-explainer* channel where the viewer's own
@@ -309,6 +324,7 @@ precisely the treadmill our own `BEAT-A-CHANNEL` §2 argues against, run compete
 
 ```
 tools/raw/wsm/uploads.tsv · uploads.json · dates.tsv     # 951-row catalog + interpolated dates
+tools/raw/wsm/meta.tsv                                   # 453 EXACT: date, views, likes, comments
 tools/teardowns/XvP7RV2umRU.md  # Richard Branson 4.39x
 tools/teardowns/RuLAOfWWgxE.md  # Luxury Fashion 2.27x
 tools/teardowns/Juc-IyTdSho.md  # Figure AI 0.70x
@@ -316,8 +332,9 @@ tools/teardowns/DFar4hdQMfI.md  # Anthropic/SBF (2 days old)
 tools/census-Juc-IyTdSho/       # sheet_01.jpg, shots.json, classes.txt, census.csv
 ```
 
-**Known limits.** Upload dates are interpolated from 48 anchors (exact within ~2 weeks; the era
-boundaries are wide enough that this does not move any conclusion). Only one shot census was run —
+**Known limits.** Dates and counts are **exact for the whole post-pivot era** (453 videos, back to
+2022-01) — every statistical claim rests on those. The 2020–21 rows use dates interpolated from 48
+anchors and rounded catalog view counts; they are descriptive background only. Only one shot census was run —
 the visual findings are n=1 for this channel and should not be generalised past "this is what their
 best recent video looks like." No retention data exists for a third-party channel, so every outcome
 here is views, never watch-time.
