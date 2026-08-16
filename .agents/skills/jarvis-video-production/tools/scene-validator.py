@@ -104,6 +104,82 @@ def check_lib_bugs(scene_dir, html=""):
             bugs.append("tl.call(...) present in loaded byrd-transitions.js — throws in HyperFrames GSAP runtime")
     return bugs
 
+KB_FLOOR = 0.030          # scale units per second
+KB_MIN_DUR = 4.0          # only shots long enough to CREATE a static run
+
+# Why the duration guard: the rate floor only matters when the shot is long enough to
+# produce a static stretch on its own. Run without it, this check flagged two shots in
+# the already-approved beat1 cold open at 0.025 and 0.027 — but they are 2.4s and 2.6s,
+# and that scene measures 3.1s longest static and 87.8 events/min. A short slow push is
+# bounded by its own cut. 4.0s sits just under motion-scan's 5.0s static floor, so a
+# shot that trips this really could hold the frame still long enough to matter.
+
+
+def check_kenburns(html):
+    """I. Ken Burns pushes slower than the measured floor render as a STATIC hold.
+
+    Measured 2026-08-15: a push under ~0.03 scale/sec does not register as change —
+    0.019 and 0.025 both failed motion-scan, 0.040 and 0.038 cleared it.
+
+    This is a PRE-RENDER check because the alternative is a wasted render, and this
+    scene class renders slowly (act3-eku: ~50 min). The rule had already been written
+    into two handoffs and was repeated anyway — six shots at 0.020-0.027 on 2026-08-16.
+    Prose in a doc does not reach the moment of building; an assertion does.
+
+    Catches both spellings:
+        shot('#f1', a, b, s0, s1, drift)                     - the helper form
+        tl.set(sel, {scale:s0}, at); tl.to(sel, {scale:s1, duration:d}, at)
+
+    Opt out with a trailing `// hf-slow` on the line when a near-still is deliberate.
+    Returns a list of (label, rate, duration) below the floor.
+    """
+    def _blank(m):
+        return re.sub(r'[^\n]', ' ', m.group(0))
+    src = re.sub(r'<!--.*?-->', _blank, html, flags=re.S)
+    src = re.sub(r'/\*.*?\*/', _blank, src, flags=re.S)
+    lines = src.splitlines()
+
+    def opted_out(pos):
+        n = src[:pos].count('\n')
+        return n < len(lines) and 'hf-slow' in lines[n]
+
+    NUM = r'(-?\d+(?:\.\d+)?)'
+    Q = r'[\'"]([^\'"]+)[\'"]'
+    slow = []
+
+    # A. the shot() helper: shot(sel, a, b, s0, s1[, drift])
+    pat_shot = r'\bshot\(\s*' + Q + r'\s*,\s*' + r'\s*,\s*'.join([NUM] * 4)
+    for m in re.finditer(pat_shot, src):
+        if opted_out(m.start()):
+            continue
+        sel = m.group(1)
+        a, b, s0, s1 = (float(m.group(i)) for i in range(2, 6))
+        d = b - a
+        if d >= KB_MIN_DUR:
+            rate = abs(s1 - s0) / d
+            if rate < KB_FLOOR:
+                slow.append((f"shot({sel})", rate, d))
+
+    # B. written-out form: a tl.set that establishes scale, then a tl.to that moves it
+    sets = {}
+    for m in re.finditer(r'tl\.set\(\s*' + Q + r'\s*,\s*\{([^}]*)\}', src):
+        sc = re.search(r'scale\s*:\s*' + NUM, m.group(2))
+        if sc:
+            sets[m.group(1)] = float(sc.group(1))
+    for m in re.finditer(r'tl\.to\(\s*' + Q + r'\s*,\s*\{([^}]*)\}', src):
+        sel, body = m.group(1), m.group(2)
+        sc = re.search(r'scale\s*:\s*' + NUM, body)
+        du = re.search(r'duration\s*:\s*' + NUM, body)
+        if not (sc and du) or sel not in sets or opted_out(m.start()):
+            continue
+        d = float(du.group(1))
+        if d >= KB_MIN_DUR:
+            rate = abs(float(sc.group(1)) - sets[sel]) / d
+            if rate < KB_FLOOR:
+                slow.append((f"tl.to({sel})", rate, d))
+    return slow
+
+
 def check_determinism(html):
     """H. Pre-render static analysis for the render-killer class.
 
@@ -385,6 +461,13 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
     for kind, n in det:
         fail(f"DETERMINISM: {n}× {_DET_MSG.get(kind, kind)}")
         issues.append((kind, n))
+
+    # I. Ken Burns floor — a push under ~0.03 scale/sec renders as a static hold.
+    for label, rate, dur in check_kenburns(html):
+        fail(f"KEN BURNS TOO SLOW: {label} {rate:.3f} scale/sec over {dur:.2f}s "
+             f"(floor {KB_FLOOR:.3f}) — motion-scan will read this as STATIC. "
+             f"Widen the scale delta or shorten the shot; add `// hf-slow` to opt out")
+        issues.append(("kenburns_slow", label))
 
     # G. text overflow heuristic — wide text with white-space: nowrap may exceed 1920px
     # Parse CSS rules: class { ... font-size: NNNpx ... white-space: nowrap ... }
