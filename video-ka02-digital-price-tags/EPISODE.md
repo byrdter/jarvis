@@ -67,10 +67,11 @@ the display.
 
 | Blocker | Owner | Needed By | Resolution |
 |---|---|---|---|
-| Walmart press-media reuse terms are not yet recorded | Production | Asset resolution | Check terms before downloading; use as proof under limited quotation if necessary |
+| Walmart press-media reuse permission is not yet granted | Terry/Production | Asset resolution | Send `WALMART-PERMISSION-REQUEST.md`; the published policy requires written permission for this use. Continue sourcing GREEN fallbacks meanwhile |
 | General human store footage is identified but not rights-cleared | Production | Asset resolution | Build a licensed/free shopper-worker bed before scene production |
 
 ## Current Next Action
 
-Generate and review one representative narration test, then resolve assets and build VO-anchored
-HyperFrames subsegments under the approved timing and evidence contract.
+Run the narration test and real-footage acquisition in parallel. Follow `FOOTAGE-ACQUISITION-PLAN.md`,
+send the Walmart request, and build the rights-cleared store/document census before VO-anchored
+HyperFrames scene construction.

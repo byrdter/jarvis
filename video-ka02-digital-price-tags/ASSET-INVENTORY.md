@@ -9,7 +9,7 @@ mean the rights have been resolved.
 |---|---|---|---|---|---|---|
 | Walmart digital tag close-up 01 | GREEN | https://commons.wikimedia.org/wiki/File:Walmart_Digital_Price_Tag_01.jpg | 01, 03 | no | identified | CC BY 4.0; record attribution |
 | Walmart digital tag close-up 02 | GREEN | https://commons.wikimedia.org/wiki/File:Walmart_Digital_Price_Tag_02.jpg | 01, 05 | no | identified | CC BY 4.0; record attribution |
-| Walmart associates, aisle, tag and pick-to-light media | AMBER until terms checked | https://corporate.walmart.com/news/2024/06/06/new-tech-better-outcomes-digital-shelf-labels-are-a-win-for-customers-and-associates | 01–03 | no | identified | Eight stills and two videos advertised |
+| Walmart associates, aisle, tag and pick-to-light media | AMBER — written permission required | https://corporate.walmart.com/news/2024/06/06/new-tech-better-outcomes-digital-shelf-labels-are-a-win-for-customers-and-associates/press-center | 01–03 | no | permission request drafted | Eight stills; 3:49 b-roll; 1:59 associate story. Walmart policy limits automatic permission to accredited professional news organizations |
 | Walmart current rollout page capture | quotation/proof | https://corporate.walmart.com/news/2026/03/02/how-the-shelf-got-smarter-and-our-jobs-got-easier | 01, 05 | no | identified | Highlight 2,300 / one-price claims |
 | Vusion label/POS architecture | quotation/proof | https://www.vusion.com/na/products/sesimagotag/electronic-shelf-labels/ | 03 | no | identified | Rebuild our own diagram; do not reuse marketing art unnecessarily |
 | Working-paper title and result pages | quotation/proof | https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5271491 | 06 | no | identified | Show “working paper” status |
@@ -17,9 +17,31 @@ mean the rights have been resolved.
 | CR Seattle basket graphic | AMBER fair-use quotation | https://www.consumerreports.org/money/questionable-business-practices/instacart-ai-pricing-experiment-inflating-grocery-bills-a1142182490/ | 07 | no | identified | Brief excerpt with critique; prefer authored redraw of reported values |
 | NJ law-signing page and bill | government/proof | https://www.nj.gov/governor/news/2026/approved/20260723a.shtml | 09 | no | identified | One-year moratorium language |
 | NYC Council hearing page | government/proof | https://council.nyc.gov/press/2026/06/17/3137/ | 09 | no | identified | Separate two proposed safeguards |
+| Senate Judiciary surveillance-pricing hearing | government/proof; recording provenance to log | https://www.judiciary.senate.gov/committee-activity/hearings/your-data-their-profit-the-consumer-cost-of-ai-surveillance-pricing | 08 | no | identified | Prefer originating Senate video and written testimony; avoid C-SPAN capture when official feed is available |
+| Rosen questions FTC chair on surveillance pricing | government/proof; recording provenance to log | https://www.rosen.senate.gov/2026/04/21/video-during-senate-hearing-rosen-presses-ftc-chair-about-companies-using-consumer-data-to-increase-prices/ | 08–09 | no | identified | Official Senate office page; useful short attributed scrutiny beat |
 | Grocery shoppers, workers, checkout, price comparison | TBD | licensed/free library | 01–11 | no | needed | Human-presence bed; aim for 35–45 distinct clips |
 | Paper price-tag replacement process | TBD | licensed/free or retailer source | 02 | no | needed | Must visibly show the old labor/friction |
 | Perishable markdown / near-expiry food | TBD | licensed/free | 10 | no | needed | Makes the consumer-benefit countercase tangible |
+
+## GREEN Candidate Shortlist — First Search Pass
+
+These are candidates, not selections. Preview the entire asset, record the current license and creator,
+and reject any clip that contains visible brand, release, or endorsement problems before download.
+
+| Candidate | Source / License | Scene(s) | Status | Editorial Use |
+|---|---|---|---|---|
+| Stock clerk organizing grocery shelves, 9s | https://www.pexels.com/video/stock-clerk-organizing-grocery-store-shelves-36074343/ — Pexels License, Circuit Occidental | 02, 03, 11 | preview needed | Real shelf-work action |
+| Shopper checking products, 13s | https://www.pexels.com/video/woman-checking-products-in-a-shopping-mart-5103995/ — Pexels License, Gustavo Fring | 01, 05, 11 | preview needed | Price-comparison/shopping bed |
+| Shopper unloads basket at checkout, 17s | https://www.pexels.com/video/woman-getting-things-out-of-grocery-basket-at-billing-counter-5103988/ — Pexels License, Gustavo Fring | 02, 05, 11 | preview needed | Checkout and shelf/register agreement |
+| Busy supermarket aisle, 10s | https://www.pexels.com/video/busy-supermarket-aisle-with-shoppers-37101039/ — Pexels License, Ronie Aristosa | 01, 04, 11 | preview needed | Human store scale/context |
+| Shopper selects fresh vegetables, 22s | https://www.pexels.com/video/a-woman-shopping-for-fresh-vegetables-8027660/ — Pexels License, Ivan S | 04, 10, 11 | preview needed | Perishable-goods/customer bed |
+| Produce aisle in busy store, 9s | https://www.pexels.com/video/vibrant-grocery-produce-aisle-in-busy-store-34506452/ — Pexels License, JMT 35 | 04, 10 | preview needed | Produce timeline establishing shot |
+| Worker arranges fresh vegetables | https://www.pexels.com/photo/man-fixing-the-vegetables-in-the-stand-8476596/ — Pexels License, Kampus Production | 03, 10 | preview needed | Real worker/produce still with authored camera move |
+
+The first search pass found credible GREEN shopper, checkout, stocking, and produce coverage. It did
+**not** find a convincing exact shot of a worker replacing printed shelf labels or repeatedly marking
+down near-expiry goods. Those remain priority gaps; use a premium licensed source or a locally filmed
+close-in demonstration rather than a semantically weak stock substitute.
 
 ## Authored Visual Components
 
@@ -41,7 +63,8 @@ mean the rights have been resolved.
 | CNBC: How Digital Price Tags Are Changing Food Shopping | AMBER | https://youtu.be/Hj5OpFNj8uc | Brief store/industry context | identified |
 | Global News: Walmart rolls out digital price tags | AMBER | https://youtu.be/zIlvYzNrim0 | Shopper concern / rollout context | identified |
 | WUSA9: Is Walmart digital pricing good or bad? | AMBER | https://youtu.be/cNpKutJ1aew | Local human presence | identified |
-| 2026 Senate hearing archive | AMBER research access | https://archive.org/details/CSPAN2_20260805_122900_The_Hearing_Room_Hearing_on_AI_Surveillance_for_Price_Gouging | Hearing room / attributed testimony | identified |
+| Official 2026 Senate Judiciary hearing video | government/proof; recording provenance to log | https://www.judiciary.senate.gov/committee-activity/hearings/your-data-their-profit-the-consumer-cost-of-ai-surveillance-pricing | Hearing room / attributed testimony | identified |
+| C-SPAN copy of 2026 Senate hearing | RED unless separately licensed | https://archive.org/details/CSPAN2_20260805_122900_The_Hearing_Room_Hearing_on_AI_Surveillance_for_Price_Gouging | Research/transcript reference only | replaced | Use originating Senate feed; Archive.org availability does not remove C-SPAN copyright |
 | NYC Council surveillance-pricing hearing | AMBER / terms unknown | https://archive.org/details/openpublica-new_york_city-new_york-legistar-nyc-1422654 | Local public hearing context | identified |
 
 ## Source-Census Result
@@ -62,3 +85,8 @@ mean the rights have been resolved.
 - Outside footage is single-use. Build sufficient shopper/worker coverage before the final scene map.
 - News footage remains AMBER and should be limited to short, transformed, attributed critical excerpts.
 - Do not treat corporate press-media availability as a reuse license until terms are recorded.
+- Walmart's published policy explicitly requires written permission for uses outside its professional-
+  news license. See `WALMART-PERMISSION-REQUEST.md`; do not download the package while permission is
+  unresolved.
+- See `FOOTAGE-ACQUISITION-PLAN.md` for the per-scene source order, real-material targets, and GREEN
+  fallback for each AMBER source.
