@@ -28,7 +28,11 @@ import json
 import re
 import sys
 
-norm = lambda s: re.sub(r"[^a-z0-9]", "", s.lower())
+def norm(s):
+    """Normalise for comparison. '&' becomes 'and' because that is how it is SPOKEN —
+    stripping it to an empty string silently drops the token from seed windows, which
+    cost EKU spanA four anchor matches before this was caught."""
+    return re.sub(r"[^a-z0-9]", "", s.lower().replace("&", " and "))
 
 
 def align(boxes, words, lookahead=5, seed=3):
@@ -37,22 +41,31 @@ def align(boxes, words, lookahead=5, seed=3):
     if not disp or not ws:
         sys.exit("error: empty boxes or words")
 
-    # 1. find where the quote starts: unbounded search for the first `seed` display
-    #    words appearing consecutively in the transcript
-    start = None
-    seed_toks = [d for d in disp[:seed] if d]
-    for i in range(len(ws)):
-        if all(i + k < len(ws) and norm(ws[i + k]["text"]) == seed_toks[k]
-               for k in range(len(seed_toks))):
-            start = i
+    # 1. find where the quote starts: an unbounded search for `seed` consecutive
+    #    display words. The seed SLIDES, because the first display token is often the
+    #    one the transcript will not reproduce — a hyphenated compound the ASR splits
+    #    ("digital-first" -> "digital first", "hardcopy" -> "hard copy"). Anchoring on
+    #    a fixed first-three window fails outright on those spans.
+    start = d_start = None
+    for off in range(0, min(len(disp) - seed + 1, 12)):
+        seed_toks = [d for d in disp[off:off + seed] if d]
+        if len(seed_toks) < seed:
+            continue
+        for i in range(len(ws)):
+            if all(i + k < len(ws) and norm(ws[i + k]["text"]) == seed_toks[k]
+                   for k in range(seed)):
+                start, d_start = i, off
+                break
+        if start is not None:
             break
     if start is None:                      # fall back to the first single-token hit
+        d_start = 0
         start = next((i for i, w in enumerate(ws) if norm(w["text"]) == disp[0]), 0)
 
     # 2. walk forward with a BOUNDED window so an unspoken token cannot run away
     times = [None] * len(disp)
     j = start
-    for i, d in enumerate(disp):
+    for i, d in enumerate(disp[d_start:], start=d_start):
         if not d:
             continue
         hi = min(j + lookahead, len(ws))
