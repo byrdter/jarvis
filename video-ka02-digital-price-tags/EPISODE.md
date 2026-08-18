@@ -8,7 +8,7 @@
 - Episode folder: `video-ka02-digital-price-tags`
 - Owner: Terry Byrd
 - Beads issue: `jarvis-oekv.2`
-- Status: scripting
+- Status: VO-approved / visual-production-prep
 
 ## Thesis
 
@@ -28,14 +28,14 @@ the display.
 
 ## Runtime
 
-- Target runtime (from channel profile and retained payoff): 12:30–13:30
+- Target runtime (from channel profile): 12:00–15:00
 - Whole-runtime carried payoff: If the label is not setting the price, what changed—and what actually
   prevents the new capability from being used against shoppers?
 - Persistent spine: three connected layers—PUBLIC LABEL → STORE PRICE ENGINE → CUSTOMER DATA—light up
   one at a time as the episode separates current use, enabled capability, and documented abuse.
 - Planned reversal position: 5:20–6:45; the largest available in-store study found virtually no surge
   pricing before or after ESL adoption.
-- Current estimated runtime: 13:28 at 150 spoken words per minute (2,020 spoken words)
+- Current estimated runtime: 13:44 at 150 spoken words per minute (2,061 spoken words)
 
 ## Production Strategy
 
@@ -45,7 +45,7 @@ the display.
 - Codex Sites planned: no
 - Site role: none
 - External clip tools: archival-search inventory; short fair-use broadcast excerpts only when needed
-- TTS/VO tool: decide after final VO approval
+- TTS/VO tool: select through a one-scene voice and pacing test before full narration
 
 ## Required Decisions
 
@@ -55,8 +55,8 @@ the display.
 | Pre-script title/thumbnail package approved | Terry | approved | “Move ahead” on selected Episode 1; factual wording tightened during Gate 2 |
 | Thesis locked | Terry | approved | “Keep the labels; govern the decisions behind them” approved 2026-08-14 |
 | Runtime target locked | Terry | approved | 12–15 minute channel range; draft targets approximately 13 minutes |
-| Visual treatment approved | Terry | approved | Story-level direction approved with thesis; scene execution still requires QA |
-| VO approved | Terry | pending | Full 12-scene draft complete; awaiting review |
+| Visual treatment approved | Terry | approved | HyperFrames direction approved 2026-08-18 with a five-second visual-state ceiling and synchronized evidence highlighting |
+| VO approved | Terry | approved | Scenes 01–11 approved; Scene 12 CTA expanded per Terry’s direction on 2026-08-18 |
 | Scene renders locked | Terry | pending | Not started |
 | Master render approved | Terry | pending | Not started |
 | Final package verified against finished video | Terry | pending | Refinement only; promise changes return to pre-script gate |
@@ -72,4 +72,5 @@ the display.
 
 ## Current Next Action
 
-Review the scene-by-scene VO draft, then resolve any wording changes before recording or TTS.
+Generate and review one representative narration test, then resolve assets and build VO-anchored
+HyperFrames subsegments under the approved timing and evidence contract.

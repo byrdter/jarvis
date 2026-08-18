@@ -15,7 +15,7 @@
 | 09 | Law reaches for two different problems | 1:10 | 1:10 | scripted | | | | Enacted vs proposed labels |
 | 10 | When a fast price moves down | 0:53 | 0:53 | scripted | | | | Waste/markdown countercase |
 | 11 | Better for whom? | 1:52 | 1:52 | scripted | | | | Verdict and four safeguards |
-| 12 | CTA | 0:18 | 0:18 | scripted | | | | Graphics only |
+| 12 | CTA | 0:34 | 0:34 | scripted | | | | Graphics-only HyperFrames CTA; like/share/bell/promise sequence |
 
 Statuses: planned, scripted, VO-generated, assets-ready, building, rendered, QC-failed, approved, locked.
 
@@ -35,6 +35,7 @@ Use `scenes/<scene>/renders/LOCKED` to pin approved takes.
 
 ## Current Production Queue
 
-1. Terry reviews and approves the VO draft or marks wording changes.
-2. Lock a narration method and record one scene as a voice/pacing test.
-3. Start asset resolution against the approved first-line anchors.
+1. Lock a narration method and record Scene 06 as a voice/pacing test.
+2. Resolve real footage and source captures against the approved first-line anchors.
+3. Build VO-anchored HyperFrames subsegments with ≤5-second ordinary visual states and synchronized
+   evidence highlighting.

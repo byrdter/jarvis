@@ -160,4 +160,6 @@ Digital shelf labels are likely to become ordinary because they solve real probl
 
 ==== SCENE 12 — CTA ====
 
-Normal life often changes before the rules catch up. We will keep following those changes to find out who benefits, what we trade away, and whether the new version is actually better. Subscribe to KeyAdvances if that is a question worth asking with us.
+Normal life often changes before the rules catch up. We will keep following those changes to find out who benefits, what we trade away, and whether the new version is actually better.
+
+If that is a question worth asking with us, subscribe to KeyAdvances. Like this video and share it with someone who wants to understand how prices are changing around us. And turn on the notification bell so you will know when we examine the next key advance reaching your life, work, or business.

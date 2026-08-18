@@ -15,7 +15,7 @@ Target: 12–15 minutes; visual-first singular investigation.
 | 9 | 09-law | power and choices | 1:20 | `New Jersey chose to regulate both` | Enacted/proposed policy mapped to separate layers |
 | 10 | 10-fast-price-down | scenarios and trade-offs | 0:55 | `Consider food that will be unsellable tomorrow` | Perishable timeline and downward price |
 | 11 | 11-verdict | better for whom | 1:30 | `Now we can answer the question we started with` | Three constituencies + four safeguards resolve spine |
-| 12 | 12-cta | channel promise | 0:25 | `Normal life often changes before the rules catch up` | Resolved spine becomes KeyAdvances end card |
+| 12 | 12-cta | channel promise | 0:34 | `Normal life often changes before the rules catch up` | Resolved spine becomes an interactive KeyAdvances like/share/bell end card |
 
 ## Withholding Ledger
 
