@@ -8,9 +8,9 @@ have been resolved.
 
 | Asset | Rights Tier | Source Path / URL | Scene(s) | Local Scene Copy | Status | Notes |
 |---|---|---|---|---|---|---|
-| Walmart digital tag close-up 01 | GREEN | https://commons.wikimedia.org/wiki/File:Walmart_Digital_Price_Tag_01.jpg | 01, 03 | no | identified | CC BY 4.0; record attribution |
-| Walmart digital tag close-up 02 | GREEN | https://commons.wikimedia.org/wiki/File:Walmart_Digital_Price_Tag_02.jpg | 01, 05 | no | identified | CC BY 4.0; record attribution |
-| Walmart associates, aisle, tag and pick-to-light media | AMBER — written permission required | https://corporate.walmart.com/news/2024/06/06/new-tech-better-outcomes-digital-shelf-labels-are-a-win-for-customers-and-associates/press-center | 01–03 | no | permission request drafted | Eight stills; 3:49 b-roll; 1:59 associate story. Walmart policy limits automatic permission to accredited professional news organizations |
+| Walmart digital tag close-up 01 | GREEN | `/Volumes/ORICO/StoryblockAssets/video-ka02-digital-price-tags/images/Walmart_Digital_Price_Tag_01 (1).jpg` | 01, 03 | no | **acquired and verified** | 4032×3024; Ktkvtsh/Wikimedia Commons; CC BY 4.0 attribution recorded in ORICO `_rights/` |
+| Walmart digital tag close-up 02 | GREEN | `/Volumes/ORICO/StoryblockAssets/video-ka02-digital-price-tags/images/Walmart_Digital_Price_Tag_02.jpg` | 01, 05 | no | **acquired and verified** | 4032×3024; clear two-label close view; Ktkvtsh/Wikimedia Commons; CC BY 4.0 attribution recorded in ORICO `_rights/` |
+| Walmart associates, aisle, tag and pick-to-light media | AMBER — written permission required | https://corporate.walmart.com/news/2024/06/06/new-tech-better-outcomes-digital-shelf-labels-are-a-win-for-customers-and-associates/press-center | 01–03 | no | **permission requested; awaiting Walmart response** | Eight stills; 3:49 b-roll; 1:59 associate story. Optional enhancement; CC photographs and licensed adjacent footage already cover the factual hardware and workflow |
 | Walmart current rollout page capture | quotation/proof | https://corporate.walmart.com/news/2026/03/02/how-the-shelf-got-smarter-and-our-jobs-got-easier | 01, 05 | no | identified | Highlight 2,300 / one-price claims |
 | Vusion label/POS architecture | quotation/proof | https://www.vusion.com/na/products/sesimagotag/electronic-shelf-labels/ | 03 | no | identified | Rebuild our own diagram; do not reuse marketing art unnecessarily |
 | Working-paper title and result pages | quotation/proof | https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5271491 | 06 | no | identified | Show “working paper” status |
@@ -67,10 +67,11 @@ close-in demonstration rather than a semantically weak stock substitute.
 | SBV-349138419 | Produce stocking and sorting | 03, 10 | retained on ORICO |
 | SBV-352908223 | Walmart exterior establishing shot | 01 | retained on ORICO |
 
-Literal gaps remaining after the batch: physical replacement of a printed shelf-edge label, true
-electronic-shelf-label macro footage, and an actual perishable markdown action. Do not fill these with
-semantically weak substitutes; use the identified CC BY hardware photographs, approved retailer
-material if permission arrives, or an authored explanation supported by the adjacent real actions.
+Literal gaps remaining after the batch: physical replacement of a printed shelf-edge label and an
+actual perishable markdown action. The true electronic-shelf-label imagery gap is now closed by the
+two verified CC BY 4.0 photographs. Do not fill the remaining gaps with semantically weak substitutes;
+use approved retailer material if permission arrives or an authored explanation supported by the
+adjacent real actions.
 
 ## Authored Visual Components
 
