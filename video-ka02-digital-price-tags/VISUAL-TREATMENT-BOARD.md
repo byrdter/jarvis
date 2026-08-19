@@ -25,6 +25,59 @@ to scene-level review and QC.
   HyperFrames supplies cropping, depth, annotation, highlighting, diagrams, data visualization,
   transitions, and the persistent three-layer spine.
 
+## Background Image Standard — Approved 2026-08-19
+
+- **No flat-black scenes.** Every scene carries a recognizable, relevant photographic or documentary
+  image bed: a Walmart/store exterior, grocery aisle, products, shopper or worker action, electronic
+  label, checkout surface, produce, hearing room, government building, or source-document texture.
+- Prefer **real, rights-cleared material** already acquired for this episode. A still extracted from a
+  licensed clip remains real photography; it may be reframed, blurred, darkened, color-treated, and
+  given restrained camera motion without becoming synthetic evidence.
+- Each scene receives a **different primary background source**. Do not repeat one generic aisle image
+  under every analytical sequence. Outside assets remain single-use across the episode.
+- The background must remain identifiable without competing with the foreground. Starting treatment:
+  8–20px blur, 65–82% midnight-navy scrim, restrained cyan/amber edge light, and a slow 3–5% camera
+  push or lateral drift. Adjust by image; these are design ranges, not fixed presets.
+- Preserve the meaningful part of the photograph. Do not blur an electronic label until its physical
+  form disappears, crop a worker into an unrecognizable fragment, or use a branded store image behind
+  a claim about an unrelated company.
+- Evidence cards, diagrams, charts, and quotations sit in the foreground with sufficient contrast.
+  A moving photographic bed adds place and texture; it may not undermine synchronized highlighting
+  or the legibility of numbers and qualifiers.
+- The CTA also uses a faint real retail image bed behind the KeyAdvances graphics, rather than ending
+  on an empty black field.
+
+### Synthetic-Media Decision
+
+No photoreal AI-generated image or clip is currently required. The acquired Walmart footage,
+Storyblocks worker/shopper footage, two CC BY electronic-label photographs, evidence documents, and
+authored HyperFrames diagrams can carry the full argument. Synthetic photoreal material would add
+little and could make genuine store operations look reconstructed.
+
+AI-generated imagery remains a **last-resort atmospheric fallback only** if the timed scene map exposes
+a specific unfillable transition. It may never depict Walmart operations, electronic-label behavior,
+surge pricing, individualized prices, a hearing, a study result, or any other factual evidence. Any such
+use must be non-evidentiary, clearly separated from source proof, and keep the finished episode well
+below the existing 10% synthetic-media ceiling. The present production target is **zero generated
+photoreal footage**.
+
+### Initial Background Families
+
+| Scene | Faded real-image bed |
+|---|---|
+| 01 | Electronic shelf-label close-up and its real store surroundings |
+| 02 | Worker/scanner or label-printer workflow |
+| 03 | App-guided grocery picker or stocked aisle |
+| 04 | Produce and public price signage |
+| 05 | Ordinary Walmart interior with visible shelf context |
+| 06 | Research-paper texture over a subdued store or shelf photograph |
+| 07 | Real online-grocery device/browser setting |
+| 08 | Checkout, phone, or retail-data interaction beneath FTC evidence |
+| 09 | Government hearing room, council chamber, or official-building image |
+| 10 | Refrigerated food, expiration check, or produce stocking |
+| 11 | Shopper/worker/store-wide image supporting the better-for-whom verdict |
+| 12 | Faint shelf/aisle image beneath the KeyAdvances CTA and end-screen zones |
+
 ## Variety Targets
 
 - At least 6 presentation registers represented.

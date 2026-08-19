@@ -56,6 +56,7 @@ the display.
 | Thesis locked | Terry | approved | “Keep the labels; govern the decisions behind them” approved 2026-08-14 |
 | Runtime target locked | Terry | approved | 12–15 minute channel range; draft targets approximately 13 minutes |
 | Visual treatment approved | Terry | approved | HyperFrames direction approved 2026-08-18 with a five-second visual-state ceiling and synchronized evidence highlighting |
+| Background and synthetic-media policy | Terry | approved | Every scene uses a distinct faded real-image/documentary bed; no flat black. Zero photoreal AI generation planned, with non-evidentiary synthetic imagery allowed only as a last-resort fallback below the 10% ceiling |
 | VO approved | Terry | approved | Scenes 01–11 approved; Scene 12 CTA expanded per Terry’s direction on 2026-08-18 |
 | Scene renders locked | Terry | pending | Not started |
 | Master render approved | Terry | pending | Not started |
