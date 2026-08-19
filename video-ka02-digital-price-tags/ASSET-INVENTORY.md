@@ -1,7 +1,8 @@
 # Asset Inventory and Visual-Source Census
 
-No assets have been downloaded or cleared yet. “Identified” means a usable lead exists; it does not
-mean the rights have been resolved.
+The first Storyblocks acquisition batch was downloaded and visually reviewed on 2026-08-19.
+“Identified” elsewhere in this document still means a usable lead exists; it does not mean the rights
+have been resolved.
 
 ## Required Assets
 
@@ -45,14 +46,31 @@ close-in demonstration rather than a semantically weak stock substitute.
 
 ## Incoming Storyblocks Batch
 
-- Owner: Terry
-- Planned download date: 2026-08-20
+- Acquisition: Codex through Terry's signed-in Storyblocks account
+- Download date: 2026-08-19
 - Selection brief: `STORYBLOCKS-DOWNLOAD-BRIEF.md`
-- Untouched originals: `03-assets/incoming/storyblocks/`
-- Rights records: `03-assets/incoming/storyblocks/_rights/`
+- Untouched originals: `/Volumes/ORICO/StoryblockAssets/video-ka02-digital-price-tags/video/`
+- Catalog and rights records: `/Volumes/ORICO/StoryblockAssets/video-ka02-digital-price-tags/`
 - Priority: paper-label replacement, label printer workflow, electronic-label macro, scanning,
   order-picking, real markdown action, and expiration-date handling.
-- Intake status: awaiting files
+- Intake status: **initial curated batch complete — 9 retained, 1 rejected after visual review**
+
+| Storyblocks ID | Coverage | Scene(s) | Status |
+|---|---|---|---|
+| SBV-352919820 | Real Walmart grocery interior and price signage | 01, 02, 05, 11 | retained on ORICO |
+| SBV-351975144 | Worker price audit with handheld scanner and tablet | 02, 03 | retained on ORICO |
+| SBV-329424001 | Adhesive-label printer workflow | 02 | retained on ORICO |
+| SBV-348689454 | Worker checks packaged-food expiration date | 10 | retained on ORICO |
+| SBV-354035772 | Real Walmart produce department, shoppers, price boards | 01, 04, 10, 11 | retained on ORICO |
+| SBV-354325338 | Walmart self-checkout receipt printing | 02, 05, 11 | retained on ORICO |
+| SBV-351961072 | App-guided grocery order picking | 03, 05, 11 | retained on ORICO |
+| SBV-349138419 | Produce stocking and sorting | 03, 10 | retained on ORICO |
+| SBV-352908223 | Walmart exterior establishing shot | 01 | retained on ORICO |
+
+Literal gaps remaining after the batch: physical replacement of a printed shelf-edge label, true
+electronic-shelf-label macro footage, and an actual perishable markdown action. Do not fill these with
+semantically weak substitutes; use the identified CC BY hardware photographs, approved retailer
+material if permission arrives, or an authored explanation supported by the adjacent real actions.
 
 ## Authored Visual Components
 
