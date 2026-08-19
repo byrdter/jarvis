@@ -43,6 +43,17 @@ The first search pass found credible GREEN shopper, checkout, stocking, and prod
 down near-expiry goods. Those remain priority gaps; use a premium licensed source or a locally filmed
 close-in demonstration rather than a semantically weak stock substitute.
 
+## Incoming Storyblocks Batch
+
+- Owner: Terry
+- Planned download date: 2026-08-20
+- Selection brief: `STORYBLOCKS-DOWNLOAD-BRIEF.md`
+- Untouched originals: `03-assets/incoming/storyblocks/`
+- Rights records: `03-assets/incoming/storyblocks/_rights/`
+- Priority: paper-label replacement, label printer workflow, electronic-label macro, scanning,
+  order-picking, real markdown action, and expiration-date handling.
+- Intake status: awaiting files
+
 ## Authored Visual Components
 
 | Component | Role | Scenes | Status | Notes |

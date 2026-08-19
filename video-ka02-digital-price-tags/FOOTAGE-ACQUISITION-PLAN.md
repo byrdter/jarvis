@@ -44,6 +44,10 @@ package therefore remains **AMBER until Walmart gives written permission**.
    execute the GREEN fallbacks below.
 7. Build the footage census and scene timelines before constructing HyperFrames compositions.
 
+Terry is sourcing Storyblocks footage on 2026-08-20. Use `STORYBLOCKS-DOWNLOAD-BRIEF.md` to prioritize
+the exact operational gaps and place untouched downloads under `03-assets/incoming/`. Pexels can cover
+much of the generic-real bed; Storyblocks should buy specificity rather than duplicate it.
+
 ## Scene-by-Scene Coverage Map
 
 | Scene | Must-Have Real Material | Target Real Coverage | Best Source | Lawful Fallback if AMBER Fails | HyperFrames Role |
@@ -122,4 +126,3 @@ A scene may enter HyperFrames construction only when:
 - document passages and highlight phrases are mapped to the relevant VO words;
 - no visual implies personalized in-store pricing, identified people, or conduct that the evidence
   does not establish.
-
