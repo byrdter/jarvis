@@ -8,7 +8,7 @@
 - Episode folder: `video-ka02-digital-price-tags`
 - Owner: Terry Byrd
 - Beads issue: `jarvis-oekv.2`
-- Status: VO-approved / visual-production-prep
+- Status: visual production active / Scene 06 review-ready
 
 ## Thesis
 
@@ -45,7 +45,7 @@ the display.
 - Codex Sites planned: no
 - Site role: none
 - External clip tools: archival-search inventory; short fair-use broadcast excerpts only when needed
-- TTS/VO tool: select through a one-scene voice and pacing test before full narration
+- TTS/VO tool: Steve / Cartesia Sonic 3.5 at 0.86 speed; Scene 06 test rendered at 66.16 seconds
 
 ## Required Decisions
 
@@ -58,7 +58,7 @@ the display.
 | Visual treatment approved | Terry | approved | HyperFrames direction approved 2026-08-18 with a five-second visual-state ceiling and synchronized evidence highlighting |
 | Background and synthetic-media policy | Terry | approved | Every scene uses a distinct faded real-image/documentary bed; no flat black. Zero photoreal AI generation planned, with non-evidentiary synthetic imagery allowed only as a last-resort fallback below the 10% ceiling |
 | VO approved | Terry | approved | Scenes 01–11 approved; Scene 12 CTA expanded per Terry’s direction on 2026-08-18 |
-| Scene renders locked | Terry | pending | Not started |
+| Scene renders locked | Terry | pending | Scene 06 prototype rendered and passed automated QC; awaiting editorial review |
 | Master render approved | Terry | pending | Not started |
 | Final package verified against finished video | Terry | pending | Refinement only; promise changes return to pre-script gate |
 | Unlisted upload QA passed | Terry | pending | Required before public/scheduled release |
@@ -73,6 +73,6 @@ the display.
 
 ## Current Next Action
 
-Run the narration test and real-footage acquisition in parallel. Follow `FOOTAGE-ACQUISITION-PLAN.md`,
-send the Walmart request, and build the rights-cleared store/document census before VO-anchored
-HyperFrames scene construction.
+Review the Scene 06 prototype for Steve voice, pacing, evidence readability, and the faded-real-footage
+grammar. Incorporate that decision before synthesizing the remaining narration and constructing the
+remaining VO-anchored HyperFrames scenes. Walmart permission remains optional enhancement, not a blocker.

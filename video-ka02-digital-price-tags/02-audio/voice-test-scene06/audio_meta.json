@@ -1,0 +1,21 @@
+{
+  "tts_provider": "cartesia",
+  "voice_id": "9fb269e7-70fe-4cbe-aa3f-28bdb67e3e84",
+  "model_id": "sonic-3.5",
+  "speed": 0.86,
+  "sample_rate": 44100,
+  "channels": 1,
+  "source_script": "video-ka02-digital-price-tags/01-script/VO-CLEAN.md",
+  "voices": [
+    {
+      "id": "s05",
+      "title": "ONE HUNDRED EIGHTY MILLION OBSERVATIONS",
+      "path": "video-ka02-digital-price-tags/02-audio/voice-test-scene06/s05-narration.wav",
+      "words_path": "video-ka02-digital-price-tags/02-audio/voice-test-scene06/s05-words.json",
+      "text_path": "video-ka02-digital-price-tags/02-audio/voice-test-scene06/s05-spoken.txt",
+      "duration_s": 66.16,
+      "word_count": 185
+    }
+  ],
+  "total_duration_s": 66.16
+}

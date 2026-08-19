@@ -1,0 +1,11 @@
+The strongest direct evidence reverses the easy version of this story.
+
+Researchers examined more than one hundred eighty million product-level observations from one hundred fourteen stores in four states. The unnamed grocery chain introduced electronic shelf labels gradually, allowing the researchers to compare pricing before and after installation and against other retailers in the same states.
+
+Before the labels, temporary price increases appeared on roughly five products in every one hundred thousand on a typical day. After installation, the figure was about five point six. The researchers described the change as virtually no surge pricing and found that discounts became slightly more common.
+
+That does not prove every retailer will behave the same way forever. The paper examines one chain, and it remains a working paper rather than a peer-reviewed final result.
+
+But it does tell us something important: installing the hardware did not automatically produce the feared behavior. The label made faster execution possible. Customer trust and competitive pressure still shaped how the retailer used it.
+
+If that were the only evidence, the concern might look premature. Then a grocery-pricing experiment appeared somewhere else.

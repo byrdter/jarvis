@@ -1,0 +1,4 @@
+{"id":"image_001","type":"image","path":"assets/images/walmart-interior-bed.jpg","source":"existing","description":"walmart interior bed","width":3840,"height":2160,"provenance":{"provider":"local","adopted":true}}
+{"id":"video_001","type":"video","path":"assets/video/walmart-interior-SBV-352919820.mp4","source":"existing","description":"walmart interior SBV 352919820","duration":6.9,"width":3840,"height":2160,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_001","type":"bgm","path":"assets/audio/scene06-narration.wav","source":"existing","description":"scene06 narration","duration":66.2,"provenance":{"provider":"local","adopted":true}}
+{"id":"voice_001","type":"voice","path":".media/audio/voice/voice_001.wav","source":"ingested","description":"scene06-narration.wav","provenance":{"provider":"local","from":"assets/audio/scene06-narration.wav"}}

@@ -13,7 +13,7 @@ have been resolved.
 | Walmart associates, aisle, tag and pick-to-light media | AMBER — written permission required | https://corporate.walmart.com/news/2024/06/06/new-tech-better-outcomes-digital-shelf-labels-are-a-win-for-customers-and-associates/press-center | 01–03 | no | **permission requested; awaiting Walmart response** | Eight stills; 3:49 b-roll; 1:59 associate story. Optional enhancement; CC photographs and licensed adjacent footage already cover the factual hardware and workflow |
 | Walmart current rollout page capture | quotation/proof | https://corporate.walmart.com/news/2026/03/02/how-the-shelf-got-smarter-and-our-jobs-got-easier | 01, 05 | no | identified | Highlight 2,300 / one-price claims |
 | Vusion label/POS architecture | quotation/proof | https://www.vusion.com/na/products/sesimagotag/electronic-shelf-labels/ | 03 | no | identified | Rebuild our own diagram; do not reuse marketing art unnecessarily |
-| Working-paper title and result pages | quotation/proof | https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5271491 | 06 | no | identified | Show “working paper” status |
+| Working-paper title and result pages | quotation/proof | https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5271491 | 06 | `05-hyperframes/index.html` | **authored source card built** | SSRN record was Cloudflare-blocked during capture; prototype uses exact title/attribution and clearly labels working-paper status rather than simulating a screenshot |
 | FTC report pages 2 and 9 | U.S. government/proof | https://www.ftc.gov/system/files/ftc_gov/pdf/p246202_surveillancepricing6bstudy_researchsummaries_redacted.pdf | 08 | no | identified | Highlight scope caveat and price-tool capability |
 | CR Seattle basket graphic | AMBER fair-use quotation | https://www.consumerreports.org/money/questionable-business-practices/instacart-ai-pricing-experiment-inflating-grocery-bills-a1142182490/ | 07 | no | identified | Brief excerpt with critique; prefer authored redraw of reported values |
 | NJ law-signing page and bill | government/proof | https://www.nj.gov/governor/news/2026/approved/20260723a.shtml | 09 | no | identified | One-year moratorium language |
@@ -57,7 +57,7 @@ close-in demonstration rather than a semantically weak stock substitute.
 
 | Storyblocks ID | Coverage | Scene(s) | Status |
 |---|---|---|---|
-| SBV-352919820 | Real Walmart grocery interior and price signage | 01, 02, 05, 11 | retained on ORICO |
+| SBV-352919820 | Real Walmart grocery interior and price signage | 01, 02, 05, 06, 11 | retained on ORICO; Scene 06 copy staged | Scene 06 uses it as the faded documentary bed and opening motion layer |
 | SBV-351975144 | Worker price audit with handheld scanner and tablet | 02, 03 | retained on ORICO |
 | SBV-329424001 | Adhesive-label printer workflow | 02 | retained on ORICO |
 | SBV-348689454 | Worker checks packaged-food expiration date | 10 | retained on ORICO |
@@ -81,7 +81,7 @@ adjacent real actions.
 | 48-hour paper clock collapsing to minutes | Threshold visualization | 01–02 | planned | Use Walmart-attributed wording |
 | 120,000-label aisle wall | Scale | 02 | planned | Avoid implying simultaneous changes |
 | Pricing taxonomy cards | Clarify dynamic vs surge vs surveillance/personalized | 04 | planned | Definitions, not scary montage |
-| 180M / 114-store dot-field | Midpoint reversal | 06 | planned | Show tiny 0.005→0.0056 change honestly |
+| 180M / 114-store dot-field | Midpoint reversal | 06 | **prototype built and rendered** | 180 one-million-observation dots; common-axis 0.005%→0.0056% comparison; caveats remain attached |
 | Five-price basket comparison | Documented adjacent case | 07 | planned | Values from CR, clearly labeled ONLINE |
 | Guardrail control panel | Verdict | 11 | planned | One public price / stability window / no personal data / audit log |
 

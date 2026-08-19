@@ -169,6 +169,12 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--voice", required=True)
     parser.add_argument("--speed", type=float, default=1.0)
+    parser.add_argument(
+        "--scene",
+        type=int,
+        action="append",
+        help="Generate only the selected one-based scene number; may be repeated.",
+    )
     args = parser.parse_args()
 
     env = load_env(args.env)
@@ -181,6 +187,12 @@ def main() -> None:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     scenes = parse_scenes(args.script)
+    if args.scene:
+        selected = {str(number).zfill(2) for number in args.scene}
+        scenes = [scene for scene in scenes if scene["number"].zfill(2) in selected]
+        missing = selected - {scene["number"].zfill(2) for scene in scenes}
+        if missing:
+            raise SystemExit(f"Requested scene(s) not found: {', '.join(sorted(missing))}")
     client = Cartesia(api_key=api_key)
     generated = []
     for scene in scenes:
