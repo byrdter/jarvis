@@ -2,9 +2,9 @@
 
 ## Concept
 
-The scene lives inside a **documentary evidence table**, not a dashboard. Real store imagery is
-always faintly present underneath paper, ink, and illuminated shelf-label elements. The visual
-argument begins with scale and anxiety, then becomes quieter and more precise as the result lands.
+The scene moves between a **documentary grocery floor** and a compact evidence table. Real footage
+is normally the foreground, not wallpaper. Paper, ink, and shelf-label elements enter only when a
+number, method, caveat, or boundary needs to be made explicit.
 
 ## Palette
 
@@ -23,8 +23,8 @@ argument begins with scale and anxiety, then becomes quieter and more precise as
 
 ## Focal Element
 
-An oversized evidence card with a thin illuminated shelf-label edge. It can behave as a paper,
-chart, map, or comparison surface without becoming generic software UI.
+The person and store action in the current real clip. Evidence cards remain partial-width overlays,
+except for the brief common-axis result chart where precision requires the whole frame.
 
 ## Anchors
 
@@ -34,9 +34,9 @@ chart, map, or comparison surface without becoming generic software UI.
 
 ## Background Treatment
 
-Use a real Walmart interior frame with a slow, continuous push. Desaturate and darken it through
-the canonical media-treatment/color-grade path, then place a translucent navy scrim above it.
-The image must remain identifiable as a working grocery aisle; it is atmosphere, not wallpaper.
+Use distinct real grocery clips at their natural brightness and preserve skin, food, and product
+color. A restrained navy readability shade may sit above footage, but the store action must remain
+immediately identifiable. During the common-axis chart only, fall back to the faded Walmart still.
 
 ## Motion Grammar
 

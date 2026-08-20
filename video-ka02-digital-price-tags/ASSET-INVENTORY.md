@@ -57,14 +57,14 @@ close-in demonstration rather than a semantically weak stock substitute.
 
 | Storyblocks ID | Coverage | Scene(s) | Status |
 |---|---|---|---|
-| SBV-352919820 | Real Walmart grocery interior and price signage | 01, 02, 05, 06, 11 | retained on ORICO; Scene 06 copy staged | Scene 06 uses it as the faded documentary bed and opening motion layer |
-| SBV-351975144 | Worker price audit with handheld scanner and tablet | 02, 03 | retained on ORICO |
+| SBV-352919820 | Real Walmart grocery interior and price signage | 01, 02, 05, 06, 11 | retained on ORICO; Scene 06 copy staged | Scene 06 foreground opening |
+| SBV-351975144 | Worker price audit with handheld scanner and tablet | 02, 03, 06 | retained on ORICO; Scene 06 copy staged | Illustrative study-adjacent foreground footage; unnamed-retailer label attached |
 | SBV-329424001 | Adhesive-label printer workflow | 02 | retained on ORICO |
-| SBV-348689454 | Worker checks packaged-food expiration date | 10 | retained on ORICO |
-| SBV-354035772 | Real Walmart produce department, shoppers, price boards | 01, 04, 10, 11 | retained on ORICO |
-| SBV-354325338 | Walmart self-checkout receipt printing | 02, 05, 11 | retained on ORICO |
-| SBV-351961072 | App-guided grocery order picking | 03, 05, 11 | retained on ORICO |
-| SBV-349138419 | Produce stocking and sorting | 03, 10 | retained on ORICO |
+| SBV-348689454 | Worker checks packaged-food expiration date | 06, 10 | retained on ORICO; Scene 06 copy staged | Illustrative foreground footage under result quotation/caveat |
+| SBV-354035772 | Real Walmart produce department, shoppers, price boards | 01, 04, 06, 10, 11 | retained on ORICO; Scene 06 copy staged | Foreground context for what faster execution changes |
+| SBV-354325338 | Walmart self-checkout receipt printing | 02, 05, 06, 11 | retained on ORICO; Scene 06 copy staged | Brief foreground transition |
+| SBV-351961072 | App-guided grocery order picking | 03, 05, 06, 11 | retained on ORICO; Scene 06 copy staged | Foreground handoff to online experiment |
+| SBV-349138419 | Produce stocking and sorting | 03, 06, 10 | retained on ORICO; Scene 06 copy staged | Illustrative study-method foreground footage; unnamed-retailer label attached |
 | SBV-352908223 | Walmart exterior establishing shot | 01 | retained on ORICO |
 
 Literal gaps remaining after the batch: physical replacement of a printed shelf-edge label and an

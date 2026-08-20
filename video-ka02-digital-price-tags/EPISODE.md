@@ -56,7 +56,7 @@ the display.
 | Thesis locked | Terry | approved | “Keep the labels; govern the decisions behind them” approved 2026-08-14 |
 | Runtime target locked | Terry | approved | 12–15 minute channel range; draft targets approximately 13 minutes |
 | Visual treatment approved | Terry | approved | HyperFrames direction approved 2026-08-18 with a five-second visual-state ceiling and synchronized evidence highlighting |
-| Background and synthetic-media policy | Terry | approved | Every scene uses a distinct faded real-image/documentary bed; no flat black. Zero photoreal AI generation planned, with non-evidentiary synthetic imagery allowed only as a last-resort fallback below the 10% ceiling |
+| Background and synthetic-media policy | Terry | approved | Real footage is the foreground default, targeted at roughly 3–4:1 against pure HyperFrames screen time. Faded documentary images prevent empty black backgrounds but do not count as real-footage coverage. Zero photoreal AI generation planned, with non-evidentiary synthetic imagery allowed only as a last-resort fallback below the 10% ceiling |
 | VO approved | Terry | approved | Scenes 01–11 approved; Scene 12 CTA expanded per Terry’s direction on 2026-08-18 |
 | Scene renders locked | Terry | pending | Scene 06 prototype rendered and passed automated QC; awaiting editorial review |
 | Master render approved | Terry | pending | Not started |
@@ -69,10 +69,10 @@ the display.
 | Blocker | Owner | Needed By | Resolution |
 |---|---|---|---|
 | Walmart press-media reuse permission is not yet granted | Terry/Production | Asset resolution | Send `WALMART-PERMISSION-REQUEST.md`; the published policy requires written permission for this use. Continue sourcing GREEN fallbacks meanwhile |
-| General human store footage is identified but not rights-cleared | Production | Asset resolution | Build a licensed/free shopper-worker bed before scene production |
+| Additional human store footage is still needed for the remaining scenes | Production | Asset resolution | The licensed Storyblocks batch now covers Scene 06 and several adjacent actions; continue building enough distinct footage to avoid reuse across the full episode |
 
 ## Current Next Action
 
-Review the Scene 06 prototype for Steve voice, pacing, evidence readability, and the faded-real-footage
-grammar. Incorporate that decision before synthesizing the remaining narration and constructing the
+Review the Scene 06 footage-dominant cut for Steve voice, pacing, evidence readability, and the 3.93:1
+real-footage-to-pure-graphics grammar. Incorporate that decision before synthesizing the remaining narration and constructing the
 remaining VO-anchored HyperFrames scenes. Walmart permission remains optional enhancement, not a blocker.

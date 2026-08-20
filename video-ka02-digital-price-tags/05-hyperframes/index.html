@@ -13,23 +13,24 @@
     #root { position:relative; width:1920px; height:1080px; overflow:hidden; background:var(--navy); isolation:isolate; }
     .full { position:absolute; inset:0; width:100%; height:100%; }
     .background-media { position:absolute; inset:-34px; width:calc(100% + 68px); height:calc(100% + 68px); object-fit:cover; opacity:.56; transform-origin:52% 48%; }
-    #opening-video { opacity:.34; }
+    #opening-video { opacity:.18; }
     .scrim { background:linear-gradient(90deg,rgba(7,21,34,.96),rgba(7,21,34,.72) 52%,rgba(7,21,34,.9)),linear-gradient(180deg,rgba(7,21,34,.34),rgba(7,21,34,.9)); }
     .texture { opacity:.18; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:48px 48px; }
-    #beat-pulse { position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none; background:linear-gradient(105deg,rgba(80,213,230,.4),rgba(242,184,75,.12) 38%,transparent 72%); }
-    .locator { position:absolute; top:54px; left:72px; z-index:50; display:flex; gap:18px; align-items:center; font-size:18px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
-    .locator strong { color:var(--cyan); }
+    .footage-layer { position:absolute; inset:0; z-index:4; overflow:hidden; pointer-events:none; }
+    .foreground-footage { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .footage-shade { position:absolute; inset:0; z-index:5; pointer-events:none; background:linear-gradient(90deg,rgba(7,21,34,.48),rgba(7,21,34,.08) 52%,rgba(7,21,34,.32)),linear-gradient(180deg,rgba(7,21,34,.08),rgba(7,21,34,.42)); }
+    .study-context { position:absolute; top:48px; right:72px; z-index:70; padding:11px 16px 10px; color:#082530; border:2px solid rgba(248,251,252,.76); border-radius:5px; background:var(--amber); box-shadow:0 10px 34px rgba(0,0,0,.32); font-family:"Archivo Black","Arial Black",sans-serif; font-size:16px; letter-spacing:.09em; text-transform:uppercase; }
+    .locator { position:absolute; top:44px; left:58px; z-index:50; display:flex; gap:18px; align-items:center; padding:10px 14px; color:#f8fbfc; border-radius:5px; background:rgba(7,21,34,.78); font-size:18px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .locator strong { color:#7eeaf5; }
     .locator-rule { width:72px; height:3px; background:var(--amber); }
     .source-line { position:absolute; left:72px; bottom:44px; z-index:60; max-width:1470px; color:#dce4e8; font-size:17px; line-height:1.45; }
     .source-line b { color:var(--amber); }
-    .evidence-cues { position:absolute; inset:0; z-index:70; pointer-events:none; }
-    .evidence-cue { position:absolute; top:46px; right:72px; min-width:260px; padding:12px 18px 11px; opacity:0; color:#082530; border:2px solid rgba(248,251,252,.72); border-radius:5px; background:var(--amber); box-shadow:0 10px 34px rgba(0,0,0,.32); font-family:"Archivo Black","Arial Black",sans-serif; font-size:17px; letter-spacing:.1em; text-align:center; text-transform:uppercase; }
-    .beat { position:absolute; inset:0; padding:132px 96px 108px; overflow:hidden; }
+    .beat { position:absolute; inset:0; z-index:10; padding:132px 96px 108px; overflow:hidden; }
     .display { margin:0; font-family:"Archivo Black","Arial Black",sans-serif; font-weight:900; line-height:.96; letter-spacing:-.045em; text-transform:uppercase; }
     .kicker { color:var(--amber); font-size:20px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
     .paper { position:relative; color:var(--ink); background:linear-gradient(90deg,rgba(17,28,37,.055) 1px,transparent 1px),linear-gradient(var(--paper),#ece5d7); background-size:38px 100%,100% 100%; border:1px solid rgba(255,255,255,.5); border-radius:12px; box-shadow:0 30px 90px rgba(0,0,0,.42); }
     .paper::before { content:""; position:absolute; inset:0 auto 0 0; width:10px; border-radius:12px 0 0 12px; background:var(--cyan); }
-    .paper-label { color:#586b75; font-size:16px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .paper-label { color:#40545e; font-size:16px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
     #beat-a .headline-wrap { position:absolute; left:104px; top:260px; width:1260px; display:flex; flex-direction:column; gap:20px; }
     #beat-a h1 { font-size:104px; }
     #beat-a .headline-accent { color:var(--cyan); }
@@ -37,23 +38,23 @@
     #beat-a .study-tab { position:absolute; right:110px; bottom:170px; width:560px; padding:30px 38px 32px 48px; }
     #beat-a .study-tab h2 { margin:12px 0 10px; font-family:Georgia,serif; font-size:30px; line-height:1.14; }
     #beat-a .study-tab p { margin:0; color:#536671; font-size:16px; }
-    #beat-b .scale-paper { position:absolute; inset:150px 110px 124px; padding:54px 58px 42px 68px; overflow:hidden; }
-    .scale-grid { display:grid; grid-template-columns:1.42fr .58fr; gap:42px; height:100%; }
-    .mega-stat { margin-top:18px; color:var(--ink); font-family:"Archivo Black","Arial Black",sans-serif; font-size:126px; font-weight:900; line-height:.92; letter-spacing:-.06em; font-variant-numeric:tabular-nums; }
-    .mega-caption { margin-top:20px; max-width:760px; color:#40535e; font-size:22px; line-height:1.4; }
-    .dot-field { display:grid; grid-template-columns:repeat(30,1fr); gap:5px; width:830px; margin-top:32px; }
-    .data-dot { display:block; width:14px; height:14px; border-radius:50%; background:#93a8b4; opacity:.22; }
-    .scale-side { display:flex; flex-direction:column; justify-content:center; gap:24px; }
-    .fact-chip { padding:24px 28px; border:2px solid #a9b8be; border-radius:9px; background:rgba(255,255,255,.45); }
-    .fact-chip strong { display:block; color:var(--ink); font-family:"Archivo Black","Arial Black",sans-serif; font-size:72px; line-height:1; }
+    #beat-b .scale-paper { position:absolute; left:86px; top:172px; width:810px; height:690px; padding:48px 52px 42px 62px; overflow:hidden; background:linear-gradient(90deg,rgba(17,28,37,.055) 1px,transparent 1px),linear-gradient(rgba(243,239,228,.96),rgba(236,229,215,.94)); }
+    .scale-grid { display:block; height:100%; }
+    .mega-stat { margin-top:18px; color:var(--ink); font-family:"Archivo Black","Arial Black",sans-serif; font-size:98px; font-weight:900; line-height:.92; letter-spacing:-.06em; font-variant-numeric:tabular-nums; }
+    .mega-caption { margin-top:18px; max-width:660px; color:#40535e; font-size:19px; line-height:1.4; }
+    .dot-field { display:grid; grid-template-columns:repeat(30,1fr); gap:5px; width:650px; margin-top:26px; }
+    .data-dot { display:block; width:12px; height:12px; border-radius:50%; background:#93a8b4; opacity:.22; }
+    .scale-side { position:absolute; left:62px; right:44px; bottom:42px; display:flex; flex-direction:row; gap:18px; }
+    .fact-chip { flex:1; padding:16px 22px; border:2px solid #a9b8be; border-radius:9px; background:rgba(255,255,255,.56); }
+    .fact-chip strong { display:inline-block; margin-right:12px; color:var(--ink); font-family:"Archivo Black","Arial Black",sans-serif; font-size:52px; line-height:1; }
     .fact-chip span { color:#4c606b; font-size:19px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-    #beat-c .method-paper { position:absolute; inset:164px 124px 136px; padding:48px 62px 54px 70px; }
+    #beat-c .method-paper { position:absolute; right:86px; top:172px; width:940px; height:690px; padding:48px 54px 48px 62px; background:linear-gradient(90deg,rgba(17,28,37,.055) 1px,transparent 1px),linear-gradient(rgba(243,239,228,.96),rgba(236,229,215,.94)); }
     .method-title { margin:14px 0 52px; font-family:Georgia,serif; font-size:42px; line-height:1.12; }
     .timeline-rail { position:relative; height:194px; }
     .timeline-line { position:absolute; left:0; right:0; top:78px; height:6px; transform-origin:left center; background:#738893; }
     .phase-label { position:absolute; top:10px; width:250px; color:#435761; font-size:18px; font-weight:700; text-align:center; letter-spacing:.08em; text-transform:uppercase; }
-    .phase-label.before { left:70px; } .phase-label.install { left:600px; color:#0a7280; } .phase-label.after { right:60px; }
-    .install-marker { position:absolute; left:730px; top:37px; width:8px; height:88px; background:var(--cyan); }
+    .phase-label.before { left:10px; } .phase-label.install { left:295px; color:#075b65; } .phase-label.after { right:10px; }
+    .install-marker { position:absolute; left:410px; top:37px; width:8px; height:88px; background:var(--cyan); }
     .store-waves { position:absolute; inset:53px 0 auto; display:grid; grid-template-columns:repeat(19,1fr); gap:12px; }
     .store-wave { width:13px; height:60px; margin:0 auto; transform-origin:bottom center; background:var(--cyan); opacity:.55; }
     .comparison-row { display:flex; gap:22px; align-items:center; margin-top:20px; padding:24px 28px; border:1px solid #aeb9bd; border-radius:8px; background:rgba(255,255,255,.46); }
@@ -75,23 +76,24 @@
     .finding-quote { position:relative; margin-top:28px; padding:20px 26px; color:#263a44; border-left:6px solid var(--cyan); background:rgba(80,213,230,.11); font-family:Georgia,serif; font-size:28px; line-height:1.35; }
     .finding-highlight { position:absolute; left:22px; top:17px; width:670px; height:42px; transform-origin:left center; background:rgba(242,184,75,.36); }
     .finding-copy { position:relative; }
-    #beat-e .caveat-wrap { position:absolute; left:170px; top:215px; width:1580px; }
-    #beat-e .caveat-paper { min-height:500px; padding:54px 64px 58px 76px; }
-    #beat-e h2 { max-width:1050px; margin:18px 0 0; font-family:Georgia,serif; font-size:50px; line-height:1.16; }
+    .video-quote { position:absolute; left:100px; right:100px; bottom:155px; padding:26px 34px 28px; color:var(--ink); border-left:8px solid var(--cyan); background:rgba(243,239,228,.94); box-shadow:0 20px 55px rgba(0,0,0,.4); font-family:Georgia,serif; font-size:34px; line-height:1.28; }
+    #beat-e .caveat-wrap { position:absolute; left:100px; top:235px; width:940px; }
+    #beat-e .caveat-paper { min-height:485px; padding:48px 54px 52px 64px; background:linear-gradient(90deg,rgba(17,28,37,.055) 1px,transparent 1px),linear-gradient(rgba(243,239,228,.96),rgba(236,229,215,.94)); }
+    #beat-e h2 { max-width:800px; margin:18px 0 0; font-family:Georgia,serif; font-size:43px; line-height:1.16; }
     .caveat-tabs { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:52px; }
     .caveat-tab { padding:26px 30px; color:#36290d; border:3px solid #b37a0b; border-radius:6px; background:rgba(242,184,75,.32); font-family:"Archivo Black","Arial Black",sans-serif; font-size:34px; text-align:center; text-transform:uppercase; }
     .caveat-note { margin-top:32px; color:#536772; font-size:18px; line-height:1.5; }
-    #beat-f .meaning-grid { position:absolute; inset:180px 130px 150px; display:grid; grid-template-columns:.8fr 1.5fr .8fr; gap:38px; align-items:center; }
-    .system-node { min-height:290px; display:flex; flex-direction:column; justify-content:center; padding:36px; border-radius:12px; text-align:center; }
+    #beat-f .meaning-grid { position:absolute; left:92px; right:92px; bottom:142px; height:270px; display:grid; grid-template-columns:.8fr 1.5fr .8fr; gap:26px; align-items:center; }
+    .system-node { min-height:225px; display:flex; flex-direction:column; justify-content:center; padding:26px; border-radius:12px; text-align:center; box-shadow:0 20px 55px rgba(0,0,0,.38); }
     .label-node { color:#063f47; border:3px solid var(--cyan); background:rgba(80,213,230,.9); }
-    .label-screen { width:210px; margin:0 auto 24px; padding:24px 18px; border:7px solid #12303b; border-radius:8px; background:#eef6ef; font-family:"Archivo Black","Arial Black",sans-serif; font-size:54px; }
-    .node-title { font-family:"Archivo Black","Arial Black",sans-serif; font-size:31px; line-height:1.04; text-transform:uppercase; }
+    .label-screen { width:180px; margin:0 auto 16px; padding:16px 14px; border:6px solid #12303b; border-radius:8px; background:#eef6ef; font-family:"Archivo Black","Arial Black",sans-serif; font-size:45px; }
+    .node-title { font-family:"Archivo Black","Arial Black",sans-serif; font-size:26px; line-height:1.04; text-transform:uppercase; }
     .decision-node { position:relative; color:var(--ink); border:2px solid #cec4ad; background:var(--paper); }
-    .decision-node .speed { margin-bottom:22px; color:#0a7482; font-family:"Archivo Black","Arial Black",sans-serif; font-size:58px; line-height:1; }
+    .decision-node .speed { margin-bottom:16px; color:#0a7482; font-family:"Archivo Black","Arial Black",sans-serif; font-size:45px; line-height:1; }
     .guard-row { display:flex; justify-content:center; gap:16px; margin-top:28px; }
     .guard { padding:14px 18px; border:2px solid #a87511; border-radius:7px; background:rgba(242,184,75,.24); font-size:17px; font-weight:700; text-transform:uppercase; }
     .surge-node { color:#fff2ef; border:3px dashed rgba(241,108,91,.65); background:rgba(111,24,16,.52); }
-    .surge-node .surge-mark { margin-bottom:18px; color:var(--coral); font-family:"Archivo Black","Arial Black",sans-serif; font-size:78px; line-height:1; }
+    .surge-node .surge-mark { margin-bottom:12px; color:var(--coral); font-family:"Archivo Black","Arial Black",sans-serif; font-size:62px; line-height:1; }
     .connector { position:absolute; top:50%; height:6px; transform:scaleX(0); background:var(--cyan); }
     .connector-a { left:24.5%; width:16%; transform-origin:left center; }
     .connector-b { left:64%; width:15%; transform-origin:left center; background:repeating-linear-gradient(90deg,var(--coral) 0 16px,transparent 16px 28px); }
@@ -111,45 +113,49 @@
     <div id="documentary-scrim" class="clip full scrim" data-start="0" data-duration="66.16" data-track-index="2"><div id="beat-pulse"></div></div>
     <div id="evidence-grid-texture" class="clip full texture" data-start="0" data-duration="66.16" data-track-index="3"></div>
 
-    <section id="beat-a" class="clip beat" data-start="0" data-duration="4.18" data-track-index="4">
+    <div class="footage-layer">
+      <video id="fg-walmart-open" class="clip foreground-footage" src="assets/video/walmart-interior-SBV-352919820.mp4" data-start="0" data-duration="4.18" data-media-start="0" data-track-index="4" muted playsinline></video>
+      <video id="fg-price-audit" class="clip foreground-footage" src="assets/video/price-audit-SBV-351975144.mp4" data-start="4.18" data-duration="7.01" data-media-start="0.8" data-track-index="4" muted playsinline></video>
+      <video id="fg-produce-stocking" class="clip foreground-footage" src="assets/video/produce-stocking-SBV-349138419.mp4" data-start="11.19" data-duration="9.82" data-media-start="2" data-track-index="4" muted playsinline></video>
+      <video id="fg-expiration-check" class="clip foreground-footage" src="assets/video/expiration-check-SBV-348689454.mp4" data-start="34.44" data-duration="12.24" data-media-start="0" data-track-index="4" muted playsinline></video>
+      <video id="fg-walmart-produce" class="clip foreground-footage" src="assets/video/walmart-produce-SBV-354035772.mp4" data-start="46.68" data-duration="11.066" data-media-start="0" data-track-index="4" muted playsinline></video>
+      <video id="fg-walmart-checkout" class="clip foreground-footage" src="assets/video/walmart-checkout-SBV-354325338.mp4" data-start="57.746" data-duration="2.184" data-media-start="1.2" data-track-index="4" muted playsinline></video>
+      <video id="fg-grocery-app" class="clip foreground-footage" src="assets/video/grocery-app-picking-SBV-351961072.mp4" data-start="59.93" data-duration="6.23" data-media-start="0.5" data-track-index="4" muted playsinline></video>
+      <div class="footage-shade"></div>
+    </div>
+    <div id="study-context" class="clip study-context" data-start="4.18" data-duration="42.5" data-track-index="6">Illustrative grocery footage · study retailer unnamed</div>
+
+    <section id="beat-a" class="clip beat" data-start="0" data-duration="4.18" data-track-index="7">
       <div class="headline-wrap"><div class="kicker initial-hidden">The direct evidence</div><h1 class="display initial-hidden">Reverses the <span class="headline-accent">easy story</span></h1><div class="under-rule"></div></div>
       <article class="study-tab paper initial-hidden"><div class="paper-label">Working paper · revised March 2026</div><h2>Electronic shelf labels have not led to surge pricing in U.S. grocery retail</h2><p>Stamatopoulos · Sanders · Bray</p></article>
     </section>
 
-    <section id="beat-b" class="clip beat" data-start="4.18" data-duration="7.01" data-track-index="4">
+    <section id="beat-b" class="clip beat" data-start="4.18" data-duration="7.01" data-track-index="7">
       <article class="scale-paper paper"><div class="scale-grid"><div><div class="paper-label">Study scale · product-level observations</div><div id="mega-number" class="mega-stat">180,000,000+</div><div class="mega-caption">Each dot represents one million product-level observations. The field is a scale device, not a result chart.</div><div id="dot-field" class="dot-field" aria-label="180 dots, one million observations each"></div></div><div class="scale-side"><div class="fact-chip initial-hidden"><strong>114</strong><span>grocery stores</span></div><div class="fact-chip initial-hidden"><strong>4</strong><span>U.S. states</span></div></div></div></article>
     </section>
 
-    <section id="beat-c" class="clip beat" data-start="11.19" data-duration="9.82" data-track-index="4">
+    <section id="beat-c" class="clip beat" data-start="11.19" data-duration="9.82" data-track-index="7">
       <article class="method-paper paper"><div class="paper-label">Study design · one unnamed grocery chain</div><h2 class="method-title">Stores adopted electronic shelf labels in staggered waves.</h2><div class="timeline-rail"><div class="phase-label before initial-hidden">Before installation</div><div class="phase-label install initial-hidden">Staggered rollout</div><div class="phase-label after initial-hidden">After installation</div><div class="timeline-line"></div><div class="install-marker initial-hidden"></div><div id="store-waves" class="store-waves"></div></div><div class="comparison-row initial-hidden"><strong>Comparison retailers in the same states</strong><div class="comparison-line"></div></div></article>
     </section>
 
-    <section id="beat-d" class="clip beat" data-start="21.01" data-duration="16.48" data-track-index="4">
-      <article class="result-paper paper"><div class="result-title"><div><div class="paper-label">Temporary price increases · typical store-day</div><h2>The expected spike barely moves.</h2></div><div class="result-badge initial-hidden">Difference: +0.0006 percentage points</div></div><div class="compare-cards"><div class="compare-card initial-hidden"><div class="value">5</div><div class="label">products in every 100,000 · before</div><div class="common-axis"><div class="axis-fill before"></div></div><div class="axis-note">Common axis: 0 to 0.006%</div></div><div class="compare-card initial-hidden"><div class="value">5.6</div><div class="label">products in every 100,000 · after</div><div class="common-axis"><div class="axis-fill after"></div></div><div class="axis-note">Common axis: 0 to 0.006%</div></div></div><div class="finding-quote initial-hidden"><div class="finding-highlight"></div><div class="finding-copy">“The pattern of prices looked almost exactly the same before and after.”</div></div></article>
+    <section id="beat-d" class="clip beat" data-start="21.01" data-duration="16.48" data-track-index="7">
+      <article class="result-paper paper"><div class="result-title"><div><div class="paper-label">Temporary price increases · typical store-day</div><h2>The expected spike barely moves.</h2></div><div class="result-badge initial-hidden">Difference: +0.0006 percentage points</div></div><div class="compare-cards"><div class="compare-card initial-hidden"><div class="value">5</div><div class="label">products in every 100,000 · before</div><div class="common-axis"><div class="axis-fill before"></div></div><div class="axis-note">Common axis: 0 to 0.006%</div></div><div class="compare-card initial-hidden"><div class="value">5.6</div><div class="label">products in every 100,000 · after</div><div class="common-axis"><div class="axis-fill after"></div></div><div class="axis-note">Common axis: 0 to 0.006%</div></div></div><div class="finding-quote initial-hidden"><div class="finding-highlight"></div><div class="finding-copy">“The pattern of prices looked almost exactly the same before and after.”</div></div></article><div class="video-quote initial-hidden">“The pattern of prices looked almost exactly the same before and after.”</div>
     </section>
 
-    <section id="beat-e" class="clip beat" data-start="37.49" data-duration="9.19" data-track-index="4">
+    <section id="beat-e" class="clip beat" data-start="37.49" data-duration="9.19" data-track-index="7">
       <div class="caveat-wrap"><article class="caveat-paper paper"><div class="paper-label">What this evidence does not prove</div><h2>A strong reversal is not a universal guarantee.</h2><div class="caveat-tabs"><div class="caveat-tab initial-hidden">One unnamed chain</div><div class="caveat-tab initial-hidden">Working paper</div></div><div class="caveat-note initial-hidden">Not yet a peer-reviewed final result. The limitation stays attached to the finding.</div></article></div>
     </section>
 
-    <section id="beat-f" class="clip beat" data-start="46.68" data-duration="13.25" data-track-index="4">
+    <section id="beat-f" class="clip beat" data-start="46.68" data-duration="13.25" data-track-index="7">
       <div class="meaning-grid"><div class="system-node label-node initial-hidden"><div class="label-screen">$4.98</div><div class="node-title">Fast display</div></div><div class="system-node decision-node initial-hidden"><div class="speed">FASTER EXECUTION</div><div class="node-title">Capability ≠ behavior</div><div class="guard-row"><div class="guard initial-hidden">Customer trust</div><div class="guard initial-hidden">Competitive pressure</div></div></div><div class="system-node surge-node initial-hidden"><div class="surge-mark">↗</div><div class="node-title">Feared surge</div></div><div class="connector connector-a"></div><div class="connector connector-b"></div></div>
     </section>
 
-    <section id="beat-g" class="clip beat" data-start="59.93" data-duration="6.23" data-track-index="4">
+    <section id="beat-g" class="clip beat" data-start="59.93" data-duration="6.23" data-track-index="7">
       <div class="handoff"><div class="kicker initial-hidden">If that were the only evidence…</div><h2 class="display initial-hidden">Then the experiment appeared <span style="color:var(--cyan)">somewhere else.</span></h2><div class="online-boundary initial-hidden">Next: online grocery pricing</div></div><article class="basket-card paper initial-hidden"><div class="paper-label">Same basket · different totals</div><div class="basket-total">$—.—</div><div class="basket-note">The shelf-label connection remains unproven. Scene 07 begins with the online boundary visible.</div></article>
     </section>
 
     <div class="locator"><strong>KeyAdvances</strong><div class="locator-rule"></div><span>Evidence 06</span></div>
     <div class="source-line"><b>Source:</b> Stamatopoulos, Sanders &amp; Bray, SSRN 5271491 (working paper; revised Mar. 2026) · Kellogg Insight research summary, Aug. 2025</div>
-    <div id="evidence-cue-overlay" class="clip evidence-cues" data-start="0" data-duration="66.16" data-track-index="5">
-      <div id="cue-scale" class="evidence-cue">Scale check · 114 stores</div>
-      <div id="cue-method" class="evidence-cue">Method · staggered rollout</div>
-      <div id="cue-base" class="evidence-cue">Baseline · 5 in 100,000</div>
-      <div id="cue-result" class="evidence-cue">Result · no pricing spike</div>
-      <div id="cue-limit" class="evidence-cue">Limit · one chain</div>
-      <div id="cue-meaning" class="evidence-cue">Meaning · guardrails matter</div>
-    </div>
     <audio id="narration" class="clip" src=".media/audio/voice/voice_001.wav" data-start="0" data-duration="66.16" data-track-index="20" data-volume="1"></audio>
   </div>
 
@@ -161,20 +167,10 @@
       var waves=document.getElementById("store-waves"); for(var j=0;j<19;j+=1){ var w=document.createElement("span"); w.className="store-wave"; waves.appendChild(w); }
       var tl=gsap.timeline({paused:true});
       tl.to("#background-still",{scale:1.25,x:-100,duration:66.16,ease:"none"},0);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},4.06).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},4.18);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},11.07).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},11.19);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},20.89).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},21.01);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},37.37).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},37.49);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},46.56).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},46.68);
-      tl.to("#beat-pulse",{opacity:.18,duration:.12,ease:"power2.out"},59.81).to("#beat-pulse",{opacity:0,duration:.28,ease:"power2.out"},59.93);
-      [["#cue-scale",7.15],["#cue-method",16.55],["#cue-base",25.95],["#cue-result",35.15],["#cue-limit",41.65],["#cue-meaning",56.85]].forEach(function(cue){
-        tl.fromTo(cue[0],{opacity:0,x:46},{opacity:1,x:0,duration:.26,ease:"power3.out",immediateRender:false},cue[1]);
-        tl.to(cue[0],{opacity:0,x:-22,duration:.28,ease:"power2.in"},cue[1]+1.18);
-      });
       tl.to("#beat-a .kicker",{opacity:1,y:-10,duration:.45,ease:"power2.out"},.15).to("#beat-a h1",{opacity:1,y:-18,duration:.7,ease:"power3.out"},.42).fromTo("#beat-a .under-rule",{scaleX:0},{scaleX:1,duration:.72,ease:"power3.out",immediateRender:false},1.2).to("#beat-a .study-tab",{opacity:1,x:-24,duration:.62,ease:"power3.out"},2.12);
       tl.fromTo("#beat-b .scale-paper",{opacity:0,y:38},{opacity:1,y:0,duration:.48,ease:"power3.out",immediateRender:false},4.18).fromTo("#beat-b #mega-number",{opacity:0,scale:.92},{opacity:1,scale:1,duration:.7,ease:"power3.out",immediateRender:false},4.82).fromTo("#beat-b .data-dot",{opacity:.18,scale:.7},{opacity:.72,scale:1,duration:.28,stagger:.025,ease:"power2.out",immediateRender:false},5.42).to("#beat-b .fact-chip",{opacity:1,x:-14,duration:.38,stagger:.54,ease:"power2.out"},8.3);
       tl.fromTo("#beat-c .method-paper",{opacity:0,x:42},{opacity:1,x:0,duration:.5,ease:"power3.out",immediateRender:false},11.19).to("#beat-c .phase-label",{opacity:1,duration:.35,stagger:.42,ease:"power2.out"},12).fromTo("#beat-c .timeline-line",{scaleX:0},{scaleX:1,duration:1.05,ease:"power2.inOut",immediateRender:false},13.1).to("#beat-c .install-marker",{opacity:1,scaleY:1,duration:.34,ease:"power2.out"},14).fromTo("#beat-c .store-wave",{scaleY:.12},{scaleY:1,duration:.32,stagger:.12,ease:"power2.out",immediateRender:false},14.34).to("#beat-c .comparison-row",{opacity:1,y:-8,duration:.45,ease:"power2.out"},18.76).fromTo("#beat-c .comparison-line",{scaleX:0},{scaleX:1,duration:.9,ease:"power2.out",immediateRender:false},19.16);
-      tl.fromTo("#beat-d .result-paper",{opacity:0,y:34},{opacity:1,y:0,duration:.5,ease:"power3.out",immediateRender:false},21.01).to("#beat-d .compare-card:first-child",{opacity:1,x:14,duration:.48,ease:"power2.out"},22.1).fromTo("#beat-d .axis-fill.before",{scaleX:0},{scaleX:1,duration:.7,ease:"power2.out",immediateRender:false},24.42).to("#beat-d .compare-card:nth-child(2)",{opacity:1,x:-14,duration:.48,ease:"power2.out"},28).fromTo("#beat-d .axis-fill.after",{scaleX:0},{scaleX:1,duration:.7,ease:"power2.out",immediateRender:false},30.2).to("#beat-d .result-badge",{opacity:1,y:8,duration:.42,ease:"power2.out"},31.5).to("#beat-d .finding-quote",{opacity:1,y:-8,duration:.45,ease:"power2.out"},32.55).fromTo("#beat-d .finding-highlight",{scaleX:0},{scaleX:1,duration:.86,ease:"power2.inOut",immediateRender:false},33.32);
+      tl.fromTo("#beat-d .result-paper",{opacity:0,y:34},{opacity:1,y:0,duration:.5,ease:"power3.out",immediateRender:false},21.01).to("#beat-d .compare-card:first-child",{opacity:1,x:14,duration:.48,ease:"power2.out"},22.1).fromTo("#beat-d .axis-fill.before",{scaleX:0},{scaleX:1,duration:.7,ease:"power2.out",immediateRender:false},24.42).to("#beat-d .compare-card:nth-child(2)",{opacity:1,x:-14,duration:.48,ease:"power2.out"},28).fromTo("#beat-d .axis-fill.after",{scaleX:0},{scaleX:1,duration:.7,ease:"power2.out",immediateRender:false},30.2).to("#beat-d .result-badge",{opacity:1,y:8,duration:.42,ease:"power2.out"},31.5).to("#beat-d .finding-quote",{opacity:1,y:-8,duration:.45,ease:"power2.out"},32.55).fromTo("#beat-d .finding-highlight",{scaleX:0},{scaleX:1,duration:.62,ease:"power2.inOut",immediateRender:false},33.22).to("#beat-d .result-paper",{opacity:0,y:-28,duration:.26,ease:"power2.in"},34.18).set("#beat-d .result-paper",{opacity:0},34.44).to("#beat-d .video-quote",{opacity:1,y:-8,duration:.34,ease:"power3.out"},34.44);
       tl.fromTo("#beat-e .caveat-paper",{opacity:0,scale:.97},{opacity:1,scale:1,duration:.5,ease:"power2.out",immediateRender:false},37.49).to("#beat-e .caveat-tab:first-child",{opacity:1,scale:1.02,duration:.42,ease:"back.out(1.5)"},40.75).to("#beat-e .caveat-tab:nth-child(2)",{opacity:1,scale:1.02,duration:.42,ease:"back.out(1.5)"},43).to("#beat-e .caveat-note",{opacity:1,y:-8,duration:.45,ease:"power2.out"},44.7);
       tl.to("#beat-f .label-node",{opacity:1,x:14,duration:.5,ease:"power3.out"},46.68).to("#beat-f .connector-a",{scaleX:1,duration:.72,ease:"power2.inOut"},48.8).to("#beat-f .decision-node",{opacity:1,scale:1.02,duration:.5,ease:"power3.out"},50).to("#beat-f .connector-b",{scaleX:1,duration:.82,ease:"power2.inOut"},51.4).to("#beat-f .surge-node",{opacity:.42,x:-12,duration:.5,ease:"power2.out"},52).to("#beat-f .guard",{opacity:1,y:-8,duration:.4,stagger:.9,ease:"back.out(1.35)"},55.68).to("#beat-f .connector-b",{opacity:.2,duration:.55,ease:"power2.out"},58.3);
       tl.to("#beat-g .kicker",{opacity:1,y:-8,duration:.4,ease:"power2.out"},59.93).to("#beat-g h2",{opacity:1,y:-14,duration:.62,ease:"power3.out"},60.52).to("#beat-g .online-boundary",{opacity:1,x:18,duration:.42,ease:"power2.out"},63.42).to("#beat-g .basket-card",{opacity:1,x:-18,rotation:0,duration:.5,ease:"power3.out"},64.45);
