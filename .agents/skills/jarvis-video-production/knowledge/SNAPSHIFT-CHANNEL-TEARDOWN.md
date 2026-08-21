@@ -273,13 +273,13 @@ the §6 rule doing its job — the proxy was confident and wrong.
    states the fact/meaning principle but gives no title-level grammar for it. This is the grammar.
 2. **The 512K BYD open** as a reference for §2 information-first: a specific object, an anomaly
    embedded rather than announced, and the entity withheld to the end of the paragraph.
-3. **A fifth confirmation that SOURCING is the gating capability.** Per
-   `reference_proven_doc_channels_presentation`, material mix on proven doc channels is a constant at
-   84–97% real third-party footage. Snap Shift runs ~30 credited sources in a single 28-minute video
-   at 0.77 uploads/day (§8). It reaches 94.8K subs in four months with a **graphics layer thinner than
-   ours** — lower-third chips and split composites, nothing more. The lesson is not to copy their
-   licence posture (§8.4); it is that our own bottleneck is `archival-search.py` throughput, not
-   HyperFrames sophistication.
+3. **Footage SUPPLY is a topic-selection decision, not a tooling one — read §8.5–8.6 before acting
+   on this one.** Snap Shift reaches 94.8K subs in four months with a **graphics layer thinner than
+   ours**, cutting 456–552 shots per episode out of only 7–30 donor videos. But it does that because
+   "China + a big engineering object" is saturated with free footage from state media, corporate
+   channels and enthusiasts. Our lane has no such supply. So the transferable move is **either** pick
+   subjects that carry native footage **or** commit to originated visuals and stop pricing our
+   sourcing against channels whose footage is free — not "raise `archival-search.py` throughput".
 4. **A single named actor as a fixed anchor works.** 100% of these titles contain "China". Combined
    with the WSM accusation-frame finding (named actor + present-tense verb, 1.69×), the pattern across
    both teardowns is: **a recurring named subject doing something specific and adverse/impressive to
@@ -368,7 +368,66 @@ on ~30 uncleared third-party sources per video is one rightsholder claim away fr
 the biggest videos are the ones worth claiming. This is a structural risk in their model — and a
 direct reason **not** to copy the sourcing method wholesale.
 
-### 8.5 Scope of this check
+### 8.5 How they source it this fast — the sourcing unit is a DONOR VIDEO, not a clip
+
+Scene detection plus credit-run analysis on the same three videos:
+
+| | shots | shots/min | avg shot | credited donor sources | **shots per donor** |
+|---|---:|---:|---:|---:|---:|
+| BYD / shipping | 456 | 16.2 | 3.7s | ~30 | **15** |
+| concrete | 491 | 23.0 | 2.6s | ~7 | **70** |
+| modular building | 552 | 23.5 | 2.6s | ~12 | **46** |
+
+**They are not sourcing 500 clips per episode. They are sourcing 7–30 long videos and cutting each
+into 15–70 pieces.** Credits recur in scattered blocks, not contiguous ones — QuirkSea appears in **9
+separate blocks** across the BYD video, Inside The Build in **10** across the concrete video. That is
+the fingerprint of one donor mined repeatedly, not of many clips found individually.
+
+Three mechanics compound:
+
+1. **Short cuts multiply supply.** At a 2.6s average, one 15-minute donor yields dozens of usable
+   pieces. The cut rhythm isn't just a style choice — it is what makes a small donor set sufficient.
+   For scale: this is **16–23.5 cuts/min against the 10.6/min** of the fastest lane in
+   `reference_proven_doc_channels_presentation`, and 2.8/min for WSM.
+2. **Paid stock fills the gaps** — Storyblocks / Artlist / FlexClip account for 7%, 0% and 17% of
+   credited frames. Instant search-and-download, no clearance step.
+3. **A large share is simply uncredited.** Credit coverage is **59% / 33% / 39%** (OCR floors). The
+   donor counts above are therefore **floors too** — a donor appearing briefly, or uncredited, is
+   invisible to this method.
+
+**Zero roster reuse.** Across the three videos the only shared source is FlexClip, a stock library.
+Each episode's donor set is found fresh for that topic — so there is no accumulating library doing the
+work. The search is genuinely repeated every time, and it is still fast.
+
+### 8.6 …because the NICHE was chosen so the footage already exists
+
+This is the part that actually transfers, and it inverts the usual reading.
+
+"China + a large engineering object" is one of the most **over-supplied** visual subjects on YouTube.
+Three independent pipelines push footage into it continuously, and all three appear in the credits:
+
+- **State and agency media that wants redistribution** — CCTV Video News Agency, Shanghai Eye, Canal 26.
+- **Corporate/promotional channels** — BYD, Broad Group, MOL Official Channel, Grimaldi.
+- **A deep enthusiast ecosystem** — CarSauce, AutoMotoTV, QuirkSea, Beyond EV, Inside The Build,
+  Massive Build, Engineering World, Speed Performance Lab.
+
+**They did not solve the sourcing problem. They chose a topic where it does not exist.** The 0.77
+uploads/day is downstream of that choice, not of any tooling advantage.
+
+> **The uncomfortable read-across for us.** Our lane — AI labor economics, filings, contracts,
+> hallucination mechanics — has **almost no native footage**. No enthusiast community films "the
+> boundary of a job moving"; no state broadcaster publishes b-roll of an indemnity clause. That is
+> why sourcing is our bottleneck, and it is a **supply** problem created by topic choice, not a
+> throughput problem `archival-search.py` can be tuned out of.
+>
+> This qualifies §7 item 3. Two honest responses, and they are different bets:
+> **(a)** deliberately choose subjects that carry native footage, accepting the constraint on what we
+> can argue; or **(b)** accept that our lane requires **originated** visuals — which is exactly what
+> HyperFrames and the citation-card system are for — and **stop benchmarking our per-video sourcing
+> cost against channels whose footage is free.** Copying their cadence without their supply is the
+> failure mode to avoid.
+
+### 8.7 Scope of this check
 
 **Three of 92 videos.** The three are the channel's #1, #2 and #4 by views, so this characterises
 what its best work looks like, not necessarily its median. Frame-level forensics for generative
