@@ -273,24 +273,31 @@ the §6 rule doing its job — the proxy was confident and wrong.
    states the fact/meaning principle but gives no title-level grammar for it. This is the grammar.
 2. **The 512K BYD open** as a reference for §2 information-first: a specific object, an anomaly
    embedded rather than announced, and the entity withheld to the end of the paragraph.
-3. **A single named actor as a fixed anchor works.** 100% of these titles contain "China". Combined
+3. **A fifth confirmation that SOURCING is the gating capability.** Per
+   `reference_proven_doc_channels_presentation`, material mix on proven doc channels is a constant at
+   84–97% real third-party footage. Snap Shift runs ~30 credited sources in a single 28-minute video
+   at 0.77 uploads/day (§8). It reaches 94.8K subs in four months with a **graphics layer thinner than
+   ours** — lower-third chips and split composites, nothing more. The lesson is not to copy their
+   licence posture (§8.4); it is that our own bottleneck is `archival-search.py` throughput, not
+   HyperFrames sophistication.
+4. **A single named actor as a fixed anchor works.** 100% of these titles contain "China". Combined
    with the WSM accusation-frame finding (named actor + present-tense verb, 1.69×), the pattern across
    both teardowns is: **a recurring named subject doing something specific and adverse/impressive to
    a thing the viewer recognizes.** Our consumer-felt anchor rule is a special case of this.
 
 ### DO NOT TAKE
 
-4. **Not the runtime conclusion.** 24-minute median with no runtime effect is *not* evidence that long
+5. **Not the runtime conclusion.** 24-minute median with no runtime effect is *not* evidence that long
    works — it is evidence that **among videos selected on packaging, runtime doesn't predict clicks.**
    We are retention-gated; this method cannot see retention (§3.1). Our §1 precondition (whole-runtime
    loop + spine + reversal) stands unchanged.
-5. **Not the volume.** 0.77 uploads/day of 24-minute video — 38 finished hours in four months — at a
+6. **Not the volume.** 0.77 uploads/day of 24-minute video — 38 finished hours in four months — at a
    flat 150 wpm ±8 is an industrial synthetic pipeline. It is the opposite of our stated direction
    (`feedback_channel_direction_held`: fewer, higher-quality, researched). Nothing here argues for
    changing that.
-6. **Not the subject.** Every subject test was null. There is no "China tech lane" lesson to extract;
+7. **Not the subject.** Every subject test was null. There is no "China tech lane" lesson to extract;
    the anchor is doing the work, not the topic.
-7. **Not the early CTA.** One 664K video with a CTA at 2:03 is not a reason to move ours.
+8. **Not the early CTA.** One 664K video with a CTA at 2:03 is not a reason to move ours.
 
 ### THE STANDING WARNING
 
@@ -301,7 +308,76 @@ Do not use it to justify anything downstream of the click.
 
 ---
 
-## 8. Tested and rejected — do not re-run
+## 8. Is the imagery AI-generated? No — measured at the pixel level
+
+**Added 2026-08-21 after the metadata teardown, because the question is not answerable from captions.**
+
+Three videos downloaded and inspected frame by frame: `NKQTGKkX3tw` (512K, BYD/shipping),
+`aBXqHZgFBoo` (664K, concrete/materials — chosen deliberately as the case where generated lab and
+microscopic imagery would be most tempting), `cyh2UimDWjw` (390K, modular construction). ~110 sampled
+frames read visually, plus OCR of the top-left corner across 495 frames.
+
+### 8.1 The finding
+
+**The footage is real, third-party, and credited on screen.** Nearly every shot carries a small
+top-left source watermark set by the channel. OCR on the BYD video reads a credit on **59% of frames
+sampled once per 6 seconds** — and that is a **floor, not an estimate**: pulling the 41% that OCR
+missed and looking at them by eye showed credits legible in almost all of them (OCR fails on dark,
+low-contrast, and stylised text). Only two frames in that sample genuinely carry no credit, and both
+are channel-built composites.
+
+Distinct credited sources in the BYD video alone: **131 raw OCR strings, ~30 distinct sources after
+deduplication.** They fall into four classes:
+
+| class | examples |
+|---|---|
+| other YouTubers' videos | CarSauce · Beyond EV · QuirkSea · AutoMotoTV · Banned Camping · Nauctis · Speed Performance Lab · GommeBlog · Steve Garrett · Marino Journey · Leandro LS · Inside the Build · Massive Build |
+| news agencies | **Reuters** · CCTV Video News Agency · Canal 26 · Shanghai Eye · TV News |
+| corporate / press footage | MOL Official Channel · Grimaldi · BYD Auto Brasil · Broad Group |
+| **paid stock libraries** | **Storyblocks · Artlist · FlexClip** |
+
+**No generative-AI imagery was found in any of the three videos.** A handful of shots are 3D/CGI —
+architectural visualisations, a white-background crane animation, a top-down composited crowd — but
+these are **stock 3D**, a normal library category (the crane shot is watermarked `STORYBLOCKS`), not
+generative output.
+
+### 8.2 There *is* a channel-built graphics layer, and it is modest
+
+What they originate themselves: lower-third label chips on a blue rounded rectangle (*A 57-STORY
+SKYSCRAPER*, *3 CRANES*, *BETWEEN 2011 AND 2013*), 2×2 and 3-panel split composites, flag-plus-map
+country cards, an inset card on paper texture, and one full-frame title card (*THE INVISIBLE INDUSTRY
+THAT MOVES EVERYTHING*). Competent, cheap, and a small share of runtime. **This is a sourcing
+operation with a thin graphics layer on top — not a design operation.**
+
+### 8.3 Where the AI actually is
+
+- **The voice is synthetic.** 150 wpm median with a **standard deviation of 8.0 across 86 videos**
+  (range 134–174), and 121–165 wpm minute-to-minute *inside* a single 21-minute read. No human
+  narrator is that even across four months.
+- **The script is near-certainly LLM-drafted.** The descriptions are LLM-shaped prose, and the
+  arithmetic demands it: **38 hours of finished 20–38-minute video in 121 days.**
+- **Nothing is disclosed.** Scanning all 93 descriptions: **0 mention AI, synthetic media, TTS, or
+  altered content.** Only 6 of 93 carry any credit language at all — the crediting happens entirely
+  on screen, never in the description. No YouTube synthetic-media label is present in the metadata.
+
+### 8.4 The exposure this creates
+
+Stated as fact, not verdict: **Storyblocks, Artlist and FlexClip are paid licences; Reuters and
+another creator's YouTube video are not, and an on-screen credit is not a licence.** A channel built
+on ~30 uncleared third-party sources per video is one rightsholder claim away from losing a video, and
+the biggest videos are the ones worth claiming. This is a structural risk in their model — and a
+direct reason **not** to copy the sourcing method wholesale.
+
+### 8.5 Scope of this check
+
+**Three of 92 videos.** The three are the channel's #1, #2 and #4 by views, so this characterises
+what its best work looks like, not necessarily its median. Frame-level forensics for generative
+artifacts was not run; the claim rests on the source watermarks — which a generative model does not
+produce — plus visual inspection. Confidence is high for these three, moderate for the catalog.
+
+---
+
+## 9. Tested and rejected — do not re-run
 
 - Title length as a driver (1.05×, null)
 - Em-dash typography as distinct from two-clause structure (same effect)
