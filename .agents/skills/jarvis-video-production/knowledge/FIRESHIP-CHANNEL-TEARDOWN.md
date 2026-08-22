@@ -4,7 +4,8 @@
 · first upload 2017-08 · created by Jeff Delaney · dev-education + tech news.
 
 Method: full catalog pull (`yt-dlp`, 783 items); **exact** upload dates + view/like/comment counts for
-the newest **233** (2024-07 → 2026-08); **approximate** dates for the full 783 via
+**495 of 783** — 100% of 2024–2026, 99% of 2023, 87% of 2022, 30% of 2021, 2–16% before (the pull was
+rate-limited by YouTube; see §7); **approximate** dates for the full 783 via
 `--extractor-args youtubetab:approximate_date`, **validated against the exact set and found unreliable
 — see §0.1**. Three `teardown.py` transcript teardowns, scene-detection density on two downloaded
 videos, permutation tests (20,000 resamples) age-residualised on the exact subset. Raw data in
@@ -15,12 +16,13 @@ videos, permutation tests (20,000 resamples) age-residualised on the exact subse
 ## 0. The one-line finding
 
 > **Fireship's famous short runtime is not why it wins — and its signature format is now its worst.**
-> Pooled, sub-5-minute videos look **1.79× better**; within era that collapses to **0.95×**, and on
-> exact dates it is **null (p = 0.20)**. Meanwhile *"X in 100 Seconds"* — the format the channel is
-> known for — has gone from **2.26× in 2020 to 0.60× today**, and has been deliberately replaced.
+> Pooled, sub-5-minute videos look **1.79× better**; on exact dates, within era, that becomes
+> **0.91× — slightly negative** — and the age-residualised test is **null (p = 0.20)**. Meanwhile
+> *"X in 100 Seconds"* — the format the channel is known for — peaked at **1.34× in 2022**, halved to
+> **0.52× in 2024**, and has been deliberately cut from **55% to 1–5%** of output.
 
-The channel is a **conveyor belt** (p90/median **1.69**), not an outlier machine, and it is currently
-executing a **format succession** in the open.
+The channel is a **conveyor belt** (p90/median **1.71–1.78** since 2023), not an outlier machine, and
+it is currently executing a **format succession** in the open.
 
 ### 0.1 A method warning, paid for in this teardown
 
@@ -40,7 +42,28 @@ confirmed independently (§3.1).
 
 ## 1. The numbers
 
-### 1.1 Era structure *(approximate dates — trajectory only, ~18% year-bin error)*
+### 1.1 Era structure — EXACT dates 2021+, approximate before
+
+**Rebuilt 2026-08-22.** Exact-date coverage by year: 2026/2025/2024 **100%**, 2023 **99%**, 2022
+**87%**, 2021 **30%**, 2017–2020 **2–16%** (§7). Rows below 2021 remain approximate and are the
+weakest evidence here.
+
+| year | n (exact) | med views | p90 | **p90/med** | med runtime | % <5 min |
+|---|---:|---:|---:|---:|---:|---:|
+| 2019 | 11 | 189,883 | 400,773 | 2.11 | 10.0m | 0% |
+| 2020 | 12 | 634,155 | 1,529,497 | 2.41 | 8.3m | 42% |
+| 2021 | 44 | 1,058,582 | 3,060,471 | 2.89 | 4.0m | 50% |
+| **2022** | 99 | 798,769 | 2,627,365 | **3.29** | 3.1m | 68% |
+| **2023** | 86 | 962,382 | 1,747,157 | **1.82** | 3.8m | 78% |
+| **2024** | 92 | 969,935 | 1,691,844 | **1.74** | 4.3m | 75% |
+| **2025** | 82 | 950,880 | 1,621,805 | **1.71** | 4.2m | 83% |
+| **2026** | 55 | 767,447 | 1,365,157 | **1.78** | 5.3m | **22%** |
+
+The dispersion collapse is confirmed exactly: **3.29 (2022) → 1.71–1.82** and flat since. 2021 carries
+the highest median in the catalog (1.06M) but is also the oldest cohort with real volume — that is
+accumulation, not superiority.
+
+#### Superseded — the original approximate-date table *(kept for provenance)*
 
 | year | n | med views | p90 | **p90/med** | med runtime | % <5 min | uploads/mo |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -60,12 +83,13 @@ catalog. Everything after is progressively flatter.
 
 ### 1.2 The dispersion collapse — a third channel doing the same thing
 
-p90/median: **7.83 → 2.58 → 2.59 → 2.73 → 2.08 → 2.10 → 1.70 → 1.69.**
+p90/median on **exact** dates: **2.89 (2021) → 3.29 (2022) → 1.82 → 1.74 → 1.71 → 1.78.** The break is
+sharp and lands in 2023.
 
 | channel | p90/median (current era) | shape |
 |---|---:|---|
 | Snap Shift | **6.76** | outlier machine |
-| Fireship | **1.69** | conveyor belt |
+| **Fireship** | **1.71–1.78** | conveyor belt |
 | Wall Street Millennial | 1.93 | conveyor belt |
 
 Fireship is now **flatter than WSM** — the flattest distribution measured on any channel to date. Its
@@ -79,16 +103,18 @@ artifact and should not be compared to small-channel scores.
 This is the finding most likely to be misread from the outside, and the reason
 `WSM-CHANNEL-TEARDOWN.md`'s "era-split before any analysis" rule exists.
 
-| slice | <5 min | ≥5 min | ratio |
-|---|---:|---:|---:|
-| **POOLED (all 783)** | 805,500 | 450,000 | **1.79×** |
-| 2017–2019 (tutorial era) | 50,500 | 86,500 | **0.58×** |
-| 2020–2022 | 768,000 | 676,000 | 1.14× |
-| 2023–2026 (current) | 900,000 | 952,000 | **0.95×** |
+| slice | dates | <5 min | ≥5 min | ratio |
+|---|---|---:|---:|---:|
+| **POOLED (all 783)** | mixed | 805,500 | 450,000 | **1.79×** |
+| 2017–2019 (tutorial era) | approx | 50,500 | 86,500 | **0.58×** |
+| **2022** | **exact** | 735,434 | 968,576 | **0.76×** |
+| **2023–2026 (current)** | **exact** | 911,973 | 961,463 | **0.95×** |
+| **2022–2026 combined** | **exact** | 870,811 | 961,463 | **0.91×** |
 
-Pooled says short wins by 79%. Within the current era the effect is **gone**, and in the earliest era
-it **reverses**. The pooled number is an artifact of *when* long videos were made — the long ones are
-old tutorials from when the channel was small.
+Pooled says short wins by 79%. Within era, measured on **exact** dates, the effect is not merely gone
+— it is **slightly negative**: short videos run 0.91× the long ones across 2022–2026, and 0.76× in
+2022 alone. The pooled number is an artifact of *when* long videos were made — the long ones are old
+tutorials from when the channel was small.
 
 **Verified independently on exact dates** (n=202, 2024-07 → 2026-08, log-views residualised on
 log-age): <5 min mean residual **−0.034** vs ≥5 min **+0.056**; difference −0.090 log-units,
@@ -104,24 +130,29 @@ log-age): <5 min mean residual **−0.034** vs ≥5 min **+0.056**; difference �
 
 ### 3.1 *"X in 100 Seconds"* has gone from the engine to a liability
 
-*(share and ratio on approximate dates — trajectory; the 2024-2026 rows are corroborated exactly)*
+**Rebuilt on EXACT dates 2026-08-22** after the metadata pull reached 495/783 (2021+ coverage
+30–100%; see §7).
 
-| year | share of output | med views (100 Sec) | med views (everything else) | **ratio** | ellipsis-style titles |
-|---|---:|---:|---:|---:|---:|
-| 2020 | 43% | 459,000 | 203,000 | **2.26×** | 2% |
-| 2021 | 54% | 797,000 | 658,000 | 1.21× | 6% |
-| 2022 | 50% | 1,000,000 | 779,000 | 1.28× | 7% |
-| 2023 | 24% | 843,000 | 801,500 | 1.05× | 20% |
-| 2024 | 14% | 629,000 | 1,100,000 | **0.57×** | 35% |
-| 2025 | 4% | 582,000 | 962,500 | **0.60×** | 82% |
-| 2026 | 5% | 470,000 | 782,000 | **0.60×** | **91%** |
+| year | share of output | med views (100 Sec) | med views (everything else) | **ratio** |
+|---|---:|---:|---:|---:|
+| 2021 | 55% | 1,165,742 | 1,002,684 | 1.16× |
+| **2022** | 39% | 955,362 | 713,090 | **1.34×** ← peak |
+| 2023 | 17% | 1,045,975 | 954,956 | 1.10× |
+| **2024** | 15% | 605,599 | 1,154,928 | **0.52×** ← collapse |
+| 2025 | 1% | 517,803 | 962,081 | 0.54× |
+| 2026 | 5% | 470,891 | 782,330 | 0.60× |
+
+> **CORRECTION to the first version of this document.** It reported a **2.26× peak in 2020** from
+> approximate dates. That row rested on **13% exact coverage of 2020** and was **overstated**. On
+> exact dates the measured peak is **1.34× in 2022**. The *shape* — rise, parity, collapse — and the
+> collapse year (2024) are unchanged, but the magnitude was wrong and the peak was a year late.
 
 On the exact-date subset, era-controlled and age-residualised, *"in 100 Seconds"* measures
-**0.58×, p = 0.0001 (n=13)** — the single strongest signal in the whole title analysis, and it is
+**0.58×, p = 0.0001** — the single strongest signal in the whole title analysis, and it is
 **negative**.
 
-**The format decayed to parity by 2023 and went negative by 2024. They read it and switched.** Output
-share fell 54% → 4%.
+**The format held ~1.1–1.3× through 2023, then halved in 2024 and stayed there. They read it and
+switched.** Output share fell 55% → 1–5%.
 
 ### 3.2 What replaced it
 
@@ -236,8 +267,8 @@ opposite of the Snap Shift posture, where the imagery *is* the substance.
 
 1. **Watch your own format for decay, and be willing to kill it.** This is the sharpest contrast in
    the corpus. Snap Shift found its best lever (two-clause titles), drifted off it under volume
-   pressure, and its median fell. Fireship watched its signature format decay from 2.26× to parity to
-   0.60× **and deliberately replaced it**, cutting output share 54% → 4%. **A format is not an
+   pressure, and its median fell. Fireship watched its signature format decay from 1.34× (2022) to
+   parity (2023) to 0.52× (2024) **and deliberately replaced it**, cutting output share 55% → 1–5%. **A format is not an
    identity; it is a position with a half-life.** Nothing in our tooling currently tracks the decay of
    a format we own — `outlier-ratchet.py` watches other channels, not our own formats.
 2. **Annotation-on-capture** (§4.4) — draw the editorial on the real artifact instead of building a
@@ -275,10 +306,31 @@ that — only the shape of what got clicked.
 - Reading the 2025→2026 median dip as decline — it is entirely age; residualised, the years are
   identical.
 
-## 7. Open — needs the full exact-date pull
+## 7. Data completeness — and the one number this exercise corrected
 
-The per-video exact pull was at **233 / 783** when this was written (it runs ~6/min; the remainder is
-~90 minutes). Everything above rests on either the exact subset (2024-07 onward, n=202–233) or clearly
-labelled approximate dates. **When the pull completes, re-run §1.1, §3.1 and §2 on exact dates** — the
-expected changes are small, but the 2017–2023 rows are currently the weakest evidence in this document
-and the format-succession trajectory deserves exact numbers.
+**Resolved 2026-08-22.** The exact-date pull finished at **495 / 783**. It exited 0, but **288 videos
+failed** — 287 to `This content isn't available, try again later. The current session has been
+rate-limited by YouTube`, 1 to an age gate. **A zero-exit yt-dlp run is not a complete run**; the
+error count has to be read from the log.
+
+The failures are **strongly era-biased**, because the id list is chronological and the throttle hit
+partway through:
+
+| year | exact coverage |
+|---|---:|
+| 2024 / 2025 / 2026 | **100%** |
+| 2023 | 99% |
+| 2022 | 87% |
+| 2021 | 30% |
+| 2017–2020 | 2–16% |
+
+So §1.1 and §3.1 are now exact from 2021 on, and §2's within-era test is exact from 2022 on. **Only
+the 2017–2020 rows still rest on approximate dates**, and they are flagged in place. A retry of the
+missing 288 with `--sleep-requests 3` is queued.
+
+**What re-running on exact dates actually changed:** the *"100 Seconds"* peak moved from a claimed
+**2.26× (2020)** to a measured **1.34× (2022)** — the original rested on 13% coverage of 2020 and
+overstated the magnitude by ~70%. The collapse year (2024), the direction, and every headline
+conclusion held. The within-era runtime result got *stronger* against short (0.95× → 0.91×, and 0.76×
+in 2022). **This is why §0.1 exists:** approximate dates were adequate for the shape and wrong on the
+number, exactly as their 23-day median error predicts.
