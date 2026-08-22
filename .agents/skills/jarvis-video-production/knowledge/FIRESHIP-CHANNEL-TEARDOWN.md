@@ -261,6 +261,84 @@ opposite of the Snap Shift posture, where the imagery *is* the substance.
 
 ---
 
+## 4b. The business model — they walked away from mid-rolls on purpose
+
+**Added 2026-08-22.** The obvious objection to a 4-minute median is that YouTube blocks mid-roll ads
+under 8 minutes. Measured, Fireship does not merely tolerate that — **it has deliberately moved away
+from ad-eligible runtime for six straight years.**
+
+| year | median runtime | **% clearing 8:00** | % clearing 10:00 |
+|---|---:|---:|---:|
+| 2019 | 10.0m | **91%** | 55% |
+| 2020 | 8.3m | 58% | 8% |
+| 2021 | 4.0m | 43% | 25% |
+| 2022 | 3.1m | 22% | 13% |
+| 2023 | 3.8m | 12% | 0% |
+| 2024 | 4.3m | 7% | 2% |
+| 2025 | 4.2m | **4%** | 0% |
+| 2026 | 5.3m | 9% | 5% |
+
+**2024–2026 combined: 14 of 229 videos (6%) can carry a mid-roll. 94% cannot.** Note also that the
+2026 lengthening (§3.3) went 4.2m → 5.3m — it moved *toward* 8:00 and **still did not cross it**. If
+mid-rolls were the goal, that shift was pointless; whatever drove it, ad eligibility was not it.
+
+### 4b.1 What they sell instead
+
+Measured across the 229 videos in the 2024+ exact cohort, from description text:
+
+| signal | share of 2024+ videos |
+|---|---:|
+| links **fireship.io / fireship.dev** (courses) | **99%** |
+| **own-product promo code** — *"Use code YT25 for 25% off PRO access"* | **75%** |
+| links Discord | 76% |
+| **third-party sponsor / affiliate** | 20% |
+| links **bytes.dev** (newsletter) | 21% |
+
+Named third-party advertisers in that window: **Brilliant.org (27), Hostinger (21)**, Sevalla (7),
+Appwrite (7), Clerk (6), BlueDot (4), Warp (4), Convex (4), Neon (3).
+
+> **Correction made during this analysis.** A first pass reported "84% carry sponsor language." That
+> regex conflated **their own** discount code with third-party sponsorship. Split properly it is
+> **75% own-product / 20% third-party**. The distinction is the whole finding — the dominant
+> monetisation is *their own course*, not advertising.
+
+### 4b.2 Why the 8-minute floor doesn't bind them
+
+**Mid-roll AdSense is the only revenue stream with a runtime floor.** Everything Fireship actually
+sells is runtime-independent:
+
+- **Course sales (fireship.io PRO)** — paid per *conversion*. A 2-minute video that brings in someone
+  searching "how does Python work" delivers a better-qualified lead than a padded 9-minute one.
+- **Sponsor slots** — paid per *video*, negotiated on audience size and quality. A sponsor pays the
+  same for a 4-minute video as a 12-minute one.
+- **Newsletter (bytes.dev)** — its own ad-supported business, fed by the channel.
+
+So the videos are **top-of-funnel lead magnets, not revenue units.** Under that model, short is not a
+sacrifice — it is *cheaper to produce, faster to ship (~8/month), and better matched to search
+intent* (§4.3). Runtime becomes free.
+
+**The general rule this establishes:** *the 8-minute floor is a constraint of the AdSense business
+model, not of YouTube.* Whether it binds depends entirely on what you sell.
+
+### 4b.3 What that does and does not mean for us
+
+`video-production-standard.md` §1 sets our 8:00 floor as **"a business constraint, not a craft
+preference"** — correct, given AdSense monetisation. This teardown does not overturn that; it
+documents the alternative and its price of entry. **This is evidence for a decision Terry owns, not a
+recommendation to change it.**
+
+Two honest limits on transferability:
+
+1. **Audience purchase-intent is not comparable.** Fireship's viewers are working developers
+   evaluating a technical course — among the highest-intent audiences on the platform. *Understanding
+   AI* is general-interest; the same funnel converts far worse per view.
+2. **A funnel needs a product at the end of it.** Fireship spent years building fireship.io before
+   the short-form model could pay. We do have a candidate — the AI Filmmaking Studio capability
+   (`feedback_studio_is_not_faceless_box`) — but nothing currently connects videos to it, and the
+   floor should not move before something does.
+
+---
+
 ## 5. What transfers to us
 
 ### TAKE
