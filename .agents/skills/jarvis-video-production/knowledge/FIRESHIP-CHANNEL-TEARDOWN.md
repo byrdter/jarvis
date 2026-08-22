@@ -396,6 +396,96 @@ product converts — what we'd sell, and to which slice, is an open question thi
 
 ---
 
+## 4d. Style and pace, measured — and why the channel is actually this big
+
+**Added 2026-08-22 at Terry's question:** *why is this channel so popular, when the earlier scan found
+tech/AI-news channels underperforming?*
+
+### 4d.1 The style signature — same facts, 1.6× faster, 3× the turns
+
+Transcript profiles, Fireship vs Snap Shift (our other faceless comparator):
+
+| | wpm | **names/min** | **nums/min** | *you/your*/min | discourse turns/min |
+|---|---:|---:|---:|---:|---:|
+| Fireship — DeepSeek (news) | **237** | 14.2 | 3.1 | 2.8 | **3.9** |
+| Fireship — God-Tier Roadmap | 211 | – | 0.8 | **4.2** | 3.5 |
+| Fireship — Python in 100 Seconds | 193 | 8.5 | 0.8 | 3.8 | 1.7 |
+| Snap Shift — BYD (512K) | 144 | 14.3 | 3.5 | 1.5 | 1.1 |
+| Snap Shift — concrete (664K) | 140 | 10.5 | 1.5 | 1.1 | 1.1 |
+
+**The fact density is the same.** Named entities per minute (14.2 vs 14.3) and numbers per minute
+(3.1 vs 3.5) are effectively identical. Fireship is not packing in more information. What differs:
+
+- **1.6× the delivery speed** (237 vs 144 wpm)
+- **2.5× the direct address** (2.8–4.2 vs 1.1–1.5 *you/your* per minute)
+- **3.5× the rhetorical turns** — *but / actually / turns out / which means* (3.9 vs 1.1 per minute)
+
+That last one is the real signature. A turn every ~15 seconds means the argument keeps **reversing**
+rather than accumulating. Snap Shift narrates *forward*; Fireship keeps pivoting.
+
+### 4d.2 Three nested clocks
+
+Measured on the 3:36 DeepSeek video:
+
+| layer | interval |
+|---|---|
+| **visual change-event** | every **0.67s** (89.7/min @0.02) |
+| **hard cut** | every **3.1s** (19.2/min @0.25) |
+| **new subtopic** | every **~20s** (≈11 distinct topics in 3:36) |
+
+The evergreen format inverts the top two: *Python in 100 Seconds* runs only **4.2 hard cuts/min** with
+**14.3-second** average shots — its 72 change-events/min are almost entirely *within-frame*. **Same
+density, opposite mechanism.** Teaching material holds the frame and animates inside it; news
+material cuts.
+
+### 4d.3 Why it's this big — it is NOT beating the pattern
+
+`RETENTION-AND-HOOKS.md` §7.4 measured AI-news channels at **0.03–0.19×** median outlier and
+explainers at **0.26–0.45×**. Fireship's 2024–2026 median outlier score is **0.215×** — *just above
+the news band, below the explainer band.* **Per subscriber, it performs like a news channel, exactly
+as §7.4 predicts.** There is no contradiction to explain away.
+
+What makes it *look* exceptional is the **denominator**: 4.25M subs × 0.215 ≈ 950K median views. The
+absolute number is huge; the efficiency is not.
+
+**And it acquired that base in a different era, with a different product:**
+
+| year | med views/video | vs 2021 |
+|---|---:|---:|
+| 2021 | 981,002 | 1.00× |
+| 2022 | 798,769 | 0.81× |
+| 2023 | 962,382 | 0.98× |
+| 2024 | 969,935 | 0.99× |
+| 2025 | 950,880 | 0.97× |
+| 2026 | 767,447 | 0.78× |
+
+**Median views per video have been flat at ~950K–980K for five straight years** while the subscriber
+base kept growing. Flat absolute reach on a growing base is **declining per-subscriber performance** —
+and p90/median collapsed 3.29 → 1.71 over the same window, meaning the breakouts stopped too.
+
+> **The mechanism: evergreen teaching was the ACQUISITION engine; topical news is the HARVEST.**
+> *"X in 100 Seconds"* is search-driven (§4.3) — it recruits strangers continuously, forever, from
+> queries people already type. That is what built 4.25M subs between 2019 and 2022, when teaching was
+> 61% → 34% of output. News commentary **retains** that base beautifully (five flat years) but
+> recruits poorly, because nobody searches for last week's Anthropic drama.
+>
+> They swapped a subscriber-acquisition product for a monetisation product — rationally, since the
+> money is in courses (§4b) — and the numbers show exactly that trade: flat reach, no outliers,
+> news-band efficiency, enormous base.
+
+### 4d.4 What that means for us
+
+1. **Do not read Fireship as proof that an AI-news format travels.** Per subscriber it performs like
+   the channels §7.4 told us to avoid. Its scale is inherited, not earned by the current format.
+2. **The transferable asset is the acquisition engine, not the harvest.** The thing that built the
+   channel was **evergreen, search-addressable explainers on terms people already query** — the exact
+   opposite of topical. If we want to grow rather than harvest, that is the half to copy.
+3. **The style is separable from the format** and is cheap to adopt: faster delivery, far more direct
+   address, and a rhetorical turn every ~15 seconds. None of that requires being a news channel, and
+   §4d.1 shows it does not require more facts either — just a different arrangement of the same ones.
+
+---
+
 ## 5. What transfers to us
 
 ### TAKE
