@@ -220,7 +220,10 @@ density is almost entirely **within-frame** (code scrolling, terms appearing, hi
 cutting. That is precisely the "prefer within-beat motion over rapid cutting" principle we already
 hold, executed harder than we execute it.
 
-### 4.3 Two different businesses under one brand
+### 4.3 Two different businesses under one brand — but no longer a balanced pair
+
+> **Read with §4c.** The evergreen/reference side is now only **10%** of output and the
+> lowest-performing category. The topical side below is what the channel actually is today.
 
 **Evergreen / reference — no hook at all.** *Python in 100 Seconds* opens:
 
@@ -327,15 +330,69 @@ preference"** — correct, given AdSense monetisation. This teardown does not ov
 documents the alternative and its price of entry. **This is evidence for a decision Terry owns, not a
 recommendation to change it.**
 
-Two honest limits on transferability:
+Limits on transferability — **one of which I got wrong on the first pass:**
 
-1. **Audience purchase-intent is not comparable.** Fireship's viewers are working developers
-   evaluating a technical course — among the highest-intent audiences on the platform. *Understanding
-   AI* is general-interest; the same funnel converts far worse per view.
+1. ~~**Audience purchase-intent is not comparable.** Fireship's viewers are working developers
+   evaluating a technical course.~~ **RETRACTED 2026-08-22 — see §4c.** Terry watched the videos and
+   said they read as high-level content for "developers / interested AI parties," not development
+   content. Measured, he is right: the current channel is **10% teaching and 29% AI-industry
+   commentary.** I described the 2019–2021 channel, not the one that exists. This caveat was doing
+   most of the work in the argument, and it does not survive.
 2. **A funnel needs a product at the end of it.** Fireship spent years building fireship.io before
    the short-form model could pay. We do have a candidate — the AI Filmmaking Studio capability
    (`feedback_studio_is_not_faceless_box`) — but nothing currently connects videos to it, and the
-   floor should not move before something does.
+   floor should not move before something does. **This one stands, and is now the only one.**
+
+---
+
+## 4c. What this channel is actually ABOUT — a correction
+
+**Added 2026-08-22, prompted by Terry after watching the videos.** I inferred the audience from
+packaging — the channel description ("code tutorials… every programmer should know"), the course
+product, titles like *Python in 100 Seconds*. That inference described a channel that no longer
+exists.
+
+Titles classified by subject, three eras:
+
+| content type | 2019–2021 (n=166) | 2022–2023 (n=185) | **2024–2026 (n=229)** | med views (current) |
+|---|---:|---:|---:|---:|
+| **TEACHING / reference** | **61%** | 34% | **10%** | 638,208 ← *worst* |
+| framework / language news | 37% | 48% | 48% | 961,463 |
+| **AI-industry news & commentary** | **1%** | 14% | **29%** | **1,001,820** |
+| security / incident drama | 1% | 1% | 7% | 748,493 |
+| culture / history / first-person | 1% | 3% | 5% | 670,756 |
+
+**Teaching fell 61% → 10% and is now the lowest-performing category on the channel.** AI-industry
+commentary went 1% → 29% and is the *highest*. A sample of the most recent 45 uploads is almost
+entirely Anthropic / OpenAI / DeepSeek / Google news, security incidents, and tech-culture stories —
+*"Anthropic is starting to panic…"*, *"OpenAI gets sued for stealing, again…"*, *"I spent 3 days at
+MIT... the robot hype is worse than you think"*, *"732 bytes of Python just borked every Linux machine
+on earth…"*.
+
+**This was already implied by my own §3 finding and I failed to follow it through.** §3 measured the
+death of the teaching format ("100 Seconds" → 1–5% of output) and then §4b.3 still characterised the
+audience by that dead format. The classic error the bible warns about, in a new costume: I verified
+the *format* against the artifact and then described the *audience* from the document.
+
+### 4c.1 Why the correction matters strategically
+
+If Fireship were a coding-course channel, its funnel would be a poor model for us — different audience,
+different intent. **It is not.** It is a **high-level tech/AI news-and-commentary channel** whose
+viewers are developers *and* interested non-specialists following the AI industry. That is
+substantially **the same audience Understanding AI is aimed at**, reached with:
+
+- a ~5-minute runtime that cannot carry a mid-roll,
+- a topical, ellipsis-headline packaging system (§3.2),
+- ~8 uploads/month,
+- and monetisation that is **75% their own product**, not ads (§4b.1).
+
+That makes the product-led model *more* relevant to us than the first version of this document
+concluded — not less. The remaining blocker is honestly item 2 above: we have no product connected to
+the videos. **The audience objection is withdrawn; the product objection is real.**
+
+One caveat that survives and cuts the other way: Fireship sells a **developer** product (fireship.io
+PRO) to the developer slice of a mixed audience. Being adjacent in *subject* does not mean the same
+product converts — what we'd sell, and to which slice, is an open question this teardown cannot answer.
 
 ---
 
