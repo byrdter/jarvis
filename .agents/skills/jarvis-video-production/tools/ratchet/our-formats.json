@@ -1,0 +1,11 @@
+{
+  "harness":        "harness|agent harness",
+  "claude-code":    "claude code|subagent|\\bmcp\\b|claude subagent|skill instead|wrapping bash|agent sdk",
+  "agent-failure":  "why .*(fail|break|waste|forget)|fails (in|at)|demos fail|goes wrong|context overload",
+  "jarvis-build":   "jarvis|second brain|command center|telegram",
+  "agent-concept":  "agentic|ai agent|multi-agent|orchestrat|swarm|react pattern|interoperab|observab",
+  "ai-labor":       "\\bjob|layoff|paycheck|worker|entry-level|\\bceo\\b",
+  "ai-reliability": "hallucinat|makes things up|invented|guessing|doomed|better than doctors",
+  "ai-money":       "ponzi|trillion|subscription|costs|price|invest|portfolio",
+  "celebrity":      "footballer|ronaldo|messi|bloodstream|paid \\$"
+}
