@@ -78,6 +78,16 @@ homeowner audience. Park it; it is not part of either channel.
 
 ## 3. Tier 1 re-titles, query-first
 
+> ### ⚠️ SUPERSEDED IN PART — read `TIMELINESS-REVISION-HARNESS.md` first.
+> Terry's timeliness critique (2026-08-22) found a real error in this table. Every keyword here was
+> ranked on **`estimatedMonthlySearch` and competition — both stock measures** — with no test of
+> whether a term is rising or saturating. Measured on actual consumption, **"context engineering"
+> delivers ~2,500 views/hour against prompt engineering's ~220,000**, so its 98K search figure
+> overstates real traffic by roughly 40×. And the live term is **harness engineering** (108,188/mo at
+> competition 43.8, with 4,310-sub channels landing 96× outliers) — which I stripped *out* of title
+> #5 and left Terry's best-performing video, *Inside Anthropic's Agent Harness*, demoted to Tier 2.
+> The revision re-ranks all 16. The core and §2, §4 and §5 of this document stand.
+
 Format: **query term at the front**, concrete promise behind it. Per
 `BYRDDYNASTY-FIRESHIP-ROADMAP.md` §3.1, search titles do **not** want a curiosity gap — the viewer
 already typed the question, so a gap is friction. Keep under ~65 characters where possible.
