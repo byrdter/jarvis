@@ -1,0 +1,284 @@
+# Fireship — channel teardown
+
+**Measured 2026-08-22.** `@Fireship` · **4,250,000 subs** · 783 long uploads · **638.8M lifetime views**
+· first upload 2017-08 · created by Jeff Delaney · dev-education + tech news.
+
+Method: full catalog pull (`yt-dlp`, 783 items); **exact** upload dates + view/like/comment counts for
+the newest **233** (2024-07 → 2026-08); **approximate** dates for the full 783 via
+`--extractor-args youtubetab:approximate_date`, **validated against the exact set and found unreliable
+— see §0.1**. Three `teardown.py` transcript teardowns, scene-detection density on two downloaded
+videos, permutation tests (20,000 resamples) age-residualised on the exact subset. Raw data in
+`tools/raw/fireship/`, teardowns in `tools/teardowns/{x7X9w_GIm1s, Nl7aCUsWykg, pEfrdAtAmqk}.md`.
+
+---
+
+## 0. The one-line finding
+
+> **Fireship's famous short runtime is not why it wins — and its signature format is now its worst.**
+> Pooled, sub-5-minute videos look **1.79× better**; within era that collapses to **0.95×**, and on
+> exact dates it is **null (p = 0.20)**. Meanwhile *"X in 100 Seconds"* — the format the channel is
+> known for — has gone from **2.26× in 2020 to 0.60× today**, and has been deliberately replaced.
+
+The channel is a **conveyor belt** (p90/median **1.69**), not an outlier machine, and it is currently
+executing a **format succession** in the open.
+
+### 0.1 A method warning, paid for in this teardown
+
+`yt-dlp`'s `approximate_date` gave dates for all 783 in one call. Cross-checked against 168 videos
+where both approximate and exact dates existed:
+
+- **exact match: 0%** · within 1 day: 6% · within 7 days: 24%
+- median absolute error **23 days**, **max 225 days**
+- **year-bin disagreement: 18%**
+
+They are usable for a coarse trajectory and nothing else. **Every headline claim below is verified on
+the exact-date subset.** Tables built on approximate dates are labelled as such. Had this not been
+checked, the 2026 row alone would have been read as fact — it disagreed with the exact data until
+confirmed independently (§3.1).
+
+---
+
+## 1. The numbers
+
+### 1.1 Era structure *(approximate dates — trajectory only, ~18% year-bin error)*
+
+| year | n | med views | p90 | **p90/med** | med runtime | % <5 min | uploads/mo |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2017 | 41 | 54,000 | 110,000 | 2.04 | 5.3m | 44% | 3.4 |
+| 2018 | 68 | 64,500 | 262,000 | 4.06 | 9.6m | 3% | 5.7 |
+| **2019** | 77 | 104,000 | 814,000 | **7.83** | 9.9m | 13% | 6.4 |
+| 2020 | 61 | 388,000 | 1,000,000 | 2.58 | 6.7m | 46% | 5.1 |
+| 2021 | 80 | 734,500 | 1,900,000 | 2.59 | 8.3m | 41% | 6.7 |
+| 2022 | 111 | 951,000 | 2,600,000 | 2.73 | 2.8m | 65% | 9.2 |
+| 2023 | 97 | 819,000 | 1,700,000 | 2.08 | 3.6m | 74% | 8.1 |
+| 2024 | 78 | 1,050,000 | 2,200,000 | 2.10 | 4.3m | 77% | 6.5 |
+| 2025 | 115 | 939,000 | 1,600,000 | **1.70** | 4.3m | 79% | 9.6 |
+| 2026 | 55 | 767,000 | 1,300,000 | **1.69** | 5.3m | 22% | 6.9 |
+
+**2019 was the breakout year** — p90/median 7.83, the only genuinely outlier-shaped season in the
+catalog. Everything after is progressively flatter.
+
+### 1.2 The dispersion collapse — a third channel doing the same thing
+
+p90/median: **7.83 → 2.58 → 2.59 → 2.73 → 2.08 → 2.10 → 1.70 → 1.69.**
+
+| channel | p90/median (current era) | shape |
+|---|---:|---|
+| Snap Shift | **6.76** | outlier machine |
+| Fireship | **1.69** | conveyor belt |
+| Wall Street Millennial | 1.93 | conveyor belt |
+
+Fireship is now **flatter than WSM** — the flattest distribution measured on any channel to date. Its
+median outlier score is 0.162× (views ÷ subs), but at 4.25M subs that number is mostly a size
+artifact and should not be compared to small-channel scores.
+
+---
+
+## 2. Runtime does NOT predict views — a textbook Simpson's reversal
+
+This is the finding most likely to be misread from the outside, and the reason
+`WSM-CHANNEL-TEARDOWN.md`'s "era-split before any analysis" rule exists.
+
+| slice | <5 min | ≥5 min | ratio |
+|---|---:|---:|---:|
+| **POOLED (all 783)** | 805,500 | 450,000 | **1.79×** |
+| 2017–2019 (tutorial era) | 50,500 | 86,500 | **0.58×** |
+| 2020–2022 | 768,000 | 676,000 | 1.14× |
+| 2023–2026 (current) | 900,000 | 952,000 | **0.95×** |
+
+Pooled says short wins by 79%. Within the current era the effect is **gone**, and in the earliest era
+it **reverses**. The pooled number is an artifact of *when* long videos were made — the long ones are
+old tutorials from when the channel was small.
+
+**Verified independently on exact dates** (n=202, 2024-07 → 2026-08, log-views residualised on
+log-age): <5 min mean residual **−0.034** vs ≥5 min **+0.056**; difference −0.090 log-units,
+**permutation p = 0.1997. Null.**
+
+> **Do not take "Fireship is short, therefore short works" from this channel.** Its own catalog says
+> runtime is neutral. Short is a *production* choice — it lets them ship ~8/month — not a
+> distribution lever.
+
+---
+
+## 3. The format succession — a signature format with a measured lifecycle
+
+### 3.1 *"X in 100 Seconds"* has gone from the engine to a liability
+
+*(share and ratio on approximate dates — trajectory; the 2024-2026 rows are corroborated exactly)*
+
+| year | share of output | med views (100 Sec) | med views (everything else) | **ratio** | ellipsis-style titles |
+|---|---:|---:|---:|---:|---:|
+| 2020 | 43% | 459,000 | 203,000 | **2.26×** | 2% |
+| 2021 | 54% | 797,000 | 658,000 | 1.21× | 6% |
+| 2022 | 50% | 1,000,000 | 779,000 | 1.28× | 7% |
+| 2023 | 24% | 843,000 | 801,500 | 1.05× | 20% |
+| 2024 | 14% | 629,000 | 1,100,000 | **0.57×** | 35% |
+| 2025 | 4% | 582,000 | 962,500 | **0.60×** | 82% |
+| 2026 | 5% | 470,000 | 782,000 | **0.60×** | **91%** |
+
+On the exact-date subset, era-controlled and age-residualised, *"in 100 Seconds"* measures
+**0.58×, p = 0.0001 (n=13)** — the single strongest signal in the whole title analysis, and it is
+**negative**.
+
+**The format decayed to parity by 2023 and went negative by 2024. They read it and switched.** Output
+share fell 54% → 4%.
+
+### 3.2 What replaced it
+
+The house style is now a **trailing-ellipsis topical headline**: *"Big Tech in panic mode... Did
+DeepSeek R1 just pop the AI bubble?"*, *"This free Chinese AI just crushed OpenAI's $200 o1 model..."*
+
+Ellipsis titles went **1% → 91%** of output and measure **1.11×, p = 0.037** era-controlled. A small
+lift on a very large base — this is a *floor* mechanic, not a ceiling one, exactly like WSM's
+accusation frame.
+
+| formula (exact subset, n=202, age-residualised) | n | lift | p |
+|---|---:|---:|---:|
+| **"X in 100 Seconds"** | 13 | **0.58×** | **0.0001*** |
+| ellipsis "…" / "..." | 156 | 1.11× | 0.037* |
+| superlative (insane/crazy/panic/god-tier) | 11 | 1.11× | 0.044* |
+| named company/product | 71 | 1.14× | 0.053 |
+| question title | 15 | 1.09× | 0.186 |
+| "new"/"just"/recency | 63 | 1.04× | 0.229 |
+| numbered listicle | 10 | 0.92× | 0.947 |
+
+### 3.3 The 2026 shift is real, verified, and free
+
+Confirmed on **exact** dates, not approximate:
+
+| | 2025 (n=82) | 2026 (n=55) |
+|---|---:|---:|
+| median runtime | 4.2m | **5.3m** |
+| % under 5 min | **83%** | **22%** |
+| median views | 950,880 | 767,447 |
+| **age-residualised mean** | **−0.005** | **+0.019** |
+
+Fireship roughly **doubled its share of longer videos in a single year, and performance did not
+move.** The raw median dip (950K → 767K) is entirely an age artifact — the 2026 cohort's median age is
+110 days vs 438. Age-normalised the two years are indistinguishable.
+
+---
+
+## 4. The craft layer — measured
+
+### 4.1 It is the fastest-talking channel we have measured
+
+| channel | wpm |
+|---|---:|
+| **Fireship — "DeepSeek" (news format)** | **236** |
+| **Fireship — "God-Tier Developer Roadmap"** | 210 |
+| **Fireship — "Python in 100 Seconds"** | 191 |
+| Modern MBA | 178 |
+| Snap Shift | 150 |
+
+236 wpm is roughly **1.6× Snap Shift's rate**. Combined with near-zero filler, the information
+density per minute is the channel's actual signature — far more than the runtime.
+
+### 4.2 Density is above our own target; hard cuts are not
+
+Scene detection on two downloaded videos:
+
+| video | change-events/min @0.02 | hard cuts/min @0.25 | avg shot |
+|---|---:|---:|---:|
+| Python in 100 Seconds (2:23) | **72.0** | 4.2 | 14.3s |
+| DeepSeek / Code Report (3:36) | **89.7** | 19.2 | 3.1s |
+
+Our `CONDUIT-VISUAL-SYSTEM.md` target is **45–60 change-events/min**; Fireship runs **72–90**. But note
+the split: the evergreen format has only **4.2 hard cuts/min** and a 14-second average shot — its
+density is almost entirely **within-frame** (code scrolling, terms appearing, highlights landing), not
+cutting. That is precisely the "prefer within-beat motion over rapid cutting" principle we already
+hold, executed harder than we execute it.
+
+### 4.3 Two different businesses under one brand
+
+**Evergreen / reference — no hook at all.** *Python in 100 Seconds* opens:
+
+> *"python — a high-level interpreted programming language famous for its zen-like code…"*
+
+A dictionary definition. No adversary, no curiosity gap, no withheld payoff — it violates every rule
+in `RETENTION-AND-HOOKS.md` §2–§3, and it has 3.0M views. **Because it serves SEARCH intent.** The
+title is a query people type; the promise is the title; a gap would be friction. This is a genuine
+boundary condition on our hook doctrine: **hook rules govern browse/suggested traffic, not search
+traffic.**
+
+**Topical / news — hook-saturated.** *DeepSeek* opens with an adversary in sentence one, a named
+victim, and a stake:
+
+> *"last week Chinese company DeepSeek shocked the world when they walked right over OpenAI's moat by
+> releasing the open-source R1 model… not only does it beat their $200 o1 reasoning model…"*
+
+Register is aggressively opinionated and slangy — *"in order for the grift to keep on grifting"*,
+*"my vibe test"*, *"normies"*. Nothing like our conduit register, and not portable to it.
+
+### 4.4 Visual vocabulary — real captures, annotated, cut against memes
+
+From frame inspection of the DeepSeek build: the actual DeepSeek benchmark chart from the paper, the
+real NVDA price chart mid-crash, Sam Altman's actual tweet, a Bloomberg article, a Tom's Guide
+article, real Reddit comments, the ChatGPT pricing page, the DeepSeek chat UI.
+
+Two devices worth stealing:
+
+1. **Annotation on top of a real capture** — a hand-drawn arrow and the caption *"CHINESE MATH
+   SUPREMACY"* scrawled over the genuine benchmark chart. The evidence stays real; the editorial
+   lives in the annotation layer on top. This is our annotation-HUD component with a joke in it.
+2. **Big overlay numerals on the capture** — *"< $10 million"*, *"−$6,000,000"*, *"671B"* — the number
+   at display size over the artifact rather than retyped into a text card.
+
+Generated imagery **is** present (an AI-composited Altman-as-Napoleon, celebrity-head reaction
+composites) but strictly as **memes/punctuation**, never as a substitute for evidence. That is the
+opposite of the Snap Shift posture, where the imagery *is* the substance.
+
+---
+
+## 5. What transfers to us
+
+### TAKE
+
+1. **Watch your own format for decay, and be willing to kill it.** This is the sharpest contrast in
+   the corpus. Snap Shift found its best lever (two-clause titles), drifted off it under volume
+   pressure, and its median fell. Fireship watched its signature format decay from 2.26× to parity to
+   0.60× **and deliberately replaced it**, cutting output share 54% → 4%. **A format is not an
+   identity; it is a position with a half-life.** Nothing in our tooling currently tracks the decay of
+   a format we own — `outlier-ratchet.py` watches other channels, not our own formats.
+2. **Annotation-on-capture** (§4.4) — draw the editorial on the real artifact instead of building a
+   separate card. Cheap, keeps the evidence real, and carries voice.
+3. **Density via within-frame motion, harder than we do it.** 72/min with only 4.2 hard cuts/min is
+   the exact shape we say we want; we target 45–60. Worth raising our floor on evergreen material.
+
+### DO NOT TAKE
+
+4. **Not the short runtime.** Measured on their own catalog, runtime is **null** (p=0.20). The pooled
+   1.79× is a Simpson's artifact. Short serves their *cadence* (~8 uploads/month), not their reach —
+   and we have an 8-minute monetisation floor they do not.
+5. **Not the hookless open — unless the traffic is search.** *Python in 100 Seconds* works because the
+   title is a search query. Our lane is browse/suggested, where §2–§3 still governs. **Do not
+   generalise "Fireship doesn't hook" into "hooks don't matter."**
+6. **Not the register.** "The grift keeps grifting" is a native-voice channel with a personality
+   attached to a real named person. We are faceless and evidence-register; borrowing the slang would
+   read as costume.
+
+### THE STANDING WARNING, again
+
+Same as Snap Shift §3.1: **this measures the click, not the hold.** Every number here is
+views-derived. A 236-wpm delivery is plainly a retention device, but nothing in this method can prove
+that — only the shape of what got clicked.
+
+---
+
+## 6. Tested and rejected — do not re-run
+
+- **Runtime as a driver** — pooled 1.79×, within-era 0.95×, exact-date test p=0.1997. Null.
+- **`approximate_date` as a substitute for exact dates** — 0% exact match, 18% year-bin error. Coarse
+  trajectory only.
+- Question titles (1.09×, p=0.19), recency markers (1.04×, p=0.23), numbered listicles (0.92×, p=0.95).
+- Named company/product (1.14×, p=0.053) — suggestive, does not clear the bar, and is 35% of output.
+- Reading the 2025→2026 median dip as decline — it is entirely age; residualised, the years are
+  identical.
+
+## 7. Open — needs the full exact-date pull
+
+The per-video exact pull was at **233 / 783** when this was written (it runs ~6/min; the remainder is
+~90 minutes). Everything above rests on either the exact subset (2024-07 onward, n=202–233) or clearly
+labelled approximate dates. **When the pull completes, re-run §1.1, §3.1 and §2 on exact dates** — the
+expected changes are small, but the 2017–2023 rows are currently the weakest evidence in this document
+and the format-succession trajectory deserves exact numbers.
