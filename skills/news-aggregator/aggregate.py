@@ -44,13 +44,27 @@ import feedparser
 try:
     import trafilatura
     HAS_TRAFILATURA = True
-except ImportError:
+except ImportError as _e:
     HAS_TRAFILATURA = False
+    # Without trafilatura, fetch_fulltext() returns "" for every URL and
+    # html_to_text() falls back to a crude tag-strip: the run still succeeds
+    # but every article is reduced to its feed summary. That failure was
+    # invisible until 2026-08-23, so make it loud rather than silent.
+    print(f"WARNING: trafilatura unavailable ({_e}) - full-text extraction is "
+          f"DISABLED; articles will be feed-summary only. "
+          f"Fix: pip install -r requirements.txt", file=sys.stderr)
 
 # ---- Persistence layer (mirrors youtube-monitor architecture) -------------
 ORICO_ROOT = Path("/Volumes/ORICO/jarvis/news-articles")
 LOCAL_INCOMING = Path.home() / ".local/share/jarvis/news-articles/incoming"
 KNOWLEDGE_DB = Path(__file__).resolve().parents[2] / "agent-sdk" / "data" / "ai-knowledge.db"
+
+# Which corpus this run belongs to. One database holds several source sets, so
+# every read and write is scoped by domain: without it the AI digest dedupes
+# against finance articles and can surface them. Set from --domain in main();
+# 'ai' is the default so existing jobs behave exactly as before.
+# See migrate-add-domain.py for the schema change this depends on.
+DOMAIN = 'ai'
 VAULT_ROOT = Path(os.path.expanduser("~/Obsidian/JARVIS/News"))
 
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
@@ -106,10 +120,28 @@ DEFAULT_RSS_FEEDS = {
 }
 
 
-def load_rss_feeds() -> Dict[str, str]:
-    """Load RSS feeds from config, falling back to a small built-in set."""
-    config_path = Path(__file__).parent / 'config' / 'rss-feeds.json'
+def load_rss_feeds(config: Optional[str] = None) -> Dict[str, str]:
+    """Load RSS feeds from config, falling back to a small built-in set.
+
+    `config` may be a bare name resolved inside config/ ("finance-feeds") or a
+    path. This is what lets one engine serve several source sets -- the AI
+    feeds, the financial read tier, the headline radar -- without forking the
+    script or swapping files in place.
+    """
+    if config:
+        p = Path(config)
+        if not p.suffix:
+            p = p.with_suffix('.json')
+        config_path = p if p.is_absolute() or p.exists() \
+            else Path(__file__).parent / 'config' / p.name
+    else:
+        config_path = Path(__file__).parent / 'config' / 'rss-feeds.json'
     if not config_path.exists():
+        if config:
+            # An explicit config that isn't there is a mistake worth failing
+            # on -- silently falling back to the AI feeds would produce a
+            # plausible-looking digest from entirely the wrong sources.
+            raise SystemExit(f"ERROR: feed config not found: {config_path}")
         return DEFAULT_RSS_FEEDS
 
     try:
@@ -433,15 +465,35 @@ def open_knowledge_db():
     return None
 
 
+def _has_domain_column(conn) -> bool:
+    """True if content_sources carries the domain tag (migrate-add-domain.py).
+
+    Checked rather than assumed so this script still runs against an
+    un-migrated database instead of crashing -- it just falls back to the old
+    undifferentiated behaviour.
+    """
+    try:
+        return any(r[1] == 'domain'
+                   for r in conn.execute("pragma table_info(content_sources)"))
+    except Exception:
+        return False
+
+
 def filter_already_seen(articles: List[Dict]) -> List[Dict]:
     """Persistent dedupe: drop articles whose URL is already in ai-knowledge.db."""
     conn = open_knowledge_db()
     if conn is None:
         return articles
     try:
-        seen = {row[0] for row in conn.execute(
-            "SELECT url FROM content_sources WHERE type='article'"
-        )}
+        if _has_domain_column(conn):
+            seen = {row[0] for row in conn.execute(
+                "SELECT url FROM content_sources "
+                "WHERE type='article' AND domain=?", (DOMAIN,)
+            )}
+        else:
+            seen = {row[0] for row in conn.execute(
+                "SELECT url FROM content_sources WHERE type='article'"
+            )}
     finally:
         conn.close()
 
@@ -599,11 +651,14 @@ def persist_to_knowledge(article: Dict, full_text: str, vault_path: Optional[Pat
     if conn is None:
         return False
     try:
+        _dom = _has_domain_column(conn)
         conn.execute(
             """INSERT INTO content_sources
                (type, title, url, author, published_date, transcript_path,
-                indexed_at, last_updated, metadata)
-               VALUES('article', ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?)""",
+                indexed_at, last_updated, metadata""" +
+            (", domain)" if _dom else ")") +
+            """ VALUES('article', ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?""" +
+            (", ?)" if _dom else ")"),
             (
                 article.get('title', ''),
                 article.get('url', ''),
@@ -617,7 +672,7 @@ def persist_to_knowledge(article: Dict, full_text: str, vault_path: Optional[Pat
                     'full_text_chars': len(full_text or ''),
                     'topics': categorize_article(article.get('title',''), article.get('summary','')),
                 }),
-            ),
+            ) + ((DOMAIN,) if _dom else ()),
         )
         conn.commit()
         return True
@@ -781,8 +836,28 @@ def main():
     parser.add_argument('--date', help='Date (YYYY-MM-DD), default: today')
     parser.add_argument('--output', help='Output file path', default='digest.md')
     parser.add_argument('--limit', type=int, default=100, help='Backfill limit')
+    parser.add_argument('--config', help='Feed config: a name resolved in '
+                                         'config/ (e.g. finance-feeds) or a '
+                                         'path. Default: rss-feeds.json')
+    parser.add_argument('--domain', default='ai',
+                        help="Corpus this run belongs to (e.g. ai, finance). "
+                             "Scopes both the persistent dedupe and the DB "
+                             "write, so one database can hold several source "
+                             "sets without them contaminating each other.")
+    parser.add_argument('--hackernews', action=argparse.BooleanOptionalAction,
+                        default=None,
+                        help='Include the Hacker News fetch. Defaults to on '
+                             'for --domain ai, off otherwise.')
+    parser.add_argument('--filter', choices=['ai', 'none'], default='ai',
+                        help="Topical relevance filter. 'ai' (default) keeps "
+                             "only AI-relevant titles and suits rss-feeds.json;"
+                             " 'none' keeps everything and is what non-AI feed "
+                             "sets need until a domain scorer exists.")
 
     args = parser.parse_args()
+
+    global DOMAIN
+    DOMAIN = args.domain
 
     if args.mode == 'backfill':
         backfill_full_text(limit=args.limit)
@@ -801,13 +876,17 @@ def main():
     all_articles: List[Dict] = []
     per_source_raw: Dict[str, int] = {}
 
-    # Hacker News (API - fast and reliable)
-    hn_articles = fetch_hackernews()
-    all_articles.extend(hn_articles)
-    per_source_raw['Hacker News'] = len(hn_articles)
+    # Hacker News (API - fast and reliable). Hardcoded rather than configured,
+    # and its fetcher filters for AI stories, so it belongs to the AI source
+    # set only -- on a finance run it was leaking AI articles into the finance
+    # corpus. Opt in explicitly with --hackernews if another domain wants it.
+    if args.hackernews if args.hackernews is not None else (DOMAIN == 'ai'):
+        hn_articles = fetch_hackernews()
+        all_articles.extend(hn_articles)
+        per_source_raw['Hacker News'] = len(hn_articles)
 
     # Fetch all RSS feeds (includes Reddit subs and Substacks)
-    rss_feeds = load_rss_feeds()
+    rss_feeds = load_rss_feeds(args.config)
     print(f"Fetching RSS feeds: {len(rss_feeds)} configured sources")
 
     for source_name, feed_url in rss_feeds.items():
@@ -846,8 +925,20 @@ def main():
         if src in AI_DEDICATED_SOURCES:
             return True
         return is_ai_relevant(a.get('title', ''))
-    relevant_articles = [a for a in all_articles if _passes_relevance(a)]
-    print(f"  Relevant articles: {len(relevant_articles)}")
+
+    # The AI keyword filter is topical, not general quality control: it keeps
+    # an article only if its TITLE matches AI_KEYWORDS, or its source is on the
+    # AI whitelist. Run a non-AI feed set through it and nearly everything is
+    # discarded for being off-topic about the wrong topic -- the finance config
+    # measured 418 -> 19 on its first run. Topical filtering belongs to the
+    # source set, so it is selected alongside the config rather than baked in.
+    if args.filter == 'none':
+        relevant_articles = all_articles
+        print(f"  Relevance filter: OFF (--filter none) -> "
+              f"{len(relevant_articles)} kept")
+    else:
+        relevant_articles = [a for a in all_articles if _passes_relevance(a)]
+        print(f"  Relevant articles: {len(relevant_articles)}")
 
     # ── Within-batch dedupe (same article, multiple feeds) ────────────────
     print("Within-batch dedupe...")

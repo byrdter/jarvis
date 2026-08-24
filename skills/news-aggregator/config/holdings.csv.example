@@ -1,0 +1,19 @@
+# Copy to holdings.csv and fill in. synthesize-finance.py reads holdings.csv
+# only — this .example file is never loaded, so a half-filled template can
+# never quietly become "your portfolio" in a brief.
+#
+# Only `symbol` is required. Every other column sharpens the ranking:
+#   status   — held | watch | exited. 'watch' items get flagged on triggers
+#              without being treated as exposure you already carry.
+#   stage    — Asset Revesting stage 1-4 (accumulation/markup/distribution/decline)
+#              if you track it; blank is fine.
+#   weight_pct — share of portfolio. Drives how hard news on it is surfaced.
+#   stop     — stop-loss level, if any. News near a stop is worth more.
+#   note     — free text, e.g. the condition you're waiting on.
+#
+# Nothing here is sent anywhere except into the local Claude CLI call that
+# writes your brief.
+symbol,status,weight_pct,stage,cost_basis,stop,note
+QQQ,held,25,,,,
+BIL,held,65,,,,cash equivalent
+USO,watch,10,,,,conditional entry — not yet opened

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.jarvis.finance-aggregator</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/terrybyrd/bin/jarvis-finance-daily.sh</string>
+    </array>
+
+    <!-- 07:00, two hours before the AI digest at 09:00: the financial brief
+         should land before the US market opens, and staggering the two jobs
+         keeps them off the same SQLite file at the same moment. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/terrybyrd/.local/share/jarvis/news-aggregator/logs/finance-aggregator-stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/terrybyrd/.local/share/jarvis/news-aggregator/logs/finance-aggregator-stderr.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

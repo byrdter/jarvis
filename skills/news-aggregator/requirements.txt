@@ -1,2 +1,13 @@
 requests>=2.32.0
 feedparser>=6.0.0
+
+# Full-text article extraction. aggregate.py wraps `import trafilatura` in a
+# try/except and silently falls back to feed-summary-only text when it is
+# missing, so an absent trafilatura degrades output without raising. It was
+# absent from this file until 2026-08-23; pin it here so a fresh venv gets it.
+#
+# lxml_html_clean is required explicitly: lxml >= 5 moved lxml.html.clean into
+# its own distribution, and trafilatura imports it at module load. Without it,
+# `import trafilatura` raises ImportError and hits the same silent fallback.
+trafilatura>=2.0.0
+lxml_html_clean>=0.4.0

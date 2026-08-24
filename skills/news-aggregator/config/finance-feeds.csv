@@ -1,0 +1,94 @@
+category,name,effective_tier,tier,median_chars,article_chars,max_chars,items,status,note,url
+press,Quartz,full,headline,120,21812,136,3,200,"article fetch recovers 21,812 ch",https://qz.com/rss
+press,CNBC Top News,full,headline,143,7374,161,30,200,"article fetch recovers 7,374 ch",https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114
+press,Fortune,full,full,5303,0,21640,10,200,,https://fortune.com/feed/fortune-feeds/?id=3230629
+press,CNBC Markets,full,headline,126,5222,170,30,200,"article fetch recovers 5,222 ch",https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258
+press,Business Insider Markets,full,headline,347,3892,349,10,200,"article fetch recovers 3,892 ch",https://markets.businessinsider.com/rss/news
+press,CNBC Finance,full,headline,92,3341,157,30,200,"article fetch recovers 3,341 ch",https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664
+press,Forbes Business,full,headline,148,2737,173,25,200,"article fetch recovers 2,737 ch",https://www.forbes.com/business/feed/
+press,Yahoo Finance,full,headline,0,2679,0,50,200,"article fetch recovers 2,679 ch",https://finance.yahoo.com/news/rssindex
+press,Financial Times Companies,partial,headline,88,1007,126,25,200,"article fetch recovers 1,007 ch",https://www.ft.com/companies?format=rss
+press,Financial Times Home,headline,headline,90,0,136,12,200,,https://www.ft.com/rss/home
+press,AP Business (via Google News),dead,dead,0,0,0,0,200,"parsed, 0 entries",https://news.google.com/rss/search?q=when:24h+allinurl:apnews.com%2Fbusiness&hl=en-US&gl=US&ceid=US:en
+press,Reuters Business (via Google News),dead,dead,0,0,0,0,200,"parsed, 0 entries",https://news.google.com/rss/search?q=when:24h+allinurl:reuters.com%2Fbusiness&hl=en-US&gl=US&ceid=US:en
+press,Axios Markets,dead,dead,0,0,0,0,404,HTTP 404,https://api.axios.com/feed/markets
+press,Axios Business,dead,dead,0,0,0,0,404,HTTP 404,https://api.axios.com/feed/business
+radar,Bloomberg Markets,headline,headline,218,0,660,20,200,,https://feeds.bloomberg.com/markets/news.rss
+radar,Bloomberg Politics,headline,headline,213,0,262,14,200,,https://feeds.bloomberg.com/politics/news.rss
+radar,Bloomberg Economics,headline,headline,210,0,218,2,200,,https://feeds.bloomberg.com/economics/news.rss
+radar,Bloomberg Technology,headline,headline,188,0,204,6,200,,https://feeds.bloomberg.com/technology/news.rss
+radar,WSJ Technology,headline,headline,124,0,184,40,200,,https://feeds.content.dowjones.io/public/rss/RSSWSJD
+radar,WSJ US Business,headline,headline,120,0,189,85,200,,https://feeds.content.dowjones.io/public/rss/WSJcomUSBusiness
+radar,WSJ World News,headline,headline,116,0,190,72,200,,https://feeds.content.dowjones.io/public/rss/RSSWorldNews
+radar,WSJ Markets,headline,headline,103,0,199,61,200,,https://feeds.content.dowjones.io/public/rss/RSSMarketsMain
+radar,MarketWatch Top Stories,headline,headline,88,0,202,10,200,,https://feeds.content.dowjones.io/public/rss/mw_topstories
+radar,WSJ Opinion,headline,headline,84,0,248,100,200,,https://feeds.content.dowjones.io/public/rss/RSSOpinion
+radar,The Economist Latest,headline,headline,66,0,130,300,200,,https://www.economist.com/latest/rss.xml
+radar,The Economist Finance,headline,headline,61,0,91,300,200,,https://www.economist.com/finance-and-economics/rss.xml
+radar,The Economist Business,headline,headline,58,0,108,300,200,,https://www.economist.com/business/rss.xml
+radar,MarketWatch Market Pulse,headline,headline,0,0,0,30,200,,https://feeds.content.dowjones.io/public/rss/mw_marketpulse
+radar,MarketWatch Real-time Headlines,headline,headline,0,0,0,10,200,,https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines
+radar,Barron's Real-time,dead,dead,0,0,0,0,404,HTTP 404,https://feeds.content.dowjones.io/public/rss/RSSBarronsRealTime
+radar,Barron's Most Recent,dead,dead,0,0,0,0,403,HTTP 403,https://www.barrons.com/xml/rss/3_7510.xml
+official,NY Fed Liberty Street Economics,full,full,8155,0,11158,100,200,,https://libertystreeteconomics.newyorkfed.org/feed/
+official,BEA News,full,partial,405,6070,952,47,200,"article fetch recovers 6,070 ch",https://apps.bea.gov/rss/rss.xml
+official,ECB Press,full,headline,0,6029,0,15,200,"article fetch recovers 6,029 ch",https://www.ecb.europa.eu/rss/press.html
+official,EIA Today in Energy,full,headline,380,2320,630,18,200,"article fetch recovers 2,320 ch",https://www.eia.gov/rss/todayinenergy.xml
+official,Federal Reserve Working Papers (FEDS),full,partial,797,2164,1262,15,200,"article fetch recovers 2,164 ch",https://www.federalreserve.gov/feeds/feds.xml
+official,NBER Working Papers,partial,partial,998,1134,2489,42,200,,https://back.nber.org/rss/new.xml
+official,FRED Announcements,partial,partial,819,674,1154,10,200,,https://news.research.stlouisfed.org/feed/
+official,Federal Reserve Press: Monetary Policy,partial,headline,63,750,118,15,200,article fetch recovers 750 ch,https://www.federalreserve.gov/feeds/press_monetary.xml
+official,Federal Reserve Press: All,partial,headline,101,696,240,20,200,article fetch recovers 696 ch,https://www.federalreserve.gov/feeds/press_all.xml
+official,SEC Press Releases,headline,headline,251,0,255,25,200,,https://www.sec.gov/news/pressreleases.rss
+official,CBO Publications,headline,headline,77,0,197,30,200,,https://www.cbo.gov/publications/all/rss.xml
+official,SEC Litigation Releases,dead,dead,0,0,0,0,403,HTTP 403,https://www.sec.gov/rss/litigation/litreleases.xml
+official,BLS News Releases,dead,dead,0,0,0,0,403,HTTP 403,https://www.bls.gov/feed/bls_latest.rss
+official,IMF Blog,dead,dead,0,0,0,0,403,HTTP 403,https://www.imf.org/en/Blogs/rss
+official,BIS Research,dead,dead,0,0,0,0,404,HTTP 404,https://www.bis.org/doclist/research.rss
+official,Treasury Press Releases,dead,dead,0,0,0,0,200,"parsed, 0 entries",https://home.treasury.gov/system/files/126/press_releases.xml
+official,St. Louis Fed On The Economy,dead,dead,0,0,0,0,timeout,no response in 25s,https://www.stlouisfed.org/on-the-economy/rss
+research,Aswath Damodaran,full,full,24984,0,53262,25,200,,https://aswathdamodaran.blogspot.com/feeds/posts/default?alt=rss
+research,Noahpinion,full,full,18468,0,75628,20,200,,https://www.noahpinion.blog/feed
+research,Apricitas Economics,full,full,8721,0,17951,20,200,,https://www.apricitas.io/feed
+research,QuantSeeker,full,full,7135,0,8874,20,200,,https://quantseeker.substack.com/feed
+research,Of Dollars and Data,full,full,6825,0,8148,10,200,,https://ofdollarsanddata.com/feed/
+research,Alpha Architect,full,full,6794,0,26369,5,200,,https://alphaarchitect.com/feed/
+research,The Big Picture (Ritholtz),full,full,5255,0,62639,10,200,,https://ritholtz.com/feed/
+research,Verdad Research,full,full,5039,0,11579,20,200,,https://verdadcap.com/archive?format=rss
+research,A Wealth of Common Sense,full,partial,408,4572,428,10,200,"article fetch recovers 4,572 ch",https://awealthofcommonsense.com/feed/
+research,Zero Hedge,full,full,4393,0,12501,25,200,,https://feeds.feedburner.com/zerohedge/feed
+research,Conversable Economist,full,full,3990,0,8490,10,200,,https://conversableeconomist.com/feed/
+research,Net Interest (Rubinstein),full,full,3558,0,7653,20,200,,https://www.netinterest.co/feed
+research,Doomberg,full,full,3359,0,9055,20,200,,https://doomberg.substack.com/feed
+research,Klement on Investing,full,full,2575,0,6265,20,200,,https://klementoninvesting.substack.com/feed
+research,Farnam Street,full,full,2422,0,26221,20,200,,https://fs.blog/feed/
+research,Quantocracy,full,full,2326,0,4017,10,200,,https://quantocracy.com/feed/
+research,Abnormal Returns,full,full,1738,0,4093,14,200,,https://abnormalreturns.com/feed/
+research,The Sounding Line,full,full,1726,0,3804,10,200,,https://thesoundingline.com/feed
+research,Pragmatic Capitalism,full,headline,186,1638,187,3,200,"article fetch recovers 1,638 ch",https://www.pragcap.com/feed/
+research,Marginal Revolution,full,partial,908,1513,2134,15,200,"article fetch recovers 1,513 ch",https://marginalrevolution.com/feed
+research,Calculated Risk,partial,partial,947,992,2896,25,200,,https://www.calculatedriskblog.com/feeds/posts/default?alt=rss
+research,Econbrowser,partial,partial,710,704,1853,10,200,,https://econbrowser.com/feed
+research,Seeking Alpha Market Currents,headline,headline,0,261,0,7,200,,https://seekingalpha.com/market_currents.xml
+research,Money Stuff / Matt Levine (Bloomberg),headline,headline,88,0,149,20,200,,https://www.bloomberg.com/opinion/authors/ARbTQlRLRjE/matthew-s-levine.rss
+research,Mr. Money Mustache,dead,dead,0,0,0,0,403,HTTP 403,https://www.mrmoneymustache.com/feed/
+research,Motley Fool,dead,dead,0,0,0,0,401,HTTP 401,https://www.fool.com/a/feeds/foolwatch
+research,The Irrelevant Investor,dead,dead,0,0,0,0,200,"parsed, 0 entries",https://theirrelevantinvestor.com/feed/
+research,CFA Institute Enterprising Investor,dead,dead,0,0,0,0,200,"parsed, 0 entries",https://blogs.cfainstitute.org/investor/feed/
+research,Morningstar,dead,dead,0,0,0,0,404,HTTP 404,https://www.morningstar.com/rss/news
+sector,Bank Underground (BoE),full,full,10854,0,12272,10,200,,https://bankunderground.co.uk/feed/
+sector,OilPrice.com,full,partial,537,7486,559,15,200,"article fetch recovers 7,486 ch",https://oilprice.com/rss/main
+sector,ETF Trends,full,partial,455,3264,558,50,200,"article fetch recovers 3,264 ch",https://www.etftrends.com/feed/
+sector,CoinDesk,full,headline,0,3252,0,25,200,"article fetch recovers 3,252 ch",https://www.coindesk.com/arc/outboundfeeds/rss/
+sector,Housing Wire,full,headline,71,2295,116,10,200,"article fetch recovers 2,295 ch",https://www.housingwire.com/feed/
+sector,Kitco Commodities,dead,dead,0,0,0,0,404,HTTP 404,https://www.kitco.com/rss/KitcoNews.xml
+sector,ETF.com,dead,dead,0,0,0,0,403,HTTP 403,https://www.etf.com/rss.xml
+api,SEC EDGAR daily index,api,dead,0,0,4819,0,403,"HTTP 403: <!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml",https://www.sec.gov/Archives/edgar/daily-index/index.json
+api,SEC EDGAR submissions (AAPL),api,api,0,0,164439,0,200,"164,439 bytes",https://data.sec.gov/submissions/CIK0000320193.json
+api,FRED series (needs free key),api,dead,0,0,191,0,400,"HTTP 400: <?xml version=""1.0"" encoding=""utf-8"" ?> <error code=""400"" message=""Bad Request.  Variable ",https://api.stlouisfed.org/fred/series?series_id=GDP
+api,SEC EDGAR full-text search,api,api,0,0,63019,0,200,"63,019 bytes",https://efts.sec.gov/LATEST/search-index?q=%22artificial+intelligence%22&dateRange=custom
+api,SEC XBRL company facts (AAPL),api,api,0,0,3789099,0,200,"3,789,099 bytes",https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json
+api,BLS timeseries,api,api,0,0,2982,0,200,"2,982 bytes",https://api.bls.gov/publicAPI/v2/timeseries/data/LNS14000000
+api,Treasury FiscalData,api,api,0,0,1742,0,200,"1,742 bytes",https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates?page[size]=1
+api,Frankfurter FX rates,api,api,0,0,433,0,200,433 bytes,https://api.frankfurter.app/latest?from=USD
+api,Alpha Vantage news sentiment (needs key),api,api,0,0,126806,0,200,"126,806 bytes",https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=demo

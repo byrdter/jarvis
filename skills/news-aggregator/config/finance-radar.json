@@ -1,0 +1,22 @@
+{
+  "Financial Times Home": "https://www.ft.com/rss/home",
+  "Bloomberg Markets": "https://feeds.bloomberg.com/markets/news.rss",
+  "Bloomberg Politics": "https://feeds.bloomberg.com/politics/news.rss",
+  "Bloomberg Economics": "https://feeds.bloomberg.com/economics/news.rss",
+  "Bloomberg Technology": "https://feeds.bloomberg.com/technology/news.rss",
+  "WSJ Technology": "https://feeds.content.dowjones.io/public/rss/RSSWSJD",
+  "WSJ US Business": "https://feeds.content.dowjones.io/public/rss/WSJcomUSBusiness",
+  "WSJ World News": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews",
+  "WSJ Markets": "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain",
+  "MarketWatch Top Stories": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+  "WSJ Opinion": "https://feeds.content.dowjones.io/public/rss/RSSOpinion",
+  "The Economist Latest": "https://www.economist.com/latest/rss.xml",
+  "The Economist Finance": "https://www.economist.com/finance-and-economics/rss.xml",
+  "The Economist Business": "https://www.economist.com/business/rss.xml",
+  "MarketWatch Market Pulse": "https://feeds.content.dowjones.io/public/rss/mw_marketpulse",
+  "MarketWatch Real-time Headlines": "https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines",
+  "SEC Press Releases": "https://www.sec.gov/news/pressreleases.rss",
+  "CBO Publications": "https://www.cbo.gov/publications/all/rss.xml",
+  "Seeking Alpha Market Currents": "https://seekingalpha.com/market_currents.xml",
+  "Money Stuff / Matt Levine (Bloomberg)": "https://www.bloomberg.com/opinion/authors/ARbTQlRLRjE/matthew-s-levine.rss"
+}
