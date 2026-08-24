@@ -181,6 +181,33 @@ strong scene 56.8, good scene 44.0, weak scene 28.9. Prefer **within-beat motion
 counters running, stamps landing, beds drifting — over rapid cutting. That reads as continuous rather
 than choppy, and it is the channel's chosen feel.
 
+### TYPE SCALE — the finding is as big as the verdict word (Terry, 2026-08-22)
+
+> *"When the text is on the screen and you are coming to a conclusion or presenting a finding,
+> make the text large so it is easily readable."*
+
+Measured on the Ordinary Economics Act II scenes, the failure was consistent and invisible until it
+was on screen: **verdict words at 106–116px sitting above findings at 36–44px.** The big word is the
+label; the small line is the actual claim — exactly backwards. Kickers were at 21px, under the
+skill's own ≥26px floor.
+
+Minimums for an originated panel on a 1920×1080 frame:
+
+| element | floor | note |
+|---|---:|---|
+| verdict word | 100px | already right |
+| **finding / conclusion row** | **60px** | was 36–44. This is the fix. |
+| row marker (×, numeral, bullet) | 44px | scale with the row |
+| kicker / label | 28px | the old ≥26px floor, raised for headroom |
+| scope line under a verdict | 26px | |
+
+**If the rows don't fit at 60px, cut rows — don't shrink type.** Both Act II panels went from 3–4
+rows to 2 precisely because footage took over the beats the extra rows were narrating, and that is
+what made the room. A panel crowded enough to need small type is a panel doing work a shot should do.
+
+**Verify on a rendered frame, not on the CSS.** `hyperframes check` samples 9 frames and passes
+overflow long before type is legible — it caught nothing here. Read the PNG at the beat.
+
 ### Information variety — every video should use most of these
 Documents · data tables with a highlighted row · charts with labelled axes · schematic maps ·
 browser/search chrome · annotation HUDs · numbered grids · stat heroes · comparison splits · real

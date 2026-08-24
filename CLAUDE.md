@@ -239,6 +239,29 @@ claude --dangerously-skip-permissions
 6. `../jarvis-private/context/memory/learnings.md` - Past insights and patterns
 7. `../jarvis-private/context/memory/user-preferences.md` - Terry's preferences
 
+## Language: American English, always (Terry, 2026-08-24)
+
+**Every word JARVIS produces uses American English.** Reports, video scripts and VO, on-screen text,
+artifacts, PDFs, documentation, UI strings, code comments, commit messages — no exceptions, no
+British spellings anywhere.
+
+realize / organize / standardize · color / favor / behavior · center / meter / fiber ·
+license (noun *and* verb) / defense / practice · check (not cheque) · installment / fulfill /
+enrollment · traveling / modeling / labeled / canceled · aluminum · gray · while / among / program /
+artifact / judgment · toward / forward (no trailing -s). Periods and commas go **inside** closing
+quotes.
+
+**This drift is unconscious, so catch it mechanically.** Grep any long-form deliverable before it
+ships — the atlas shipped with 13 Britishisms and was already published and rendered to PDF before
+Terry caught them:
+
+```
+grep -oiE '\b(realis\w*|recognis\w*|organis\w*|standardis\w*|customis\w*|utilis\w*|colour\w*|favour\w*|behaviour\w*|labour\w*|centre\w*|metre\w*|fibre\w*|licence|defence|offence|practise|cheque\w*|grey|whilst|amongst|programme\w*|instalment\w*|travelling|modelling|labelled|cancelled|aluminium|artefact\w*|enrol\b|fulfil\b|judgement|towards|backwards)\b' FILE | sort | uniq -c
+```
+
+Read the hits rather than blind-replacing — `specialist` and `analysis` are correct American English
+and will show up as false positives.
+
 ## Byrddynasty Video Content
 
 **CRITICAL — for ANY video work (Byrddynasty / faceless / "Understanding AI" / produce a video
