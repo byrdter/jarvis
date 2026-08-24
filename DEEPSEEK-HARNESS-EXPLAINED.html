@@ -1,0 +1,2054 @@
+<title>The Harness Layer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+/* ============================================================
+   THE HARNESS LAYER &#8212; engineering field manual
+   Palette: deep-sea slate ground, brass accent (the harness),
+   teal accent (the model). Two-colour coding is consistent
+   across every figure: BRASS = machinery you own,
+   TEAL = intelligence you rent.
+   ============================================================ */
+
+:root{
+  --paper:#F0F3F2;
+  --surface:#FFFFFF;
+  --surface-2:#E7ECEA;
+  --ink:#131A1D;
+  --ink-2:#2C3A3E;
+  --muted:#5B6C70;
+  --faint:#8B9A9D;
+  --rule:#CBD5D3;
+  --rule-2:#E1E8E6;
+  --brass:#B26A12;
+  --brass-soft:#F6E5CE;
+  --teal:#146B76;
+  --teal-soft:#D6E8EA;
+  --danger:#A03127;
+  --danger-soft:#F7DEDA;
+  --shadow:0 1px 0 rgba(19,26,29,.04), 0 12px 28px -18px rgba(19,26,29,.35);
+
+  --serif:"Source Serif 4", Iowan Old Style, Palatino, Georgia, serif;
+  --grot:"Bricolage Grotesque", "Archivo", Helvetica Neue, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1417;
+    --surface:#151E22;
+    --surface-2:#1B262B;
+    --ink:#E6ECEB;
+    --ink-2:#C3CFCF;
+    --muted:#93A3A6;
+    --faint:#6D7E82;
+    --rule:#2A383D;
+    --rule-2:#1F2B30;
+    --brass:#E0A24A;
+    --brass-soft:#3A2A12;
+    --teal:#5EB8C4;
+    --teal-soft:#12333A;
+    --danger:#E48577;
+    --danger-soft:#3B1C18;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 30px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1417;
+  --surface:#151E22;
+  --surface-2:#1B262B;
+  --ink:#E6ECEB;
+  --ink-2:#C3CFCF;
+  --muted:#93A3A6;
+  --faint:#6D7E82;
+  --rule:#2A383D;
+  --rule-2:#1F2B30;
+  --brass:#E0A24A;
+  --brass-soft:#3A2A12;
+  --teal:#5EB8C4;
+  --teal-soft:#12333A;
+  --danger:#E48577;
+  --danger-soft:#3B1C18;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 30px -20px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- shell ---------- */
+.shell{max-width:1250px;margin:0 auto;padding:0 26px 120px}
+.col{max-width:680px}
+
+@media (min-width:1080px){
+  .shell{display:grid;grid-template-columns:198px minmax(0,1fr);gap:50px}
+  .shell > header, .shell > .masthead{grid-column:1 / -1}
+  .rail{grid-column:1;grid-row:2}
+  main{grid-column:2;grid-row:2}
+}
+
+/* ---------- masthead ---------- */
+.masthead{padding:64px 0 40px;border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 22px
+}
+h1{
+  font-family:var(--grot);font-weight:800;font-size:clamp(46px,8.4vw,104px);
+  line-height:.92;letter-spacing:-.032em;margin:0 0 26px;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--brass)}
+.standfirst{
+  font-size:clamp(19px,2.1vw,23px);line-height:1.5;color:var(--ink-2);
+  max-width:34em;margin:0 0 34px
+}
+.standfirst strong{font-weight:600;color:var(--ink);box-shadow:inset 0 -.42em 0 var(--brass-soft)}
+
+.dockets{
+  display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:8px
+}
+.docket{background:var(--surface);padding:13px 15px}
+.docket dt{
+  font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--faint);margin:0 0 5px
+}
+.docket dd{margin:0;font-family:var(--grot);font-weight:700;font-size:16px;letter-spacing:-.01em}
+
+/* ---------- rail ---------- */
+.rail{padding-top:52px}
+@media (min-width:1080px){.rail{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding-bottom:60px}}
+.rail h2{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--faint);margin:0 0 14px;
+  padding-bottom:9px;border-bottom:1px solid var(--rule)
+}
+.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rail a{
+  display:grid;grid-template-columns:26px 1fr;gap:6px;align-items:baseline;
+  font-family:var(--grot);font-size:13.5px;font-weight:500;line-height:1.32;
+  color:var(--muted);text-decoration:none;padding:6px 6px 6px 0;border-radius:3px
+}
+.rail a span{font-family:var(--mono);font-size:10px;color:var(--brass);font-weight:700}
+.rail a:hover{color:var(--ink);background:var(--surface-2)}
+.rail a:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ---------- sections ---------- */
+main{padding-top:52px}
+section{margin:0 0 80px;scroll-margin-top:24px}
+.part-tag{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:12px;margin:0 0 16px
+}
+.part-tag::after{content:"";flex:1;height:1px;background:var(--rule)}
+h2.head{
+  font-family:var(--grot);font-weight:700;font-size:clamp(30px,4.2vw,44px);
+  line-height:1.04;letter-spacing:-.024em;margin:0 0 20px;max-width:16em;text-wrap:balance
+}
+h3{
+  font-family:var(--grot);font-weight:700;font-size:22px;line-height:1.22;
+  letter-spacing:-.015em;margin:44px 0 12px;max-width:22em;text-wrap:balance
+}
+h4{
+  font-family:var(--mono);font-weight:700;font-size:11.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);margin:32px 0 10px
+}
+p{margin:0 0 18px;max-width:34em}
+p.lede{font-size:20px;line-height:1.55;color:var(--ink-2);max-width:32em}
+a{color:var(--ink);text-decoration-color:var(--brass);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:2px}
+strong{font-weight:600}
+em.term{font-style:normal;font-family:var(--grot);font-weight:700;color:var(--brass)}
+code{
+  font-family:var(--mono);font-size:.845em;background:var(--surface-2);
+  padding:.12em .38em;border-radius:3px;border:1px solid var(--rule-2)
+}
+
+ul,ol.body{margin:0 0 20px;padding-left:0;max-width:34em;list-style:none}
+ul li,ol.body li{position:relative;padding-left:26px;margin-bottom:11px}
+ul li::before{
+  content:"";position:absolute;left:6px;top:.68em;width:7px;height:1.5px;background:var(--brass)
+}
+ol.body{counter-reset:bl}
+ol.body li{counter-increment:bl}
+ol.body li::before{
+  content:counter(bl);position:absolute;left:0;top:.06em;font-family:var(--mono);
+  font-size:11px;font-weight:700;color:var(--brass)
+}
+
+/* ---------- figure plate ---------- */
+.fig{
+  margin:34px 0 38px;border:1px solid var(--rule);background:var(--surface);
+  box-shadow:var(--shadow);position:relative
+}
+.fig-head{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;
+  padding:11px 16px;border-bottom:1px solid var(--rule);background:var(--surface-2)
+}
+.fig-no{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.16em;
+  color:var(--brass);text-transform:uppercase;white-space:nowrap
+}
+.fig-title{
+  font-family:var(--grot);font-size:13.5px;font-weight:700;letter-spacing:-.005em;color:var(--ink)
+}
+.fig-body{padding:22px 18px;overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto;min-width:520px}
+.fig-note{
+  padding:0 18px 16px;font-size:15px;line-height:1.5;color:var(--muted);max-width:52em
+}
+.fig-note strong{color:var(--ink-2);font-weight:600}
+
+/* svg shared classes */
+.s-fill{fill:var(--surface)}
+.s-stroke{stroke:var(--rule);stroke-width:1.4;fill:none}
+.s-box{fill:var(--surface);stroke:var(--rule);stroke-width:1.4}
+.s-box-2{fill:var(--surface-2);stroke:var(--rule);stroke-width:1.4}
+.s-brass{fill:var(--brass-soft);stroke:var(--brass);stroke-width:1.5}
+.s-teal{fill:var(--teal-soft);stroke:var(--teal);stroke-width:1.5}
+.s-dang{fill:var(--danger-soft);stroke:var(--danger);stroke-width:1.5}
+.s-t{font-family:var(--mono);font-size:12px;fill:var(--ink)}
+.s-t-b{font-family:var(--mono);font-size:12.5px;font-weight:700;fill:var(--ink)}
+.s-t-s{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+.s-t-k{font-family:var(--mono);font-size:9.5px;font-weight:700;fill:var(--faint);letter-spacing:.12em}
+.s-t-brass{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--brass)}
+.s-t-teal{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--teal)}
+.s-t-dang{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--danger)}
+.s-line{stroke:var(--ink-2);stroke-width:1.5;fill:none}
+.s-line-f{stroke:var(--rule);stroke-width:1.3;fill:none}
+.s-dash{stroke:var(--muted);stroke-width:1.4;fill:none;stroke-dasharray:4 4}
+
+/* ---------- callouts ---------- */
+.callout{
+  border-left:3px solid var(--brass);background:var(--surface);
+  padding:18px 20px;margin:28px 0;max-width:36em;box-shadow:var(--shadow)
+}
+.callout.warn{border-left-color:var(--danger)}
+.callout.key{border-left-color:var(--teal)}
+.callout h5{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 8px
+}
+.callout.warn h5{color:var(--danger)}
+.callout.key h5{color:var(--teal)}
+.callout p{margin:0 0 10px;font-size:17px}
+.callout p:last-child{margin:0}
+
+.plain{
+  background:var(--surface-2);border:1px solid var(--rule);padding:16px 18px;
+  margin:24px 0;max-width:36em
+}
+.plain p{margin:0;font-size:17px}
+.plain .lbl{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--faint);display:block;margin-bottom:7px
+}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:28px 0;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px}
+th{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--faint);text-align:left;
+  padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--rule);vertical-align:bottom
+}
+td{padding:12px 14px;border-bottom:1px solid var(--rule-2);vertical-align:top;line-height:1.45}
+tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:var(--mono);font-size:12.5px}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.pill{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:2.5px 7px;border-radius:2px;white-space:nowrap
+}
+.pill.ok{background:var(--teal-soft);color:var(--teal)}
+.pill.no{background:var(--danger-soft);color:var(--danger)}
+.pill.mid{background:var(--brass-soft);color:var(--brass)}
+
+/* ---------- code ---------- */
+pre{
+  font-family:var(--mono);font-size:13px;line-height:1.62;background:var(--surface);
+  border:1px solid var(--rule);padding:16px 18px;overflow-x:auto;margin:22px 0;max-width:100%
+}
+pre .c{color:var(--faint)}
+pre .k{color:var(--brass);font-weight:700}
+pre .s{color:var(--teal)}
+
+/* ---------- glossary ---------- */
+.gloss{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0}
+.gloss div{background:var(--surface);padding:15px 17px;display:grid;grid-template-columns:1fr;gap:5px}
+@media (min-width:660px){.gloss div{grid-template-columns:190px 1fr;gap:20px}}
+.gloss dt{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--brass);margin:0}
+.gloss dd{margin:0;font-size:16px;line-height:1.5;color:var(--ink-2)}
+
+/* ---------- sources ---------- */
+.srcs{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:24px 0}
+.src{background:var(--surface);padding:13px 16px;display:grid;gap:3px}
+@media (min-width:720px){.src{grid-template-columns:1fr 190px 74px;align-items:baseline;gap:16px}}
+.src .t{font-family:var(--grot);font-weight:700;font-size:15px;line-height:1.3}
+.src .t a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.src .t a:hover{border-bottom-color:var(--brass)}
+.src .ch{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.src .d{font-family:var(--mono);font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+footer{
+  margin-top:70px;padding-top:26px;border-top:2px solid var(--ink);
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.7
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.flow{stroke-dasharray:5 5;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-20}}
+</style>
+
+<div class="shell">
+
+<div class="masthead">
+  <p class="eyebrow">Field report &#183; 11 video teardowns + primary sources &#183; 23 Aug 2026</p>
+  <h1>The <em>Harness</em> Layer</h1>
+  <p class="standfirst">A step-by-step explanation of what a harness actually does, and what DeepSeek changed when it open-sourced its own on 13 August 2026. <strong>Short version: the model is a brain in a jar. The harness is the body. DeepSeek gave away the body.</strong></p>
+  <dl class="dockets">
+    <div class="docket"><dt>Released</dt><dd>13 Aug 2026</dd></div>
+    <div class="docket"><dt>Licence</dt><dd>MIT</dd></div>
+    <div class="docket"><dt>GitHub stars</dt><dd>~188,000</dd></div>
+    <div class="docket"><dt>Forks</dt><dd>~20,900</dd></div>
+    <div class="docket"><dt>Status</dt><dd>Dev preview</dd></div>
+    <div class="docket"><dt>Kernel</dt><dd>Cordis</dd></div>
+  </dl>
+</div>
+
+<nav class="rail">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s0"><span>00</span>The 60-second answer</a></li>
+    <li><a href="#s1"><span>01</span>What a harness is</a></li>
+    <li><a href="#s2"><span>02</span>Harness processing: the loop</a></li>
+    <li><a href="#s3"><span>03</span>Inside one model call</a></li>
+    <li><a href="#s4"><span>04</span>Turns, steps, events</a></li>
+    <li><a href="#s5"><span>05</span>The tool pipeline</a></li>
+    <li><a href="#s6"><span>06</span>Code vs. configuration</a></li>
+    <li><a href="#s7"><span>07</span>Everything is a plugin</a></li>
+    <li><a href="#s8"><span>08</span>How a running harness is assembled</a></li>
+    <li><a href="#s9"><span>09</span>Cordis, part 1: time</a></li>
+    <li><a href="#s10"><span>10</span>Cordis, part 2: space</a></li>
+    <li><a href="#s11"><span>11</span>Confluence</a></li>
+    <li><a href="#s12"><span>12</span>The four modes</a></li>
+    <li><a href="#s13"><span>13</span>Creator mode, step by step</a></li>
+    <li><a href="#s14"><span>14</span>The trajectory view</a></li>
+    <li><a href="#s15"><span>15</span>Sub-agents &amp; any model</a></li>
+    <li><a href="#s16"><span>16</span>Permissions vs. sandbox</a></li>
+    <li><a href="#s17"><span>17</span>Where it breaks</a></li>
+    <li><a href="#s18"><span>18</span>Why give it away?</a></li>
+    <li><a href="#s19"><span>19</span>Does it actually work?</a></li>
+    <li><a href="#s20"><span>20</span>The bigger idea</a></li>
+    <li><a href="#gloss"><span>&#8212;</span>Glossary</a></li>
+    <li><a href="#sources"><span>&#8212;</span>Sources</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ 00 ============ -->
+<section id="s0">
+  <p class="part-tag">Start here</p>
+  <h2 class="head">The 60-second answer</h2>
+
+  <p class="lede">Every video in this set is circling one idea, so let's put it down plainly before anything else.</p>
+
+  <p>An AI model, by itself, does exactly one thing: <strong>it turns text into more text.</strong> That's the whole job. It cannot open a file on your laptop. It cannot run a command. It cannot check whether the code it just wrote actually works. It produces words and then it stops.</p>
+
+  <p>A <em class="term">harness</em> is the ordinary program that sits between that text generator and your actual computer. It reads the model's words, does the real work those words describe, catches the result, and hands the result back to the model so it can decide what to do next. Then it does it again. And again. Until the job is finished.</p>
+
+  <p><strong>"Harness processing"</strong> &#8212; the phrase in these videos &#8212; is simply <em>everything that happens on your machine between one model call and the next</em>. Assembling the prompt. Deciding which tools the model may use. Running the tool it picked. Catching the error. Writing it all to a log. Deciding whether to loop again.</p>
+
+  <p>Claude Code is a harness. Codex is a harness. Cursor is a harness. On 13 August 2026 DeepSeek published theirs &#8212; <code>dsh</code> &#8212; under an MIT licence, for free, and it collected roughly 188,000 GitHub stars in ten days. As The Stack put it: the harness "is the part everyone's been paying for. DeepSeek just posted it."</p>
+
+  <p>But DeepSeek didn't just clone Claude Code. They rebuilt the harness on a foundation where <strong>every single piece of it is a removable plugin</strong> &#8212; the model connector, the tool list, the memory, the sandbox, the user interface, and even <em>the loop itself</em>. And because those pieces are described in configuration files rather than compiled code, <strong>the agent can add new pieces to itself while it is still running.</strong></p>
+
+  <p>That is the whole story. The rest of this report explains each part of it slowly, with pictures.</p>
+</section>
+
+<!-- ============ 01 ============ -->
+<section id="s1">
+  <p class="part-tag">Part 01 &#183; Foundations</p>
+  <h2 class="head">What a harness is, in the plainest possible terms</h2>
+
+  <p>Jack Roberts gives the cleanest one-liner across all eleven videos: <strong>"the model is the brain, the harness is the body."</strong></p>
+
+  <p>Hold that image, because it's precise rather than cute. A brain in a jar can think brilliantly and change nothing. It has no hands to open a drawer, no eyes to read what's inside, no memory of what it did five minutes ago. Everything that converts thought into effect lives in the body.</p>
+
+  <p>Now map that onto software:</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 01</span><span class="fig-title">Brain in a jar vs. brain with a body</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 320" role="img" aria-label="Left: a model alone can only emit text and is blocked from the computer. Right: the same model wrapped in a harness can read files, run commands and see results.">
+        <!-- LEFT PANEL -->
+        <text x="0" y="14" class="s-t-k">A &#183; MODEL ALONE</text>
+        <rect x="0" y="28" width="410" height="266" class="s-box-2" rx="2"/>
+
+        <rect x="34" y="90" width="150" height="86" class="s-teal" rx="3"/>
+        <text x="109" y="126" class="s-t-b" text-anchor="middle" fill="var(--teal)">LLM</text>
+        <text x="109" y="146" class="s-t-s" text-anchor="middle">text in &#8594; text out</text>
+
+        <path d="M188 133 L246 133" class="s-line" marker-end="url(#ar)"/>
+        <text x="256" y="130" class="s-t">words</text>
+        <text x="256" y="148" class="s-t-s">(that's all)</text>
+
+        <!-- wall -->
+        <line x1="200" y1="196" x2="200" y2="272" stroke="var(--danger)" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="34" y="216" class="s-t-s">your files</text>
+        <text x="34" y="236" class="s-t-s">your terminal</text>
+        <text x="34" y="256" class="s-t-s">your browser</text>
+        <text x="212" y="228" class="s-t-dang">UNREACHABLE</text>
+        <text x="212" y="248" class="s-t-s">no hands</text>
+
+        <!-- RIGHT PANEL -->
+        <text x="470" y="14" class="s-t-k">B &#183; MODEL + HARNESS</text>
+        <rect x="470" y="28" width="430" height="266" class="s-box-2" rx="2"/>
+
+        <rect x="492" y="52" width="386" height="218" class="s-brass" rx="3"/>
+        <text x="504" y="72" class="s-t-brass">HARNESS &#8212; runs on your machine</text>
+
+        <rect x="514" y="90" width="140" height="72" class="s-teal" rx="3"/>
+        <text x="584" y="120" class="s-t-b" text-anchor="middle" fill="var(--teal)">LLM</text>
+        <text x="584" y="140" class="s-t-s" text-anchor="middle">(rented, remote)</text>
+
+        <path d="M658 112 L714 112" class="s-line" marker-end="url(#ar)"/>
+        <path d="M714 140 L658 140" class="s-line" marker-end="url(#ar)"/>
+        <text x="726" y="108" class="s-t-s">"read main.py"</text>
+        <text x="726" y="150" class="s-t-s">file contents</text>
+
+        <rect x="514" y="186" width="112" height="60" class="s-box" rx="3"/>
+        <text x="570" y="212" class="s-t" text-anchor="middle">files</text>
+        <text x="570" y="230" class="s-t-s" text-anchor="middle">read / write</text>
+
+        <rect x="640" y="186" width="112" height="60" class="s-box" rx="3"/>
+        <text x="696" y="212" class="s-t" text-anchor="middle">terminal</text>
+        <text x="696" y="230" class="s-t-s" text-anchor="middle">run commands</text>
+
+        <rect x="766" y="186" width="90" height="60" class="s-box" rx="3"/>
+        <text x="811" y="212" class="s-t" text-anchor="middle">web</text>
+        <text x="811" y="230" class="s-t-s" text-anchor="middle">search</text>
+
+        <path d="M570 166 L570 184" class="s-line-f"/>
+        <path d="M660 166 L694 184" class="s-line-f"/>
+        <path d="M700 166 L806 184" class="s-line-f"/>
+
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note"><strong>Colour key used in every figure that follows.</strong> <span style="color:var(--teal)">Teal = the model</span> &#8212; the intelligence, rented by the token, running on somebody's servers. <span style="color:var(--brass)">Brass = the harness</span> &#8212; ordinary software running on <em>your</em> machine. Nearly everything interesting in this report happens in the brass.</p>
+  </div>
+
+  <p>Turing Post makes the consequence explicit, and it is the single most useful sentence for understanding why any of this matters:</p>
+
+  <div class="callout key">
+    <h5>The load-bearing insight</h5>
+    <p>"Put the same model inside two harnesses, and you can get two different assistants."</p>
+    <p>The harness decides what enters the model's context, which tools exist, what gets remembered, and when the model gets another turn. Those four decisions change the behaviour more than swapping the model does. We spend our time comparing models and treat the surrounding system as packaging. DeepSeek is treating it as the architecture.</p>
+  </div>
+
+  <p>This is also why Jack Roberts warns that switching to DeepSeek's harness may make your design work <em>worse</em> even with a good model behind it: "Claude itself has baked in so many different things into its harness that really makes it exceptional beyond just using the model." The taste is in the body, not only the brain.</p>
+</section>
+
+<!-- ============ 02 ============ -->
+<section id="s2">
+  <p class="part-tag">Part 02 &#183; The mechanism</p>
+  <h2 class="head">Harness processing is a loop. Here is the loop.</h2>
+
+  <p>Stephen G. Pope spends the first four minutes of his deep dive on exactly this, because everything else depends on it. Strip away branding and every harness on the market &#8212; Claude Code, Codex, Cursor, <code>dsh</code> &#8212; runs the same five-beat cycle.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 02</span><span class="fig-title">The agent loop &#8212; the thing "harness processing" refers to</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 400" role="img" aria-label="A five-step cycle: user asks, harness assembles prompt, model replies with a tool call, harness executes it on the machine, result is fed back, loop repeats until done.">
+        <!-- user -->
+        <rect x="18" y="168" width="118" height="62" class="s-box" rx="3"/>
+        <text x="77" y="194" class="s-t-b" text-anchor="middle">YOU</text>
+        <text x="77" y="213" class="s-t-s" text-anchor="middle">"fix the tests"</text>
+        <path d="M140 199 L182 199" class="s-line" marker-end="url(#ar2)"/>
+
+        <!-- harness ring container -->
+        <rect x="190" y="42" width="512" height="316" class="s-brass" rx="4"/>
+        <text x="204" y="64" class="s-t-brass">THE HARNESS &#8212; your machine</text>
+
+        <!-- 1 assemble -->
+        <rect x="214" y="86" width="164" height="76" class="s-box" rx="3"/>
+        <text x="226" y="106" class="s-t-k">STEP 1</text>
+        <text x="226" y="126" class="s-t-b">Assemble</text>
+        <text x="226" y="145" class="s-t-s">prompt + tools + history</text>
+
+        <!-- 2 model -->
+        <rect x="514" y="86" width="164" height="76" class="s-teal" rx="3"/>
+        <text x="526" y="106" class="s-t-k">STEP 2</text>
+        <text x="526" y="126" class="s-t-b" fill="var(--teal)">Ask the model</text>
+        <text x="526" y="145" class="s-t-s">one HTTPS request</text>
+
+        <!-- 3 decide -->
+        <rect x="514" y="200" width="164" height="76" class="s-box" rx="3"/>
+        <text x="526" y="220" class="s-t-k">STEP 3</text>
+        <text x="526" y="240" class="s-t-b">Model replies</text>
+        <text x="526" y="259" class="s-t-s">"call read_file(x)"</text>
+
+        <!-- 4 execute -->
+        <rect x="214" y="200" width="164" height="76" class="s-box" rx="3"/>
+        <text x="226" y="220" class="s-t-k">STEP 4</text>
+        <text x="226" y="240" class="s-t-b">Execute it</text>
+        <text x="226" y="259" class="s-t-s">real work, real machine</text>
+
+        <!-- 5 feed back -->
+        <rect x="230" y="296" width="248" height="48" class="s-box-2" rx="3"/>
+        <text x="244" y="316" class="s-t-b">STEP 5 &#183; Append the result</text>
+        <text x="244" y="334" class="s-t-s">history grows, then go round again</text>
+
+        <!-- arrows around the ring -->
+        <path d="M382 124 L508 124" class="s-line flow" marker-end="url(#ar2)"/>
+        <path d="M596 166 L596 194" class="s-line flow" marker-end="url(#ar2)"/>
+        <path d="M512 238 L384 238" class="s-line flow" marker-end="url(#ar2)"/>
+        <path d="M296 280 L296 292" class="s-line flow" marker-end="url(#ar2)"/>
+        <path d="M230 320 L208 320 L208 124 L210 124" class="s-line flow" marker-end="url(#ar2)"/>
+
+        <!-- exit -->
+        <path d="M682 238 L758 238" class="s-line" marker-end="url(#ar2)"/>
+        <text x="720" y="228" class="s-t-s" text-anchor="middle">loop exits</text>
+        <rect x="766" y="207" width="120" height="62" class="s-box" rx="3"/>
+        <text x="826" y="233" class="s-t-b" text-anchor="middle">DONE</text>
+        <text x="826" y="252" class="s-t-s" text-anchor="middle">it answers you</text>
+
+        <text x="0" y="386" class="s-t-s">Steps 1, 4 and 5 are pure harness, running on your machine. Only step 2 leaves it.</text>
+
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Read it clockwise from Step 1. The animated arrows are the loop; it spins as many times as the job needs. Stephen Pope: "it just goes in that loop until it's done and then it pops back out and it answers that question."</p>
+  </div>
+
+  <h3>Walking one real cycle</h3>
+
+  <p>Say you type <em>"fix the failing test in <code>auth.py</code>."</em> Here is what the harness actually does, beat by beat.</p>
+
+  <ol class="body">
+    <li><strong>Assemble.</strong> The harness builds one message package: a system prompt (the agent's standing instructions), a machine-readable list of every tool the model is allowed to call, and the entire conversation so far. It sends that package to the model.</li>
+    <li><strong>The model answers with an intention, not an action.</strong> It replies with something like <code>run_command("pytest auth.py")</code>. Note carefully: <em>the model did not run anything.</em> It emitted the text of a request.</li>
+    <li><strong>The harness runs it.</strong> Your computer actually executes <code>pytest</code>. This is the moment text becomes work, and it happens entirely in the brass.</li>
+    <li><strong>The harness catches the result</strong> &#8212; the failure output, the stack trace &#8212; and appends it to the conversation history.</li>
+    <li><strong>Loop.</strong> The harness sends the <em>whole grown conversation</em> back to the model. The model now knows what went wrong and asks to edit a file. Repeat.</li>
+  </ol>
+
+  <p>The loop exits when the model returns an answer with no tool call in it. That's the entire mechanism. There is no magic in it, which is precisely why giving it away for free is such a strange and interesting move.</p>
+
+  <div class="callout">
+    <h5>The thing people get wrong</h5>
+    <p>The conversation feels continuous. It isn't. As Pope puts it: "the conversation is really more transactional than you think." Each pass around the loop is a fresh, stateless HTTPS request. The model remembers nothing. <strong>The harness is what remembers</strong> &#8212; it re-sends the entire growing transcript every single time.</p>
+    <p>This is why context windows fill up, why long sessions get expensive, and why <code>/compact</code> exists.</p>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section id="s3">
+  <p class="part-tag">Part 03 &#183; The mechanism</p>
+  <h2 class="head">What is actually inside one model call</h2>
+
+  <p>Step 1 above says "assemble." Assemble <em>what</em>? This is worth opening up, because once you've seen it, the phrase "everything is a plugin" stops being marketing and becomes a list of specific, nameable parts.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 03</span><span class="fig-title">Anatomy of a single request to the model</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 400" role="img" aria-label="One API request contains three parts: system prompt, tool definitions, and the full message history. The harness builds all three.">
+        <text x="0" y="14" class="s-t-k">BUILT BY THE HARNESS, ON YOUR MACHINE</text>
+        <rect x="0" y="26" width="520" height="342" class="s-brass" rx="3"/>
+
+        <!-- system prompt -->
+        <rect x="20" y="48" width="480" height="82" class="s-box" rx="3"/>
+        <text x="34" y="68" class="s-t-brass">1 &#183; SYSTEM PROMPT</text>
+        <text x="34" y="90" class="s-t">Who the agent is and how it should behave.</text>
+        <text x="34" y="110" class="s-t-s">"You are a coding agent&#8230;" + your AGENTS.md + project rules</text>
+
+        <!-- tools -->
+        <rect x="20" y="142" width="480" height="112" class="s-box" rx="3"/>
+        <text x="34" y="162" class="s-t-brass">2 &#183; TOOL DEFINITIONS</text>
+        <text x="34" y="184" class="s-t">A menu of what the model is allowed to ask for.</text>
+        <rect x="34" y="196" width="128" height="44" class="s-box-2" rx="2"/>
+        <text x="98" y="216" class="s-t-s" text-anchor="middle">read_file</text>
+        <text x="98" y="232" class="s-t-s" text-anchor="middle">(name, args)</text>
+        <rect x="172" y="196" width="128" height="44" class="s-box-2" rx="2"/>
+        <text x="236" y="216" class="s-t-s" text-anchor="middle">bash</text>
+        <text x="236" y="232" class="s-t-s" text-anchor="middle">(command)</text>
+        <rect x="310" y="196" width="128" height="44" class="s-box-2" rx="2"/>
+        <text x="374" y="216" class="s-t-s" text-anchor="middle">edit_file</text>
+        <text x="374" y="232" class="s-t-s" text-anchor="middle">(path, patch)</text>
+        <text x="452" y="222" class="s-t-s">&#8230;</text>
+
+        <!-- messages -->
+        <rect x="20" y="266" width="480" height="84" class="s-box" rx="3"/>
+        <text x="34" y="286" class="s-t-brass">3 &#183; MESSAGES</text>
+        <text x="34" y="308" class="s-t">Every turn so far, re-sent in full, every time.</text>
+        <text x="34" y="328" class="s-t-s">user &#8594; assistant &#8594; tool call &#8594; tool result &#8594; user &#8594; &#8230;</text>
+        <text x="34" y="344" class="s-t-s">this is the part that grows, and the part you pay for</text>
+
+        <!-- arrow -->
+        <path d="M528 196 L604 196" class="s-line" marker-end="url(#ar3)"/>
+        <text x="536" y="186" class="s-t-s">HTTPS</text>
+
+        <!-- model -->
+        <rect x="614" y="112" width="270" height="168" class="s-teal" rx="3"/>
+        <text x="632" y="138" class="s-t-k">RENTED, REMOTE</text>
+        <text x="632" y="166" class="s-t-b" fill="var(--teal)">THE MODEL</text>
+        <text x="632" y="192" class="s-t-s">DeepSeek V4 &#183; Claude &#183; GPT</text>
+        <text x="632" y="212" class="s-t-s">a local model via Ollama</text>
+        <text x="632" y="244" class="s-t">Reads all three parts.</text>
+        <text x="632" y="264" class="s-t">Replies with text or a tool call.</text>
+
+        <text x="0" y="392" class="s-t-s">Every box on the left is a swappable plugin in DeepSeek Harness &#8212; including the box on the right.</text>
+
+        <defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Pope's demo shows this as raw JSON and it looks intimidating; broken into three parts it is trivial. <strong>System prompt, tool list, message history.</strong> That's a whole coding agent. Everything else is decoration around those three fields.</p>
+  </div>
+
+  <p>Now you can name the four jobs of a harness precisely &#8212; Pope's list, and it maps one-to-one onto DeepSeek's plugin categories:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>The harness's job</th><th>What it means in practice</th><th class="mono">DSH plugin</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Model choice</strong></td><td>Which LLM, which endpoint, which effort level</td><td class="mono">llm/llm</td></tr>
+        <tr><td><strong>Tool registry</strong></td><td>The list of things the model is allowed to ask for</td><td class="mono">core/tools</td></tr>
+        <tr><td><strong>Prompt assembly</strong></td><td>Building the system prompt from files and rules</td><td class="mono">core/system-prompt</td></tr>
+        <tr><td><strong>Session memory</strong></td><td>Remembering every turn and re-sending it</td><td class="mono">core/session</td></tr>
+        <tr><td><strong>The loop itself</strong></td><td>Deciding whether to go round again</td><td class="mono">core/agent-loop</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section id="s4">
+  <p class="part-tag">Part 04 &#183; The mechanism</p>
+  <h2 class="head">Turns, steps and the append-only log</h2>
+
+  <p>DeepSeek's own architecture document adds one refinement to the simple loop, and it's worth learning because it is the vocabulary the whole tool uses.</p>
+
+  <ul>
+    <li>A <em class="term">step</em> is <strong>one model request plus the tool calls that come out of it</strong>. One trip round the ring in Fig. 02.</li>
+    <li>A <em class="term">turn</em> is <strong>everything that happens from you pressing enter to the agent going quiet</strong>. A turn contains zero or more steps.</li>
+  </ul>
+
+  <p>Between those two boundaries the harness emits a stream of named events, and this is where every extension point in the system lives. If you want to change how the agent behaves, you attach to an event.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 04</span><span class="fig-title">One turn, two steps &#8212; the event timeline</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Timeline showing turn/start, then two step cycles each with pre-step, step start, assistant message, tool calls and step end, then turn/end.">
+        <!-- turn bracket -->
+        <path d="M22 40 L22 26 L878 26 L878 40" class="s-stroke" stroke="var(--brass)" stroke-width="1.6"/>
+        <text x="450" y="18" class="s-t-brass" text-anchor="middle">ONE TURN &#8212; you press enter &#8230; agent goes quiet</text>
+
+        <!-- baseline -->
+        <line x1="22" y1="200" x2="878" y2="200" stroke="var(--rule)" stroke-width="2"/>
+
+        <!-- turn/start -->
+        <circle cx="46" cy="200" r="6" fill="var(--brass)"/>
+        <text x="46" y="228" class="s-t-s" text-anchor="middle">turn/start</text>
+
+        <!-- STEP 1 -->
+        <rect x="86" y="96" width="330" height="84" class="s-box-2" rx="3"/>
+        <text x="98" y="116" class="s-t-k">STEP 1</text>
+        <text x="98" y="138" class="s-t">agent/pre-step &#8594; step/start</text>
+        <text x="98" y="158" class="s-t">&#8594; assistant/message &#8594; tool/call &#215;2</text>
+        <text x="98" y="174" class="s-t-s">"list the files" &#183; "read auth.py"</text>
+        <path d="M251 182 L251 196" class="s-line-f"/>
+        <circle cx="251" cy="200" r="5" fill="var(--teal)"/>
+        <text x="251" y="228" class="s-t-s" text-anchor="middle">step/end</text>
+
+        <!-- STEP 2 -->
+        <rect x="440" y="96" width="330" height="84" class="s-box-2" rx="3"/>
+        <text x="452" y="116" class="s-t-k">STEP 2</text>
+        <text x="452" y="138" class="s-t">agent/pre-step &#8594; step/start</text>
+        <text x="452" y="158" class="s-t">&#8594; assistant/message (no tools)</text>
+        <text x="452" y="174" class="s-t-s">"fixed it &#8212; here's what changed"</text>
+        <path d="M605 182 L605 196" class="s-line-f"/>
+        <circle cx="605" cy="200" r="5" fill="var(--teal)"/>
+        <text x="605" y="228" class="s-t-s" text-anchor="middle">step/end</text>
+
+        <!-- turn end -->
+        <circle cx="850" cy="200" r="6" fill="var(--brass)"/>
+        <text x="850" y="228" class="s-t-s" text-anchor="middle">turn/end</text>
+        <text x="672" y="204" class="s-t-s">nothing owed &#8594;</text>
+
+        <!-- log -->
+        <rect x="22" y="256" width="856" height="66" class="s-brass" rx="3"/>
+        <text x="38" y="278" class="s-t-brass">THE SESSION LOG &#8212; append-only, every event above written down forever</text>
+        <text x="38" y="300" class="s-t-s">"Model-visible means logged." Anything the model was shown must be reconstructable from this file.</text>
+        <text x="38" y="316" class="s-t-s">Exportable as session.jsonl &#183; resume &#183; fork &#183; search &#183; replay</text>
+      </svg>
+    </div>
+    <p class="fig-note">The turn/step split is not bureaucracy &#8212; it gives extension authors many places to intervene. You can rewrite the user's input at <code>agent/pre-step</code>, inspect or block a tool at <code>tools/pre-execute</code>, or refuse to let the turn end at <code>agent/turn-stopping</code>.</p>
+  </div>
+
+  <h3>Why "append-only" matters more than it sounds</h3>
+
+  <p>Most chat tools show you a tidy summary of what happened. DeepSeek's rule is stricter and stated in their own docs: <strong>if the model saw it, it is in the log.</strong> Not a summary of it &#8212; the actual bytes.</p>
+
+  <p>NeuralNine calls this "the complete opposite of Anthropic's approach of hiding the thinking process," and demonstrates the payoff: you can export a whole session as a <code>session.jsonl</code> zip and read every system prompt, every reasoning trace, every tool payload and every result. Better Stack shows the same thing per-message: 187 tokens total, 94 of them reasoning, click through to the raw thinking.</p>
+
+  <p>That log is also what makes <em>resume, fork, search and replay</em> possible. If the log is the truth, you can rewind to any point in it and branch.</p>
+</section>
+
+<!-- ============ 05 ============ -->
+<section id="s5">
+  <p class="part-tag">Part 05 &#183; The mechanism</p>
+  <h2 class="head">Step 4 in detail: the tool pipeline</h2>
+
+  <p>"The harness runs it" hides the most safety-critical machinery in the whole system. A tool call does not go straight to your shell. It runs a short assembly line, and every station on that line is an extension point.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 05</span><span class="fig-title">The tool execution pipeline</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 300" role="img" aria-label="A tool call passes through pre-execute checks, permission policy, execution by a provider, and post-execute transformation before the result returns to the model.">
+        <rect x="0" y="52" width="150" height="70" class="s-teal" rx="3"/>
+        <text x="75" y="80" class="s-t-b" text-anchor="middle" fill="var(--teal)">MODEL ASKS</text>
+        <text x="75" y="100" class="s-t-s" text-anchor="middle">bash("rm -rf build")</text>
+
+        <path d="M154 87 L188 87" class="s-line" marker-end="url(#ar5)"/>
+
+        <rect x="192" y="52" width="150" height="70" class="s-box" rx="3"/>
+        <text x="267" y="76" class="s-t-b" text-anchor="middle">tools/pre-execute</text>
+        <text x="267" y="96" class="s-t-s" text-anchor="middle">validate args &#183; log</text>
+        <text x="267" y="112" class="s-t-s" text-anchor="middle">reject if unsafe</text>
+
+        <path d="M346 87 L380 87" class="s-line" marker-end="url(#ar5)"/>
+
+        <rect x="384" y="52" width="150" height="70" class="s-brass" rx="3"/>
+        <text x="459" y="76" class="s-t-b" text-anchor="middle" fill="var(--brass)">POLICY GATE</text>
+        <text x="459" y="96" class="s-t-s" text-anchor="middle">approval? sandbox?</text>
+        <text x="459" y="112" class="s-t-s" text-anchor="middle">inside the workspace?</text>
+
+        <path d="M538 87 L572 87" class="s-line" marker-end="url(#ar5)"/>
+
+        <rect x="576" y="52" width="150" height="70" class="s-box" rx="3"/>
+        <text x="651" y="76" class="s-t-b" text-anchor="middle">tools/execute</text>
+        <text x="651" y="96" class="s-t-s" text-anchor="middle">the provider actually</text>
+        <text x="651" y="112" class="s-t-s" text-anchor="middle">does the thing</text>
+
+        <path d="M730 87 L764 87" class="s-line" marker-end="url(#ar5)"/>
+
+        <rect x="768" y="52" width="132" height="70" class="s-box" rx="3"/>
+        <text x="834" y="76" class="s-t-b" text-anchor="middle">post-execute</text>
+        <text x="834" y="96" class="s-t-s" text-anchor="middle">redact secrets</text>
+        <text x="834" y="112" class="s-t-s" text-anchor="middle">trim &#183; transform</text>
+
+        <!-- return path -->
+        <path d="M834 126 L834 168 L75 168 L75 130" class="s-line" marker-end="url(#ar5)"/>
+        <text x="450" y="162" class="s-t-s" text-anchor="middle">result appended to the session log, then back into the next model call</text>
+
+        <!-- blocked branch -->
+        <rect x="384" y="200" width="150" height="62" class="s-dang" rx="3"/>
+        <text x="459" y="224" class="s-t-b" text-anchor="middle" fill="var(--danger)">BLOCKED</text>
+        <text x="459" y="244" class="s-t-s" text-anchor="middle">"git-protect-hook blocked"</text>
+        <path d="M459 126 L459 196" class="s-dash" marker-end="url(#ar5d)"/>
+        <text x="470" y="160" class="s-t-dang">deny rule hits</text>
+
+        <text x="0" y="288" class="s-t-s">Caleb Curry builds a deny rule at the policy gate that blocks `git reset --hard` and bare `psql` &#8212; and it holds.</text>
+
+        <defs>
+          <marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+          <marker id="ar5d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Every station is a plugin. That's how Caleb Curry's guard rule works: the agent writes a plugin that attaches to the policy gate, and afterwards a request to <code>git reset --hard</code> comes back <em>"bash blocked &#8212; git-protect-hook blocked."</em></p>
+  </div>
+
+  <div class="callout warn">
+    <h5>Say this part out loud</h5>
+    <p>A deny rule is a guardrail against accidents, not a security boundary. Caleb Curry is blunt about it: "if it is maliciously trying to achieve some goal, it might be able to bypass whatever you're blocking."</p>
+    <p>His actual advice is better than any rule: <strong>"If you can't do it yourself, then your LLM can't do it for you."</strong> Don't have the production database credentials on the machine. Delete the cloud CLI you don't want touched. Or run the whole thing in a container.</p>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section id="s6">
+  <p class="part-tag">Part 06 &#183; What DeepSeek changed</p>
+  <h2 class="head">The one real difference: code versus configuration</h2>
+
+  <p class="lede">Everything so far is true of every harness ever built. Here is the fork in the road.</p>
+
+  <p>In Claude Code, Codex, Cursor and essentially every other agent, the four jobs from Fig. 03 &#8212; the model connector, the tool list, the prompt assembly, the loop &#8212; live <strong>in compiled code</strong>. Stephen Pope demonstrates this on his own product, Shockwave: the tools are defined in TypeScript, the system prompt is built by a function, and once the program starts, "this code is brought into memory and it can't change."</p>
+
+  <p>Which means the agent can't meaningfully alter itself. It could edit its own source, sure &#8212; but then somebody has to rebuild the binary, cut a release, upload it, and have you download it. As Pope puts it: "it's a whole process to update the agent."</p>
+
+  <p>DeepSeek moved all of that out of code and into <strong>configuration files that the running program reads and re-reads</strong>.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 06</span><span class="fig-title">Why configuration lets an agent change itself and code doesn't</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 360" role="img" aria-label="Left: in a code-defined harness the agent must edit source, rebuild, release and reinstall. Right: in a config-defined harness the agent writes a config file and the running system reloads it.">
+        <!-- LEFT -->
+        <text x="0" y="14" class="s-t-k">A &#183; CODE-DEFINED HARNESS  (Claude Code, Codex, most tools)</text>
+        <rect x="0" y="26" width="424" height="310" class="s-box-2" rx="3"/>
+
+        <rect x="20" y="48" width="384" height="58" class="s-box" rx="3"/>
+        <text x="34" y="72" class="s-t-b">Agent wants a new tool</text>
+        <text x="34" y="92" class="s-t-s">"I need to diff two database schemas"</text>
+
+        <g>
+          <path d="M212 110 L212 128" class="s-line" marker-end="url(#ar6)"/>
+          <rect x="20" y="132" width="384" height="40" class="s-box" rx="3"/>
+          <text x="34" y="157" class="s-t">1 &#183; edit the source code</text>
+
+          <path d="M212 176 L212 190" class="s-line" marker-end="url(#ar6)"/>
+          <rect x="20" y="194" width="384" height="40" class="s-dang" rx="3"/>
+          <text x="34" y="219" class="s-t" fill="var(--danger)">2 &#183; rebuild &#183; compile &#183; bundle</text>
+
+          <path d="M212 238 L212 252" class="s-line" marker-end="url(#ar6)"/>
+          <rect x="20" y="256" width="384" height="40" class="s-dang" rx="3"/>
+          <text x="34" y="281" class="s-t" fill="var(--danger)">3 &#183; cut a release &#183; reinstall &#183; restart</text>
+        </g>
+        <text x="20" y="320" class="s-t-dang">The agent cannot do steps 2 and 3 to itself.</text>
+
+        <!-- RIGHT -->
+        <text x="476" y="14" class="s-t-k">B &#183; CONFIG-DEFINED HARNESS  (DeepSeek Harness)</text>
+        <rect x="476" y="26" width="424" height="310" class="s-brass" rx="3"/>
+
+        <rect x="496" y="48" width="384" height="58" class="s-box" rx="3"/>
+        <text x="510" y="72" class="s-t-b">Agent wants a new tool</text>
+        <text x="510" y="92" class="s-t-s">"I need to diff two database schemas"</text>
+
+        <path d="M688 110 L688 128" class="s-line" marker-end="url(#ar6)"/>
+        <rect x="496" y="132" width="384" height="40" class="s-box" rx="3"/>
+        <text x="510" y="157" class="s-t">1 &#183; write a small plugin + a config entry</text>
+
+        <path d="M688 176 L688 190" class="s-line" marker-end="url(#ar6)"/>
+        <rect x="496" y="194" width="384" height="40" class="s-teal" rx="3"/>
+        <text x="510" y="219" class="s-t" fill="var(--teal)">2 &#183; you approve it</text>
+
+        <path d="M688 238 L688 252" class="s-line" marker-end="url(#ar6)"/>
+        <rect x="496" y="256" width="384" height="40" class="s-teal" rx="3"/>
+        <text x="510" y="281" class="s-t" fill="var(--teal)">3 &#183; kernel hot-loads it &#183; nothing restarts</text>
+
+        <text x="496" y="320" class="s-t-brass">The task that needed the tool is still running.</text>
+
+        <defs>
+          <marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Pope's summary: "the agent can go in and it can change the configuration because it's not code. Code is running, but what is <em>guiding</em> the code is all configuration." That is the entire technical thesis of DeepSeek Harness in one sentence.</p>
+  </div>
+
+  <h3>A sharp distinction worth stealing: tools vs. skills</h3>
+
+  <p>Pope draws a line here that clarifies a lot of confused writing about agents, and it explains why this shift matters:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:22%">&nbsp;</th><th>A TOOL</th><th>A SKILL</th></tr></thead>
+      <tbody>
+        <tr><td><strong>What it is</strong></td><td>A function the harness runs</td><td>A written procedure the model follows</td></tr>
+        <tr><td><strong>Who does the work</strong></td><td>Your computer</td><td>The model, thinking</td></tr>
+        <tr><td><strong>Cost</strong></td><td>Effectively free</td><td>Burns tokens every time</td></tr>
+        <tr><td><strong>Behaviour</strong></td><td><span class="pill ok">Deterministic</span> same input, same output</td><td><span class="pill mid">Interpreted</span> may vary run to run</td></tr>
+        <tr><td><strong>Example</strong></td><td><code>flip_coin()</code> &#8594; real 50/50 in code</td><td>"To commit: first check for secrets, then&#8230;"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Before DeepSeek's harness, an agent asked for a new ability could only write itself a <em>skill</em> &#8212; a markdown file of instructions it then has to read and interpret every time. With config-defined plugins, it can write itself a real <em>tool</em>: actual code, in the registry, running deterministically, at no token cost.</p>
+
+  <p>Caleb Curry stumbles into exactly this and it's the best moment in his tutorial. His agent writes a "commit safely" skill in prose. He looks at it and says: <em>"this here is too much English, not enough code."</em> He asks it to convert to a deterministic script &#8212; and it produces <code>check-commit-safety.sh</code>, with a real deny-list and a real 10 MB file-size check. "This removes model judgment from what's safe."</p>
+</section>
+
+<!-- ============ 07 ============ -->
+<section id="s7">
+  <p class="part-tag">Part 07 &#183; What DeepSeek changed</p>
+  <h2 class="head">"Everything is a plugin" &#8212; and they do mean everything</h2>
+
+  <p>This is the phrase on the front of the repo, and every one of the eleven videos repeats it. It sounds like the usual extensibility boast. It isn't, and the difference is worth being precise about.</p>
+
+  <p>Chase AI puts the objection best: <em>"we already have plugins in other harnesses like Claude Code and Codex."</em> True. But in those tools, plugins are things you <strong>bolt on around the outside</strong> &#8212; skills, MCP servers, extra CLIs. The engine underneath stays sealed. In DeepSeek Harness the engine itself is assembled out of the same plugin parts you'd write yourself.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 07</span><span class="fig-title">Two meanings of "plugin"</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 330" role="img" aria-label="Left: a conventional harness has a sealed core with plugins attached around the outside. Right: DeepSeek Harness has a thin kernel and every capability including the loop is a plugin.">
+        <!-- LEFT -->
+        <text x="0" y="14" class="s-t-k">A &#183; CONVENTIONAL: PLUGINS BOLT ON AROUND A SEALED CORE</text>
+        <rect x="0" y="26" width="424" height="292" class="s-box-2" rx="3"/>
+
+        <rect x="112" y="106" width="200" height="130" class="s-dang" rx="3"/>
+        <text x="212" y="150" class="s-t-b" text-anchor="middle" fill="var(--danger)">SEALED CORE</text>
+        <text x="212" y="174" class="s-t-s" text-anchor="middle">agent loop &#183; prompt</text>
+        <text x="212" y="192" class="s-t-s" text-anchor="middle">tool registry &#183; model</text>
+        <text x="212" y="216" class="s-t-s" text-anchor="middle">you cannot touch this</text>
+
+        <rect x="36" y="56" width="104" height="36" class="s-box" rx="3"/>
+        <text x="88" y="79" class="s-t-s" text-anchor="middle">a skill</text>
+        <rect x="286" y="56" width="104" height="36" class="s-box" rx="3"/>
+        <text x="338" y="79" class="s-t-s" text-anchor="middle">an MCP server</text>
+        <rect x="36" y="250" width="104" height="36" class="s-box" rx="3"/>
+        <text x="88" y="273" class="s-t-s" text-anchor="middle">a hook</text>
+        <rect x="286" y="250" width="104" height="36" class="s-box" rx="3"/>
+        <text x="338" y="273" class="s-t-s" text-anchor="middle">a CLI</text>
+
+        <path d="M112 96 L134 110" class="s-line-f"/>
+        <path d="M312 96 L290 110" class="s-line-f"/>
+        <path d="M112 246 L134 232" class="s-line-f"/>
+        <path d="M312 246 L290 232" class="s-line-f"/>
+
+        <!-- RIGHT -->
+        <text x="476" y="14" class="s-t-k">B &#183; DSH: A THIN KERNEL, EVERYTHING ELSE PLUGGED IN</text>
+        <rect x="476" y="26" width="424" height="292" class="s-brass" rx="3"/>
+
+        <rect x="620" y="152" width="136" height="52" class="s-box" rx="3" stroke="var(--ink-2)" stroke-width="1.8"/>
+        <text x="688" y="174" class="s-t-b" text-anchor="middle">CORDIS</text>
+        <text x="688" y="192" class="s-t-s" text-anchor="middle">tiny kernel</text>
+
+        <g class="s-t-s">
+          <rect x="496" y="48" width="118" height="34" class="s-box" rx="2"/><text x="555" y="70" text-anchor="middle">model adapter</text>
+          <rect x="626" y="48" width="118" height="34" class="s-box" rx="2"/><text x="685" y="70" text-anchor="middle">tool registry</text>
+          <rect x="756" y="48" width="124" height="34" class="s-box" rx="2"/><text x="818" y="70" text-anchor="middle">session log</text>
+
+          <rect x="496" y="94" width="118" height="34" class="s-box" rx="2"/><text x="555" y="116" text-anchor="middle">storage</text>
+          <rect x="626" y="94" width="118" height="34" class="s-box" rx="2"/><text x="685" y="116" text-anchor="middle">sandbox</text>
+          <rect x="756" y="94" width="124" height="34" class="s-box" rx="2"/><text x="818" y="116" text-anchor="middle">scheduling</text>
+
+          <rect x="496" y="160" width="112" height="36" class="s-teal" rx="2"/><text x="552" y="183" text-anchor="middle" fill="var(--teal)">THE AGENT LOOP</text>
+          <rect x="768" y="160" width="112" height="36" class="s-teal" rx="2"/><text x="824" y="183" text-anchor="middle" fill="var(--teal)">THE WEB UI</text>
+
+          <rect x="496" y="216" width="118" height="34" class="s-box" rx="2"/><text x="555" y="238" text-anchor="middle">system prompt</text>
+          <rect x="626" y="216" width="118" height="34" class="s-box" rx="2"/><text x="685" y="238" text-anchor="middle">the sidebar</text>
+          <rect x="756" y="216" width="124" height="34" class="s-box" rx="2"/><text x="818" y="238" text-anchor="middle">the attach button</text>
+
+          <rect x="496" y="262" width="118" height="34" class="s-box" rx="2"/><text x="555" y="284" text-anchor="middle">web search</text>
+          <rect x="626" y="262" width="118" height="34" class="s-box" rx="2"/><text x="685" y="284" text-anchor="middle">sub-agents</text>
+          <rect x="756" y="262" width="124" height="34" class="s-box" rx="2"/><text x="818" y="284" text-anchor="middle">your cat overlay</text>
+        </g>
+      </svg>
+    </div>
+    <p class="fig-note">Two of these are worth staring at: <strong>the agent loop</strong> and <strong>the web UI</strong>. Chase AI opens the plugin config and finds the loop itself editable &#8212; "this is literally like a core part of the plumbing that you can begin to edit." NeuralNine adds three lines of YAML and the entire sidebar disappears on reload.</p>
+  </div>
+
+  <h4>NeuralNine's demonstration, in full</h4>
+  <p>Edit <code>~/.dsh/profiles/web/cordis.patch.yaml</code>:</p>
+<pre><span class="c"># before &#8212; an empty list</span>
+patches: []
+
+<span class="c"># after &#8212; turn off a piece of the product</span>
+patches:
+  - <span class="k">id</span>: <span class="s">ui-sidebar</span>
+    <span class="k">disabled</span>: <span class="s">true</span></pre>
+  <p>Reload the page. The sidebar is gone. Put the list back to empty, reload again, it returns. Three lines of text just removed a feature from a shipping product &#8212; no fork, no rebuild, no source edit.</p>
+
+  <p>Turing Post checked the "everything" claim rather than repeating it, and the honest answer is: <em>"there is still a small core disk kernel underneath, followed by Node, the operating system, and the hardware. Everything means nearly every product capability above that kernel."</em> Which is still remarkable.</p>
+</section>
+
+<!-- ============ 08 ============ -->
+<section id="s8">
+  <p class="part-tag">Part 08 &#183; What DeepSeek changed</p>
+  <h2 class="head">How a running harness is assembled at boot</h2>
+
+  <p>If everything is a plugin, something has to decide which plugins exist and in what order. DeepSeek's answer is a stack of layers, each one allowed to override the one beneath it &#8212; the same idea as CSS cascade, or Docker image layers.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 08</span><span class="fig-title">Four layers compose into one plugin tree</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Four stacked layers - bundles, profile patch, home patch and CLI overlay - are applied in order to produce the running plugin tree.">
+        <text x="0" y="14" class="s-t-k">APPLIED IN THIS ORDER, EACH OVERRIDING THE ONE BELOW</text>
+
+        <rect x="0" y="30" width="480" height="58" class="s-box-2" rx="3"/>
+        <text x="16" y="52" class="s-t-brass">LAYER 1 &#183; BUNDLES</text>
+        <text x="16" y="74" class="s-t-s">dsh-base (models, tools, storage, sandbox) + dsh-web-app or dsh-headless</text>
+
+        <rect x="0" y="96" width="480" height="58" class="s-box-2" rx="3"/>
+        <text x="16" y="118" class="s-t-brass">LAYER 2 &#183; PROFILE PATCH</text>
+        <text x="16" y="140" class="s-t-s">the profile's own cordis.patch.yml &#8212; your named setup</text>
+
+        <rect x="0" y="162" width="480" height="58" class="s-box-2" rx="3"/>
+        <text x="16" y="184" class="s-t-brass">LAYER 3 &#183; HOME PATCH</text>
+        <text x="16" y="206" class="s-t-s">machine-wide overrides for every profile</text>
+
+        <rect x="0" y="228" width="480" height="58" class="s-box-2" rx="3"/>
+        <text x="16" y="250" class="s-t-brass">LAYER 4 &#183; CLI OVERLAY</text>
+        <text x="16" y="272" class="s-t-s">--patch, applied last, wins over everything</text>
+
+        <path d="M496 158 L556 158" class="s-line" marker-end="url(#ar8)"/>
+        <text x="500" y="146" class="s-t-s">compose</text>
+
+        <rect x="566" y="30" width="334" height="256" class="s-brass" rx="3"/>
+        <text x="584" y="54" class="s-t-brass">THE RUNNING PLUGIN TREE</text>
+        <g class="s-t-s">
+          <rect x="584" y="70" width="298" height="28" class="s-box" rx="2"/><text x="596" y="89">llm/llm &#183; deepseek-v4-pro</text>
+          <rect x="584" y="104" width="298" height="28" class="s-box" rx="2"/><text x="596" y="123">core/tools &#183; bash, read, write, edit</text>
+          <rect x="584" y="138" width="298" height="28" class="s-box" rx="2"/><text x="596" y="157">core/session &#183; append-only log</text>
+          <rect x="584" y="172" width="298" height="28" class="s-box" rx="2"/><text x="596" y="191">core/agent-loop &#183; turn/step driver</text>
+          <rect x="584" y="206" width="298" height="28" class="s-box" rx="2"/><text x="596" y="225">ui-sidebar<tspan dx="14" fill="var(--danger)">DISABLED by layer 2</tspan></text>
+          <rect x="584" y="240" width="298" height="28" class="s-teal" rx="2"/><text x="596" y="259" fill="var(--teal)">repo-stats &#183; a plugin you wrote</text>
+        </g>
+
+        <text x="0" y="312" class="s-t-s">A PROFILE is a named composition stored in the harness home. It lists its bundles, holds any out-of-tree plugins,</text>
+        <text x="0" y="330" class="s-t-s">and keeps your patch file. Swapping profile swaps the whole product &#8212; same binary, different machine.</text>
+
+        <defs>
+          <marker id="ar8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">This is why <code>dsh</code> can ship as a web app, a headless one-shot runner, and an SDK you embed in your own product &#8212; all from the same code. You change which bundles are in the profile. Pope embeds the SDK inside his own desktop app; DeepSeek ships <code>dsh-web-app</code> on top of the same base.</p>
+  </div>
+</section>
+
+<!-- ============ 09 ============ -->
+<section id="s9">
+  <p class="part-tag">Part 09 &#183; The kernel</p>
+  <h2 class="head">Cordis, part one: making removal safe</h2>
+
+  <p class="lede">Here is the part almost nobody covers, and it is the actual innovation.</p>
+
+  <p>Adding a plugin to a running program is easy. Everyone can hot-load code. <strong>Removing one cleanly is the hard problem</strong> &#8212; and if you can't remove cleanly, you can't let an agent experiment, because every failed experiment leaves debris behind.</p>
+
+  <p>Turing Post frames it exactly right: <em>"Creating the plugin is the easy part. Removing it is where the paper begins."</em></p>
+
+  <h3>The problem, concretely</h3>
+
+  <p>Imagine the agent writes itself a schema-diff plugin. In the course of starting up, that plugin:</p>
+  <ul>
+    <li>registers a command in the tool menu,</li>
+    <li>starts a timer that polls the database every 30 seconds,</li>
+    <li>opens a connection,</li>
+    <li>and offers a service that a second plugin has started depending on.</li>
+  </ul>
+
+  <p>Now delete it. In an ordinary program: the command vanishes, <strong>but the timer keeps firing</strong>, the connection stays open, and the second plugin crashes reaching for something that no longer exists. The experiment was removed; its wreckage wasn't. The traditional fix is "restart the whole application and hope." That is precisely what you cannot do to an agent that is halfway through a task.</p>
+
+  <h3>Cordis's answer: every effect carries its own undo</h3>
+
+  <p>The paper's term is <em class="term">revertible effects</em>, and the rule is a single sentence: <strong>every registration must hand back a disposer.</strong> When a plugin changes the world, it doesn't just mutate state &#8212; it performs a tracked change that knows how to undo itself. The runtime records those undos in order, and on teardown <strong>runs them backwards</strong>, last in first out &#8212; the same discipline as unwinding a stack.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 09</span><span class="fig-title">Temporal composability &#8212; effects go on in order, come off in reverse</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 340" role="img" aria-label="A plugin registers four effects in order; on teardown the runtime runs their inverses in reverse order, leaving no residue.">
+        <text x="0" y="14" class="s-t-k">LOAD &#8212; effects recorded with their inverses</text>
+        <rect x="0" y="26" width="404" height="240" class="s-brass" rx="3"/>
+        <g class="s-t-s">
+          <rect x="20" y="46" width="364" height="42" class="s-box" rx="2"/>
+          <text x="34" y="64" class="s-t">1 &#183; register tool "schema-diff"</text>
+          <text x="34" y="80" fill="var(--teal)">&#8627; inverse: unregister it</text>
+
+          <rect x="20" y="98" width="364" height="42" class="s-box" rx="2"/>
+          <text x="34" y="116" class="s-t">2 &#183; start 30s polling timer</text>
+          <text x="34" y="132" fill="var(--teal)">&#8627; inverse: clear the timer</text>
+
+          <rect x="20" y="150" width="364" height="42" class="s-box" rx="2"/>
+          <text x="34" y="168" class="s-t">3 &#183; open DB connection</text>
+          <text x="34" y="184" fill="var(--teal)">&#8627; inverse: close it</text>
+
+          <rect x="20" y="202" width="364" height="42" class="s-box" rx="2"/>
+          <text x="34" y="220" class="s-t">4 &#183; provide service "diffs"</text>
+          <text x="34" y="236" fill="var(--teal)">&#8627; inverse: withdraw it</text>
+        </g>
+        <path d="M394 66 L394 232" class="s-line-f" stroke="var(--brass)" stroke-width="2"/>
+        <text x="20" y="284" class="s-t-brass">Order recorded: 1 &#8594; 2 &#8594; 3 &#8594; 4</text>
+
+        <!-- teardown -->
+        <text x="496" y="14" class="s-t-k">UNLOAD &#8212; inverses run in reverse</text>
+        <rect x="496" y="26" width="404" height="240" class="s-box-2" rx="3"/>
+        <g class="s-t-s">
+          <rect x="516" y="46" width="364" height="38" class="s-box" rx="2"/>
+          <text x="530" y="70" class="s-t">4 &#183; withdraw service "diffs"</text>
+          <rect x="516" y="94" width="364" height="38" class="s-box" rx="2"/>
+          <text x="530" y="118" class="s-t">3 &#183; close DB connection</text>
+          <rect x="516" y="142" width="364" height="38" class="s-box" rx="2"/>
+          <text x="530" y="166" class="s-t">2 &#183; clear the timer</text>
+          <rect x="516" y="190" width="364" height="38" class="s-box" rx="2"/>
+          <text x="530" y="214" class="s-t">1 &#183; unregister the tool</text>
+        </g>
+        <path d="M890 214 L890 56" class="s-line" marker-end="url(#ar9)" stroke="var(--teal)"/>
+        <text x="496" y="284" class="s-t-teal">No orphan timer. No leaked socket. Nothing left dangling.</text>
+
+        <text x="0" y="322" class="s-t-s">The author still has to write a correct inverse for each effect. The runtime takes responsibility for tracking and ordering them.</text>
+
+        <defs>
+          <marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--teal)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">In code, a plugin author writes this &#8212; the disposer returned from <code>ctx.effect()</code> is the inverse the runtime files away:</p>
+  </div>
+
+<pre><span class="c">// every registration hands back its own undo</span>
+ctx.<span class="k">effect</span>(() => {
+  <span class="k">const</span> dispose = ctx.tools.register(schemaDiffTool)
+  <span class="k">return</span> dispose   <span class="c">// &#8592; the inverse. Cordis files it and runs it later.</span>
+})</pre>
+
+  <div class="callout warn">
+    <h5>The honest limit</h5>
+    <p>Turing Post states it plainly and it deserves repeating: <strong>"Cordis can remove the plugin that sent an email. It cannot remove the email from somebody's inbox."</strong></p>
+    <p>Reversibility covers effects <em>on the running system</em>. It says nothing about effects on the world.</p>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+  <p class="part-tag">Part 10 &#183; The kernel</p>
+  <h2 class="head">Cordis, part two: making dependencies safe</h2>
+
+  <p>Reversing effects in order solves time. There's a second, independent problem: <strong>plugins depend on each other</strong>, and those relationships change while the system runs.</p>
+
+  <p>Cordis's answer here is <em class="term">reactive coeffects</em>. A plugin doesn't fetch what it needs; it <strong>declares</strong> what it needs, and the runtime holds it in a waiting state until those things exist:</p>
+
+<pre><span class="k">export const</span> inject = [<span class="s">'tools'</span>, <span class="s">'llm'</span>]   <span class="c">// I need these to exist</span></pre>
+
+  <p>Two consequences fall straight out of that one line, and both are the reason you never write a boot sequence:</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 10</span><span class="fig-title">Spatial composability &#8212; declare, wait, activate; and tear down dependants first</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 360" role="img" aria-label="Top: a plugin stays pending until its declared dependency exists, then activates automatically. Bottom: on removal the dependent plugin shuts down first, while the service it needs still exists.">
+        <!-- A: startup -->
+        <text x="0" y="14" class="s-t-k">A &#183; STARTUP &#8212; no boot order to write</text>
+        <rect x="0" y="26" width="900" height="140" class="s-box-2" rx="3"/>
+
+        <rect x="22" y="52" width="176" height="92" class="s-box" rx="3"/>
+        <text x="110" y="78" class="s-t-b" text-anchor="middle">Plugin B</text>
+        <text x="110" y="98" class="s-t-s" text-anchor="middle">inject: ['tools']</text>
+        <rect x="44" y="110" width="132" height="24" class="s-dang" rx="2"/>
+        <text x="110" y="127" class="s-t-s" text-anchor="middle" fill="var(--danger)">PENDING</text>
+
+        <path d="M206 98 L262 98" class="s-line" marker-end="url(#ar10)"/>
+        <text x="212" y="88" class="s-t-s">'tools' arrives</text>
+
+        <rect x="272" y="52" width="176" height="92" class="s-box" rx="3"/>
+        <text x="360" y="78" class="s-t-b" text-anchor="middle">Plugin B</text>
+        <text x="360" y="98" class="s-t-s" text-anchor="middle">dependency satisfied</text>
+        <rect x="294" y="110" width="132" height="24" class="s-teal" rx="2"/>
+        <text x="360" y="127" class="s-t-s" text-anchor="middle" fill="var(--teal)">ACTIVE</text>
+
+        <rect x="486" y="52" width="392" height="92" class="s-brass" rx="3"/>
+        <text x="500" y="76" class="s-t-brass">WHAT YOU DIDN'T HAVE TO DO</text>
+        <text x="500" y="100" class="s-t-s">write an init order &#183; sequence a boot file</text>
+        <text x="500" y="120" class="s-t-s">guard every access &#183; re-run setup after a reload</text>
+        <text x="500" y="140" class="s-t-s">The runtime activates B the moment 'tools' appears.</text>
+
+        <!-- B: teardown -->
+        <text x="0" y="196" class="s-t-k">B &#183; TEARDOWN &#8212; dependants leave first, while they still can</text>
+        <rect x="0" y="208" width="900" height="128" class="s-box-2" rx="3"/>
+
+        <rect x="22" y="230" width="150" height="86" class="s-dang" rx="3"/>
+        <text x="97" y="256" class="s-t-b" text-anchor="middle" fill="var(--danger)">WRONG</text>
+        <text x="97" y="278" class="s-t-s" text-anchor="middle">kill provider A first</text>
+        <text x="97" y="298" class="s-t-s" text-anchor="middle">&#8594; B crashes on cleanup</text>
+
+        <rect x="200" y="230" width="330" height="86" class="s-teal" rx="3"/>
+        <text x="216" y="254" class="s-t-b" fill="var(--teal)">CORDIS ORDER</text>
+        <text x="216" y="276" class="s-t-s">1 &#183; shut down B, the dependant &#8212; service A is still up,</text>
+        <text x="216" y="294" class="s-t-s">     so B can flush, close and deregister properly</text>
+        <text x="216" y="312" class="s-t-s">2 &#183; only then does provider A disappear</text>
+
+        <rect x="558" y="230" width="320" height="86" class="s-brass" rx="3"/>
+        <text x="576" y="254" class="s-t-brass">WHY IT MATTERS FOR AGENTS</text>
+        <text x="576" y="276" class="s-t-s">An agent's throwaway experiment can be unwound</text>
+        <text x="576" y="294" class="s-t-s">without knocking over plugins built on top of it,</text>
+        <text x="576" y="312" class="s-t-s">mid-task, with no restart.</text>
+
+        <defs>
+          <marker id="ar10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Turing Post's phrasing: "If one plugin provides a service that another needs, the dependent plugin shuts down first <em>while it can still access the service</em>. Only then does the provider disappear."</p>
+  </div>
+
+  <h4>How plugins talk to each other</h4>
+  <p>Four typed event modes, each with different semantics &#8212; worth knowing because "waterfall" is how you intercept the system without forking it:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th class="mono" style="width:120px">Mode</th><th>Behaviour</th><th>Use it for</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">emit</td><td>Fire and forget, in registration order</td><td>Notifications, metrics</td></tr>
+        <tr><td class="mono">parallel</td><td>All listeners run concurrently</td><td>Independent side jobs</td></tr>
+        <tr><td class="mono">serial</td><td>Awaited, strictly in sequence</td><td>Ordered work (e.g. <code>agent/turn-stopping</code>)</td></tr>
+        <tr><td class="mono">waterfall</td><td>Around-middleware: each listener gets <code>next()</code> and may <strong>short-circuit</strong> by not calling it</td><td>Blocking a tool call, rewriting input, injecting context</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>That last row is the whole extension story. Caleb Curry's <code>git reset</code> guard is a waterfall listener that simply declines to call <code>next()</code>.</p>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="s11">
+  <p class="part-tag">Part 11 &#183; The kernel</p>
+  <h2 class="head">Confluence: why the detours don't accumulate</h2>
+
+  <p>Reversible effects and reactive dependencies are <em>local</em> rules &#8212; each plugin behaves well on its own. The paper's real ambition is to prove something about the <em>whole</em> system from those local rules. That property is called <strong>confluence</strong>.</p>
+
+  <p>In one sentence: <strong>however you got here, if you end up with the same set of plugins, you end up in the same state.</strong></p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 11</span><span class="fig-title">Confluence &#8212; two very different histories, one identical end state</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 300" role="img" aria-label="A messy path of loading, adding, experimenting and removing arrives at the same final state as simply loading the final configuration from scratch.">
+        <!-- messy path -->
+        <text x="0" y="14" class="s-t-k">SYSTEM 1 &#183; A MESSY AFTERNOON</text>
+        <g class="s-t-s">
+          <rect x="0" y="30" width="86" height="42" class="s-box" rx="2"/><text x="43" y="56" text-anchor="middle">load A</text>
+          <rect x="106" y="30" width="86" height="42" class="s-box" rx="2"/><text x="149" y="56" text-anchor="middle">add B</text>
+          <rect x="212" y="30" width="98" height="42" class="s-brass" rx="2"/><text x="261" y="50" text-anchor="middle" fill="var(--brass)">try C</text><text x="261" y="66" text-anchor="middle">experiment</text>
+          <rect x="330" y="30" width="98" height="42" class="s-dang" rx="2"/><text x="379" y="50" text-anchor="middle" fill="var(--danger)">remove C</text><text x="379" y="66" text-anchor="middle">it was wrong</text>
+          <rect x="448" y="30" width="98" height="42" class="s-box" rx="2"/><text x="497" y="50" text-anchor="middle">reload A</text><text x="497" y="66" text-anchor="middle">after a crash</text>
+        </g>
+        <path d="M90 51 L102 51" class="s-line-f"/><path d="M196 51 L208 51" class="s-line-f"/>
+        <path d="M314 51 L326 51" class="s-line-f"/><path d="M432 51 L444 51" class="s-line-f"/>
+        <path d="M550 51 L636 51 L636 108" class="s-line" marker-end="url(#ar11)"/>
+
+        <!-- clean path -->
+        <text x="0" y="196" class="s-t-k">SYSTEM 2 &#183; A FRESH BOOT</text>
+        <rect x="0" y="210" width="200" height="52" class="s-box" rx="2"/>
+        <text x="100" y="232" class="s-t" text-anchor="middle">load A + B</text>
+        <text x="100" y="250" class="s-t-s" text-anchor="middle">straight from config</text>
+        <path d="M204 236 L636 236 L636 186" class="s-line" marker-end="url(#ar11)"/>
+
+        <!-- converge -->
+        <rect x="546" y="112" width="354" height="72" class="s-teal" rx="3"/>
+        <text x="723" y="140" class="s-t-b" text-anchor="middle" fill="var(--teal)">SAME OBSERVABLE STATE</text>
+        <text x="723" y="162" class="s-t-s" text-anchor="middle">the final system depends on what remains,</text>
+        <text x="723" y="178" class="s-t-s" text-anchor="middle">not on the route taken to get there</text>
+
+        <text x="0" y="284" class="s-t-s">Conditions: correct inverses &#183; successful execution &#183; sufficiently independent effects &#183; no dependency cycles</text>
+
+        <defs>
+          <marker id="ar11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note"><strong>Why this is the point of the entire paper:</strong> it is what makes experimentation safe. If detours left permanent residue, an agent that tried ten approaches would end the session in a state nobody could reason about. Confluence says: try things. What you keep is what you get.</p>
+  </div>
+
+  <h3>Read the assumptions, not just the theorem</h3>
+
+  <p>Turing Post does the honest thing and lists the fine print, which most coverage skips:</p>
+
+  <ul>
+    <li><strong>Plugin authors must supply correct inverses.</strong> The runtime tracks and orders undos; it cannot invent them. A sloppy plugin still leaks.</li>
+    <li><strong>The strongest result assumes successful execution.</strong> Crashes mid-teardown are outside the guarantee.</li>
+    <li><strong>Effects must be sufficiently independent</strong>, and <strong>dependencies must be acyclic</strong> &#8212; no circular requirements.</li>
+    <li><strong>The formal model simplifies some features of the real implementation.</strong> The proof is about the model, and the model is not the code.</li>
+  </ul>
+
+  <h4>Where Cordis actually came from</h4>
+  <p>The best detail in any of the eleven videos, and Turing Post is the only one who found it. <strong>Cordis is not a DeepSeek invention.</strong> It came out of <em>Koishi</em> &#8212; an open-source <strong>chatbot framework</strong> created by a developer who goes by Shigma and named after a character from the Touhou Project games. It has been on GitHub since 2022. Over four years, <strong>more than 4,000 community-contributed plugins</strong> pushed that runtime through real dependency tangles, hot reloads, failures and cleanup bugs.</p>
+
+  <p>DeepSeek recognised what was sitting there, adopted it for the harness, and then researchers from Peking University and DeepSeek built the formal theory around it &#8212; published the same day as the harness itself.</p>
+
+  <div class="callout key">
+    <h5>The quiet moral</h5>
+    <p>"The harness layer was never proprietary. It was sitting in open source inside a chatbot plugin ecosystem, waiting for somebody to recognise what it could become."</p>
+  </div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section id="s12">
+  <p class="part-tag">Part 12 &#183; Using it</p>
+  <h2 class="head">Getting it running, and the four modes</h2>
+
+  <p>Installation is one command. It does not open a terminal UI &#8212; it starts a local web server and opens a browser page at <code>127.0.0.1:3080</code>, which is just your own machine talking to itself.</p>
+
+<pre><span class="c"># the whole install</span>
+npx @deepseek-ai/dsh web</pre>
+
+  <p>Prerequisite: Node.js. Then it asks for an API key (DeepSeek's, or any provider you like), and for a <strong>workspace</strong> &#8212; the folder it is allowed to work in. Several presenters simply pasted the repo URL into Claude Code and said "install this and get the web UI running," which also works and is funny.</p>
+
+  <p>Then you pick a mode. This is the setting people most often ignore and shouldn't:</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 12</span><span class="fig-title">The four agent presets</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 260" role="img" aria-label="Four modes: minimal with two tools, standard with the full toolset, code mode which writes one program instead of many tool calls, and creator mode which can inspect and author plugins.">
+        <text x="0" y="14" class="s-t-k">FEWER CAPABILITIES &#8592; &#8594; MORE CAPABILITIES</text>
+        <line x1="0" y1="26" x2="900" y2="26" stroke="var(--rule)" stroke-width="1.5"/>
+
+        <rect x="0" y="42" width="212" height="184" class="s-box" rx="3"/>
+        <text x="16" y="66" class="s-t-b">MINIMAL</text>
+        <text x="16" y="90" class="s-t-s">Two tools only:</text>
+        <text x="16" y="108" class="s-t-s">persistent bash +</text>
+        <text x="16" y="126" class="s-t-s">string-replace editor.</text>
+        <text x="16" y="152" class="s-t-s">No web search.</text>
+        <text x="16" y="170" class="s-t-s">No extras.</text>
+        <rect x="16" y="188" width="180" height="24" class="s-box-2" rx="2"/>
+        <text x="26" y="205" class="s-t-s">for benchmarking</text>
+
+        <rect x="228" y="42" width="212" height="184" class="s-teal" rx="3"/>
+        <text x="244" y="66" class="s-t-b" fill="var(--teal)">STANDARD</text>
+        <text x="244" y="90" class="s-t-s">The full toolset:</text>
+        <text x="244" y="108" class="s-t-s">file editing, shell,</text>
+        <text x="244" y="126" class="s-t-s">web search, workflows,</text>
+        <text x="244" y="144" class="s-t-s">sub-agents.</text>
+        <rect x="244" y="188" width="180" height="24" class="s-box" rx="2"/>
+        <text x="254" y="205" class="s-t-s">start here &#8212; the default</text>
+
+        <rect x="456" y="42" width="212" height="184" class="s-box" rx="3"/>
+        <text x="472" y="66" class="s-t-b">CODE / PTC</text>
+        <text x="472" y="90" class="s-t-s">Same tools, but the</text>
+        <text x="472" y="108" class="s-t-s">model writes ONE</text>
+        <text x="472" y="126" class="s-t-s">TypeScript program</text>
+        <text x="472" y="144" class="s-t-s">that calls them all,</text>
+        <text x="472" y="162" class="s-t-s">instead of 40 round trips.</text>
+        <rect x="472" y="188" width="180" height="24" class="s-box-2" rx="2"/>
+        <text x="482" y="205" class="s-t-s">repetitive bulk work</text>
+
+        <rect x="684" y="42" width="216" height="184" class="s-brass" rx="3"/>
+        <text x="700" y="66" class="s-t-b" fill="var(--brass)">CREATOR</text>
+        <text x="700" y="90" class="s-t-s">Standard, plus runtime</text>
+        <text x="700" y="108" class="s-t-s">inspection and the</text>
+        <text x="700" y="126" class="s-t-s">plugin-development skill.</text>
+        <text x="700" y="152" class="s-t-s">This is the mode where</text>
+        <text x="700" y="170" class="s-t-s">it edits itself.</text>
+        <rect x="700" y="188" width="184" height="24" class="s-box" rx="2"/>
+        <text x="710" y="205" class="s-t-s">building plugins &amp; presets</text>
+      </svg>
+    </div>
+    <p class="fig-note"><strong>Code/PTC mode is the underrated one.</strong> Chase AI's explanation: "in standard mode, if you wanted it to do a bunch of tool calls, it would do those tool calls one by one. In PTC mode, it would create a script where it runs all the tools essentially in one go" &#8212; collapsing forty round trips into one program, and saving all the context those round trips would have eaten.</p>
+  </div>
+
+  <h4>Everything else you'd expect is there</h4>
+  <ul>
+    <li><strong><code>AGENTS.md</code></strong> &#8212; the project instruction file, equivalent to <code>CLAUDE.md</code>. It reads <code>CLAUDE.md</code> too, so an existing project works unchanged.</li>
+    <li><strong>Skills</strong> &#8212; written to <code>.agents/skills/&lt;name&gt;/SKILL.md</code>. Created live; they appear in the session's skill catalogue immediately.</li>
+    <li><strong>Slash commands</strong> including <code>/compact</code>, a skill catalogue, file attachment, MCP support.</li>
+    <li><strong>Effort levels</strong> &#8212; <code>high</code> or <code>max</code> on DeepSeek's models, exposed per session.</li>
+  </ul>
+</section>
+
+<!-- ============ 13 ============ -->
+<section id="s13">
+  <p class="part-tag">Part 13 &#183; Using it</p>
+  <h2 class="head">Creator mode: watching an agent extend itself, step by step</h2>
+
+  <p class="lede">This is the demo every one of the eleven videos runs, because it is the thing you cannot do anywhere else. Here it is broken into its actual beats.</p>
+
+  <p>Pope's version is the clearest because he picks something with an obviously correct answer. He types:</p>
+
+  <div class="plain"><span class="lbl">Prompt &#183; creator mode</span><p>"Create a new tool that will allow us to flip a coin and return heads or tails."</p></div>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 13</span><span class="fig-title">The self-extension loop, beat by beat</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 400" role="img" aria-label="Six beats: you ask, the agent loads the plugin-development skill, writes the plugin and config, you approve, the kernel hot-loads it, and the tool is immediately usable in the same session.">
+        <g class="s-t-s">
+          <!-- 1 -->
+          <rect x="0" y="26" width="262" height="76" class="s-box" rx="3"/>
+          <text x="16" y="46" class="s-t-k">BEAT 1 &#183; YOU</text>
+          <text x="16" y="70" class="s-t">Describe the capability</text>
+          <text x="16" y="90">in plain English. No code.</text>
+
+          <path d="M266 64 L308 64" class="s-line" marker-end="url(#ar13)"/>
+
+          <!-- 2 -->
+          <rect x="316" y="26" width="262" height="76" class="s-teal" rx="3"/>
+          <text x="332" y="46" class="s-t-k">BEAT 2 &#183; THE AGENT</text>
+          <text x="332" y="70" class="s-t" fill="var(--teal)">Auto-loads the Cordis</text>
+          <text x="332" y="90">plugin-development skill.</text>
+
+          <path d="M582 64 L624 64" class="s-line" marker-end="url(#ar13)"/>
+
+          <!-- 3 -->
+          <rect x="632" y="26" width="268" height="76" class="s-teal" rx="3"/>
+          <text x="648" y="46" class="s-t-k">BEAT 3 &#183; THE AGENT</text>
+          <text x="648" y="70" class="s-t" fill="var(--teal)">Writes the plugin code +</text>
+          <text x="648" y="90">the config entry that mounts it.</text>
+
+          <path d="M766 106 L766 130" class="s-line" marker-end="url(#ar13)"/>
+
+          <!-- 4 -->
+          <rect x="632" y="138" width="268" height="76" class="s-brass" rx="3"/>
+          <text x="648" y="158" class="s-t-k">BEAT 4 &#183; YOU</text>
+          <text x="648" y="182" class="s-t" fill="var(--brass)">Approve. A human must</text>
+          <text x="648" y="202">click. This gate is not optional.</text>
+
+          <path d="M628 176 L586 176" class="s-line" marker-end="url(#ar13)"/>
+
+          <!-- 5 -->
+          <rect x="316" y="138" width="262" height="76" class="s-box" rx="3"/>
+          <text x="332" y="158" class="s-t-k">BEAT 5 &#183; THE KERNEL</text>
+          <text x="332" y="182" class="s-t">Hot-loads it. Nothing</text>
+          <text x="332" y="202">rebuilds. Nothing restarts.</text>
+
+          <path d="M312 176 L270 176" class="s-line" marker-end="url(#ar13)"/>
+
+          <!-- 6 -->
+          <rect x="0" y="138" width="262" height="76" class="s-box" rx="3"/>
+          <text x="16" y="158" class="s-t-k">BEAT 6 &#183; SAME SESSION</text>
+          <text x="16" y="182" class="s-t">flip_coin() is now in the</text>
+          <text x="16" y="202">tool list. Usable immediately.</text>
+        </g>
+
+        <!-- lifetime -->
+        <rect x="0" y="248" width="440" height="130" class="s-box-2" rx="3"/>
+        <text x="16" y="272" class="s-t-brass">WHAT SURVIVES</text>
+        <text x="16" y="296" class="s-t-s">By default the plugin lives in process memory only.</text>
+        <text x="16" y="316" class="s-t-s">Restart the harness and it is gone.</text>
+        <text x="16" y="342" class="s-t-s">To keep it you must ask: "save this plugin."</text>
+        <text x="16" y="362" class="s-t-s">It cannot promote itself to permanent.</text>
+
+        <rect x="460" y="248" width="440" height="130" class="s-dang" rx="3"/>
+        <text x="476" y="272" class="s-t-dang">WHAT THIS IS NOT</text>
+        <text x="476" y="296" class="s-t-s">DeepSeek's own words: the creator sandbox is</text>
+        <text x="476" y="316" class="s-t-s">NOT a security boundary. Treat this access</text>
+        <text x="476" y="336" class="s-t-s">much like shell access.</text>
+        <text x="476" y="362" class="s-t-s">It does not wake at night and redesign itself.</text>
+
+        <defs>
+          <marker id="ar13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">The coin-flip example is chosen well: a coin flip must be genuinely 50/50, which a language model cannot guarantee by reasoning. The generated <em>tool</em> contains real randomness code &#8212; so the answer is correct by construction rather than by the model trying hard.</p>
+  </div>
+
+  <h3>Then Pope does the thing that makes people sit up</h3>
+
+  <p>He asks the same agent: <em>"what would be one thing we can change on the UI to show how the agent can modify its own UI live?"</em></p>
+
+  <p>The agent proposes a button in the sidebar footer, asks for approval, and adds it. He clicks it: <strong>tails, heads, tails, tails, tails.</strong> The agent wrote itself a tool, then wrote itself a button that calls that tool, into the interface it is currently being used through, without restarting.</p>
+
+  <p>The variations across the other videos are all the same trick with different payloads:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Presenter</th><th>What they asked creator mode for</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>NeuralNine</td><td>A cat that walks left-to-right along the bottom of the screen</td><td>Works; animation is crude</td></tr>
+        <tr><td>NeuralNine</td><td>A working GUI calculator in the corner</td><td>Works; button labels illegible</td></tr>
+        <tr><td>Better Stack</td><td>A playable dinosaur jumping game, bottom right</td><td>Works, and is playable</td></tr>
+        <tr><td>Chase AI</td><td>Matrix colour scheme with falling ASCII</td><td>Works; "ugly as sin"</td></tr>
+        <tr><td>Cole Medin</td><td>A tool to fetch star counts from any GitHub repo</td><td>Works; asks clarifying questions, auto-installs</td></tr>
+        <tr><td>Jack Roberts</td><td>"Build yourself a memory tool"</td><td>Works &#8212; save / search / forget</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout key">
+    <h5>Why this matters more than the toys suggest</h5>
+    <p>Turing Post supplies the serious case. An agent reviewing a database migration hits a wall: it can't compare two schema versions, and no such tool exists. Conventionally, you stop, a human builds an extension, and you start over.</p>
+    <p>Here, <strong>the agent writes the missing tool and carries on with the task it had already started.</strong> "The model has not been retrained. Nobody shipped a new version. The working environment grew a new capability after the task had already begun."</p>
+    <p>That is the shift: an agent stops searching only for a solution and begins searching over <em>the composition of the worker that will find the solution.</em></p>
+  </div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section id="s14">
+  <p class="part-tag">Part 14 &#183; Using it</p>
+  <h2 class="head">The trajectory view: nothing is hidden</h2>
+
+  <p>The second headline feature, and the one Chase AI, NeuralNine, Cole Medin and Better Stack all independently rate as the best thing in the tool. Every run is fully traceable &#8212; not summarised, <em>traceable</em>.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 14</span><span class="fig-title">What the trajectory panel exposes</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 330" role="img" aria-label="The trajectory view shows every event in a run, and clicking any event reveals its source plugin, raw payload, token counts and timing.">
+        <!-- track -->
+        <text x="0" y="14" class="s-t-k">EVERY EVENT IN THE RUN, IN ORDER &#8212; CLICK ANY ONE</text>
+        <rect x="0" y="26" width="470" height="252" class="s-box-2" rx="3"/>
+        <g class="s-t-s">
+          <rect x="18" y="46" width="434" height="30" class="s-box" rx="2"/><text x="32" y="66">&#9656; system prompt</text>
+          <rect x="18" y="82" width="434" height="30" class="s-box" rx="2"/><text x="32" y="102">&#9656; context injection  1 of 3</text>
+          <rect x="18" y="118" width="434" height="30" class="s-box" rx="2"/><text x="32" y="138">&#9656; user message</text>
+          <rect x="18" y="154" width="434" height="30" class="s-box" rx="2"/><text x="32" y="174">&#9656; assistant thinking</text>
+          <rect x="18" y="190" width="434" height="30" class="s-brass" rx="2"/><text x="32" y="210" fill="var(--brass)">&#9656; tool call &#183; bash &#183; SELECTED</text>
+          <rect x="18" y="226" width="434" height="30" class="s-box" rx="2"/><text x="32" y="246">&#9656; tool result</text>
+        </g>
+
+        <path d="M456 205 L512 205" class="s-line" marker-end="url(#ar14)"/>
+
+        <!-- detail -->
+        <rect x="520" y="26" width="380" height="252" class="s-brass" rx="3"/>
+        <text x="538" y="50" class="s-t-brass">DETAIL FOR THE SELECTED EVENT</text>
+        <g class="s-t-s">
+          <rect x="538" y="62" width="344" height="30" class="s-box" rx="2"/><text x="550" y="82">SOURCE &#8212; which plugin caused this</text>
+          <rect x="538" y="98" width="344" height="30" class="s-box" rx="2"/><text x="550" y="118">RAW &#8212; the exact payload sent</text>
+          <rect x="538" y="134" width="344" height="30" class="s-box" rx="2"/><text x="550" y="154">RESULT &#8212; exactly what came back</text>
+          <rect x="538" y="170" width="344" height="30" class="s-box" rx="2"/><text x="550" y="190">TOKENS &#8212; 187 total, 94 reasoning</text>
+          <rect x="538" y="206" width="344" height="30" class="s-box" rx="2"/><text x="550" y="226">TIMING &#8212; when, and how long</text>
+          <rect x="538" y="242" width="344" height="26" class="s-teal" rx="2"/><text x="550" y="260" fill="var(--teal)">EXPORT &#8212; whole session as .jsonl</text>
+        </g>
+
+        <text x="0" y="304" class="s-t-s">Cole Medin: "It looks like the kind of thing you'd have in an AI observability platform, like LangFuse or LangSmith."</text>
+        <text x="0" y="322" class="s-t-s">He clicks a context injection, follows it to source, and finds it came from the DSH system-prompt plugin.</text>
+
+        <defs>
+          <marker id="ar14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">The practical payoff is debugging. Chase AI: "in the situations where you're having to do a lot of troubleshooting &#8212; <em>where is stuff actually going wrong?</em> &#8212; well, this is where I can find it." NeuralNine's framing is sharper: "This is full transparency, 100%."</p>
+  </div>
+</section>
+
+<!-- ============ 15 ============ -->
+<section id="s15">
+  <p class="part-tag">Part 15 &#183; Using it</p>
+  <h2 class="head">Sub-agents, and running four companies' models at once</h2>
+
+  <p>Because the model adapter is just a plugin, and because sub-agents are just a tool, one genuinely novel arrangement falls out: <strong>a single conversation can dispatch work to several different models from several different vendors, each in its own clean context.</strong></p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 15</span><span class="fig-title">One session, many brains</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 340" role="img" aria-label="A main agent dispatches sub-agents, each pinned to a different model or even to Claude Code and Codex as whole external agents, each reporting back a summary.">
+        <rect x="330" y="26" width="240" height="76" class="s-brass" rx="3"/>
+        <text x="450" y="52" class="s-t-b" text-anchor="middle" fill="var(--brass)">MAIN SESSION</text>
+        <text x="450" y="72" class="s-t-s" text-anchor="middle">holds the plan, stays clean</text>
+        <text x="450" y="90" class="s-t-s" text-anchor="middle">expensive model, high effort</text>
+
+        <path d="M370 106 L150 148" class="s-line" marker-end="url(#ar15)"/>
+        <path d="M420 106 L360 148" class="s-line" marker-end="url(#ar15)"/>
+        <path d="M480 106 L560 148" class="s-line" marker-end="url(#ar15)"/>
+        <path d="M530 106 L768 148" class="s-line" marker-end="url(#ar15)"/>
+        <text x="450" y="128" class="s-t-s" text-anchor="middle">sub-agent tool &#183; runs in the background</text>
+
+        <rect x="20" y="152" width="196" height="96" class="s-teal" rx="3"/>
+        <text x="36" y="176" class="s-t-k">SUB-AGENT A</text>
+        <text x="36" y="200" class="s-t" fill="var(--teal)">Claude Opus</text>
+        <text x="36" y="222" class="s-t-s">the hard reasoning bit</text>
+        <text x="36" y="240" class="s-t-s">own context window</text>
+
+        <rect x="236" y="152" width="196" height="96" class="s-teal" rx="3"/>
+        <text x="252" y="176" class="s-t-k">SUB-AGENT B</text>
+        <text x="252" y="200" class="s-t" fill="var(--teal)">Qwen 3, local</text>
+        <text x="252" y="222" class="s-t-s">free, slow, overnight</text>
+        <text x="252" y="240" class="s-t-s">nothing leaves the box</text>
+
+        <rect x="466" y="152" width="196" height="96" class="s-box" rx="3"/>
+        <text x="482" y="176" class="s-t-k">SUB-AGENT C</text>
+        <text x="482" y="200" class="s-t">Claude Code, whole</text>
+        <text x="482" y="222" class="s-t-s">delegated as an entire</text>
+        <text x="482" y="240" class="s-t-s">external agent, not a model</text>
+
+        <rect x="682" y="152" width="196" height="96" class="s-box" rx="3"/>
+        <text x="698" y="176" class="s-t-k">SUB-AGENT D</text>
+        <text x="698" y="200" class="s-t">Codex, whole</text>
+        <text x="698" y="222" class="s-t-s">"have Codex write this</text>
+        <text x="698" y="240" class="s-t-s">Python function for me"</text>
+
+        <path d="M118 252 L118 278 L450 278 L450 258" class="s-line-f"/>
+        <path d="M334 252 L334 278" class="s-line-f"/>
+        <path d="M564 252 L564 278" class="s-line-f"/>
+        <path d="M780 252 L780 278 L450 278" class="s-line-f"/>
+        <rect x="330" y="286" width="240" height="42" class="s-box-2" rx="3"/>
+        <text x="450" y="312" class="s-t-s" text-anchor="middle">each reports a summary back &#8212; not its transcript</text>
+
+        <defs>
+          <marker id="ar15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Sub-agents C and D are the strange ones. <code>subagent-claude-code</code> and <code>subagent-codex</code> are built-in plugins that hand work to <em>entire rival harnesses</em>. Cole Medin: "sometimes you do want to lean on the power that comes out of the box with these other coding agents."</p>
+  </div>
+
+  <p>Caleb Curry demonstrates the model pinning directly &#8212; he spawns two sub-agents, one on Opus and one on Qwen 3, from a single prompt, and finds the harness recommends "a workflow tool with model overrides" to pin a child to a specific LLM. He also names the economics of it:</p>
+
+  <div class="plain"><span class="lbl">Caleb Curry</span><p>"There is a cost with sub-agents &#8212; every single one has its own token usage. But there's also a lot of benefit, because you're going to have a much cleaner context window. Your main chat can focus on what it's focusing on. <strong>So it costs, but it also saves you.</strong>"</p></div>
+
+  <p>His working pattern is worth copying wholesale: <em>expensive model for the conversation, the spec and the planning; cheap models delegated the implementation, because their work can be verified.</em></p>
+
+  <h4>What "any model" actually covers</h4>
+  <ul>
+    <li><strong>DeepSeek's own API</strong> &#8212; V4 Flash and V4 Pro, with high/max effort. The default, and the only path where web search works out of the box.</li>
+    <li><strong>Anthropic, OpenAI, Bedrock</strong>, or any OpenAI-compatible endpoint. DeepSeek's own config example ships with Claude Sonnet in it.</li>
+    <li><strong>Aggregators</strong> &#8212; OpenRouter, Groq, opencode-go, and others, several with free tiers.</li>
+    <li><strong>Fully local via Ollama</strong> &#8212; add a custom provider at <code>http://localhost:11434/v1</code>, OpenAI-completions format. Ollama's launcher now lists DeepSeek Harness as a target directly.</li>
+  </ul>
+
+  <div class="callout warn">
+    <h5>One practical trap, from the tutorials</h5>
+    <p>Caleb Curry hits both Ollama snags on camera. First, the provider form rejects an empty API key &#8212; put any placeholder in (he uses <code>x</code>). Second, a 404: he pasted the model <em>ID</em> from the browser, but the field wants the model <em>name</em> from <code>ollama list</code>.</p>
+    <p>And a reality check on local models: describing a repo with a local Qwen 3 took so long he abandoned it, then <code>5 + 5</code> took <strong>1 minute 14 seconds</strong> to answer. Local is for overnight batch work, not interactive coding.</p>
+  </div>
+</section>
+
+<!-- ============ 16 ============ -->
+<section id="s16">
+  <p class="part-tag">Part 16 &#183; Using it</p>
+  <h2 class="head">Permissions and sandboxing are two different dials</h2>
+
+  <p>DeepSeek's docs are unusually clear on this and it's worth internalising, because conflating the two is how people get hurt.</p>
+
+  <ul>
+    <li><strong>Approval</strong> answers: <em>must the human confirm this action?</em></li>
+    <li><strong>Sandboxing</strong> answers: <em>what can this action reach at all?</em></li>
+  </ul>
+
+  <p>They are independent. You can have an agent that asks permission for everything but can still reach your whole disk, or one that never asks but can only touch one folder.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 16</span><span class="fig-title">The two dials, and where the presets sit</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 340" role="img" aria-label="A two-axis grid: vertical axis is how much the agent must ask permission, horizontal axis is how much of the machine it can reach. Read-only, workspace-write and full access sit at different points.">
+        <!-- axes -->
+        <line x1="120" y1="40" x2="120" y2="272" stroke="var(--ink-2)" stroke-width="1.6"/>
+        <line x1="120" y1="272" x2="800" y2="272" stroke="var(--ink-2)" stroke-width="1.6"/>
+        <text x="120" y="30" class="s-t-k" text-anchor="middle">ASKS A LOT</text>
+        <text x="120" y="292" class="s-t-k" text-anchor="middle">ASKS NOTHING</text>
+        <text x="60" y="160" class="s-t-k" transform="rotate(-90 60 160)" text-anchor="middle">APPROVAL</text>
+        <text x="460" y="316" class="s-t-k" text-anchor="middle">REACH &#8212; HOW MUCH OF THE MACHINE THE ACTION CAN TOUCH &#8594;</text>
+
+        <!-- grid -->
+        <line x1="120" y1="156" x2="800" y2="156" class="s-line-f" stroke-dasharray="3 4"/>
+        <line x1="380" y1="40" x2="380" y2="272" class="s-line-f" stroke-dasharray="3 4"/>
+        <line x1="600" y1="40" x2="600" y2="272" class="s-line-f" stroke-dasharray="3 4"/>
+
+        <!-- points -->
+        <rect x="140" y="70" width="196" height="66" class="s-teal" rx="3"/>
+        <text x="154" y="94" class="s-t-b" fill="var(--teal)">READ-ONLY</text>
+        <text x="154" y="114" class="s-t-s">looks, never writes</text>
+        <text x="154" y="130" class="s-t-s">safest way to explore a repo</text>
+
+        <rect x="392" y="106" width="196" height="80" class="s-brass" rx="3"/>
+        <text x="406" y="130" class="s-t-b" fill="var(--brass)">WORKSPACE-WRITE</text>
+        <text x="406" y="150" class="s-t-s">free inside your folder</text>
+        <text x="406" y="166" class="s-t-s">asks before stepping outside</text>
+        <text x="406" y="182" class="s-t-s">&#8592; the sensible default</text>
+
+        <rect x="614" y="196" width="196" height="66" class="s-dang" rx="3"/>
+        <text x="628" y="220" class="s-t-b" fill="var(--danger)">FULL ACCESS</text>
+        <text x="628" y="240" class="s-t-s">no prompts, whole machine</text>
+        <text x="628" y="256" class="s-t-s">"danger-full-access"</text>
+
+        <!-- the gap -->
+        <rect x="140" y="196" width="196" height="66" class="s-box-2" rx="3"/>
+        <text x="154" y="220" class="s-t-b">THE GAP</text>
+        <text x="154" y="240" class="s-t-s">workspace-write still lets</text>
+        <text x="154" y="256" class="s-t-s">a global CLI reach anywhere</text>
+      </svg>
+    </div>
+    <p class="fig-note"><strong>Read "the gap" box carefully.</strong> Caleb Curry finds it live: inside workspace-write, with no prompt at all, he runs the GitHub CLI and it happily returns his username. "It's going to block execution outside of this folder &#8212; but what if you're just using a CLI that you can access anywhere?" Folder scoping does not scope your installed tools.</p>
+  </div>
+
+  <p>His three-tier defence, in order of how much it actually helps:</p>
+
+  <ol class="body">
+    <li><strong>Remove the capability from the machine.</strong> No production DB credentials, no cloud CLI you don't want touched. "If you can't do it yourself, then your LLM can't do it for you."</li>
+    <li><strong>Run it in a container.</strong> His own preference &#8212; an isolated environment that cannot reach anything on the primary system.</li>
+    <li><strong>Add deny rules at the policy gate.</strong> Useful against accidents. Explicitly not proof against intent.</li>
+  </ol>
+</section>
+
+<!-- ============ 17 ============ -->
+<section id="s17">
+  <p class="part-tag">Part 17 &#183; Reality check</p>
+  <h2 class="head">Where it breaks &#8212; and it does break</h2>
+
+  <p class="lede">Every video in this set says some version of "it's rough." The Stack is the only one that goes and reads the bug reports, so its account carries most of this section. Nothing below contradicts the enthusiasm above; it's the price of the preview label.</p>
+
+  <h3>Fault 1 &#183; The model swap is the headline, and it broke on day one</h3>
+
+  <p>The entire pitch is "point it at any provider." On 13 August &#8212; launch day &#8212; somebody did exactly that and every tool call came back rejected as <code>UNKNOWN_TOOL</code>. The agent could hold a conversation and could not do a single piece of work.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 17</span><span class="fig-title">Why the model swap fails &#8212; a translation bug, not a design flaw</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 300" role="img" aria-label="A rival provider sends a tool call where an unchanged field is an explicit empty value; DeepSeek's adapter reads empty as nothing and drops the tool name, so the harness cannot find a plugin to run.">
+        <rect x="0" y="34" width="212" height="98" class="s-teal" rx="3"/>
+        <text x="16" y="56" class="s-t-k">RIVAL PROVIDER</text>
+        <text x="16" y="80" class="s-t" fill="var(--teal)">sends a tool call</text>
+        <text x="16" y="102" class="s-t-s">name: "read_file"</text>
+        <text x="16" y="120" class="s-t-s">delta fields: "" (unchanged)</text>
+
+        <path d="M216 82 L266 82" class="s-line" marker-end="url(#ar17)"/>
+
+        <rect x="274" y="34" width="238" height="98" class="s-dang" rx="3"/>
+        <text x="290" y="56" class="s-t-k">DEEPSEEK'S ADAPTER PLUGIN</text>
+        <text x="290" y="80" class="s-t" fill="var(--danger)">reads "" as "nothing here"</text>
+        <text x="290" y="102" class="s-t-s">so it DROPS the tool name</text>
+        <text x="290" y="120" class="s-t-s">and the call's reference id</text>
+
+        <path d="M516 82 L566 82" class="s-line" marker-end="url(#ar17)"/>
+
+        <rect x="574" y="34" width="326" height="98" class="s-box" rx="3"/>
+        <text x="590" y="56" class="s-t-k">THE HARNESS</text>
+        <text x="590" y="80" class="s-t">gets a tool call with no name</text>
+        <text x="590" y="102" class="s-t-s">&#8594; cannot find a plugin to run</text>
+        <text x="590" y="120" class="s-t-dang">&#8594; UNKNOWN_TOOL &#183; rejected</text>
+
+        <rect x="0" y="160" width="900" height="118" class="s-box-2" rx="3"/>
+        <text x="18" y="184" class="s-t-brass">THE DEEPER PROBLEM &#8212; NOBODY HAS SOLVED THIS</text>
+        <text x="18" y="210" class="s-t-s">Each AI company writes its tool-call messages slightly differently, and none of it is a shared written standard.</text>
+        <text x="18" y="230" class="s-t-s">So somebody must hand-write a translator per provider, and you are at the mercy of whoever wrote that bridge.</text>
+        <text x="18" y="256" class="s-t-s">A rival framework, Code Whale, doesn't even pretend otherwise &#8212; it carries an internal setting called `wire` purely to</text>
+        <text x="18" y="272" class="s-t-s">track whose message style each connection speaks, and names a DeepSeek&#8596;Anthropic pairing outright in its code.</text>
+
+        <defs>
+          <marker id="ar17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">The Stack's verdict is fair and is the right one to carry away: DeepSeek did not fail at something routine. They hit <strong>the same structural wall every framework hits</strong> &#8212; "pointed anywhere AI" is not a standard, it's something a developer configures by hand, everywhere, on every tool that offers it. DeepSeek just did it in public with the whole internet watching.</p>
+  </div>
+
+  <h3>Fault 2 &#183; Third-party plugins crashed the agent</h3>
+
+  <p>Two days after launch, installing almost any outside add-on broke every job the agent tried &#8212; a hard crash, <code>cannot read properties of undefined</code>. Named examples were a browser driver and an SSH tool, which is unlucky, because driving a browser and reaching another machine are two of the main reasons you'd install an agent at all.</p>
+
+  <p>The cause is mundane and familiar to any Node developer: a shared core package, <code>@deepseek-ai/dsh-tools</code>, gets bundled a second time inside each add-on. Two identical copies sit in memory and refuse to recognise each other. The maintainers confirmed this was a platform problem, not a plugin-author problem &#8212; which is the more damaging of the two answers, since the plugin system <em>is</em> the reason to choose this harness.</p>
+
+  <h3>Fault 3 &#183; Plugins run with everything</h3>
+
+  <p>Chase AI raises the one that should worry you most, and it is not a bug &#8212; it's the current design:</p>
+
+  <div class="callout warn">
+    <h5>Read this before installing anything</h5>
+    <p>"As of right now, out of the box &#8212; remember this is in developer preview &#8212; <strong>every single plugin you add to DeepSeek Harness gets full shell access and full access to your entire file system.</strong> If there is a bad actor that has some sort of sketchy plugin that can take a look at your API keys, because it will essentially have permission to do so, you can be in a bad spot."</p>
+    <p>He installed one anyway &#8212; but had Claude Code read the source first. That's the minimum bar.</p>
+  </div>
+
+  <h3>Fault 4 &#183; You cannot send the fix back</h3>
+
+  <p>The normal open-source deal is that anybody who finds a fault writes the repair and sends it upstream, and the crowd patches faster than the parent company could. The developer who filed the day-one bug also pointed out that <code>CONTRIBUTING.md</code> states <strong>outside pull requests are not being accepted.</strong></p>
+
+  <p>Roughly 20,900 people have forked this codebase. Some of them have certainly fixed these issues locally. Those fixes have nowhere to go home to. As The Stack puts it: the answer to who patches this platform is DeepSeek, whenever DeepSeek decides to &#8212; "which is exactly the same dynamic as any proprietary product you pay for, except because it costs $0, there is absolutely nobody for you to ring."</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Fault</th><th>Reported</th><th>Severity</th><th>Workaround today</th></tr></thead>
+      <tbody>
+        <tr><td><code>UNKNOWN_TOOL</code> on non-DeepSeek providers</td><td class="mono">13 Aug, launch day</td><td><span class="pill no">Blocking</span></td><td>Run it on DeepSeek's own models</td></tr>
+        <tr><td>Third-party plugins crash every call (duplicate core package)</td><td class="mono">~15 Aug</td><td><span class="pill no">Blocking</span></td><td>Stick to built-in plugins</td></tr>
+        <tr><td>Tool calls with empty names</td><td class="mono">16 Aug</td><td><span class="pill mid">Intermittent</span></td><td>Retry; watch the trajectory view</td></tr>
+        <tr><td>Plugins get full shell + filesystem</td><td class="mono">By design, preview</td><td><span class="pill no">Security</span></td><td>Read the source; use a container</td></tr>
+        <tr><td>No external PRs accepted</td><td class="mono">CONTRIBUTING.md</td><td><span class="pill mid">Structural</span></td><td>None. Wait for DeepSeek.</td></tr>
+        <tr><td>Input box drops characters (early builds)</td><td class="mono">Reported by Caleb Curry</td><td><span class="pill mid">Cosmetic</span></td><td>He found Safari worked better than Chrome</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Cole Medin, who is broadly the most enthusiastic voice in the set, says the same thing without the forensics: "you'll see a lot of little glitches with their tool calls and different plugins, even the ones that are built right into the open source."</p>
+</section>
+
+<!-- ============ 18 ============ -->
+<section id="s18">
+  <p class="part-tag">Part 18 &#183; The strategy</p>
+  <h2 class="head">Why would anyone give away the thing everyone else sells?</h2>
+
+  <p>Two answers, and both are true at once.</p>
+
+  <h3>The commercial answer: the harness was never the meter</h3>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 18</span><span class="fig-title">Where the money actually is</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 300" role="img" aria-label="The harness is free and runs locally at zero cost; the tokens consumed by the model are metered and are where DeepSeek earns. Swapping the model turns the meter off.">
+        <rect x="0" y="30" width="420" height="164" class="s-brass" rx="3"/>
+        <text x="18" y="54" class="s-t-brass">THE HARNESS &#183; YOUR MACHINE</text>
+        <text x="18" y="82" class="s-t-b" fill="var(--brass)">COSTS $0 &#183; FOREVER</text>
+        <text x="18" y="108" class="s-t-s">MIT licensed &#183; no login &#183; no dashboard</text>
+        <text x="18" y="128" class="s-t-s">no seat fee &#183; no vendor in the middle</text>
+        <text x="18" y="148" class="s-t-s">Runs at 127.0.0.1:3080. Nothing leaves</text>
+        <text x="18" y="166" class="s-t-s">unless you point it outward.</text>
+        <text x="18" y="186" class="s-t-s">Telemetry off by default.</text>
+
+        <rect x="480" y="30" width="420" height="164" class="s-teal" rx="3"/>
+        <text x="498" y="54" class="s-t-k">THE MODEL &#183; THEIR SERVERS</text>
+        <text x="498" y="82" class="s-t-b" fill="var(--teal)">METERED BY THE TOKEN</text>
+        <text x="498" y="108" class="s-t-s">This is the product. This is the meter.</text>
+        <text x="498" y="134" class="s-t-s">Same launch week: V4-Pro moved off flat</text>
+        <text x="498" y="152" class="s-t-s">pricing to peak / off-peak rates &#8212; read</text>
+        <text x="498" y="170" class="s-t-s">against the old rates, a price RISE.</text>
+
+        <path d="M424 112 L474 112" class="s-line" marker-end="url(#ar18)"/>
+        <text x="428" y="100" class="s-t-s">tokens</text>
+
+        <rect x="0" y="212" width="900" height="80" class="s-dang" rx="3"/>
+        <text x="18" y="236" class="s-t-dang">THE MOST EXPENSIVE SENTENCE IN THE README</text>
+        <text x="18" y="258" class="s-t-s">"Point it at any other provider." It is the one feature that costs DeepSeek money</text>
+        <text x="18" y="278" class="s-t-s">every single time it works &#8212; change the config, wire up a rival, and the meter stops.</text>
+
+        <defs>
+          <marker id="ar18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">The Stack's sharpest observation: the free harness and the more expensive model shipped <em>on the same day, in the same launch story.</em> "The money only flows when you stick to the default settings." That is not an accusation of bad faith &#8212; it's just the shape of the business, and worth seeing clearly.</p>
+  </div>
+
+  <h3>The strategic answer: commoditise the layer before it becomes a moat</h3>
+
+  <p>Turing Post names the pattern, and it is the more interesting reading:</p>
+
+  <div class="callout key">
+    <h5>DeepSeek has a habit</h5>
+    <p>"It takes a layer that the rest of the industry is beginning to treat as expensive and proprietary, publishes a capable version, and moves the argument down one level."</p>
+    <p>Its <em>models</em> forced everyone to argue about how much intelligence should cost. Its <em>harness</em> forces us to ask what a coding assistant even is, and which parts of it deserve to remain a product.</p>
+    <p>"While other big labs spend millions acquiring harness companies, DeepSeek just open-sourced one for everyone, everywhere, for free."</p>
+  </div>
+
+  <p>Read that way, the play is defensive as much as generous. If the harness layer becomes a commodity &#8212; free, open, forkable &#8212; then no competitor can build a business on owning it, and the competition returns to the layer DeepSeek is strongest at: cheap tokens.</p>
+</section>
+
+<!-- ============ 19 ============ -->
+<section id="s19">
+  <p class="part-tag">Part 19 &#183; Reality check</p>
+  <h2 class="head">Does it actually build anything? One head-to-head test</h2>
+
+  <p>Albert Olgaard ran the only genuine controlled comparison in the set. Same prompt &#8212; <em>"build a Loom clone with full authentication, full back end, full database"</em> &#8212; given simultaneously to three harness-and-model pairs, each at high effort with permissions wide open. He then reviewed all three blind, before learning which was which.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Harness + model</th><th class="num">Time to build</th><th>His blind ranking</th><th class="num">Relative token price</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Codex</strong> + GPT-5.6 high</td><td class="num">1h 46m</td><td><span class="pill ok">1st</span> best UI, nicest platform</td><td class="num">~10&#215;</td></tr>
+        <tr><td><strong>Claude Code</strong> + Opus 5 high</td><td class="num">3h 27m</td><td><span class="pill mid">2nd</span></td><td class="num">~10&#215;</td></tr>
+        <tr><td><strong>DeepSeek Harness</strong> + V4-Pro high</td><td class="num">1h 22m</td><td><span class="pill mid">3rd</span> but "extremely impressed"</td><td class="num">~1&#215;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Two findings matter more than the ranking.</p>
+
+  <p><strong>None of the three one-shotted it.</strong> All three produced a working screen-recording app with real auth, a real database and a shareable link &#8212; and all three shipped a bug he had to fix by hand. Two of them shipped <em>the same</em> upload bug. "It's very interesting how no one caught that one."</p>
+
+  <p><strong>DeepSeek was the fastest of the three</strong>, at roughly a tenth of the token cost, and finished a working product. It placed last on polish, which is exactly the trade Jack Roberts predicts: taste lives in the harness, and Claude Code has years of it baked in.</p>
+
+  <h4>What it costs in ordinary use</h4>
+  <ul>
+    <li>Caleb Curry's whole setup session &#8212; repo init, an <code>AGENTS.md</code>, a vault, a commit skill, a guard hook: <strong>under one cent</strong> across 11 API requests.</li>
+    <li>One presenter built a full mind-mapping app <em>plus</em> a marketing site for it in about 9 minutes: <strong>~10 cents</strong>, ~300,000 tokens, 17 API calls.</li>
+    <li>He tops up the DeepSeek account with <strong>$2</strong> and treats it as plenty.</li>
+  </ul>
+
+  <p>Jack Roberts gives the framing that makes this legible: think in tiers. <strong>Frontier</strong> models for work where polish is the product and the output is client-facing. <strong>Workhorse</strong> models &#8212; "1% of the price, 95% of the capability" &#8212; for volume. DeepSeek Harness is a workhorse rig, and an unusually good one.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:24%">&nbsp;</th><th>DeepSeek Harness</th><th>Claude Code / Codex</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Harness cost</strong></td><td><span class="pill ok">$0, MIT</span></td><td>Bundled into subscription</td></tr>
+        <tr><td><strong>Model choice</strong></td><td>Any provider, or fully local</td><td>Locked to the vendor's models</td></tr>
+        <tr><td><strong>Change the agent loop</strong></td><td><span class="pill ok">Yes &#8212; it's a plugin</span></td><td><span class="pill no">No</span></td></tr>
+        <tr><td><strong>Change the UI</strong></td><td><span class="pill ok">Yes, live, by prompt</span></td><td><span class="pill no">No</span></td></tr>
+        <tr><td><strong>See the raw run</strong></td><td>Full trajectory + <code>.jsonl</code> export</td><td>Partial</td></tr>
+        <tr><td><strong>Polish / design taste</strong></td><td><span class="pill mid">Preview-grade</span></td><td><span class="pill ok">Years of it</span></td></tr>
+        <tr><td><strong>Plugin isolation</strong></td><td><span class="pill no">None &#8212; full shell</span></td><td>Sandboxed, reviewed marketplace</td></tr>
+        <tr><td><strong>Who fixes bugs</strong></td><td>DeepSeek only, no external PRs</td><td>The vendor, with support</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <h5>The consensus recommendation across all eleven videos</h5>
+    <p>Nobody &#8212; not even the most enthusiastic presenter &#8212; tells you to cancel your subscription. The unanimous advice is: <strong>install it, run it on DeepSeek's own models, use it as the cheap workhorse for volume work, and learn how it thinks.</strong> Don't put another company's model behind it for anything that matters yet, and don't install third-party plugins you haven't read.</p>
+    <p>Cole Medin's version: "I'm not telling you to just jump from Claude or Codex right into DeepSeek's Harness &#8212; but this is worth our attention, because mark my words, this kind of harness is going to be optimal for you very soon."</p>
+  </div>
+</section>
+
+<!-- ============ 20 ============ -->
+<section id="s20">
+  <p class="part-tag">Part 20 &#183; The bigger idea</p>
+  <h2 class="head">What "everything is a plugin" is actually reaching for</h2>
+
+  <p>Turing Post is the only one of the eleven to place this historically, and the framing is worth the detour, because it explains why serious people are excited about a preview-grade tool with three open blocking bugs.</p>
+
+  <p>Computing has had two of these grammars before, and both reorganised the field:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:26%">The grammar</th><th>What it unified</th><th>What happened</th></tr></thead>
+      <tbody>
+        <tr><td><strong>"Everything is an object"</strong><br><span style="color:var(--muted)">Smalltalk, late 1970s</span></td><td>All software becomes objects sending each other messages</td><td>Smalltalk itself stayed niche. Its ideas escaped and colonised personal computing.</td></tr>
+        <tr><td><strong>"Everything is a file"</strong><br><span style="color:var(--muted)">Unix</span></td><td>Devices, pipes, sockets &#8212; one shared interface</td><td>Made small tools composable. Still the water we swim in.</td></tr>
+        <tr><td><strong>"Everything is a relation"</strong><br><span style="color:var(--muted)">Codd, 1970</span></td><td>Formal rules under something the industry treated as plumbing</td><td>The original vision was diluted into SQL &#8212; and still reorganised databases entirely.</td></tr>
+        <tr><td><strong>"Everything is a plugin"</strong><br><span style="color:var(--muted)">Cordis / DSH, 2026</span></td><td>A common life cycle for capabilities: what they need, what they change, how they leave</td><td>Unknown. One implementation, no cross-vendor adoption, a proposal rather than a standard.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The pattern in the first three rows is the encouraging one: <strong>the original system does not have to win for its grammar to spread.</strong> Alan Kay later said the larger Smalltalk idea was <em>messaging</em>, not objects &#8212; the noun was just the memorable handle. Here the memorable noun is "plugin"; the deeper proposal is a shared life cycle for capabilities.</p>
+
+  <h3>The socket analogy, and why it's the best one</h3>
+
+  <p>Traditional software stores capability inside products: teams build features in advance, maintain them, and sell access. This proposes something different &#8212; <strong>capability generated at the moment it is needed.</strong> Describe the task, spend some inference, create the plugin, use it, remove it.</p>
+
+  <div class="fig">
+    <div class="fig-head"><span class="fig-no">Fig. 19</span><span class="fig-title">The electrical socket, and what it separated</span></div>
+    <div class="fig-body">
+      <svg viewBox="0 0 900 272" role="img" aria-label="An analogy: inference is the grid, the plugin interface is the standard socket, and a generated tool is the appliance. Standardising the socket separated appliance makers from power providers.">
+        <rect x="0" y="34" width="270" height="112" class="s-teal" rx="3"/>
+        <text x="18" y="58" class="s-t-k">THE GRID</text>
+        <text x="18" y="86" class="s-t-b" fill="var(--teal)">INFERENCE</text>
+        <text x="18" y="110" class="s-t-s">metered, abundant, boring</text>
+        <text x="18" y="128" class="s-t-s">you don't care whose turbine</text>
+
+        <path d="M274 90 L318 90" class="s-line" marker-end="url(#ar19)"/>
+
+        <rect x="326" y="34" width="248" height="112" class="s-brass" rx="3"/>
+        <text x="344" y="58" class="s-t-k">THE SOCKET</text>
+        <text x="344" y="86" class="s-t-b" fill="var(--brass)">PLUGIN INTERFACE</text>
+        <text x="344" y="110" class="s-t-s">one shared shape:</text>
+        <text x="344" y="128" class="s-t-s">what it needs &#183; changes &#183; how it leaves</text>
+
+        <path d="M578 90 L622 90" class="s-line" marker-end="url(#ar19)"/>
+
+        <rect x="630" y="34" width="270" height="112" class="s-box" rx="3"/>
+        <text x="648" y="58" class="s-t-k">THE APPLIANCE</text>
+        <text x="648" y="86" class="s-t-b">THE GENERATED TOOL</text>
+        <text x="648" y="110" class="s-t-s">made for one task, maybe once</text>
+        <text x="648" y="128" class="s-t-s">then unplugged and forgotten</text>
+
+        <rect x="0" y="164" width="900" height="94" class="s-box-2" rx="3"/>
+        <text x="18" y="186" class="s-t-brass">THE FACTORY WARNING</text>
+        <text x="18" y="208" class="s-t-s">Early factories swapped the steam engine for one big electric motor &#8212; and kept the old shafts and belts.</text>
+        <text x="18" y="228" class="s-t-s">The real gains only came when factories were redesigned around small motors on individual machines.</text>
+        <text x="18" y="248" class="s-t-s">Most coding assistants are still at the big-motor stage: one powerful model driving a fixed set of tools.</text>
+
+        <defs>
+          <marker id="ar19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="fig-note">Once the socket was standardised, appliance makers and power companies could stop being the same business. The claim here is that a standard plugin life cycle does the same for agents: the assistant no longer needs every possible capability built into it in advance.</p>
+  </div>
+
+  <h3>The honest state of it</h3>
+
+  <p>Turing Post is careful not to oversell, and this is the right note to end the technical argument on:</p>
+
+  <ul>
+    <li>Creator-mode plugins live in process memory and vanish on restart. They cannot promote themselves to permanent.</li>
+    <li>A human still has to approve and start them.</li>
+    <li>DeepSeek says outright that the creator sandbox is <strong>not a security boundary</strong>.</li>
+    <li>It is one implementation and a proposal &#8212; not a standard, with no cross-vendor adoption.</li>
+  </ul>
+
+  <p>So: <em>"Harness is not waking up at night and designing itself and returning smarter before you got your coffee."</em> What exists is the beginning of that loop &#8212; an agent that can propose a change to its own toolbox, and a runtime that knows how to absorb it and, crucially, how to take it back out again.</p>
+
+  <div class="callout key">
+    <h5>The question worth sitting with</h5>
+    <p>"Once an agent can recompose itself, what exactly is the product anymore?"</p>
+    <p>If the answer is "the runtime that can generate, absorb and safely remove the right capability," then competition stops being about who ships the richest set of built-in features. And DeepSeek Harness would not need to win for that idea to.</p>
+  </div>
+</section>
+
+<!-- ============ GLOSSARY ============ -->
+<section id="gloss">
+  <p class="part-tag">Reference</p>
+  <h2 class="head">Glossary</h2>
+
+  <dl class="gloss">
+    <div><dt>Harness</dt><dd>The program around a model that turns its text into real work: assembles the prompt, offers tools, executes them, remembers, loops. "The body." Claude Code, Codex, Cursor and <code>dsh</code> are all harnesses.</dd></div>
+    <div><dt>Agent loop</dt><dd>The repeating cycle &#8212; ask model, get tool request, execute it, feed the result back &#8212; that runs until the model stops asking for tools.</dd></div>
+    <div><dt>Step</dt><dd>One model request plus the tool calls it produces. One trip round the loop.</dd></div>
+    <div><dt>Turn</dt><dd>Everything from you pressing enter to the agent going quiet. Contains zero or more steps.</dd></div>
+    <div><dt>Tool</dt><dd>A function the harness runs on your machine. Deterministic, costs no tokens. The computer does the work.</dd></div>
+    <div><dt>Skill</dt><dd>A written procedure the model reads and follows. Costs tokens, may vary run to run. The model does the work.</dd></div>
+    <div><dt>Plugin</dt><dd>In DSH, the unit everything is made of &#8212; including the model adapter, the tool registry, the session log, the agent loop and the UI.</dd></div>
+    <div><dt>Cordis</dt><dd>The plugin kernel underneath DeepSeek Harness. Not a DeepSeek invention &#8212; it came from the Koishi chatbot framework, on GitHub since 2022.</dd></div>
+    <div><dt>Profile</dt><dd>A named composition stored in the harness home: which bundles to stack, which extra plugins to install, plus your own patch file.</dd></div>
+    <div><dt>Bundle</dt><dd>A distribution package of Cordis configs and code. <code>dsh-base</code> is the foundation of every profile; <code>dsh-web-app</code> adds the browser UI.</dd></div>
+    <div><dt>Revertible effect</dt><dd>Any change a plugin makes that carries its own undo. The runtime records the undos and runs them in reverse order on teardown. ("Temporal composability.")</dd></div>
+    <div><dt>Reactive coeffect</dt><dd>A declared dependency. A plugin says what it needs via <code>inject</code>; the runtime keeps it pending until that exists, and tears dependants down before providers. ("Spatial composability.")</dd></div>
+    <div><dt>Confluence</dt><dd>The property that however you reached a configuration, the same final set of plugins yields the same observable state. What makes experimentation safe.</dd></div>
+    <div><dt>Trajectory</dt><dd>The panel that exposes every event in a run &#8212; source plugin, raw payload, result, tokens, timing &#8212; and exports the whole session as <code>.jsonl</code>.</dd></div>
+    <div><dt>Creator mode</dt><dd>The preset in which the agent can inspect the running system and author plugins for itself. Its sandbox is explicitly not a security boundary.</dd></div>
+    <div><dt>Code / PTC mode</dt><dd>A preset where the model writes one TypeScript program that calls many tools, instead of making many separate tool calls. Saves round trips and context.</dd></div>
+  </dl>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="sources">
+  <p class="part-tag">Reference</p>
+  <h2 class="head">Sources</h2>
+
+  <h4>The eleven videos &#183; transcripts pulled and read in full</h4>
+  <div class="srcs">
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=qg9EyGOZd9U">DeepSeek Harness: The End of Claude Code?</a></div><div class="ch">NeuralNine</div><div class="d">14 Aug &#183; 13m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=jtyV7O4Pt0s">Why DeepSeek Harness Is The End Of Coding Agents as We Know Them</a></div><div class="ch">Turing Post TV</div><div class="d">17 Aug &#183; 15m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=DTu4yvmc0Fc">DeepSeek Harness Just Changed AI Forever</a></div><div class="ch">Better Stack</div><div class="d">19 Aug &#183; 6m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=yipfaA-GXPg">DeepSeek Just Built the Next Generation of Coding Agents</a></div><div class="ch">Cole Medin</div><div class="d">20 Aug &#183; 14m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=Hpw4fAHlHDw">NEW Deepseek Agent Harness EXPLAINED (deep dive)</a></div><div class="ch">Stephen G. Pope</div><div class="d">20 Aug &#183; 16m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=legYz3Hk2rQ">DeepSeek Harness &#8212; Full Tutorial for Beginners</a></div><div class="ch">Caleb Curry</div><div class="d">20 Aug &#183; 46m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=RkNafW_Mv9w">DeepSeek Harness = Claude Code for $0</a></div><div class="ch">Jack Roberts</div><div class="d">21 Aug &#183; 12m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=f51ICIoHcjY">Why DeepSeek Harness Just Became The Fastest Growing Github Repo EVER</a></div><div class="ch">Chase AI</div><div class="d">Aug &#183; 11m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=CoOkn-e4k8M">DeepSeek Harness Might Be Where AI Is Actually Headed</a></div><div class="ch">Albert Olgaard</div><div class="d">Aug &#183; 14m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=4h6eRByaLpo">Did DeepSeek Harness Just Change AI Forever?</a></div><div class="ch">The Stack</div><div class="d">23 Aug &#183; 18m</div></div>
+    <div class="src"><div class="t"><a href="https://www.youtube.com/watch?v=pgFjL7Iw9AM">DeepSeek Harness &#8212; eight use cases</a></div><div class="ch">(Spanish, auto-translated)</div><div class="d">Aug &#183; 31m</div></div>
+  </div>
+
+  <h4>Primary sources &#183; checked directly, not taken from the videos</h4>
+  <div class="srcs">
+    <div class="src"><div class="t"><a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-ai/deepseek-harness</a> &#8212; the repository and README</div><div class="ch">GitHub &#183; MIT</div><div class="d">~188k &#9733;</div></div>
+    <div class="src"><div class="t"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md">docs/architecture.md</a> &#8212; turn/step model, core packages, capability seams</div><div class="ch">DeepSeek</div><div class="d">primary</div></div>
+    <div class="src"><div class="t"><a href="https://deepseek.com/harness/en/">deepseek.com/harness</a> &#8212; feature list, modes, traceability claims</div><div class="ch">DeepSeek</div><div class="d">primary</div></div>
+    <div class="src"><div class="t"><a href="https://github.com/cordiverse/paper">A Programming Paradigm for Spatiotemporal Composability</a> &#8212; the Cordis paper</div><div class="ch">cordiverse</div><div class="d">13 Aug 2026</div></div>
+    <div class="src"><div class="t"><a href="https://github.com/cordiverse/cordis">cordiverse/cordis</a> &#8212; the kernel itself</div><div class="ch">Shigma</div><div class="d">since 2022</div></div>
+    <div class="src"><div class="t"><a href="https://deepseek-harness.github.io/deepseek-harness/en/reference/">DeepSeek Harness reference docs</a> &#8212; profiles, bundles, layer order</div><div class="ch">DeepSeek</div><div class="d">primary</div></div>
+    <div class="src"><div class="t"><a href="https://dshseek.com/guides/what-is-cordis/">What is Cordis (paper deep-read)</a> &#8212; effect/disposer and inject examples</div><div class="ch">DSHSeek</div><div class="d">secondary</div></div>
+    <div class="src"><div class="t"><a href="https://habr.com/en/articles/1070958/">Inside DeepSeek Harness: Cordis, session events, tool pipelines, permission boundaries</a></div><div class="ch">Habr</div><div class="d">secondary</div></div>
+  </div>
+
+  <h4>A note on how this was assembled</h4>
+  <p>All eleven transcripts were downloaded and read end to end. Where a claim appears in only one video it is attributed to that presenter by name. Where a claim is about how the software works, it was checked against DeepSeek's own repository, architecture document and product page, or against the Cordis paper &#8212; not accepted from the video alone. Star and fork counts are as reported by GitHub on 23 August 2026 and were still climbing; the videos cite figures from 127,000 to 177,000 depending on their recording date, which is itself the most vivid fact in this report.</p>
+
+  <p>Two things could not be verified independently here and are reported as sourced claims: the specific GitHub Discussion numbers behind the three faults in Part 17 (via The Stack), and the Peking University co-authorship of the Cordis paper (via Turing Post).</p>
+</section>
+
+<footer>
+  <p>THE HARNESS LAYER &#183; compiled 23 August 2026 &#183; 11 video teardowns + 8 primary sources<br>
+  Colour key throughout: BRASS = the harness, machinery you own &#183; TEAL = the model, intelligence you rent<br>
+  Diagrams hand-drawn as inline SVG. Nothing in this document is generated imagery.</p>
+</footer>
+
+</main>
+</div>
