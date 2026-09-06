@@ -682,28 +682,40 @@ sorted into the two columns. Then everything clears to the single closing line.
 
 ---
 
-## SCENE 10 — CTA (33:20–34:20 · ~150 words)
+## SCENE 10 — CTA (33:20–34:40 · ~205 words)
 
 **ANCHOR:** `One thing before you go, and then I'll get out of your way.`
 
-**VISUAL:** Presenter to camera, plain. Then the six citations as a full-screen readable list — the
-thing the interview didn't provide.
+**VISUAL — HYPERFRAMES, NO PRESENTER.** Terry does not appear on camera in this scene. Built as a
+HyperFrames composition over `asset-library/clip-library/pixelimages/person-pointing-at-screen2.png`
+(the gray-haired character — the Terry likeness, pointing toward the viewer), scrimmed and drifting
+on the registered `tl`. Over it, the four asks land as discrete typographic beats, one per line, each
+arriving on its VO word: **SUBSCRIBE · LIKE · SHARE · 🔔 NOTIFICATIONS**. Then the composition
+resolves to the six citations, full-screen and readable — journals, dates, DOIs. That citation card
+is the last frame of the video and it holds.
 
 > One thing before you go, and then I'll get out of your way.
 >
-> Every number in this video came from a paper I opened and read. All six are on screen now, with
-> journals, dates and DOIs. If you think I've got one of them wrong, go and check it — that's not a
-> rhetorical invitation, that's the entire point of the channel.
+> Every number in this video came from a paper I opened and read. All six are on screen now — the
+> journals, the dates, the DOIs. If you think I've got one of them wrong, go and check it. That isn't
+> a rhetorical invitation. That's the entire point of what I'm doing here.
 >
-> Because that's what this is going to be. Somebody makes a confident claim about AI with money riding
-> on the answer, and I go and do the arithmetic. Sometimes the claim will hold up. When it does, I'll
-> make that video too — otherwise the ones where it doesn't aren't worth anything.
+> Because this is what the channel is going to be. Somebody makes a confident claim about AI with
+> money riding on the answer, and I go and do the arithmetic.
 >
-> If that's useful to you, subscribe, and I'll see you on the next one.
+> Sometimes the claim is going to hold up. When it does, I'll make that video too — otherwise the
+> ones where it doesn't aren't worth anything.
+>
+> So if that's useful to you: **subscribe**, and **hit the like button** — it genuinely does decide
+> whether anybody else ever sees this. If you know somebody who's been arguing about this at work,
+> or at home, **send it to them.**
+>
+> And **ring the notification bell**, because these take a while to research and they don't come out
+> on a schedule. The bell is the only way you'll know when the next one lands.
+>
+> I'm Terry Byrd. Go check my numbers.
 >
 > **[END]**
-
----
 
 ## PRODUCTION NOTES
 

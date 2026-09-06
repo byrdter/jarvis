@@ -1,7 +1,7 @@
 # V01 — CLEAN READ SCRIPT (spoken words only)
 
-Record one scene at a time. Numbers spelled out deliberately — read as written.
-Ng quotes verified against Whisper. See claim-source-map.md before recording.
+Ng quotes verified against Whisper. See claim-source-map.md and VISUAL-MAP.md before recording.
+SCENE 10 is VO only — no presenter, it is a HyperFrames build.
 
 
 ==== SCENE 01 — COLD OPEN ====
@@ -419,11 +419,17 @@ And if you skip it, you'll get exactly what you asked for, and nothing else.
 ==== SCENE 10 — CTA ====
 
 One thing before you go, and then I'll get out of your way.
-Every number in this video came from a paper I opened and read. All six are on screen now, with
-journals, dates and DOIs. If you think I've got one of them wrong, go and check it — that's not a
-rhetorical invitation, that's the entire point of the channel.
-Because that's what this is going to be. Somebody makes a confident claim about AI with money riding
-on the answer, and I go and do the arithmetic. Sometimes the claim will hold up. When it does, I'll
-make that video too — otherwise the ones where it doesn't aren't worth anything.
-If that's useful to you, subscribe, and I'll see you on the next one.
+Every number in this video came from a paper I opened and read. All six are on screen now — the
+journals, the dates, the DOIs. If you think I've got one of them wrong, go and check it. That isn't
+a rhetorical invitation. That's the entire point of what I'm doing here.
+Because this is what the channel is going to be. Somebody makes a confident claim about AI with
+money riding on the answer, and I go and do the arithmetic.
+Sometimes the claim is going to hold up. When it does, I'll make that video too — otherwise the
+ones where it doesn't aren't worth anything.
+So if that's useful to you: subscribe, and hit the like button — it genuinely does decide
+whether anybody else ever sees this. If you know somebody who's been arguing about this at work,
+or at home, send it to them.
+And ring the notification bell, because these take a while to research and they don't come out
+on a schedule. The bell is the only way you'll know when the next one lands.
+I'm Terry Byrd. Go check my numbers.
 

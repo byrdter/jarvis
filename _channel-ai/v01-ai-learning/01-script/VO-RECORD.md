@@ -1,14 +1,15 @@
 # V01 — RECORDING SCRIPT (paragraph takes)
 
-**How to use this.** Record **one numbered paragraph at a time.** If you fluff anything in a
-paragraph, just pause about a second and say the **whole paragraph again** from the top. Do that as
-many times as you like — the assembler keeps only your **last** complete take of each one.
+**How to use this.** Record **one numbered paragraph at a time.** If you fluff anything, pause about
+a second and say the **whole paragraph again from its first word.** The assembler keeps only your
+**last** complete take.
 
-**Two things that make the automatic edit reliable:**
-1. **Always restart from the first word of the paragraph**, never from the middle of it.
-2. **Leave ~1 second of silence** between takes and between paragraphs. That silence is where the cut lands.
+1. **Always restart from the first word** — never mid-paragraph.
+2. **Leave ~1 second of silence** between takes. That silence is where the cut lands.
 
 Paragraph numbers are for you and the assembler — **do not read them aloud.**
+
+⚠️ **SCENE 10 is not recorded to camera** — it is a HyperFrames build. Record the VO only.
 
 ---
 
@@ -476,10 +477,16 @@ Paragraph numbers are for you and the assembler — **do not read them aloud.**
 
 **[217]**  One thing before you go, and then I'll get out of your way.
 
-**[218]**  Every number in this video came from a paper I opened and read. All six are on screen now, with journals, dates and DOIs. If you think I've got one of them wrong, go and check it — that's not a rhetorical invitation, that's the entire point of the channel.
+**[218]**  Every number in this video came from a paper I opened and read. All six are on screen now — the journals, the dates, the DOIs. If you think I've got one of them wrong, go and check it.
 
-**[219]**  Because that's what this is going to be. Somebody makes a confident claim about AI with money riding on the answer, and I go and do the arithmetic.
+**[219]**  That isn't a rhetorical invitation. That's the entire point of what I'm doing here.
 
-**[220]**  Sometimes the claim will hold up. When it does, I'll make that video too — otherwise the ones where it doesn't aren't worth anything.
+**[220]**  Because this is what the channel is going to be. Somebody makes a confident claim about AI with money riding on the answer, and I go and do the arithmetic.
 
-**[221]**  If that's useful to you, subscribe, and I'll see you on the next one.
+**[221]**  Sometimes the claim is going to hold up. When it does, I'll make that video too — otherwise the ones where it doesn't aren't worth anything.
+
+**[222]**  So if that's useful to you: subscribe, and hit the like button — it genuinely does decide whether anybody else ever sees this. If you know somebody who's been arguing about this at work, or at home, send it to them.
+
+**[223]**  And ring the notification bell, because these take a while to research and they don't come out on a schedule. The bell is the only way you'll know when the next one lands.
+
+**[224]**  I'm Terry Byrd. Go check my numbers.

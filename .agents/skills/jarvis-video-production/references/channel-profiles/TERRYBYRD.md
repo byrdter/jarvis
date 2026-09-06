@@ -11,6 +11,22 @@ Load this profile INSTEAD OF the skill's Byrddynasty defaults for any video on t
 | **"Faceless video is the default"** | **PRESENTER ON CAMERA** | Terry's decision, 2026-09-05. The AB Explained teardown measured presenter-led long-form at **2.81× the channel's own median** versus 0.53× for its street-interview format — 5.3× apart, same channel, same audience. A 45-frame census of their AI winner found **56% of runtime is presenter to camera**; it is the connective tissue holding 40 minutes together. |
 | **"Target runtime ~8 minutes"** | **30–50 minutes** | The arithmetic lane measures 31–54 min (23.73× at 54.4 min on 13,100 subs); the atlas 40.3 min at 13.05×; the ceiling case 75 min at 4.99M views. `video-production-standard.md` §1 already retired the 8-min rule as a training wheel with no upper bound. **8:00 remains a hard floor** (mid-roll monetization). |
 
+### Presenter ratio — set 2026-09-06, and it diverges from the model
+
+**Short bursts, not sustained talking head.** Terry appears **one paragraph (2–3 sentences) at a
+time, never two in a row**, when a line is first-person process, a self-correction, a direct address
+or a verdict. Everything else carries a visual. V01 maps to **~17% presenter, ~39 appearances, one
+roughly every 55 seconds.**
+
+⚠️ **This is a deliberate divergence from the measured reference.** The Asian Boss census found
+**56% presenter** on their best long-form video. 17% is a different register — closer to Johnny
+Harris — and it is Terry's call, not a measured finding. **Watch retention on V01 before treating
+this ratio as settled.**
+
+**CTA scenes carry no presenter** — built in HyperFrames over the pixel-art likeness
+(`asset-library/clip-library/pixelimages/person-pointing-at-screen2.png`), with subscribe · like ·
+share · notification-bell as typographic beats, resolving to the full citation list as the last frame.
+
 **Unchanged and still binding:** the avatar stays retired — human presence is Terry himself, a real
 person, never a synthetic stand-in. `tools/prepublish-check.py`'s 15-minute floor now passes trivially.
 
