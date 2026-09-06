@@ -150,16 +150,16 @@ document pull-out.
 > are anyway. Point two is small. Point five is moderate. Point eight is large. Point six-eight sits
 > in the upper half of moderate, heading toward large.
 >
-> In education research, where almost everything anybody tries produces an effect of about point two
-> and half of those don't replicate — an effect of point six-eight, in the *harmful* direction, from a
-> tool being marketed as a learning aid, is not a small finding.
+> Educational interventions that anyone gets excited about routinely land in the small range. An
+> effect of point six-eight, in the *harmful* direction, from a tool being marketed as a learning aid,
+> is not a small finding.
 >
 > And this was **pre-registered.** Barcaui wrote down what he expected to find, and how he'd measure
 > it, before he ran it. That matters more than most people realize. It's the difference between a
 > prediction and a story told afterward about numbers you already had.
 >
-> The explanation he gives is a piece of learning science that's about forty years old, and it has a
-> deeply annoying name: **desirable difficulties.**
+> The explanation he gives is a piece of learning science that's been around since the nineteen-nineties,
+> and it has a deeply annoying name: **desirable difficulties.**
 >
 > The idea is that the struggle isn't a cost of learning that we tolerate. The struggle *is* the
 > learning. When you retrieve something with effort, when you generate an answer instead of reading
@@ -173,7 +173,32 @@ document pull-out.
 >
 > One study can't tell us which.
 >
-> So let's go to the one that took the tool away.
+> *[beat]*
+>
+> Although — before I leave it, there's a companion finding, and it matters because it isn't about
+> remembering at all.
+>
+> A team led by Yizhou Fan at Peking University, with Dragan Gašević at Monash, ran a randomized lab
+> study with a hundred and seventeen university students. Published in the British Journal of
+> Educational Technology. The task wasn't a memory test — it was writing an essay. Four groups: one
+> with ChatGPT, one with a human expert to consult, one with writing-analytics software, and one with
+> nothing.
+>
+> The ChatGPT group wrote **measurably better essays.** Their scores improved more than anyone else's.
+>
+> And their knowledge gain, and their ability to transfer what they'd learned to a new problem, were
+> **not significantly different** from the students who had no help at all.
+>
+> Better work. Same person at the end of it.
+>
+> The authors gave that a name, and it's the best phrase anybody has coined for this: **metacognitive
+> laziness.** Not laziness about the task — the essays were good. Laziness about *monitoring your own
+> thinking.* You hand over not just the work, but the job of noticing whether you understood it.
+>
+> So that's two studies, two completely different measures — a memory test forty-five days out, and a
+> transfer test on the same afternoon — pointing the same way.
+>
+> Now let's go to the one that took the tool away.
 
 ---
 
@@ -562,7 +587,7 @@ Then the Ng transcript card returns — with the qualifier that was cut off the 
 >
 > "It's just so clear that LLMs, **as they are most commonly used**, are terrible for learning."
 >
-> Four words in the middle of that sentence — *as they are most commonly used* — and they carry the
+> Six words in the middle of that sentence — *as they are most commonly used* — and they carry the
 > entire argument. And he adds, immediately: "I'm not saying there's no way to use it in a way that is
 > good for learning. I think there are ways to use it that are good for learning."
 >
@@ -583,7 +608,7 @@ Then the Ng transcript card returns — with the qualifier that was cut off the 
 > *[beat]*
 >
 > Which, honestly, is most of what's wrong with how we talk about this technology. Not that people are
-> lying. That the true sentence is nine words longer than the one that travels.
+> lying. That the true sentence is always longer than the one that travels.
 >
 > And I should hold myself to the same standard, so let me be explicit about what this evidence does
 > **not** say.
@@ -620,8 +645,9 @@ sorted into the two columns. Then everything clears to the single closing line.
 > The line between those two outcomes is not the model, the subscription tier, or the prompt. It's
 > whether you did the thinking.
 >
-> And the uncomfortable number in all of this — the one I keep coming back to — is that **eighty
-> percent.** Eighty percent of the AI users in that Chinese study showed the outsourcing fingerprint.
+> And the uncomfortable number in all of this — the one I keep coming back to — is that **eighty-one
+> percent.** Eighty-one percent of the AI users in that Chinese study showed the outsourcing
+> fingerprint.
 > Fast, correct, and learning nothing.
 >
 > That is not people abusing the tool. That is the tool working exactly as designed, being used
@@ -640,7 +666,7 @@ sorted into the two columns. Then everything clears to the single closing line.
 > percent — and the ones who let the AI generate it and then made themselves understand what it wrote,
 > at eighty-six percent.
 >
-> Four and a half minutes, on a twenty-minute task, for more than double the retained skill.
+> Four and a half minutes, on a twenty-four-minute task, for more than double the retained skill.
 >
 > Nobody is asking you to do it the hard way. The evidence isn't nostalgic and neither am I. Every one
 > of those top three groups used the AI.
