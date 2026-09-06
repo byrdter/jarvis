@@ -69,6 +69,15 @@ Read `…/strategic-pivot-launch/SHOW-BIBLE.md`. Hold to:
   projects still parse and is never set on new work. Scene registers come from VISUAL-SOURCING /
   CONDUIT-VISUAL-SYSTEM, not from who is on camera.
 
+## Step 0c-2 — QUOTE VERIFICATION (mandatory before any quote enters the script)
+
+**Every quote that will be spoken or shown gets Whisper-verified against the source audio.** Auto-
+captions are for research only. See `references/USING-REAL-PEOPLE.md` **Rule 0** for the command and
+the V01 case that produced this rule — a quote cut three words early, in a video about quotes being
+cut early, caught only by luck.
+
+Save the verified passage beside the script and quote from it, not from the research transcript.
+
 ## Step 0d — Fact-check + claim-source map
 Every meaningful on-screen/spoken claim needs a source (or be framed as interpretation). Fill
 `claim-source-map.md` (scene · claim · source · url · confidence · lens). The research helper's URLs

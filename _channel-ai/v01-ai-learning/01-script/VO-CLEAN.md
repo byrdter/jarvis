@@ -1,0 +1,411 @@
+# V01 — CLEAN READ SCRIPT (spoken words only)
+
+Record one scene at a time. Numbers spelled out deliberately — read as written.
+All Ng quotes verified against Whisper transcription of the source audio.
+
+
+==== SCENE 01 — COLD OPEN ====
+
+Nine days ago, a man who has taught roughly eight million people how to use artificial intelligence
+sat down for an interview and said this.
+
+"Frankly, AI models are terrible for learning."
+That's Andrew Ng. He co-founded Coursera. He built the founding team at Google Brain. If there is a
+single person whose career is made of teaching people this technology, it's him. And he flagged the
+line himself, on camera, as controversial — "I don't know if I've said this publicly, but I think
+it's true."
+Then he said the part I couldn't let go of. He said: the data is very clear.
+He's right that it's clear. He just never said which data. No paper, no author, no number. He said
+"all the data that's coming out," and "more and more studies are coming out," and the interview
+moved on.
+And roughly ninety seconds later in that same conversation, the interviewer puts it to him that he
+has just taken a hundred million dollars from Coursera to build a new company — one that teaches
+people using AI. He says yes.
+
+So I went and found the studies. It took a week. There are six that matter.
+Two randomized controlled trials, one of them pre-registered. One that followed twenty-six thousand
+eight hundred and eleven students for thirty months. One meta-analysis pooling twenty-six trials. And
+one that has nothing to do with school at all.
+Four of them found harm. Two of them found the opposite.
+All six are studying the same technology.
+
+Here's what they actually say.
+
+==== SCENE 02 — WHY THIS ISN'T A STORY ABOUT SCHOOL ====
+
+Before I show you any of it, I want to move this off the topic you think it's about.
+When somebody says "AI and learning," you picture a teenager pasting an essay prompt into a chatbot
+at eleven at night. That's a real thing and it's in the evidence. But it's not why I made this.
+Last week I needed to do something I'd done before — a piece of configuration I'd worked out myself
+maybe two years ago. And I couldn't. I knew the shape of it. I knew roughly where the problem was.
+But the actual steps were gone in a way they wouldn't have been if I'd fought through it the first
+time and then done it again by hand a year later.
+Ng describes exactly this, about himself, in the same interview. He said he asked a model how a
+front-end and back-end component fit together, got the answer, shipped the project — and six months
+later, when he needed to redo it, he didn't remember. So he asked again.
+That's not a student cheating. That's a working professional discovering that something he used to
+know, he now merely has access to.
+One of the six studies I'm going to show you isn't about students at all. It's about professional
+software developers learning a new tool, and it produced the single most uncomfortable number in the
+whole set.
+So keep your own work in mind as we go. Because the question underneath all of this isn't whether
+AI is bad for children.
+It's whether the thing you finished this week left anything behind in you.
+
+==== SCENE 03 — STUDY ONE: THE SURPRISE TEST ====
+
+The first study is the one I'd put in front of anybody who only has time for one.
+It was run by André Barcaui at the Federal University of Rio de Janeiro, published in Social
+Sciences and Humanities Open in November of last year. A hundred and twenty business students,
+learning real material from their actual course — concepts in artificial intelligence and machine
+learning.
+They were randomly assigned, sixty and sixty. Half studied with ChatGPT as a study aid. Half studied
+the way people studied in twenty-fifteen. Same material. Same course. The only difference was the
+tool.
+And I should tell you the thing the summaries of this study leave out. A hundred and twenty started.
+Eighty-five came back for the test — forty-three from the AI group, forty-two from the other one.
+That's a seventy-one percent follow-up, balanced across both conditions, which is respectable for
+this kind of work. But it means when you see the statistics quoted, the sample is eighty-five, not a
+hundred and twenty. I got that wrong myself the first time I wrote this up.
+Now, here's the design decision that makes this study worth your time.
+He didn't test them at the end of the session. He waited forty-five days — and then gave them a
+surprise test. No warning, no revision period, no chance to cram. Just: what's still in there,
+a month and a half later?
+The students who studied the old way scored sixty-eight point five percent.
+The students who studied with ChatGPT scored fifty-seven point five percent.
+
+Eleven points. And before anybody tells me that's noise on eighty-five people — the statistics are in
+the paper. T of eighty-three equals minus three point one-nine. P equals point zero zero two.
+Cohen's d of zero point six-eight, with a confidence interval running from point two-four to one
+point one-two.
+Let me put that second number in plain English, because it's the one that matters and it's the one
+that gets skipped. Cohen's d is a measure of how big a gap is, relative to how spread out people
+are anyway. Point two is small. Point five is moderate. Point eight is large. Point six-eight sits
+in the upper half of moderate, heading toward large.
+In education research, where almost everything anybody tries produces an effect of about point two
+and half of those don't replicate — an effect of point six-eight, in the harmful direction, from a
+tool being marketed as a learning aid, is not a small finding.
+And this was pre-registered. Barcaui wrote down what he expected to find, and how he'd measure
+it, before he ran it. That matters more than most people realize. It's the difference between a
+prediction and a story told afterward about numbers you already had.
+The explanation he gives is a piece of learning science that's about forty years old, and it has a
+deeply annoying name: desirable difficulties.
+The idea is that the struggle isn't a cost of learning that we tolerate. The struggle is the
+learning. When you retrieve something with effort, when you generate an answer instead of reading
+one, when you space the practice out so it's a bit uncomfortable — that effort is what builds the
+memory. Remove the effort and you don't get a faster version of learning. You get a smoother version
+of not learning.
+Which means a tool that makes studying feel easier is doing something ambiguous. It might be
+removing friction that never helped. Or it might be removing the exact thing that was doing the
+work.
+One study can't tell us which.
+So let's go to the one that took the tool away.
+
+==== SCENE 04 — STUDY TWO: THEY TOOK IT AWAY ====
+
+In Turkey, about a thousand high school students sat down to do math.
+This is Bastani and colleagues, published in PNAS — the Proceedings of the National Academy of
+Sciences — in June of last year. Around fifty classes, ninth through eleventh grade, four
+ninety-minute sessions. A genuine randomized controlled trial, run inside a real school.
+One group practiced the way they always had. Another group got GPT-4 while they practiced.
+During those practice sessions, the students with GPT-4 access improved their performance by
+forty-eight percent.
+Forty-eight percent. If you're selling AI tutoring software, that is the number you put on the
+slide. It's real, it's from a top-tier journal, and it is not misleading about what it measures.
+While the students had the tool, they were dramatically better at math problems.
+Then the researchers did the thing that separates a marketing metric from an actual finding.
+They took it away. And gave them an exam.
+The students who had practiced with GPT-4 scored seventeen percent worse than the students who
+never had it at all.
+
+Not seventeen percent worse than their practice scores. Seventeen percent worse than the control
+group. Statistically significant. They would have been better off if the tool had never been in the
+room.
+Sit with the shape of that for a second, because it recurs in every study I'm going to show you.
+Performance went up. Learning went down. At the same time, in the same students, from the
+same tool.
+And you can see exactly how it happened, because the authors describe the behavior. The students
+used GPT-4 as — their word — a crutch. Not to understand the problem. To get past it. Which
+works beautifully right up until the moment the crutch isn't there, and it turns out you've spent
+four sessions not building the thing the sessions were for.
+Now. I want to flag something, because I'm going to come back to it and I don't want to be accused
+of hiding it.
+That study had a third group. I'm not going to tell you about it yet. It's the most important
+result in this entire video, and it changes the direction of everything I've said so far. But it
+only lands if you've first accepted how bad the first two findings are.
+So hold that. There's a third arm. I'll come back to it.
+Because here's the honest objection to everything so far. Two studies. A hundred and twenty
+undergraduates in Brazil, a thousand teenagers in Turkey. Both in controlled conditions, both over
+weeks.
+What happens over years? At scale? In the real world, where nobody is running an experiment on you
+and the tool is just... there, all the time, the way it actually is?
+Somebody looked.
+
+==== SCENE 05 — STUDY THREE: TWENTY-SIX THOUSAND STUDENTS, THIRTY MONTHS ====
+
+Twenty-six thousand, eight hundred and eleven students. Thirty months. Nine subjects.
+This is a working paper from David Strömberg at Stockholm University, with Victor Lei and Yanhui Wu
+at the University of Hong Kong, published through the Centre for Economic Policy Research in June of
+this year. One Chinese county, about a million people, grades seven through twelve, tracked for two
+and a half years.
+I want to be careful about what this is, because it isn't the same kind of evidence as the first two.
+Nobody was assigned to anything. But it isn't just a correlation either — they used a
+difference-in-differences design, which exploits the fact that students started using AI at different
+times. If the kids who adopted in March and the kids who adopted in September show the same drop
+starting from their own adoption date, that's a much harder pattern to explain away.
+It is also a discussion paper. It has not yet been through peer review. I'll hold it to that standard
+and so should you.
+Here's what they found.
+Homework scores went up eighteen percent. Homework took thirty percent less time — from
+sixty-four minutes down to forty-five.
+Within six months, monthly exam scores were down twenty percent — which the authors put at
+one point four standard deviations.
+The high school entrance exam: down twenty-four percent. The college entrance exam: down
+eighteen percent. One point five and one point three standard deviations.
+If standard deviations don't mean much to you, here's the translation: those are not slips. Those are
+the difference between the student you were and a substantially different student.
+Those last two are not quizzes. In that system, those are the exams that decide what happens to your
+life.
+And now the detail that I think is the most important thing in this paper, and the reason nobody
+caught this earlier.
+The full penalty only shows up after about two years.
+Every signal a parent, a teacher, or a school administrator looks at in the short run said this was
+working. Homework improved. It took less time. Kids seemed less stressed about it. The damage was
+accumulating the entire time, in a place nobody measures until it's much too late to do anything
+about it.
+Two more things from this paper.
+The researchers could identify which students were being hurt, from the data alone. The
+fingerprint is a specific combination: exceptionally short homework completion time, coupled with
+high homework scores. Faster than the fastest student who wasn't using AI, and still correct.
+That's the signature of outsourcing, and it applied to eighty-one percent of the AI users.
+Eighty-one percent. This isn't a minority misusing the tool. This is what using the tool normally
+looks like.
+But that leaves nineteen percent. And what happened to them is, I think, the most important sentence
+in this entire paper.
+The AI users who spent as much time on homework as the students not using AI — same hours, higher
+homework scores, so they were definitely using it — those students showed exam scores in line with
+everybody else. And the authors checked whether they were just the smarter kids to begin with. They
+weren't.
+Same tool. Same subject. Same school. The ones who kept the hours were fine.
+
+One more thing, and it cuts the other way, so I'm going to say it. The penalty is shrinking. The
+authors estimate it fell from about twenty-five percent in early twenty-twenty-three to about sixteen
+percent by June of twenty-twenty-five. Students and teachers appear to be adapting. It has not gone
+away — but it is not fixed in stone either.
+And the students who lost the most weren't the ones you'd guess. It wasn't the strugglers.
+It was the high achievers.
+
+==== SCENE 06 — THE REVERSAL ====
+
+Everything I have told you for the last twelve minutes is true, and the headline you would write
+from it is wrong.
+Let me go back to Turkey. That third group.
+There were never two arms in that experiment. There were three. Control. GPT Base — the one I told
+you about, plain GPT-4, answer anything. And a third arm the researchers built themselves, called
+GPT Tutor.
+Same model. Same students. Same four sessions. One difference: they configured it so it would not
+hand over answers. It gave hints — hints written by the teachers — and it made the student do the
+step.
+During practice, that group didn't improve by forty-eight percent.
+They improved by a hundred and twenty-seven percent.
+The best short-term performance in the entire study came from the version that refused to do the work.
+And then they took it away and gave them the exam. Remember, the plain GPT-4 group came out
+seventeen percent below students who never touched it.
+The GPT Tutor group came out statistically indistinguishable from the control group.
+No penalty. None. Same model, same room, same week — the difference was entirely in whether the
+thing would give you the answer when you asked for it.
+
+And this is not a lone result. There's a meta-analysis published in Education and Information
+Technologies in February of last year, by Zhu, Liu and Zhao.
+They screened five thousand, eight hundred and eighty-seven papers, kept the twenty-six that were
+genuine randomized trials, and pooled them.
+Overall effect of generative AI on learning outcomes: positive. Hedges' g of zero point
+three-nine-two. Small, but real, and in the helpful direction.
+So now I have a problem, and if you've been paying attention you have it too.
+I've shown you a pre-registered trial where AI cost students eleven points of retention. A PNAS
+trial where it left them worse than never having used it. A thirty-month study where it knocked
+twenty-four percent off the exam that determines their future.
+And I've now shown you a meta-analysis of twenty-six randomized trials saying it helps, and an arm
+of that same PNAS study where it more than doubled performance and did no damage at all.
+These are not in conflict. They are not even really about the same thing.
+And the distinction that separates them is so simple that once you see it you cannot unsee it — but
+it is missing from almost every conversation anybody is having about this, including the one Andrew
+Ng was having when he said the sentence I opened with.
+There's a sixth study. It's the one about the developers. And it doesn't just support the
+distinction.
+It tells you, with numbers attached, exactly which side of the line you personally are standing on.
+
+==== SCENE 07 — STUDY SIX: THE SIX BEHAVIORS ====
+
+In January, two researchers at Anthropic ran an experiment on people who write software for a living.
+Judy Hanwen Shen and Alex Tamkin. The paper is called "How AI Impacts Skill Formation," posted to
+arXiv on the third of February this year. Not students. Fifty-two working developers — recruited
+through a crowd-work platform, paid a hundred and fifty dollars, most of them between twenty-five and
+thirty-five, most with a bachelor's degree, all of them coding in Python at least once a week.
+Twenty-six with AI assistance, twenty-six without. Their task was to learn a Python library called
+Trio that none of them had used before — which is, if you write software, roughly what your job is.
+Then both groups took a fourteen-question quiz, worth twenty-seven points, with no AI allowed.
+The AI group scored four point one-five points lower on that twenty-seven point quiz. The authors
+put it at a seventeen percent difference — about two grade points. Cohen's d of zero point
+seven-three-eight, p equals point zero one. This was pre-registered too; the registration is public.
+Hold that against Barcaui: zero point six-eight, Brazilian undergraduates, machine-learning concepts,
+forty-five-day surprise test. And this one: zero point seven-three-eight, professional developers,
+a Python library, immediate quiz.
+Different continents. Different people. Different subject. Different measurement. Effect size lands
+in the same place both times.
+That is what independent replication looks like, and it's the strongest single thing I can tell you
+in this video.
+But that's not the number that bothered me.
+The obvious defense of all of this is the trade. Fine — I learned less, but I got it done faster.
+That's an adult decision. Not everything has to be an education.
+So they measured the time.
+With AI: twenty-three minutes. Without AI: twenty-four point eight minutes.
+P equals zero point three-nine-one. Not significant. There was no meaningful time saving at all.
+
+They lost the skill and they didn't get the speed. And the researchers watched the screen recordings
+to work out why — some participants asked the assistant up to fifteen questions, or spent more
+than thirty percent of the total task time just composing queries. Whatever was saved on the
+writing was spent on the asking.
+Now here's the part that made me want to make this video. And here's where I have to be careful with
+you, because it is simultaneously the most useful thing in the paper and the least statistically
+solid.
+They didn't stop at "AI group versus no-AI group." They watched the screen recordings of every
+participant and sorted how people actually used the assistant into six distinct patterns. And the
+patterns have wildly different outcomes.
+Before I show you the table — the caveat. Twenty-six people were in the AI condition. Six patterns.
+That's roughly four people per pattern. This is a descriptive breakdown of a small sample, not
+the study's statistical finding. The seventeen percent is the finding. This is the authors showing
+their working.
+I'm showing it to you anyway, because a pattern you can recognize yourself in is worth more than a
+p-value you can't act on. Just hold it loosely.
+Bottom of the table. Iterative AI Debugging — throw the error back at the model until something
+works. Thirty-one minutes. Quiz score: twenty-four percent. The slowest approach and the worst
+outcome.
+Progressive AI Reliance — start off doing it yourself, hand over more and more as you get tired.
+Twenty-two minutes. Thirty-five percent.
+AI Delegation — hand the whole thing over. Nineteen and a half minutes. Fastest in the study.
+Quiz score: thirty-nine percent.
+Now the top three.
+Conceptual Inquiry — ask it to explain the idea, write the code yourself. Twenty-two minutes.
+Sixty-five percent.
+Hybrid Code-Explanation — ask for the code and the explanation of why it's that way. Twenty-four
+minutes. Sixty-eight percent.
+And at the top: Generation-Then-Comprehension. Let it generate, then make yourself understand
+what it produced before you move on. Twenty-four minutes. Eighty-six percent.
+
+Look at the two ends of that table.
+AI Delegation: nineteen and a half minutes, thirty-nine percent.
+Generation-Then-Comprehension: twenty-four minutes, eighty-six percent.
+Four and a half minutes. That's the entire difference in time. And it is worth more than double
+the understanding.
+The fastest way through was very nearly the worst way through.
+And look at what the two ends of that table have in common. Every one of those six patterns is a
+person using AI. All six. Nobody in that table refused the tool.
+So whatever separates eighty-six percent from thirty-nine percent, it is not the technology.
+
+Which means the question I have been asking for the last twenty minutes — is AI bad for learning —
+may have been the wrong question the entire time.
+
+==== SCENE 08 — THE DISTINCTION ====
+
+So here is the line, and I want to state it as plainly as I can.
+There are two completely different things happening, and we use one word for both of them.
+The first is AI built to teach you. The tutor with guardrails. The system designed so that you
+do the work and it manages the difficulty. That's the GPT Tutor arm — a hundred and twenty-seven
+percent, no lasting harm. That's the twenty-six randomized trials in the meta-analysis coming out
+positive. When AI is engineered as pedagogy, the evidence says it works.
+The second is AI doing your task. Not teaching. Finishing. And every study in that column points
+the same direction: Barcaui's eleven points, the seventeen percent below control, the twenty-four
+percent off the entrance exam, the developers losing the library.
+Same technology. Opposite sign. And the variable isn't the model — it's whether the work happened
+in your head or somewhere else.
+Now. Andrew Ng.
+I opened this video making it sound like he'd overreached, and I want to correct that, because when
+I went back through the transcript properly, he hadn't.
+Here's the full sentence, including the part that gets cut when it's quoted:
+"We should stop thinking of AI as helpful for learning. At least the vast majority of ways that
+the vast majority of people are using AI models today is absolutely terrible for learning."
+That middle clause is the whole distinction. He was making it the entire time.
+And I want to tell you how close I came to getting this wrong, because it's the most useful thing
+that happened while I was making this.
+The transcript I worked from was YouTube's automatic captions. They're approximate — they drop
+words, they double words, they mishear. When I first wrote this section, I had that sentence ending
+at "using AI models today." Full stop. Which made the qualifier look like the end of his thought.
+It isn't. The sentence keeps going: is absolutely terrible for learning. He's not softening the
+claim with that clause. He's scoping it — saying precisely which uses he means.
+So I'd taken a sentence and cut it three words early, in a way that changed what it meant — while
+writing a video about people taking sentences and cutting them early in ways that change what they
+mean. I only caught it because I went back and ran the audio through proper transcription instead of
+trusting the captions.
+
+He says it more cleanly thirty seconds earlier, and this is the version I'd put on a wall:
+"It's just so clear that LLMs, as they are most commonly used, are terrible for learning."
+Four words in the middle of that sentence — as they are most commonly used — and they carry the
+entire argument. And he adds, immediately: "I'm not saying there's no way to use it in a way that is
+good for learning. I think there are ways to use it that are good for learning."
+He is not contradicting himself when he takes a hundred million dollars to build a teaching company
+while warning you that AI damages learning. He's describing two different products. One of them is
+the thing he's building. The other is the thing you did this morning.
+And the reason he's credible on the second one is that he's a victim of it. He told that story on
+himself — the component he shipped and then couldn't rebuild six months later. The most
+accomplished AI educator alive, cognitively offloading a piece of his own craft and watching it not
+come back.
+So he wasn't wrong, and he wasn't overstating.
+He was compressed. He said the precise thing, and the precise thing has a qualifier in the
+middle of it, and qualifiers do not survive being quoted.
+
+Which, honestly, is most of what's wrong with how we talk about this technology. Not that people are
+lying. That the true sentence is nine words longer than the one that travels.
+And I should hold myself to the same standard, so let me be explicit about what this evidence does
+not say.
+It does not say AI makes you stupid. Nobody measured that.
+It does not say don't use it. The best-performing developers in that study used it — they just made
+themselves understand the output.
+The China study is a panel, not a trial, and it hasn't been peer-reviewed yet. The Kazakhstan
+classroom study I looked at has no control group at all, so I've left it out of the argument
+entirely.
+What the evidence supports is narrower than the headline, and more useful.
+
+==== SCENE 09 — THE VERDICT ====
+
+So: is AI terrible for learning? Here's my verdict, and it's the one the evidence will actually
+carry.
+No. But AI doing your work for you is — and that's how almost everybody uses it.
+Six studies. Two of them found AI genuinely helps, when it's built to teach and it refuses to hand
+over the answer. Four of them found real, replicated, medium-to-large harm when it's used to finish
+the task instead.
+The line between those two outcomes is not the model, the subscription tier, or the prompt. It's
+whether you did the thinking.
+And the uncomfortable number in all of this — the one I keep coming back to — is that eighty
+percent. Eighty percent of the AI users in that Chinese study showed the outsourcing fingerprint.
+Fast, correct, and learning nothing.
+That is not people abusing the tool. That is the tool working exactly as designed, being used
+exactly as intended, by people who have no idea it's happening — because every short-term signal
+says it's going great. The homework scores go up. The task gets done. The commit lands.
+The bill arrives two years later, and by then nobody connects it to anything.
+
+I'll leave you with the one number from all six papers that I think you can actually act on.
+Four and a half minutes.
+That's the gap between the developers who delegated the task and finished fastest, at thirty-nine
+percent — and the ones who let the AI generate it and then made themselves understand what it wrote,
+at eighty-six percent.
+Four and a half minutes, on a twenty-minute task, for more than double the retained skill.
+Nobody is asking you to do it the hard way. The evidence isn't nostalgic and neither am I. Every one
+of those top three groups used the AI.
+They just didn't let it be the last thing that happened.
+
+The next time it hands you something that works and you feel that small pull to move on — that's the
+moment. That's the whole thing. It costs about four minutes.
+And if you skip it, you'll get exactly what you asked for, and nothing else.
+
+==== SCENE 10 — CTA ====
+
+One thing before you go, and then I'll get out of your way.
+Every number in this video came from a paper I opened and read. All six are on screen now, with
+journals, dates and DOIs. If you think I've got one of them wrong, go and check it — that's not a
+rhetorical invitation, that's the entire point of the channel.
+Because that's what this is going to be. Somebody makes a confident claim about AI with money riding
+on the answer, and I go and do the arithmetic. Sometimes the claim will hold up. When it does, I'll
+make that video too — otherwise the ones where it doesn't aren't worth anything.
+If that's useful to you, subscribe, and I'll see you on the next one.
+

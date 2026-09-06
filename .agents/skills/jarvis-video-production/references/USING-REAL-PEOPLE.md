@@ -11,6 +11,40 @@ a specific asset, take the conservative option.
 - ❌ **AI-GENERATING / faking** a real person (a synthetic "Sam Altman" image or voice) = banned.
   Likeness + fabrication + credibility risk. Never generate a real person's face or voice.
 
+## RULE 0 — AUTO-CAPTIONS ARE NOT A SOURCE (added 2026-09-06, learned the hard way)
+
+**Any quote that will be SPOKEN on camera or SHOWN on screen must be verified against the AUDIO
+before it enters the script.** YouTube auto-captions are a search-and-triage tool, never a quotation
+source. They drop words, double words, and mishear — silently.
+
+```bash
+# extract just the passage, then transcribe it properly
+ffmpeg -y -ss MM:SS -to MM:SS -i source.mp4 -c copy clip.mp4
+python3 -c "import sys;sys.path.insert(0,'$HOME/.claude/skills/watch/scripts');
+from pathlib import Path; import whisper as W;
+print(W.transcribe_video(Path('clip.mp4'), Path('a.mp3'))[0])"
+```
+
+**What this caught on V01** (the first video it was applied to):
+- Auto-caption: *"…the vast majority majority of your people are using AI models today"* — garbled.
+  I cleaned it into a sentence that **ended there**.
+- Actual audio: *"…the vast majority of people are using AI models today **is absolutely terrible for
+  learning.**"*
+- The quote had been cut three words early in a way that changed its force — inside a video about
+  people cutting quotes early in ways that change their force.
+- The same pass also recovered a **better** quote that the captions had buried, and fixed a dropped
+  "if" and a misattributed dollar figure.
+
+**Why this is Rule 0 and not Rule 7:** this is the repo's own doctrine applied to quotation —
+*verify against the artifact, never against the document.* The audio is the artifact. A caption file
+is a document about the artifact. Getting a quote wrong is the one error that costs a
+commentary channel its whole position, and it is cheap to prevent: about two minutes per passage.
+
+**Save the verified transcript beside the script** (`ng-quotes-VERBATIM-whisper.txt` is the V01
+pattern) and read quotes from *that* file, never from the caption dump used during research.
+
+---
+
 ## The 6 rules (apply to any real-person asset)
 1. **Real, never fabricated.** Only use footage/photos/quotes that actually exist. (Same standard as
    our GROUNDED verification — the quote/clip must trace to a real, cited source.)
