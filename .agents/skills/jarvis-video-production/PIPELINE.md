@@ -54,6 +54,29 @@ fact-check into a claim-source map. Scaffold the folder with `tools/scaffold-scr
 `01-script/` + a `scenes.json` that Step 1 consumes). Output: `VO-ONLY.md` (Terry records it in
 HeyGen) + `scenes.json`. If a finished script + take already exist, skip to Step 1.
 
+## Step 0e — PARAGRAPH-TAKE ASSEMBLY (presenter-recorded channels)  →  `tools/assemble-takes.py`
+
+For channels where Terry records himself rather than pasting into HeyGen. He reads from
+`VO-RECORD.md` (numbered 2–3 sentence paragraphs), and on any fluff repeats the **whole paragraph
+from its first word**. The assembler keeps the **last** take of each and cuts the rest.
+
+```bash
+python3 tools/assemble-takes.py --media take.mp4 --script VO-RECORD.md      # plan → takes-review.md
+python3 tools/assemble-takes.py --media take.mp4 --script VO-RECORD.md --apply
+python3 tools/assemble-takes.py --selftest --script VO-RECORD.md            # prove the alignment
+```
+
+**Read `takes-review.md` before `--apply`.** If a paragraph reports 1 take and you know you did 3,
+alignment slipped. `--apply` refuses to run while any paragraph is unmatched.
+
+**Measured behavior** (`--selftest`, synthetic retakes + transcription noise): exact take-count
+37/40 at 6% word noise, degrading to 24/40 at 20%. **Over-count is 0 at every level** — it never
+invents a take, so it cannot cut good audio. Failures are always under-counts, which leave a stray
+retake in the output for you to hear and trim by hand.
+
+**Discipline that makes it work:** restart from the paragraph's first word, never mid-sentence; leave
+~1 second of silence between takes. Cuts snap to detected silence.
+
 ## Step 1 — Intake / split  →  `tools/split-heygen.py`
 Split the HeyGen take into per-scene `assets/audio.mp3` + `transcript.json` (word-level,
 scene-relative) + `avatar.mp4` (avatar scenes) + `hyperframes.json`. It transcribes the whole take
