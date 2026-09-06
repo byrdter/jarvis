@@ -45,6 +45,20 @@ pattern) and read quotes from *that* file, never from the caption dump used duri
 
 ---
 
+## RULE 0b — GENERATED IMAGERY MUST BE LABELED ON SCREEN (added 2026-09-06)
+
+AI-generated b-roll is **preferred** over library search — it gives exactly the frame the beat needs
+(Terry, 2026-09-06). It is unrestricted for anything **illustrative**, and forbidden for anything
+offered as **evidence**. Evidence is always a real capture of a real document.
+
+**But the viewer cannot tell the difference, so tell them.** Any generated image that could read as
+documentary photography carries a small persistent **`ILLUSTRATION`** mark. Real captures carry the
+opposite: source, page, DOI.
+
+This is not legal caution — it is the channel's own promise. A video whose thesis is *you can check
+what I show you* cannot contain synthetic images that look like proof and aren't marked. The rule
+still stands that we never generate a real person's face or voice (below); this extends it to scenes.
+
 ## The 6 rules (apply to any real-person asset)
 1. **Real, never fabricated.** Only use footage/photos/quotes that actually exist. (Same standard as
    our GROUNDED verification — the quote/clip must trace to a real, cited source.)
