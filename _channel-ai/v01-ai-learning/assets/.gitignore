@@ -1,0 +1,6 @@
+# Paid Higgsfield originals, superseded by the free Codex set.
+# Kept locally for comparison; regenerable from prompts/ at zero cost, so not carried in git.
+alt-higgsfield/
+# Codex drops this into any directory it runs in.
+AGENTS.md
+_gen.log

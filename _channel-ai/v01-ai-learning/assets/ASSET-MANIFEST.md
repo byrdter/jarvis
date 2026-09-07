@@ -6,7 +6,16 @@ real document. Anything **illustrative** is generated. A viewer must never have 
 | | |
 |---|---|
 | 📄 **EVIDENCE — REAL** | Captured from the actual PDF at 200dpi. Never generated, never retouched. |
-| 🎨 **ILLUSTRATION — GENERATED** | Higgsfield `soul_location`, 2048×1152. Carries no evidentiary weight. |
+| 🎨 **ILLUSTRATION — GENERATED** | **Codex `image_gen__imagegen` (gpt-image-2), 1672×941, $0.** Carries no evidentiary weight. |
+
+> ### Generation is free — never pay for it
+> All 24 stills are generated through `codex exec` on Terry's ChatGPT subscription at **zero cost**.
+> Prompts live in `prompts/*.txt`; `_gen.sh` regenerates any missing slug and skips what exists, so a
+> run is resumable and the whole set is reproducible at any time for nothing.
+>
+> **These were first generated through the paid Higgsfield MCP (~3 credits) before checking for the
+> free path — my error, 2026-09-07.** The paid set is archived in `alt-higgsfield/` (gitignored) and
+> superseded. Rule now lives in `SKILL.md` and memory: **check for the free path before spending.**
 
 ---
 
@@ -41,14 +50,26 @@ real document. Anything **illustrative** is generated. A viewer must never have 
 | 06 | `s06-a-teacher-points-not-writes`, `s06-b-student-working-it-out`, `s06-c-stack-of-papers-26-trials` | **`s06-a` is the reversal's key image** — a hand pointing, the student's pencil still in the student's hand |
 | 07 | `s07-a-dev-reading-carefully`, `s07-b-dev-moving-on-fast`, `s07-c-six-workstations-v2`, `s07-d-stopwatch-keyboard` | **use `v2`** — v1 rejected, kept as `_rejected-*` for the record |
 
-**All 24 generated at 0.12 credits each ≈ 3 credits total.**
+**All 24 regenerated free via Codex on 2026-09-07 and swapped in** (`swap-in-codex.sh`).
+Native 1672×941 (1.78:1) — marginally under the paid set's 2048×1152, immaterial for stills that are
+punched into and animated rather than shown at native resolution.
 
 ### Quality pass — I looked at them, I did not trust the job status
 
-Of 8 inspected: **5 excellent, 2 usable with a crop, 1 rejected and regenerated.**
-- ❌ `s07-c` v1 — generic open office, readable terminal text on screens, no distinct postures, poor diversity. Regenerated.
-- ⚠️ `s03-d` — garbled AI text in the top-right corner. `d2` generated clean.
-- ⚠️ `s04-b1` — read as "closing a laptop," not "the tool being removed." `b2` is better.
+**Paid set (Higgsfield), 8 inspected:** 5 excellent, 2 usable with a crop, 1 rejected.
+- ❌ `s07-c` v1 — generic open office, readable terminal text, no distinct postures, poor diversity.
+- ⚠️ `s03-d` — garbled AI text top-right. `d2` was generated clean.
+- ⚠️ `s04-b1` — read as "closing a laptop," not "the tool being removed." `b2` is the better idea.
+
+**Free set (Codex), 4 inspected — better on every one compared directly:**
+- `s06-a-teacher-points-not-writes` — the pointing finger is unambiguous and the student's own pencil
+  is visible at frame right. The reversal's whole argument in one image.
+- `s04-b2-desk-absence` — the clean rectangle in the dust reads instantly; no VO needed to explain it.
+- `s07-c-six-workstations-v2` — **six** distinct postures, varied people, and the monitors are pure
+  abstract color fields with **no text at all**. Best version of this shot by a distance.
+- `s03-bg-library-dusk` — real depth: brass lamps against blue dusk through tall windows.
+
+**Conclusion: the free path is not a compromise.** It won every head-to-head.
 
 ---
 
