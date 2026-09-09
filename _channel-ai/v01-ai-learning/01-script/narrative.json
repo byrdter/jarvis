@@ -1,0 +1,39 @@
+{
+ "payoff": [
+  "No. But using AI to get your work done is",
+  "it isn't the tool",
+  "It was never the tool"
+ ],
+ "spine": [
+  "learn",
+  "learns",
+  "learned",
+  "learning",
+  "remember",
+  "remembered",
+  "know",
+  "knew",
+  "knows",
+  "knowledge",
+  "understand",
+  "understood",
+  "understanding",
+  "retain",
+  "retained",
+  "retention",
+  "forget",
+  "forgot",
+  "forgotten",
+  "skill",
+  "skills",
+  "rebuild",
+  "recall"
+ ],
+ "cta": [
+  "subscribe",
+  "like button",
+  "notification bell",
+  "send it to them"
+ ],
+ "runtime": 1578.5
+}

@@ -1,5 +1,25 @@
 # V01 — CLAIM-SOURCE MAP (PIPELINE Step 0d)
 
+> ## ⚠️ REWRITTEN 2026-09-08 — the script changed register
+>
+> The script no longer walks study by study. It states **five findings about the viewer**, with the
+> evidence in passing. **Every statistic was removed from the VO** — no p-values, no effect sizes, no
+> confidence intervals, no sample sizes, no journal names spoken. About **seven numbers** survive in
+> the whole video.
+>
+> **That makes this file more important, not less.** It is now the only place the full evidence lives
+> in prose, and it is where anyone checking the video's claims should be sent. The scene numbers below
+> are the NEW ones (9 scenes).
+>
+> | old | new |
+> |---|---|
+> | 01 cold open · 02 not-about-school | **01** cold open (Ng's loss → Terry's) · **02** the line nobody draws |
+> | 03 Barcaui · 04 Bastani · 05 CEPR | **03** Finding 1 · **04** Finding 2 *(+ the single caveat)* · **05** Finding 3 |
+> | 06 reversal · 07 Shen & Tamkin | **06** Finding 4 (de-skilling) · **07** Finding 5 (the turn) |
+> | 08 distinction · 09 verdict · 10 CTA | **08** verdict · **09** CTA (HyperFrames, no presenter) |
+>
+> **The six sources and every verified figure below are unchanged** — only where they appear moved.
+
 Every spoken or on-screen factual claim, mapped to its source. **Confidence** is about the *claim as
 stated in the script*, not the quality of the paper.
 
@@ -145,6 +165,17 @@ stated in the script*, not the quality of the paper.
 | Six citations on screen with journals, dates, DOIs | The table at the top of this file | ✅ Build the endcard from it |
 
 ---
+
+## What changed in the VO — read before recording
+
+- **Spoken numbers, entire video:** *eight million · nearly half · twenty-six thousand · two years ·
+  eighty-one percent · eighty-six against thirty-nine · four and a half minutes.* Nothing else.
+- **Never spoken:** t-statistics, p-values, Cohen's d, confidence intervals, sample sizes, "randomized
+  controlled trial", "pre-registered", "meta-analysis", and every journal name.
+- **The caveat is now ONE paragraph**, in Scene 04, ending *"that's the last time I'll qualify it."*
+  It still names the peer-review status of the Chinese paper out loud. **That line is not optional.**
+- **Everything struck from the VO stays true and stays on screen** — the papers appear as document
+  captures, and the six citations hold as the final frame of Scene 09.
 
 ## Pre-record checklist
 
