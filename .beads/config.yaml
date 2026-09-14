@@ -54,3 +54,13 @@
 # - github.repo
 
 sync.remote: "git+https://github.com/byrdter/jarvis-beads.git"
+
+# JSONL auto-export DISABLED 2026-09-14. Nested form, as documented in the commented
+# template above (flat dotted `backup.enabled:` is NOT honored — verified).
+# Why: auto-export unconditionally runs `git add .beads/issues.jsonl`, but that file is
+# intentionally untracked (.beads/.gitignore:78) because byrdter/jarvis58 is PUBLIC and the
+# export carries memories with strategy, revenue figures and internal paths.
+# DO NOT `git add -f` it. Off-machine backup is the private Dolt remote byrdter/jarvis-beads
+# (`bd dolt push`); .beads/ syncs via Dropbox; on-demand snapshot is `bd export -o <file>`.
+backup:
+  enabled: false
