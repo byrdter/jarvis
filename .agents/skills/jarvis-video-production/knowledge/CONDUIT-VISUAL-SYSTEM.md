@@ -3,7 +3,7 @@
 **Status:** current standard, faceless mode. Derived from the **Messi / "Secretly an AI Investor"**
 master (2026-07-26) — the reference build. Read with `CITATION-CARD-FORMAT.md` (assembly + QC
 mechanics) and `RETENTION-AND-HOOKS.md` (scripting). The `.claude` mirror is
-`.claude/rules/video-production-standard.md`.
+`knowledge/VIDEO-PRODUCTION-STANDARD.md`.
 
 This doc answers: *what do I put on screen, when, and why that and not a text card.*
 

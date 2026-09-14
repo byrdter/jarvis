@@ -7,7 +7,7 @@ immediately after: **what artifact do the words live inside?**
 Written 2026-07-31 against the live `hyperframes catalog` (**138 installed items** — older docs say
 142; the binary is authoritative). Verified by running the CLI, not by reading a manifest.
 
-> House rule this enforces (`.claude/rules/video-production-standard.md` §9 rule 4):
+> House rule this enforces (`knowledge/VIDEO-PRODUCTION-STANDARD.md` §9 rule 4):
 > **No naked text on screen.** Information lives inside an artifact — a real document, a citation card,
 > a webpage, a terminal/IDE, a data-viz graphic, an org chart. Naked centered or lower-third text is a
 > LAST resort, permitted only for a true title or a landing line.

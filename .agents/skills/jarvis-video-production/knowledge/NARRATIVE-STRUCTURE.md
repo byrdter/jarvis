@@ -347,4 +347,4 @@ This is not a better idea. It is the same idea, withheld.
 
 Related: `RETENTION-AND-HOOKS.md` (the first 30s) · `CONDUIT-VISUAL-SYSTEM.md` (the frame) ·
 `BYRDDYNASTY-CHANNEL-AUDIT.md` (the numbers) · `tools/teardowns/` (other people's proven shapes) ·
-`.claude/rules/video-production-standard.md` §1–§3.
+`knowledge/VIDEO-PRODUCTION-STANDARD.md` §1–§3.

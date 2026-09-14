@@ -1,6 +1,6 @@
 # Word-synced citation card — the LA "karaoke" technique
 
-Implements `.claude/rules/video-production-standard.md` §10.2. A cream evidence card whose quote
+Implements `knowledge/VIDEO-PRODUCTION-STANDARD.md` §10.2. A cream evidence card whose quote
 **highlights word-by-word in lockstep with the VO reading it** (pending words dim, each snaps to full
 ink at its VO word-start). Built + pixel-verified 2026-07-31.
 

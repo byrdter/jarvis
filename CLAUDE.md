@@ -105,139 +105,31 @@ jarvis/                          # Public GitHub repository
 
 ## Development Phases
 
-### Phase 0: Terminal Foundation ✅ COMPLETE (Jan 24, 2026)
-- [x] Claude Code as brain via terminal
-- [x] Context system operational (progressive disclosure working)
-- [x] Market Analysis skill (with real data integration)
-- [x] Memory system working (autonomous updates)
-- [x] **Real market data integration** (CLI tool with yfinance)
-- [x] **Live market analysis** (detected first MACD signal in SPY)
-- [x] **Level 1 patterns documented** (ready for extraction)
+Phases 0–3B are complete. Full details in [`PHASES-ARCHIVE.md`](PHASES-ARCHIVE.md).
 
-**Key Achievement:** JARVIS detected first real market signal (MACD divergence)
-**Documentation:** See `../jarvis-private/research/OPTIONS-A-B-C-D-SUMMARY.md` for complete journey
+| Phase | Shipped | One-liner |
+|---|---|---|
+| 0 | Jan 2026 | Terminal foundation, market data, first MACD signal |
+| 1 | Feb 2026 | Full Asset Revesting workflow (screener → monitor → tracker) |
+| 1-Ext | Feb 2026 | Content creation domain, 234+ pieces, multi-platform |
+| 2 | Apr 2026 | Agent SDK, vector search, Gmail/Calendar, $0 cost |
+| 3A | Apr 2026 | Persistent Bun server, CLI subprocess, 24/7 execution |
+| 3B | Apr 2026 | Daily reflection, morning briefings, auto-memory |
 
-### Phase 1: Investment Domain Complete ✅ COMPLETE (Feb 13, 2026)
-- [x] **ETF Screener skill** - Screen 14 ETFs, rank Stage 2 opportunities
-- [x] **Portfolio Builder skill** - Construct allocation with position sizing
-- [x] **Portfolio Monitor skill** - Daily stop checks + weekly reviews
-- [x] **Performance Tracker skill** - Monthly strategy validation
-- [x] **Market Insights skill** - Automated Chris Vermeulen YouTube analysis
-- [x] **Obsidian Integration** - Multi-domain second brain (7 domains)
-- [x] **Alpaca API Integration** - 200 SMA capable, 256+ days data
-- [x] **$100K Portfolio Allocation** - QQQ $25K, USO $10K conditional, BIL $65K
-- [~] ~~**Heartbeat System** - Fully autonomous proactive execution~~ **DELETED 2026-08-02.**
-  The python scaffold (`scripts/heartbeat/`) and its four launchd jobs were removed. They
-  never executed successfully — 129 TCC failures, 0 successes, 0-byte stdout logs — and could
-  not have worked regardless: `run_skill()` invoked `skills/<name>/run.py` but only 3 of 21
-  skills have one, and 4 of the 10 skills it called never existed. Its working functions are
-  covered elsewhere (news/YouTube/arXiv via `~/bin` daily jobs; morning briefing + memory
-  consolidation via the agent-sdk daily reflection). **Not covered by anything today: ETF
-  stage scan, stop-loss guard, monthly performance tracking.** Recover with
-  `git show d1e29a1:scripts/heartbeat/executor.py`.
+**Not covered by anything today:** ETF stage scan, stop-loss guard, monthly performance tracking.
 
-**Key Achievement:** Complete Asset Revesting workflow automated + expert validation
-**Documentation:** `../jarvis-private/context/memory/work-status.md`; audit + rationale in
-`reports/JARVIS-SYSTEM-AUDIT-2026-08-01.md`
-
-#### Phase 1 Extended: Content Creation Domain ✅ COMPLETE (Feb 22, 2026)
-- [x] **10-Day Promotional Blitz Content Library** - 18,000+ lines of pre-written content
-- [x] **Image Catalog System** - 270 images analyzed (95%+ coverage, 90%+ cost savings)
-- [x] **URL Management System** - Centralized in .env + automated replacement (134 placeholders)
-- [x] **Manual Posting Strategy** - Complete 17-day tactical schedule for 7 platforms
-- [x] **Launch Ready** - Monday, February 23, 2026 @ 7:00 AM
-  - 234+ content pieces (YouTube, Instagram, TikTok, LinkedIn, Twitter/X, Pinterest, Substack)
-  - 70+ pieces complete and ready for copy/paste
-  - Templates for remaining pieces (~3 hours to finish)
-
-**Key Achievement:** Complete promotional blitz content library created - multi-platform distribution ready
-**Documentation:** See `apps/content-creation/video-generator/projects/byrddynasty/content-library/LAUNCH-READY-SUMMARY.md`
-
-### Phase 2: Agent SDK + Vector Search + API Integrations ✅ COMPLETE (Apr 1, 2026)
-- [x] **Phase 2A:** Bun runtime + TypeScript environment
-- [x] **Phase 2B:** Hybrid vector + keyword search (local embeddings, $0 cost)
-- [x] **Phase 2C:** Gmail + Calendar integrations (OAuth, programmatic access)
-- [x] **Phase 2D:** 24/7 heartbeat + specialized subagents
-
-**Key Achievement:** Zero-cost autonomous agent with intelligent memory search and direct API integrations
-**Documentation:** See `../jarvis-private/research/PHASE-2-COMPLETE.md` and `agent-sdk/` (its own repo: github.com/byrdter/jarvis_phase2)
-
-**Capabilities Added:**
-- Semantic vector search (70% vector + 30% keyword, ~60-200ms, $0 cost)
-- Read emails programmatically (search, filter, check broker alerts)
-- Access calendar events (today, upcoming, earnings calendar)
-- 24/7 autonomous monitoring (survives reboots, CLI-first, $0/month)
-
-### Phase 3: Autonomous Intelligence & Remote Access ⏳ IN PROGRESS (Apr 4, 2026)
-
-#### Phase 3A: Agent SDK ✅ COMPLETE (Apr 4, 2026)
-- [x] **Persistent Bun server** - 24/7 execution on port 3000
-- [x] **CLI subprocess approach** - Using Claude Code CLI (Cole Medin method)
-- [x] **HTTP/WebSocket APIs** - Remote query endpoints
-- [x] **Event loop** - Time-based triggers (8 AM, 9:30 AM, 4 PM)
-- [x] **Execution logging** - SQLite database tracking
-- [x] **$0/month cost** - OAuth token (no API charges)
-
-**Key Achievement:** True persistent autonomous agent using CLI subprocesses instead of expensive API calls  
-**Documentation:** See `../jarvis-private/docs/phases/PHASE-3A-COMPLETE.md` and `../jarvis-private/docs/phases/PHASE-3-CLI-SUBPROCESS-APPROACH.md`
-
-#### Phase 3B: Daily Reflection ✅ COMPLETE (Apr 4, 2026)
-- [x] **8 AM automatic reflection** - Reviews yesterday's logs
-- [x] **Learning extraction** - JARVIS analyzes patterns, extracts insights
-- [x] **Memory file updates** - Auto-updates learnings.md and work-status.md
-- [x] **Morning briefing** - Market + Portfolio + Calendar + Email + Priorities
-- [x] **Zero manual intervention** - Self-improving AI that learns from every execution
-
-**Key Achievement:** JARVIS manages its own memory and delivers actionable morning intelligence daily  
-**Documentation:** See `../jarvis-private/docs/phases/PHASE-3B-COMPLETE.md`
-
-**Capabilities Added:**
-- CLI subprocess execution (full JARVIS context, $0 cost)
-- Daily learning cycle (3-7 insights per day)
-- Automatic memory management (no human updates needed)
-- Morning briefings (portfolio alerts, priorities, calendar awareness)
-
-#### Phase 3C: Remote Access 🔄 NEXT
+### Phase 3C: Remote Access 🔄 NEXT
 - [ ] Chat interface (Slack/Telegram bot for mobile access)
 - [ ] Push notifications for portfolio alerts
 - [ ] Natural language queries from anywhere
 
-#### Phase 3D: Voice Interface (Future)
+### Phase 3D: Voice Interface (Future)
 - Voice interface (Whisper + ElevenLabs + React frontend)
 
 ### Phase 4: Full Integration
 - Brokerage integration (Alpaca - if needed for trading)
 - Database persistence (Supabase)
 - Dashboard and reporting
-
-## Commands Reference
-
-```bash
-# Start JARVIS session
-claude
-
-# Continue previous session
-claude --continue
-
-# Resume specific session
-claude --resume
-
-# Run in YOLO mode (if not set in settings.json)
-claude --dangerously-skip-permissions
-```
-
-## Key Files to Read
-
-### Every Session
-1. `../jarvis-private/context/CLAUDE.md` - Context system orchestrator (always read first)
-2. `../jarvis-private/context/memory/work-status.md` - Current state and recent work
-
-### When Needed
-3. `../jarvis-private/context/projects/investments/CLAUDE.md` - Asset Revesting methodology
-4. `skills/market-analysis/SKILL.md` - When performing market analysis
-5. `../jarvis-private/context/tools/market-data-cli.md` - When using market data tool
-6. `../jarvis-private/context/memory/learnings.md` - Past insights and patterns
-7. `../jarvis-private/context/memory/user-preferences.md` - Terry's preferences
 
 ## Language: American English, always (Terry, 2026-08-24)
 
@@ -352,51 +244,11 @@ render); no static hold >5s (ambient motion + the freeze gate); VO-anchored timi
 hub `jarvis-video-production` (git-recoverable if ever needed). The old global `byrddynasty-video-production`
 skill is now a redirect to it. For one-off thumbnails/stills use `image-generation` + `cli-tools/make-text-card.py`.
 
-## Important Documentation
+## Key References
 
-### For Understanding the System
-- **`README.md`** - Overview, architecture, getting started
-- **`../jarvis-private/research/LEVEL-1-PATTERNS.md`** - Domain-agnostic patterns (for extraction)
-- **`../jarvis-private/MiscGuides/NINE-SKILLS-MAPPING.md`** - Connection to Nine Essential Skills framework
-- **`../jarvis-private/research/OPTIONS-A-B-C-D-SUMMARY.md`** - Complete Phase 0 development journey
-
-### For Context Recovery (If Session Lost)
-- `../jarvis-private/context/memory/work-status.md` - What was completed, what's next
-- `../jarvis-private/context/memory/learnings.md` - All accumulated knowledge
-- `../jarvis-private/research/SESSION-ACCOMPLISHMENTS.md` - Latest session achievements
-
-## Current Capabilities
-
-### Market Analysis
-- **Real-time data** via `jarvis-price` CLI tool (Yahoo Finance, 15-20 min delay)
-- **4-stage detection** (Accumulation, Markup, Distribution, Decline)
-- **Technical indicators** (SMAs, RSI, MACD)
-- **Composite scoring** with grades
-- **Actionable recommendations** with entry/exit points
-
-### Tools Available (Phase 0)
-- `jarvis-price indicators SPY --json` - Get all technical indicators
-- `jarvis-price stage QQQ --json` - Quick stage assessment
-- `jarvis-price current SYMBOL` - Current price and market data
-- `jarvis-price history SYMBOL --days N` - Historical data
-
-See `../jarvis-private/context/tools/market-data-cli.md` for complete documentation.
-
-### MCP Integration (Phase 3+)
-- **Lazy loading enabled** in `.claude/settings.json` (`enableToolSearch: true`)
-- **Claude Code 2.17+** supports on-demand MCP tool loading
-- **Future expansion ready**: Can add 100+ MCP servers with zero context bloat
-- **Strategy**: Keep custom CLI tools for investment domain, add MCP servers for new domains (research, social, productivity)
-
-## What JARVIS Can Do Now
-
-1. **Analyze any stock/ETF** using Asset Revesting 4-stage framework
-2. **Detect market signals** from real Yahoo Finance data
-3. **Generate professional reports** saved to `../jarvis-private/reports/`
-4. **Update its own memory** after completing tasks
-5. **Learn from experience** via `learnings.md`
-6. **Maintain continuity** across sessions
-7. **Ready for MCP expansion** when adding new domains (future)
+- **Context recovery:** `../jarvis-private/context/memory/work-status.md`
+- **Market data CLI:** `../jarvis-private/context/tools/market-data-cli.md` (`jarvis-price indicators SPY --json`)
+- **Asset Revesting:** `../jarvis-private/context/projects/investments/CLAUDE.md`
 
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
