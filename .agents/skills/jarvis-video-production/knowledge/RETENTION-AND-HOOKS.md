@@ -226,15 +226,29 @@ to explore…" is BANNED — one is a gap-pointer, the other is procedural.
 
 ---
 
-## 5. Shorts: 2 per video (the distribution wedge)
-Shorts **bypass the cold-start wall** that long-form is stuck behind, so they're the fastest path to
-subs for a small channel. **Every 8-min video gets 2 shorts (~60s, 9:16):**
-- Terry records each short's VO in HeyGen on a blank screen; the operator builds the 9:16 short by
-  **recutting the MAIN video's own visuals** (scenes + citation cards) to that VO, **burned-in
-  captions** (most watch muted), ending on the title lockup + a "WATCH THE FULL VIDEO ▸" + SUBSCRIBE.
-- Pick **2 distinct angles** so they don't cannibalize (e.g. story/mechanism vs thesis/verdict).
-- Same hook rules as §3 apply to the first *second* of a short — even harder (swipe test).
-See the V5 build: `SHORTS-V5.md` + `hyperframes-shorts/SHORTS-BUILD-SPEC.md`.
+## 5. Shorts: DON'T — superseded 2026-08-01 by first-party Studio data
+
+> **⛔ THE "2 SHORTS PER VIDEO" RULE IS DEAD.** It was set 2026-07-14/15 from a *diagnosis*
+> (shorts bypass the cold-start wall) with **no outcome data on shorts**. The Studio export of
+> 2026-08-01 measured the actual outcome across 73 shorts:
+>
+> | | Views | Impressions | Subs | Watch time |
+> |---|---|---|---|---|
+> | Long-form (95) | 5,798 | 85,833 | **109** | **278 h** |
+> | Shorts (73) | 4,091 | 7,646 | **4** | **8 h** |
+>
+> **Shorts were 41% of views and 1.4% of the value.** 73 shorts produced 4 subscribers and
+> 8 watch-hours. Source: `Byrddynasty channel audit — first-party Studio export, 2026-08-01`,
+> which is the authoritative doc.
+>
+> **The rule now:** do not build shorts as a default deliverable. The audit's only carve-out is
+> *"or make them only as trailers for a long-form that exists"* — an option, not an obligation,
+> and one that has never been measured on its own. Anyone re-proposing a shorts program needs
+> new data, not this section.
+>
+> **What the same audit says the lever actually is:** CTR was fine (July median 3.70%, second-best
+> on record). **Impressions/video collapsed 7.8× and watch-time/video collapsed 14×.** The
+> constraint is retention, not distribution — which is what §1–§4 are for.
 
 ---
 
