@@ -5,7 +5,10 @@ Uses whisper-cli (whisper.cpp) with ggml-base.en, -ml 1 -sow for word-level outp
 """
 import json, subprocess, sys, os, tempfile
 
-MODEL = os.path.expanduser("~/.whisper-models/ggml-base.en.bin")
+MODEL = next((os.path.expanduser(f"~/.whisper-models/{m}") for m in
+              ("ggml-base.en.bin", "ggml-small.en.bin", "ggml-large-v3-turbo.bin")
+              if os.path.exists(os.path.expanduser(f"~/.whisper-models/{m}"))),
+             os.path.expanduser("~/.whisper-models/ggml-base.en.bin"))
 
 def main():
     src, out = sys.argv[1], sys.argv[2]
@@ -16,7 +19,8 @@ def main():
                         "-ac", "1", "-ar", "16000", "-vn", wav], check=True)
         oj = os.path.join(td, "whisper")
         subprocess.run(["whisper-cli", "-m", MODEL, "-f", wav,
-                        "-ml", "1", "-sow", "-oj", "-of", oj],
+                        "-ml", "1", "-sow", "-oj", "-of", oj,
+                        "-ng"],   # CPU only: Metal/GPU decodes garbage on the Intel MacBook (2026-10-23)
                        check=True, capture_output=True)
         data = json.load(open(oj + ".json"))
     words = []

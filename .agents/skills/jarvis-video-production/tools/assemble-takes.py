@@ -40,8 +40,43 @@ def load_paragraphs(p):
         out.append({"id": m.group(1), "text": m.group(2).strip(), "words": norm(m.group(2))})
     return [x for x in out if x["words"]]
 
+def transcribe_local(media, workdir):
+    """Free, offline fallback: whisper.cpp's whisper-cli with word-level output (-ml 1).
+    Model: $WHISPER_MODEL, else the best ggml model found in ~/.whisper-models."""
+    import shutil, tempfile
+    if not shutil.which("whisper-cli"):
+        sys.exit("No transcriber: neither the watch skill nor whisper-cli is installed.")
+    model = os.environ.get("WHISPER_MODEL")
+    if not model:
+        for name in ("ggml-large-v3-turbo.bin", "ggml-small.en.bin", "ggml-base.en.bin"):
+            p = os.path.expanduser(f"~/.whisper-models/{name}")
+            if os.path.exists(p): model = p; break
+    if not model: sys.exit("whisper-cli found but no model in ~/.whisper-models")
+    print(f"[takes] local whisper.cpp · {Path(model).name}")
+    with tempfile.TemporaryDirectory() as td:
+        wav = os.path.join(td, "audio.wav")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(media), "-ac", "1", "-ar", "16000", "-vn", wav], check=True)
+        oj = os.path.join(td, "w")
+        # -ng = CPU only. On the Intel MacBook (i9-9880H) the default Metal/GPU path decodes to
+        # garbage ("the the the", "0 0 0") on real speech; CPU is correct. Verified 2026-10-23.
+        subprocess.run(["whisper-cli", "-m", model, "-f", wav, "-ml", "1", "-sow", "-oj", "-of", oj, "-ng",
+                        "-t", str(os.cpu_count() or 4)], check=True, capture_output=True)
+        data = json.load(open(oj + ".json"))
+    flat = []
+    for seg in data["transcription"]:
+        ws = norm(seg["text"])
+        if not ws: continue
+        t0, t1 = seg["offsets"]["from"] / 1000.0, seg["offsets"]["to"] / 1000.0
+        step = (t1 - t0) / len(ws)
+        for i, w in enumerate(ws):
+            flat.append({"w": w, "t0": t0 + i * step, "t1": t0 + (i + 1) * step})
+    return flat
+
 def transcribe(media, workdir):
-    """Whisper with word timestamps via the watch skill's client."""
+    """Whisper with word timestamps via the watch skill's client; falls back to local whisper.cpp
+    (the watch skill isn't installed on every machine — added 2026-10-23 on the travel Mac)."""
+    if not os.path.isdir(os.path.expanduser("~/.claude/skills/watch/scripts")):
+        return transcribe_local(media, workdir)
     sys.path.insert(0, os.path.expanduser("~/.claude/skills/watch/scripts"))
     cfg = os.path.expanduser("~/.config/watch/.env")
     if os.path.exists(cfg):
@@ -94,6 +129,21 @@ def best_match(words, lo, hi, tgt, probe, thresh):
             return i, full
     return None, 0.0
 
+def restart_point(words, i, tgt, k=4):
+    """If the speaker started the line, stopped, and restarted it from the top, return the index of
+    the restart; otherwise i. Requires the first k words to recur within one line-length, and the
+    words before the recurrence to be (mostly) an opening fragment of the line itself."""
+    head = tgt[:k]
+    if len(head) < 3: return i
+    best = i
+    for j in range(i + 2, min(i + len(tgt), len(words) - k)):
+        if difflib.SequenceMatcher(None, [w["w"] for w in words[j:j+k]], head).ratio() < 0.75:
+            continue
+        frag = [w["w"] for w in words[i:j]]
+        if difflib.SequenceMatcher(None, frag, tgt[:len(frag)]).ratio() >= 0.7:
+            best = j
+    return best
+
 def find_takes(words, paras, thresh, lookahead):
     """Monotonic walk. Takes of one paragraph are consecutive, so after the first
     match we keep looking in a tight forward window; each accepted take must clear
@@ -106,6 +156,11 @@ def find_takes(words, paras, thresh, lookahead):
         while scan < len(words):
             i, full = best_match(words, scan, scan + wide, tgt, probe, thresh)
             if i is None: break
+            # A false start ("In September 2026, the unemp— … In September 2026, the unemployment
+            # rate…") clears the threshold from its first word, so the take would start on the
+            # stumble. If the line's opening words occur AGAIN shortly after i, and everything
+            # between is a prefix of the line, the real take starts at the restart. (2026-10-23)
+            i = restart_point(words, i, tgt)
             end = min(len(words) - 1, i + n - 1)
             takes.append((i, end, round(full, 3)))
             scan = end + 1
@@ -123,13 +178,37 @@ def silences(media, workdir, noise="-32dB", dur=0.28):
     en = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", out)]
     return sorted(zip(st, en + [None]*(len(st)-len(en))), key=lambda x: x[0])
 
-def snap(t, sils, before=True, window=1.2):
-    best = t
+def snap(t, sils, before=True, pad=0.12, media_end=None):
+    """Move a cut into the nearest pause. Word timestamps from whisper.cpp can be ~1s off, so a cut
+    placed on a word edge clips words; a cut placed in a pause never does.
+    keep-in  → just before speech resumes at the END of the nearest preceding pause;
+    keep-out → just after speech stops at the START of the nearest following pause.
+    Pauses of ≥0.5s are preferred over the short ones between sentences inside a line.
+    (Rewritten 2026-10-23: the old version only snapped when the estimate already sat inside a pause.)"""
+    # whisper.cpp word times run LATE on CPU (measured 0.5–2s on 2026-10-23, both on first and last
+    # words), so search a window centred ~0.8s EARLIER than the estimate.
+    centre, half = t - 0.8, 1.8
+    cands = []
     for s0, s1 in sils:
-        if s1 is None: continue
-        if before and s0 - window <= t <= s1 + 0.05: best = max(best, (s0+s1)/2)
-        if (not before) and s0 - 0.05 <= t <= s1 + window: best = min(best, (s0+s1)/2)
-    return best
+        if s1 is None: s1 = s0 + 0.3
+        edge = s1 if before else s0
+        if abs(edge - centre) <= half:
+            cands.append((s1 - s0 < 0.5, abs(edge - centre), s0, s1))
+    if not cands:
+        if before and t <= 2.5: return 0.0                       # speech starts at the top of the file
+        if not before and media_end and media_end - t <= 2.5: return media_end   # last line of the file
+        return t - pad if before else t + pad
+    short_only, _, s0, s1 = min(cands)
+    if short_only and not before and media_end and media_end - t <= 2.5:
+        return media_end      # only sentence-gaps nearby and the file is ending: keep to the end
+    return max(s0, s1 - pad) if before else min(s1, s0 + pad)
+
+def aligned_end(words, s_i, tgt):
+    """Index of the transcript word aligned to the line's LAST matched word. Using s_i + n - 1
+    drifts whenever whisper splits or merges words ("4.2" → "4","2"), which clipped line endings."""
+    win = [w["w"] for w in words[s_i:s_i + int(len(tgt) * 1.5) + 6]]
+    blocks = [b for b in difflib.SequenceMatcher(None, win, tgt, autojunk=False).get_matching_blocks() if b.size]
+    return s_i + (blocks[-1].a + blocks[-1].size - 1 if blocks else len(tgt) - 1)
 
 def selftest(script):
     """Synthetic retakes + transcription noise. Proves the alignment behavior the
@@ -185,6 +264,7 @@ def main():
     print(f"[takes] {len(words)} words transcribed")
     res, unmatched = find_takes(words, paras, a.thresh, a.lookahead)
     sils = silences(media, wd)
+    media_end = float(subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0",str(media)],capture_output=True,text=True).stdout or 0) or None
     print(f"[takes] {len(sils)} silence regions")
 
     keeps, rows, retakes = [], [], 0
@@ -194,8 +274,11 @@ def main():
             rows.append((p["id"], 0, "—", "—", "⚠️ NOT FOUND", p["text"][:60])); continue
         if len(tk) > 1: retakes += len(tk) - 1
         s_i, e_i, sim = tk[-1]
-        t0 = snap(max(0.0, words[s_i]["t0"] - a.pad), sils, before=True)
-        t1 = snap(words[e_i]["t1"] + a.pad, sils, before=False)
+        e_i = aligned_end(words, s_i, p["words"])
+        t0 = max(0.0, snap(words[s_i]["t0"], sils, before=True, pad=a.pad))
+        t1 = snap(words[e_i]["t1"], sils, before=False, pad=a.pad, media_end=media_end)
+        if keeps and t0 < keeps[-1][1]:          # never overlap the previous kept line
+            t0 = keeps[-1][1]
         keeps.append((t0, t1))
         rows.append((p["id"], len(tk), f"{t0:8.2f}", f"{t1:8.2f}", f"sim {sim}", p["text"][:60]))
 
@@ -221,7 +304,7 @@ def main():
     outp = wd / f"{media.stem}-assembled.mp4"
     cmd = ["ffmpeg","-y","-i",str(media),
            "-vf",f"select='{sel}',setpts=N/FRAME_RATE/TB",
-           "-af",f"aselect='{sel}',asetpts=N/SR/STB", str(outp)]
+           "-af",f"aselect='{sel}',asetpts=N/SR/TB", str(outp)]
     print("[takes] cutting …"); subprocess.run(cmd, check=True)
     print(f"[takes] → {outp}")
 
