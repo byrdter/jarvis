@@ -378,7 +378,7 @@ around. The adapter (§5.1) tracks both and pauses factory laps when your intera
 ### 10.4 Revised build order (replaces §8 where they differ)
 | Step | Where | Est. |
 |---|---|---|
-| 1. Private `jarvis-brain` repo skeleton (SOUL/USER/memory/journal/topics/domains) | travel | 1 h |
+| 1. Private `jarvis-brain` repo, built fresh on Cole's template (§11 layout) | travel | 1–2 h |
 | 2. Remote Control + Telegram Channels on the laptop | travel | 1 h |
 | 3. Personality interview → `SOUL.md`, `USER.md` | travel | 1 h |
 | 4. Brain adapter + usage tracking (Claude / Codex / Ollama) | travel | 3 h |
@@ -398,3 +398,71 @@ around. The adapter (§5.1) tracks both and pauses factory laps when your intera
 - Channels overview: https://dev.to/alanwest/claude-code-channels-control-your-ai-coding-agent-from-telegram-2b0n
 - Zubair Trabzada prompt packs (in `~/Dropbox/AITerryByrd/`): hardware tiers and the local stack
 - The 26 videos (digest 2026-11-07): Cole Medin qIWB1yMsqRo, xOFkpf9KgKg, mjQlZrteMIY, YHKuUjicB3M · Ben AI pXHpUyC54uQ, Puzgmzv7t3Q, 82hCt3xH9Gc, d7VPnW1KsgA · Nate Herk bvGptCLDhyo, yysILVsfLFM · Nick Saraev LP7bfT4vOlo · Samin Yasar kG_CoTjCC98 · Ray Fu -SsAwIkW9rI · Zubair Trabzada OTb1DR47LSo, BgpRjk4Yoqk, acsXZP3SA6w, wJ3CFmzMbtA, U-LXFzu6sGU, YK-qJwmwjVc, 1ILapFgLf2E, Acw0NtkyNtM, qfpD1FWdyTs, ud7wzdiM0gk, 2od7tPirPYE, whIp1SOahOM, dCKBxcYGkoE (all youtube.com/watch?v=<id>)
+
+---
+
+## 11. Reorganize vs. start fresh: the answer (2026-11-08)
+
+**Neither a pure reorganization nor a fresh start. Split JARVIS by role: build the *brain* fresh, refit
+the *engine* in place, and turn `jarvis-private` into cold storage.**
+
+Measured state: `jarvis` is ~15 GB mixing engine code (`agent-sdk`, skills, tools) with video media
+(`asset-library` 4.4 GB, two video folders 5.6 GB). `jarvis-private` is ~60 GB, almost all video
+projects. The actual *knowledge* is small and scattered: 17 files in `context/`, 69 auto-memory
+files, `bd` memories, two wikis (`ai-futures-wiki`, `claude-code-wiki`), and `research/`. Much of it
+is stale: the phase state was frozen in April and `NewDirection.md` in June.
+
+| Piece | Action | Why |
+|---|---|---|
+| **`jarvis-brain`** (NEW private repo) | **Build fresh** on Cole's 4 C's template (his repo is at `~/Dropbox/Dynamous/claude-code-second-brain`: SOUL/USER/MEMORY, daily logs, hybrid search, heartbeat, chat), then **import selectively** | Moving 6 stores of half-stale notes in bulk just moves the rot. Cole: "start with soul.md and user.md… keep it incredibly simple." Each import is a decision: still true, and serves the focus? |
+| **`jarvis`** (existing repo) | **Refit in place** as the ENGINE: server, router, Telegram, interface, skills, CLI tools | The code works and has history. It needs pruning, not a rewrite |
+| Video media inside `jarvis` | Move to ORICO / Dropbox media (out of git) | 10 GB of binaries don't belong in an engine repo |
+| Dropped lanes (investments, Ordinary Economics, Camino, macro, athlete…) | `archive/` branch or folder; nothing deleted | Terry's call 2026-11-08: archive, refocus |
+| **`jarvis-private`** | Becomes **cold storage** (media, finished video projects); not synced to the cloud | The brain stops living here |
+| **`jarvis-lab`** (NEW repo) | Factory config, Hermes/OpenClaw setups, `lab-log/` run records | Experiments stay outside the brain (§10) |
+| Apps built by the factory | One repo each | Each is a product, and a video |
+
+### The brain repo layout (Cole's two layers + Karpathy wiki + Zubair's typed graph)
+```
+jarvis-brain/
+├── SOUL.md  USER.md  MEMORY.md     ← layer 1: loaded every session by a SessionStart hook
+├── wiki/                            ← layer 2: AI-owned Karpathy wiki, one entity page per thing
+│   ├── index.md  log.md
+│   ├── people/  projects/  apps/  tools/  models/  concepts/   ← "types" = colors in the galaxy
+├── raw/                             ← read-only sources (transcripts, articles, teardowns)
+├── daily/YYYY-MM-DD.md              ← every conversation summarized here; nightly reflection promotes
+├── lab/                             ← verdicts pulled back from jarvis-lab (results only)
+└── evals/tasks.md                   ← Cole's eval suite: real tasks re-run on every model/engine change
+```
+Every fact is tagged **state** (overwrite) or **event** (append + date). That's Cole's fix for rot.
+
+### Selective import list (first pass, decided with Terry)
+Keep: user facts + feedback memories that still hold · the agent-engineering salvage + positioning
+docs · JARVIS architecture notes · `claude-code-wiki` (directly on-topic) · channel production
+standards that still apply to the AI channel. Archive: investments, Ordinary Economics, Camino,
+macro, athlete, hallucinations series, old phase files.
+
+### Run Cole's four audits after the build (they're the acceptance test)
+1. **Context:** fresh session, "what are we working on and why?" → answers like a teammate, no digging.
+2. **Connections:** "Monday catch-up" → pulls Gmail, calendar, GitHub, Telegram.
+3. **Capabilities:** a weekly job in one short request → real output, no re-explaining.
+4. **Cadence:** one heartbeat job reports back on Telegram unasked.
+
+## 12. The JARVIS face: what Zubair actually shows (frames reviewed 2026-11-08)
+From frame grabs of three of his videos (YK-qJwmwjVc, OTb1DR47LSo, acsXZP3SA6w); `localhost:4719`, titled "AI WORKSHOP OS":
+- **Center:** a 3D force graph, "531 notes · 1940 connections". Nodes are **typed and color-filtered**
+  (Router, Wiki, Concepts, Suites, Skills, Tools, Worlds, Notes, Files), and hubs are labeled by size
+  (Skill Suites 236, Local Businesses 123…). Toggle "back to 2D."
+- **Left panel:** "Search the brain…", an **Inspector** (click a node to light only its connections;
+  *shift-click a second node to trace the path between them*), Top Hubs, force sliders (repel, link
+  length).
+- **Right:** the **J.A.R.V.I.S. arc-reactor ring** (purple/teal HUD), with status ("ONLINE", "LISTENING",
+  "THINKING"), a **model badge** ("FABLE 5.1", "QWEN 3.5 9B"), and **skins: RING / CUBE / FACE**. Below:
+  toggles EYES, WATCH, HOLO, FOCUS.
+- **Overlays:** a "Tool armory" grid of integrations; live call cards ("ON THE CALL · the tire shop");
+  his Telegram chat with Jarvis shown side by side; spoken replies as a caption line at the bottom.
+- **Takeaway for us:** the galaxy works because the brain is *typed*. That's why the `wiki/` folders
+  above are typed. Our version adds the lab specialists as moons (§10.3) and colors the orb by engine.
+- Spotted on ollama.com in his video: `ollama launch claude | opencode | hermes | openclaw --model qwen3.5`.
+  Ollama now launches Hermes and OpenClaw against a local model directly. Useful for the lab
+  (unverified until we run it).
