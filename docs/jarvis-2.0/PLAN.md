@@ -1,6 +1,24 @@
 # JARVIS 2.0: One Brain, Many Bodies
 
-*Drafted 2026-11-07 (travel week). Status: PLAN, nothing built yet.*
+*Drafted 2026-11-07 (travel week), revised 2026-11-08 after Terry's decisions. Status: PLAN, nothing built yet.*
+
+**Direction (Terry, 2026-11-08):** agentic AI engineering is THE focus, broadly defined. That means:
+- *Using* dark factories to ship apps
+- Cloning apps
+- Team and organization brains
+- Local LLMs replacing paid services
+- Testing open models and reporting the findings
+- Outsourcing specialist work to open agents (Hermes, OpenClaw)
+
+Other lanes get archived during the reorganization. JARVIS is both the tool and the test bench.
+See §10.
+
+**Decided 2026-11-08:**
+- Home Mac mini = **32 GB**.
+- Brain = **private GitHub repo**, with memory leaving Dropbox (migration script comes after the repo exists).
+- Phone channel = **Telegram** for now.
+- **Cloud server = yes**, and it doubles as the lab.
+- Private domains get decided at local-brain setup.
 
 The goal: talk to JARVIS from anywhere (phone, terminal, desktop, voice) and get the same brain,
 the same memory and the same personality. It should keep working when the home machine is off, and
@@ -106,7 +124,8 @@ research preview had limits) and that it works under a non-interactive launch.
 
 | Option | Cost/mo | Verdict |
 |---|---|---|
-| **Hetzner Cloud CAX21/CPX21** (4 vCPU, 8 GB, Ashburn/Hillsboro) | ~$8–12 | **Pick this.** Cheapest real Linux box. Runs Claude Code + Channels + Bun server 24/7 |
+| **Hetzner Cloud CPX31/CAX31** (4–8 vCPU, 8–16 GB, Ashburn/Hillsboro) | ~$15–20 | **Pick this.** Sized up from the minimum because it also hosts the lab: the factory, Hermes and OpenClaw (§10). x86 (CPX) if any lab tool lacks ARM builds |
+| Hostinger KVM2 | ~$10–15 | What Cole's factory videos use (sponsored), so his walkthrough applies step for step |
 | DigitalOcean / Vultr droplet, 4 GB | ~$24 | Same idea, friendlier console, double the price |
 | Fly.io / Railway (containers) | $5–20 | Good for the Bun server alone; awkward for a long-lived interactive Claude session |
 | Anthropic Routines + web sessions | $0 extra | Use for **scheduled** jobs regardless. Not a chat endpoint by itself |
@@ -139,8 +158,15 @@ headroom.
 | 64 GB | Gemma 4 31B + vision model + embeddings, all resident | Comfortable; same class as this M5 Pro laptop |
 | 96–128 GB+ | gpt-oss-120b / Llama 4 Scout | Near-cloud quality at home |
 
-If buying: a **Mac mini with 32 GB is the floor and 64 GB is the sweet spot**. Put the money in
-memory, not CPU or internal storage (models live fine on an external SSD).
+**Terry's home Mac mini has 32 GB, which is the 32 GB row.** What that means in practice:
+- **Main local brain:** Qwen 3.8 27B (~17 GB) *or* Gemma 4 26B-A4B (~18 GB, faster, 256K context).
+  Only one fits at a time alongside the voice and listening engines.
+- **Small model kept loaded:** Qwen 3.5 9B for quick chat and routing.
+- **Embeddings:** `nomic-embed-text` (tiny).
+- **Not a fit here:** gpt-oss-120b-class models. That's what the 64 GB travel M5 Pro is for, so it
+  becomes the test bench for bigger open models when we report on them.
+
+Ollama loads one large model at a time, so the first reply after switching models is slow.
 
 ### Local stack
 - **Brain:** Ollama (OpenAI-compatible endpoint on `:11434`), models pinned by tag.
@@ -277,11 +303,93 @@ The macro curriculum (52 weeks, Mankiw remap) is the first real tenant of this l
 
 ## 9. Open decisions (Terry's call)
 
-1. Which machine is at home, and how much memory does it have? This sets the local-model tier.
-2. Brain repo on GitHub (private) vs. self-hosted Gitea on the VPS?
-3. Telegram vs. Discord vs. iMessage as the main chat mouth?
-4. Cloud body: Hetzner VPS (recommended) or rely on the home Mac + Anthropic cloud only?
-5. Which domains are `private` (local-only)?
+Resolved 2026-11-08: home = 32 GB mini · brain = private GitHub · chat = Telegram · cloud server = yes.
+Still open:
+1. Which domains are `private` (local-only)? Decide at local-brain setup.
+2. Which lanes/repos get archived vs. deleted in the reorganization? (Proposed: archive branch +
+   `archive/` folder, nothing deleted.)
+3. Terry's "updated idea" for the original premise. Not yet discussed.
+
+---
+
+## 10. JARVIS as an agentic-AI lab
+
+JARVIS stays the trusted core: your memory, personality and judgment. Everything experimental
+runs **beside** it as a *specialist* that JARVIS can call, on the cloud server. Specialists never
+write to the brain repo directly. They return results, and JARVIS decides what to keep.
+
+```
+                 ┌──────────── JARVIS (core: brain repo, SOUL, memory) ────────────┐
+   Telegram ───▶ │  router: "is this mine, or do I outsource it?"                  │
+                 └──┬──────────────┬──────────────┬──────────────┬────────────────┘
+                    ▼              ▼              ▼              ▼
+              Dark factory     Hermes Agent    OpenClaw       REA teardown
+              (Archon, Cole's   (self-writing   (multi-channel (reverse-engineer
+              ai-software-      skills, cron,   gateway,       an app → findings
+              factory)          own memory)     plugins)       → PRD)
+                    │              │              │              │
+                    └──────── results + a lab log entry ─────────┘
+                                         ▼
+                       journal/lab/ → reports → channel material
+```
+
+### 10.1 The specialists (what's verified so far)
+| Specialist | What it is | How JARVIS calls it | Use it for |
+|---|---|---|---|
+| **Dark factory**: Cole's `coleam00/ai-software-factory` on **Archon** (MIT) | GitHub issues in, reviewed and merged PRs out; frontier model plans and reviews, cheaper model builds; `MISSION.md` + hidden holdout tests | File GitHub issues on a factory repo; it runs on cron on the VPS | Building apps and tools (§10.2) |
+| **Hermes Agent** (Nous Research, MIT) | Self-hosted agent: writes its own skills, has its own memory and cron, any model including Ollama | `hermes chat -q` one-shot, `hermes acp`, MCP server plugin, OpenAI-compatible API | Long-running specialist jobs; a test bench for open models |
+| **OpenClaw** (OpenClaw Foundation, MIT) | Personal-assistant gateway, 20+ chat channels, swappable models | `openclaw agent exec`, `openclaw acp`, `openclaw mcp`, webhooks | Comparing against JARVIS; multi-channel experiments; team brain prototypes |
+| **REA** (`morluto/rea`, MIT, `npx rea-agents setup`) | MCP server that lets an agent look inside apps without their source (JS/Electron, binaries via Ghidra, Android, web) | MCP in Claude Code | App teardowns → PRD for the factory. Clone *behavior*, not code or assets; respect licenses |
+
+All call interfaces above come from the projects' docs and are **unverified until we run them**.
+Each needs a smoke test before JARVIS depends on it.
+
+### 10.2 The app pipeline (using factories, not explaining them)
+1. **Pick** a target: a paid service to replace, an app to clone, or a team-brain tool. Nick's
+   roundup shows the winners are small and personal: replace one subscription.
+2. **Teardown** (optional): REA plus a browser walkthrough → `topics/<app>/teardown.md`.
+3. **Spec:** JARVIS interviews you, then writes `MISSION.md` (including "never becomes") + PRD +
+   10–20 issues.
+4. **Build:** the factory on the VPS. Plan/review on Claude, build on a cheaper or open model (Cole's
+   measured mix: about the same quality at ~¼ the cost). You approve the epic split and promotion to
+   production. Cole's own verdict is that fully hands-off fails, so keep those two gates.
+5. **Report:** every run logs cost, time, tickets passed and model mix to `journal/lab/`. That
+   log becomes the channel's evidence.
+
+**Budget note:** Cole burned through both a $200 Claude Max and a $200 Codex Pro weekly limit in
+one week running factories. JARVIS's daily use must not starve the factory, or the other way
+around. The adapter (§5.1) tracks both and pauses factory laps when your interactive headroom gets low.
+
+### 10.3 The face of JARVIS (Zubair-style "entity" interface)
+- **What:** a local web app (served by the home Mac or VPS, reached over Tailscale, installable on
+  the phone as a PWA).
+- **Center:** a 3D **knowledge galaxy** of the brain repo (3d-force-graph / three.js). Notes are
+  stars, links come from `[[wikilinks]]`, and folders are colored by domain.
+- **Corner:** the **JARVIS orb**, a living entity that changes color per engine (Claude gold /
+  local green / Codex blue, matching your existing brain palette). It pulses while speaking and
+  shows a status line ("thinking", "outsourcing to factory", "reading 4 notes").
+- **Fly-to-source:** when JARVIS answers from notes, the camera flies to them and lights the cluster.
+- **Specialists as moons:** factory, Hermes, OpenClaw and REA orbit the core and light up when a
+  job is out. You can *see* the outsourcing.
+- **Build source:** Zubair's free prompt packs (in `~/Dropbox/AITerryByrd/`) cover the galaxy,
+  voice and fly-to-source. We adapt them to the brain repo and the router, not his API-key server.
+  His finished app is members-only. We build our own.
+
+### 10.4 Revised build order (replaces §8 where they differ)
+| Step | Where | Est. |
+|---|---|---|
+| 1. Private `jarvis-brain` repo skeleton (SOUL/USER/memory/journal/topics/domains) | travel | 1 h |
+| 2. Remote Control + Telegram Channels on the laptop | travel | 1 h |
+| 3. Personality interview → `SOUL.md`, `USER.md` | travel | 1 h |
+| 4. Brain adapter + usage tracking (Claude / Codex / Ollama) | travel | 3 h |
+| 5. VPS (Hetzner) + Tailscale + always-on JARVIS + Telegram | travel | 3 h |
+| 6. Archive the dropped lanes (archive branch/folder, nothing deleted) | travel | 1–2 h |
+| 7. Dark factory on the VPS; first real app through it, with a lab log | travel | 4–6 h |
+| 8. Hermes + OpenClaw installed as specialists; smoke-test each call path | travel | 3 h |
+| 9. JARVIS face v1 (galaxy + orb + fly-to-source) | travel | 4 h |
+| 10. Memory migration script (Dropbox → brain repo) | after 1–5 | 3–4 h |
+| 11. Home mini: Ollama 27B + Whisper + TTS + embeddings; `private` tier | **home** | 3–4 h |
+| 12. Failover drill: home off → phone → VPS, same memory | home | 1 h |
 
 ## Sources
 - Anthropic, "Use the Claude Agent SDK with your Claude plan": https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan
