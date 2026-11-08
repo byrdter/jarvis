@@ -466,3 +466,46 @@ From frame grabs of three of his videos (YK-qJwmwjVc, OTb1DR47LSo, acsXZP3SA6w);
 - Spotted on ollama.com in his video: `ollama launch claude | opencode | hermes | openclaw --model qwen3.5`.
   Ollama now launches Hermes and OpenClaw against a local model directly. Useful for the lab
   (unverified until we run it).
+
+## 13. What we take from Cole's `second-brain-starter` (reviewed 2026-11-08)
+
+The repo (github.com/coleam00/second-brain-starter, last commit 2026-06-09) is small: a **PRD-generator
+skill** plus **memory templates**. The *implementation* (hooks, search, heartbeat, chat) is his
+workshop code, which we already have locally at `~/Dropbox/Dynamous/claude-code-second-brain/.claude/`
+(March 2026). Together they cover most of steps 1–4.
+
+**Adopt directly**
+- **`BOOTSTRAP.md`**: a first-run interview, one question at a time, that fills USER/SOUL/HEARTBEAT and then
+  deletes itself. It resumes if a session ends partway. **This replaces our "personality interview" step.** We
+  add our own questions: the agentic-AI focus, the lab, privacy tiers, the learning style.
+- **Templates** `SOUL.md` (values, proactivity rules, Always Ask / Never Do / Safe Freely), `USER.md`,
+  `MEMORY.md`, `HEARTBEAT.md`.
+- **Requirements form** (8 sections), filled out once → becomes our spec. Pick **"Advisor"** as the
+  proactivity level to start: drafts for review, never sends.
+
+**Adopt the patterns (these solve problems our plan would hit)**
+1. **`concat-both` git merge driver** for `daily/*.md`. Laptop, VPS and home Mac all append to daily
+   logs, and plain git merges conflict on day one. Cole's fix: git-sync every 2 min plus a merge driver that
+   concatenates both sides. **Required, because we chose git as the sync layer.**
+2. **SessionStart / PreCompact / SessionEnd hooks.** `memory_flush.py` (a no-tools Claude call) writes
+   *intelligent* summaries to the daily log, not transcript dumps.
+3. **Hook recursion guard:** every SDK session sets `CLAUDE_INVOKED_BY`, so heartbeat/flush runs don't
+   re-trigger the flush hooks.
+4. **Heartbeat state-diffing:** only *new* items reach the model, which stops 30-minute nag loops.
+5. **Pre-flight guardrail agent:** a no-tools call rates external data pass/fail/suspicious before
+   the main agent reads it. This is the prompt-injection check.
+6. **`block-secrets.py`** PreToolUse hook plus `DANGEROUS_BASH_PATTERNS`. **Essential on the VPS**, where
+   the agent runs unattended.
+7. **SOUL.md write-protection:** reflection can *suggest* personality changes but can't make them (stops "soul drift").
+8. **Integration CLI wrapper** (`query.py gmail …`): the LLM never sees keys, and permissions are set per tool.
+9. **Hybrid search:** FastEmbed (local ONNX) + SQLite FTS5/sqlite-vec locally, Postgres + pgvector on the VPS,
+   weighted 70% vector / 30% keyword.
+10. **Draft lifecycle** (`drafts/active → sent | expired`), voice-matched from your sent mail.
+
+**Skip / change**
+- Slack chat bot → we use **Telegram via Channels**.
+- Asana / Circle integrations → not in our stack. Swap in **GitHub** (factory issues/PRs) and YouTube.
+- Habits tracker → optional, later.
+- Obsidian Sync → **git** (we chose GitHub).
+- The repo has no license file, so we adapt the patterns and write our own code rather than copy
+  files wholesale. The workshop code is Dynamous member material, for your own use.
