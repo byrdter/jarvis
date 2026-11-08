@@ -509,3 +509,14 @@ workshop code, which we already have locally at `~/Dropbox/Dynamous/claude-code-
 - Obsidian Sync → **git** (we chose GitHub).
 - The repo has no license file, so we adapt the patterns and write our own code rather than copy
   files wholesale. The workshop code is Dynamous member material, for your own use.
+
+## 14. Repo size (measured 2026-11-08)
+- `jarvis/.git` = 1.3 GB: 338 commits, 2 packs. History is **~82% PNG** (517 MB), then webm, `assets.db` (it was
+  committed repeatedly, 26 MB), jpg and mp4. **All markdown across all of history = 3 MB.** Biggest folders:
+  `video-assets` 215 MB, `_channel-ai` 108 MB, `video-12-mcp-token-stack` 97 MB, `video-ka01` 94 MB, `asset-library` 79 MB.
+- **The brain repo will stay small for years:** text compresses ~3–4×, and git stores edits as deltas. GitHub limits:
+  100 MB per file (hard), ~1 GB per repo recommended, 5 GB strongly recommended.
+- **Engine fix, done at the move out of Dropbox (everything gets re-cloned anyway):** keep the old repo as
+  `jarvis58-archive`, rewrite a copy with `git filter-repo` stripping media/db paths, then push it as the new engine
+  repo (expected tens of MB). Add `.gitignore` rules for `*.png *.jpg *.mp4 *.webm *.wav *.db` outside an
+  allowlisted `docs/img/`. Interim, no rewrite: on the VPS, `git clone --filter=blob:none` skips old blobs.
