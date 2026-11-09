@@ -370,3 +370,29 @@ AGENTS.md
 raw/wsm/
 .agents/skills/jarvis-video-production/tools/census-*/video.mp4
 .agents/skills/jarvis-video-production/tools/census-*/frames/
+
+# --- JARVIS 2.0: the engine repo holds code and text only (2026-11-08) ---
+# Media, databases and documents live in Dropbox/ORICO, never in git.
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.webm
+*.mov
+*.wav
+*.mp3
+*.m4a
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.zip
+*.pdf
+# Browser profiles and secrets
+*_profile/
+.env
+.env.*
+!.env.example
