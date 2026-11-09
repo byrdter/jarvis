@@ -520,3 +520,10 @@ workshop code, which we already have locally at `~/Dropbox/Dynamous/claude-code-
   `jarvis58-archive`, rewrite a copy with `git filter-repo` stripping media/db paths, then push it as the new engine
   repo (expected tens of MB). Add `.gitignore` rules for `*.png *.jpg *.mp4 *.webm *.wav *.db` outside an
   allowlisted `docs/img/`. Interim, no rewrite: on the VPS, `git clone --filter=blob:none` skips old blobs.
+- **Dry run 2026-11-08 (scratch copy):** stripping images/video/audio/db/pdf/zip from all history took the engine from
+  625 MB (fresh clone; the 1.3 GB in Dropbox includes a duplicate pack) to **6.8 MB**, keeping 330 commits and
+  1,052 of 1,343 files. Of the 291 files dropped: archived video projects, skill demo frames, `assets.db`, and 3 PDFs.
+- **Found:** `jarvis58` is **public**, and its history contains `output/pdf/TerryDiet2026-English.pdf` and
+  `skills/send-invoice/invoices/INV-0001.pdf`. No API-key patterns were found in any commit (sk-ant, sk-proj,
+  ghp_, AKIA, xox). Fix: rename to `jarvis58-archive` **and make it private**, then publish the slimmed copy as
+  the new public engine repo. That way no force-push is needed.
