@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/Users/terrybyrd/Library/CloudStorage/Dropbox/jarvis/.codex/hooks/restore-session-state.sh'"
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/restore-session-state.sh\""
           }
         ]
       },

@@ -32,7 +32,7 @@ JARVIS is a personal AI assistant specialized in investment management using Chr
 
 Documentation in this repo references two roots via placeholders:
 
-- `${JARVIS_HOME}` = `~/Library/CloudStorage/Dropbox/jarvis` (this public repo)
+- `${JARVIS_HOME}` = `~/code/jarvis` (this public repo, github.com/byrdter/jarvis; moved out of Dropbox 2026-11-09, never put it back in a synced folder)
 - `${JARVIS_PRIVATE}` = `~/Library/CloudStorage/Dropbox/jarvis-private` (private peer directory, not on GitHub)
 
 When you see those placeholders in any SKILL.md or doc, substitute mentally before navigating.
