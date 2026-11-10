@@ -19,7 +19,7 @@
       {
         "hooks": [
           {
-            "command": "bash .claude/hooks/restore-session-state.sh",
+            "command": "bash .claude/hooks/load-brain.sh",
             "type": "command"
           }
         ],
