@@ -538,3 +538,9 @@ lab specialists; (4) **voice**: wake word, barge-in, an "addressed?" gate, realt
 in the adapter; (7) tool order **connector → MCP/Zapier → recorded skill**; (8) a **stress-test debate**
 skill; (9) **keep-as-note** answer cards; (10) a fixed **teardown template** + self-test before showing;
 (11) galaxy upgrades (depth, pin, heatmap, type toggles, 2D icons).
+
+**Build specs (2026-11-11):** [ZUBAIR-PACKS-AND-JEV.md](ZUBAIR-PACKS-AND-JEV.md): all 12 prompt packs + the
+`jev-use` / `jev-ultrafast` repos, organized by our components. The reflex layer should use **`jev-use`**
+(MIT Claude Code plugin + MCP server; batched judgments, typed escalation, a gate that can only deny or
+ask), with the private tier kept off it. Eight laws adopted, led by "receipts or it didn't happen" and
+"done means preflight passed." The graph: [BRAIN-STUDIO-SPEC.md](BRAIN-STUDIO-SPEC.md).
