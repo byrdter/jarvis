@@ -527,3 +527,14 @@ workshop code, which we already have locally at `~/Dropbox/Dynamous/claude-code-
   `skills/send-invoice/invoices/INV-0001.pdf`. No API-key patterns were found in any commit (sk-ant, sk-proj,
   ghp_, AKIA, xox). Fix: rename to `jarvis58-archive` **and make it private**, then publish the slimmed copy as
   the new public engine repo. That way no force-push is needed.
+
+## 15. Zubair's last five months: additions (reviewed 2026-11-11)
+Full review: [ZUBAIR-REVIEW-2026-11.md](ZUBAIR-REVIEW-2026-11.md) (14 videos, June–November).
+Adopt, in order: (1) a **reflex layer** of five fast gates before the brain (lane, complete, addressed,
+stakes, brain-has-it), built on Haiku/local first, Jev tested in the lab; (2) **stakes-based
+confirmation + duplicate-action check**; (3) **knower vs. doer** with a jobs board and debriefs for the
+lab specialists; (4) **voice**: wake word, barge-in, an "addressed?" gate, realtime + cheap TTS tiers;
+(5) Telegram **voice notes**, outbound calls later; (6) **cost shown before paid calls + per-session cap**
+in the adapter; (7) tool order **connector → MCP/Zapier → recorded skill**; (8) a **stress-test debate**
+skill; (9) **keep-as-note** answer cards; (10) a fixed **teardown template** + self-test before showing;
+(11) galaxy upgrades (depth, pin, heatmap, type toggles, 2D icons).
