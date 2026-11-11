@@ -92,8 +92,8 @@ Needed, in priority order:
 4. **Updated JARVIS prompt pack with REA integration.**
 5. **GPT-6 Astra JARVIS pack** (eyes / watch / focus / holo prompts).
 6. **AI Second Brain Operating System** (the free 2D/3D visualizer: GitHub link + install steps).
-   **Different path:** Classroom → its own course "AI Second Brain Operating System" (not the
-   YouTube Resources folder). From video xHAZo1SmnhM (2026-06-15).
+   **Not needed:** the course is Level 3 only, but the free version is public on GitHub
+   (zubair-trabzada/brain-map, MIT). Fully studied: see BRAIN-STUDIO-SPEC.md.
 7. **Debate show prompt pack.**
 8. The JARVIS phone-call prompts, if posted with "My AI Called Me During a Meeting."
 Optional: Social Media Automation (brand-voice template, for the channel), tvOS files, Record-a-skill notes.
