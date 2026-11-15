@@ -1,0 +1,17 @@
+[Unit]
+Description=JARVIS Telegram chat (Claude Code in tmux)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+# Telegram allows one poller per bot; clear orphaned plugin pollers first.
+ExecStartPre=-/usr/bin/pkill -f "plugins/cache/claude-plugins-official/telegram"
+ExecStartPre=-/usr/bin/tmux kill-session -t jarvis-chat
+ExecStart=/usr/bin/tmux new-session -d -s jarvis-chat -x 200 -y 50 %h/bin/jarvis-chat-loop.sh
+ExecStop=/usr/bin/tmux kill-session -t jarvis-chat
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=default.target

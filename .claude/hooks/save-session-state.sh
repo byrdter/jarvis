@@ -2,7 +2,9 @@
 # PreCompact Hook - Save Session State Before Context Compaction
 # Preserves critical context so conversations can continue seamlessly after compaction
 
-set -euo pipefail
+set -uo pipefail
+# Never block compaction, even if something below fails
+trap 'exit 0' ERR
 
 # Environment variables provided by Claude Code
 SESSION_ID="${CLAUDE_SESSION_ID:-unknown}"
@@ -27,7 +29,7 @@ if [ -f "${CONVERSATION_FILE}/${SESSION_ID}.jsonl" ]; then
 fi
 
 # Create state snapshot
-cat > "$STATE_FILE" <<'EOF'
+cat > "$STATE_FILE" <<EOF
 # Session State Snapshot - ScriptSelect
 
 **Session ID:** ${SESSION_ID}
@@ -78,10 +80,6 @@ $(cd "$PROJECT_DIR" && git branch --show-current 2>/dev/null || echo "unknown")
 ${RECENT_MESSAGES}
 
 EOF
-
-# Use environment variable substitution
-eval "echo \"$(cat "$STATE_FILE")\"" > "$STATE_FILE.tmp"
-mv "$STATE_FILE.tmp" "$STATE_FILE"
 
 echo "[ScriptSelect PreCompact] ✅ Session state saved to: ${STATE_FILE}" >&2
 echo "[ScriptSelect PreCompact] This state will be restored on SessionStart" >&2
