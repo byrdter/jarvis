@@ -382,7 +382,7 @@ around. The adapter (§5.1) tracks both and pauses factory laps when your intera
 | 2. Remote Control + Telegram Channels on the laptop | travel | 1 h |
 | 3. Personality interview → `SOUL.md`, `USER.md` | travel | 1 h |
 | 4. Brain adapter + usage tracking (Claude / Codex / Ollama) | travel | 3 h |
-| 5. VPS (Hetzner) + Tailscale + always-on JARVIS + Telegram | travel | 3 h |
+| 5. VPS (Hetzner) + Tailscale + always-on JARVIS + Telegram ✅ **done 2026-11-15** (see SERVER-PLAN.md) | travel | 3 h |
 | 6. Archive the dropped lanes (archive branch/folder, nothing deleted) | travel | 1–2 h |
 | 7. Dark factory on the VPS; first real app through it, with a lab log | travel | 4–6 h |
 | 8. Hermes + OpenClaw installed as specialists; smoke-test each call path | travel | 3 h |

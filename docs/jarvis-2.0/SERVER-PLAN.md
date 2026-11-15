@@ -2,6 +2,11 @@
 
 > PLAN §10.4 step 5. Goal: JARVIS answers on Telegram 24/7, sends the 10:00 brief, runs the 30-minute
 > heartbeat, and later hosts the lab specialists, whether or not Terry's laptop is on.
+> **Status: ✅ LIVE 2026-11-15.** All 10 steps done; Terry tested from the phone with the laptop closed.
+> Deviations: CX23 (CX33 sold out), Ubuntu 26.04; Telegram token + allowlist stay in
+> `~/.claude/channels/telegram/` (where the plugin reads them), not `/etc/jarvis`; jobs gate on local time
+> via `~/.config/jarvis/jobs.env`; added a `jarvis-chat-watchdog` timer (background `claude -p` used to
+> kill the chat's poller). Code: `infra/server/`. Heartbeat sees public GitHub only so far.
 > Builds on: SERVER notes in PLAN §4, the laws in ZUBAIR-PACKS-AND-JEV.md, Telegram setup of 2026-11-11.
 
 ## Decisions (defaults; Terry can change any)
