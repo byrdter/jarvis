@@ -86,14 +86,26 @@ def ask_claude(prompt: str, timeout: int = 600) -> str:
     return r.stdout.strip()
 
 
+def github_token() -> str:
+    """Terry's `gh auth login` token on the server, if signed in (sees private repos)."""
+    try:
+        r = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=15)
+        return r.stdout.strip() if r.returncode == 0 else ""
+    except (OSError, subprocess.TimeoutExpired):
+        return ""
+
+
 def github_activity(since_iso: str) -> list[str]:
-    """Open issues/PRs on Terry's public repos, updated since `since_iso`, by someone else.
-    Unauthenticated public search; private repos need `gh auth login` on the server (later)."""
+    """Open issues/PRs on Terry's repos, updated since `since_iso`, by someone else.
+    Private repos included when gh is signed in; otherwise public repos only."""
     user = CFG["GITHUB_USER"]
     q = f"user:{user} is:open updated:>{since_iso} -author:{user}"
     url = "https://api.github.com/search/issues?" + urllib.parse.urlencode({"q": q, "per_page": 20})
-    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json",
-                                               "User-Agent": "jarvis-heartbeat"})
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "jarvis-heartbeat"}
+    token = github_token()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as resp:
         items = json.load(resp).get("items", [])
     out = []
