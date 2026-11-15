@@ -1,0 +1,9 @@
+[Unit]
+Description=JARVIS chat watchdog (timer)
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=2min
+
+[Install]
+WantedBy=timers.target

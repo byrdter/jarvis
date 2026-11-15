@@ -30,7 +30,8 @@ def checks() -> list[tuple[str, bool, str]]:
     age = time.time() - ok_file.stat().st_mtime if ok_file.exists() else 1e9
     out.append(("Brain synced in the last 10 min", age < 600, f"{int(age)}s ago" if age < 1e9 else "never"))
 
-    for t in ("jarvis-brain-sync", "jarvis-heartbeat", "jarvis-brief", "jarvis-preflight"):
+    for t in ("jarvis-brain-sync", "jarvis-heartbeat", "jarvis-brief", "jarvis-preflight",
+              "jarvis-chat-watchdog"):
         st = sh("systemctl", "--user", "is-active", f"{t}.timer").stdout.strip()
         out.append((f"{t} timer on", st == "active", st))
 

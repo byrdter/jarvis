@@ -1,0 +1,6 @@
+[Unit]
+Description=JARVIS chat watchdog (restarts chat if its Telegram poller died)
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash %h/bin/jarvis-jobs/chat-watchdog.sh

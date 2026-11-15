@@ -75,7 +75,11 @@ def tg_send(text: str) -> None:
 def ask_claude(prompt: str, timeout: int = 600) -> str:
     """Run Claude headless in the engine repo, so the brain loads via the SessionStart hook."""
     env = dict(os.environ, PATH=f"{HOME}/.local/bin:{HOME}/.bun/bin:{os.environ.get('PATH', '')}")
-    r = subprocess.run([CLAUDE, "-p", prompt], cwd=ENGINE, capture_output=True, text=True,
+    # NEVER load the Telegram plugin here: a new plugin instance SIGTERMs the running poller
+    # (bot.pid), which silently deafens the chat session. Learned 2026-11-15.
+    no_tg = json.dumps({"enabledPlugins": {"telegram@claude-plugins-official": False}})
+    r = subprocess.run([CLAUDE, "-p", prompt, "--settings", no_tg], cwd=ENGINE,
+                       capture_output=True, text=True,
                        timeout=timeout, env=env)
     if r.returncode != 0:
         raise RuntimeError(f"claude -p failed ({r.returncode}): {r.stderr[-500:]}")
