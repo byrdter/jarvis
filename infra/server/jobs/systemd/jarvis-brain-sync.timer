@@ -1,0 +1,10 @@
+[Unit]
+Description=JARVIS brain sync with GitHub (timer)
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+
+
+[Install]
+WantedBy=timers.target

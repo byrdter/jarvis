@@ -1,0 +1,9 @@
+[Unit]
+Description=JARVIS heartbeat (gates itself to active local hours) (timer)
+
+[Timer]
+OnCalendar=*:00,30
+Persistent=true
+
+[Install]
+WantedBy=timers.target

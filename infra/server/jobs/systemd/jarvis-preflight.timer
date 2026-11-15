@@ -1,0 +1,9 @@
+[Unit]
+Description=JARVIS daily preflight checks (PREFLIGHT_HOUR local) (timer)
+
+[Timer]
+OnCalendar=*:50
+Persistent=true
+
+[Install]
+WantedBy=timers.target

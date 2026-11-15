@@ -1,0 +1,9 @@
+[Unit]
+Description=JARVIS morning brief (sends once a day at BRIEF_HOUR local) (timer)
+
+[Timer]
+OnCalendar=*:00/15
+Persistent=true
+
+[Install]
+WantedBy=timers.target

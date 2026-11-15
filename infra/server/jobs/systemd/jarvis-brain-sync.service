@@ -1,0 +1,9 @@
+[Unit]
+Description=JARVIS brain sync with GitHub
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/bin/jarvis-jobs
+ExecStart=/bin/bash %h/bin/jarvis-jobs/brain-sync-job.sh
+TimeoutStartSec=900
