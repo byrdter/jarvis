@@ -21,11 +21,14 @@ TG_DIR = HOME / ".claude/channels/telegram"
 BRAIN = Path(os.environ.get("JARVIS_BRAIN", HOME / "code/jarvis-brain"))
 ENGINE = HOME / "code/jarvis"
 CLAUDE = str(HOME / ".local/bin/claude")
+# Collected items, one folder per day; outside git, expired after INBOX_DAYS. See collect.py.
+INBOX = Path(os.environ.get("JARVIS_INBOX", HOME / ".local/share/jarvis/inbox"))
 
 
 def load_config() -> dict:
     cfg = {"JARVIS_TZ": "Europe/Madrid", "ACTIVE_START": "10", "ACTIVE_END": "19",
-           "BRIEF_HOUR": "10", "PREFLIGHT_HOUR": "9", "GITHUB_USER": "byrdter"}
+           "BRIEF_HOUR": "10", "PREFLIGHT_HOUR": "9", "GITHUB_USER": "byrdter",
+           "COLLECT_HOUR": "7", "INBOX_DAYS": "30"}
     f = HOME / ".config/jarvis/jobs.env"
     if f.exists():
         for line in f.read_text().splitlines():
@@ -72,13 +75,14 @@ def tg_send(text: str) -> None:
         urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage", data, timeout=30).read()
 
 
-def ask_claude(prompt: str, timeout: int = 600) -> str:
-    """Run Claude headless in the engine repo, so the brain loads via the SessionStart hook."""
+def ask_claude(prompt: str, timeout: int = 600, extra: list[str] | None = None) -> str:
+    """Run Claude headless in the engine repo, so the brain loads via the SessionStart hook.
+    `extra` adds CLI flags (e.g. edit permissions for the curator)."""
     env = dict(os.environ, PATH=f"{HOME}/.local/bin:{HOME}/.bun/bin:{os.environ.get('PATH', '')}")
     # NEVER load the Telegram plugin here: a new plugin instance SIGTERMs the running poller
     # (bot.pid), which silently deafens the chat session. Learned 2026-11-15.
     no_tg = json.dumps({"enabledPlugins": {"telegram@claude-plugins-official": False}})
-    r = subprocess.run([CLAUDE, "-p", prompt, "--settings", no_tg], cwd=ENGINE,
+    r = subprocess.run([CLAUDE, "-p", prompt, "--settings", no_tg, *(extra or [])], cwd=ENGINE,
                        capture_output=True, text=True,
                        timeout=timeout, env=env)
     if r.returncode != 0:

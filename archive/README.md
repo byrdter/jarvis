@@ -14,6 +14,7 @@ archived, not eliminated, and can be restored by moving a folder back.
 | `camino/` | Camino channel lane research | `_channel-camino/` |
 | `keyadvances/` | KeyAdvances channel: two video projects (6G breakthrough, digital price tags) and four strategy reports | repo root, `reports/` |
 | `cartoon-starter/` | Cartoon starter asset pack and its test renders | `asset-library/`, `renders/` |
+| `ai-futures-collector/` | Code for the old daily AI Futures collector and digest (Five Lenses sources, sweep, digest email, launchd). Copied from Dropbox, its only home until now | `agent-sdk/` in Dropbox (never in git) |
 | `phase-docs/` | Completion and setup notes from Phases 1–3 (memory, three-brain, multi-Claude, Agent SDK, cleanup plan) | repo root |
 
 Not in this repo: Ordinary Economics, macro curriculum, athlete-investor and hallucinations series. Those

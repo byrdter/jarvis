@@ -37,6 +37,9 @@ def main(force: bool) -> int:
     except Exception as e:
         gh = [f"(GitHub check failed: {e})"]
     queued = read_state("brief-queue", [])
+    additions = read_state("brain-additions", [])
+    added_txt = "\n".join(f"- {a.get('action', 'updated')} [[{a.get('page')}]]: {a.get('what')} ({a.get('source', '')})"
+                           for a in additions) or "(nothing added)"
     daily = sorted((BRAIN / "daily").glob("*.md"))[-2:]
     daily_txt = "\n\n".join(f"## {p.name}\n" + "\n".join(p.read_text().splitlines()[-40:])
                             for p in daily)
@@ -48,8 +51,11 @@ Follow the Daily section of HEARTBEAT.md in your brain. Structure:
 2. Needs you: anything waiting on Terry (PRs, issues, queued items). Skip if none.
 3. Top 3 for today: your recommendation, grounded in the current focus in MEMORY.md and the
    recent daily logs. One line each, with the why.
+4. Added to the brain: the wiki additions below, 3 to 5 short lines, most useful first, each
+   with its page name. End with: "Reply 'drop that' or 'more like this' to steer." Skip the
+   section if nothing was added.
 Calendar: Terry doesn't use Google Calendar yet, so leave it out.
-Keep it under 1,200 characters. American English, friend's voice, no filler.
+Keep it under 1,600 characters. American English, friend's voice, no filler.
 
 DATA
 Engine repo commits (jarvis) since {since}Z:
@@ -64,6 +70,9 @@ GitHub issues/PRs from others on Terry's public repos:
 Items the heartbeat queued for this brief:
 {chr(10).join(queued) or "(none)"}
 
+Wiki additions from the daily intake (collected and curated since the last brief):
+{added_txt}
+
 Recent daily logs (tails):
 {daily_txt}
 """
@@ -71,6 +80,7 @@ Recent daily logs (tails):
     tg_send(text)
     write_state(JOB, {"last_sent": today})
     write_state("brief-queue", [])
+    write_state("brain-additions", [])
     log(JOB, f"sent brief for {today} ({len(text)} chars)")
     return 0
 

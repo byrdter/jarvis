@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 import time
+from datetime import timedelta
 
 from jarvis_jobs import CFG, STATE, TG_DIR, log, now_local, read_state, write_state, tg_send
 
@@ -31,9 +32,17 @@ def checks() -> list[tuple[str, bool, str]]:
     out.append(("Brain synced in the last 10 min", age < 600, f"{int(age)}s ago" if age < 1e9 else "never"))
 
     for t in ("jarvis-brain-sync", "jarvis-heartbeat", "jarvis-brief", "jarvis-preflight",
-              "jarvis-chat-watchdog"):
+              "jarvis-chat-watchdog", "jarvis-intake"):
         st = sh("systemctl", "--user", "is-active", f"{t}.timer").stdout.strip()
         out.append((f"{t} timer on", st == "active", st))
+
+    intake = read_state("intake", {})
+    yesterday = (now_local().date() - timedelta(days=1)).isoformat()
+    fresh = intake.get("last_run", "") >= yesterday and intake.get("status") != "failed"
+    out.append(("Daily intake ran (today or yesterday)", fresh,
+                f"{intake.get('last_run', 'never')} {intake.get('status', '')}"))
+    bad = intake.get("failed_sources") or []
+    out.append(("Intake sources all fetched", len(bad) <= 2, ", ".join(bad) or "all ok"))
 
     free = shutil.disk_usage("/").free / 2**30
     out.append(("Disk has 5 GB+ free", free > 5, f"{free:.1f} GB free"))

@@ -1,0 +1,163 @@
+# What JARVIS collects every morning. Focus: building with AI (models, agents, tools, Claude Code,
+# techniques, prices and limits), not general AI news. Decided with Terry 2026-11-15.
+#
+# Each [[source]]: id (unique, never rename: dedupe state is keyed on it), name, kind, max (new items
+# kept per run), plus the kind's field:
+#   rss              url      RSS or Atom feed (GitHub releases are Atom: github.com/OWNER/REPO/releases.atom)
+#   sitemap          url      new pages under `prefix` in a sitemap (for sites without a feed)
+#   hn               (none)   Hacker News stories from the last day, points >= min_points, AI keywords
+#   github-trending  (none)   new repos (last 14 days) about agents/LLMs/MCP, by stars
+#   hf-trending      (none)   trending models on Hugging Face
+#   youtube          channel_id   newest uploads: title + description (no transcripts yet)
+#
+# Adding a source: append a block, run `collect.py --dry-run --only <id>` on the server, deploy.
+
+# --- Release notes and changelogs -------------------------------------------------------------
+[[source]]
+id = "anthropic-news"
+name = "Anthropic news"
+kind = "sitemap"
+url = "https://www.anthropic.com/sitemap.xml"
+prefix = "https://www.anthropic.com/news/"
+max = 5
+
+[[source]]
+id = "claude-code-releases"
+name = "Claude Code releases"
+kind = "rss"
+url = "https://github.com/anthropics/claude-code/releases.atom"
+max = 5
+
+[[source]]
+id = "claude-agent-sdk-releases"
+name = "Claude Agent SDK (Python) releases"
+kind = "rss"
+url = "https://github.com/anthropics/claude-agent-sdk-python/releases.atom"
+max = 3
+
+[[source]]
+id = "openai-news"
+name = "OpenAI news"
+kind = "rss"
+url = "https://openai.com/news/rss.xml"
+max = 5
+
+[[source]]
+id = "openai-agents-releases"
+name = "OpenAI Agents SDK releases"
+kind = "rss"
+url = "https://github.com/openai/openai-agents-python/releases.atom"
+max = 2
+
+[[source]]
+id = "google-deepmind"
+name = "Google DeepMind blog"
+kind = "rss"
+url = "https://deepmind.google/blog/rss.xml"
+max = 4
+
+[[source]]
+id = "google-ai-blog"
+name = "Google AI blog"
+kind = "rss"
+url = "https://blog.google/technology/ai/rss/"
+max = 4
+
+[[source]]
+id = "mcp-spec-releases"
+name = "Model Context Protocol releases"
+kind = "rss"
+url = "https://github.com/modelcontextprotocol/modelcontextprotocol/releases.atom"
+max = 2
+
+[[source]]
+id = "langgraph-releases"
+name = "LangGraph releases"
+kind = "rss"
+url = "https://github.com/langchain-ai/langgraph/releases.atom"
+max = 2
+
+# --- Builders who test things ------------------------------------------------------------------
+[[source]]
+id = "simon-willison"
+name = "Simon Willison"
+kind = "rss"
+url = "https://simonwillison.net/atom/everything/"
+max = 8
+
+[[source]]
+id = "latent-space"
+name = "Latent Space"
+kind = "rss"
+url = "https://www.latent.space/feed"
+max = 3
+
+[[source]]
+id = "yt-cole-medin"
+name = "Cole Medin (YouTube)"
+kind = "youtube"
+channel_id = "UCMwVTLZIRRUyyVrkjDpn4pA"
+max = 3
+
+[[source]]
+id = "yt-indydevdan"
+name = "IndyDevDan (YouTube)"
+kind = "youtube"
+channel_id = "UC_x36zCEGilGpB1m-V4gmjg"
+max = 3
+
+[[source]]
+id = "yt-nate-herk"
+name = "Nate Herk (YouTube)"
+kind = "youtube"
+channel_id = "UC2ojq-nuP8ceeHqiroeKhBA"
+max = 3
+
+[[source]]
+id = "yt-ai-jason"
+name = "AI Jason (YouTube)"
+kind = "youtube"
+channel_id = "UCrXSVX9a1mj8l0CMLwKgMVw"
+max = 3
+
+[[source]]
+id = "yt-ai-explained"
+name = "AI Explained (YouTube)"
+kind = "youtube"
+channel_id = "UCNJ1Ymd5yFuUPtn21xtRbbw"
+max = 3
+
+[[source]]
+id = "yt-matthew-berman"
+name = "Matthew Berman (YouTube)"
+kind = "youtube"
+channel_id = "UCawZsQWqfGSbCI5yjkdVkTA"
+max = 3
+
+# --- What's moving -----------------------------------------------------------------------------
+[[source]]
+id = "hn-ai"
+name = "Hacker News (AI stories)"
+kind = "hn"
+min_points = 150
+max = 8
+
+[[source]]
+id = "github-trending-agents"
+name = "New agent/LLM repos on GitHub"
+kind = "github-trending"
+max = 6
+
+# --- Local models ------------------------------------------------------------------------------
+[[source]]
+id = "hf-trending"
+name = "Hugging Face trending models"
+kind = "hf-trending"
+max = 6
+
+[[source]]
+id = "ollama-releases"
+name = "Ollama releases"
+kind = "rss"
+url = "https://github.com/ollama/ollama/releases.atom"
+max = 2

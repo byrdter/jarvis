@@ -234,6 +234,17 @@ skill is now a redirect to it. For one-off thumbnails/stills use `image-generati
 
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
+## Brain intake: collect, curate, steer (2026-11-15)
+
+Every morning at 07:00 local the server collects ~20 AI-building sources (`infra/server/jobs/sources.toml`)
+into an inbox (`~/.local/share/jarvis/inbox/YYYY-MM-DD/`, outside git, kept 30 days), and a curator
+promotes what matters into `jarvis-brain/wiki/` under the rules in `jarvis-brain/wiki/CURATION.md`. The
+10:00 brief lists what was added. **Terry steers, he never approves items.** When Terry reacts to a brain
+addition ("drop that", "more like this", "stop collecting X"), add one dated line to the **Feedback**
+section of `CURATION.md` (newest first) and, for "drop that", remove the fact from the wiki page too.
+Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
+X lately?", grep the inbox as well as the wiki.
+
 ## Beads Issue Tracker
 
 This project uses **bd (beads)** for issue tracking. Run `bd prime` to see full workflow context and commands.
