@@ -38,6 +38,20 @@ NOISE = re.compile(r"<(system-reminder|command-[a-z-]+|local-command-[a-z]+|past
                    r".*?</\1[^>]*>", re.S)
 
 
+def local_now() -> datetime:
+    """Terry's local time. The server's clock is UTC; jobs.env's JARVIS_TZ says where Terry is."""
+    env = HOME / ".config/jarvis/jobs.env"
+    if env.exists():
+        for line in env.read_text().splitlines():
+            if line.strip().startswith("JARVIS_TZ="):
+                try:
+                    from zoneinfo import ZoneInfo
+                    return datetime.now(ZoneInfo(line.split("=", 1)[1].strip()))
+                except Exception:
+                    break
+    return datetime.now()
+
+
 def log(msg: str) -> None:
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with LOG.open("a") as fh:
@@ -64,11 +78,25 @@ def read_turns(path: Path, start: int):
                 continue
             if d.get("type") == "custom-title":
                 title = d.get("customTitle") or d.get("title") or title
-            if n <= start or d.get("type") not in ("user", "assistant") or d.get("isMeta"):
+            if n <= start or d.get("type") not in ("user", "assistant"):
                 continue
             if d.get("isCompactSummary"):
                 continue  # a summary of turns we've already flushed
-            t = NOISE.sub("", text_of(d.get("message", {}).get("content")))
+            content = d.get("message", {}).get("content")
+            if d.get("isMeta"):
+                # Telegram messages arrive as meta user entries wrapped in <channel ...>; other
+                # meta entries are system plumbing.
+                if not (isinstance(content, str) and content.lstrip().startswith("<channel")):
+                    continue
+            if d["type"] == "assistant" and isinstance(content, list):
+                # In the Telegram chat, JARVIS answers through the reply tool, not plain text.
+                for b in content:
+                    if isinstance(b, dict) and b.get("type") == "tool_use" \
+                            and b.get("name", "").endswith("telegram__reply"):
+                        msg = str((b.get("input") or {}).get("text", "")).strip()
+                        if msg:
+                            turns.append(("JARVIS", msg))
+            t = NOISE.sub("", text_of(content))
             t = re.sub(r"</?channel[^>]*>", "", t).strip()  # Telegram wrapper (chat ids etc.)
             if t:
                 turns.append(("Terry" if d["type"] == "user" else "JARVIS", t))
@@ -105,10 +133,11 @@ Conversation{f' ("{title}")' if title else ''}:
 
 
 def append_daily(entry: str, title: str, where: str) -> Path:
-    day = datetime.now().strftime("%Y-%m-%d")
+    now = local_now()
+    day = now.strftime("%Y-%m-%d")
     p = BRAIN / "daily" / f"{day}.md"
     p.parent.mkdir(parents=True, exist_ok=True)
-    head = f"\n## {datetime.now():%H:%M} · {where}" + (f" · {title}" if title else "") + "\n\n"
+    head = f"\n## {now:%H:%M} · {where}" + (f" · {title}" if title else "") + "\n\n"
     with p.open("a") as fh:
         if fh.tell() == 0:
             fh.write(f"# {day}\n")

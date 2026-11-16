@@ -245,6 +245,18 @@ section of `CURATION.md` (newest first) and, for "drop that", remove the fact fr
 YouTube transcripts are made on the **laptop** (`infra/laptop/yt-transcribe.py`, hourly launchd job; YouTube blocks the server), with local whisper, and reach the curator through the inbox's `late.md`. Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
 X lately?", grep the inbox as well as the wiki.
 
+## Automatic memory (2026-11-15)
+
+Nobody has to remember to save anything. Every session's new turns are summarized into
+`jarvis-brain/daily/YYYY-MM-DD.md` (Decided / Done / Learned [S]/[E] / Open) when the session ends or
+compacts (`.claude/hooks/memory_flush.py`, log at `~/.local/state/jarvis/flush.log`). At 03:00 local the
+server sweeps its own conversations (the Telegram chat seldom ends), then the **nightly reflection**
+(`infra/server/jobs/reflect.py`) promotes the logs into `MEMORY.md`, `USER.md` and `wiki/projects/`.
+**SOUL.md is Terry's alone**: reflection only proposes changes in `jarvis-brain/proposals/soul.md` and
+the brief asks him. `.claude/hooks/guard.py` (PreToolUse, every session) blocks SOUL.md edits, reading or
+writing secrets, and destructive commands; run `python3 .claude/hooks/guard.py --test` after changing it.
+JARVIS's own job sessions carry `CLAUDE_INVOKED_BY` and are never summarized.
+
 ## Beads Issue Tracker
 
 This project uses **bd (beads)** for issue tracking. Run `bd prime` to see full workflow context and commands.
