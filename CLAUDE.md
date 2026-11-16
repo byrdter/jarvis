@@ -1,11 +1,14 @@
 # JARVIS Project Guidelines
 
 > **JARVIS** - Just A Rather Very Intelligent System  
-> An AI-powered investment management assistant using Claude Code as its intelligent core.
+> Terry's second brain and agentic-AI workbench, with Claude Code as its intelligent core.
 
 ## Project Overview
 
-JARVIS is a personal AI assistant specialized in investment management using Chris Vermeulen's Asset Revesting methodology. Claude Code serves as the "brain" of the system, orchestrating analysis, recommendations, and learning through a sophisticated context system.
+JARVIS is Terry's second brain and working partner. Since the 2026-11-08 refocus, its job is agentic AI:
+building and testing AI apps and capabilities, and teaching non-coders to do the same (see
+`docs/jarvis-2.0/PLAN.md`). Identity lives in `~/code/jarvis-brain/SOUL.md`, loaded by the SessionStart hook.
+The investment lane (Asset Revesting skills, market data) and other dropped lanes are in [`archive/`](archive/README.md).
 
 ## Architecture
 
@@ -53,12 +56,13 @@ jarvis/                          # Public GitHub repository
 ├── CLAUDE.md                    # This file - project guidelines
 ├── README.md                    # Setup, tech stack, getting started
 ├── .claude/
-│   ├── output-style.md          # JARVIS personality/identity
 │   ├── settings.json            # Claude Code settings
 │   └── hooks/                   # Behavioral steering
 ├── ecosystem/                   # Core framework
 ├── skills/                      # Educational example skills
-└── cli-tools/                   # Custom tools
+├── cli-tools/                   # Custom tools
+├── infra/server/                # Always-on Hetzner server: services, timers, jobs
+└── archive/                     # Dropped lanes, kept for reference (nothing deleted)
 
 ../jarvis-private/               # Private data (not on GitHub)
 ├── context/
@@ -69,15 +73,6 @@ jarvis/                          # Public GitHub repository
 ├── apps/                        # Your work products
 ├── reports/                     # Generated reports
 └── logs/                        # Execution logs
-    ├── market-analysis/         # Individual ETF deep dive
-    ├── etf-screener/            # Screen 14 ETFs, rank opportunities
-    ├── portfolio-builder/       # Construct allocations
-    ├── portfolio-monitor/       # Daily/weekly monitoring
-    ├── performance-tracker/     # Monthly validation
-    ├── market-insights/         # Chris Vermeulen automation
-    │   ├── check_new_videos.py  # YouTube automation script
-    │   └── transcripts/         # Video transcripts
-    └── obsidian-manager/        # Vault organization
 ```
 
 ## Core Principles
@@ -116,20 +111,8 @@ Phases 0–3B are complete. Full details in [`PHASES-ARCHIVE.md`](PHASES-ARCHIVE
 | 3A | Apr 2026 | Persistent Bun server, CLI subprocess, 24/7 execution |
 | 3B | Apr 2026 | Daily reflection, morning briefings, auto-memory |
 
-**Not covered by anything today:** ETF stage scan, stop-loss guard, monthly performance tracking.
-
-### Phase 3C: Remote Access 🔄 NEXT
-- [ ] Chat interface (Slack/Telegram bot for mobile access)
-- [ ] Push notifications for portfolio alerts
-- [ ] Natural language queries from anywhere
-
-### Phase 3D: Voice Interface (Future)
-- Voice interface (Whisper + ElevenLabs + React frontend)
-
-### Phase 4: Full Integration
-- Brokerage integration (Alpaca - if needed for trading)
-- Database persistence (Supabase)
-- Dashboard and reporting
+**Current work:** JARVIS 2.0, `docs/jarvis-2.0/PLAN.md` §10.4. The always-on server (step 5) went live
+2026-11-15 (`docs/jarvis-2.0/SERVER-PLAN.md`); next are step 6 (archive lanes) and step 7 (dark factory).
 
 ## Language: American English, always (Terry, 2026-08-24)
 
@@ -247,8 +230,7 @@ skill is now a redirect to it. For one-off thumbnails/stills use `image-generati
 ## Key References
 
 - **Context recovery:** `../jarvis-private/context/memory/work-status.md`
-- **Market data CLI:** `../jarvis-private/context/tools/market-data-cli.md` (`jarvis-price indicators SPY --json`)
-- **Asset Revesting:** `../jarvis-private/context/projects/investments/CLAUDE.md`
+- **Archived lanes (investments, Camino, KeyAdvances, old phase docs):** [`archive/README.md`](archive/README.md)
 
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->

@@ -6,6 +6,10 @@
 [![Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-purple.svg)](https://claude.ai/code)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
+> **Update (November 2026):** JARVIS now focuses on agentic AI: building and testing AI apps and
+> capabilities. The investment skills described below were moved to [`archive/investments/`](archive/README.md)
+> and are no longer maintained. This README will be rewritten for the new direction.
+
 ---
 
 ## ⚠️ IMPORTANT DISCLAIMER
