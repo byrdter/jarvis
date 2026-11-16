@@ -112,7 +112,7 @@ Phases 0–3B are complete. Full details in [`PHASES-ARCHIVE.md`](PHASES-ARCHIVE
 | 3B | Apr 2026 | Daily reflection, morning briefings, auto-memory |
 
 **Current work:** JARVIS 2.0, `docs/jarvis-2.0/PLAN.md` §10.4. The always-on server (step 5) went live
-2026-11-15 (`docs/jarvis-2.0/SERVER-PLAN.md`); next are step 6 (archive lanes) and step 7 (dark factory).
+2026-11-15 (`docs/jarvis-2.0/SERVER-PLAN.md`); step 6 (archive lanes) done 2026-11-15; next is step 7 (dark factory on the VPS).
 
 ## Language: American English, always (Terry, 2026-08-24)
 
