@@ -226,6 +226,8 @@ def enrich_youtube(it):
     vd = pr.get("videoDetails", {})
     mf = pr.get("microformat", {}).get("playerMicroformatRenderer", {})
     it["published"] = mf.get("publishDate", "") or it["published"]
+    if not vd:  # YouTube served the server a bot wall; the laptop fills in length + transcript
+        return it
     mins = int(vd.get("lengthSeconds", 0) or 0) // 60
     it["extra"] = f"{vd.get('author', '')}, {mins} min, {vd.get('viewCount', '?')} views"
     it["text"] = to_text(vd.get("shortDescription", ""), 4000)

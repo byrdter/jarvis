@@ -242,7 +242,7 @@ promotes what matters into `jarvis-brain/wiki/` under the rules in `jarvis-brain
 10:00 brief lists what was added. **Terry steers, he never approves items.** When Terry reacts to a brain
 addition ("drop that", "more like this", "stop collecting X"), add one dated line to the **Feedback**
 section of `CURATION.md` (newest first) and, for "drop that", remove the fact from the wiki page too.
-Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
+YouTube transcripts are made on the **laptop** (`infra/laptop/yt-transcribe.py`, hourly launchd job; YouTube blocks the server), with local whisper, and reach the curator through the inbox's `late.md`. Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
 X lately?", grep the inbox as well as the wiki.
 
 ## Beads Issue Tracker
