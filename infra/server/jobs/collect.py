@@ -280,6 +280,12 @@ def main(argv) -> int:
             failed.append(src["id"])
             log(JOB, f"FAIL {src['id']}: {type(e).__name__}: {str(e)[:200]}")
             continue
+        if not items and src["kind"] not in ("hn", "github-trending"):
+            # A feed or channel page that lists nothing is a failed fetch (YouTube sometimes serves
+            # an empty page), not an empty source. Don't record it as seen; retry next run.
+            failed.append(src["id"])
+            log(JOB, f"FAIL {src['id']}: listed 0 items")
+            continue
         known = set(seen.get(src["id"], []))
         first = src["id"] not in seen
         new = [i for i in items if i["uid"] not in known]
