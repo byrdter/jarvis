@@ -8,8 +8,8 @@
       {
         "hooks": [
           {
-            "command": "bash .claude/hooks/save-session-state.sh",
-            "type": "command"
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/memory-flush.sh\""
           }
         ],
         "matcher": ""
@@ -35,6 +35,28 @@
           }
         ],
         "matcher": ""
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/memory-flush.sh\""
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Read|Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.py\""
+          }
+        ]
       }
     ]
   }

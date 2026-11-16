@@ -28,7 +28,7 @@ INBOX = Path(os.environ.get("JARVIS_INBOX", HOME / ".local/share/jarvis/inbox"))
 def load_config() -> dict:
     cfg = {"JARVIS_TZ": "Europe/Madrid", "ACTIVE_START": "10", "ACTIVE_END": "19",
            "BRIEF_HOUR": "10", "PREFLIGHT_HOUR": "9", "GITHUB_USER": "byrdter",
-           "COLLECT_HOUR": "7", "INBOX_DAYS": "30"}
+           "COLLECT_HOUR": "7", "INBOX_DAYS": "30", "REFLECT_HOUR": "3"}
     f = HOME / ".config/jarvis/jobs.env"
     if f.exists():
         for line in f.read_text().splitlines():
@@ -78,11 +78,15 @@ def tg_send(text: str) -> None:
 def ask_claude(prompt: str, timeout: int = 600, extra: list[str] | None = None) -> str:
     """Run Claude headless in the engine repo, so the brain loads via the SessionStart hook.
     `extra` adds CLI flags (e.g. edit permissions for the curator)."""
-    env = dict(os.environ, PATH=f"{HOME}/.local/bin:{HOME}/.bun/bin:{os.environ.get('PATH', '')}")
+    # CLAUDE_INVOKED_BY: the memory hooks skip JARVIS's own job sessions (recursion guard), and
+    # --no-session-persistence keeps them out of the transcripts the nightly flush sweeps.
+    env = dict(os.environ, PATH=f"{HOME}/.local/bin:{HOME}/.bun/bin:{os.environ.get('PATH', '')}",
+               CLAUDE_INVOKED_BY=os.environ.get("CLAUDE_INVOKED_BY", "jarvis-job"))
     # NEVER load the Telegram plugin here: a new plugin instance SIGTERMs the running poller
     # (bot.pid), which silently deafens the chat session. Learned 2026-11-15.
     no_tg = json.dumps({"enabledPlugins": {"telegram@claude-plugins-official": False}})
-    r = subprocess.run([CLAUDE, "-p", prompt, "--settings", no_tg, *(extra or [])], cwd=ENGINE,
+    r = subprocess.run([CLAUDE, "-p", prompt, "--settings", no_tg, "--no-session-persistence",
+                        *(extra or [])], cwd=ENGINE,
                        capture_output=True, text=True,
                        timeout=timeout, env=env)
     if r.returncode != 0:

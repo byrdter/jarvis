@@ -32,7 +32,7 @@ def checks() -> list[tuple[str, bool, str]]:
     out.append(("Brain synced in the last 10 min", age < 600, f"{int(age)}s ago" if age < 1e9 else "never"))
 
     for t in ("jarvis-brain-sync", "jarvis-heartbeat", "jarvis-brief", "jarvis-preflight",
-              "jarvis-chat-watchdog", "jarvis-intake"):
+              "jarvis-chat-watchdog", "jarvis-intake", "jarvis-reflect"):
         st = sh("systemctl", "--user", "is-active", f"{t}.timer").stdout.strip()
         out.append((f"{t} timer on", st == "active", st))
 

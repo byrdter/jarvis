@@ -1,0 +1,9 @@
+[Unit]
+Description=Check hourly whether tonight's reflection is due (runs once a day at REFLECT_HOUR local)
+
+[Timer]
+OnCalendar=*:20
+Persistent=true
+
+[Install]
+WantedBy=timers.target

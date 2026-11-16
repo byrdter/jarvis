@@ -8,24 +8,12 @@ touch SOUL/USER/MEMORY or the daily logs. The change list feeds the morning brie
 brain" section.
 
 Usage: curate.py [--day YYYY-MM-DD] [--no-commit]"""
-import json
-import re
-import subprocess
 import sys
 
-from jarvis_jobs import BRAIN, INBOX, ask_claude, log, now_local, read_state, write_state
+from brain_edit import guarded_edit
+from jarvis_jobs import BRAIN, INBOX, log, now_local, read_state, write_state
 
 JOB = "curate"
-
-
-def git(*args, check=False) -> subprocess.CompletedProcess:
-    return subprocess.run(["git", "-C", str(BRAIN), *args], capture_output=True, text=True,
-                          timeout=120, check=check)
-
-
-def changed_paths() -> list[str]:
-    out = git("status", "--porcelain", "--untracked-files=all").stdout.splitlines()
-    return [l[3:].split(" -> ")[-1].strip('"') for l in out if l.strip()]
 
 
 def main(argv) -> int:
@@ -46,22 +34,13 @@ def main(argv) -> int:
         write_state(JOB, {"last_run": day, "changes": []})
         return 0
 
-    # Pause brain-sync while the curator works, so nothing it writes is committed before the guard
-    # below has checked it. Restarted in finally; preflight flags the timer if it ever stays off.
-    subprocess.run(["systemctl", "--user", "stop", "jarvis-brain-sync.timer"], capture_output=True)
-    try:
-        rc = curate(argv, day, day_dir, index, late)
-        if rc == 0:
-            late_claim.unlink(missing_ok=True)
-        return rc
-    finally:
-        subprocess.run(["systemctl", "--user", "start", "jarvis-brain-sync.timer"], capture_output=True)
+    rc = curate(argv, day, day_dir, index, late)
+    if rc == 0:
+        late_claim.unlink(missing_ok=True)
+    return rc
 
 
 def curate(argv, day, day_dir, index, late) -> int:
-    git("pull", "-q", "--no-rebase", "--no-edit")
-    before = set(changed_paths())  # pre-existing local edits are not ours to judge or commit
-
     late_txt = ("\n   Also read these YouTube items from earlier days: their transcripts arrived after that day "
                 "was curated. Judge them on the transcript (an earlier run may have used the "
                 "description already; add only what's new):\n" +
@@ -82,37 +61,11 @@ When done, print exactly one final line and nothing after it:
 CURATED {{"changes": [{{"page": "<slug>", "action": "created|updated", "what": "<one short line: the fact, in plain words>", "source": "<url>"}}], "considered": <items read>, "skipped_reason": "<one line on what you passed over and why>"}}
 If nothing qualified, print CURATED with an empty changes list."""
 
-    out = ask_claude(prompt, timeout=1800, extra=[
-        "--permission-mode", "acceptEdits",
-        "--add-dir", str(BRAIN), "--add-dir", str(INBOX),
-        "--allowedTools", "Read", "Edit", "Write", "Glob", "Grep",
-    ])
-    m = re.search(r"^CURATED (\{.*\})\s*$", out, re.M)
-    result = json.loads(m.group(1)) if m else {"changes": [], "error": "no CURATED line",
-                                               "tail": out[-400:]}
-
-    # Guard: revert anything the curator changed outside wiki/, and CURATION.md itself.
-    reverted = []
-    for p in set(changed_paths()) - before:
-        if not p.startswith("wiki/") or p == "wiki/CURATION.md":
-            tracked = git("ls-files", "--error-unmatch", p).returncode == 0
-            if tracked:
-                git("checkout", "--", p)
-            else:
-                (BRAIN / p).unlink(missing_ok=True)
-            reverted.append(p)
-    if reverted:
-        log(JOB, f"GUARD reverted out-of-bounds changes: {', '.join(reverted)}")
-
-    ours = sorted(p for p in set(changed_paths()) - before if p.startswith("wiki/"))
-    if ours and "--no-commit" not in argv:
-        n = len(result.get("changes", []))
-        # Same lock as brain-sync.sh, so the two never commit at once.
-        subprocess.run(["flock", "-w", "120", str(BRAIN / ".sync.lock"), "bash", "-c",
-                        f'cd "{BRAIN}" && git add -- {" ".join(map(repr, ours))} && '
-                        f'git commit -q -m "curate: {day}, {n} wiki changes" && '
-                        f'(git pull -q --no-rebase --no-edit && git push -q)'],
-                       capture_output=True, text=True, timeout=300)
+    result = guarded_edit(
+        JOB, prompt, marker="CURATED", extra_dirs=[INBOX], commit="--no-commit" not in argv,
+        allowed=lambda p: p.startswith("wiki/") and p != "wiki/CURATION.md",
+        commit_msg=f"curate: {day}, wiki changes")
+    ours, reverted = result["kept"], result["reverted"]
 
     # Queue for the brief (accumulates until the brief sends and clears it).
     pending = read_state("brain-additions", [])
@@ -125,7 +78,7 @@ If nothing qualified, print CURATED with an empty changes list."""
     log(JOB, f"{day}: {len(result.get('changes', []))} wiki changes from "
              f"{result.get('considered', '?')} items read; files: {', '.join(ours) or 'none'}"
              + (f"; ERROR {result['error']}" if result.get("error") else ""))
-    return 0 if m else 1
+    return 1 if result.get("error") else 0
 
 
 if __name__ == "__main__":
