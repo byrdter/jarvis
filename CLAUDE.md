@@ -245,6 +245,13 @@ section of `CURATION.md` (newest first) and, for "drop that", remove the fact fr
 YouTube transcripts are made on the **laptop** (`infra/laptop/yt-transcribe.py`, hourly launchd job; YouTube blocks the server), with local whisper, and reach the curator through the inbox's `late.md`. Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
 X lately?", grep the inbox as well as the wiki.
 
+**Library (documents Terry keeps):** Terry drops PDFs/markdown in `~/JARVIS-Library/<creator>/`; the
+laptop's hourly job (`infra/laptop/hourly.sh` → `ingest-library.py`) extracts text to
+`jarvis-brain/raw/sources/<creator>/` and lists it in `raw/sources/PENDING.md`; the next curator run
+writes a `wiki/people/<creator>.md` page plus tools/concepts knowledge. Originals stay put; the brain
+is text only. Zubair's 16 packs are already in (`raw/sources/zubair/`, `wiki/people/zubair-trabzada.md`).
+If Terry hands a document over in chat instead, copy it into `~/JARVIS-Library/<creator>/`.
+
 ## Automatic memory (2026-11-15)
 
 Nobody has to remember to save anything. Every session's new turns are summarized into

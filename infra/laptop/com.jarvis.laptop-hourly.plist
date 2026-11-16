@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key><string>com.jarvis.yt-transcribe</string>
+  <key>Label</key><string>com.jarvis.laptop-hourly</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/opt/homebrew/bin/python3</string>
-    <string>__HOME__/code/jarvis/infra/laptop/yt-transcribe.py</string>
+    <string>/bin/bash</string>
+    <string>__HOME__/code/jarvis/infra/laptop/hourly.sh</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
@@ -15,7 +15,7 @@
   <key>RunAtLoad</key><true/>
   <key>LowPriorityIO</key><true/>
   <key>Nice</key><integer>10</integer>
-  <key>StandardOutPath</key><string>/tmp/jarvis-yt-transcribe.out</string>
-  <key>StandardErrorPath</key><string>/tmp/jarvis-yt-transcribe.err</string>
+  <key>StandardOutPath</key><string>/tmp/jarvis-laptop-hourly.out</string>
+  <key>StandardErrorPath</key><string>/tmp/jarvis-laptop-hourly.err</string>
 </dict>
 </plist>
