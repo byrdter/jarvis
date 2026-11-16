@@ -245,6 +245,23 @@ section of `CURATION.md` (newest first) and, for "drop that", remove the fact fr
 YouTube transcripts are made on the **laptop** (`infra/laptop/yt-transcribe.py`, hourly launchd job; YouTube blocks the server), with local whisper, and reach the curator through the inbox's `late.md`. Source changes go in `sources.toml` (then `infra/server/jobs/install.sh`). For "what did we see about
 X lately?", grep the inbox as well as the wiki.
 
+**Channel watch (2026-11-16):** new videos from channels Terry follows (`group = "watch"` in
+`sources.toml`: Tina Huang, Grace Leung, Riley Brown, Ray Fu, Tom Crawshaw, Charlie Chang, Jeff Su) go
+to `~/.local/share/jarvis/watch/YYYY-MM-DD/` on the server, never to the curator. Each gets a number
+that never repeats, and the list follows the 10:00 brief. The laptop job adds transcripts. Files expire
+after 7 days. **When Terry replies "keep N" (or 👍 N):**
+1. Find N in `~/.local/share/jarvis/watch/IDS.md` and read the item, including its transcript if it
+   has one.
+2. Write what's worth keeping into the brain under `wiki/CURATION.md` rules:
+   - the creator's `wiki/people/<creator>.md` page, created if missing: who they are, how they compete
+     with Terry's channel, and a table row per kept video (what it shows, what it means for us)
+   - durable how-to facts on tools/concepts pages
+3. Commit with `scripts/brain-sync.sh`.
+4. Reply with what was saved.
+
+If there is no transcript yet, say so and save from the title and description. Competitor context:
+`jarvis-brain/wiki/projects/channel-competitors.md`.
+
 **Library (documents Terry keeps):** Terry drops PDFs/markdown in `~/JARVIS-Library/<creator>/`; the
 laptop's hourly job (`infra/laptop/hourly.sh` → `ingest-library.py`) extracts text to
 `jarvis-brain/raw/sources/<creator>/` and lists it in `raw/sources/PENDING.md`; the next curator run

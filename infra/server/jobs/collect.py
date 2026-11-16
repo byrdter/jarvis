@@ -22,7 +22,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
-from jarvis_jobs import CFG, INBOX, github_token, log, now_local, read_state, write_state
+from jarvis_jobs import CFG, INBOX, WATCH, github_token, log, now_local, read_state, write_state
 
 JOB = "collect"
 HERE = Path(__file__).resolve().parent
@@ -253,10 +253,28 @@ def write_item(day_dir: Path, src: dict, it: dict) -> Path:
     return p
 
 
-def expire(days: int) -> int:
+def watch_item(today: str, src: dict, it: dict) -> None:
+    """A video from a channel Terry follows: numbered, filed under WATCH, queued for the list that
+    follows the brief. Numbers never repeat, so "keep 42" works all week."""
+    n = read_state("watch-counter", 0) + 1
+    write_state("watch-counter", n)
+    it["extra"] = (it["extra"] + "; " if it["extra"] else "") + f"watch id {n}"
+    d = WATCH / today
+    d.mkdir(parents=True, exist_ok=True)
+    p = write_item(d, src, it)
+    rel = p.relative_to(WATCH)
+    with (WATCH / "IDS.md").open("a") as fh:
+        fh.write(f"- {n} | {rel} | {src['name']} | {it['title']}\n")
+    queue = read_state("watch-new", [])
+    queue.append({"id": n, "channel": src["name"].replace(" (YouTube)", ""), "title": it["title"],
+                  "url": it["url"], "path": str(rel)})
+    write_state("watch-new", queue)
+
+
+def expire(days: int, root: Path = INBOX) -> int:
     cutoff = (now_local() - timedelta(days=days)).date().isoformat()
     gone = 0
-    for d in INBOX.glob("20??-??-??"):
+    for d in root.glob("20??-??-??"):
         if d.is_dir() and d.name < cutoff:
             shutil.rmtree(d)
             gone += 1
@@ -301,6 +319,9 @@ def main(argv) -> int:
                 print(f"   - {i['title'][:100]} | {i['published']} | {i['url']}")
             continue
         for i in keep:
+            if src.get("group") == "watch":
+                watch_item(today, src, i)
+                continue
             write_item(day_dir, src, i)
             report.append(f"- [{src['name']}] {i['title']} ({i['url']})")
         # Remember everything listed (not just what we kept), so a busy feed doesn't resurface
@@ -316,6 +337,7 @@ def main(argv) -> int:
             fh.write(f"# Inbox {today}\n\nOne line per collected item. Files sit next to this index.\n\n")
         fh.write("\n".join(report) + ("\n" if report else ""))
     gone = expire(int(CFG.get("INBOX_DAYS", "30")))
+    gone += expire(int(CFG.get("WATCH_DAYS", "7")), WATCH)
     write_state(JOB, {"last_run": today, "items": total, "failed": failed})
     log(JOB, f"collected {total} items into {day_dir} ({len(failed)} sources failed: "
              f"{', '.join(failed) or 'none'}; expired {gone} old day folders)")

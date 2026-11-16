@@ -20,6 +20,17 @@ def git_log(repo, since: str) -> str:
     return r.stdout.strip() or "(no commits)"
 
 
+def send_watch_list() -> None:
+    """New videos from the channels Terry follows, as a second message after the brief."""
+    queue = read_state("watch-new", [])
+    if not queue:
+        return
+    lines = [f"{v['id']} · {v['channel']}: {v['title']}\n{v['url']}" for v in queue]
+    tg_send("📺 New from your channels\n\n" + "\n\n".join(lines) +
+            "\n\nReply 'keep 12' (any number above) to save one to the brain. The rest clear out in 7 days.")
+    write_state("watch-new", [])
+
+
 def main(force: bool) -> int:
     local = now_local()
     today = local.date().isoformat()
@@ -78,6 +89,7 @@ Recent daily logs (tails):
 """
     text = ask_claude(prompt)
     tg_send(text)
+    send_watch_list()
     write_state(JOB, {"last_sent": today})
     write_state("brief-queue", [])
     write_state("brain-additions", [])

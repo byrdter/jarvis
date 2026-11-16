@@ -23,12 +23,16 @@ ENGINE = HOME / "code/jarvis"
 CLAUDE = str(HOME / ".local/bin/claude")
 # Collected items, one folder per day; outside git, expired after INBOX_DAYS. See collect.py.
 INBOX = Path(os.environ.get("JARVIS_INBOX", HOME / ".local/share/jarvis/inbox"))
+# New videos from channels Terry follows (sources.toml group "watch"). Listed after the brief, never
+# curated automatically; Terry replies "keep N" to save one. Expired after WATCH_DAYS.
+WATCH = Path(os.environ.get("JARVIS_WATCH", HOME / ".local/share/jarvis/watch"))
 
 
 def load_config() -> dict:
     cfg = {"JARVIS_TZ": "Europe/Madrid", "ACTIVE_START": "10", "ACTIVE_END": "19",
            "BRIEF_HOUR": "10", "PREFLIGHT_HOUR": "9", "GITHUB_USER": "byrdter",
-           "COLLECT_HOUR": "7", "INBOX_DAYS": "30", "REFLECT_HOUR": "3"}
+           "COLLECT_HOUR": "7", "INBOX_DAYS": "30", "REFLECT_HOUR": "3",
+           "WATCH_DAYS": "7"}
     f = HOME / ".config/jarvis/jobs.env"
     if f.exists():
         for line in f.read_text().splitlines():

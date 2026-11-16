@@ -161,3 +161,62 @@ name = "Ollama releases"
 kind = "rss"
 url = "https://github.com/ollama/ollama/releases.atom"
 max = 2
+
+# --- Channels Terry follows (2026-11-16) ---------------------------------------------------------
+# group = "watch": never curated automatically. Listed after the 10:00 brief with a number; Terry
+# replies "keep N" to save one to the brain (see CLAUDE.md, "Channel watch"). Expire after 7 days.
+[[source]]
+id = "yt-tina-huang"
+name = "Tina Huang (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UC2UXDak6o7rBm23k3Vv5dww"
+max = 5
+
+[[source]]
+id = "yt-grace-leung"
+name = "Grace Leung (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCrB7UFnkosBjAhOg3a9NdWw"
+max = 5
+
+[[source]]
+id = "yt-riley-brown"
+name = "Riley Brown (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCMcoud_ZW7cfxeIugBflSBw"
+max = 5
+
+[[source]]
+id = "yt-ray-fu"
+name = "Ray Fu (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCICk1RFsC2NpDSlvPR427VQ"
+max = 5
+
+[[source]]
+id = "yt-tom-crawshaw"
+name = "Tom Crawshaw (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCbzAhbNfR5jT1T4lC8ux2WA"
+max = 5
+
+[[source]]
+id = "yt-charlie-chang"
+name = "Charlie Chang (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCTQuKo8v0PaPCvk5aRxc_Yg"
+max = 5
+
+[[source]]
+id = "yt-jeff-su"
+name = "Jeff Su (YouTube)"
+kind = "youtube"
+group = "watch"
+channel_id = "UCwAnu01qlnVg1Ai2AbtTMaA"
+max = 5

@@ -17,6 +17,7 @@ from pathlib import Path
 
 SERVER = "jarvis-server"
 INBOX = ".local/share/jarvis/inbox"
+WATCH = ".local/share/jarvis/watch"  # videos from channels Terry follows; transcribed so "keep N" has substance
 MODEL = Path.home() / ".whisper-models/ggml-small.en.bin"
 BIN = "/opt/homebrew/bin"
 DAYS_BACK = 3          # only recent videos; older ones aren't news anymore
@@ -42,19 +43,21 @@ def ssh(cmd: str, stdin: str | None = None, timeout: int = 60) -> str:
 
 
 def pending() -> list[tuple[str, str, int]]:
-    """(server path, video url, minutes) for recent YouTube items with no transcript yet."""
-    out = ssh(f"cd {INBOX} 2>/dev/null || exit 0; "
-              f"for d in $(ls -d 20??-??-?? | sort | tail -{DAYS_BACK}); do "
-              f"for f in $d/yt-*.md; do [ -f \"$f\" ] || continue; "
-              f"grep -q '^## Transcript' \"$f\" && continue; "
-              f"grep -q '^- transcript: skipped' \"$f\" && continue; "
-              f"echo \"$f|$(sed -n 's/^- url: //p' \"$f\" | head -1)|$(sed -n 's/^- notes: .*, \\([0-9]*\\) min,.*/\\1/p' \"$f\" | head -1)\"; "
-              f"done; done")
+    """(server path from home, video url, minutes) for recent YouTube items with no transcript yet.
+    Inbox items come first: the curator is waiting on them."""
     items = []
-    for line in out.splitlines():
-        path, url, mins = (line.split("|") + ["", ""])[:3]
-        if url.startswith("https://www.youtube.com/watch"):
-            items.append((path, url, int(mins) if mins.isdigit() else 0))
+    for root in (INBOX, WATCH):
+        out = ssh(f"cd {root} 2>/dev/null || exit 0; "
+                  f"for d in $(ls -d 20??-??-?? 2>/dev/null | sort | tail -{DAYS_BACK}); do "
+                  f"for f in $d/yt-*.md; do [ -f \"$f\" ] || continue; "
+                  f"grep -q '^## Transcript' \"$f\" && continue; "
+                  f"grep -q '^- transcript: skipped' \"$f\" && continue; "
+                  f"echo \"$f|$(sed -n 's/^- url: //p' \"$f\" | head -1)|$(sed -n 's/^- notes: .*, \\([0-9]*\\) min,.*/\\1/p' \"$f\" | head -1)\"; "
+                  f"done; done")
+        for line in out.splitlines():
+            path, url, mins = (line.split("|") + ["", ""])[:3]
+            if url.startswith("https://www.youtube.com/watch"):
+                items.append((f"{root}/{path}", url, int(mins) if mins.isdigit() else 0))
     return items
 
 
@@ -99,7 +102,7 @@ def main(argv) -> int:
     for path, url, mins in todo:
         if done >= cap:
             break
-        q = shlex.quote(f"{INBOX}/{path}")
+        q = shlex.quote(path)
         try:
             mins = mins or minutes(url)
         except subprocess.CalledProcessError as e:
@@ -126,7 +129,10 @@ def main(argv) -> int:
                     log("YouTube is rate-limiting this connection; stopping for this hour")
                     break
                 continue
-        ssh(f"cat >> {q} && echo {shlex.quote('- ' + path)} >> {INBOX}/late.md",
+        # Inbox items go on late.md for the curator; watch items wait for Terry's "keep".
+        late = (f" && echo {shlex.quote('- ' + path.removeprefix(INBOX + '/'))} >> {INBOX}/late.md"
+                if path.startswith(INBOX + "/") else "")
+        ssh(f"cat >> {q}{late}",
             stdin=f"\n## Transcript (whisper on the laptop)\n\n{text}\n", timeout=120)
         log(f"transcribed {url} ({mins} min, {len(text)} chars) -> {path}")
         done += 1
