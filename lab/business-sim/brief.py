@@ -148,11 +148,39 @@ Plain text, under 200 words, for a busy owner. Three short parts:
 2. Needs your decision today: one line per alert, most urgent first, each with the action to take.
 3. Quiet: one line on what's fine.
 Use ONLY numbers that appear in the facts; never compute new ones or round differently. If there are no
-alerts, say so plainly. No headings with #, no tables. American English."""
+alerts, say so plainly. No headings with #, no tables. American English.
+Never write a date or a day name: the date line at the top is added by code. Say "yesterday" and "today".
+The one exception is a comparison copied from the facts, such as "a normal Monday"."""
+
+DATE_KEYS = ("today", "yesterday", "weekday")     # the writer never sees these; code writes the date line
+
+
+def header(f: dict) -> str:
+    """The date line, written by code so no model can get the day wrong."""
+    t, y = date.fromisoformat(f["today"]), date.fromisoformat(f["yesterday"])
+    return f"Lanternwick morning brief · {t:%A, %B} {t.day}, {t.year} · covers {y:%A, %B} {y.day}"
+
+
+DAYS = "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
+MONTHS = "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec"
+
+
+def check_dates(text: str, f: dict) -> list[str]:
+    """Days and dates belong to the code-written header. In the AI's text, the only day name allowed is
+    yesterday's weekday inside a comparison ("a normal Monday", "for a Monday"); everything else is flagged."""
+    yd = f["weekday"]
+    bad = []
+    for m in re.finditer(rf"\b({DAYS})(?:'s)?\b", text):
+        before = text[max(0, m.start() - 20):m.start()].lower()
+        if not (m.group(1) == yd and re.search(r"\b(a|normal|typical|usual|average)\s+$", before)):
+            bad.append(text[max(0, m.start() - 12):m.end() + 12].strip())
+    for m in re.finditer(rf"\b(?:{MONTHS})[a-z]*\.? \d{{1,2}}\b|\b(?:19|20)\d\d-\d\d-\d\d\b|\b\d{{1,2}}/\d{{1,2}}\b", text):
+        bad.append(m.group(0))
+    return bad
 
 
 def write(f: dict, writer: str, model: str) -> str:
-    user = "FACTS (JSON):\n" + json.dumps(f, indent=1)
+    user = "FACTS (JSON):\n" + json.dumps({k: v for k, v in f.items() if k not in DATE_KEYS}, indent=1)
     if writer == "claude":
         r = subprocess.run(["claude", "-p", f"{SYSTEM}\n\n{user}", "--no-session-persistence", "--tools", ""],
                            capture_output=True, text=True, timeout=600,
@@ -218,9 +246,10 @@ def main():
         print(json.dumps(f, indent=1))
         return
     text = write(f, a.writer, a.model)
-    print(text)
+    print(header(f) + "\n\n" + text)        # the header is code; the checks below read only the AI's text
     print("\n---")
     print("numbers not in the facts:", check_numbers(text, f) or "none")
+    print("days or dates written by the AI:", check_dates(text, f) or "none")
     print("grade:", json.dumps(grade(text, incidents, f)))
 
 
