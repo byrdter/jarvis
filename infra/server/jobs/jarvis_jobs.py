@@ -50,8 +50,11 @@ def now_local() -> datetime:
     return datetime.now(ZoneInfo(CFG["JARVIS_TZ"]))
 
 
+DRY = os.environ.get("JARVIS_DRY") == "1"  # test runs: print instead of sending, keep state as is
+
+
 def log(job: str, msg: str) -> None:
-    line = f"{datetime.now().isoformat(timespec='seconds')} [{job}] {msg}"
+    line = f"{datetime.now().isoformat(timespec='seconds')} [{job}]{' [dry]' if DRY else ''} {msg}"
     print(line, file=sys.stderr)
     with open(STATE / "jobs.log", "a") as fh:
         fh.write(line + "\n")
@@ -63,11 +66,17 @@ def read_state(name: str, default=None):
 
 
 def write_state(name: str, value) -> None:
+    if DRY:
+        print(f"[dry] would save state {name}: {json.dumps(value)[:300]}")
+        return
     (STATE / f"{name}.json").write_text(json.dumps(value, indent=2))
 
 
 def tg_send(text: str) -> None:
     """Send a message to Terry through the bot API. Sending doesn't conflict with the chat poller."""
+    if DRY:
+        print(f"[dry] would send to Telegram:\n{text}\n")
+        return
     token = ""
     for line in (TG_DIR / ".env").read_text().splitlines():
         if line.startswith("TELEGRAM_BOT_TOKEN="):
@@ -96,6 +105,39 @@ def ask_claude(prompt: str, timeout: int = 600, extra: list[str] | None = None) 
     if r.returncode != 0:
         raise RuntimeError(f"claude -p failed ({r.returncode}): {r.stderr[-500:]}")
     return r.stdout.strip()
+
+
+# Read-only Google tools for job sessions (claude.ai connectors on Terry's account). Sending,
+# replying, deleting and calendar writes are also hard-blocked by .claude/hooks/guard.py.
+GOOGLE_READ = ",".join([
+    "mcp__claude_ai_Gmail__search_threads", "mcp__claude_ai_Gmail__get_thread",
+    "mcp__claude_ai_Gmail__get_message", "mcp__claude_ai_Gmail__list_labels",
+    "mcp__claude_ai_Google_Calendar__list_events", "mcp__claude_ai_Google_Calendar__list_calendars",
+    "mcp__claude_ai_Google_Calendar__get_event",
+])
+
+
+def mail_and_calendar(since_utc: datetime, hours_ahead: int = 2) -> list[str]:
+    """New person-to-Terry email since `since_utc` and events starting in the next few hours,
+    one line each, keyed "mail:<thread>" / "cal:<event>@<start>" before the first " | " so the
+    caller can de-duplicate. Raises on connector trouble so the caller can report it."""
+    local = now_local()
+    prompt = f"""Read-only check of Terry's Gmail and Google Calendar. Do not draft, send or change anything.
+Now: {local:%Y-%m-%d %H:%M} in {CFG["JARVIS_TZ"]}.
+1. Gmail search_threads, query: in:inbox after:{int(since_utc.timestamp())} -category:promotions -category:social
+   Keep only mail a person wrote to Terry or that needs action (a question, a request, a deadline,
+   a security alert, a failed payment, a booking change). Drop newsletters, marketing, receipts,
+   routine notifications.
+2. Calendar list_events on the primary calendar from now to {hours_ahead} hours ahead.
+Reply with ONLY a JSON object, no code fence:
+{{"items": ["mail:<threadId> | <sender name> | <subject> | <one-line gist, what Terry needs to do>",
+            "cal:<eventId>@<start ISO> | <start, Terry's local time> | <title> | <where / link>"],
+  "error": "<empty, or the exact connector error if a tool failed>"}}"""
+    raw = ask_claude(prompt, timeout=300, extra=["--allowedTools", GOOGLE_READ])
+    data = json.loads(raw[raw.index("{"): raw.rindex("}") + 1])
+    if data.get("error"):
+        raise RuntimeError(data["error"])
+    return [str(i) for i in data.get("items", [])]
 
 
 def github_token() -> str:

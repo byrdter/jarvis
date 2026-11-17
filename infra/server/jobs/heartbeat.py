@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Heartbeat: every 30 min in Terry's active hours, gather what changed with plain code,
-and only if something did, ask Claude (with HEARTBEAT.md) whether it's worth a ping now.
+"""Heartbeat: every 30 min in Terry's active hours, gather what changed (GitHub with plain code;
+new email and upcoming meetings with a read-only Claude check), and only if something did, ask Claude (with HEARTBEAT.md) whether it's worth a ping now.
 Anything not urgent is queued for the morning brief. Silent when nothing's new."""
 import json
 import sys
 from datetime import datetime, timedelta, timezone
 
-from jarvis_jobs import (BRAIN, CFG, ask_claude, github_activity, log, now_local,
-                         read_state, tg_send, write_state)
+from jarvis_jobs import (BRAIN, CFG, ask_claude, github_activity, log, mail_and_calendar,
+                         now_local, read_state, tg_send, write_state)
 
 JOB = "heartbeat"
 
@@ -27,8 +27,19 @@ def main(force: bool) -> int:
         changes += github_activity(since_q[:19])
     except Exception as e:  # network hiccup: note it, don't wake the model for it
         log(JOB, f"github gather failed: {e}")
+    try:
+        changes += mail_and_calendar(datetime.fromisoformat(since.replace("Z", "+00:00")))
+    except Exception as e:
+        log(JOB, f"mail/calendar gather failed: {str(e)[:300]}")
+        today = local.date().isoformat()
+        if state.get("mail_error_day") != today:  # tell Terry once a day, via the brief
+            state["mail_error_day"] = today
+            q = read_state("brief-queue", [])
+            write_state("brief-queue", q + [f"Email/calendar check failed ({str(e)[:120]}). If it says "
+                                            "permissions, reconnect the connector in claude.ai and Select all."])
     seen = set(state.get("seen", []))
-    new = [c for c in changes if c not in seen]
+    key = lambda c: c.split(" | ", 1)[0]  # mail:/cal: items de-dupe on their id, the rest on the text
+    new = [c for c in changes if key(c) not in seen]
 
     if not new:
         write_state(JOB, {**state, "last_run": started})
@@ -57,7 +68,7 @@ def main(force: bool) -> int:
     queue = read_state("brief-queue", [])
     queue += decision.get("for_brief", [])
     write_state("brief-queue", queue)
-    write_state(JOB, {"last_run": started, "seen": (list(seen) + new)[-200:]})
+    write_state(JOB, {**state, "last_run": started, "seen": (list(seen) + [key(c) for c in new])[-400:]})
     log(JOB, f"{len(new)} new; queued {len(decision.get('for_brief', []))} for brief")
     return 0
 

@@ -7,8 +7,8 @@ import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
 
-from jarvis_jobs import (BRAIN, CFG, ENGINE, ask_claude, github_activity, log, now_local,
-                         read_state, tg_send, write_state)
+from jarvis_jobs import (BRAIN, CFG, ENGINE, GOOGLE_READ, ask_claude, github_activity, log,
+                         now_local, read_state, tg_send, write_state)
 
 JOB = "brief"
 
@@ -58,15 +58,20 @@ def main(force: bool) -> int:
     prompt = f"""You are JARVIS writing Terry's morning brief for {local:%A, %B %-d}. It goes to
 Telegram as plain text (no Markdown tables, no headers with #; short lines, a few emoji at most).
 Follow the Daily section of HEARTBEAT.md in your brain. Structure:
-1. Overnight: what shipped or changed (from the data below). Say "quiet night" if nothing did.
-2. Needs you: anything waiting on Terry (PRs, issues, queued items). Skip if none.
-3. Top 3 for today: your recommendation, grounded in the current focus in MEMORY.md and the
+1. Today: Terry's meetings today (Calendar list_events, primary calendar, today in
+   {CFG["JARVIS_TZ"]}, times in his local time), then email that needs him (Gmail search_threads,
+   query: in:inbox after:{int(since_local.timestamp())} -category:promotions -category:social).
+   Only mail a person wrote or that needs action; one line each: who, what, what he should do.
+   Skip newsletters, marketing, receipts. Say "no meetings, inbox clear" if both are empty.
+   Read only: never draft, send or change anything. If a tool fails, say so in one line.
+2. Overnight: what shipped or changed (from the data below). Say "quiet night" if nothing did.
+3. Needs you: anything else waiting on Terry (PRs, issues, queued items). Skip if none.
+4. Top 3 for today: your recommendation, grounded in the current focus in MEMORY.md and the
    recent daily logs. One line each, with the why.
-4. Added to the brain: the wiki additions below, 3 to 5 short lines, most useful first, each
+5. Added to the brain: the wiki additions below, 3 to 5 short lines, most useful first, each
    with its page name. End with: "Reply 'drop that' or 'more like this' to steer." Skip the
    section if nothing was added.
-Calendar: Terry doesn't use Google Calendar yet, so leave it out.
-Keep it under 1,600 characters. American English, friend's voice, no filler.
+Keep it under 2,000 characters. American English, friend's voice, no filler.
 
 DATA
 Engine repo commits (jarvis) since {since}Z:
@@ -87,7 +92,7 @@ Wiki additions from the daily intake (collected and curated since the last brief
 Recent daily logs (tails):
 {daily_txt}
 """
-    text = ask_claude(prompt)
+    text = ask_claude(prompt, extra=["--allowedTools", GOOGLE_READ])
     tg_send(text)
     send_watch_list()
     write_state(JOB, {"last_sent": today})
