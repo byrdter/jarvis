@@ -1,0 +1,9 @@
+[Unit]
+Description=Update the brain search index (nomic-embed-text via local Ollama)
+After=ollama.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/code/jarvis/infra/laptop/brain-ask.py index
+TimeoutStartSec=40min
+Nice=10

@@ -269,6 +269,20 @@ writes a `wiki/people/<creator>.md` page plus tools/concepts knowledge. Original
 is text only. Zubair's 16 packs are already in (`raw/sources/zubair/`, `wiki/people/zubair-trabzada.md`).
 If Terry hands a document over in chat instead, copy it into `~/JARVIS-Library/<creator>/`.
 
+## Searching the brain (2026-11-17)
+
+To find something in `jarvis-brain` by meaning (a past decision, a person, "what did we say about X"),
+run this first instead of grepping blind. It works on the laptop and on the server:
+
+```
+python3 ~/code/jarvis/infra/laptop/brain-ask.py search "your question" [-k 8] [--full]
+```
+
+It prints the best-matching sections with their file paths (meaning + shared rare words, at most two
+per file; new or changed files are indexed on the fly). Read the files it points to, then answer and
+name the file. Grep is still right for exact strings (an ID, a filename). Embeddings come from Ollama's
+`nomic-embed-text` on localhost (server: `infra/server/setup-ollama.sh`, user service `ollama`).
+
 ## Email, calendar, Drive (connected 2026-11-17)
 
 Gmail, Google Calendar and Google Drive are claude.ai connectors on Terry's Google account

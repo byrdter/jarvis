@@ -7,13 +7,16 @@ How it works:
   2. ask: find the sections closest to the question (meaning + shared words), hand them to the local
      model (qwen3.8:27b by default) with the rule "answer only from these, cite [n]".
   3. serve: the same thing as a chat page at http://localhost:8765, with sources you can open.
+  4. search: just the matching sections, no answer. For Claude sessions (laptop, Telegram, server
+     jobs) that want to search the brain by meaning; they write the answer themselves.
 
 Usage: brain-ask.py index
        brain-ask.py ask "what time does the morning brief go out?"
        brain-ask.py serve [--port 8765]
+       brain-ask.py search "who is Ray Fu?" [-k 8] [--full]   (runs on the server too)
 Env:   BRAIN_ASK_MODEL (default qwen3.8:27b), JARVIS_BRAIN (default ~/code/jarvis-brain)
 
-Stdlib only. Nothing leaves the laptop: Ollama runs on localhost and the page binds to 127.0.0.1."""
+Stdlib only. Nothing leaves the machine: Ollama runs on localhost and the page binds to 127.0.0.1."""
 import json
 import math
 import os
@@ -38,7 +41,7 @@ RAW_PREFIXES = ("daily/", "raw/")
 
 # What counts as the brain. drafts/ and evals/ are working files, CLAUDE.md is instructions.
 INCLUDE_DIRS = ["wiki", "daily", "lab", "raw/sources", "proposals"]
-INCLUDE_FILES = ["MEMORY.md", "USER.md", "SOUL.md"]
+INCLUDE_FILES = ["MEMORY.md", "USER.md", "SOUL.md", "HEARTBEAT.md", "CLAUDE.md"]
 
 STOP = set("""a an and are as at be but by can could did do does for from had has have how i if in into is
 it its me my no not of on or our so than that the their them then there these they this to us was we were
@@ -131,7 +134,7 @@ def update_index(quiet: bool = False) -> dict:
             c["vec"] = [round(x, 5) for x in v]
     idx = {"params": params, "files": seen, "chunks": keep + new}
     INDEX.parent.mkdir(parents=True, exist_ok=True)
-    tmp = INDEX.with_suffix(".tmp")
+    tmp = INDEX.with_suffix(f".tmp{os.getpid()}")  # two searches at once mustn't share a temp file
     tmp.write_text(json.dumps(idx))
     tmp.replace(INDEX)
     if not quiet:
@@ -207,6 +210,21 @@ def cmd_ask(question: str) -> int:
     return 0
 
 
+def cmd_search(argv: list[str]) -> int:
+    k = int(argv[argv.index("-k") + 1]) if "-k" in argv else TOP_K
+    full = "--full" in argv
+    skip = {"-k", "--full"} | ({argv[argv.index("-k") + 1]} if "-k" in argv else set())
+    question = " ".join(a for a in argv if a not in skip).strip()
+    if not question:
+        print('usage: brain-ask.py search "question" [-k 8] [--full]')
+        return 1
+    idx = update_index(quiet=True)
+    for i, h in enumerate(search(idx, question, k), 1):
+        text = h["text"] if full else (h["text"][:600] + ("…" if len(h["text"]) > 600 else ""))
+        print(f"[{i}] {h['file']} · {h['label']} · score {h['score']}\n{text}\n")
+    return 0
+
+
 PAGE = (Path(__file__).parent / "brain-ask.html")
 
 
@@ -272,7 +290,7 @@ def cmd_serve(port: int) -> int:
 
 
 def main(argv: list[str]) -> int:
-    if not argv or argv[0] not in ("index", "ask", "serve"):
+    if not argv or argv[0] not in ("index", "ask", "serve", "search"):
         print(__doc__)
         return 1
     if argv[0] == "index":
@@ -280,6 +298,8 @@ def main(argv: list[str]) -> int:
         return 0
     if argv[0] == "ask":
         return cmd_ask(" ".join(argv[1:]))
+    if argv[0] == "search":
+        return cmd_search(argv[1:])
     port = int(argv[argv.index("--port") + 1]) if "--port" in argv else 8765
     return cmd_serve(port)
 

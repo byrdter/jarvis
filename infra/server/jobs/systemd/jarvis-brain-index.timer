@@ -1,0 +1,9 @@
+[Unit]
+Description=Keep the brain search index current (only changed files are re-embedded)
+
+[Timer]
+OnCalendar=*:03/10
+Persistent=true
+
+[Install]
+WantedBy=timers.target
