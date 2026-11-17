@@ -40,7 +40,8 @@ RAW_PENALTY = float(os.environ.get("BRAIN_ASK_RAW", 0.03))
 RAW_PREFIXES = ("daily/", "raw/")
 
 # What counts as the brain. drafts/ and evals/ are working files, CLAUDE.md is instructions.
-INCLUDE_DIRS = ["wiki", "daily", "lab", "raw/sources", "proposals"]
+INCLUDE_DIRS = ["wiki", "daily", "lab", "raw/sources", "raw/claude-memory", "raw/jarvis-private-context",
+                "raw/reports", "audits", "proposals"]
 INCLUDE_FILES = ["MEMORY.md", "USER.md", "SOUL.md", "HEARTBEAT.md", "CLAUDE.md"]
 
 STOP = set("""a an and are as at be but by can could did do does for from had has have how i if in into is
