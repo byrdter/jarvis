@@ -1,0 +1,9 @@
+[Unit]
+Description=Check hourly whether the weekly brain audit is due (AUDIT_WEEKDAY at AUDIT_HOUR local)
+
+[Timer]
+OnCalendar=*:40
+Persistent=true
+
+[Install]
+WantedBy=timers.target

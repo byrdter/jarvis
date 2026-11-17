@@ -278,6 +278,14 @@ explicit OK in this conversation.** Unattended job sessions (`CLAUDE_INVOKED_BY`
 those actions by `.claude/hooks/guard.py`. If a call fails with "requires additional permissions", Terry
 reconnects that connector in claude.ai → Settings → Connectors and checks **Select all**.
 
+## Weekly brain audit (2026-11-17)
+
+Sundays at 04:00 local the server's `audit.py` scores the brain's health (0–100) and writes numbered
+proposed fixes to `jarvis-brain/audits/YYYY-MM-DD.md`; the brief carries one line. It changes nothing.
+**When Terry replies "fix the audit" (all) or "fix 1, 3" (some):** open the newest file in `audits/`,
+apply those fixes under `wiki/CURATION.md` rules (never SOUL.md or `daily/`), tick each `[ ]` → `[x]`,
+commit with `scripts/brain-sync.sh`, and reply with what changed. Ask first if a fix would delete a page.
+
 ## Automatic memory (2026-11-15)
 
 Nobody has to remember to save anything. Every session's new turns are summarized into

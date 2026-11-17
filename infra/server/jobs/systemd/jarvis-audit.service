@@ -1,0 +1,8 @@
+[Unit]
+Description=JARVIS weekly brain audit: health score and proposed fixes (changes nothing)
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/bin/jarvis-jobs
+ExecStart=/usr/bin/python3 %h/bin/jarvis-jobs/audit.py
+TimeoutStartSec=40min

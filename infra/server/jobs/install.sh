@@ -23,5 +23,5 @@ else
   test -f ~/.config/jarvis/jobs.env || cp "$HERE/jobs.env.example" ~/.config/jarvis/jobs.env
 fi
 run 'chmod +x ~/bin/jarvis-jobs/*.py ~/bin/jarvis-jobs/*.sh && systemctl --user daemon-reload &&
-  for t in brain-sync heartbeat brief preflight chat-watchdog intake reflect; do systemctl --user enable --now jarvis-$t.timer; done &&
+  for t in brain-sync heartbeat brief preflight chat-watchdog intake reflect audit; do systemctl --user enable --now jarvis-$t.timer; done &&
   systemctl --user list-timers "jarvis-*" --no-pager'
