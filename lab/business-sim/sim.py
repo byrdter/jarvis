@@ -63,20 +63,32 @@ CREATE TABLE returns(id INTEGER PRIMARY KEY, order_id INT, product_id INT, reque
 CREATE TABLE purchase_orders(id INTEGER PRIMARY KEY, supplier_id INT, product_id INT, qty INT, ordered TEXT,
   arrives TEXT, received INT);
 CREATE TABLE lost_sales(day TEXT, product_id INT, customer_id INT);
+CREATE TABLE inventory_daily(day TEXT, stock_value REAL, units INT);
 CREATE TABLE emails(id INTEGER PRIMARY KEY, sent TEXT, sender TEXT, recipient TEXT, subject TEXT, body TEXT,
   kind TEXT, customer_id INT, order_id INT);
 """
 
 
 class Store:
-    def __init__(self, days: int, seed: int, out: Path):
-        self.rng = np.random.default_rng(seed)
+    def __init__(self, days: int, seed: int, out: Path, policy: str = "naive", write_mbox: bool = True):
+        # Separate random streams, so a change in how the shop runs (say, reordering) can't change which
+        # customers show up or what they want: replays with and without an app see the same customers.
+        self.rng = np.random.default_rng(seed)                   # customers and demand (+ catalog)
+        self.ops = np.random.default_rng([seed, 1])              # supplier lead times
+        self.ret = np.random.default_rng([seed, 2])              # returns
+        self.mrng = np.random.default_rng([seed, 3])             # email timestamps
+        self.policy, self.write_mbox = policy, write_mbox
+        self.advisor = None
+        if policy == "advisor":
+            from advisor import ReorderAdvisor
+            self.advisor = ReorderAdvisor()
         self.days, self.start = days, date(2025, 1, 1)
         out.mkdir(parents=True, exist_ok=True)
         for f in ("store.db", "mail.mbox"):
             (out / f).unlink(missing_ok=True)
         self.db = sqlite3.connect(out / "store.db")
-        self.db.executescript(SCHEMA)
+        self.db.executescript(SCHEMA + """CREATE INDEX o_placed ON orders(placed); CREATE INDEX oi_order ON order_items(order_id);
+                                          CREATE INDEX ls_day ON lost_sales(day);""")
         self.mbox = mailbox.mbox(str(out / "mail.mbox"))
         self.customers: list[dict] = []
         self.pending_deliveries: dict[date, list] = {}
@@ -114,11 +126,12 @@ class Store:
     def mail(self, day: date, sender, recipient, subject, body, kind, cust=None, order=None):
         m = EmailMessage()
         m["From"], m["To"], m["Subject"] = sender, recipient, subject
-        hour = int(self.rng.integers(7, 23))
-        m["Date"] = format_datetime(datetime(day.year, day.month, day.day, hour, int(self.rng.integers(0, 60)), tzinfo=timezone.utc))
+        hour = int(self.mrng.integers(7, 23))
+        m["Date"] = format_datetime(datetime(day.year, day.month, day.day, hour, int(self.mrng.integers(0, 60)), tzinfo=timezone.utc))
         m["X-Sim-Kind"] = kind
         m.set_content(body)
-        self.mbox.add(m)
+        if self.write_mbox:
+            self.mbox.add(m)
         self.email_count += 1
         self.db.execute("INSERT INTO emails(sent,sender,recipient,subject,body,kind,customer_id,order_id) VALUES(?,?,?,?,?,?,?,?)",
                         (day.isoformat(), sender, recipient, subject, body, kind, cust, order))
@@ -135,8 +148,8 @@ class Store:
             first, last = r.choice(FIRST), r.choice(LAST)
             c = dict(id=cid, name=f"{first} {last}", email=f"{first.lower()}.{last.lower()}{cid}@mail.test",
                      rate=float(r.gamma(0.5, 1 / 90)),      # orders per day; mean ~0.0056 => ~2/yr while active (ASSUMED)
-                     drop=float(r.beta(2.0, 2.0)),
-                     basket=float(r.gamma(1.2, 1 / 1.2)),    # own spend level: some always buy one thing, some fill a cart (Gamma-Gamma idea)           # chance of leaving after each order, incl. the first (ASSUMED)
+                     drop=float(r.beta(2.0, 2.0)),           # chance of leaving after each order, incl. the first (ASSUMED)
+                     basket=float(r.gamma(1.2, 1 / 1.2)),    # own spend level: some always buy one thing, some fill a cart (Gamma-Gamma idea)
                      alive=True, joined=day)
             self.customers.append(c)
             self.db.execute("INSERT INTO customers VALUES(?,?,?,?,?,?,?,NULL)",
@@ -149,6 +162,14 @@ class Store:
         n_items = 1 + r.poisson(0.7 * c.get("basket", 1.0) ** 1.6)
         picks = r.choice(len(self.products), size=n_items, p=self.pop)
         sale = day.month == 11 and day.day >= 24 or r.random() < 0.08
+        ship_days = int(r.integers(2, 8))
+        asks = r.random() < SUPPORT_Q_RATE
+        q = r.choice(["Can I change the shipping address?", "Does this run true to size?", "Can I add a gift note?",
+                      "My discount code didn't apply.", "When will this ship?"])
+        leaves = r.random() < c["drop"]
+        if leaves:   # whether they come back doesn't depend on our stock (a simplification)
+            c["alive"] = False
+            self.db.execute("UPDATE customers SET churned_on=? WHERE id=?", ((day + timedelta(days=1)).isoformat(), c["id"]))
         items, missing = [], []
         for i in picks:
             p = self.products[i]
@@ -158,7 +179,8 @@ class Store:
                 continue
             p["stock"] -= 1
             items.append(p)
-            self.check_reorder(day, p)
+            if self.policy == "naive":
+                self.check_reorder(day, p)
         if missing and not items:
             self.mail(day, self.addr(c), SHOP, "Is this back in stock?",
                       f"Hi, I wanted {missing[0]['cat']} item {missing[0]['id']} but it says sold out. Any idea when it's back?\n{c['name']}",
@@ -168,7 +190,7 @@ class Store:
             return
         subtotal = round(sum(p["price"] for p in items), 2)
         discount = round(subtotal * 0.2, 2) if sale else 0.0
-        delivered = day + timedelta(days=int(r.integers(2, 8)))
+        delivered = day + timedelta(days=ship_days)
         cur = self.db.execute("INSERT INTO orders(customer_id,placed,delivered,status,subtotal,discount) VALUES(?,?,?,?,?,?)",
                               (c["id"], day.isoformat(), delivered.isoformat(), "placed", subtotal, discount))
         oid = cur.lastrowid
@@ -177,16 +199,11 @@ class Store:
         self.mail(day, SHOP, self.addr(c), f"Order #{oid} confirmed",
                   f"Hi {c['name'].split()[0]},\n\nThanks for your order!\n{lines}\nTotal: ${subtotal - discount:.2f}\n\nHarbor & Pine", "order_confirmation", c["id"], oid)
         self.pending_deliveries.setdefault(delivered, []).append((oid, c, items))
-        if r.random() < SUPPORT_Q_RATE:
-            q = r.choice(["Can I change the shipping address?", "Does this run true to size?", "Can I add a gift note?",
-                          "My discount code didn't apply.", "When will this ship?"])
+        if asks:
             self.mail(day, self.addr(c), SHOP, f"Question about order #{oid}", f"Hi, {q}\nThanks, {c['name']}", "support_question", c["id"], oid)
-        if r.random() < c["drop"]:
-            c["alive"] = False
-            self.db.execute("UPDATE customers SET churned_on=? WHERE id=?", ((day + timedelta(days=1)).isoformat(), c["id"]))
 
     def deliver(self, day: date):
-        r = self.rng
+        r = self.ret
         for oid, c, items in self.pending_deliveries.pop(day, []):
             self.db.execute("UPDATE orders SET status='delivered' WHERE id=?", (oid,))
             self.mail(day, SHOP, self.addr(c), f"Order #{oid} delivered", "Your order has arrived. Enjoy!", "delivered", c["id"], oid)
@@ -197,7 +214,7 @@ class Store:
                     self.pending_returns.setdefault(when, []).append((oid, c, p))
 
     def process_returns(self, day: date):
-        r = self.rng
+        r = self.ret
         for oid, c, p in self.pending_returns.pop(day, []):
             reasons = RETURN_REASONS[p["cat"]]
             reason = reasons[r.choice(len(reasons), p=[w for _, w in reasons])][0]
@@ -212,20 +229,24 @@ class Store:
                       f"Hi {c['name'].split()[0]}, your return label is attached. Refund of ${p['price']:.2f} once it arrives.", "return_label", c["id"], oid)
 
     def check_reorder(self, day: date, p: dict):
+        """The shop's current rule: at 30 units left, order 120, one order at a time, every product alike."""
         if p["stock"] <= p["rop"] and not p.get("on_order"):
-            lead = max(2, int(self.rng.normal(12, 4)))
-            arrives = day + timedelta(days=lead)
-            cur = self.db.execute("INSERT INTO purchase_orders(supplier_id,product_id,qty,ordered,arrives,received) VALUES(?,?,?,?,?,0)",
-                                  (p["supplier"], p["id"], p["rq"], day.isoformat(), arrives.isoformat()))
-            p["on_order"] = True
-            self.pending_pos.setdefault(arrives, []).append((cur.lastrowid, p))
-            self.mail(day, SHOP, f"{p['cat'].title()} Source Co. <orders@{p['cat']}-source.test>", f"PO #{cur.lastrowid}",
-                      f"Please ship {p['rq']} units of SKU {p['id']}. Thanks, Harbor & Pine purchasing", "purchase_order")
+            self.place_po(day, p, p["rq"])
+
+    def place_po(self, day: date, p: dict, qty: int):
+        lead = max(2, int(self.ops.normal(12, 4)))
+        arrives = day + timedelta(days=lead)
+        cur = self.db.execute("INSERT INTO purchase_orders(supplier_id,product_id,qty,ordered,arrives,received) VALUES(?,?,?,?,?,0)",
+                              (p["supplier"], p["id"], qty, day.isoformat(), arrives.isoformat()))
+        p["on_order"] = p.get("on_order", 0) + qty
+        self.pending_pos.setdefault(arrives, []).append((cur.lastrowid, p, qty))
+        self.mail(day, SHOP, f"{p['cat'].title()} Source Co. <orders@{p['cat']}-source.test>", f"PO #{cur.lastrowid}",
+                  f"Please ship {qty} units of SKU {p['id']}. Thanks, Harbor & Pine purchasing", "purchase_order")
 
     def receive_pos(self, day: date):
-        for po, p in self.pending_pos.pop(day, []):
-            p["stock"] += p["rq"]
-            p["on_order"] = False
+        for po, p, qty in self.pending_pos.pop(day, []):
+            p["stock"] += qty
+            p["on_order"] = max(0, p.get("on_order", 0) - qty)
             self.db.execute("UPDATE purchase_orders SET received=1 WHERE id=?", (po,))
 
     def repeat_orders(self, day: date):
@@ -240,15 +261,41 @@ class Store:
         for t in range(self.days):
             day = self.start + timedelta(days=t)
             self.receive_pos(day)
+            if self.advisor:   # the app: once a day, read the sales history and decide what to order
+                for p, qty in self.advisor.recommend(self.db, day, self.products):
+                    self.place_po(day, p, qty)
             self.deliver(day)
             self.process_returns(day)
             self.repeat_orders(day)
             self.new_customers(day, t)
+            self.db.execute("INSERT INTO inventory_daily VALUES(?,?,?)", (day.isoformat(),
+                            sum(p["stock"] * p["cost"] for p in self.products), sum(p["stock"] for p in self.products)))
         self.db.execute("UPDATE products SET stock=stock")  # final stock written below
         self.db.executemany("UPDATE products SET stock=? WHERE id=?", [(p["stock"], p["id"]) for p in self.products])
         self.db.commit()
-        self.mbox.flush()
+        if self.write_mbox:
+            self.mbox.flush()
         return time.time() - t0
+
+
+HOLDING_RATE = 0.25   # ASSUMED: carrying stock costs 25% of its value per year (cash, space, shrinkage)
+PO_COST = 40.0        # ASSUMED: each supplier order costs $40 of staff time and fees
+
+
+def scoreboard(db, days) -> dict:
+    q = lambda sql: db.execute(sql).fetchone()[0] or 0
+    margin = q("SELECT SUM(oi.unit_price - p.cost) FROM order_items oi JOIN products p ON p.id = oi.product_id") \
+        - q("SELECT SUM(discount) FROM orders")
+    avg_stock = q("SELECT AVG(stock_value) FROM inventory_daily")
+    pos = q("SELECT COUNT(*) FROM purchase_orders")
+    holding = avg_stock * HOLDING_RATE * days / 365
+    return {"orders": q("SELECT COUNT(*) FROM orders"),
+            "lost_sale_units": q("SELECT COUNT(*) FROM lost_sales"),
+            "lost_sales_value": round(q("SELECT SUM(p.price) FROM lost_sales l JOIN products p ON p.id = l.product_id")),
+            "products_that_ran_out": q("SELECT COUNT(DISTINCT product_id) FROM lost_sales"),
+            "gross_margin": round(margin), "avg_stock_value": round(avg_stock), "holding_cost": round(holding),
+            "purchase_orders": pos, "ordering_cost": round(pos * PO_COST),
+            "profit_after_stock_costs": round(margin - holding - pos * PO_COST)}
 
 
 def main():
@@ -256,13 +303,23 @@ def main():
     ap.add_argument("--days", type=int, default=730)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default=str(Path(__file__).parent / "out"))
+    ap.add_argument("--policy", choices=["naive", "advisor"], default="naive",
+                    help="naive = the shop's fixed rule; advisor = the reorder advisor app decides")
+    ap.add_argument("--no-mbox", action="store_true", help="skip writing the mbox file (faster replays)")
+    ap.add_argument("--json", action="store_true", help="print only the scoreboard as JSON")
     a = ap.parse_args()
-    s = Store(a.days, a.seed, Path(a.out))
+    s = Store(a.days, a.seed, Path(a.out), a.policy, write_mbox=not a.no_mbox)
     secs = s.run()
+    board = scoreboard(s.db, a.days)
+    if a.json:
+        print(__import__("json").dumps({"seed": a.seed, "policy": a.policy, "secs": round(secs, 1), **board}))
+        return
     q = lambda sql: s.db.execute(sql).fetchone()[0]
-    print(f"simulated {a.days} days in {secs:.1f}s")
+    print(f"simulated {a.days} days in {secs:.1f}s (policy: {a.policy})")
     for t in ("customers", "orders", "order_items", "returns", "purchase_orders", "lost_sales", "emails"):
         print(f"  {t:16} {q(f'SELECT COUNT(*) FROM {t}'):>8,}")
+    for k, v in board.items():
+        print(f"  {k:24} {v:>12,}")
 
 
 if __name__ == "__main__":

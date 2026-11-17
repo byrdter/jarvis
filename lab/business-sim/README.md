@@ -19,4 +19,14 @@ python3 support.py --reuse --agent claude              # same inbox, Claude as t
 
 Result on 18 cases: local 27B 15/18 (fails every late return), local + date tool 18/18, Claude 18/18.
 
+```
+# First company app: the reorder advisor (advisor.py), replay-tested against the shop's fixed rule.
+python3 sim.py --policy advisor      # one store, the advisor decides supplier orders
+python3 replay.py                    # 5 stores x 2 years, old rule vs advisor on identical customers (~4 min)
+```
+
+Replay result (5 stores, 2 years each): the advisor earns more in all 5, mean +$191K (range +$38K to
++$439K); lost sales down 64% on average, average stock down 40%, at the cost of 3–4x more supplier orders.
+Its December stockouts fall 70% in year 2 once it has learned last year's holiday rush.
+
 Findings, design and sources: `jarvis-brain/wiki/concepts/business-simulation.md`.
