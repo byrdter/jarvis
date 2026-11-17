@@ -43,10 +43,10 @@ def main():
                    "Keep every fact given; invent nothing about the order.")
         cust, t1 = chat(a.model, persona, f"You are {name} from {city}. Situation (from the shop's records): {body}\n"
                                           f"Order {oid}, placed {placed}, delivered {delivered}, total ${total or 0:.2f}.")
-        agent = ("You are the customer-support agent for Harbor & Pine, an online apparel and home-goods shop. "
+        agent = ("You are the customer-support agent for Lanternwick, an online apparel and home-goods shop. "
                  "Policy: 30-day returns, free return label, refunds within 5 business days of receipt; "
                  "defective or damaged items need a photo; size exchanges are free. Use only the order facts "
-                 "given. Reply in under 120 words, warm and specific. Sign as 'Harbor & Pine Support'.")
+                 "given. Reply in under 120 words, warm and specific. Sign as 'Lanternwick Support'.")
         reply, t2 = chat(a.model, agent, f"Order record: #{oid}, placed {placed}, delivered {delivered}, total ${total or 0:.2f}.\n\n"
                                          f"Customer email:\n{cust}")
         times += [t1, t2]

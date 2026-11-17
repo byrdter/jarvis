@@ -142,7 +142,7 @@ def facts(db, today: date) -> dict:
             "return_spikes": spikes, "stock_at_risk": at_risk[:5]}
 
 
-SYSTEM = """You write the owner's morning brief for Harbor & Pine, a small online apparel and home-goods shop.
+SYSTEM = """You write the owner's morning brief for Lanternwick, a small online apparel and home-goods shop.
 Plain text, under 200 words, for a busy owner. Three short parts:
 1. Yesterday: orders and revenue against a normal day for that weekday; returns and refunds.
 2. Needs your decision today: one line per alert, most urgent first, each with the action to take.

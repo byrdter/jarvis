@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Business simulator, prototype 1: a fictional online store ("Harbor & Pine", apparel + home goods).
+"""Business simulator, prototype 1: a fictional online store ("Lanternwick", apparel + home goods).
 
 Runs N simulated days of an ongoing business and fills a SQLite database plus a real mailbox file:
   customers   arrive by a seasonal Poisson process; each gets a hidden purchase rate (Gamma) and a
@@ -46,7 +46,7 @@ FIRST = ["Ana", "Ben", "Carla", "Dev", "Elena", "Femi", "Grace", "Hugo", "Ines",
          "Noah", "Olga", "Priya", "Quinn", "Rosa", "Sam", "Tara", "Umar", "Vera", "Wes", "Ximena", "Yuki", "Zoe"]
 LAST = ["Alvarez", "Brooks", "Chen", "Diaz", "Evans", "Fischer", "Garcia", "Hughes", "Ito", "Jensen", "Khan",
         "Lopez", "Morris", "Nguyen", "Okafor", "Patel", "Reyes", "Silva", "Taylor", "Usman", "Vargas", "Walsh"]
-SHOP = "Harbor & Pine <hello@harborpine.test>"   # .test is reserved: these addresses can never reach anyone
+SHOP = "Lanternwick <hello@lanternwick.test>"   # .test is reserved: these addresses can never reach anyone
 
 
 SCHEMA = """
@@ -208,7 +208,7 @@ class Store:
         self.db.executemany("INSERT INTO order_items VALUES(?,?,?,?)", [(oid, p["id"], 1, p["price"]) for p in items])
         lines = "\n".join(f"  - {p['cat'].title()} item {p['id']}  ${p['price']:.2f}" for p in items)
         self.mail(day, SHOP, self.addr(c), f"Order #{oid} confirmed",
-                  f"Hi {c['name'].split()[0]},\n\nThanks for your order!\n{lines}\nTotal: ${subtotal - discount:.2f}\n\nHarbor & Pine", "order_confirmation", c["id"], oid)
+                  f"Hi {c['name'].split()[0]},\n\nThanks for your order!\n{lines}\nTotal: ${subtotal - discount:.2f}\n\nLanternwick", "order_confirmation", c["id"], oid)
         self.pending_deliveries.setdefault(delivered, []).append((oid, c, items))
         if asks:
             self.mail(day, self.addr(c), SHOP, f"Question about order #{oid}", f"Hi, {q}\nThanks, {c['name']}", "support_question", c["id"], oid)
@@ -257,7 +257,7 @@ class Store:
         p["on_order"] = p.get("on_order", 0) + qty
         self.pending_pos.setdefault(arrives, []).append((cur.lastrowid, p, qty))
         self.mail(day, SHOP, f"{p['cat'].title()} Source Co. <orders@{p['cat']}-source.test>", f"PO #{cur.lastrowid}",
-                  f"Please ship {qty} units of SKU {p['id']}. Thanks, Harbor & Pine purchasing", "purchase_order")
+                  f"Please ship {qty} units of SKU {p['id']}. Thanks, Lanternwick purchasing", "purchase_order")
 
     def receive_pos(self, day: date):
         for po, p, qty in self.pending_pos.pop(day, []):

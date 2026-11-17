@@ -24,7 +24,7 @@ def main():
         w = csv.writer(f); w.writerow(["day", "product_id", "product", "category", "ordered", "why"])
         for day, pid, qty, why in log:
             w.writerow([day, pid, names[pid][0], names[pid][1], qty, why])
-    page = [f"Harbor & Pine reorder advisor, morning of {a.day} (seed {a.seed})", ""]
+    page = [f"Lanternwick reorder advisor, morning of {a.day} (seed {a.seed})", ""]
     page += [f"#{pid:<4} {names[pid][0]:<22} order {qty:>4}   {why}" for day, pid, qty, why in log if day == a.day]
     (out / f"advisor-log-seed{a.seed}-{a.day}.txt").write_text("\n".join(page) + "\n")
     print(f"{len(log)} decisions; {len(page) - 2} on {a.day}")

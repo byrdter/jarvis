@@ -5,7 +5,7 @@
            known from the shop's policy (normal return, defective item, too late, not yet delivered,
            wrong order number). The "truth" never goes to the agent.
 2. inbox:  a local model writes each customer's email in their own voice; it is SENT by SMTP to
-           support@harborpine.test on the local Mailpit server (watch it at http://127.0.0.1:8025).
+           support@lanternwick.test on the local Mailpit server (watch it at http://127.0.0.1:8025).
 3. agent:  reads unread mail through Mailpit's API, looks up the order in the store database (a tool),
            decides under the policy, and replies by SMTP. Agent = local model or Claude (`--agent claude`).
 4. grade:  the agent's decision vs the truth: right action, right refund, no photo asked for when the
@@ -29,9 +29,9 @@ from pathlib import Path
 HERE = Path(__file__).parent
 DB = HERE / "out" / "store.db"
 API = "http://127.0.0.1:8025/api/v1"
-SUPPORT = "support@harborpine.test"
+SUPPORT = "support@lanternwick.test"
 
-POLICY = """Harbor & Pine support policy:
+POLICY = """Lanternwick support policy:
 - Returns are accepted within 30 days of DELIVERY. After 30 days, politely decline (no refund).
 - Normal returns (doesn't fit, changed mind, not as pictured, arrived late): approve, send a free return
   label, refund the item's price within 5 business days of receiving it. No photo needed.
@@ -115,7 +115,7 @@ def customers_write(cases, model):
         body = local(model, persona, f"You are {c['name']}. Order number {c['shown_id']}, the {c['item']}. "
                                      f"Your situation: {c['reason']}.", temperature=0.9)
         body = re.sub(r"(?im)^subject:.*\n+", "", body)
-        send(f"{c['name']} <{c['email']}>", f"Harbor & Pine Support <{SUPPORT}>", f"Order {c['shown_id']}", body,
+        send(f"{c['name']} <{c['email']}>", f"Lanternwick Support <{SUPPORT}>", f"Order {c['shown_id']}", body,
              {"X-Sim-Case": str(c["n"]), "X-Sim-Today": c["today"]})
 
 
@@ -144,10 +144,10 @@ def lookup_order(db, oid, today=None):
 
 
 def agent_decide(ask, email_text, today, record):
-    system = (f"You are the customer-support agent for Harbor & Pine. Today's date is {today}.\n{POLICY}\n\n"
+    system = (f"You are the customer-support agent for Lanternwick. Today's date is {today}.\n{POLICY}\n\n"
               "Reply with ONLY a JSON object, no code fence: {\"action\": one of " + json.dumps(ACTIONS) +
               ", \"refund\": number (the refund you are approving now, else 0), \"reply\": \"the email to the customer, under 110 words, "
-              "signed Harbor & Pine Support\"}")
+              "signed Lanternwick Support\"}")
     user = f"Customer email:\n{email_text}\n\nOrder lookup result: {json.dumps(record) if record else 'NOT FOUND'}"
     raw = ask(system, user)
     try:
@@ -170,7 +170,7 @@ def work_inbox(db, ask, label):
         d = agent_decide(ask, text, today, record)
         d["secs"] = round(time.time() - t, 1)
         decisions[case_no] = d
-        send(f"Harbor & Pine Support <{SUPPORT}>", m["From"]["Address"], f"Re: {m['Subject']}", str(d.get("reply", "")),
+        send(f"Lanternwick Support <{SUPPORT}>", m["From"]["Address"], f"Re: {m['Subject']}", str(d.get("reply", "")),
              {"X-Sim-Agent": label})
         req = urllib.request.Request(f"{API}/messages", json.dumps({"IDs": [m["ID"]], "Read": True}).encode(),
                                      {"Content-Type": "application/json"}, method="PUT")

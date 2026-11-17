@@ -1,6 +1,6 @@
 # Business simulator (prototype 1)
 
-A fictional online store, Harbor & Pine, run for simulated years in seconds: customers who buy and
+A fictional online store, Lanternwick, run for simulated years in seconds: customers who buy and
 quit on realistic statistical patterns, seasonal demand, returns by category, supplier reorders,
 stockouts, and every customer touchpoint written as real email in an mbox file. Everything is fictional,
 and all addresses use the reserved `.test` domain, so nothing can ever reach a real person.
