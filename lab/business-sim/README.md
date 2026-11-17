@@ -29,4 +29,14 @@ Replay result (5 stores, 2 years each): the advisor earns more in all 5, mean +$
 +$439K); lost sales down 64% on average, average stock down 40%, at the cost of 3–4x more supplier orders.
 Its December stockouts fall 70% in year 2 once it has learned last year's holiday rush.
 
+```
+# Second company app: the owner's morning brief (brief.py), tested with planted problems.
+python3 sim.py --days 450 --seed 7 --no-mbox --out out/brief/incident --defect-from 2026-02-01 --outage-on 2026-03-09
+python3 sim.py --days 450 --seed 7 --no-mbox --out out/brief/normal
+python3 brief.py --db out/brief/incident/store.db --today 2026-03-10 --writer local    # or --writer claude / none
+```
+
+Result: both the local model and Claude caught all three planted problems (bad batch, checkout outage,
+stock risk) with every number traced to the facts; 5 false alarms in 85 days on the normal store.
+
 Findings, design and sources: `jarvis-brain/wiki/concepts/business-simulation.md`.

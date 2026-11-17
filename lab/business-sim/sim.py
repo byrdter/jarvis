@@ -70,13 +70,20 @@ CREATE TABLE emails(id INTEGER PRIMARY KEY, sent TEXT, sender TEXT, recipient TE
 
 
 class Store:
-    def __init__(self, days: int, seed: int, out: Path, policy: str = "naive", write_mbox: bool = True):
+    def __init__(self, days: int, seed: int, out: Path, policy: str = "naive", write_mbox: bool = True,
+                 defect_from: str | None = None, outage_on: str | None = None):
         # Separate random streams, so a change in how the shop runs (say, reordering) can't change which
         # customers show up or what they want: replays with and without an app see the same customers.
         self.rng = np.random.default_rng(seed)                   # customers and demand (+ catalog)
         self.ops = np.random.default_rng([seed, 1])              # supplier lead times
         self.ret = np.random.default_rng([seed, 2])              # returns
         self.mrng = np.random.default_rng([seed, 3])             # email timestamps
+        self.inc = np.random.default_rng([seed, 4])              # planted incidents
+        # Planted incidents (ground truth for testing apps like the morning brief; written to incidents.json)
+        self.defect_from = date.fromisoformat(defect_from) if defect_from else None
+        self.outage_on = date.fromisoformat(outage_on) if outage_on else None
+        self.defect_pid = None
+        self.out_dir = out
         self.policy, self.write_mbox = policy, write_mbox
         self.advisor = None
         if policy == "advisor":
@@ -121,6 +128,8 @@ class Store:
                                  si, p["stock"], 30, 120, p["pop"]))
         self.pop = np.array([p["pop"] for p in self.products])
         self.pop /= self.pop.sum()
+        apparel = [p for p in self.products if p["cat"] == "apparel"]
+        self.top_apparel = max(apparel, key=lambda p: p["pop"])["id"]   # the bad-batch target, if planted
 
     # ---------- email ----------
     def mail(self, day: date, sender, recipient, subject, body, kind, cust=None, order=None):
@@ -170,6 +179,8 @@ class Store:
         if leaves:   # whether they come back doesn't depend on our stock (a simplification)
             c["alive"] = False
             self.db.execute("UPDATE customers SET churned_on=? WHERE id=?", ((day + timedelta(days=1)).isoformat(), c["id"]))
+        if self.outage_on == day and self.inc.random() < 0.7:
+            return   # checkout is broken today: most orders silently fail (nothing reaches the database)
         items, missing = [], []
         for i in picks:
             p = self.products[i]
@@ -209,15 +220,20 @@ class Store:
             self.mail(day, SHOP, self.addr(c), f"Order #{oid} delivered", "Your order has arrived. Enjoy!", "delivered", c["id"], oid)
             for p in items:
                 _, _, _, rate, (lo, hi) = CATEGORIES[p["cat"]]
+                bad = self.defect_from and p["id"] == self.top_apparel and day >= self.defect_from
+                if bad and self.inc.random() < 0.45:   # a bad batch: 45% of these come back defective
+                    when = day + timedelta(days=int(self.inc.integers(2, 9)))
+                    self.pending_returns.setdefault(when, []).append((oid, c, p, "defective"))
+                    continue
                 if r.random() < rate:
                     when = day + timedelta(days=int(min(hi, r.gamma(2.0, 4.0) + lo)))
                     self.pending_returns.setdefault(when, []).append((oid, c, p))
 
     def process_returns(self, day: date):
         r = self.ret
-        for oid, c, p in self.pending_returns.pop(day, []):
+        for oid, c, p, *forced in self.pending_returns.pop(day, []):
             reasons = RETURN_REASONS[p["cat"]]
-            reason = reasons[r.choice(len(reasons), p=[w for _, w in reasons])][0]
+            reason = forced[0] if forced else reasons[r.choice(len(reasons), p=[w for _, w in reasons])][0]
             restock = reason not in ("defective", "damaged in shipping")
             if restock:
                 p["stock"] += 1
@@ -275,6 +291,10 @@ class Store:
         self.db.commit()
         if self.write_mbox:
             self.mbox.flush()
+        import json as _json
+        (self.out_dir / "incidents.json").write_text(_json.dumps({
+            "defect_batch": {"product_id": self.top_apparel, "from": self.defect_from.isoformat()} if self.defect_from else None,
+            "checkout_outage": self.outage_on.isoformat() if self.outage_on else None}, indent=1))
         return time.time() - t0
 
 
@@ -307,8 +327,11 @@ def main():
                     help="naive = the shop's fixed rule; advisor = the reorder advisor app decides")
     ap.add_argument("--no-mbox", action="store_true", help="skip writing the mbox file (faster replays)")
     ap.add_argument("--json", action="store_true", help="print only the scoreboard as JSON")
+    ap.add_argument("--defect-from", help="plant a bad batch: the top apparel product turns defective from this date")
+    ap.add_argument("--outage-on", help="plant a checkout outage on this date (70%% of orders fail)")
     a = ap.parse_args()
-    s = Store(a.days, a.seed, Path(a.out), a.policy, write_mbox=not a.no_mbox)
+    s = Store(a.days, a.seed, Path(a.out), a.policy, write_mbox=not a.no_mbox,
+              defect_from=a.defect_from, outage_on=a.outage_on)
     secs = s.run()
     board = scoreboard(s.db, a.days)
     if a.json:
