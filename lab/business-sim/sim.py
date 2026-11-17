@@ -135,7 +135,8 @@ class Store:
             first, last = r.choice(FIRST), r.choice(LAST)
             c = dict(id=cid, name=f"{first} {last}", email=f"{first.lower()}.{last.lower()}{cid}@mail.test",
                      rate=float(r.gamma(0.5, 1 / 90)),      # orders per day; mean ~0.0056 => ~2/yr while active (ASSUMED)
-                     drop=float(r.beta(2.0, 2.0)),           # chance of leaving after each order, incl. the first (ASSUMED)
+                     drop=float(r.beta(2.0, 2.0)),
+                     basket=float(r.gamma(1.2, 1 / 1.2)),    # own spend level: some always buy one thing, some fill a cart (Gamma-Gamma idea)           # chance of leaving after each order, incl. the first (ASSUMED)
                      alive=True, joined=day)
             self.customers.append(c)
             self.db.execute("INSERT INTO customers VALUES(?,?,?,?,?,?,?,NULL)",
@@ -145,7 +146,7 @@ class Store:
 
     def place_order(self, day: date, c: dict, first_order=False):
         r = self.rng
-        n_items = 1 + r.poisson(0.7)
+        n_items = 1 + r.poisson(0.7 * c.get("basket", 1.0) ** 1.6)
         picks = r.choice(len(self.products), size=n_items, p=self.pop)
         sale = day.month == 11 and day.day >= 24 or r.random() < 0.08
         items, missing = [], []
