@@ -52,8 +52,17 @@ def is_soul(path: str) -> bool:
     return bool(path) and os.path.normpath(path).endswith("jarvis-brain/SOUL.md")
 
 
+# Mail/calendar actions that reach other people or can't be taken back. Unattended job sessions
+# (CLAUDE_INVOKED_BY set) never do these; in a live chat Terry's explicit OK is the gate.
+OUTBOUND = re.compile(r"^mcp__(?!.*telegram).*__(send_message|send_draft|reply|forward|trash_\w+|"
+                      r"delete_\w+|create_event|update_event|respond_to_event|share_file)$")
+
+
 def check(tool: str, ti: dict) -> str | None:
     """Reason to block, or None."""
+    if OUTBOUND.match(tool) and os.environ.get("CLAUDE_INVOKED_BY"):
+        return ("Unattended jobs never send, reply, forward, delete or change calendar events. "
+                "Write a draft or put it in the brief for Terry to approve.")
     path = ti.get("file_path") or ti.get("notebook_path") or ti.get("path") or ""
     if tool in ("Edit", "Write", "MultiEdit", "NotebookEdit"):
         if is_soul(path) and os.environ.get("JARVIS_ALLOW_SOUL") != "1":
@@ -83,6 +92,10 @@ def check(tool: str, ti: dict) -> str | None:
 
 
 TESTS = [  # (tool, input, should_block)
+    ("mcp__claude_ai_Gmail__send_message", {}, "JOB"),
+    ("mcp__claude_ai_Gmail__create_draft", {}, False),
+    ("mcp__claude_ai_Google_Calendar__create_event", {}, "JOB"),
+    ("mcp__plugin_telegram_telegram__reply", {}, False),
     ("Edit", {"file_path": "/home/jarvis/code/jarvis-brain/SOUL.md", "new_string": "x"}, True),
     ("Edit", {"file_path": "/home/jarvis/code/jarvis-brain/MEMORY.md", "new_string": "x"}, False),
     ("Bash", {"command": "echo hi >> ~/code/jarvis-brain/SOUL.md"}, True),
@@ -122,7 +135,18 @@ TESTS = [  # (tool, input, should_block)
 
 def main() -> int:
     if "--test" in sys.argv:
-        bad = [(t, i, want) for t, i, want in TESTS if (check(t, i) is not None) != want]
+        def ok(t, i, want):
+            if want != "JOB":
+                return (check(t, i) is not None) == want
+            saved = os.environ.pop("CLAUDE_INVOKED_BY", None)  # "JOB": allowed live, blocked in a job
+            live = check(t, i) is None
+            os.environ["CLAUDE_INVOKED_BY"] = "test"
+            job = check(t, i) is not None
+            os.environ.pop("CLAUDE_INVOKED_BY")
+            if saved is not None:
+                os.environ["CLAUDE_INVOKED_BY"] = saved
+            return live and job
+        bad = [(t, i, want) for t, i, want in TESTS if not ok(t, i, want)]
         for t, i, want in bad:
             print(f"FAIL {t} {i} expected {'block' if want else 'allow'}")
         print(f"{len(TESTS) - len(bad)}/{len(TESTS)} passed")

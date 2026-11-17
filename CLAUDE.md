@@ -269,6 +269,15 @@ writes a `wiki/people/<creator>.md` page plus tools/concepts knowledge. Original
 is text only. Zubair's 16 packs are already in (`raw/sources/zubair/`, `wiki/people/zubair-trabzada.md`).
 If Terry hands a document over in chat instead, copy it into `~/JARVIS-Library/<creator>/`.
 
+## Email, calendar, Drive (connected 2026-11-17)
+
+Gmail, Google Calendar and Google Drive are claude.ai connectors on Terry's Google account
+so every session (laptop, Telegram, server jobs) has them. **Read freely;
+write drafts; never send, reply, forward, delete, or create/change calendar events without Terry's
+explicit OK in this conversation.** Unattended job sessions (`CLAUDE_INVOKED_BY` set) are blocked from
+those actions by `.claude/hooks/guard.py`. If a call fails with "requires additional permissions", Terry
+reconnects that connector in claude.ai → Settings → Connectors and checks **Select all**.
+
 ## Automatic memory (2026-11-15)
 
 Nobody has to remember to save anything. Every session's new turns are summarized into
