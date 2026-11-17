@@ -347,6 +347,11 @@ read time. Measured before deciding: 41 curated MEMORY.md files (newest 2026-08-
 memories — **both actively used**, for exactly the two different purposes above. Terry settled it
 2026-08-07: keep both, split by role.
 
+**Update 2026-11-17 (memory migration):** `jarvis-brain` is the memory every body shares (laptop,
+Telegram, server jobs). Laptop `MEMORY.md` topic files are copied into `jarvis-brain/raw/claude-memory/`
+hourly, so the server can search them, but only facts promoted into the brain's `USER.md`, `MEMORY.md`
+or `wiki/` are loaded everywhere. A durable fact that matters off the laptop belongs in the brain.
+
 Rule of thumb: *would I want this loaded before I know what today's task is?* → `MEMORY.md`.
 *Would I only want this once I'm already doing that kind of work?* → `bd remember`.
 
