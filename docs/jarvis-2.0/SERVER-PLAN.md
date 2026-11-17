@@ -32,11 +32,11 @@ user: jarvis (no root login; sudo only for setup)
 |---|---|---|
 | `jarvis-chat` | `claude --channels plugin:telegram@claude-plugins-official` inside tmux, in `~/code/jarvis` (so the brain loads every session). Restarts on crash. **Kills stray old pollers before starting** (the plugin can leave orphaned `bun` processes after a restart, which then trigger 409s). | always |
 | `brain-sync` | `scripts/brain-sync.sh`: commit, merge (union merge for daily logs), push | every 2 min |
-| `jarvis-heartbeat` | Gathers changes with plain scripts (GitHub, later Gmail), and **only if something changed** runs `claude -p` with HEARTBEAT.md; sends results via the Telegram Bot API `sendMessage` (sending doesn't conflict with the chat poller) | every 30 min, 10:00–19:00 Europe/Madrid |
-| `jarvis-brief` | The morning brief: overnight changes, today's top 3, AI news later | 10:00 Europe/Madrid daily |
+| `jarvis-heartbeat` | Gathers changes with plain scripts (GitHub, later Gmail), and **only if something changed** runs `claude -p` with HEARTBEAT.md; sends results via the Telegram Bot API `sendMessage` (sending doesn't conflict with the chat poller) | every 30 min, 10:00–19:00 Terry's time |
+| `jarvis-brief` | The morning brief: overnight changes, today's top 3, AI news later | 10:00 Terry's time, daily |
 | `jarvis-preflight` | Live checks (law: "done means preflight passed"); posts failures to Telegram | daily + after every deploy |
 
-Time zone: the server runs in UTC; jobs use `Europe/Madrid` explicitly (and follow Terry's travel when needed).
+Time zone: the server runs in UTC; jobs use Terry's time zone from `JARVIS_TZ` in `~/.config/jarvis/jobs.env` (Europe/Madrid at home; change it when he travels). `infra/server/jobs/install.sh` deploys from the laptop or from the server itself.
 
 ## Security checklist
 - SSH keys only, password login off, root login off; **ufw: deny all incoming**, allow only the Tailscale interface.
