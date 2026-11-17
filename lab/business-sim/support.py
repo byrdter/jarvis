@@ -212,12 +212,13 @@ def main():
     ap.add_argument("--agent", choices=["local", "claude"], default="local")
     ap.add_argument("--model", default="qwen3.8:27b")
     ap.add_argument("--seed", type=int, default=3)
+    ap.add_argument("--db", default=str(DB), help="store database to draw cases from")
     ap.add_argument("--date-tool", action="store_true", help="order lookup computes days since delivery")
     ap.add_argument("--reuse", action="store_true", help="grade a new agent on the cases already in the inbox")
     a = ap.parse_args()
     global DATE_TOOL
     DATE_TOOL = a.date_tool
-    db = sqlite3.connect(DB)
+    db = sqlite3.connect(a.db)
     rng = random.Random(a.seed)
     cases_file = HERE / "out" / "cases.json"
     if a.reuse:
