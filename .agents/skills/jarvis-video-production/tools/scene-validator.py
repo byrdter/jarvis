@@ -427,6 +427,11 @@ def validate_scene(scene_dir, render_dir=None, sample_frames=False):
 
     # B. animation events past comp end
     events = extract_animation_ats(html)
+    if (scene_dir / 'cues.js').exists() and re.search(r"\b[CE]\(\s*['\"]", html):
+        # Cue-timed scene: tween positions are C('012') + offset, invisible to this static parse. The real
+        # timeline length is checked at runtime (ep2/tools/check-tl.py) and dead air by motion-scan.py.
+        info("cue-timed scene: overrun/dead-air checked at runtime (check-tl.py) and on the render (motion-scan.py)")
+        events = []
     if events:
         overruns = [(k,t,d) for (k,t,d) in events if t + d > comp_dur + 0.1]
         if overruns:
