@@ -153,7 +153,7 @@ or landing line. The full capability set is installed and active (`hyperframes-a
 `hyperframes add` registry) — reach into it. **Non-negotiable technical floor:** all motion on the
 registered `tl` (a bare `gsap.to`/CSS `@keyframes`/`requestAnimationFrame` renders FROZEN), and every
 scene MUST pass `tools/scene-validator.py` (the pre-render determinism gate) before Terry sees it.
-Use the PINNED CLI (`hyperframes`, global **0.7.109** — verified 2026-08-15) — never bare
+Use the PINNED CLI (`hyperframes`, global **0.9.64** — verified 2026-11-17, re-pinned forward from 0.7.109 at the Ep 2 cold open; nothing in the season had rendered for a master) — never bare
 `npx hyperframes`. **This line is the ONE source of truth**: `tools/check-cli-pin.py` parses the
 version out of it. Do not restate the number in other docs; point at this line instead.
 **The global binary SELF-UPDATES**: 0.7.84 → 0.7.87 inside one session on 2026-08-01, then
