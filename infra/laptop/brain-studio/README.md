@@ -34,8 +34,11 @@ while thinking, and pulses on every spoken word (word-boundary events; a soft be
 none). The caption under it says which engine and what it's doing ("Reading the brain · Claude",
 "From 3 notes · 4.4 s"). Click it to talk.
 
-**Switch brains out loud:** "switch to the local brain" / "use local" answers with `qwen3.5:9b` on
-Ollama (nothing leaves the Mac, ~2–4 s once warm); "back to Claude" / "use Claude" returns to the plan.
+**Switch brains out loud:** say it however you like ("can you switch over to the local brain", "go
+local", "use Claude", "back to Claude"): a short request with a switch word and an engine name. Local
+answers with `qwen3.5:9b` on Ollama (nothing leaves the Mac, ~2–4 s once warm). A *question* about the
+engine ("which brain are you using?") goes to the model instead, and every prompt tells it where it is
+running and on which engine (`where_you_are()` in `server.py`), with past answers labeled by engine.
 Override with `BRAIN_STUDIO_ENGINE`, `BRAIN_STUDIO_LOCAL_MODEL` (e.g. `qwen3.8:27b`: smarter, slower).
 
 ## Voice

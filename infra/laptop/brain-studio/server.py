@@ -21,6 +21,7 @@ import importlib.util
 import json
 import os
 import re
+import socket
 import subprocess
 import sys
 import threading
@@ -175,6 +176,28 @@ def set_engine(name: str) -> dict:
     return engine_info()
 
 
+def where_you_are() -> str:
+    """Facts about this running session, handed to the model every turn so it never has to guess
+    (asked "where are you?", the local model said it wasn't running anywhere)."""
+    host = socket.gethostname().removesuffix(".local")
+    notes = sum(1 for n in _graph.get("nodes", []) if not n.get("hub"))
+    if ENGINE["name"] == "local":
+        brain = (f"the LOCAL brain: {LOCAL_MODEL} running in Ollama on this Mac. Nothing Terry says or "
+                 "reads here leaves the machine")
+    else:
+        brain = (f"CLAUDE ({MODEL}) on Terry's Claude plan. The question and these notes go to Anthropic "
+                 "to be answered")
+    return (f"Where you are right now (facts, use them if asked):\n"
+            f"- You are JARVIS in Brain Studio, the 3D galaxy of Terry's brain, served from his Mac "
+            f"({host}) at http://127.0.0.1:{PORT}. The galaxy has {notes} notes from ~/code/jarvis-brain.\n"
+            f"- You are answering with {brain}.\n"
+            f"- Engines: Claude (orange orb) or the local brain (green orb). Terry switches by saying "
+            f"\"switch to the local brain\" or \"use Claude\"; the page does the switch, not you. If he asks "
+            f"you to switch, tell him to say one of those.\n"
+            f"- Past answers below are labeled with the engine that gave them; the other engine's answers "
+            f"were not yours.")
+
+
 def engine_info() -> dict:
     return {"engine": ENGINE["name"], "model": LOCAL_MODEL if ENGINE["name"] == "local" else MODEL}
 
@@ -203,8 +226,11 @@ def chat(q: str) -> dict:
         titles[nid] = _graph["nodes"][nid]["label"]
     notes = "\n\n".join(f"<note id={nid} title=\"{titles[nid]}\">\n" + "\n…\n".join(parts) + "\n</note>"
                         for nid, parts in blocks.items())
-    convo = "".join(f"Terry: {t['q']}\nJARVIS: {t['a']}\n" for t in _history[-HISTORY_TURNS:])
-    prompt = (f"Notes from the brain (closest matches to the question):\n\n{notes or '(none found)'}\n\n"
+    # Each past answer is labeled with the engine that gave it, so after a switch neither brain owns
+    # (or apologizes for) the other's words.
+    convo = "".join(f"Terry: {t['q']}\nJARVIS ({t.get('by', '?')}): {t['a']}\n" for t in _history[-HISTORY_TURNS:])
+    prompt = (where_you_are() + "\n\n"
+              + f"Notes from the brain (closest matches to the question):\n\n{notes or '(none found)'}\n\n"
               + (f"Conversation so far:\n{convo}\n" if convo else "")
               + f"Terry: {q}")
     engine = ENGINE["name"]
@@ -212,7 +238,7 @@ def chat(q: str) -> dict:
     used = [int(i) for i in reply.get("sources", []) if str(i).isdigit() and int(i) in blocks]
     about = bool(reply.get("about_notes")) and bool(used)
     answer = str(reply.get("answer", "")).strip() or "I lost my train of thought there. Ask me again?"
-    _history.append({"q": q, "a": answer})
+    _history.append({"q": q, "a": answer, "by": f"local {LOCAL_MODEL}" if engine == "local" else f"Claude {MODEL}"})
     del _history[:-HISTORY_TURNS]
     return {"answer": answer, "nodes": used if about else [], "about_notes": about,
             "considered": list(blocks), "retrieval": mode, "ms": int((time.time() - t0) * 1000),
@@ -333,8 +359,13 @@ TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=u
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *a):
-        if "/api/" in (a[0] if a else ""):
+        # a[0] is the request line for access logs, but an HTTPStatus for send_error(); don't crash on it.
+        if a and isinstance(a[0], str) and "/api/" in a[0]:
             sys.stderr.write("%s\n" % (fmt % a))
+
+    def do_HEAD(self):   # health checks probe with HEAD; answer instead of logging a 501 traceback
+        self.send_response(200 if urlparse(self.path).path in ("/", "/index.html") else 404)
+        self.end_headers()
 
     def send(self, code: int, body: bytes, ctype: str):
         self.send_response(code)
@@ -402,8 +433,8 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main(argv: list[str]) -> int:
-    global MODEL
-    port = int(argv[argv.index("--port") + 1]) if "--port" in argv else PORT
+    global MODEL, PORT
+    port = PORT = int(argv[argv.index("--port") + 1]) if "--port" in argv else PORT
     if "--model" in argv:
         MODEL = argv[argv.index("--model") + 1]
     g = rebuild()

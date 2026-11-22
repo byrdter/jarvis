@@ -528,7 +528,11 @@ const ROUTES = [
   // "show me Ray Fu" goes straight to the star, but only when a note really matches;
   // "show me what we know about pricing" falls through to the brain.
   // Switch brains out loud. The orb's aura changes color with the engine.
-  { re: /^(?:jarvis[,\s]+)?(?:switch to|use|go|change to)\s+(?:the\s+)?(local|offline|ollama|claude|cloud)(?:\s+(?:brain|model|mode))?\.?$/i, run: m => setEngineRemote(/claude|cloud/i.test(m[1]) ? 'claude' : 'local') },
+  // Loose on purpose: "can you switch over to the local brain please" must switch, not reach the model
+  // (which has no tools and would say it can't). A short request with a switch verb and an engine word.
+  { re: /^(?=.{0,90}$).*?\b(?:switch|use|go|change|move|flip|run|put|try|back)\b(?:\s+[\w']+){0,4}?\s+(local|offline|ollama|qwen|on[- ]device|claude|cloud|sonnet|anthropic)\b(?!\s+code)/i,
+    run: m => /\b(what|which|where|why|how|should|are you|is it|is this|do we)\b/i.test(m.input) ? false   // a question about the engine goes to the model, which now knows
+            : setEngineRemote(/claude|cloud|sonnet|anthropic/i.test(m[1]) ? 'claude' : 'local') },
   // "Remember that…" (and the ways Terry actually says it) writes a note into the brain.
   { re: /^(?:jarvis[,\s]+)?(?:please\s+)?(?:remember(?: that)?|note to self|don'?t let me forget(?: that)?|log this|make a note(?: that)?)[:,]?\s+(.+)$/is, run: m => remember(m[1], m.input) },
   { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
