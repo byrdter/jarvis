@@ -436,39 +436,119 @@ function pickVoice() {
 }
 if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
-// Every utterance goes through queueUtterance(), which holds the mute check, so nothing routes around it.
-// speak() says a whole text now; speechStart/Feed/End speak an answer sentence by sentence while it's
-// still being written, which is what makes JARVIS start talking ~1 s after you stop.
-let pendingUtt = 0, streamOpen = false, sbuf = '';
+// Every sentence goes through queueUtterance(), which holds the mute check, so nothing routes around it.
+// Sentences play strictly in order on one chain. In the local voice, each sentence's audio is fetched the
+// moment it is queued (so the next is ready while one plays) and played gaplessly through Web Audio; the
+// orb pulses to the real loudness. If the local voice fails, that sentence (and the rest) use the browser.
+let pendingUtt = 0, streamOpen = false, sbuf = '', chain = Promise.resolve(), sayGen = 0;
+let audioCtx = null, analyser = null, curSrc = null, levelRAF = 0;
+const voiceState = { mode: (() => { try { return localStorage.getItem('jarvis.voice') || 'local'; } catch { return 'local'; } })(),
+                     ready: false, name: null };
+function ensureAudio() {
+  if (audioCtx) return audioCtx;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser(); analyser.fftSize = 512; analyser.connect(audioCtx.destination);
+  return audioCtx;
+}
+async function refreshVoice() {
+  try { const r = await (await fetch('/api/voice')).json(); voiceState.ready = !!r.ready; voiceState.name = r.voice; voiceState.voices = r.voices || {}; voiceState.error = r.error; }
+  catch { voiceState.ready = false; }
+  return voiceState;
+}
+refreshVoice(); setInterval(() => { if (!voiceState.ready) refreshVoice(); }, 5000);   // it loads in the background
+// Browsers only allow audio after a gesture. Any click, tap or key unlocks it (not only the wake veil),
+// otherwise a session started from the mic button would quietly fall back to the browser voice.
+for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, () => { ensureAudio(); audioCtx?.state === 'suspended' && audioCtx.resume(); }, { capture: true });
+const useLocalVoice = () => voiceState.mode === 'local' && voiceState.ready && !!audioCtx;
+
+async function fetchVoice(text) {
+  const res = await fetch('/api/tts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
+  if (!res.ok) throw new Error('voice ' + res.status);
+  return audioCtx.decodeAudioData(await res.arrayBuffer());
+}
+function startSpeakingLook() {
+  if (speaking) return;
+  speaking = true; setStatus('speaking');
+}
+function playBuffer(buf, g) {
+  return new Promise(resolve => {
+    if (g !== sayGen) return resolve();
+    const src = audioCtx.createBufferSource(); src.buffer = buf; src.connect(analyser);
+    curSrc = src; src.onended = () => { if (curSrc === src) curSrc = null; resolve(); };
+    startSpeakingLook();
+    const data = new Uint8Array(analyser.fftSize);
+    cancelAnimationFrame(levelRAF);
+    const tick = () => {
+      if (curSrc !== src) return;
+      analyser.getByteTimeDomainData(data);
+      let sum = 0; for (const v of data) { const x = (v - 128) / 128; sum += x * x; }
+      orb.setLevel(Math.min(1, Math.sqrt(sum / data.length) * 4));
+      levelRAF = requestAnimationFrame(tick);
+    };
+    tick();
+    src.start();
+  });
+}
+function sayBrowser(p, g) {
+  return new Promise(resolve => {
+    if (g !== sayGen || !('speechSynthesis' in window)) return resolve();
+    const u = new SpeechSynthesisUtterance(p);
+    if (voice) u.voice = voice;
+    u.rate = 1.04; u.pitch = 1;
+    u.onboundary = e => { if (!e.name || e.name === 'word') { orb.kick(0.5); lastWord = Date.now(); } };
+    u.onstart = () => {
+      startSpeakingLook(); clearInterval(beat);
+      beat = setInterval(() => { if (speaking && Date.now() - lastWord > 380) orb.kick(0.25 + Math.random() * 0.3); }, 190);
+    };
+    u.onend = u.onerror = () => { clearInterval(beat); resolve(); };
+    speechSynthesis.speak(u);   // Chrome cuts long utterances off after ~15 s, so one sentence each
+  });
+}
 function queueUtterance(p) {
   p = p.trim();
-  if (MUTE || !('speechSynthesis' in window) || !p) return;
-  const u = new SpeechSynthesisUtterance(p);
-  if (voice) u.voice = voice;
-  u.rate = 1.04; u.pitch = 1;
-  u.onboundary = e => { if (!e.name || e.name === 'word') { orb.kick(0.5); lastWord = Date.now(); } };
-  u.onstart = () => {
-    if (speaking) return;
-    speaking = true; setStatus('speaking');
-    clearInterval(beat);
-    beat = setInterval(() => { if (speaking && Date.now() - lastWord > 380) orb.kick(0.25 + Math.random() * 0.3); }, 190);
-  };
-  u.onend = u.onerror = () => { if (--pendingUtt <= 0 && !streamOpen) doneSpeaking(); };
+  if (MUTE || !p) return;
+  const g = sayGen, local = useLocalVoice();
+  const audio = local ? fetchVoice(p) : null;          // start rendering now, while earlier sentences play
+  audio?.catch(() => {});
   pendingUtt++;
-  speechSynthesis.speak(u);   // Chrome cuts long utterances off after ~15 s, so one sentence each
+  chain = chain.then(async () => {
+    if (g !== sayGen) return;
+    try {
+      if (audio) await playBuffer(await audio, g);
+      else await sayBrowser(p, g);
+    } catch {
+      voiceState.ready = false;                        // local voice failed: fall back, recheck in 5 s
+      await sayBrowser(p, g);
+    } finally {
+      if (g === sayGen && --pendingUtt <= 0 && !streamOpen) doneSpeaking();
+    }
+  });
 }
-function doneSpeaking() { pendingUtt = 0; speaking = false; clearInterval(beat); quietUntil = Date.now() + 500; setStatus('idle'); }
+function cancelSpeech() {
+  sayGen++; chain = Promise.resolve(); pendingUtt = 0;
+  try { curSrc?.stop(); } catch {}
+  curSrc = null; cancelAnimationFrame(levelRAF);
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+}
+function doneSpeaking() { pendingUtt = 0; speaking = false; clearInterval(beat); orb.setLevel(0); quietUntil = Date.now() + 500; setStatus('idle'); }
 const SENTENCE = /^([\s\S]*?[.!?]+["')\]]*)\s+/;   // a sentence is done once the space after it arrives
 function speak(text) {
-  if (!('speechSynthesis' in window)) return;
-  speechSynthesis.cancel(); pendingUtt = 0; streamOpen = false;
+  cancelSpeech(); streamOpen = false;
   (String(text).match(/[^.!?]+[.!?]+["')\]]*|\S[^.!?]*$/g) || [text]).forEach(queueUtterance);
 }
-function speechStart() { if ('speechSynthesis' in window) speechSynthesis.cancel(); pendingUtt = 0; streamOpen = true; sbuf = ''; }
+// The FIRST chunk may end at a clause (comma, semicolon, dash) once it's long enough, so a long opening
+// sentence doesn't hold the first word back. Zubair's pack warns this stalls mid-sentence; that was true
+// of his voice engine (barely faster than real time). The local voice renders ~11x real time, so the
+// next chunk is ready before this one finishes. The browser voice keeps whole sentences.
+const CLAUSE = /^([\s\S]{45,}?[,;:—–])\s+/;
+let firstChunk = true;
+function speechStart() { cancelSpeech(); streamOpen = true; sbuf = ''; firstChunk = true; }
 function speechFeed(piece) {
   sbuf += piece;
   let m;
-  while ((m = sbuf.match(SENTENCE))) { queueUtterance(m[1]); sbuf = sbuf.slice(m[0].length); }
+  while ((m = sbuf.match(SENTENCE) || (firstChunk && useLocalVoice() && sbuf.match(CLAUSE)))) {
+    queueUtterance(m[1]); sbuf = sbuf.slice(m[0].length); firstChunk = false;
+  }
 }
 function speechEnd() {
   if (!streamOpen) return;
@@ -477,9 +557,9 @@ function speechEnd() {
 }
 function stopSpeaking() {
   streamOpen = false; sbuf = '';
-  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  cancelSpeech();
   answerAbort?.abort();
-  speaking = false; pendingUtt = 0; clearInterval(beat); setStatus('idle');
+  speaking = false; clearInterval(beat); orb.setLevel(0); setStatus('idle');
 }
 
 // ─── listening ───────────────────────────────────────────────────────────────────────────────────
@@ -563,14 +643,35 @@ const ROUTES = [
   // Switch brains out loud. The orb's aura changes color with the engine.
   // Loose on purpose: "can you switch over to the local brain please" must switch, not reach the model
   // (which has no tools and would say it can't). A short request with a switch verb and an engine word.
-  { re: /^(?=.{0,90}$).*?\b(?:switch|use|go|change|move|flip|run|put|try|back)\b(?:\s+[\w']+){0,4}?\s+(local|offline|ollama|qwen|on[- ]device|claude|cloud|sonnet|anthropic)\b(?!\s+code)/i,
+  { re: /^(?=.{0,90}$).*?\b(?:switch|use|go|change|move|flip|run|put|try|back)\b(?:\s+[\w']+){0,4}?\s+(local|offline|ollama|qwen|on[- ]device|claude|cloud|sonnet|anthropic)\b(?!\s+(?:code|voice))/i,
     run: m => /\b(what|which|where|why|how|should|are you|is it|is this|do we)\b/i.test(m.input) ? false   // a question about the engine goes to the model, which now knows
             : setEngineRemote(/claude|cloud|sonnet|anthropic/i.test(m[1]) ? 'claude' : 'local') },
+  // Voices: "use the browser voice" / "use your local voice" / "use the Javert voice" / "what voices do you have"
+  { re: /^(?:use|switch to|go back to)\s+(?:the|your)\s+(browser|local|own|natural)\s+voice\.?$/i, run: m => setVoiceMode(/browser/i.test(m[1]) ? 'browser' : 'local') },
+  { re: /^(?:use|switch to|try|change to)\s+(?:the\s+)?(\w+)(?:'s)?\s+voice\.?$/i, run: m => setVoiceName(m[1].toLowerCase()) },
+  { re: /^(?:what|which)\s+voices?\s+(?:do you have|can you (?:do|use)|are there)\??$/i, run: async () => { await refreshVoice(); const v = Object.keys(voiceState.voices || {}); say(v.length ? `I can use ${v.slice(0, -1).join(', ')} or ${v.at(-1)}. I'm ${voiceState.name} right now.` : `My local voice isn't running, so I'm on the browser voice. ${voiceState.error || ''}`); } },
   // "Remember that…" (and the ways Terry actually says it) writes a note into the brain.
   { re: /^(?:jarvis[,\s]+)?(?:please\s+)?(?:remember(?: that)?|note to self|don'?t let me forget(?: that)?|log this|make a note(?: that)?)[:,]?\s+(.+)$/is, run: m => remember(m[1], m.input) },
   { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
 ];
 function say(text, q = '') { showAnswer(q, text); speak(text); }
+async function setVoiceMode(mode) {
+  voiceState.mode = mode;
+  try { localStorage.setItem('jarvis.voice', mode); } catch {}
+  ensureAudio(); await refreshVoice();
+  if (mode === 'local' && !voiceState.ready) return say(`My local voice isn't ready: ${voiceState.error || 'still loading'}. I'll use the browser voice until it is.`);
+  say(mode === 'local' ? `This is my own voice again.` : `Okay, browser voice.`);
+}
+async function setVoiceName(name) {
+  if (!['local', 'browser', 'own', 'natural', 'your'].includes(name)) {
+    const r = await fetch('/api/voice', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voice: name }) }).then(r => r.json()).catch(e => ({ error: String(e) }));
+    if (r.error) return say(/unknown voice/.test(r.error) ? `I don't have a voice called ${name}.` : `I couldn't change voices: ${r.error}`);
+    voiceState.mode = 'local'; try { localStorage.setItem('jarvis.voice', 'local'); } catch {}
+    await refreshVoice();
+    return say(`This is ${name}. How do I sound?`);
+  }
+  return false;
+}
 async function setEngineRemote(e) {
   try {
     const r = await fetch('/api/engine', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ engine: e }) }).then(r => r.json());
@@ -647,6 +748,7 @@ function showAnswer(q, a, srcIds = [], ms) {
 const wake = document.getElementById('wake');
 wake.addEventListener('click', () => {
   wake.classList.add('gone');
+  ensureAudio();
   speak('Hi Terry.');
   ask.focus();
 }, { once: true });
@@ -654,7 +756,7 @@ if (MUTE) { wake.classList.add('gone'); statusText.textContent = 'Idle (muted ta
 
 function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 addEventListener('resize', () => { Graph.width(innerWidth).height(innerHeight); bloom.setSize(innerWidth, innerHeight); });
-window.__studio = { Graph, nodes, lit: () => lit, handle };   // for testing from the console
+window.__studio = { Graph, nodes, lit: () => lit, handle, voice: voiceState, speaking: () => speaking, audio: () => audioCtx?.state };   // for testing from the console
 </script>
 </body>
 </html>

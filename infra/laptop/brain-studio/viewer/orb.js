@@ -6,7 +6,8 @@
 //   idle       slow breathing
 //   listening  the edge ripples with the REAL microphone level (setLevel, from an AnalyserNode)
 //   thinking   inner arcs spin up and one satellite orbits per note being read
-//   speaking   a pulse on every spoken word (kick, from SpeechSynthesis boundary events)
+//   speaking   follows the real loudness of the local voice (setLevel, from an AnalyserNode on the
+//              output); with the browser voice, a pulse on every spoken word (kick, from boundary events)
 //   error      a red flicker
 // No dependencies. One requestAnimationFrame loop; it sleeps when the tab is hidden.
 
@@ -43,7 +44,7 @@ export function createOrb(canvas) {
     // Energy: what drives the wobble. Listening follows the mic; speaking decays between word kicks.
     const target = st.state === 'listening' ? 0.15 + st.level * 1.6
                  : st.state === 'thinking' ? 0.35
-                 : st.state === 'speaking' ? 0.2
+                 : st.state === 'speaking' ? 0.2 + st.level * 1.2
                  : err ? 0.3 + 0.3 * (Math.sin(t * 30) > 0.6 ? 1 : 0)
                  : 0.08;
     st.energy += (target - st.energy) * (st.state === 'speaking' ? 0.08 : 0.15);
@@ -129,7 +130,7 @@ export function createOrb(canvas) {
   requestAnimationFrame(frame);
 
   return {
-    setState(s) { st.state = s; if (s !== 'listening') st.level = 0; },
+    setState(s) { st.state = s; if (s !== 'listening' && s !== 'speaking') st.level = 0; },
     setEngine(e) { if (ENGINES[e]) st.engine = e; },
     get engine() { return st.engine; },
     setLevel(v) { st.level = Math.max(0, Math.min(1, v)); },

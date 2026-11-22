@@ -4,6 +4,8 @@
   GET  /                 the viewer (viewer/ only; nothing else on disk is reachable)
   GET  /api/note?id=N    one note's full text, for "Read full note"
   POST /api/chat         {"q": "..."} -> {"answer", "nodes", "about_notes", "ms"}
+  POST /api/tts          {"text"} -> audio/wav in JARVIS's local voice (503 if it isn't up: use the browser voice)
+  GET  /api/voice        voice status and choices; POST {"voice": name or clip path} switches it
   POST /api/chat/stream  same question; NDJSON: {"t":"text","s":...} as it's written, then {"t":"done",...}
   POST /api/reset        forget the conversation
   POST /api/remember     {"text": "..."} -> a new note in captures/, a line in today's daily log, a live star
@@ -18,6 +20,7 @@ down, a keyword score over the galaxy stands in.
 Binds to 127.0.0.1 only: the page holds excerpts of private notes. Stdlib only.
 Usage: server.py [--port 4700] [--model sonnet]
 """
+import atexit
 import importlib.util
 import json
 import os
@@ -225,6 +228,58 @@ class ClaudeSession:
 
 
 CLAUDE = ClaudeSession()
+
+
+# ─── the voice: Kyutai Pocket TTS in its own Python 3.12 env (voice/setup.sh), a child process ───────
+# The page asks /api/tts for one sentence at a time and plays them back to back. If the voice isn't set
+# up or hasn't loaded yet, /api/voice says so and the page speaks with the browser voice instead.
+VOICE_VENV = Path(os.environ.get("BRAIN_STUDIO_VOICE_VENV",
+                                 Path.home() / ".local/share/jarvis/brain-studio/voice-venv"))
+VOICE_PORT = 4701
+
+
+class VoiceBay:
+    def __init__(self):
+        self.p = None
+
+    def start(self):
+        py = VOICE_VENV / "bin/python"
+        if not py.exists():
+            print(f"voice: not set up ({py} missing); run voice/setup.sh. Using the browser voice.")
+            return
+        try:                                       # already running (another server instance)? reuse it
+            self.call("GET", "/health", timeout=1)
+            return
+        except Exception:
+            pass
+        RUN_DIR.mkdir(parents=True, exist_ok=True)
+        log = open(RUN_DIR / "voice.log", "a")
+        self.p = subprocess.Popen([str(py), str(HERE / "voice/voice.py"), "--port", str(VOICE_PORT)],
+                                  cwd=RUN_DIR, stdout=log, stderr=log)
+        atexit.register(lambda: self.p and self.p.poll() is None and self.p.terminate())
+
+    def call(self, method: str, path: str, body: dict | None = None, timeout: float = 30):
+        import urllib.request
+        req = urllib.request.Request(f"http://127.0.0.1:{VOICE_PORT}{path}", method=method,
+                                     data=json.dumps(body).encode() if body is not None else None,
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.status, dict(r.headers), r.read()
+
+    def info(self) -> dict:
+        if self.p is not None and self.p.poll() is not None:    # it died: bring it back (it reloads in seconds)
+            print(f"voice: exited with {self.p.returncode}; restarting", file=sys.stderr)
+            self.p = None
+            self.start()
+        try:
+            return json.loads(self.call("GET", "/health", timeout=1)[2])
+        except Exception:
+            installed = (VOICE_VENV / "bin/python").exists()
+            return {"ready": False, "voice": None, "voices": {},
+                    "error": "starting" if installed else "not set up: run infra/laptop/brain-studio/voice/setup.sh"}
+
+
+VOICE = VoiceBay()
 
 
 def ollama(path: str, body: dict | None = None, timeout: int = 180) -> dict:
@@ -540,6 +595,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         url = urlparse(self.path)
+        if url.path == "/api/voice":
+            return self.json(200, VOICE.info())
         if url.path == "/api/engine":
             return self.json(200, engine_info())
         if url.path == "/api/note":
@@ -595,6 +652,32 @@ class Handler(BaseHTTPRequestHandler):
                 except OSError:
                     pass
             return
+        if path == "/api/tts":
+            try:
+                status, headers, data = VOICE.call("POST", "/tts", {"text": str(body.get("text", ""))[:600]})
+            except Exception as e:
+                code = getattr(e, "code", 503)
+                return self.json(code if isinstance(code, int) else 503, {"error": f"voice unavailable: {e}"})
+            self.send_response(200)
+            self.send_header("Content-Type", "audio/wav")
+            self.send_header("Content-Length", str(len(data)))
+            self.send_header("Cache-Control", "no-store")
+            for h in ("X-Render-Ms", "X-Jarvis-Voice"):
+                if headers.get(h):
+                    self.send_header(h, headers[h])
+            self.end_headers()
+            self.wfile.write(data)
+            return
+        if path == "/api/voice":
+            try:
+                return self.json(200, json.loads(VOICE.call("POST", "/voice", {"voice": str(body.get("voice", ""))})[2]))
+            except Exception as e:
+                detail = e.read().decode() if hasattr(e, "read") else str(e)
+                try:
+                    detail = json.loads(detail).get("error", detail)
+                except ValueError:
+                    pass
+                return self.json(400, {"error": detail})
         if path == "/api/remember":
             try:
                 return self.json(200, capture(str(body.get("text", ""))[:4000]))
@@ -627,6 +710,7 @@ def main(argv: list[str]) -> int:
     print(f"galaxy: {sum(1 for x in g['nodes'] if not x.get('hub'))} notes, {len(g['links'])} links")
     if ENGINE["name"] == "claude":
         CLAUDE.warm()
+    VOICE.start()
     srv = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print(f"Brain Studio on http://127.0.0.1:{port}  (model {MODEL}; Ctrl-C to stop)")
     try:

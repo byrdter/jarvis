@@ -43,9 +43,19 @@ Override with `BRAIN_STUDIO_ENGINE`, `BRAIN_STUDIO_LOCAL_MODEL` (e.g. `qwen3.8:2
 
 ## Voice
 
-- **Speaking:** the browser's own voices (Web Speech API), best American English voice on the machine.
-  macOS: System Settings → Accessibility → Spoken Content → System voice → Manage Voices, and download
-  an *Enhanced* or *Premium* voice (Ava, Samantha, Zoe); the page picks it automatically.
+- **Speaking:** JARVIS's own voice, Kyutai Pocket TTS running on this Mac (`voice/voice.py`, free, nothing
+  leaves the machine). One-time setup: `infra/laptop/brain-studio/voice/setup.sh` (it needs Python 3.12,
+  so it gets its own environment in `~/.local/share/jarvis/brain-studio/voice-venv`). After that,
+  `server.py` starts the voice by itself, restarts it if it dies, and the page plays each sentence as soon
+  as it's written, fetching the next while one plays. The first chunk may end at a comma so a long
+  opening sentence doesn't hold the first word back. Measured 2026-11-22: a sentence renders in ~0.25 s;
+  first audio 1.1–2.3 s after a typed question. The orb follows the real loudness of the voice.
+  - "use the Javert voice" (or Charles, Paul, Anna…) switches; "what voices do you have" lists them;
+    `BRAIN_STUDIO_VOICE` sets the default (Marius). Licenses: Marius and Javert are CC0, the VCTK voices
+    (Charles, Paul, Anna, Vera, Fantine, Eponine, Azelma) are CC-BY 4.0, Cosette is non-commercial only.
+    A path to a 5–20 s WAV clip clones that voice; only use a voice you own or have permission to use.
+  - "use the browser voice" / "use your local voice" switch between the two (remembered per browser). If
+    the local voice isn't running, the page uses the browser's best American English voice instead.
 - **Listening:** click the mic (Chrome). Recognition finalizes on every pause, so the page waits
   `FINISH_MS` (900 ms, top of the script) after the last words before sending; more speech restarts the
   clock. "Stop", "wait" or "quiet" cut JARVIS off instantly. While JARVIS speaks, everything else it
