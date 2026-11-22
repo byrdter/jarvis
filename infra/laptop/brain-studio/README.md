@@ -34,6 +34,12 @@ python3 infra/laptop/brain-studio/server.py        # then open http://127.0.0.1:
   `FINISH_MS` (900 ms, top of the script) after the last words before sending; more speech restarts the
   clock. "Stop", "wait" or "quiet" cut JARVIS off instantly. While JARVIS speaks, everything else it
   hears is ignored, so it doesn't answer itself.
+- **Remember:** "remember that…", "note to self…", "don't let me forget…", "log this…" or "make a
+  note…" saves the rest as a new note in `jarvis-brain/captures/` (a new star is born next to its
+  closest notes, pulses, and the camera flies to it) and adds one line to today's `daily/` log, which
+  the nightly reflection promotes into MEMORY.md / USER.md. It's searchable in the very next question,
+  and `brain-sync.sh` pushes it so Telegram and the server know it within a minute. The same fact twice
+  in a day is kept once. A failed save is always said out loud. Server: `capture()`; viewer: `addNote()`.
 - **Voice routes** (checked before the brain): "show me Ray Fu" / "go to Ollama" (flies there only if a
   note really matches), "zoom out" / "reset", "stop rotating" / "start rotating", "start over" (forget
   the conversation). Add routes to `ROUTES`, not to the core.
@@ -46,7 +52,9 @@ python3 infra/laptop/brain-studio/server.py        # then open http://127.0.0.1:
 4. Click the mic and say "what do we know about… [pause] …agent harnesses": the pause must not cut
    you off. If it does, raise `FINISH_MS`; tune it after a day of real use, not in one sitting.
 5. While it answers, say "stop": it goes quiet at once.
-6. Open `http://127.0.0.1:4700/?mute=1` in a second tab and ask something: the text appears, nothing is heard.
+6. Say "remember that the finish window should be 900 milliseconds": a new star is born, then ask "how
+   long should the finish window be?" and it answers from that note.
+7. Open `http://127.0.0.1:4700/?mute=1` in a second tab and ask something: the text appears, nothing is heard.
 
 Measured 2026-11-21: retrieval 0.3 s, a full answer 3.5–6.5 s (most of it is the `claude` CLI starting).
 

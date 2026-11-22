@@ -132,8 +132,10 @@ for (const l of links) {
   nodes[l.source].deg++; nodes[l.target].deg++;
   nodes[l.source].nb.add(l.target); nodes[l.target].nb.add(l.source);
 }
-const noteCount = nodes.filter(n => !n.hub).length;
-document.getElementById('count').textContent = `${noteCount} notes · ${links.length} links`;
+function updateCount() {   // read from the data, never hardcoded
+  document.getElementById('count').textContent = `${nodes.filter(n => !n.hub).length} notes · ${links.length} links`;
+}
+updateCount();
 const color = g => G.groups[g]?.color || '#888';
 
 // ─── state: ONE owner for focus ──────────────────────────────────────────────────────────────────
@@ -149,7 +151,7 @@ const Graph = new ForceGraph3D(el, { controlType: 'orbit' })
   .showNavInfo(false)
   .nodeId('id')
   .nodeRelSize(1.4)
-  .nodeVal(n => Math.pow(n.r * (0.8 + Math.min(Math.sqrt(n.deg) * 0.15, 1.4)), 2.2) / 3)
+  .nodeVal(n => Math.pow(n.r * (0.8 + Math.min(Math.sqrt(n.deg) * 0.15, 1.4)) * (1 + 1.6 * (n.pulse || 0)), 2.2) / 3)
   .nodeColor(n => (!lit.size || lit.has(n.id)) ? color(n.g) : '#1a2030')
   .nodeOpacity(0.95)
   .nodeResolution(14)
@@ -301,7 +303,7 @@ function openPanel(n) {
 function closePanel() { panel.classList.remove('open'); }
 
 // ─── legend / filter ─────────────────────────────────────────────────────────────────────────────
-{
+function renderLegend() {
   const legend = document.getElementById('legend');
   const counts = {};
   nodes.forEach(n => { if (!n.hub) counts[n.g] = (counts[n.g] || 0) + 1; });
@@ -314,6 +316,55 @@ function closePanel() { panel.classList.remove('open'); }
     r.classList.toggle('off', hidden.has(g));
     Graph.nodeVisibility(Graph.nodeVisibility()).linkVisibility(Graph.linkVisibility());
   });
+  legend.querySelectorAll('.row').forEach(r => r.classList.toggle('off', hidden.has(r.dataset.g)));
+}
+renderLegend();
+
+// ─── new notes: ONE door on this side (the server's is capture()) ────────────────────────────────
+// Birth next to the most related star, link it, a glow pulse, then fly to it. Ids stay index-aligned.
+function addNote(node, hub, newLinks, groups) {
+  Object.assign(G.groups, groups || {});
+  const born = [hub, node].filter(Boolean).map(n => (nodes[n.id] = { ...n, deg: 0, nb: new Set() }));
+  const fresh = nodes[node.id];
+  const anchor = newLinks.map(l => nodes[l.target]).find(n => n && !n.hub && n.x !== undefined)
+              || newLinks.map(l => nodes[l.target]).find(n => n && n.x !== undefined);
+  for (const n of born) if (anchor) { n.x = anchor.x + rnd(); n.y = anchor.y + rnd(); n.z = anchor.z + rnd(); }
+  const objs = newLinks.map(l => ({ source: l.source, target: l.target }));
+  for (const l of objs) {
+    links.push(l);
+    nodes[l.source].deg++; nodes[l.target].deg++;
+    nodes[l.source].nb.add(l.target); nodes[l.target].nb.add(l.source);
+  }
+  const data = Graph.graphData();
+  Graph.graphData({ nodes: [...data.nodes, ...born], links: [...data.links, ...objs] });
+  updateCount(); renderLegend();
+  fresh.pulse = 1;
+  const t0 = performance.now();
+  const tick = () => {
+    const k = Math.min((performance.now() - t0) / 1600, 1);
+    fresh.pulse = Math.sin(k * Math.PI * 3) * (1 - k);   // three beats, fading
+    Graph.nodeVal(Graph.nodeVal());
+    if (k < 1) requestAnimationFrame(tick); else { fresh.pulse = 0; Graph.nodeVal(Graph.nodeVal()); }
+  };
+  requestAnimationFrame(tick);
+  setTimeout(() => focusNode(fresh), 350);
+}
+
+async function remember(fact, said) {
+  busy = true; setStatus('thinking', 'Saving to the brain…');
+  try {
+    const res = await fetch('/api/remember', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: fact }) });
+    const r = await res.json();
+    if (!res.ok) throw new Error(r.error || res.statusText);
+    if (r.duplicate) { if (r.node) focusNode(nodes[r.node.id]); }
+    else addNote(r.node, r.hub, r.links, r.groups);
+    setStatus('idle');
+    say(r.say, said);
+  } catch (e) {
+    // A brain that quietly forgets is worse than none: a failed save is always said out loud.
+    setStatus('error', 'Not saved');
+    say(String(e.message || e).startsWith("I couldn't") ? e.message : `I couldn't save that: ${e.message || e}`, said);
+  } finally { busy = false; }
 }
 
 // ─── search ──────────────────────────────────────────────────────────────────────────────────────
@@ -416,6 +467,8 @@ const ROUTES = [
   { re: /^(new conversation|start over|forget (that|this conversation))\.?$/i, run: async () => { await fetch('/api/reset', { method: 'POST' }); say('Fresh start.'); } },
   // "show me Ray Fu" goes straight to the star, but only when a note really matches;
   // "show me what we know about pricing" falls through to the brain.
+  // "Remember that…" (and the ways Terry actually says it) writes a note into the brain.
+  { re: /^(?:jarvis[,\s]+)?(?:please\s+)?(?:remember(?: that)?|note to self|don'?t let me forget(?: that)?|log this|make a note(?: that)?)[:,]?\s+(.+)$/is, run: m => remember(m[1], m.input) },
   { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
 ];
 function say(text, q = '') { showAnswer(q, text); speak(text); }

@@ -5,6 +5,7 @@
   GET  /api/note?id=N    one note's full text, for "Read full note"
   POST /api/chat         {"q": "..."} -> {"answer", "nodes", "about_notes", "ms"}
   POST /api/reset        forget the conversation
+  POST /api/remember     {"text": "..."} -> a new note in captures/, a line in today's daily log, a live star
   POST /api/rebuild      re-run build.py (new or edited notes) without restarting
 
 How /api/chat answers: brain-ask.py's hybrid search (Ollama embeddings + shared rare words, ~0.3 s)
@@ -23,6 +24,7 @@ import subprocess
 import sys
 import threading
 import time
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -176,6 +178,112 @@ def chat(q: str) -> dict:
             "considered": list(blocks), "retrieval": mode, "ms": int((time.time() - t0) * 1000)}
 
 
+# ─── remember: ONE door for new notes ────────────────────────────────────────────────────────────
+# "Remember that…" becomes (1) a real note in captures/, a star in the galaxy and searchable in the very
+# next question, and (2) one line in today's daily log, which the nightly reflection promotes into
+# MEMORY.md / USER.md / wiki. daily/ is append-only and union-merged, so appending is safe from any machine.
+# Anything that creates a note goes through capture(); the viewer's addNote() is its other half.
+CAPTURES = BRAIN / "captures"
+
+
+def slugify(s: str, n: int = 6) -> str:
+    words = re.findall(r"[a-z0-9]+", s.lower())[:n]
+    return "-".join(words) or "note"
+
+
+def capture(fact: str) -> dict:
+    fact = re.sub(r"\s+", " ", fact).strip().strip('"').strip()
+    if len(fact) < 4:
+        raise ValueError("there was nothing to remember")
+    fact = fact[0].upper() + fact[1:]
+    if fact[-1] not in ".!?":
+        fact += "."
+    now = datetime.now()
+    date = now.strftime("%Y-%m-%d")
+    words = fact.rstrip(".!?").split()
+    title = " ".join(words[:8]) + ("…" if len(words) > 8 else "")
+
+    # Duplicate check: the same fact twice today is one memory, not two.
+    for old in CAPTURES.glob(f"{date}-*.md"):
+        if fact in old.read_text(errors="replace"):
+            nid = _graph["by_key"].get(str(old.relative_to(BRAIN)))
+            return {"duplicate": True, "node": _graph["nodes"][nid] if nid is not None else None,
+                    "hub": None, "links": [], "say": "I already have that one."}
+
+    # Link it to what it is about: the closest curated notes (not journals or raw dumps).
+    hits, _ = retrieve(fact)
+    related = []
+    for h in hits:
+        if h["file"].startswith(("daily/", "raw/", "captures/")) or h["file"] in related:
+            continue
+        if h.get("score", 1) < 0.55 and related:  # weak matches only if nothing better
+            continue
+        related.append(h["file"])
+        if len(related) == 3:
+            break
+
+    CAPTURES.mkdir(parents=True, exist_ok=True)
+    path = CAPTURES / f"{date}-{slugify(fact)}.md"
+    k = 2
+    while path.exists():
+        path = CAPTURES / f"{date}-{slugify(fact)}-{k}.md"
+        k += 1
+    rel = str(path.relative_to(BRAIN))
+    links_line = " · ".join(f"[[{Path(r).stem}]]" for r in related)
+    body = (f"# {title}\n\n> **Summary:** {fact}\n\n"
+            f"Said to JARVIS in Brain Studio, {now:%A %B %-d, %Y at %-I:%M %p}.\n\n{fact}\n"
+            + (f"\nRelated: {links_line}\n" if related else ""))
+    path.write_text(body)
+    if path.read_text() != body:               # a capture that didn't land must never look saved
+        raise OSError(f"{rel} did not save correctly")
+
+    daily = BRAIN / "daily" / f"{date}.md"
+    entry = (f"\n## {now:%H:%M} · Mac · Brain Studio capture\n\n**Learned:**\n"
+             f"- [S] Terry asked JARVIS to remember: {fact} (`{rel}`)\n")
+    with daily.open("a") as f:
+        if f.tell() == 0:
+            f.write(f"# {date}\n")
+        f.write(entry)
+
+    # Live graph: append (never rebuild) so every id the open page holds stays valid.
+    sys.path.insert(0, str(HERE))
+    import build
+    with _lock:
+        nodes = _graph["nodes"]
+        new_hub = None
+        hub = next((n for n in nodes if n.get("hub") and n["g"] == "captures"), None)
+        links = []
+        if hub is None:
+            name, color = build.GROUP_OF["captures"]
+            new_hub = hub = {"key": "hub:captures", "label": name, "g": "captures", "hub": True,
+                             "e": "", "s": f"Every note in {name}.", "r": 7, "id": len(nodes)}
+            nodes.append(hub)
+            _graph["groups"]["captures"] = {"name": name, "color": color}
+            core = next((n for n in nodes if n.get("hub") and n["g"] == "core"), None)
+            if core:
+                links.append({"source": hub["id"], "target": core["id"]})
+        node = {"key": rel, "label": title, "g": "captures", "s": fact,
+                "e": f"Said to JARVIS in Brain Studio, {now:%A %B %-d, %Y at %-I:%M %p}.",
+                "m": int(path.stat().st_mtime), "w": len(body.split()), "r": build.RADIUS["captures"],
+                "id": len(nodes)}
+        nodes.append(node)
+        _graph["by_key"][rel] = node["id"]
+        links.append({"source": node["id"], "target": hub["id"]})
+        for r in related:
+            if r in _graph["by_key"]:
+                links.append({"source": node["id"], "target": _graph["by_key"][r]})
+        _graph["links"].extend(links)
+        build.write({k: v for k, v in _graph.items() if k != "by_key"})
+
+    # Push it to GitHub in the background so the server and Telegram know it within a minute.
+    sync = BRAIN / "scripts/brain-sync.sh"
+    if sync.exists():
+        subprocess.Popen(["bash", str(sync)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                         start_new_session=True)
+    return {"duplicate": False, "node": node, "hub": new_hub, "links": links, "groups": _graph["groups"],
+            "say": "Got it. That's in the brain now."}
+
+
 # ─── HTTP ────────────────────────────────────────────────────────────────────────────────────────
 TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
          ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png",
@@ -230,6 +338,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json(504, {"error": "The brain took too long to answer."})
             except Exception as e:
                 return self.json(500, {"error": f"The brain call failed: {e}"})
+        if path == "/api/remember":
+            try:
+                return self.json(200, capture(str(body.get("text", ""))[:4000]))
+            except Exception as e:  # never fail silently: the viewer says this out loud
+                return self.json(500, {"error": f"I couldn't save that: {e}"})
         if path == "/api/reset":
             _history.clear()
             return self.json(200, {"ok": True})

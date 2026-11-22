@@ -36,6 +36,7 @@ GROUPS = [
     ("models",   "Models",          "#a78bfa", ["wiki/models/"]),
     ("apps",     "Apps",            "#34d399", ["wiki/apps/"]),
     ("wiki",     "Wiki",            "#e7e5e4", ["wiki/"]),
+    ("captures", "Captures",        "#fde68a", ["captures/"]),
     ("lab",      "Lab",             "#2dd4bf", ["lab/", "evals/"]),
     ("journal",  "Daily journal",   "#94a3b8", ["daily/"]),
     ("memory",   "Session memory",  "#818cf8", ["raw/claude-memory/", "raw/jarvis-private-context/"]),
@@ -48,7 +49,7 @@ GROUP_OF = {k: (name, color) for k, name, color, _ in GROUPS}
 MENTION_TARGETS = {"people", "projects", "concepts", "tools", "models", "apps"}
 # Size of a group's stars in the viewer (base radius before the degree bonus).
 RADIUS = {"core": 9, "people": 6, "projects": 6, "concepts": 5, "tools": 5, "models": 5, "apps": 5,
-          "wiki": 4.5, "lab": 4, "journal": 3.5, "memory": 2.6, "sources": 3, "work": 2.6}
+          "wiki": 4.5, "captures": 4.5, "lab": 4, "journal": 3.5, "memory": 2.6, "sources": 3, "work": 2.6}
 
 
 def group_for(rel: str) -> str:
