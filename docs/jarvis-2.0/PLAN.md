@@ -386,7 +386,7 @@ around. The adapter (§5.1) tracks both and pauses factory laps when your intera
 | 6. Archive the dropped lanes (archive branch/folder, nothing deleted) ✅ **done 2026-11-15** (`archive/README.md`) | travel | 1–2 h |
 | 7. Dark factory on the VPS; first real app through it, with a lab log | travel | 4–6 h |
 | 8. Hermes + OpenClaw installed as specialists; smoke-test each call path | travel | 3 h |
-| 9. JARVIS face v1 (galaxy + orb + fly-to-source) ✅ **v1 done 2026-11-21**: galaxy + two-way browser voice + fly-to-source (`infra/laptop/brain-studio/`); orb/moons still to come | travel | 4 h |
+| 9. JARVIS face v1 (galaxy + orb + fly-to-source) ✅ **v1 done 2026-11-21**: galaxy + two-way browser voice + fly-to-source (`infra/laptop/brain-studio/`); "remember that…" and the orb (engine colors, Claude ↔ local by voice) added the same night; specialist moons still to come | travel | 4 h |
 | 10. Memory migration script (Dropbox → brain repo) | after 1–5 | 3–4 h |
 | 11. Home mini: Ollama 27B + Whisper + TTS + embeddings; `private` tier | **home** | 3–4 h |
 | 12. Failover drill: home off → phone → VPS, same memory | home | 1 h |

@@ -77,7 +77,21 @@
   #wake .card span { color: var(--muted); font-size: 13px; }
   #wake.gone { display: none; }
 
+  /* the orb, bottom right */
+  #orbWrap { position: fixed; right: 18px; bottom: 14px; width: 168px; text-align: center; pointer-events: none; }
+  #orb { width: 168px; height: 168px; display: block; cursor: pointer; pointer-events: auto; }
+  #orbCap { margin-top: -10px; font-size: 12px; color: var(--muted); line-height: 1.35; }
+  #orbCap b { display: block; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; }
+  @media (max-width: 1140px) {
+    #orbWrap { bottom: 150px; width: 110px; }
+    #orb { width: 110px; height: 110px; }
+  }
+
   @media (max-width: 760px) {
+    #orbWrap { top: 10px; right: 8px; bottom: auto; width: 84px; }
+    #orb { width: 84px; height: 84px; }
+    #orbCap { display: none; }
+    #brand { width: calc(100vw - 120px) !important; }
     #brand { width: calc(100vw - 32px); }
     #legend { display: none; }
     #panel { top: auto; bottom: 170px; left: 16px; right: 16px; width: auto; max-height: 38vh; }
@@ -109,6 +123,8 @@
   <div id="status" data-s="idle"><span class="orb"></span><span id="statusText">Idle</span><span class="keys">click a star · Esc clears</span></div>
 </div>
 
+<div id="orbWrap"><canvas id="orb" title="Click to talk"></canvas><div id="orbCap"><b id="orbEngine">Claude</b><span id="orbText">Idle</span></div></div>
+
 <div id="wake"><div class="card glass"><b>JARVIS</b><span>Click anywhere to wake</span></div></div>
 
 <script src="graph-data.js"></script>
@@ -117,6 +133,7 @@ import ForceGraph3D from 'https://esm.sh/3d-force-graph@1.80.1?deps=three@0.186.
 import * as THREE from 'https://esm.sh/three@0.186.1';
 import { UnrealBloomPass } from 'https://esm.sh/three@0.186.1/examples/jsm/postprocessing/UnrealBloomPass.js';
 import SpriteText from 'https://esm.sh/three-spritetext@1.10.0?deps=three@0.186.1';
+import { createOrb, ENGINES } from './orb.js';
 
 // ─── tunables ────────────────────────────────────────────────────────────────────────────────────
 const FINISH_MS = 900;      // pause that ends a spoken thought. The most personal number here: tune after a day of real use.
@@ -391,14 +408,27 @@ addEventListener('keydown', e => { if (e.key === 'Escape') { stopSpeaking(); cle
 
 // ─── status ──────────────────────────────────────────────────────────────────────────────────────
 const statusEl = document.getElementById('status'), statusText = document.getElementById('statusText');
+const orb = createOrb(document.getElementById('orb'));
+const orbText = document.getElementById('orbText'), orbEngine = document.getElementById('orbEngine');
+function setEngine(e) {
+  orb.setEngine(e);
+  orbEngine.textContent = ENGINES[e]?.name || e;
+  orbEngine.style.color = ENGINES[e]?.color || '';
+}
+setEngine('claude');
+fetch('/api/engine').then(r => r.json()).then(r => setEngine(r.engine)).catch(() => {});
+document.getElementById('orb').onclick = () => micOn ? stopMic() : startMic();
+
 function setStatus(s, text) {
-  statusEl.dataset.s = s;
-  statusText.textContent = text || { idle: micOn ? 'Listening' : 'Idle', listening: 'Listening', thinking: 'Thinking…', speaking: 'Speaking', error: 'Error' }[s];
-  if (s === 'idle' && micOn) statusEl.dataset.s = 'listening';
+  const shown = s === 'idle' && micOn ? 'listening' : s;
+  statusEl.dataset.s = shown;
+  statusText.textContent = text || { idle: 'Idle', listening: 'Listening', thinking: 'Thinking…', speaking: 'Speaking', error: 'Error' }[shown];
+  orb.setState(shown);
+  orbText.textContent = statusText.textContent;
 }
 
 // ─── speaking: ONE function speaks, and the mute check lives inside it ───────────────────────────
-let voice = null, speaking = false;
+let voice = null, speaking = false, lastWord = 0, beat = null;
 function pickVoice() {
   const vs = speechSynthesis.getVoices().filter(v => /^en[-_]US/i.test(v.lang));
   const rank = v => (/premium|enhanced|natural|neural/i.test(v.name) ? 4 : 0) + (/samantha|ava|allison|google us english/i.test(v.name) ? 2 : 0) + (v.localService ? 1 : 0);
@@ -415,12 +445,17 @@ function speak(text) {
     const u = new SpeechSynthesisUtterance(p.trim());
     if (voice) u.voice = voice;
     u.rate = 1.04; u.pitch = 1;
-    if (i === 0) u.onstart = () => { speaking = true; setStatus('speaking'); };
-    if (i === parts.length - 1) u.onend = u.onerror = () => { speaking = false; quietUntil = Date.now() + 500; setStatus('idle'); };
+    u.onboundary = e => { if (!e.name || e.name === 'word') { orb.kick(0.5); lastWord = Date.now(); } };
+    if (i === 0) u.onstart = () => {
+      speaking = true; setStatus('speaking');
+      clearInterval(beat);
+      beat = setInterval(() => { if (speaking && Date.now() - lastWord > 380) orb.kick(0.25 + Math.random() * 0.3); }, 190);
+    };
+    if (i === parts.length - 1) u.onend = u.onerror = () => { speaking = false; clearInterval(beat); quietUntil = Date.now() + 500; setStatus('idle'); };
     speechSynthesis.speak(u);
   });
 }
-function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); speaking = false; setStatus('idle'); }
+function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); speaking = false; clearInterval(beat); setStatus('idle'); }
 
 // ─── listening ───────────────────────────────────────────────────────────────────────────────────
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -448,8 +483,33 @@ function startMic() {
   rec.onerror = e => { if (e.error === 'not-allowed') { micOn = false; micBtn.classList.remove('on'); setStatus('error', 'Microphone blocked: allow it in the address bar'); } };
   rec.start();
   micOn = true; micBtn.classList.add('on'); setStatus('listening');
+  startLevel();
 }
-function stopMic() { micOn = false; micBtn.classList.remove('on'); try { rec?.stop(); } catch {} setStatus('idle'); }
+function stopMic() { micOn = false; micBtn.classList.remove('on'); try { rec?.stop(); } catch {} stopLevel(); setStatus('idle'); }
+
+// The orb hears what the mic hears: RMS level from a second, read-only tap on the microphone.
+let levelStream = null, levelCtx = null;
+async function startLevel() {
+  try {
+    levelStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    levelCtx = new AudioContext();
+    const an = levelCtx.createAnalyser(); an.fftSize = 512;
+    levelCtx.createMediaStreamSource(levelStream).connect(an);
+    const buf = new Float32Array(an.fftSize);
+    const loop = () => {
+      if (!levelStream) return;
+      an.getFloatTimeDomainData(buf);
+      let sum = 0; for (const v of buf) sum += v * v;
+      orb.setLevel(Math.sqrt(sum / buf.length) * 6);
+      requestAnimationFrame(loop);
+    };
+    loop();
+  } catch { /* level is decoration; recognition still works without it */ }
+}
+function stopLevel() {
+  levelStream?.getTracks().forEach(t => t.stop()); levelStream = null;
+  levelCtx?.close().catch(() => {}); levelCtx = null;
+}
 function flush() {
   const text = buffer.trim(); buffer = '';
   if (!text || busy) return;
@@ -467,11 +527,21 @@ const ROUTES = [
   { re: /^(new conversation|start over|forget (that|this conversation))\.?$/i, run: async () => { await fetch('/api/reset', { method: 'POST' }); say('Fresh start.'); } },
   // "show me Ray Fu" goes straight to the star, but only when a note really matches;
   // "show me what we know about pricing" falls through to the brain.
+  // Switch brains out loud. The orb's aura changes color with the engine.
+  { re: /^(?:jarvis[,\s]+)?(?:switch to|use|go|change to)\s+(?:the\s+)?(local|offline|ollama|claude|cloud)(?:\s+(?:brain|model|mode))?\.?$/i, run: m => setEngineRemote(/claude|cloud/i.test(m[1]) ? 'claude' : 'local') },
   // "Remember that…" (and the ways Terry actually says it) writes a note into the brain.
   { re: /^(?:jarvis[,\s]+)?(?:please\s+)?(?:remember(?: that)?|note to self|don'?t let me forget(?: that)?|log this|make a note(?: that)?)[:,]?\s+(.+)$/is, run: m => remember(m[1], m.input) },
   { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
 ];
 function say(text, q = '') { showAnswer(q, text); speak(text); }
+async function setEngineRemote(e) {
+  try {
+    const r = await fetch('/api/engine', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ engine: e }) }).then(r => r.json());
+    if (r.error) throw new Error(r.error);
+    setEngine(r.engine); setStatus('idle');
+    say(r.engine === 'local' ? `Switched to the local brain, ${r.model}. Nothing leaves this Mac.` : 'Back on Claude.');
+  } catch (err) { setStatus('error', 'Engine switch failed'); say(`I couldn't switch brains: ${err.message || err}`); }
+}
 
 // ─── the brain ───────────────────────────────────────────────────────────────────────────────────
 let busy = false;
@@ -482,12 +552,13 @@ async function handle(text) {
     const m = text.match(r.re);
     if (m && (await r.run(m)) !== false) return;
   }
-  busy = true; setStatus('thinking');
+  busy = true; orb.setSatellites(6); setStatus('thinking', `Reading the brain · ${ENGINES[orb.engine]?.name || ''}`);
   showAnswer(text, '…');
   try {
     const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: text }) });
     const r = await res.json();
     if (!res.ok) throw new Error(r.error || res.statusText);
+    if (r.engine) setEngine(r.engine);
     // Decide whether it was about the notes BEFORE deciding to move the camera. Small talk holds still.
     if (r.about_notes && r.nodes.length) {
       const src = r.nodes.map(i => nodes[i]);
@@ -495,7 +566,7 @@ async function handle(text) {
       else focusNode(src[0], { extra: r.nodes });
     }
     showAnswer(text, r.answer, r.about_notes ? r.nodes : [], r.ms);
-    setStatus('idle');
+    setStatus('idle', r.about_notes && r.nodes.length ? `From ${r.nodes.length} note${r.nodes.length > 1 ? 's' : ''} · ${(r.ms / 1000).toFixed(1)} s` : 'Idle');
     speak(r.answer);
   } catch (e) {
     setStatus('error', 'The brain call failed');

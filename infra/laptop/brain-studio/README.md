@@ -25,6 +25,19 @@ python3 infra/laptop/brain-studio/server.py        # then open http://127.0.0.1:
 - Only `focusNode` / `lightCluster` / `clearFocus` move the camera or change what is lit.
 - Only `speak()` makes sound, and it checks `?mute=1` itself, so a muted tab can never talk.
 
+## The orb
+
+Bottom right (top right on a phone), `viewer/orb.js`, plain canvas. The core is JARVIS gold; the aura is
+the color of the brain answering (Claude `#d97757`, local `#4ade80`, from the brain palette). It
+breathes when idle, ripples with the **real** mic level while listening, spins with orbiting satellites
+while thinking, and pulses on every spoken word (word-boundary events; a soft beat if the voice sends
+none). The caption under it says which engine and what it's doing ("Reading the brain · Claude",
+"From 3 notes · 4.4 s"). Click it to talk.
+
+**Switch brains out loud:** "switch to the local brain" / "use local" answers with `qwen3.5:9b` on
+Ollama (nothing leaves the Mac, ~2–4 s once warm); "back to Claude" / "use Claude" returns to the plan.
+Override with `BRAIN_STUDIO_ENGINE`, `BRAIN_STUDIO_LOCAL_MODEL` (e.g. `qwen3.8:27b`: smarter, slower).
+
 ## Voice
 
 - **Speaking:** the browser's own voices (Web Speech API), best American English voice on the machine.

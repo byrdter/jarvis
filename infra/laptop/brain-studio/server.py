@@ -6,6 +6,7 @@
   POST /api/chat         {"q": "..."} -> {"answer", "nodes", "about_notes", "ms"}
   POST /api/reset        forget the conversation
   POST /api/remember     {"text": "..."} -> a new note in captures/, a line in today's daily log, a live star
+  GET  /api/engine       {"engine": "claude"|"local", "model"}; POST {"engine": ...} switches brains
   POST /api/rebuild      re-run build.py (new or edited notes) without restarting
 
 How /api/chat answers: brain-ask.py's hybrid search (Ollama embeddings + shared rare words, ~0.3 s)
@@ -35,6 +36,9 @@ BRAIN = Path(os.environ.get("JARVIS_BRAIN", Path.home() / "code/jarvis-brain")).
 RUN_DIR = Path.home() / ".local/share/jarvis/brain-studio/run"   # neutral cwd: no CLAUDE.md, no hooks
 PORT = 4700
 MODEL = os.environ.get("BRAIN_STUDIO_MODEL", "sonnet")
+LOCAL_MODEL = os.environ.get("BRAIN_STUDIO_LOCAL_MODEL", "qwen3.5:9b")   # fast enough to talk to; 27b is smarter, slower
+OLLAMA = "http://localhost:11434/api"
+ENGINE = {"name": os.environ.get("BRAIN_STUDIO_ENGINE", "claude")}          # "claude" (plan) or "local" (Ollama)
 TOP_K = 8          # notes handed to the model per question
 HISTORY_TURNS = 4  # past exchanges kept for follow-ups
 
@@ -140,6 +144,41 @@ def ask_claude(prompt: str) -> str:
     return json.loads(r.stdout).get("result", "")
 
 
+def ollama(path: str, body: dict | None = None, timeout: int = 180) -> dict:
+    import urllib.request
+    req = urllib.request.Request(f"{OLLAMA}/{path}", json.dumps(body).encode() if body is not None else None,
+                                 {"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read())
+
+
+def ask_local(prompt: str) -> str:
+    """Same persona, same notes, answered by a model on this Mac. Nothing leaves the machine."""
+    r = ollama("chat", {"model": LOCAL_MODEL, "stream": False, "think": False, "format": "json",
+                        "keep_alive": "30m", "options": {"temperature": 0.3, "num_ctx": 16384},
+                        "messages": [{"role": "system", "content": PERSONA},
+                                     {"role": "user", "content": prompt}]})
+    return r.get("message", {}).get("content", "")
+
+
+def set_engine(name: str) -> dict:
+    if name not in ("claude", "local"):
+        raise ValueError(f"unknown engine {name!r}")
+    if name == "local":
+        try:
+            have = {m["name"] for m in ollama("tags", timeout=5).get("models", [])}
+        except Exception:
+            raise RuntimeError("Ollama isn't running on this Mac")
+        if LOCAL_MODEL not in have:
+            raise RuntimeError(f"{LOCAL_MODEL} isn't installed (ollama pull {LOCAL_MODEL})")
+    ENGINE["name"] = name
+    return engine_info()
+
+
+def engine_info() -> dict:
+    return {"engine": ENGINE["name"], "model": LOCAL_MODEL if ENGINE["name"] == "local" else MODEL}
+
+
 def parse_reply(text: str) -> dict:
     m = re.search(r"\{.*\}", text, re.S)
     if m:
@@ -168,14 +207,16 @@ def chat(q: str) -> dict:
     prompt = (f"Notes from the brain (closest matches to the question):\n\n{notes or '(none found)'}\n\n"
               + (f"Conversation so far:\n{convo}\n" if convo else "")
               + f"Terry: {q}")
-    reply = parse_reply(ask_claude(prompt))
+    engine = ENGINE["name"]
+    reply = parse_reply(ask_local(prompt) if engine == "local" else ask_claude(prompt))
     used = [int(i) for i in reply.get("sources", []) if str(i).isdigit() and int(i) in blocks]
     about = bool(reply.get("about_notes")) and bool(used)
     answer = str(reply.get("answer", "")).strip() or "I lost my train of thought there. Ask me again?"
     _history.append({"q": q, "a": answer})
     del _history[:-HISTORY_TURNS]
     return {"answer": answer, "nodes": used if about else [], "about_notes": about,
-            "considered": list(blocks), "retrieval": mode, "ms": int((time.time() - t0) * 1000)}
+            "considered": list(blocks), "retrieval": mode, "ms": int((time.time() - t0) * 1000),
+            **engine_info()}
 
 
 # ─── remember: ONE door for new notes ────────────────────────────────────────────────────────────
@@ -308,6 +349,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         url = urlparse(self.path)
+        if url.path == "/api/engine":
+            return self.json(200, engine_info())
         if url.path == "/api/note":
             try:
                 node = _graph["nodes"][int(parse_qs(url.query)["id"][0])]
@@ -343,6 +386,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json(200, capture(str(body.get("text", ""))[:4000]))
             except Exception as e:  # never fail silently: the viewer says this out loud
                 return self.json(500, {"error": f"I couldn't save that: {e}"})
+        if path == "/api/engine":
+            try:
+                return self.json(200, set_engine(str(body.get("engine", ""))))
+            except Exception as e:
+                return self.json(400, {"error": str(e)})
         if path == "/api/reset":
             _history.clear()
             return self.json(200, {"ok": True})
