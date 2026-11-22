@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS Brain Studio</title>
+<style>
+  :root {
+    --bg: #02040a; --panel: rgba(10, 14, 24, 0.82); --line: rgba(148, 163, 184, 0.16);
+    --text: #e6e9f0; --muted: #8a94a8; --gold: #f5c451; --live: #34d399; --warn: #f87171;
+    --font: ui-sans-serif, -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.45 var(--font); overflow: hidden; }
+  #graph { position: fixed; inset: 0; }
+  .glass { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  button { font: inherit; color: inherit; cursor: pointer; }
+
+  /* brand + search, top left */
+  #brand { position: fixed; top: 16px; left: 16px; padding: 12px 14px; width: 280px; }
+  #brand h1 { margin: 0; font-size: 13px; letter-spacing: 0.32em; color: var(--gold); font-weight: 600; }
+  #brand .count { color: var(--muted); font-size: 12px; margin: 2px 0 10px; }
+  #search { width: 100%; padding: 8px 10px; border-radius: 9px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text); font: inherit; outline: none; }
+  #search:focus { border-color: rgba(245, 196, 81, 0.5); }
+
+  /* legend / filter, top right */
+  #legend { position: fixed; top: 16px; right: 16px; padding: 10px 8px; min-width: 190px; }
+  #legend .row { display: flex; align-items: center; gap: 8px; padding: 3px 8px; border-radius: 7px; cursor: pointer; user-select: none; }
+  #legend .row:hover { background: rgba(255,255,255,0.05); }
+  #legend .row.off { opacity: 0.35; }
+  #legend .dot { width: 9px; height: 9px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
+  #legend .n { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+  #legend .hint { color: var(--muted); font-size: 11px; padding: 4px 8px 0; }
+
+  /* inspector, left */
+  #panel { position: fixed; top: 150px; left: 16px; width: 340px; max-height: calc(100vh - 330px); overflow: auto; padding: 14px 16px; display: none; }
+  #panel.open { display: block; }
+  #panel .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  #panel h2 { margin: 6px 0 2px; font-size: 18px; line-height: 1.25; }
+  #panel .meta { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+  #panel .sum { color: #cfd5e2; margin: 0 0 10px; }
+  #panel .ex { white-space: pre-wrap; color: #aeb6c6; font-size: 12.5px; border-left: 2px solid var(--line); padding-left: 10px; margin: 0 0 10px; }
+  #panel .links a { display: block; color: #cfd5e2; text-decoration: none; padding: 3px 0; font-size: 13px; cursor: pointer; }
+  #panel .links a:hover { color: var(--gold); }
+  #panel .links .d { color: var(--muted); font-size: 11px; }
+  #panel .bar { display: flex; gap: 8px; margin: 8px 0 12px; }
+  #panel .bar button { background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; font-size: 12px; }
+  #panel .close { position: absolute; top: 8px; right: 10px; background: none; border: 0; color: var(--muted); font-size: 18px; }
+  #panel h3 { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 12px 0 4px; }
+
+  /* conversation dock, bottom */
+  #dock { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); width: min(720px, calc(100vw - 32px)); padding: 12px; }
+  #answer { min-height: 0; max-height: 26vh; overflow: auto; margin: 0 4px 10px; color: #dfe4ee; font-size: 15px; display: none; }
+  #answer.show { display: block; }
+  #answer .q { color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+  #answer .src { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  #answer .src a { color: var(--gold); cursor: pointer; text-decoration: none; }
+  #row { display: flex; gap: 8px; align-items: center; }
+  #mic { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,0.05); display: grid; place-items: center; flex: none; }
+  #mic.on { background: rgba(52, 211, 153, 0.18); border-color: var(--live); box-shadow: 0 0 18px rgba(52,211,153,0.45); }
+  #mic svg { width: 20px; height: 20px; }
+  #ask { flex: 1; padding: 12px 14px; border-radius: 11px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text); font: inherit; font-size: 15px; outline: none; min-width: 0; }
+  #ask:focus { border-color: rgba(245, 196, 81, 0.5); }
+  #status { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); margin: 8px 4px 0; }
+  #status .orb { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); transition: background 0.2s, box-shadow 0.2s; }
+  #status[data-s="listening"] .orb { background: var(--live); box-shadow: 0 0 12px var(--live); animation: pulse 1.2s infinite; }
+  #status[data-s="thinking"] .orb { background: #60a5fa; box-shadow: 0 0 12px #60a5fa; animation: pulse 0.7s infinite; }
+  #status[data-s="speaking"] .orb { background: var(--gold); animation: pulse 0.45s infinite; }
+  #status[data-s="error"] .orb { background: var(--warn); box-shadow: 0 0 10px var(--warn); }
+  #status .keys { margin-left: auto; }
+  @keyframes pulse { 50% { transform: scale(1.45); opacity: 0.7; } }
+
+  /* wake veil: browsers block audio until the first click */
+  #wake { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(ellipse at center, rgba(2,4,10,0.1), rgba(2,4,10,0.55)); cursor: pointer; }
+  #wake .card { text-align: center; padding: 20px 28px; }
+  #wake .card b { display: block; letter-spacing: 0.32em; color: var(--gold); font-size: 13px; margin-bottom: 6px; }
+  #wake .card span { color: var(--muted); font-size: 13px; }
+  #wake.gone { display: none; }
+
+  @media (max-width: 760px) {
+    #brand { width: calc(100vw - 32px); }
+    #legend { display: none; }
+    #panel { top: auto; bottom: 170px; left: 16px; right: 16px; width: auto; max-height: 38vh; }
+    #status .keys { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+
+<div id="brand" class="glass">
+  <h1>JARVIS</h1>
+  <div class="count" id="count">loading the brain…</div>
+  <input id="search" type="search" placeholder="Search the brain" autocomplete="off" spellcheck="false">
+</div>
+
+<div id="legend" class="glass"></div>
+
+<div id="panel" class="glass"></div>
+
+<div id="dock" class="glass">
+  <div id="answer"></div>
+  <div id="row">
+    <button id="mic" title="Talk (click to toggle)" aria-label="Microphone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    </button>
+    <input id="ask" placeholder="Ask your brain anything…" autocomplete="off">
+  </div>
+  <div id="status" data-s="idle"><span class="orb"></span><span id="statusText">Idle</span><span class="keys">click a star · Esc clears</span></div>
+</div>
+
+<div id="wake"><div class="card glass"><b>JARVIS</b><span>Click anywhere to wake</span></div></div>
+
+<script src="graph-data.js"></script>
+<script type="module">
+import ForceGraph3D from 'https://esm.sh/3d-force-graph@1.80.1?deps=three@0.186.1';
+import * as THREE from 'https://esm.sh/three@0.186.1';
+import { UnrealBloomPass } from 'https://esm.sh/three@0.186.1/examples/jsm/postprocessing/UnrealBloomPass.js';
+import SpriteText from 'https://esm.sh/three-spritetext@1.10.0?deps=three@0.186.1';
+
+// ─── tunables ────────────────────────────────────────────────────────────────────────────────────
+const FINISH_MS = 900;      // pause that ends a spoken thought. The most personal number here: tune after a day of real use.
+const INTERRUPT = /^\s*(stop|wait|quiet|hush|cancel|enough|shut up)\b/i;
+const MUTE = new URLSearchParams(location.search).get('mute') === '1';   // ?mute=1: this tab never speaks
+const CLUSTER_AT = 4;       // answers drawing on this many notes light a cluster instead of flying to one
+
+// ─── data ────────────────────────────────────────────────────────────────────────────────────────
+const G = GRAPH;   // a top-level const in graph-data.js: global, but not on window
+const nodes = G.nodes.map(n => ({ ...n, deg: 0, nb: new Set() }));
+const links = G.links.map(l => ({ source: l.source, target: l.target }));
+for (const l of links) {
+  nodes[l.source].deg++; nodes[l.target].deg++;
+  nodes[l.source].nb.add(l.target); nodes[l.target].nb.add(l.source);
+}
+const noteCount = nodes.filter(n => !n.hub).length;
+document.getElementById('count').textContent = `${noteCount} notes · ${links.length} links`;
+const color = g => G.groups[g]?.color || '#888';
+
+// ─── state: ONE owner for focus ──────────────────────────────────────────────────────────────────
+// Only focusNode / lightCluster / clearFocus change what is lit or move the camera.
+let lit = new Set();         // node ids lit up
+let selected = null;         // node in the inspector
+const hidden = new Set();    // groups filtered out
+
+// ─── galaxy ──────────────────────────────────────────────────────────────────────────────────────
+const el = document.getElementById('graph');
+const Graph = new ForceGraph3D(el, { controlType: 'orbit' })
+  .backgroundColor('#000000')   // the bloom composer converts colors, so near-black renders navy; pure black stays black
+  .showNavInfo(false)
+  .nodeId('id')
+  .nodeRelSize(1.4)
+  .nodeVal(n => Math.pow(n.r * (0.8 + Math.min(Math.sqrt(n.deg) * 0.15, 1.4)), 2.2) / 3)
+  .nodeColor(n => (!lit.size || lit.has(n.id)) ? color(n.g) : '#1a2030')
+  .nodeOpacity(0.95)
+  .nodeResolution(14)
+  .nodeLabel(n => `<div style="font:13px ${getComputedStyle(document.body).fontFamily};padding:4px 6px;background:rgba(10,14,24,.9);border-radius:6px;border:1px solid rgba(148,163,184,.2)"><b>${esc(n.label)}</b><br><span style="color:#8a94a8">${esc(G.groups[n.g].name)} · ${n.deg} links</span></div>`)
+  .nodeVisibility(n => !hidden.has(n.g))
+  .nodeThreeObjectExtend(true)
+  .nodeThreeObject(n => {
+    if (!(n.hub || n.g === 'core' || (lit.size && lit.has(n.id) && lit.size <= 14))) return null;
+    const t = new SpriteText(n.label, n.hub ? 5 : 3.6, n.hub ? '#f5f1e6' : '#e6e9f0');
+    t.fontFace = 'ui-sans-serif, -apple-system, sans-serif';
+    t.fontWeight = n.hub ? '600' : '500';
+    t.backgroundColor = false;
+    t.material.depthWrite = false;
+    t.position.y = Math.sqrt(n.r) * 3.2 + 4;
+    return t;
+  })
+  .linkVisibility(l => !hidden.has(nodeOf(l.source).g) && !hidden.has(nodeOf(l.target).g))
+  .linkColor(l => isLitLink(l) ? '#f5c451' : (lit.size ? 'rgba(80,96,128,0.10)' : 'rgba(120,140,180,0.22)'))
+  .linkWidth(l => isLitLink(l) ? 0.9 : 0)
+  .linkOpacity(0.5)
+  .linkDirectionalParticles(l => isLitLink(l) ? 2 : 0)
+  .linkDirectionalParticleWidth(1.6)
+  .linkDirectionalParticleSpeed(0.006)
+  .linkDirectionalParticleColor(() => '#ffe6a3')
+  .onNodeClick(n => focusNode(n, { panel: true }))
+  .onBackgroundClick(() => {})
+  .cooldownTicks(150)
+  .d3AlphaDecay(0.02);
+
+Graph.d3Force('charge').strength(n => -(30 + n.r * 9)).distanceMax(500);
+Graph.d3Force('link').distance(l => (nodeOf(l.source).hub || nodeOf(l.target).hub) ? 55 : 32).strength(0.4);
+
+function nodeOf(x) { return typeof x === 'object' ? x : nodes[x]; }
+function isLitLink(l) { return lit.size && lit.has(nodeOf(l.source).id) && lit.has(nodeOf(l.target).id); }
+function refresh() {
+  Graph.nodeColor(Graph.nodeColor()).linkColor(Graph.linkColor()).linkWidth(Graph.linkWidth())
+       .linkDirectionalParticles(Graph.linkDirectionalParticles()).nodeThreeObject(Graph.nodeThreeObject());
+}
+
+// Glow: bloom over black space.
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.75, 0.35, 0.22);
+Graph.postProcessingComposer().addPass(bloom);
+
+// Starfield: a far shell of faint points.
+{
+  const N = 3500, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const r = 2200 + Math.random() * 2600, u = Math.random() * 2 - 1, th = Math.random() * Math.PI * 2;
+    const s = Math.sqrt(1 - u * u);
+    pos.set([r * s * Math.cos(th), r * u, r * s * Math.sin(th)], i * 3);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  Graph.scene().add(new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x8796b8, size: 1.4, sizeAttenuation: false, transparent: true, opacity: 0.75 })));
+}
+
+// Slow idle rotation; any touch stops it, 25 s of quiet with nothing lit brings it back.
+const controls = Graph.controls();
+controls.autoRotate = true; controls.autoRotateSpeed = 0.35;
+let idleTimer = null;
+el.addEventListener('pointerdown', () => { controls.autoRotate = false; armIdle(); });
+el.addEventListener('wheel', () => { controls.autoRotate = false; armIdle(); }, { passive: true });
+function armIdle() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { if (!lit.size) controls.autoRotate = true; }, 25000); }
+
+// Growth: the brain is born star by star, core first, then hubs, then notes grouped by type.
+{
+  const order = [...nodes].sort((a, b) => (b.g === 'core') - (a.g === 'core') || (b.hub ? 1 : 0) - (a.hub ? 1 : 0) || a.g.localeCompare(b.g));
+  let grown = false, fitted = false;
+  const born = new Set(), shown = { nodes: [], links: [] };
+  let i = 0;
+  const step = () => {
+    const batch = order.slice(i, i + 4); i += 4;
+    for (const n of batch) {
+      const friend = [...n.nb].find(id => born.has(id));
+      if (friend !== undefined && nodes[friend].x !== undefined) { n.x = nodes[friend].x + rnd(); n.y = nodes[friend].y + rnd(); n.z = nodes[friend].z + rnd(); }
+      born.add(n.id); shown.nodes.push(n);
+    }
+    shown.links = links.filter(l => born.has(nodeOf(l.source).id) && born.has(nodeOf(l.target).id));
+    Graph.graphData({ nodes: shown.nodes, links: shown.links });
+    // The library parks the camera close to the first tiny batch; pull back so the birth is watched from afar.
+    if (i === 4) setTimeout(() => Graph.cameraPosition({ x: 0, y: 0, z: 650 }), 60);
+    if (i < order.length) setTimeout(step, 45);
+    else grown = true;
+  };
+  // Fit once the physics settles after the last star is born (a timer fires too early and gets overridden).
+  Graph.onEngineStop(() => { if (grown && !fitted) { fitted = true; Graph.zoomToFit(1200, 60); setTimeout(openDeepLink, 1300); } });
+  step();
+}
+function rnd() { return (Math.random() - 0.5) * 12; }
+
+// ─── focus (the one owner) ───────────────────────────────────────────────────────────────────────
+function focusNode(n, { panel = true, extra = [], fly = true } = {}) {
+  controls.autoRotate = false; armIdle();
+  lit = new Set([n.id, ...n.nb, ...extra]);
+  refresh();
+  if (fly && n.x !== undefined) {
+    const d = 150 + n.r * 8, len = Math.hypot(n.x, n.y, n.z) || 1, k = 1 + d / len;
+    Graph.cameraPosition({ x: n.x * k, y: n.y * k, z: n.z * k }, n, 1600);
+  }
+  if (panel) openPanel(n);
+  history.replaceState(null, '', '#n=' + encodeURIComponent(n.label));
+}
+
+function lightCluster(ids) {
+  controls.autoRotate = false; armIdle();
+  lit = new Set(ids);
+  refresh();
+  Graph.zoomToFit(1400, 90, n => lit.has(n.id));
+  closePanel();
+}
+
+function clearFocus() {
+  lit = new Set(); selected = null;
+  refresh(); closePanel();
+  Graph.zoomToFit(1200, 60);
+  history.replaceState(null, '', location.pathname + location.search);
+  armIdle();
+}
+
+// ─── inspector ───────────────────────────────────────────────────────────────────────────────────
+const panel = document.getElementById('panel');
+function openPanel(n) {
+  selected = n;
+  const nb = [...n.nb].map(i => nodes[i]).sort((a, b) => b.deg - a.deg);
+  panel.innerHTML = `
+    <button class="close" title="Close (Esc)">×</button>
+    <span class="chip"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:${color(n.g)}"></span>${esc(G.groups[n.g].name)}</span>
+    <h2>${esc(n.label)}</h2>
+    <div class="meta">${n.deg} connections${n.key && !n.hub ? ` · ${esc(n.key)}` : ''}${n.m ? ` · edited ${new Date(n.m * 1000).toLocaleDateString()}` : ''}</div>
+    ${n.s ? `<p class="sum">${esc(n.s)}</p>` : ''}
+    ${n.e ? `<div class="ex" id="ex">${esc(n.e)}</div>` : ''}
+    ${n.hub ? '' : `<div class="bar"><button id="full">Read full note</button></div>`}
+    <h3>Connected to</h3>
+    <div class="links">${nb.slice(0, 40).map(m => `<a data-id="${m.id}"><span style="color:${color(m.g)}">●</span> ${esc(m.label)} <span class="d">${m.deg}</span></a>`).join('')}${nb.length > 40 ? `<div class="d">+${nb.length - 40} more</div>` : ''}</div>`;
+  panel.classList.add('open');
+  panel.querySelector('.close').onclick = clearFocus;
+  panel.querySelectorAll('.links a').forEach(a => a.onclick = () => focusNode(nodes[+a.dataset.id]));
+  const full = panel.querySelector('#full');
+  if (full) full.onclick = async () => {
+    const ex = panel.querySelector('#ex');
+    if (full.dataset.open) { ex.textContent = n.e; full.textContent = 'Read full note'; delete full.dataset.open; return; }
+    full.textContent = 'Loading…';
+    try {
+      const r = await fetch(`/api/note?id=${n.id}`).then(r => r.json());
+      ex.textContent = r.text || n.e; full.textContent = 'Show less'; full.dataset.open = '1';
+    } catch { full.textContent = 'Could not load it'; }
+  };
+}
+function closePanel() { panel.classList.remove('open'); }
+
+// ─── legend / filter ─────────────────────────────────────────────────────────────────────────────
+{
+  const legend = document.getElementById('legend');
+  const counts = {};
+  nodes.forEach(n => { if (!n.hub) counts[n.g] = (counts[n.g] || 0) + 1; });
+  legend.innerHTML = Object.entries(G.groups).map(([k, g]) =>
+    `<div class="row" data-g="${k}"><span class="dot" style="background:${g.color};color:${g.color}"></span>${esc(g.name)}<span class="n">${counts[k] || 0}</span></div>`).join('')
+    + `<div class="hint">click a type to hide it</div>`;
+  legend.querySelectorAll('.row').forEach(r => r.onclick = () => {
+    const g = r.dataset.g;
+    hidden.has(g) ? hidden.delete(g) : hidden.add(g);
+    r.classList.toggle('off', hidden.has(g));
+    Graph.nodeVisibility(Graph.nodeVisibility()).linkVisibility(Graph.linkVisibility());
+  });
+}
+
+// ─── search ──────────────────────────────────────────────────────────────────────────────────────
+function findNode(q) {
+  q = q.trim().toLowerCase().replace(/^the\s+/, '');
+  if (!q) return null;
+  const scored = nodes.filter(n => !hidden.has(n.g)).map(n => {
+    const l = n.label.toLowerCase();
+    const s = l === q ? 100 : l.startsWith(q) ? 60 : l.includes(q) ? 40 : (n.key || '').toLowerCase().includes(q.replace(/\s+/g, '-')) ? 30 : 0;
+    return [s + Math.min(n.deg, 20) / 10, n];
+  }).filter(([s]) => s >= 30).sort((a, b) => b[0] - a[0]);
+  return scored[0]?.[1] || null;
+}
+document.getElementById('search').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const n = findNode(e.target.value);
+  if (n) focusNode(n); else e.target.style.borderColor = 'var(--warn)', setTimeout(() => e.target.style.borderColor = '', 900);
+});
+function openDeepLink() {
+  const m = location.hash.match(/^#n=(.+)$/);
+  if (m) { const n = findNode(decodeURIComponent(m[1])); if (n) focusNode(n); }
+}
+addEventListener('keydown', e => { if (e.key === 'Escape') { stopSpeaking(); clearFocus(); } });
+
+// ─── status ──────────────────────────────────────────────────────────────────────────────────────
+const statusEl = document.getElementById('status'), statusText = document.getElementById('statusText');
+function setStatus(s, text) {
+  statusEl.dataset.s = s;
+  statusText.textContent = text || { idle: micOn ? 'Listening' : 'Idle', listening: 'Listening', thinking: 'Thinking…', speaking: 'Speaking', error: 'Error' }[s];
+  if (s === 'idle' && micOn) statusEl.dataset.s = 'listening';
+}
+
+// ─── speaking: ONE function speaks, and the mute check lives inside it ───────────────────────────
+let voice = null, speaking = false;
+function pickVoice() {
+  const vs = speechSynthesis.getVoices().filter(v => /^en[-_]US/i.test(v.lang));
+  const rank = v => (/premium|enhanced|natural|neural/i.test(v.name) ? 4 : 0) + (/samantha|ava|allison|google us english/i.test(v.name) ? 2 : 0) + (v.localService ? 1 : 0);
+  voice = vs.sort((a, b) => rank(b) - rank(a))[0] || null;
+}
+if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+function speak(text) {
+  if (MUTE || !('speechSynthesis' in window) || !text) return;
+  speechSynthesis.cancel();
+  // Chrome cuts long utterances off after ~15 s, so queue one sentence at a time.
+  const parts = text.match(/[^.!?]+[.!?]+["')\]]*|\S[^.!?]*$/g) || [text];
+  parts.forEach((p, i) => {
+    const u = new SpeechSynthesisUtterance(p.trim());
+    if (voice) u.voice = voice;
+    u.rate = 1.04; u.pitch = 1;
+    if (i === 0) u.onstart = () => { speaking = true; setStatus('speaking'); };
+    if (i === parts.length - 1) u.onend = u.onerror = () => { speaking = false; quietUntil = Date.now() + 500; setStatus('idle'); };
+    speechSynthesis.speak(u);
+  });
+}
+function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); speaking = false; setStatus('idle'); }
+
+// ─── listening ───────────────────────────────────────────────────────────────────────────────────
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const micBtn = document.getElementById('mic'), ask = document.getElementById('ask');
+let rec = null, micOn = false, buffer = '', finishTimer = null, quietUntil = 0;
+
+function startMic() {
+  if (!SR) { showAnswer('', 'This browser has no speech recognition. Use Chrome, or type below.'); return; }
+  rec = new SR();
+  rec.lang = 'en-US'; rec.continuous = true; rec.interimResults = true;
+  rec.onresult = e => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript;
+      if (INTERRUPT.test(t) && (speaking || busy)) { stopSpeaking(); buffer = ''; clearTimeout(finishTimer); ask.value = ''; return; }
+      if (speaking || Date.now() < quietUntil) continue;    // don't transcribe our own voice
+      if (e.results[i].isFinal) buffer = (buffer + ' ' + t).trim(); else interim += t;
+    }
+    if (speaking) return;
+    ask.value = (buffer + ' ' + interim).trim();
+    // The pause that truly ends a thought sends it; more speech restarts the clock.
+    if (buffer || interim) { clearTimeout(finishTimer); finishTimer = setTimeout(flush, FINISH_MS); }
+  };
+  rec.onend = () => { if (micOn) try { rec.start(); } catch {} };
+  rec.onerror = e => { if (e.error === 'not-allowed') { micOn = false; micBtn.classList.remove('on'); setStatus('error', 'Microphone blocked: allow it in the address bar'); } };
+  rec.start();
+  micOn = true; micBtn.classList.add('on'); setStatus('listening');
+}
+function stopMic() { micOn = false; micBtn.classList.remove('on'); try { rec?.stop(); } catch {} setStatus('idle'); }
+function flush() {
+  const text = buffer.trim(); buffer = '';
+  if (!text || busy) return;
+  ask.value = '';
+  handle(text);
+}
+micBtn.onclick = () => micOn ? stopMic() : startMic();
+
+// ─── voice routes: checked before anything goes to the brain ─────────────────────────────────────
+const ROUTES = [
+  { re: INTERRUPT, run: () => stopSpeaking() },
+  { re: /^(zoom out|reset( the view)?|show (me )?everything|clear( it)?|back to the galaxy)\.?$/i, run: () => { clearFocus(); } },
+  { re: /^(start|resume) (rotating|rotation|spinning)\.?$/i, run: () => { controls.autoRotate = true; } },
+  { re: /^(stop|pause) (rotating|rotation|spinning)\.?$/i, run: () => { controls.autoRotate = false; } },
+  { re: /^(new conversation|start over|forget (that|this conversation))\.?$/i, run: async () => { await fetch('/api/reset', { method: 'POST' }); say('Fresh start.'); } },
+  // "show me Ray Fu" goes straight to the star, but only when a note really matches;
+  // "show me what we know about pricing" falls through to the brain.
+  { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
+];
+function say(text, q = '') { showAnswer(q, text); speak(text); }
+
+// ─── the brain ───────────────────────────────────────────────────────────────────────────────────
+let busy = false;
+async function handle(text) {
+  text = text.trim();
+  if (!text) return;
+  for (const r of ROUTES) {
+    const m = text.match(r.re);
+    if (m && (await r.run(m)) !== false) return;
+  }
+  busy = true; setStatus('thinking');
+  showAnswer(text, '…');
+  try {
+    const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: text }) });
+    const r = await res.json();
+    if (!res.ok) throw new Error(r.error || res.statusText);
+    // Decide whether it was about the notes BEFORE deciding to move the camera. Small talk holds still.
+    if (r.about_notes && r.nodes.length) {
+      const src = r.nodes.map(i => nodes[i]);
+      if (src.length >= CLUSTER_AT) lightCluster(r.nodes);
+      else focusNode(src[0], { extra: r.nodes });
+    }
+    showAnswer(text, r.answer, r.about_notes ? r.nodes : [], r.ms);
+    setStatus('idle');
+    speak(r.answer);
+  } catch (e) {
+    setStatus('error', 'The brain call failed');
+    say(`I couldn't reach the brain just now. ${String(e.message || e).slice(0, 140)}`, text);
+  } finally { busy = false; }
+}
+ask.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { const t = ask.value; ask.value = ''; handle(t); } });
+
+const answerEl = document.getElementById('answer');
+function showAnswer(q, a, srcIds = [], ms) {
+  answerEl.classList.add('show');
+  answerEl.innerHTML = (q ? `<div class="q">${esc(q)}</div>` : '') + `<div>${esc(a)}</div>`
+    + (srcIds.length ? `<div class="src">From: ${srcIds.map(i => `<a data-id="${i}">${esc(nodes[i].label)}</a>`).join(' · ')}${ms ? ` · ${(ms / 1000).toFixed(1)} s` : ''}</div>` : '');
+  answerEl.querySelectorAll('.src a').forEach(a => a.onclick = () => focusNode(nodes[+a.dataset.id]));
+}
+
+// ─── wake: the first click unlocks audio, then one short greeting ────────────────────────────────
+const wake = document.getElementById('wake');
+wake.addEventListener('click', () => {
+  wake.classList.add('gone');
+  speak('Hi Terry.');
+  ask.focus();
+}, { once: true });
+if (MUTE) { wake.classList.add('gone'); statusText.textContent = 'Idle (muted tab)'; }
+
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+addEventListener('resize', () => { Graph.width(innerWidth).height(innerHeight); bloom.setSize(innerWidth, innerHeight); });
+window.__studio = { Graph, nodes, lit: () => lit, handle };   // for testing from the console
+</script>
+</body>
+</html>

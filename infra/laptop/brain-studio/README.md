@@ -1,0 +1,54 @@
+# Brain Studio
+
+The face of JARVIS: `jarvis-brain` drawn as a 3D galaxy you can talk to. Ask a question by voice or
+text, JARVIS answers out loud from your notes only, and the camera flies to the note the answer came from.
+
+```
+python3 infra/laptop/brain-studio/server.py        # then open http://127.0.0.1:4700 in Chrome
+```
+
+(Or `preview_start brain-studio` from a Claude Code session; the config is in `.claude/launch.json`.)
+
+## How it works
+
+| Piece | File | What it does |
+|---|---|---|
+| Indexer | `build.py` | Types every brain note by folder (Core, People, Projects, Concepts, Tools, Models, Lab, Daily journal, Session memory, Sources…), links them through `[[wikilinks]]`, relative `.md` links and mentions of curated page titles, and adds one hub star per type. Writes `viewer/graph-data.js` (gitignored: it holds private excerpts). |
+| Server | `server.py` | Serves only `viewer/` on 127.0.0.1. `POST /api/chat` finds the closest notes with `brain-ask.py`'s hybrid search (Ollama embeddings, ~0.3 s; falls back to keywords if Ollama is off), then asks the `claude` CLI on your plan (Sonnet, low effort, no tools, no hooks, no session saved) for a two or three sentence spoken answer plus the ids of the notes it used. The persona is one block at the top of the file. |
+| Viewer | `viewer/index.html` | 3d-force-graph + bloom + starfield; the brain grows star by star; click a star for the inspector (summary, excerpt, Read full note, connections); type filter; search; deep links `#n=Ray Fu`. |
+
+**The rules that make the demo honest** (from Zubair's Fable 5.2 Workshop pack, Prompts 02–03):
+- Small talk ("good morning") holds the galaxy still. The server decides `about_notes` before the viewer
+  moves the camera.
+- An answer from 1–3 notes flies to the top note and lights its neighbors and the other sources. Four or
+  more light the whole cluster instead, because flying to one note out of six misrepresents the answer.
+- Only `focusNode` / `lightCluster` / `clearFocus` move the camera or change what is lit.
+- Only `speak()` makes sound, and it checks `?mute=1` itself, so a muted tab can never talk.
+
+## Voice
+
+- **Speaking:** the browser's own voices (Web Speech API), best American English voice on the machine.
+  macOS: System Settings → Accessibility → Spoken Content → System voice → Manage Voices, and download
+  an *Enhanced* or *Premium* voice (Ava, Samantha, Zoe); the page picks it automatically.
+- **Listening:** click the mic (Chrome). Recognition finalizes on every pause, so the page waits
+  `FINISH_MS` (900 ms, top of the script) after the last words before sending; more speech restarts the
+  clock. "Stop", "wait" or "quiet" cut JARVIS off instantly. While JARVIS speaks, everything else it
+  hears is ignored, so it doesn't answer itself.
+- **Voice routes** (checked before the brain): "show me Ray Fu" / "go to Ollama" (flies there only if a
+  note really matches), "zoom out" / "reset", "stop rotating" / "start rotating", "start over" (forget
+  the conversation). Add routes to `ROUTES`, not to the core.
+
+## Test plan
+
+1. Open the page, click once: it says "Hi Terry." The count in the corner is read from the data.
+2. Type "Who is Ray Fu?": the camera dives to Ray Fu, the inspector opens, the answer is spoken.
+3. Type "Good morning": a warm reply, and the galaxy does not move.
+4. Click the mic and say "what do we know about… [pause] …agent harnesses": the pause must not cut
+   you off. If it does, raise `FINISH_MS`; tune it after a day of real use, not in one sitting.
+5. While it answers, say "stop": it goes quiet at once.
+6. Open `http://127.0.0.1:4700/?mute=1` in a second tab and ask something: the text appears, nothing is heard.
+
+Measured 2026-11-21: retrieval 0.3 s, a full answer 3.5–6.5 s (most of it is the `claude` CLI starting).
+
+Credit: the type-by-folder galaxy and the honesty rules follow Zubair Trabzada's free `brain-map`
+(MIT) and his JARVIS prompt packs. This is our own code, written for our brain layout and the Claude plan.

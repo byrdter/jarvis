@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brain-studio",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["infra/laptop/brain-studio/server.py", "--port", "4700"],
+      "port": 4700
+    }
+  ]
+}

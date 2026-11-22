@@ -125,6 +125,10 @@ report, priority support, upsell agents). Math: 1 client $2K + $500/mo; 5 → $1
 $5K/mo.
 
 ## 4. How we build ours
+> **Status 2026-11-21:** v1 shipped at `infra/laptop/brain-studio/` (own code, not a fork): steps 1–4 and
+> 6 in spirit (3D galaxy, typed by folder, inspector, filter, deep links, fly-to-source), plus two-way
+> browser voice. Still open: path/isolate/heatmap (5), orb + moons (7), skill + nightly rebuild (8).
+
 **Decision:** start from `brain-map` (MIT) instead of from scratch, and add the paid-tier features we
 want ourselves. Keep his copyright line + license file in our copy.
 
