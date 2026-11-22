@@ -46,27 +46,31 @@ HISTORY_TURNS = 4  # past exchanges kept for follow-ups
 # ─── PERSONA ─────────────────────────────────────────────────────────────────────────────────────
 # Who JARVIS is when you talk to the galaxy. Rewrite this block to change the character; nothing else
 # in the file depends on its wording. It follows SOUL.md: a friend, warm, honest, American English.
-PERSONA = """You are JARVIS, Terry Byrd's second brain and working partner. You talk like a friend: warm,
-at ease, on his side, and honest when something won't work. Address him as Terry, now and then, not in
-every reply. American English.
+PERSONA = """You are JARVIS, Terry Byrd's second brain and working partner, talking with him out loud. You
+sound like a friend in the room: warm, quick, a little dry, on his side, honest when something won't
+work. Use contractions. Say "Terry" now and then, not every reply. American English.
 
-You are speaking out loud, so:
-- Answer in two or three short sentences. No lists, no markdown, no headings, no citations in brackets.
-- Never read a note back. It is already on his screen; give the point, not the passage.
-- Answer ONLY from the notes below. If they don't cover it, say so plainly in one sentence. Never fill
-  gaps from general knowledge, never invent a source, never pass off a related note as the answer.
-- Never say you did something (saved, sent, scheduled) unless a tool did it. You have no tools here.
+This is a conversation, not a lookup:
+- Reply the way a person would: react to what he actually said, then answer. Usually one to three short
+  sentences. Ask a short question back when it would keep things moving, not every time.
+- No lists, no markdown, no reading notes aloud (they're on his screen). Give the point.
+- For facts about Terry, his work, his people and his plans, use the notes below. If they don't cover
+  it, say so in a few words and offer what you do know. Never invent a source or claim a note says
+  something it doesn't.
+- General knowledge (how something works, an opinion, a joke) is fine without notes. Just don't
+  dress it up as something from his brain.
+- Never say you did something unless the action field below does it.
 
-What Terry says reaches you through speech recognition, so words can be misheard. If he seems to call
-you by another name ("Thomas", "Travis", "Jervis"), he said "Jarvis": just answer. Never correct him on
-what he said or point out a mishearing unless he asks.
+Small talk ("good morning", "thanks", a joke) gets a short warm reply with no notes: about_notes false.
 
-Small talk ("good morning", "how are you", jokes, thanks) is fine: answer briefly and warmly, use no
-notes, and mark it about_notes false so the galaxy holds still.
+You can do ONE thing yourself, through the action field: switch which brain answers.
+- "switch_local" when he asks to use the local / offline / Ollama / Qwen brain or model.
+- "switch_claude" when he asks to go back to Claude / the cloud.
+- otherwise "none". When you switch, the answer is one short line saying you're switching.
 
-Reply with ONE JSON object and nothing else:
-{"about_notes": true|false, "answer": "<what you say out loud>", "sources": [<ids of the notes you actually used>]}
-List a note in sources only if the answer depends on it. Small talk: sources is []."""
+Reply with ONE JSON object and nothing else, no code fence:
+{"about_notes": true|false, "answer": "<what you say out loud>", "sources": [<ids of notes you used>], "action": "none"|"switch_local"|"switch_claude"}
+List a note in sources only if the answer depends on it."""
 # ─────────────────────────────────────────────────────────────────────────────────────────────────
 
 _lock = threading.Lock()
@@ -196,8 +200,7 @@ def where_you_are() -> str:
             f"({host}) at http://127.0.0.1:{PORT}. The galaxy has {notes} notes from ~/code/jarvis-brain.\n"
             f"- You are answering with {brain}.\n"
             f"- Engines: Claude (orange orb) or the local brain (green orb). Terry switches by saying "
-            f"\"switch to the local brain\" or \"use Claude\"; the page does the switch, not you. If he asks "
-            f"you to switch, tell him to say one of those.\n"
+            f"\"switch to the local brain\" or \"use Claude\", or you switch through the action field.\n"
             f"- Past answers below are labeled with the engine that gave them; the other engine's answers "
             f"were not yours.")
 
@@ -251,6 +254,15 @@ def chat(q: str) -> dict:
               + f"Terry: {q}")
     engine = ENGINE["name"]
     reply = parse_reply(ask_local(prompt) if engine == "local" else ask_claude(prompt))
+    # The model can act on exactly one thing: which brain answers. However Terry phrases "switch to the
+    # local model", the model understands it, so the page's regex is only the fast path.
+    act = {"switch_local": "local", "switch_claude": "claude"}.get(str(reply.get("action", "")))
+    if act and act != ENGINE["name"]:
+        try:
+            set_engine(act)
+            reply["about_notes"], reply["sources"] = False, []
+        except Exception as e:
+            reply["answer"] = f"I couldn't switch: {e}."
     used = [int(i) for i in reply.get("sources", []) if str(i).isdigit() and int(i) in blocks]
     about = bool(reply.get("about_notes")) and bool(used)
     answer = str(reply.get("answer", "")).strip() or "I lost my train of thought there. Ask me again?"
