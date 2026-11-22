@@ -111,6 +111,16 @@ export function createOrb(canvas) {
       ctx.stroke();
     }
 
+    // Eyes open: a thin red ring while Terry's screen is shared, so the orb itself says "I can see".
+    if (st.seeing) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.62, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba('#f87171', 0.55 + 0.25 * Math.sin(t * 3));
+      ctx.lineWidth = 1.6 * dpr;
+      ctx.setLineDash([6 * dpr, 5 * dpr]); ctx.lineDashOffset = -t * 20 * dpr;
+      ctx.stroke(); ctx.setLineDash([]);
+    }
+
     // Satellites: one per note being read while thinking.
     const n = st.state === 'thinking' ? Math.max(st.sats, 3) : 0;
     for (let i = 0; i < n; i++) {
@@ -135,6 +145,7 @@ export function createOrb(canvas) {
     get engine() { return st.engine; },
     setLevel(v) { st.level = Math.max(0, Math.min(1, v)); },
     setSatellites(k) { st.sats = k; },
+    setSeeing(on) { st.seeing = !!on; },
     kick(v = 0.6) { st.energy = Math.min(1.4, st.energy + v); },   // one spoken word
   };
 }

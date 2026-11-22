@@ -65,6 +65,10 @@ This is a conversation, not a lookup:
   dress it up as something from his brain.
 - Never say you did something unless the action field below does it.
 
+When a screenshot is attached, it is Terry's screen at the moment he asked. Answer about what is
+actually on it; if you can't read something, say so. Never describe a screen when no screenshot is
+attached, and never mention one he didn't ask about.
+
 Small talk ("good morning", "thanks", a joke) gets a short warm reply with no notes: about_notes false.
 
 You can do ONE thing yourself, through the action field: switch which brain answers.
@@ -290,12 +294,13 @@ def ollama(path: str, body: dict | None = None, timeout: int = 180) -> dict:
         return json.loads(r.read())
 
 
-def stream_local(prompt: str):
+def stream_local(prompt: str, image: str | None = None):
     """Same persona, same notes, answered by a model on this Mac and streamed. Nothing leaves the machine."""
     import urllib.request
     body = {"model": LOCAL_MODEL, "stream": True, "think": False, "keep_alive": "30m",
             "options": {"temperature": 0.3, "num_ctx": 16384},
-            "messages": [{"role": "system", "content": PERSONA}, {"role": "user", "content": prompt}]}
+            "messages": [{"role": "system", "content": PERSONA},
+                         {"role": "user", "content": prompt, **({"images": [image]} if image else {})}]}
     req = urllib.request.Request(f"{OLLAMA}/chat", json.dumps(body).encode(), {"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=180) as r:
         for line in r:
@@ -385,7 +390,7 @@ def parse_json_reply(text: str) -> dict:
     return {"about_notes": False, "answer": plain, "sources": []}
 
 
-def chat_stream(q: str):
+def chat_stream(q: str, image: str | None = None):
     """Yields ("text", piece) while the answer is being written, then ("done", result). The spoken text
     comes first in the model's reply, so the page can start talking before the model has finished."""
     t0 = time.time()
@@ -411,8 +416,16 @@ def chat_stream(q: str):
     prompt = (where_you_are() + "\n\n"
               + f"Notes from the brain (closest matches to the question):\n\n{notes or '(none found)'}\n\n"
               + (f"Earlier in this conversation (you may not have seen these):\n{convo}\n" if convo else "")
+              + ("[Terry is sharing his screen; the screenshot attached is what it shows right now.]\n"
+                 if image else "")
               + f"Terry: {q}")
-    pieces = stream_local(prompt) if engine == "local" else CLAUDE.stream(prompt)
+    if engine == "local":
+        pieces = stream_local(prompt, image)
+    elif image:
+        pieces = CLAUDE.stream([{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": image}},
+                                {"type": "text", "text": prompt}])
+    else:
+        pieces = CLAUDE.stream(prompt)
     raw, sent, first_ms = "", 0, None
     for piece in pieces:
         raw += piece
@@ -446,12 +459,26 @@ def chat_stream(q: str):
             yield "replace", answer
     used = [int(i) for i in reply.get("sources", []) if str(i).isdigit() and int(i) in blocks]
     about = bool(reply.get("about_notes")) and bool(used)
-    _history.append({"q": q, "a": answer, "sess": CLAUDE.gen if engine == "claude" else None,
+    log_turn({"q": q, "engine": engine, "screen": bool(image), "first_ms": first_ms,
+              "ms": int((time.time() - t0) * 1000), "a": answer[:240]})
+    _history.append({"q": q + (" [while sharing his screen]" if image else ""), "a": answer,
+                     "sess": CLAUDE.gen if engine == "claude" else None,
                      "by": f"local {LOCAL_MODEL}" if engine == "local" else f"Claude {MODEL}"})
     del _history[:-HISTORY_TURNS]
     yield "done", {"answer": answer, "nodes": used if about else [], "about_notes": about,
                    "considered": list(blocks), "retrieval": mode, "first_ms": first_ms,
                    "ms": int((time.time() - t0) * 1000), **engine_info()}
+
+
+def log_turn(rec: dict):
+    """One line per turn in ~/.local/share/jarvis/brain-studio/run/turns.log (never the screenshot), so
+    "it answered the wrong thing" can be checked against what it actually heard."""
+    try:
+        RUN_DIR.mkdir(parents=True, exist_ok=True)
+        with open(RUN_DIR / "turns.log", "a") as f:
+            f.write(json.dumps({"ts": datetime.now().isoformat(timespec="seconds"), **rec}) + "\n")
+    except OSError:
+        pass
 
 
 def chat(q: str) -> dict:
@@ -633,12 +660,17 @@ class Handler(BaseHTTPRequestHandler):
             q = str(body.get("q", "")).strip()[:2000]
             if not q:
                 return self.json(400, {"error": "empty question"})
+            image = body.get("image") or None
+            if image:
+                image = str(image).split(",", 1)[-1]            # strip "data:image/jpeg;base64,"
+                if len(image) > 6_000_000:
+                    return self.json(413, {"error": "That screenshot is too large."})
             # NDJSON, one event per line; HTTP/1.0 closes the connection to end the body.
             self.send_response(200)
             self.send_header("Content-Type", "application/x-ndjson")
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
-            gen = chat_stream(q)
+            gen = chat_stream(q, image)
             try:
                 for kind, val in gen:
                     ev = {"t": kind, **(val if kind == "done" else {"s": val})}

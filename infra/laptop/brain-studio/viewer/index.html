@@ -59,6 +59,16 @@
   #mic { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,0.05); display: grid; place-items: center; flex: none; }
   #mic.on { background: rgba(52, 211, 153, 0.18); border-color: var(--live); box-shadow: 0 0 18px rgba(52,211,153,0.45); }
   #mic svg { width: 20px; height: 20px; }
+  #eye { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,0.05); display: grid; place-items: center; flex: none; color: inherit; cursor: pointer; }
+  #eye svg { width: 20px; height: 20px; }
+  #eye.on { background: rgba(248, 113, 113, 0.2); border-color: #f87171; box-shadow: 0 0 18px rgba(248,113,113,0.5); color: #fecaca; }
+  #eye.nudge { animation: nudge 0.6s ease-in-out 5; }
+  @keyframes nudge { 50% { transform: scale(1.18); box-shadow: 0 0 22px rgba(255,215,0,0.7); } }
+  #seeing { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30; display: none; cursor: pointer;
+            padding: 8px 16px; border-radius: 999px; background: rgba(127, 29, 29, 0.85); border: 1px solid #f87171;
+            color: #fee2e2; font-size: 13px; letter-spacing: 0.02em; box-shadow: 0 0 24px rgba(248,113,113,0.45); }
+  #seeing.show { display: block; }
+  @media (max-width: 760px) { #seeing { top: auto; bottom: 150px; font-size: 12px; max-width: calc(100vw - 32px); } }
   #ask { flex: 1; padding: 12px 14px; border-radius: 11px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text); font: inherit; font-size: 15px; outline: none; min-width: 0; }
   #ask:focus { border-color: rgba(245, 196, 81, 0.5); }
   #status { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); margin: 8px 4px 0; }
@@ -112,11 +122,15 @@
 
 <div id="panel" class="glass"></div>
 
+<div id="seeing" role="status" title="Click to stop">● JARVIS can see your screen · click or say "stop looking" to turn it off</div>
 <div id="dock" class="glass">
   <div id="answer"></div>
   <div id="row">
     <button id="mic" title="Talk (click to toggle)" aria-label="Microphone">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    </button>
+    <button id="eye" title="Let JARVIS see your screen (click again to stop)" aria-label="Share screen with JARVIS">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
     <input id="ask" placeholder="Ask your brain anything…" autocomplete="off">
   </div>
@@ -507,6 +521,7 @@ function sayBrowser(p, g) {
 function queueUtterance(p) {
   p = p.trim();
   if (MUTE || !p) return;
+  recentSpoken = (recentSpoken + ' ' + p).slice(-1500); spokenAt = Date.now();
   const g = sayGen, local = useLocalVoice();
   const audio = local ? fetchVoice(p) : null;          // start rendering now, while earlier sentences play
   audio?.catch(() => {});
@@ -530,7 +545,7 @@ function cancelSpeech() {
   curSrc = null; cancelAnimationFrame(levelRAF);
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
-function doneSpeaking() { pendingUtt = 0; speaking = false; clearInterval(beat); orb.setLevel(0); quietUntil = Date.now() + 500; setStatus('idle'); }
+function doneSpeaking() { pendingUtt = 0; speaking = false; clearInterval(beat); orb.setLevel(0); quietUntil = Date.now() + 1200; spokenAt = Date.now(); setStatus('idle'); }
 const SENTENCE = /^([\s\S]*?[.!?]+["')\]]*)\s+/;   // a sentence is done once the space after it arrives
 function speak(text) {
   cancelSpeech(); streamOpen = false;
@@ -623,17 +638,44 @@ function bestAlt(result) {   // prefer an alternative that actually heard "Jarvi
   for (let k = 0; k < result.length; k++) if (/\bjarvis\b/i.test(result[k].transcript)) return result[k].transcript;
   return result[0].transcript;
 }
+// The mic also hears JARVIS through the speakers, and Chrome can deliver that transcript a second or two
+// after he stops. Without this guard he answers his own words, and Terry's real question was dropped
+// because the page was "busy" (so he had to ask twice). Now: an utterance that is mostly words JARVIS just
+// said, within a few seconds of him saying them, is discarded; anything else is a real turn.
+let recentSpoken = '', spokenAt = 0;
+const words = t => (t.toLowerCase().match(/[a-z0-9']+/g) || []);
+// An echo is a verbatim run of JARVIS's words, so compare word triples, not loose words: "what about Tom
+// Crawshaw?" shares words with an answer that mentioned Tom, but not its three-word runs.
+function isEcho(text) {
+  const recent = speaking || Date.now() - spokenAt < 6000;
+  if (!recent) return false;
+  const w = words(text), said = words(recentSpoken);
+  if (w.length < 3) return (speaking || Date.now() - spokenAt < 1500) && !INTERRUPT.test(text)
+                           && ` ${said.join(' ')} `.includes(` ${w.join(' ')} `);
+  const tri = a => a.slice(2).map((_, i) => a[i] + ' ' + a[i + 1] + ' ' + a[i + 2]);
+  const saidTri = new Set(tri(said)), mine = tri(w);
+  return mine.filter(x => saidTri.has(x)).length / mine.length >= 0.5;
+}
 function flush() {
   const text = fixWake(buffer.trim()); buffer = '';
-  if (!text || busy) return;
+  if (!text) return;
+  if (isEcho(text)) { ask.value = ''; return; }
   ask.value = '';
+  // A new real question while JARVIS is still thinking or talking replaces the old one (never dropped).
+  if (busy || speaking) stopSpeaking();
   handle(text);
 }
 micBtn.onclick = () => micOn ? stopMic() : startMic();
 
 // ─── voice routes: checked before anything goes to the brain ─────────────────────────────────────
 const ROUTES = [
-  { re: INTERRUPT, run: () => stopSpeaking() },
+  // Screen: on only by a click (browsers require it), off by voice or click. Before INTERRUPT so
+  // "stop looking at my screen" isn't heard as a bare "stop".
+  { re: /^(?:please\s+)?(?:stop|quit|turn off|close|end|disable)\s+(?:looking at|watching|sharing|seeing)?\s*(?:my\s+|the\s+)?screen(?:\s+(?:sharing|share|vision))?\.?$|^close your eyes\.?$|^stop (?:looking|watching)\.?$/i,
+    run: () => { if (!screenOn()) return say("I'm not looking at your screen."); stopScreen(); say("Okay, I can't see your screen anymore."); } },
+  { re: /^(?:please\s+)?(?:look at|watch|share|see|turn on|open)\s+(?:my\s+|the\s+)?screen(?:\s+(?:sharing|share|vision))?\.?$|^(?:can you )?(?:look|see) (?:at )?(?:this|my screen)\??$/i,
+    run: async () => { if (screenOn()) return false; await startScreen(true); } },   // already on: the brain answers, with the frame
+  { re: /^\s*(?:stop|wait|quiet|hush|cancel|enough|shut up)(?:\s+(?:it|that|talking|please|now|jarvis))*[\s.!,]*$/i, run: () => stopSpeaking() },
   { re: /^(zoom out|reset( the view)?|show (me )?everything|clear( it)?|back to the galaxy)\.?$/i, run: () => { clearFocus(); } },
   { re: /^(start|resume) (rotating|rotation|spinning)\.?$/i, run: () => { controls.autoRotate = true; } },
   { re: /^(stop|pause) (rotating|rotation|spinning)\.?$/i, run: () => { controls.autoRotate = false; } },
@@ -655,6 +697,48 @@ const ROUTES = [
   { re: /^(?:show me|find|go to|open|fly to|take me to)\s+(?:the\s+)?(.+?)\.?$/i, run: m => { const n = findNode(m[1]); if (!n) return false; focusNode(n); say(`Here's ${n.label}.`); } },
 ];
 function say(text, q = '') { showAnswer(q, text); speak(text); }
+
+// ─── eyes: JARVIS sees the screen only while Terry is sharing it ─────────────────────────────────
+// Off by default and never remembered across reloads. On only by a click (Chrome requires a click to
+// share), off by voice ("stop looking at my screen"), the eye button, or Chrome's own "Stop sharing".
+// While on, a red banner says so, and each question carries ONE frame grabbed the moment it was asked.
+// Frames go to the brain with that question and are never saved anywhere.
+let screenStream = null;
+const screenVideo = Object.assign(document.createElement('video'), { muted: true, playsInline: true });
+const eyeBtn = document.getElementById('eye'), seeing = document.getElementById('seeing');
+const screenOn = () => !!screenStream && screenStream.getVideoTracks().some(t => t.readyState === 'live');
+async function startScreen(spoken = false) {
+  try {
+    screenStream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: 2 }, audio: false });
+  } catch (e) {
+    screenStream = null;
+    if (spoken) { eyeBtn.classList.add('nudge'); setTimeout(() => eyeBtn.classList.remove('nudge'), 4000);
+                  say(e.name === 'NotAllowedError' && !navigator.userActivation?.isActive
+                      ? "Click the eye button next to the mic and pick a screen or window, and I'll look."
+                      : "Okay, I won't look."); }
+    return false;
+  }
+  screenVideo.srcObject = screenStream; await screenVideo.play().catch(() => {});
+  screenStream.getVideoTracks()[0].onended = () => stopScreen(true);
+  eyeBtn.classList.add('on'); seeing.classList.add('show'); orb.setSeeing?.(true);
+  say("I can see your screen now. Ask me anything about it, and say stop looking when you're done.");
+  return true;
+}
+function stopScreen(byChrome = false) {
+  screenStream?.getTracks().forEach(t => t.stop()); screenStream = null; screenVideo.srcObject = null;
+  eyeBtn.classList.remove('on'); seeing.classList.remove('show'); orb.setSeeing?.(false);
+  if (byChrome) say("Screen sharing is off.");
+}
+function grabFrame() {
+  const v = screenVideo, w = v.videoWidth, h = v.videoHeight;
+  if (!w || !h) return null;
+  const k = Math.min(1, 1568 / Math.max(w, h));         // big enough to read text, small enough to send fast
+  const c = Object.assign(document.createElement('canvas'), { width: Math.round(w * k), height: Math.round(h * k) });
+  c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', 0.8);
+}
+eyeBtn.onclick = () => screenOn() ? (stopScreen(), say("Okay, I can't see your screen anymore.")) : startScreen(true);
+seeing.onclick = () => { stopScreen(); say("Okay, I can't see your screen anymore."); };
 async function setVoiceMode(mode) {
   voiceState.mode = mode;
   try { localStorage.setItem('jarvis.voice', mode); } catch {}
@@ -682,7 +766,7 @@ async function setEngineRemote(e) {
 }
 
 // ─── the brain ───────────────────────────────────────────────────────────────────────────────────
-let busy = false, answerAbort = null;
+let busy = false, answerAbort = null, turnId = 0;
 async function handle(text) {
   text = text.trim();
   if (!text) return;
@@ -691,13 +775,15 @@ async function handle(text) {
     const m = bare.match(r.re);
     if (m && (await r.run(m)) !== false) return;
   }
+  const turn = ++turnId;
   busy = true; orb.setSatellites(6); setStatus('thinking', `Reading the brain · ${ENGINES[orb.engine]?.name || ''}`);
   showAnswer(text, '…');
   answerAbort = new AbortController();
+  const frame = screenOn() ? grabFrame() : null;      // what's on screen at the moment Terry asked
   let said = '', r = null;
   try {
     const res = await fetch('/api/chat/stream', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-                                                  body: JSON.stringify({ q: text }), signal: answerAbort.signal });
+                                                  body: JSON.stringify({ q: text, image: frame }), signal: answerAbort.signal });
     if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
     speechStart();
     const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
@@ -732,7 +818,7 @@ async function handle(text) {
     speechEnd();
     setStatus('error', 'The brain call failed');
     say(`I couldn't reach the brain just now. ${String(e.message || e).slice(0, 140)}`, text);
-  } finally { busy = false; answerAbort = null; }
+  } finally { if (turn === turnId) { busy = false; answerAbort = null; } }
 }
 ask.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { const t = ask.value; ask.value = ''; handle(t); } });
 
@@ -756,7 +842,7 @@ if (MUTE) { wake.classList.add('gone'); statusText.textContent = 'Idle (muted ta
 
 function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 addEventListener('resize', () => { Graph.width(innerWidth).height(innerHeight); bloom.setSize(innerWidth, innerHeight); });
-window.__studio = { Graph, nodes, lit: () => lit, handle, voice: voiceState, speaking: () => speaking, audio: () => audioCtx?.state };   // for testing from the console
+window.__studio = { Graph, nodes, lit: () => lit, handle, flush: t => { buffer = t; flush(); }, isEcho, screenOn, voice: voiceState, speaking: () => speaking, audio: () => audioCtx?.state };   // for testing from the console
 </script>
 </body>
 </html>

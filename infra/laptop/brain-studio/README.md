@@ -66,6 +66,20 @@ Override with `BRAIN_STUDIO_ENGINE`, `BRAIN_STUDIO_LOCAL_MODEL` (e.g. `qwen3.8:2
   the nightly reflection promotes into MEMORY.md / USER.md. It's searchable in the very next question,
   and `brain-sync.sh` pushes it so Telegram and the server know it within a minute. The same fact twice
   in a day is kept once. A failed save is always said out loud. Server: `capture()`; viewer: `addNote()`.
+- **Eyes (screen sharing):** off by default and never remembered. Click the **eye** button next to the mic
+  and pick a screen or window (Chrome needs that click); saying "look at my screen" when it's off nudges
+  the button. While it's on, a red banner says "JARVIS can see your screen," the orb wears a red ring, and
+  every question carries ONE frame grabbed the moment you asked; both brains can read it (Claude ~1 s to
+  the first word, local ~2.5 s). Frames go to the brain with that question and are never saved or logged.
+  Off: "stop looking at my screen," "close your eyes," the eye button, the banner, or Chrome's own "Stop
+  sharing."
+- **Talking over JARVIS:** the mic hears JARVIS through the speakers, so anything that repeats a run of his
+  own recent words is ignored (`isEcho`). A real question while he's thinking or talking replaces the old
+  answer instead of being dropped. A bare "stop" / "wait" cuts him off; "stop rotating" and "stop looking"
+  are their own commands.
+- **Turn log:** every question, the engine, whether the screen was shared, time to first word, and the start
+  of the answer go to `~/.local/share/jarvis/brain-studio/run/turns.log` (local only, never the screenshot),
+  so "it answered the wrong thing" can be checked against what it actually heard.
 - **Voice routes** (checked before the brain): "show me Ray Fu" / "go to Ollama" (flies there only if a
   note really matches), "zoom out" / "reset", "stop rotating" / "start rotating", "start over" (forget
   the conversation). Add routes to `ROUTES`, not to the core.
