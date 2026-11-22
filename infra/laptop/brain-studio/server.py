@@ -4,6 +4,7 @@
   GET  /                 the viewer (viewer/ only; nothing else on disk is reachable)
   GET  /api/note?id=N    one note's full text, for "Read full note"
   POST /api/chat         {"q": "..."} -> {"answer", "nodes", "about_notes", "ms"}
+  POST /api/chat/stream  same question; NDJSON: {"t":"text","s":...} as it's written, then {"t":"done",...}
   POST /api/reset        forget the conversation
   POST /api/remember     {"text": "..."} -> a new note in captures/, a line in today's daily log, a live star
   GET  /api/engine       {"engine": "claude"|"local", "model"}; POST {"engine": ...} switches brains
@@ -68,8 +69,9 @@ You can do ONE thing yourself, through the action field: switch which brain answ
 - "switch_claude" when he asks to go back to Claude / the cloud.
 - otherwise "none". When you switch, the answer is one short line saying you're switching.
 
-Reply with ONE JSON object and nothing else, no code fence:
-{"about_notes": true|false, "answer": "<what you say out loud>", "sources": [<ids of notes you used>], "action": "none"|"switch_local"|"switch_claude"}
+Reply in exactly this shape, nothing before or after it:
+<what you say out loud, plain text, no JSON, no quotes around it>
+[[meta]] {"about_notes": true|false, "sources": [<ids of notes you used>], "action": "none"|"switch_local"|"switch_claude"}
 List a note in sources only if the answer depends on it."""
 # ─────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -141,16 +143,88 @@ def retrieve(q: str) -> tuple[list[dict], str]:
 
 
 # ─── the brain ───────────────────────────────────────────────────────────────────────────────────
-def ask_claude(prompt: str) -> str:
-    RUN_DIR.mkdir(parents=True, exist_ok=True)
-    env = {**os.environ, "CLAUDE_INVOKED_BY": "brain-studio"}  # memory_flush skips job sessions
-    cmd = ["claude", "-p", "--model", MODEL, "--effort", "low", "--setting-sources", "",
-           "--tools", "", "--strict-mcp-config", "--no-session-persistence",
-           "--output-format", "json", "--system-prompt", PERSONA, prompt]
-    r = subprocess.run(cmd, cwd=RUN_DIR, env=env, capture_output=True, text=True, timeout=120)
-    if r.returncode != 0:
-        raise RuntimeError((r.stderr or r.stdout).strip()[:400] or f"claude exited {r.returncode}")
-    return json.loads(r.stdout).get("result", "")
+class ClaudeSession:
+    """ONE long-lived `claude` process for the conversation, fed over stream-json. Starting a new
+    `claude -p` per turn cost 5.5-6 s before a word came back; a warm session gives first words in
+    0.4-0.7 s (measured 2026-11-22, M5 Pro). Same plan, no API key, no tools, no hooks, no saved session.
+    The session remembers its own turns, so prompts only carry turns it didn't see (local-brain ones)."""
+    MAX_TURNS = 24     # each turn adds its notes to the context; start fresh (in the background) after this
+
+    def __init__(self):
+        self.p = None
+        self.gen = 0          # bumps on every restart; history entries remember which session saw them
+        self.turns = 0
+        self.lock = threading.Lock()
+
+    def alive(self) -> bool:
+        return self.p is not None and self.p.poll() is None
+
+    def start(self):
+        self.stop()
+        RUN_DIR.mkdir(parents=True, exist_ok=True)
+        env = {**os.environ, "CLAUDE_INVOKED_BY": "brain-studio"}  # memory_flush skips job sessions
+        cmd = ["claude", "-p", "--model", MODEL, "--effort", "low", "--setting-sources", "",
+               "--tools", "", "--strict-mcp-config", "--no-session-persistence",
+               "--input-format", "stream-json", "--output-format", "stream-json", "--verbose",
+               "--include-partial-messages", "--system-prompt", PERSONA]
+        self.p = subprocess.Popen(cmd, cwd=RUN_DIR, env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                  stderr=open(RUN_DIR / "claude-session.log", "a"), text=True, bufsize=1)
+        self.gen += 1
+        self.turns = 0
+
+    def stop(self):
+        if self.alive():
+            try:
+                self.p.stdin.close()
+                self.p.terminate()
+            except Exception:
+                pass
+        self.p = None
+
+    def warm(self):
+        """Start the process now so the first question doesn't pay for it."""
+        def go():
+            with self.lock:
+                if not self.alive():
+                    self.start()
+        threading.Thread(target=go, daemon=True).start()
+
+    def stream(self, prompt: str):
+        """Yield text as Claude writes it. Always reads the turn through to its result, even if the
+        caller stops early (Terry interrupted), so the next turn never reads this one's leftovers."""
+        with self.lock:
+            if not self.alive() or self.turns >= self.MAX_TURNS:
+                self.start()
+            self.turns += 1
+            self.p.stdin.write(json.dumps({"type": "user", "message": {"role": "user", "content": prompt}}) + "\n")
+            self.p.stdin.flush()
+            killer = threading.Timer(120, lambda: self.p and self.p.kill())
+            killer.start()
+            done = False
+            try:
+                while True:
+                    line = self.p.stdout.readline()
+                    if not line:
+                        raise RuntimeError("the Claude session ended unexpectedly")
+                    ev = json.loads(line)
+                    if ev.get("type") == "stream_event":
+                        d = ev["event"].get("delta") or {}
+                        if d.get("type") == "text_delta":
+                            yield d["text"]
+                    elif ev.get("type") == "result":
+                        done = True
+                        if ev.get("is_error"):
+                            raise RuntimeError(str(ev.get("result") or "Claude returned an error")[:300])
+                        return
+            finally:
+                killer.cancel()
+                if not done and self.alive():      # caller left mid-turn: finish reading this turn
+                    for line in self.p.stdout:
+                        if json.loads(line).get("type") == "result":
+                            break
+
+
+CLAUDE = ClaudeSession()
 
 
 def ollama(path: str, body: dict | None = None, timeout: int = 180) -> dict:
@@ -161,13 +235,18 @@ def ollama(path: str, body: dict | None = None, timeout: int = 180) -> dict:
         return json.loads(r.read())
 
 
-def ask_local(prompt: str) -> str:
-    """Same persona, same notes, answered by a model on this Mac. Nothing leaves the machine."""
-    r = ollama("chat", {"model": LOCAL_MODEL, "stream": False, "think": False, "format": "json",
-                        "keep_alive": "30m", "options": {"temperature": 0.3, "num_ctx": 16384},
-                        "messages": [{"role": "system", "content": PERSONA},
-                                     {"role": "user", "content": prompt}]})
-    return r.get("message", {}).get("content", "")
+def stream_local(prompt: str):
+    """Same persona, same notes, answered by a model on this Mac and streamed. Nothing leaves the machine."""
+    import urllib.request
+    body = {"model": LOCAL_MODEL, "stream": True, "think": False, "keep_alive": "30m",
+            "options": {"temperature": 0.3, "num_ctx": 16384},
+            "messages": [{"role": "system", "content": PERSONA}, {"role": "user", "content": prompt}]}
+    req = urllib.request.Request(f"{OLLAMA}/chat", json.dumps(body).encode(), {"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=180) as r:
+        for line in r:
+            ev = json.loads(line)
+            if ev.get("message", {}).get("content"):
+                yield ev["message"]["content"]
 
 
 def set_engine(name: str) -> dict:
@@ -181,6 +260,8 @@ def set_engine(name: str) -> dict:
         if LOCAL_MODEL not in have:
             raise RuntimeError(f"{LOCAL_MODEL} isn't installed (ollama pull {LOCAL_MODEL})")
     ENGINE["name"] = name
+    if name == "claude":
+        CLAUDE.warm()
     return engine_info()
 
 
@@ -209,7 +290,25 @@ def engine_info() -> dict:
     return {"engine": ENGINE["name"], "model": LOCAL_MODEL if ENGINE["name"] == "local" else MODEL}
 
 
+META = "[[meta]]"
+
+
 def parse_reply(text: str) -> dict:
+    """Spoken text, then one [[meta]] line. Falls back to the older JSON-only shape."""
+    if META in text:
+        spoken, _, meta = text.partition(META)
+        try:
+            m = json.loads(re.search(r"\{.*\}", meta, re.S).group(0))
+        except Exception:
+            m = {}
+        return {"about_notes": m.get("about_notes", False), "sources": m.get("sources", []),
+                "action": m.get("action", "none"), "answer": spoken.strip()}
+    if not text.lstrip().startswith("{"):
+        return {"about_notes": False, "answer": text.strip(), "sources": []}
+    return parse_json_reply(text)
+
+
+def parse_json_reply(text: str) -> dict:
     """Pull the reply object out of whatever the model sent. Models sometimes wrap it in prose, a
     ```json fence, or send it twice ("Correction: here it is on its own"); a greedy {.*} spanning all of
     that fails to parse and the whole mess got spoken. Take the LAST complete object that has an answer."""
@@ -231,7 +330,9 @@ def parse_reply(text: str) -> dict:
     return {"about_notes": False, "answer": plain, "sources": []}
 
 
-def chat(q: str) -> dict:
+def chat_stream(q: str):
+    """Yields ("text", piece) while the answer is being written, then ("done", result). The spoken text
+    comes first in the model's reply, so the page can start talking before the model has finished."""
     t0 = time.time()
     hits, mode = retrieve(q)
     # One block per note (a note can return two sections); label each with its galaxy id.
@@ -245,15 +346,39 @@ def chat(q: str) -> dict:
         titles[nid] = _graph["nodes"][nid]["label"]
     notes = "\n\n".join(f"<note id={nid} title=\"{titles[nid]}\">\n" + "\n…\n".join(parts) + "\n</note>"
                         for nid, parts in blocks.items())
+    engine = ENGINE["name"]
     # Each past answer is labeled with the engine that gave it, so after a switch neither brain owns
-    # (or apologizes for) the other's words.
-    convo = "".join(f"Terry: {t['q']}\nJARVIS ({t.get('by', '?')}): {t['a']}\n" for t in _history[-HISTORY_TURNS:])
+    # (or apologizes for) the other's words. The Claude session already remembers its own turns.
+    recent = _history[-HISTORY_TURNS:]
+    if engine == "claude":
+        recent = [t for t in recent if t.get("sess") != CLAUDE.gen or not CLAUDE.alive()]
+    convo = "".join(f"Terry: {t['q']}\nJARVIS ({t.get('by', '?')}): {t['a']}\n" for t in recent)
     prompt = (where_you_are() + "\n\n"
               + f"Notes from the brain (closest matches to the question):\n\n{notes or '(none found)'}\n\n"
-              + (f"Conversation so far:\n{convo}\n" if convo else "")
+              + (f"Earlier in this conversation (you may not have seen these):\n{convo}\n" if convo else "")
               + f"Terry: {q}")
-    engine = ENGINE["name"]
-    reply = parse_reply(ask_local(prompt) if engine == "local" else ask_claude(prompt))
+    pieces = stream_local(prompt) if engine == "local" else CLAUDE.stream(prompt)
+    raw, sent, first_ms = "", 0, None
+    for piece in pieces:
+        raw += piece
+        if raw.lstrip().startswith("{"):          # old JSON habit: can't speak it until it's complete
+            continue
+        spoken = raw.split(META, 1)[0]
+        safe = len(spoken)
+        if META not in raw:                       # hold back a half-written "[[meta" so it's never spoken
+            for k in range(min(len(META), len(spoken)), 0, -1):
+                if spoken.endswith(META[:k]):
+                    safe -= k
+                    break
+        if safe > sent:
+            if first_ms is None:
+                first_ms = int((time.time() - t0) * 1000)
+            yield "text", spoken[sent:safe]
+            sent = safe
+    reply = parse_reply(raw)
+    answer = str(reply.get("answer", "")).strip() or "I lost my train of thought there. Ask me again?"
+    if sent == 0:
+        yield "text", answer
     # The model can act on exactly one thing: which brain answers. However Terry phrases "switch to the
     # local model", the model understands it, so the page's regex is only the fast path.
     act = {"switch_local": "local", "switch_claude": "claude"}.get(str(reply.get("action", "")))
@@ -262,15 +387,22 @@ def chat(q: str) -> dict:
             set_engine(act)
             reply["about_notes"], reply["sources"] = False, []
         except Exception as e:
-            reply["answer"] = f"I couldn't switch: {e}."
+            answer = f"I couldn't switch: {e}."
+            yield "replace", answer
     used = [int(i) for i in reply.get("sources", []) if str(i).isdigit() and int(i) in blocks]
     about = bool(reply.get("about_notes")) and bool(used)
-    answer = str(reply.get("answer", "")).strip() or "I lost my train of thought there. Ask me again?"
-    _history.append({"q": q, "a": answer, "by": f"local {LOCAL_MODEL}" if engine == "local" else f"Claude {MODEL}"})
+    _history.append({"q": q, "a": answer, "sess": CLAUDE.gen if engine == "claude" else None,
+                     "by": f"local {LOCAL_MODEL}" if engine == "local" else f"Claude {MODEL}"})
     del _history[:-HISTORY_TURNS]
-    return {"answer": answer, "nodes": used if about else [], "about_notes": about,
-            "considered": list(blocks), "retrieval": mode, "ms": int((time.time() - t0) * 1000),
-            **engine_info()}
+    yield "done", {"answer": answer, "nodes": used if about else [], "about_notes": about,
+                   "considered": list(blocks), "retrieval": mode, "first_ms": first_ms,
+                   "ms": int((time.time() - t0) * 1000), **engine_info()}
+
+
+def chat(q: str) -> dict:
+    for kind, val in chat_stream(q):
+        if kind == "done":
+            return val
 
 
 # ─── remember: ONE door for new notes ────────────────────────────────────────────────────────────
@@ -440,6 +572,29 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json(504, {"error": "The brain took too long to answer."})
             except Exception as e:
                 return self.json(500, {"error": f"The brain call failed: {e}"})
+        if path == "/api/chat/stream":
+            q = str(body.get("q", "")).strip()[:2000]
+            if not q:
+                return self.json(400, {"error": "empty question"})
+            # NDJSON, one event per line; HTTP/1.0 closes the connection to end the body.
+            self.send_response(200)
+            self.send_header("Content-Type", "application/x-ndjson")
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            gen = chat_stream(q)
+            try:
+                for kind, val in gen:
+                    ev = {"t": kind, **(val if kind == "done" else {"s": val})}
+                    self.wfile.write((json.dumps(ev) + "\n").encode())
+                    self.wfile.flush()
+            except (BrokenPipeError, ConnectionResetError):
+                gen.close()                       # Terry cut it off; the session drains the turn itself
+            except Exception as e:
+                try:
+                    self.wfile.write((json.dumps({"t": "error", "error": f"The brain call failed: {e}"}) + "\n").encode())
+                except OSError:
+                    pass
+            return
         if path == "/api/remember":
             try:
                 return self.json(200, capture(str(body.get("text", ""))[:4000]))
@@ -452,6 +607,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json(400, {"error": str(e)})
         if path == "/api/reset":
             _history.clear()
+            CLAUDE.stop()
+            if ENGINE["name"] == "claude":
+                CLAUDE.warm()
             return self.json(200, {"ok": True})
         if path == "/api/rebuild":
             g = rebuild()
@@ -467,6 +625,8 @@ def main(argv: list[str]) -> int:
         MODEL = argv[argv.index("--model") + 1]
     g = rebuild()
     print(f"galaxy: {sum(1 for x in g['nodes'] if not x.get('hub'))} notes, {len(g['links'])} links")
+    if ENGINE["name"] == "claude":
+        CLAUDE.warm()
     srv = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print(f"Brain Studio on http://127.0.0.1:{port}  (model {MODEL}; Ctrl-C to stop)")
     try:

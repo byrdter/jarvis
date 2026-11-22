@@ -436,26 +436,51 @@ function pickVoice() {
 }
 if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
-function speak(text) {
-  if (MUTE || !('speechSynthesis' in window) || !text) return;
-  speechSynthesis.cancel();
-  // Chrome cuts long utterances off after ~15 s, so queue one sentence at a time.
-  const parts = text.match(/[^.!?]+[.!?]+["')\]]*|\S[^.!?]*$/g) || [text];
-  parts.forEach((p, i) => {
-    const u = new SpeechSynthesisUtterance(p.trim());
-    if (voice) u.voice = voice;
-    u.rate = 1.04; u.pitch = 1;
-    u.onboundary = e => { if (!e.name || e.name === 'word') { orb.kick(0.5); lastWord = Date.now(); } };
-    if (i === 0) u.onstart = () => {
-      speaking = true; setStatus('speaking');
-      clearInterval(beat);
-      beat = setInterval(() => { if (speaking && Date.now() - lastWord > 380) orb.kick(0.25 + Math.random() * 0.3); }, 190);
-    };
-    if (i === parts.length - 1) u.onend = u.onerror = () => { speaking = false; clearInterval(beat); quietUntil = Date.now() + 500; setStatus('idle'); };
-    speechSynthesis.speak(u);
-  });
+// Every utterance goes through queueUtterance(), which holds the mute check, so nothing routes around it.
+// speak() says a whole text now; speechStart/Feed/End speak an answer sentence by sentence while it's
+// still being written, which is what makes JARVIS start talking ~1 s after you stop.
+let pendingUtt = 0, streamOpen = false, sbuf = '';
+function queueUtterance(p) {
+  p = p.trim();
+  if (MUTE || !('speechSynthesis' in window) || !p) return;
+  const u = new SpeechSynthesisUtterance(p);
+  if (voice) u.voice = voice;
+  u.rate = 1.04; u.pitch = 1;
+  u.onboundary = e => { if (!e.name || e.name === 'word') { orb.kick(0.5); lastWord = Date.now(); } };
+  u.onstart = () => {
+    if (speaking) return;
+    speaking = true; setStatus('speaking');
+    clearInterval(beat);
+    beat = setInterval(() => { if (speaking && Date.now() - lastWord > 380) orb.kick(0.25 + Math.random() * 0.3); }, 190);
+  };
+  u.onend = u.onerror = () => { if (--pendingUtt <= 0 && !streamOpen) doneSpeaking(); };
+  pendingUtt++;
+  speechSynthesis.speak(u);   // Chrome cuts long utterances off after ~15 s, so one sentence each
 }
-function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); speaking = false; clearInterval(beat); setStatus('idle'); }
+function doneSpeaking() { pendingUtt = 0; speaking = false; clearInterval(beat); quietUntil = Date.now() + 500; setStatus('idle'); }
+const SENTENCE = /^([\s\S]*?[.!?]+["')\]]*)\s+/;   // a sentence is done once the space after it arrives
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel(); pendingUtt = 0; streamOpen = false;
+  (String(text).match(/[^.!?]+[.!?]+["')\]]*|\S[^.!?]*$/g) || [text]).forEach(queueUtterance);
+}
+function speechStart() { if ('speechSynthesis' in window) speechSynthesis.cancel(); pendingUtt = 0; streamOpen = true; sbuf = ''; }
+function speechFeed(piece) {
+  sbuf += piece;
+  let m;
+  while ((m = sbuf.match(SENTENCE))) { queueUtterance(m[1]); sbuf = sbuf.slice(m[0].length); }
+}
+function speechEnd() {
+  if (!streamOpen) return;
+  streamOpen = false; queueUtterance(sbuf); sbuf = '';
+  if (pendingUtt <= 0) doneSpeaking();
+}
+function stopSpeaking() {
+  streamOpen = false; sbuf = '';
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  answerAbort?.abort();
+  speaking = false; pendingUtt = 0; clearInterval(beat); setStatus('idle');
+}
 
 // ─── listening ───────────────────────────────────────────────────────────────────────────────────
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -556,7 +581,7 @@ async function setEngineRemote(e) {
 }
 
 // ─── the brain ───────────────────────────────────────────────────────────────────────────────────
-let busy = false;
+let busy = false, answerAbort = null;
 async function handle(text) {
   text = text.trim();
   if (!text) return;
@@ -567,10 +592,30 @@ async function handle(text) {
   }
   busy = true; orb.setSatellites(6); setStatus('thinking', `Reading the brain · ${ENGINES[orb.engine]?.name || ''}`);
   showAnswer(text, '…');
+  answerAbort = new AbortController();
+  let said = '', r = null;
   try {
-    const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: text }) });
-    const r = await res.json();
-    if (!res.ok) throw new Error(r.error || res.statusText);
+    const res = await fetch('/api/chat/stream', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                                                  body: JSON.stringify({ q: text }), signal: answerAbort.signal });
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+    speechStart();
+    const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
+    let pend = '';
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      pend += value;
+      let nl;
+      while ((nl = pend.indexOf('\n')) >= 0) {
+        const ev = JSON.parse(pend.slice(0, nl)); pend = pend.slice(nl + 1);
+        if (ev.t === 'text') { said += ev.s; speechFeed(ev.s); showAnswer(text, said); }
+        else if (ev.t === 'replace') { said = ev.s; speechStart(); speechFeed(ev.s); showAnswer(text, said); }
+        else if (ev.t === 'error') throw new Error(ev.error);
+        else if (ev.t === 'done') r = ev;
+      }
+    }
+    speechEnd();
+    if (!r) throw new Error('the answer was cut off');
     if (r.engine) setEngine(r.engine);
     // Decide whether it was about the notes BEFORE deciding to move the camera. Small talk holds still.
     if (r.about_notes && r.nodes.length) {
@@ -579,12 +624,14 @@ async function handle(text) {
       else focusNode(src[0], { extra: r.nodes });
     }
     showAnswer(text, r.answer, r.about_notes ? r.nodes : [], r.ms);
-    setStatus('idle', r.about_notes && r.nodes.length ? `From ${r.nodes.length} note${r.nodes.length > 1 ? 's' : ''} · ${(r.ms / 1000).toFixed(1)} s` : 'Idle');
-    speak(r.answer);
+    const cap = r.about_notes && r.nodes.length ? `From ${r.nodes.length} note${r.nodes.length > 1 ? 's' : ''} · first word ${(r.first_ms / 1000).toFixed(1)} s` : `First word ${((r.first_ms || r.ms) / 1000).toFixed(1)} s`;
+    setStatus(speaking || pendingUtt > 0 ? 'speaking' : 'idle', cap);
   } catch (e) {
+    if (e.name === 'AbortError') return;          // Terry said "stop"
+    speechEnd();
     setStatus('error', 'The brain call failed');
     say(`I couldn't reach the brain just now. ${String(e.message || e).slice(0, 140)}`, text);
-  } finally { busy = false; }
+  } finally { busy = false; answerAbort = null; }
 }
 ask.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { const t = ask.value; ask.value = ''; handle(t); } });
 

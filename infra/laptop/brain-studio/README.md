@@ -14,7 +14,7 @@ python3 infra/laptop/brain-studio/server.py        # then open http://127.0.0.1:
 | Piece | File | What it does |
 |---|---|---|
 | Indexer | `build.py` | Types every brain note by folder (Core, People, Projects, Concepts, Tools, Models, Lab, Daily journal, Session memory, Sources…), links them through `[[wikilinks]]`, relative `.md` links and mentions of curated page titles, and adds one hub star per type. Writes `viewer/graph-data.js` (gitignored: it holds private excerpts). |
-| Server | `server.py` | Serves only `viewer/` on 127.0.0.1. `POST /api/chat` finds the closest notes with `brain-ask.py`'s hybrid search (Ollama embeddings, ~0.3 s; falls back to keywords if Ollama is off), then asks the `claude` CLI on your plan (Sonnet, low effort, no tools, no hooks, no session saved) for a two or three sentence spoken answer plus the ids of the notes it used. The persona is one block at the top of the file. |
+| Server | `server.py` | Serves only `viewer/` on 127.0.0.1. `POST /api/chat/stream` finds the closest notes with `brain-ask.py`'s hybrid search (Ollama embeddings, ~0.3 s; keywords if Ollama is off), then streams the answer from ONE long-lived `claude` session on your plan (stream-json in and out, Sonnet, low effort, no tools, no hooks, nothing saved), or from Ollama when the local brain is on. The model writes the spoken answer first and one `[[meta]]` line last (sources, about-notes, action), so the page speaks sentence by sentence while it is still being written. The persona is one block at the top of the file. |
 | Viewer | `viewer/index.html` | 3d-force-graph + bloom + starfield; the brain grows star by star; click a star for the inspector (summary, excerpt, Read full note, connections); type filter; search; deep links `#n=Ray Fu`. |
 
 **The rules that make the demo honest** (from Zubair's Fable 5.2 Workshop pack, Prompts 02–03):
@@ -72,7 +72,7 @@ Override with `BRAIN_STUDIO_ENGINE`, `BRAIN_STUDIO_LOCAL_MODEL` (e.g. `qwen3.8:2
    long should the finish window be?" and it answers from that note.
 7. Open `http://127.0.0.1:4700/?mute=1` in a second tab and ask something: the text appears, nothing is heard.
 
-Measured 2026-11-21: retrieval 0.3 s, a full answer 3.5–6.5 s (most of it is the `claude` CLI starting).
+Measured 2026-11-22 on the M5 Pro: first spoken word 0.7–1.3 s after the question on Claude (was 5–6 s when every turn started a new `claude -p`), ~2 s on the local 9B once it is loaded. Why and what's next: `docs/jarvis-2.0/VOICE-CRITIQUE.md`.
 
 Credit: the type-by-folder galaxy and the honesty rules follow Zubair Trabzada's free `brain-map`
 (MIT) and his JARVIS prompt packs. This is our own code, written for our brain layout and the Claude plan.
