@@ -465,11 +465,11 @@ let rec = null, micOn = false, buffer = '', finishTimer = null, quietUntil = 0;
 function startMic() {
   if (!SR) { showAnswer('', 'This browser has no speech recognition. Use Chrome, or type below.'); return; }
   rec = new SR();
-  rec.lang = 'en-US'; rec.continuous = true; rec.interimResults = true;
+  rec.lang = 'en-US'; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 5;
   rec.onresult = e => {
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
-      const t = e.results[i][0].transcript;
+      const t = bestAlt(e.results[i]);
       if (INTERRUPT.test(t) && (speaking || busy)) { stopSpeaking(); buffer = ''; clearTimeout(finishTimer); ask.value = ''; return; }
       if (speaking || Date.now() < quietUntil) continue;    // don't transcribe our own voice
       if (e.results[i].isFinal) buffer = (buffer + ' ' + t).trim(); else interim += t;
@@ -510,8 +510,16 @@ function stopLevel() {
   levelStream?.getTracks().forEach(t => t.stop()); levelStream = null;
   levelCtx?.close().catch(() => {}); levelCtx = null;
 }
+// Chrome often hears "Jarvis" as Thomas, Travis, Jervis… Only when it's how the sentence starts (the
+// way you address someone), so "Travis Scott's new album" in the middle of a question is left alone.
+const WAKE_MISHEARD = /^((?:hey|hi|ok(?:ay)?|yo|so)[,\s]+)?(?:thomas|travis|jervis|jarvas|jarvus|jarves|jarvi|charvis|garvis|jarbis)\b[,.]?/i;
+const fixWake = t => t.replace(WAKE_MISHEARD, (_, pre = '') => `${pre}Jarvis,`);
+function bestAlt(result) {   // prefer an alternative that actually heard "Jarvis"
+  for (let k = 0; k < result.length; k++) if (/\bjarvis\b/i.test(result[k].transcript)) return result[k].transcript;
+  return result[0].transcript;
+}
 function flush() {
-  const text = buffer.trim(); buffer = '';
+  const text = fixWake(buffer.trim()); buffer = '';
   if (!text || busy) return;
   ask.value = '';
   handle(text);
@@ -552,8 +560,9 @@ let busy = false;
 async function handle(text) {
   text = text.trim();
   if (!text) return;
+  const bare = text.replace(/^(?:(?:hey|hi|ok(?:ay)?)[,\s]+)?jarvis[,.!\s]+/i, '');   // "Jarvis, zoom out" is a route too
   for (const r of ROUTES) {
-    const m = text.match(r.re);
+    const m = bare.match(r.re);
     if (m && (await r.run(m)) !== false) return;
   }
   busy = true; orb.setSatellites(6); setStatus('thinking', `Reading the brain · ${ENGINES[orb.engine]?.name || ''}`);

@@ -57,6 +57,10 @@ You are speaking out loud, so:
   gaps from general knowledge, never invent a source, never pass off a related note as the answer.
 - Never say you did something (saved, sent, scheduled) unless a tool did it. You have no tools here.
 
+What Terry says reaches you through speech recognition, so words can be misheard. If he seems to call
+you by another name ("Thomas", "Travis", "Jervis"), he said "Jarvis": just answer. Never correct him on
+what he said or point out a mishearing unless he asks.
+
 Small talk ("good morning", "how are you", jokes, thanks) is fine: answer briefly and warmly, use no
 notes, and mark it about_notes false so the galaxy holds still.
 
@@ -203,13 +207,25 @@ def engine_info() -> dict:
 
 
 def parse_reply(text: str) -> dict:
-    m = re.search(r"\{.*\}", text, re.S)
-    if m:
+    """Pull the reply object out of whatever the model sent. Models sometimes wrap it in prose, a
+    ```json fence, or send it twice ("Correction: here it is on its own"); a greedy {.*} spanning all of
+    that fails to parse and the whole mess got spoken. Take the LAST complete object that has an answer."""
+    dec, found, i = json.JSONDecoder(), None, text.find("{")
+    while i != -1:
         try:
-            return json.loads(m.group(0))
+            obj, end = dec.raw_decode(text, i)
+            if isinstance(obj, dict) and str(obj.get("answer", "")).strip():
+                found = obj
+            i = text.find("{", end)
         except ValueError:
-            pass
-    return {"about_notes": False, "answer": text.strip(), "sources": []}
+            i = text.find("{", i + 1)
+    if found:
+        return found
+    m = re.search(r'"answer"\s*:\s*"((?:[^"\\]|\\.)*)"?', text)      # a truncated object: keep its answer
+    if m:
+        return {"about_notes": False, "answer": json.loads(f'"{m.group(1)}"'), "sources": []}
+    plain = re.sub(r"```(?:json)?|[{}]", "", text).strip()
+    return {"about_notes": False, "answer": plain, "sources": []}
 
 
 def chat(q: str) -> dict:
