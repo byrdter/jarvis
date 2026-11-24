@@ -16,5 +16,10 @@ DEST2="$HOME/Library/LaunchAgents/com.jarvis.brain-ask.plist"
 sed "s#__HOME__#$HOME#" "$HERE/com.jarvis.brain-ask.plist" > "$DEST2"
 launchctl bootout "gui/$UID_/com.jarvis.brain-ask" 2>/dev/null || true
 launchctl bootstrap "gui/$UID_" "$DEST2"
+# Brain sync every 2 minutes (matches the server), so Obsidian edits don't sit for an hour.
+DEST3="$HOME/Library/LaunchAgents/com.jarvis.brain-sync.plist"
+sed "s#__HOME__#$HOME#" "$HERE/com.jarvis.brain-sync.plist" > "$DEST3"
+launchctl bootout "gui/$UID_/com.jarvis.brain-sync" 2>/dev/null || true
+launchctl bootstrap "gui/$UID_" "$DEST3"
 mkdir -p "$HOME/JARVIS-Library"
 echo "installed. Brain chat: http://localhost:8765. Drop documents in ~/JARVIS-Library/<creator>/. Logs: ~/Library/Logs/jarvis-*.log"
